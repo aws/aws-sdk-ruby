@@ -1,0 +1,1450 @@
+module Aws::AppMesh
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::AppMesh::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateGatewayRouteResponse
+      include Smithy::Client::_Response[Types::CreateGatewayRouteOperationOutput]
+      def gateway_route: () -> Types::GatewayRouteData?
+    end
+    def create_gateway_route: (
+      ?gateway_route_name: String,
+      ?mesh_name: String,
+      ?virtual_gateway_name: String,
+      ?spec: {
+        priority: Integer,
+        http_route: {
+          match: {
+            prefix: String,
+            path: {
+              exact: String,
+              regex: String
+            },
+            query_parameters: Array[
+              {
+                name: String,
+                match: {
+                  exact: untyped
+                }
+              }
+            ],
+            method: String,
+            hostname: {
+              exact: String,
+              suffix: String
+            },
+            headers: Array[
+              {
+                name: String,
+                invert: bool,
+                match: {
+                  exact: String,
+                  regex: untyped,
+                  range: {
+                    start: Integer,
+                    end: untyped
+                  },
+                  prefix: untyped,
+                  suffix: untyped
+                }
+              }
+            ],
+            port: Integer
+          },
+          action: {
+            target: {
+              virtual_service: {
+                virtual_service_name: String
+              },
+              port: untyped
+            },
+            rewrite: {
+              prefix: {
+                default_prefix: String,
+                value: String
+              },
+              path: {
+                exact: untyped
+              },
+              hostname: {
+                default_target_hostname: untyped
+              }
+            }
+          }
+        },
+        http2_route: untyped,
+        grpc_route: {
+          match: {
+            service_name: String,
+            hostname: untyped,
+            metadata: Array[
+              {
+                name: untyped,
+                invert: untyped,
+                match: {
+                  exact: untyped,
+                  regex: untyped,
+                  range: untyped,
+                  prefix: untyped,
+                  suffix: untyped
+                }
+              }
+            ],
+            port: untyped
+          },
+          action: {
+            target: untyped,
+            rewrite: {
+              hostname: untyped
+            }
+          }
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String,
+      ?mesh_owner: String
+    ) -> _CreateGatewayRouteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGatewayRouteResponse
+
+    interface _CreateMeshResponse
+      include Smithy::Client::_Response[Types::CreateMeshOperationOutput]
+      def mesh: () -> Types::MeshData?
+    end
+    def create_mesh: (
+      ?mesh_name: String,
+      ?spec: {
+        egress_filter: {
+          type: String
+        },
+        service_discovery: {
+          ip_preference: String
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateMeshResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMeshResponse
+
+    interface _CreateRouteResponse
+      include Smithy::Client::_Response[Types::CreateRouteOperationOutput]
+      def route: () -> Types::RouteData?
+    end
+    def create_route: (
+      ?route_name: String,
+      ?mesh_name: String,
+      ?virtual_router_name: String,
+      ?spec: {
+        priority: Integer,
+        http_route: {
+          match: {
+            prefix: String,
+            path: {
+              exact: String,
+              regex: String
+            },
+            query_parameters: Array[
+              {
+                name: String,
+                match: {
+                  exact: untyped
+                }
+              }
+            ],
+            method: String,
+            scheme: String,
+            headers: Array[
+              {
+                name: String,
+                invert: bool,
+                match: {
+                  exact: String,
+                  regex: untyped,
+                  range: {
+                    start: Integer,
+                    end: untyped
+                  },
+                  prefix: untyped,
+                  suffix: untyped
+                }
+              }
+            ],
+            port: Integer
+          },
+          action: {
+            weighted_targets: Array[
+              {
+                virtual_node: String,
+                weight: Integer,
+                port: untyped
+              }
+            ]
+          },
+          retry_policy: {
+            per_retry_timeout: {
+              value: Integer,
+              unit: String
+            },
+            max_retries: Integer,
+            http_retry_events: Array[String],
+            tcp_retry_events: Array[String]
+          },
+          timeout: {
+            per_request: untyped,
+            idle: untyped
+          }
+        },
+        tcp_route: {
+          action: {
+            weighted_targets: untyped
+          },
+          timeout: {
+            idle: untyped
+          },
+          match: {
+            port: untyped
+          }
+        },
+        http2_route: untyped,
+        grpc_route: {
+          action: {
+            weighted_targets: untyped
+          },
+          match: {
+            service_name: String,
+            method_name: String,
+            metadata: Array[
+              {
+                name: untyped,
+                invert: untyped,
+                match: {
+                  exact: untyped,
+                  regex: untyped,
+                  range: untyped,
+                  prefix: untyped,
+                  suffix: untyped
+                }
+              }
+            ],
+            port: untyped
+          },
+          retry_policy: {
+            per_retry_timeout: untyped,
+            max_retries: untyped,
+            http_retry_events: untyped,
+            tcp_retry_events: untyped,
+            grpc_retry_events: Array[String]
+          },
+          timeout: {
+            per_request: untyped,
+            idle: untyped
+          }
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String,
+      ?mesh_owner: String
+    ) -> _CreateRouteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRouteResponse
+
+    interface _CreateVirtualGatewayResponse
+      include Smithy::Client::_Response[Types::CreateVirtualGatewayOperationOutput]
+      def virtual_gateway: () -> Types::VirtualGatewayData?
+    end
+    def create_virtual_gateway: (
+      ?virtual_gateway_name: String,
+      ?mesh_name: String,
+      ?spec: {
+        backend_defaults: {
+          client_policy: {
+            tls: {
+              enforce: bool,
+              ports: Array[Integer],
+              certificate: {
+                file: {
+                  certificate_chain: String,
+                  private_key: untyped
+                },
+                sds: {
+                  secret_name: String
+                }
+              },
+              validation: {
+                trust: {
+                  acm: {
+                    certificate_authority_arns: Array[String]
+                  },
+                  file: {
+                    certificate_chain: untyped
+                  },
+                  sds: {
+                    secret_name: untyped
+                  }
+                },
+                subject_alternative_names: {
+                  match: {
+                    exact: Array[String]
+                  }
+                }
+              }
+            }
+          }
+        },
+        listeners: Array[
+          {
+            health_check: {
+              timeout_millis: Integer,
+              interval_millis: Integer,
+              protocol: String,
+              port: Integer,
+              path: String,
+              healthy_threshold: Integer,
+              unhealthy_threshold: untyped
+            },
+            port_mapping: {
+              port: untyped,
+              protocol: untyped
+            },
+            tls: {
+              mode: String,
+              validation: {
+                trust: {
+                  file: untyped,
+                  sds: untyped
+                },
+                subject_alternative_names: untyped
+              },
+              certificate: {
+                acm: {
+                  certificate_arn: String
+                },
+                file: untyped,
+                sds: untyped
+              }
+            },
+            connection_pool: {
+              http: {
+                max_connections: Integer,
+                max_pending_requests: Integer
+              },
+              http2: {
+                max_requests: Integer
+              },
+              grpc: {
+                max_requests: untyped
+              }
+            }
+          }
+        ],
+        logging: {
+          access_log: {
+            file: {
+              path: untyped,
+              format: {
+                text: String,
+                json: Array[
+                  {
+                    key: String,
+                    value: String
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String,
+      ?mesh_owner: String
+    ) -> _CreateVirtualGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVirtualGatewayResponse
+
+    interface _CreateVirtualNodeResponse
+      include Smithy::Client::_Response[Types::CreateVirtualNodeOperationOutput]
+      def virtual_node: () -> Types::VirtualNodeData?
+    end
+    def create_virtual_node: (
+      ?virtual_node_name: String,
+      ?mesh_name: String,
+      ?spec: {
+        service_discovery: {
+          dns: {
+            hostname: String,
+            response_type: String,
+            ip_preference: String
+          },
+          aws_cloud_map: {
+            namespace_name: String,
+            service_name: untyped,
+            attributes: Array[
+              {
+                key: String,
+                value: String
+              }
+            ],
+            ip_preference: untyped
+          }
+        },
+        listeners: Array[
+          {
+            port_mapping: {
+              port: Integer,
+              protocol: String
+            },
+            tls: {
+              mode: String,
+              certificate: {
+                acm: {
+                  certificate_arn: String
+                },
+                file: {
+                  certificate_chain: String,
+                  private_key: untyped
+                },
+                sds: {
+                  secret_name: String
+                }
+              },
+              validation: {
+                trust: {
+                  file: {
+                    certificate_chain: untyped
+                  },
+                  sds: {
+                    secret_name: untyped
+                  }
+                },
+                subject_alternative_names: {
+                  match: {
+                    exact: Array[String]
+                  }
+                }
+              }
+            },
+            health_check: {
+              timeout_millis: Integer,
+              interval_millis: Integer,
+              protocol: untyped,
+              port: untyped,
+              path: String,
+              healthy_threshold: Integer,
+              unhealthy_threshold: untyped
+            },
+            timeout: {
+              tcp: {
+                idle: {
+                  value: Integer,
+                  unit: String
+                }
+              },
+              http: {
+                per_request: untyped,
+                idle: untyped
+              },
+              http2: untyped,
+              grpc: {
+                per_request: untyped,
+                idle: untyped
+              }
+            },
+            outlier_detection: {
+              max_server_errors: Integer,
+              interval: untyped,
+              base_ejection_duration: untyped,
+              max_ejection_percent: Integer
+            },
+            connection_pool: {
+              tcp: {
+                max_connections: Integer
+              },
+              http: {
+                max_connections: untyped,
+                max_pending_requests: Integer
+              },
+              http2: {
+                max_requests: Integer
+              },
+              grpc: {
+                max_requests: untyped
+              }
+            }
+          }
+        ],
+        backends: Array[
+          {
+            virtual_service: {
+              virtual_service_name: String,
+              client_policy: {
+                tls: {
+                  enforce: bool,
+                  ports: Array[Integer],
+                  certificate: {
+                    file: untyped,
+                    sds: untyped
+                  },
+                  validation: {
+                    trust: {
+                      acm: {
+                        certificate_authority_arns: Array[String]
+                      },
+                      file: untyped,
+                      sds: untyped
+                    },
+                    subject_alternative_names: untyped
+                  }
+                }
+              }
+            }
+          }
+        ],
+        backend_defaults: {
+          client_policy: untyped
+        },
+        logging: {
+          access_log: {
+            file: {
+              path: untyped,
+              format: {
+                text: String,
+                json: Array[
+                  {
+                    key: String,
+                    value: String
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String,
+      ?mesh_owner: String
+    ) -> _CreateVirtualNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVirtualNodeResponse
+
+    interface _CreateVirtualRouterResponse
+      include Smithy::Client::_Response[Types::CreateVirtualRouterOperationOutput]
+      def virtual_router: () -> Types::VirtualRouterData?
+    end
+    def create_virtual_router: (
+      ?virtual_router_name: String,
+      ?mesh_name: String,
+      ?spec: {
+        listeners: Array[
+          {
+            port_mapping: {
+              port: Integer,
+              protocol: String
+            }
+          }
+        ]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String,
+      ?mesh_owner: String
+    ) -> _CreateVirtualRouterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVirtualRouterResponse
+
+    interface _CreateVirtualServiceResponse
+      include Smithy::Client::_Response[Types::CreateVirtualServiceOperationOutput]
+      def virtual_service: () -> Types::VirtualServiceData?
+    end
+    def create_virtual_service: (
+      ?virtual_service_name: String,
+      ?mesh_name: String,
+      ?spec: {
+        provider: {
+          virtual_node: {
+            virtual_node_name: String
+          },
+          virtual_router: {
+            virtual_router_name: untyped
+          }
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String,
+      ?mesh_owner: String
+    ) -> _CreateVirtualServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVirtualServiceResponse
+
+    interface _DeleteGatewayRouteResponse
+      include Smithy::Client::_Response[Types::DeleteGatewayRouteOperationOutput]
+      def gateway_route: () -> Types::GatewayRouteData?
+    end
+    def delete_gateway_route: (
+      ?gateway_route_name: String,
+      ?mesh_name: String,
+      ?virtual_gateway_name: String,
+      ?mesh_owner: String
+    ) -> _DeleteGatewayRouteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGatewayRouteResponse
+
+    interface _DeleteMeshResponse
+      include Smithy::Client::_Response[Types::DeleteMeshOperationOutput]
+      def mesh: () -> Types::MeshData?
+    end
+    def delete_mesh: (
+      ?mesh_name: String
+    ) -> _DeleteMeshResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMeshResponse
+
+    interface _DeleteRouteResponse
+      include Smithy::Client::_Response[Types::DeleteRouteOperationOutput]
+      def route: () -> Types::RouteData?
+    end
+    def delete_route: (
+      ?route_name: String,
+      ?mesh_name: String,
+      ?virtual_router_name: String,
+      ?mesh_owner: String
+    ) -> _DeleteRouteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRouteResponse
+
+    interface _DeleteVirtualGatewayResponse
+      include Smithy::Client::_Response[Types::DeleteVirtualGatewayOperationOutput]
+      def virtual_gateway: () -> Types::VirtualGatewayData?
+    end
+    def delete_virtual_gateway: (
+      ?virtual_gateway_name: String,
+      ?mesh_name: String,
+      ?mesh_owner: String
+    ) -> _DeleteVirtualGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVirtualGatewayResponse
+
+    interface _DeleteVirtualNodeResponse
+      include Smithy::Client::_Response[Types::DeleteVirtualNodeOperationOutput]
+      def virtual_node: () -> Types::VirtualNodeData?
+    end
+    def delete_virtual_node: (
+      ?virtual_node_name: String,
+      ?mesh_name: String,
+      ?mesh_owner: String
+    ) -> _DeleteVirtualNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVirtualNodeResponse
+
+    interface _DeleteVirtualRouterResponse
+      include Smithy::Client::_Response[Types::DeleteVirtualRouterOperationOutput]
+      def virtual_router: () -> Types::VirtualRouterData?
+    end
+    def delete_virtual_router: (
+      ?virtual_router_name: String,
+      ?mesh_name: String,
+      ?mesh_owner: String
+    ) -> _DeleteVirtualRouterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVirtualRouterResponse
+
+    interface _DeleteVirtualServiceResponse
+      include Smithy::Client::_Response[Types::DeleteVirtualServiceOperationOutput]
+      def virtual_service: () -> Types::VirtualServiceData?
+    end
+    def delete_virtual_service: (
+      ?virtual_service_name: String,
+      ?mesh_name: String,
+      ?mesh_owner: String
+    ) -> _DeleteVirtualServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVirtualServiceResponse
+
+    interface _DescribeGatewayRouteResponse
+      include Smithy::Client::_Response[Types::DescribeGatewayRouteOperationOutput]
+      def gateway_route: () -> Types::GatewayRouteData?
+    end
+    def describe_gateway_route: (
+      ?gateway_route_name: String,
+      ?mesh_name: String,
+      ?virtual_gateway_name: String,
+      ?mesh_owner: String
+    ) -> _DescribeGatewayRouteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGatewayRouteResponse
+
+    interface _DescribeMeshResponse
+      include Smithy::Client::_Response[Types::DescribeMeshOperationOutput]
+      def mesh: () -> Types::MeshData?
+    end
+    def describe_mesh: (
+      ?mesh_name: String,
+      ?mesh_owner: String
+    ) -> _DescribeMeshResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMeshResponse
+
+    interface _DescribeRouteResponse
+      include Smithy::Client::_Response[Types::DescribeRouteOperationOutput]
+      def route: () -> Types::RouteData?
+    end
+    def describe_route: (
+      ?route_name: String,
+      ?mesh_name: String,
+      ?mesh_owner: String,
+      ?virtual_router_name: String
+    ) -> _DescribeRouteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRouteResponse
+
+    interface _DescribeVirtualGatewayResponse
+      include Smithy::Client::_Response[Types::DescribeVirtualGatewayOperationOutput]
+      def virtual_gateway: () -> Types::VirtualGatewayData?
+    end
+    def describe_virtual_gateway: (
+      ?virtual_gateway_name: String,
+      ?mesh_name: String,
+      ?mesh_owner: String
+    ) -> _DescribeVirtualGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVirtualGatewayResponse
+
+    interface _DescribeVirtualNodeResponse
+      include Smithy::Client::_Response[Types::DescribeVirtualNodeOperationOutput]
+      def virtual_node: () -> Types::VirtualNodeData?
+    end
+    def describe_virtual_node: (
+      ?virtual_node_name: String,
+      ?mesh_name: String,
+      ?mesh_owner: String
+    ) -> _DescribeVirtualNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVirtualNodeResponse
+
+    interface _DescribeVirtualRouterResponse
+      include Smithy::Client::_Response[Types::DescribeVirtualRouterOperationOutput]
+      def virtual_router: () -> Types::VirtualRouterData?
+    end
+    def describe_virtual_router: (
+      ?virtual_router_name: String,
+      ?mesh_name: String,
+      ?mesh_owner: String
+    ) -> _DescribeVirtualRouterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVirtualRouterResponse
+
+    interface _DescribeVirtualServiceResponse
+      include Smithy::Client::_Response[Types::DescribeVirtualServiceOperationOutput]
+      def virtual_service: () -> Types::VirtualServiceData?
+    end
+    def describe_virtual_service: (
+      ?virtual_service_name: String,
+      ?mesh_name: String,
+      ?mesh_owner: String
+    ) -> _DescribeVirtualServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVirtualServiceResponse
+
+    interface _ListGatewayRoutesResponse
+      include Smithy::Client::_Response[Types::ListGatewayRoutesOperationOutput]
+      def gateway_routes: () -> Array[Types::GatewayRouteRef]?
+      def next_token: () -> String?
+    end
+    def list_gateway_routes: (
+      ?mesh_name: String,
+      ?virtual_gateway_name: String,
+      ?next_token: String,
+      ?limit: Integer,
+      ?mesh_owner: String
+    ) -> _ListGatewayRoutesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGatewayRoutesResponse
+
+    interface _ListMeshesResponse
+      include Smithy::Client::_Response[Types::ListMeshesOperationOutput]
+      def meshes: () -> Array[Types::MeshRef]?
+      def next_token: () -> String?
+    end
+    def list_meshes: (
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListMeshesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMeshesResponse
+
+    interface _ListRoutesResponse
+      include Smithy::Client::_Response[Types::ListRoutesOperationOutput]
+      def routes: () -> Array[Types::RouteRef]?
+      def next_token: () -> String?
+    end
+    def list_routes: (
+      ?mesh_name: String,
+      ?virtual_router_name: String,
+      ?next_token: String,
+      ?limit: Integer,
+      ?mesh_owner: String
+    ) -> _ListRoutesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRoutesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOperationOutput]
+      def tags: () -> Array[Types::TagRef]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String,
+      ?next_token: String,
+      ?limit: Integer
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListVirtualGatewaysResponse
+      include Smithy::Client::_Response[Types::ListVirtualGatewaysOperationOutput]
+      def virtual_gateways: () -> Array[Types::VirtualGatewayRef]?
+      def next_token: () -> String?
+    end
+    def list_virtual_gateways: (
+      ?mesh_name: String,
+      ?next_token: String,
+      ?limit: Integer,
+      ?mesh_owner: String
+    ) -> _ListVirtualGatewaysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVirtualGatewaysResponse
+
+    interface _ListVirtualNodesResponse
+      include Smithy::Client::_Response[Types::ListVirtualNodesOperationOutput]
+      def virtual_nodes: () -> Array[Types::VirtualNodeRef]?
+      def next_token: () -> String?
+    end
+    def list_virtual_nodes: (
+      ?mesh_name: String,
+      ?next_token: String,
+      ?limit: Integer,
+      ?mesh_owner: String
+    ) -> _ListVirtualNodesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVirtualNodesResponse
+
+    interface _ListVirtualRoutersResponse
+      include Smithy::Client::_Response[Types::ListVirtualRoutersOperationOutput]
+      def virtual_routers: () -> Array[Types::VirtualRouterRef]?
+      def next_token: () -> String?
+    end
+    def list_virtual_routers: (
+      ?mesh_name: String,
+      ?next_token: String,
+      ?limit: Integer,
+      ?mesh_owner: String
+    ) -> _ListVirtualRoutersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVirtualRoutersResponse
+
+    interface _ListVirtualServicesResponse
+      include Smithy::Client::_Response[Types::ListVirtualServicesOperationOutput]
+      def virtual_services: () -> Array[Types::VirtualServiceRef]?
+      def next_token: () -> String?
+    end
+    def list_virtual_services: (
+      ?mesh_name: String,
+      ?next_token: String,
+      ?limit: Integer,
+      ?mesh_owner: String
+    ) -> _ListVirtualServicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVirtualServicesResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOperationOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOperationOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateGatewayRouteResponse
+      include Smithy::Client::_Response[Types::UpdateGatewayRouteOperationOutput]
+      def gateway_route: () -> Types::GatewayRouteData?
+    end
+    def update_gateway_route: (
+      ?gateway_route_name: String,
+      ?mesh_name: String,
+      ?virtual_gateway_name: String,
+      ?spec: {
+        priority: Integer,
+        http_route: {
+          match: {
+            prefix: String,
+            path: {
+              exact: String,
+              regex: String
+            },
+            query_parameters: Array[
+              {
+                name: String,
+                match: {
+                  exact: untyped
+                }
+              }
+            ],
+            method: String,
+            hostname: {
+              exact: String,
+              suffix: String
+            },
+            headers: Array[
+              {
+                name: String,
+                invert: bool,
+                match: {
+                  exact: String,
+                  regex: untyped,
+                  range: {
+                    start: Integer,
+                    end: untyped
+                  },
+                  prefix: untyped,
+                  suffix: untyped
+                }
+              }
+            ],
+            port: Integer
+          },
+          action: {
+            target: {
+              virtual_service: {
+                virtual_service_name: String
+              },
+              port: untyped
+            },
+            rewrite: {
+              prefix: {
+                default_prefix: String,
+                value: String
+              },
+              path: {
+                exact: untyped
+              },
+              hostname: {
+                default_target_hostname: untyped
+              }
+            }
+          }
+        },
+        http2_route: untyped,
+        grpc_route: {
+          match: {
+            service_name: String,
+            hostname: untyped,
+            metadata: Array[
+              {
+                name: untyped,
+                invert: untyped,
+                match: {
+                  exact: untyped,
+                  regex: untyped,
+                  range: untyped,
+                  prefix: untyped,
+                  suffix: untyped
+                }
+              }
+            ],
+            port: untyped
+          },
+          action: {
+            target: untyped,
+            rewrite: {
+              hostname: untyped
+            }
+          }
+        }
+      },
+      ?client_token: String,
+      ?mesh_owner: String
+    ) -> _UpdateGatewayRouteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGatewayRouteResponse
+
+    interface _UpdateMeshResponse
+      include Smithy::Client::_Response[Types::UpdateMeshOperationOutput]
+      def mesh: () -> Types::MeshData?
+    end
+    def update_mesh: (
+      ?mesh_name: String,
+      ?spec: {
+        egress_filter: {
+          type: String
+        },
+        service_discovery: {
+          ip_preference: String
+        }
+      },
+      ?client_token: String
+    ) -> _UpdateMeshResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMeshResponse
+
+    interface _UpdateRouteResponse
+      include Smithy::Client::_Response[Types::UpdateRouteOperationOutput]
+      def route: () -> Types::RouteData?
+    end
+    def update_route: (
+      ?route_name: String,
+      ?mesh_name: String,
+      ?virtual_router_name: String,
+      ?spec: {
+        priority: Integer,
+        http_route: {
+          match: {
+            prefix: String,
+            path: {
+              exact: String,
+              regex: String
+            },
+            query_parameters: Array[
+              {
+                name: String,
+                match: {
+                  exact: untyped
+                }
+              }
+            ],
+            method: String,
+            scheme: String,
+            headers: Array[
+              {
+                name: String,
+                invert: bool,
+                match: {
+                  exact: String,
+                  regex: untyped,
+                  range: {
+                    start: Integer,
+                    end: untyped
+                  },
+                  prefix: untyped,
+                  suffix: untyped
+                }
+              }
+            ],
+            port: Integer
+          },
+          action: {
+            weighted_targets: Array[
+              {
+                virtual_node: String,
+                weight: Integer,
+                port: untyped
+              }
+            ]
+          },
+          retry_policy: {
+            per_retry_timeout: {
+              value: Integer,
+              unit: String
+            },
+            max_retries: Integer,
+            http_retry_events: Array[String],
+            tcp_retry_events: Array[String]
+          },
+          timeout: {
+            per_request: untyped,
+            idle: untyped
+          }
+        },
+        tcp_route: {
+          action: {
+            weighted_targets: untyped
+          },
+          timeout: {
+            idle: untyped
+          },
+          match: {
+            port: untyped
+          }
+        },
+        http2_route: untyped,
+        grpc_route: {
+          action: {
+            weighted_targets: untyped
+          },
+          match: {
+            service_name: String,
+            method_name: String,
+            metadata: Array[
+              {
+                name: untyped,
+                invert: untyped,
+                match: {
+                  exact: untyped,
+                  regex: untyped,
+                  range: untyped,
+                  prefix: untyped,
+                  suffix: untyped
+                }
+              }
+            ],
+            port: untyped
+          },
+          retry_policy: {
+            per_retry_timeout: untyped,
+            max_retries: untyped,
+            http_retry_events: untyped,
+            tcp_retry_events: untyped,
+            grpc_retry_events: Array[String]
+          },
+          timeout: {
+            per_request: untyped,
+            idle: untyped
+          }
+        }
+      },
+      ?client_token: String,
+      ?mesh_owner: String
+    ) -> _UpdateRouteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRouteResponse
+
+    interface _UpdateVirtualGatewayResponse
+      include Smithy::Client::_Response[Types::UpdateVirtualGatewayOperationOutput]
+      def virtual_gateway: () -> Types::VirtualGatewayData?
+    end
+    def update_virtual_gateway: (
+      ?virtual_gateway_name: String,
+      ?mesh_name: String,
+      ?spec: {
+        backend_defaults: {
+          client_policy: {
+            tls: {
+              enforce: bool,
+              ports: Array[Integer],
+              certificate: {
+                file: {
+                  certificate_chain: String,
+                  private_key: untyped
+                },
+                sds: {
+                  secret_name: String
+                }
+              },
+              validation: {
+                trust: {
+                  acm: {
+                    certificate_authority_arns: Array[String]
+                  },
+                  file: {
+                    certificate_chain: untyped
+                  },
+                  sds: {
+                    secret_name: untyped
+                  }
+                },
+                subject_alternative_names: {
+                  match: {
+                    exact: Array[String]
+                  }
+                }
+              }
+            }
+          }
+        },
+        listeners: Array[
+          {
+            health_check: {
+              timeout_millis: Integer,
+              interval_millis: Integer,
+              protocol: String,
+              port: Integer,
+              path: String,
+              healthy_threshold: Integer,
+              unhealthy_threshold: untyped
+            },
+            port_mapping: {
+              port: untyped,
+              protocol: untyped
+            },
+            tls: {
+              mode: String,
+              validation: {
+                trust: {
+                  file: untyped,
+                  sds: untyped
+                },
+                subject_alternative_names: untyped
+              },
+              certificate: {
+                acm: {
+                  certificate_arn: String
+                },
+                file: untyped,
+                sds: untyped
+              }
+            },
+            connection_pool: {
+              http: {
+                max_connections: Integer,
+                max_pending_requests: Integer
+              },
+              http2: {
+                max_requests: Integer
+              },
+              grpc: {
+                max_requests: untyped
+              }
+            }
+          }
+        ],
+        logging: {
+          access_log: {
+            file: {
+              path: untyped,
+              format: {
+                text: String,
+                json: Array[
+                  {
+                    key: String,
+                    value: String
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      ?client_token: String,
+      ?mesh_owner: String
+    ) -> _UpdateVirtualGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVirtualGatewayResponse
+
+    interface _UpdateVirtualNodeResponse
+      include Smithy::Client::_Response[Types::UpdateVirtualNodeOperationOutput]
+      def virtual_node: () -> Types::VirtualNodeData?
+    end
+    def update_virtual_node: (
+      ?virtual_node_name: String,
+      ?mesh_name: String,
+      ?spec: {
+        service_discovery: {
+          dns: {
+            hostname: String,
+            response_type: String,
+            ip_preference: String
+          },
+          aws_cloud_map: {
+            namespace_name: String,
+            service_name: untyped,
+            attributes: Array[
+              {
+                key: String,
+                value: String
+              }
+            ],
+            ip_preference: untyped
+          }
+        },
+        listeners: Array[
+          {
+            port_mapping: {
+              port: Integer,
+              protocol: String
+            },
+            tls: {
+              mode: String,
+              certificate: {
+                acm: {
+                  certificate_arn: String
+                },
+                file: {
+                  certificate_chain: String,
+                  private_key: untyped
+                },
+                sds: {
+                  secret_name: String
+                }
+              },
+              validation: {
+                trust: {
+                  file: {
+                    certificate_chain: untyped
+                  },
+                  sds: {
+                    secret_name: untyped
+                  }
+                },
+                subject_alternative_names: {
+                  match: {
+                    exact: Array[String]
+                  }
+                }
+              }
+            },
+            health_check: {
+              timeout_millis: Integer,
+              interval_millis: Integer,
+              protocol: untyped,
+              port: untyped,
+              path: String,
+              healthy_threshold: Integer,
+              unhealthy_threshold: untyped
+            },
+            timeout: {
+              tcp: {
+                idle: {
+                  value: Integer,
+                  unit: String
+                }
+              },
+              http: {
+                per_request: untyped,
+                idle: untyped
+              },
+              http2: untyped,
+              grpc: {
+                per_request: untyped,
+                idle: untyped
+              }
+            },
+            outlier_detection: {
+              max_server_errors: Integer,
+              interval: untyped,
+              base_ejection_duration: untyped,
+              max_ejection_percent: Integer
+            },
+            connection_pool: {
+              tcp: {
+                max_connections: Integer
+              },
+              http: {
+                max_connections: untyped,
+                max_pending_requests: Integer
+              },
+              http2: {
+                max_requests: Integer
+              },
+              grpc: {
+                max_requests: untyped
+              }
+            }
+          }
+        ],
+        backends: Array[
+          {
+            virtual_service: {
+              virtual_service_name: String,
+              client_policy: {
+                tls: {
+                  enforce: bool,
+                  ports: Array[Integer],
+                  certificate: {
+                    file: untyped,
+                    sds: untyped
+                  },
+                  validation: {
+                    trust: {
+                      acm: {
+                        certificate_authority_arns: Array[String]
+                      },
+                      file: untyped,
+                      sds: untyped
+                    },
+                    subject_alternative_names: untyped
+                  }
+                }
+              }
+            }
+          }
+        ],
+        backend_defaults: {
+          client_policy: untyped
+        },
+        logging: {
+          access_log: {
+            file: {
+              path: untyped,
+              format: {
+                text: String,
+                json: Array[
+                  {
+                    key: String,
+                    value: String
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      ?client_token: String,
+      ?mesh_owner: String
+    ) -> _UpdateVirtualNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVirtualNodeResponse
+
+    interface _UpdateVirtualRouterResponse
+      include Smithy::Client::_Response[Types::UpdateVirtualRouterOperationOutput]
+      def virtual_router: () -> Types::VirtualRouterData?
+    end
+    def update_virtual_router: (
+      ?virtual_router_name: String,
+      ?mesh_name: String,
+      ?spec: {
+        listeners: Array[
+          {
+            port_mapping: {
+              port: Integer,
+              protocol: String
+            }
+          }
+        ]
+      },
+      ?client_token: String,
+      ?mesh_owner: String
+    ) -> _UpdateVirtualRouterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVirtualRouterResponse
+
+    interface _UpdateVirtualServiceResponse
+      include Smithy::Client::_Response[Types::UpdateVirtualServiceOperationOutput]
+      def virtual_service: () -> Types::VirtualServiceData?
+    end
+    def update_virtual_service: (
+      ?virtual_service_name: String,
+      ?mesh_name: String,
+      ?spec: {
+        provider: {
+          virtual_node: {
+            virtual_node_name: String
+          },
+          virtual_router: {
+            virtual_router_name: untyped
+          }
+        }
+      },
+      ?client_token: String,
+      ?mesh_owner: String
+    ) -> _UpdateVirtualServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVirtualServiceResponse
+  end
+end

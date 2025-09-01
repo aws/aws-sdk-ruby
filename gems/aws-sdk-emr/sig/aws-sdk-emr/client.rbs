@@ -1,0 +1,1213 @@
+module Aws::EMR
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::EMR::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddInstanceFleetResponse
+      include Smithy::Client::_Response[Types::AddInstanceFleetOutput]
+      def cluster_id: () -> String?
+      def instance_fleet_id: () -> String?
+      def cluster_arn: () -> String?
+    end
+    def add_instance_fleet: (
+      ?cluster_id: String,
+      ?instance_fleet: {
+        name: String,
+        instance_fleet_type: String,
+        target_on_demand_capacity: Integer,
+        target_spot_capacity: untyped,
+        instance_type_configs: Array[
+          {
+            instance_type: String,
+            weighted_capacity: untyped,
+            bid_price: untyped,
+            bid_price_as_percentage_of_on_demand_price: Float,
+            ebs_configuration: {
+              ebs_block_device_configs: Array[
+                {
+                  volume_specification: {
+                    volume_type: String,
+                    iops: Integer,
+                    size_in_gb: untyped,
+                    throughput: Integer
+                  },
+                  volumes_per_instance: untyped
+                }
+              ],
+              ebs_optimized: bool
+            },
+            configurations: Array[
+              {
+                classification: untyped,
+                configurations: untyped,
+                properties: Hash[String, String]
+              }
+            ],
+            custom_ami_id: untyped,
+            priority: untyped
+          }
+        ],
+        launch_specifications: {
+          spot_specification: {
+            timeout_duration_minutes: untyped,
+            timeout_action: String,
+            block_duration_minutes: untyped,
+            allocation_strategy: String
+          },
+          on_demand_specification: {
+            allocation_strategy: String,
+            capacity_reservation_options: {
+              usage_strategy: String,
+              capacity_reservation_preference: String,
+              capacity_reservation_resource_group_arn: untyped
+            }
+          }
+        },
+        resize_specifications: {
+          spot_resize_specification: {
+            timeout_duration_minutes: untyped,
+            allocation_strategy: untyped
+          },
+          on_demand_resize_specification: {
+            timeout_duration_minutes: untyped,
+            allocation_strategy: untyped,
+            capacity_reservation_options: untyped
+          }
+        },
+        context: untyped
+      }
+    ) -> _AddInstanceFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddInstanceFleetResponse
+
+    interface _AddInstanceGroupsResponse
+      include Smithy::Client::_Response[Types::AddInstanceGroupsOutput]
+      def job_flow_id: () -> String?
+      def instance_group_ids: () -> Array[String]?
+      def cluster_arn: () -> String?
+    end
+    def add_instance_groups: (
+      ?instance_groups: Array[
+        {
+          name: String,
+          market: String,
+          instance_role: String,
+          bid_price: untyped,
+          instance_type: String,
+          instance_count: Integer,
+          configurations: Array[
+            {
+              classification: String,
+              configurations: untyped,
+              properties: Hash[String, String]
+            }
+          ],
+          ebs_configuration: {
+            ebs_block_device_configs: Array[
+              {
+                volume_specification: {
+                  volume_type: untyped,
+                  iops: untyped,
+                  size_in_gb: untyped,
+                  throughput: Integer
+                },
+                volumes_per_instance: untyped
+              }
+            ],
+            ebs_optimized: bool
+          },
+          auto_scaling_policy: {
+            constraints: {
+              min_capacity: untyped,
+              max_capacity: untyped
+            },
+            rules: Array[
+              {
+                name: untyped,
+                description: untyped,
+                action: {
+                  market: untyped,
+                  simple_scaling_policy_configuration: {
+                    adjustment_type: String,
+                    scaling_adjustment: untyped,
+                    cool_down: untyped
+                  }
+                },
+                trigger: {
+                  cloud_watch_alarm_definition: {
+                    comparison_operator: String,
+                    evaluation_periods: untyped,
+                    metric_name: untyped,
+                    namespace: untyped,
+                    period: untyped,
+                    statistic: String,
+                    threshold: Float,
+                    unit: String,
+                    dimensions: Array[
+                      {
+                        key: untyped,
+                        value: untyped
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          custom_ami_id: untyped
+        }
+      ],
+      ?job_flow_id: String
+    ) -> _AddInstanceGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddInstanceGroupsResponse
+
+    interface _AddJobFlowStepsResponse
+      include Smithy::Client::_Response[Types::AddJobFlowStepsOutput]
+      def step_ids: () -> Array[String]?
+    end
+    def add_job_flow_steps: (
+      ?job_flow_id: String,
+      ?steps: Array[
+        {
+          name: String,
+          action_on_failure: String,
+          hadoop_jar_step: {
+            properties: Array[
+              {
+                key: String,
+                value: untyped
+              }
+            ],
+            jar: untyped,
+            main_class: untyped,
+            args: Array[String]
+          }
+        }
+      ],
+      ?execution_role_arn: String
+    ) -> _AddJobFlowStepsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddJobFlowStepsResponse
+
+    interface _AddTagsResponse
+      include Smithy::Client::_Response[Types::AddTagsOutput]
+    end
+    def add_tags: (
+      ?resource_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _AddTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsResponse
+
+    interface _CancelStepsResponse
+      include Smithy::Client::_Response[Types::CancelStepsOutput]
+      def cancel_steps_info_list: () -> Array[Types::CancelStepsInfo]?
+    end
+    def cancel_steps: (
+      ?cluster_id: String,
+      ?step_ids: Array[String],
+      ?step_cancellation_option: String
+    ) -> _CancelStepsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelStepsResponse
+
+    interface _CreatePersistentAppUIResponse
+      include Smithy::Client::_Response[Types::CreatePersistentAppUIOutput]
+      def persistent_app_ui_id: () -> String?
+      def runtime_role_enabled_cluster: () -> bool?
+    end
+    def create_persistent_app_ui: (
+      ?target_resource_arn: String,
+      ?emr_containers_config: {
+        job_run_id: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ],
+      ?x_referer: String,
+      ?profiler_type: String
+    ) -> _CreatePersistentAppUIResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePersistentAppUIResponse
+
+    interface _CreateSecurityConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateSecurityConfigurationOutput]
+      def name: () -> String?
+      def creation_date_time: () -> Time?
+    end
+    def create_security_configuration: (
+      ?name: String,
+      ?security_configuration: String
+    ) -> _CreateSecurityConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSecurityConfigurationResponse
+
+    interface _CreateStudioResponse
+      include Smithy::Client::_Response[Types::CreateStudioOutput]
+      def studio_id: () -> String?
+      def url: () -> String?
+    end
+    def create_studio: (
+      ?name: String,
+      ?description: String,
+      ?auth_mode: String,
+      ?vpc_id: String,
+      ?subnet_ids: Array[String],
+      ?service_role: String,
+      ?user_role: String,
+      ?workspace_security_group_id: String,
+      ?engine_security_group_id: String,
+      ?default_s3_location: String,
+      ?idp_auth_url: String,
+      ?idp_relay_state_parameter_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ],
+      ?trusted_identity_propagation_enabled: bool,
+      ?idc_user_assignment: String,
+      ?idc_instance_arn: String,
+      ?encryption_key_arn: String
+    ) -> _CreateStudioResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStudioResponse
+
+    interface _CreateStudioSessionMappingResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_studio_session_mapping: (
+      ?studio_id: String,
+      ?identity_id: String,
+      ?identity_name: String,
+      ?identity_type: String,
+      ?session_policy_arn: String
+    ) -> _CreateStudioSessionMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStudioSessionMappingResponse
+
+    interface _DeleteSecurityConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteSecurityConfigurationOutput]
+    end
+    def delete_security_configuration: (
+      ?name: String
+    ) -> _DeleteSecurityConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSecurityConfigurationResponse
+
+    interface _DeleteStudioResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_studio: (
+      ?studio_id: String
+    ) -> _DeleteStudioResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStudioResponse
+
+    interface _DeleteStudioSessionMappingResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_studio_session_mapping: (
+      ?studio_id: String,
+      ?identity_id: String,
+      ?identity_name: String,
+      ?identity_type: String
+    ) -> _DeleteStudioSessionMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStudioSessionMappingResponse
+
+    interface _DescribeClusterResponse
+      include Smithy::Client::_Response[Types::DescribeClusterOutput]
+      def cluster: () -> Types::Cluster?
+    end
+    def describe_cluster: (
+      ?cluster_id: String
+    ) -> _DescribeClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeClusterResponse
+
+    interface _DescribeJobFlowsResponse
+      include Smithy::Client::_Response[Types::DescribeJobFlowsOutput]
+      def job_flows: () -> Array[Types::JobFlowDetail]?
+    end
+    def describe_job_flows: (
+      ?created_after: Time,
+      ?created_before: Time,
+      ?job_flow_ids: Array[String],
+      ?job_flow_states: Array[String]
+    ) -> _DescribeJobFlowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeJobFlowsResponse
+
+    interface _DescribeNotebookExecutionResponse
+      include Smithy::Client::_Response[Types::DescribeNotebookExecutionOutput]
+      def notebook_execution: () -> Types::NotebookExecution?
+    end
+    def describe_notebook_execution: (
+      ?notebook_execution_id: String
+    ) -> _DescribeNotebookExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeNotebookExecutionResponse
+
+    interface _DescribePersistentAppUIResponse
+      include Smithy::Client::_Response[Types::DescribePersistentAppUIOutput]
+      def persistent_app_ui: () -> Types::PersistentAppUI?
+    end
+    def describe_persistent_app_ui: (
+      ?persistent_app_ui_id: String
+    ) -> _DescribePersistentAppUIResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePersistentAppUIResponse
+
+    interface _DescribeReleaseLabelResponse
+      include Smithy::Client::_Response[Types::DescribeReleaseLabelOutput]
+      def release_label: () -> String?
+      def applications: () -> Array[Types::SimplifiedApplication]?
+      def next_token: () -> String?
+      def available_os_releases: () -> Array[Types::OSRelease]?
+    end
+    def describe_release_label: (
+      ?release_label: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeReleaseLabelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReleaseLabelResponse
+
+    interface _DescribeSecurityConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeSecurityConfigurationOutput]
+      def name: () -> String?
+      def security_configuration: () -> String?
+      def creation_date_time: () -> Time?
+    end
+    def describe_security_configuration: (
+      ?name: String
+    ) -> _DescribeSecurityConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSecurityConfigurationResponse
+
+    interface _DescribeStepResponse
+      include Smithy::Client::_Response[Types::DescribeStepOutput]
+      def step: () -> Types::Step?
+    end
+    def describe_step: (
+      ?cluster_id: String,
+      ?step_id: String
+    ) -> _DescribeStepResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStepResponse
+
+    interface _DescribeStudioResponse
+      include Smithy::Client::_Response[Types::DescribeStudioOutput]
+      def studio: () -> Types::Studio?
+    end
+    def describe_studio: (
+      ?studio_id: String
+    ) -> _DescribeStudioResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStudioResponse
+
+    interface _GetAutoTerminationPolicyResponse
+      include Smithy::Client::_Response[Types::GetAutoTerminationPolicyOutput]
+      def auto_termination_policy: () -> Types::AutoTerminationPolicy?
+    end
+    def get_auto_termination_policy: (
+      ?cluster_id: String
+    ) -> _GetAutoTerminationPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutoTerminationPolicyResponse
+
+    interface _GetBlockPublicAccessConfigurationResponse
+      include Smithy::Client::_Response[Types::GetBlockPublicAccessConfigurationOutput]
+      def block_public_access_configuration: () -> Types::BlockPublicAccessConfiguration?
+      def block_public_access_configuration_metadata: () -> Types::BlockPublicAccessConfigurationMetadata?
+    end
+    def get_block_public_access_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBlockPublicAccessConfigurationResponse
+
+    interface _GetClusterSessionCredentialsResponse
+      include Smithy::Client::_Response[Types::GetClusterSessionCredentialsOutput]
+      def credentials: () -> Types::Credentials?
+      def expires_at: () -> Time?
+    end
+    def get_cluster_session_credentials: (
+      ?cluster_id: String,
+      ?execution_role_arn: String
+    ) -> _GetClusterSessionCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetClusterSessionCredentialsResponse
+
+    interface _GetManagedScalingPolicyResponse
+      include Smithy::Client::_Response[Types::GetManagedScalingPolicyOutput]
+      def managed_scaling_policy: () -> Types::ManagedScalingPolicy?
+    end
+    def get_managed_scaling_policy: (
+      ?cluster_id: String
+    ) -> _GetManagedScalingPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetManagedScalingPolicyResponse
+
+    interface _GetOnClusterAppUIPresignedURLResponse
+      include Smithy::Client::_Response[Types::GetOnClusterAppUIPresignedURLOutput]
+      def presigned_url_ready: () -> bool?
+      def presigned_url: () -> String?
+    end
+    def get_on_cluster_app_ui_presigned_url: (
+      ?cluster_id: String,
+      ?on_cluster_app_ui_type: String,
+      ?application_id: String,
+      ?dry_run: bool,
+      ?execution_role_arn: String
+    ) -> _GetOnClusterAppUIPresignedURLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOnClusterAppUIPresignedURLResponse
+
+    interface _GetPersistentAppUIPresignedURLResponse
+      include Smithy::Client::_Response[Types::GetPersistentAppUIPresignedURLOutput]
+      def presigned_url_ready: () -> bool?
+      def presigned_url: () -> String?
+    end
+    def get_persistent_app_ui_presigned_url: (
+      ?persistent_app_ui_id: String,
+      ?persistent_app_ui_type: String,
+      ?application_id: String,
+      ?auth_proxy_call: bool,
+      ?execution_role_arn: String
+    ) -> _GetPersistentAppUIPresignedURLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPersistentAppUIPresignedURLResponse
+
+    interface _GetStudioSessionMappingResponse
+      include Smithy::Client::_Response[Types::GetStudioSessionMappingOutput]
+      def session_mapping: () -> Types::SessionMappingDetail?
+    end
+    def get_studio_session_mapping: (
+      ?studio_id: String,
+      ?identity_id: String,
+      ?identity_name: String,
+      ?identity_type: String
+    ) -> _GetStudioSessionMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStudioSessionMappingResponse
+
+    interface _ListBootstrapActionsResponse
+      include Smithy::Client::_Response[Types::ListBootstrapActionsOutput]
+      def bootstrap_actions: () -> Array[Types::Command]?
+      def marker: () -> String?
+    end
+    def list_bootstrap_actions: (
+      ?cluster_id: String,
+      ?marker: String
+    ) -> _ListBootstrapActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBootstrapActionsResponse
+
+    interface _ListClustersResponse
+      include Smithy::Client::_Response[Types::ListClustersOutput]
+      def clusters: () -> Array[Types::ClusterSummary]?
+      def marker: () -> String?
+    end
+    def list_clusters: (
+      ?created_after: Time,
+      ?created_before: Time,
+      ?cluster_states: Array[String],
+      ?marker: String
+    ) -> _ListClustersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListClustersResponse
+
+    interface _ListInstanceFleetsResponse
+      include Smithy::Client::_Response[Types::ListInstanceFleetsOutput]
+      def instance_fleets: () -> Array[Types::InstanceFleet]?
+      def marker: () -> String?
+    end
+    def list_instance_fleets: (
+      ?cluster_id: String,
+      ?marker: String
+    ) -> _ListInstanceFleetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInstanceFleetsResponse
+
+    interface _ListInstanceGroupsResponse
+      include Smithy::Client::_Response[Types::ListInstanceGroupsOutput]
+      def instance_groups: () -> Array[Types::InstanceGroup]?
+      def marker: () -> String?
+    end
+    def list_instance_groups: (
+      ?cluster_id: String,
+      ?marker: String
+    ) -> _ListInstanceGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInstanceGroupsResponse
+
+    interface _ListInstancesResponse
+      include Smithy::Client::_Response[Types::ListInstancesOutput]
+      def instances: () -> Array[Types::Instance]?
+      def marker: () -> String?
+    end
+    def list_instances: (
+      ?cluster_id: String,
+      ?instance_group_id: String,
+      ?instance_group_types: Array[String],
+      ?instance_fleet_id: String,
+      ?instance_fleet_type: String,
+      ?instance_states: Array[String],
+      ?marker: String
+    ) -> _ListInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInstancesResponse
+
+    interface _ListNotebookExecutionsResponse
+      include Smithy::Client::_Response[Types::ListNotebookExecutionsOutput]
+      def notebook_executions: () -> Array[Types::NotebookExecutionSummary]?
+      def marker: () -> String?
+    end
+    def list_notebook_executions: (
+      ?editor_id: String,
+      ?status: String,
+      ?from: Time,
+      ?to: Time,
+      ?marker: String,
+      ?execution_engine_id: String
+    ) -> _ListNotebookExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNotebookExecutionsResponse
+
+    interface _ListReleaseLabelsResponse
+      include Smithy::Client::_Response[Types::ListReleaseLabelsOutput]
+      def release_labels: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_release_labels: (
+      ?filters: {
+        prefix: String,
+        application: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListReleaseLabelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReleaseLabelsResponse
+
+    interface _ListSecurityConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListSecurityConfigurationsOutput]
+      def security_configurations: () -> Array[Types::SecurityConfigurationSummary]?
+      def marker: () -> String?
+    end
+    def list_security_configurations: (
+      ?marker: String
+    ) -> _ListSecurityConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSecurityConfigurationsResponse
+
+    interface _ListStepsResponse
+      include Smithy::Client::_Response[Types::ListStepsOutput]
+      def steps: () -> Array[Types::StepSummary]?
+      def marker: () -> String?
+    end
+    def list_steps: (
+      ?cluster_id: String,
+      ?step_states: Array[String],
+      ?step_ids: Array[String],
+      ?marker: String
+    ) -> _ListStepsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStepsResponse
+
+    interface _ListStudioSessionMappingsResponse
+      include Smithy::Client::_Response[Types::ListStudioSessionMappingsOutput]
+      def session_mappings: () -> Array[Types::SessionMappingSummary]?
+      def marker: () -> String?
+    end
+    def list_studio_session_mappings: (
+      ?studio_id: String,
+      ?identity_type: String,
+      ?marker: String
+    ) -> _ListStudioSessionMappingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStudioSessionMappingsResponse
+
+    interface _ListStudiosResponse
+      include Smithy::Client::_Response[Types::ListStudiosOutput]
+      def studios: () -> Array[Types::StudioSummary]?
+      def marker: () -> String?
+    end
+    def list_studios: (
+      ?marker: String
+    ) -> _ListStudiosResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStudiosResponse
+
+    interface _ListSupportedInstanceTypesResponse
+      include Smithy::Client::_Response[Types::ListSupportedInstanceTypesOutput]
+      def supported_instance_types: () -> Array[Types::SupportedInstanceType]?
+      def marker: () -> String?
+    end
+    def list_supported_instance_types: (
+      ?release_label: String,
+      ?marker: String
+    ) -> _ListSupportedInstanceTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSupportedInstanceTypesResponse
+
+    interface _ModifyClusterResponse
+      include Smithy::Client::_Response[Types::ModifyClusterOutput]
+      def step_concurrency_level: () -> Integer?
+      def extended_support: () -> bool?
+    end
+    def modify_cluster: (
+      ?cluster_id: String,
+      ?step_concurrency_level: Integer,
+      ?extended_support: bool
+    ) -> _ModifyClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyClusterResponse
+
+    interface _ModifyInstanceFleetResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def modify_instance_fleet: (
+      ?cluster_id: String,
+      ?instance_fleet: {
+        instance_fleet_id: String,
+        target_on_demand_capacity: Integer,
+        target_spot_capacity: untyped,
+        resize_specifications: {
+          spot_resize_specification: {
+            timeout_duration_minutes: untyped,
+            allocation_strategy: String
+          },
+          on_demand_resize_specification: {
+            timeout_duration_minutes: untyped,
+            allocation_strategy: String,
+            capacity_reservation_options: {
+              usage_strategy: String,
+              capacity_reservation_preference: String,
+              capacity_reservation_resource_group_arn: String
+            }
+          }
+        },
+        instance_type_configs: Array[
+          {
+            instance_type: String,
+            weighted_capacity: untyped,
+            bid_price: untyped,
+            bid_price_as_percentage_of_on_demand_price: Float,
+            ebs_configuration: {
+              ebs_block_device_configs: Array[
+                {
+                  volume_specification: {
+                    volume_type: String,
+                    iops: Integer,
+                    size_in_gb: untyped,
+                    throughput: Integer
+                  },
+                  volumes_per_instance: untyped
+                }
+              ],
+              ebs_optimized: bool
+            },
+            configurations: Array[
+              {
+                classification: untyped,
+                configurations: untyped,
+                properties: Hash[String, String]
+              }
+            ],
+            custom_ami_id: untyped,
+            priority: untyped
+          }
+        ],
+        context: untyped
+      }
+    ) -> _ModifyInstanceFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyInstanceFleetResponse
+
+    interface _ModifyInstanceGroupsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def modify_instance_groups: (
+      ?cluster_id: String,
+      ?instance_groups: Array[
+        {
+          instance_group_id: String,
+          instance_count: Integer,
+          ec2_instance_ids_to_terminate: Array[String],
+          shrink_policy: {
+            decommission_timeout: untyped,
+            instance_resize_policy: {
+              instances_to_terminate: Array[String],
+              instances_to_protect: untyped,
+              instance_termination_timeout: untyped
+            }
+          },
+          reconfiguration_type: String,
+          configurations: Array[
+            {
+              classification: String,
+              configurations: untyped,
+              properties: Hash[String, String]
+            }
+          ]
+        }
+      ]
+    ) -> _ModifyInstanceGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyInstanceGroupsResponse
+
+    interface _PutAutoScalingPolicyResponse
+      include Smithy::Client::_Response[Types::PutAutoScalingPolicyOutput]
+      def cluster_id: () -> String?
+      def instance_group_id: () -> String?
+      def auto_scaling_policy: () -> Types::AutoScalingPolicyDescription?
+      def cluster_arn: () -> String?
+    end
+    def put_auto_scaling_policy: (
+      ?cluster_id: String,
+      ?instance_group_id: String,
+      ?auto_scaling_policy: {
+        constraints: {
+          min_capacity: Integer,
+          max_capacity: untyped
+        },
+        rules: Array[
+          {
+            name: String,
+            description: untyped,
+            action: {
+              market: String,
+              simple_scaling_policy_configuration: {
+                adjustment_type: String,
+                scaling_adjustment: untyped,
+                cool_down: untyped
+              }
+            },
+            trigger: {
+              cloud_watch_alarm_definition: {
+                comparison_operator: String,
+                evaluation_periods: untyped,
+                metric_name: untyped,
+                namespace: untyped,
+                period: untyped,
+                statistic: String,
+                threshold: Float,
+                unit: String,
+                dimensions: Array[
+                  {
+                    key: untyped,
+                    value: untyped
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    ) -> _PutAutoScalingPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAutoScalingPolicyResponse
+
+    interface _PutAutoTerminationPolicyResponse
+      include Smithy::Client::_Response[Types::PutAutoTerminationPolicyOutput]
+    end
+    def put_auto_termination_policy: (
+      ?cluster_id: String,
+      ?auto_termination_policy: {
+        idle_timeout: Integer
+      }
+    ) -> _PutAutoTerminationPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAutoTerminationPolicyResponse
+
+    interface _PutBlockPublicAccessConfigurationResponse
+      include Smithy::Client::_Response[Types::PutBlockPublicAccessConfigurationOutput]
+    end
+    def put_block_public_access_configuration: (
+      ?block_public_access_configuration: {
+        block_public_security_group_rules: bool,
+        permitted_public_security_group_rule_ranges: Array[
+          {
+            min_range: Integer,
+            max_range: untyped
+          }
+        ],
+        classification: String,
+        configurations: Array[
+          {
+            classification: untyped,
+            configurations: untyped,
+            properties: Hash[String, String]
+          }
+        ],
+        properties: untyped
+      }
+    ) -> _PutBlockPublicAccessConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBlockPublicAccessConfigurationResponse
+
+    interface _PutManagedScalingPolicyResponse
+      include Smithy::Client::_Response[Types::PutManagedScalingPolicyOutput]
+    end
+    def put_managed_scaling_policy: (
+      ?cluster_id: String,
+      ?managed_scaling_policy: {
+        compute_limits: {
+          unit_type: String,
+          minimum_capacity_units: Integer,
+          maximum_capacity_units: untyped,
+          maximum_on_demand_capacity_units: untyped,
+          maximum_core_capacity_units: untyped
+        },
+        utilization_performance_index: Integer,
+        scaling_strategy: String
+      }
+    ) -> _PutManagedScalingPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutManagedScalingPolicyResponse
+
+    interface _RemoveAutoScalingPolicyResponse
+      include Smithy::Client::_Response[Types::RemoveAutoScalingPolicyOutput]
+    end
+    def remove_auto_scaling_policy: (
+      ?cluster_id: String,
+      ?instance_group_id: String
+    ) -> _RemoveAutoScalingPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveAutoScalingPolicyResponse
+
+    interface _RemoveAutoTerminationPolicyResponse
+      include Smithy::Client::_Response[Types::RemoveAutoTerminationPolicyOutput]
+    end
+    def remove_auto_termination_policy: (
+      ?cluster_id: String
+    ) -> _RemoveAutoTerminationPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveAutoTerminationPolicyResponse
+
+    interface _RemoveManagedScalingPolicyResponse
+      include Smithy::Client::_Response[Types::RemoveManagedScalingPolicyOutput]
+    end
+    def remove_managed_scaling_policy: (
+      ?cluster_id: String
+    ) -> _RemoveManagedScalingPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveManagedScalingPolicyResponse
+
+    interface _RemoveTagsResponse
+      include Smithy::Client::_Response[Types::RemoveTagsOutput]
+    end
+    def remove_tags: (
+      ?resource_id: String,
+      ?tag_keys: Array[String]
+    ) -> _RemoveTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTagsResponse
+
+    interface _RunJobFlowResponse
+      include Smithy::Client::_Response[Types::RunJobFlowOutput]
+      def job_flow_id: () -> String?
+      def cluster_arn: () -> String?
+    end
+    def run_job_flow: (
+      ?name: String,
+      ?log_uri: String,
+      ?log_encryption_kms_key_id: String,
+      ?additional_info: String,
+      ?ami_version: String,
+      ?release_label: String,
+      ?instances: {
+        master_instance_type: String,
+        slave_instance_type: untyped,
+        instance_count: Integer,
+        instance_groups: Array[
+          {
+            name: String,
+            market: String,
+            instance_role: String,
+            bid_price: untyped,
+            instance_type: untyped,
+            instance_count: untyped,
+            configurations: Array[
+              {
+                classification: String,
+                configurations: untyped,
+                properties: Hash[String, String]
+              }
+            ],
+            ebs_configuration: {
+              ebs_block_device_configs: Array[
+                {
+                  volume_specification: {
+                    volume_type: untyped,
+                    iops: untyped,
+                    size_in_gb: untyped,
+                    throughput: Integer
+                  },
+                  volumes_per_instance: untyped
+                }
+              ],
+              ebs_optimized: bool
+            },
+            auto_scaling_policy: {
+              constraints: {
+                min_capacity: untyped,
+                max_capacity: untyped
+              },
+              rules: Array[
+                {
+                  name: untyped,
+                  description: untyped,
+                  action: {
+                    market: untyped,
+                    simple_scaling_policy_configuration: {
+                      adjustment_type: String,
+                      scaling_adjustment: untyped,
+                      cool_down: untyped
+                    }
+                  },
+                  trigger: {
+                    cloud_watch_alarm_definition: {
+                      comparison_operator: String,
+                      evaluation_periods: untyped,
+                      metric_name: untyped,
+                      namespace: untyped,
+                      period: untyped,
+                      statistic: String,
+                      threshold: Float,
+                      unit: String,
+                      dimensions: Array[
+                        {
+                          key: untyped,
+                          value: untyped
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            custom_ami_id: untyped
+          }
+        ],
+        instance_fleets: Array[
+          {
+            name: untyped,
+            instance_fleet_type: String,
+            target_on_demand_capacity: Integer,
+            target_spot_capacity: untyped,
+            instance_type_configs: Array[
+              {
+                instance_type: untyped,
+                weighted_capacity: untyped,
+                bid_price: untyped,
+                bid_price_as_percentage_of_on_demand_price: untyped,
+                ebs_configuration: untyped,
+                configurations: untyped,
+                custom_ami_id: untyped,
+                priority: untyped
+              }
+            ],
+            launch_specifications: {
+              spot_specification: {
+                timeout_duration_minutes: untyped,
+                timeout_action: String,
+                block_duration_minutes: untyped,
+                allocation_strategy: String
+              },
+              on_demand_specification: {
+                allocation_strategy: String,
+                capacity_reservation_options: {
+                  usage_strategy: String,
+                  capacity_reservation_preference: String,
+                  capacity_reservation_resource_group_arn: untyped
+                }
+              }
+            },
+            resize_specifications: {
+              spot_resize_specification: {
+                timeout_duration_minutes: untyped,
+                allocation_strategy: untyped
+              },
+              on_demand_resize_specification: {
+                timeout_duration_minutes: untyped,
+                allocation_strategy: untyped,
+                capacity_reservation_options: untyped
+              }
+            },
+            context: untyped
+          }
+        ],
+        ec2_key_name: untyped,
+        placement: {
+          availability_zone: String,
+          availability_zones: Array[String]
+        },
+        keep_job_flow_alive_when_no_steps: bool,
+        termination_protected: untyped,
+        unhealthy_node_replacement: untyped,
+        hadoop_version: untyped,
+        ec2_subnet_id: untyped,
+        ec2_subnet_ids: untyped,
+        emr_managed_master_security_group: untyped,
+        emr_managed_slave_security_group: untyped,
+        service_access_security_group: untyped,
+        additional_master_security_groups: Array[String],
+        additional_slave_security_groups: untyped
+      },
+      ?steps: Array[
+        {
+          name: String,
+          action_on_failure: String,
+          hadoop_jar_step: {
+            properties: Array[
+              {
+                key: String,
+                value: untyped
+              }
+            ],
+            jar: untyped,
+            main_class: untyped,
+            args: Array[String]
+          }
+        }
+      ],
+      ?bootstrap_actions: Array[
+        {
+          name: String,
+          script_bootstrap_action: {
+            path: String,
+            args: Array[String]
+          }
+        }
+      ],
+      ?supported_products: Array[String],
+      ?new_supported_products: Array[
+        {
+          name: String,
+          args: Array[String]
+        }
+      ],
+      ?applications: Array[
+        {
+          name: String,
+          version: untyped,
+          args: Array[String],
+          additional_info: Hash[String, String]
+        }
+      ],
+      ?configurations: Array[
+        {
+          classification: String,
+          configurations: untyped,
+          properties: Hash[String, String]
+        }
+      ],
+      ?visible_to_all_users: bool,
+      ?job_flow_role: String,
+      ?service_role: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ],
+      ?security_configuration: String,
+      ?auto_scaling_role: String,
+      ?scale_down_behavior: String,
+      ?custom_ami_id: String,
+      ?ebs_root_volume_size: Integer,
+      ?repo_upgrade_on_boot: String,
+      ?kerberos_attributes: {
+        realm: String,
+        kdc_admin_password: untyped,
+        cross_realm_trust_principal_password: untyped,
+        ad_domain_join_user: untyped,
+        ad_domain_join_password: untyped
+      },
+      ?step_concurrency_level: Integer,
+      ?managed_scaling_policy: {
+        compute_limits: {
+          unit_type: String,
+          minimum_capacity_units: Integer,
+          maximum_capacity_units: untyped,
+          maximum_on_demand_capacity_units: untyped,
+          maximum_core_capacity_units: untyped
+        },
+        utilization_performance_index: Integer,
+        scaling_strategy: String
+      },
+      ?placement_group_configs: Array[
+        {
+          instance_role: String,
+          placement_strategy: String
+        }
+      ],
+      ?auto_termination_policy: {
+        idle_timeout: Integer
+      },
+      ?os_release_label: String,
+      ?ebs_root_volume_iops: Integer,
+      ?ebs_root_volume_throughput: Integer,
+      ?extended_support: bool
+    ) -> _RunJobFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RunJobFlowResponse
+
+    interface _SetKeepJobFlowAliveWhenNoStepsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_keep_job_flow_alive_when_no_steps: (
+      ?job_flow_ids: Array[String],
+      ?keep_job_flow_alive_when_no_steps: bool
+    ) -> _SetKeepJobFlowAliveWhenNoStepsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetKeepJobFlowAliveWhenNoStepsResponse
+
+    interface _SetTerminationProtectionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_termination_protection: (
+      ?job_flow_ids: Array[String],
+      ?termination_protected: bool
+    ) -> _SetTerminationProtectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetTerminationProtectionResponse
+
+    interface _SetUnhealthyNodeReplacementResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_unhealthy_node_replacement: (
+      ?job_flow_ids: Array[String],
+      ?unhealthy_node_replacement: bool
+    ) -> _SetUnhealthyNodeReplacementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetUnhealthyNodeReplacementResponse
+
+    interface _SetVisibleToAllUsersResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_visible_to_all_users: (
+      ?job_flow_ids: Array[String],
+      ?visible_to_all_users: bool
+    ) -> _SetVisibleToAllUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetVisibleToAllUsersResponse
+
+    interface _StartNotebookExecutionResponse
+      include Smithy::Client::_Response[Types::StartNotebookExecutionOutput]
+      def notebook_execution_id: () -> String?
+    end
+    def start_notebook_execution: (
+      ?editor_id: String,
+      ?relative_path: String,
+      ?notebook_execution_name: String,
+      ?notebook_params: String,
+      ?execution_engine: {
+        id: String,
+        type: String,
+        master_instance_security_group_id: untyped,
+        execution_role_arn: String
+      },
+      ?service_role: String,
+      ?notebook_instance_security_group_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ],
+      ?notebook_s3_location: {
+        bucket: String,
+        key: String
+      },
+      ?output_notebook_s3_location: {
+        bucket: String,
+        key: String
+      },
+      ?output_notebook_format: String,
+      ?environment_variables: Hash[String, String]
+    ) -> _StartNotebookExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartNotebookExecutionResponse
+
+    interface _StopNotebookExecutionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def stop_notebook_execution: (
+      ?notebook_execution_id: String
+    ) -> _StopNotebookExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopNotebookExecutionResponse
+
+    interface _TerminateJobFlowsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def terminate_job_flows: (
+      ?job_flow_ids: Array[String]
+    ) -> _TerminateJobFlowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateJobFlowsResponse
+
+    interface _UpdateStudioResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_studio: (
+      ?studio_id: String,
+      ?name: String,
+      ?description: String,
+      ?subnet_ids: Array[String],
+      ?default_s3_location: String,
+      ?encryption_key_arn: String
+    ) -> _UpdateStudioResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStudioResponse
+
+    interface _UpdateStudioSessionMappingResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_studio_session_mapping: (
+      ?studio_id: String,
+      ?identity_id: String,
+      ?identity_name: String,
+      ?identity_type: String,
+      ?session_policy_arn: String
+    ) -> _UpdateStudioSessionMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStudioSessionMappingResponse
+  end
+end

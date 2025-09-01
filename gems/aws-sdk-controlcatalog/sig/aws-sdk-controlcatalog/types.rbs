@@ -1,0 +1,570 @@
+module Aws::ControlCatalog
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AssociatedDomainSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    class AssociatedObjectiveSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    class CommonControlFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?objectives: Array[Types::ObjectiveResourceFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor objectives: Array[Types::ObjectiveResourceFilter]?
+    end
+
+    class CommonControlMappingDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?common_control_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor common_control_arn: String?
+    end
+
+    class CommonControlSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?domain: Types::AssociatedDomainSummary,
+        ?objective: Types::AssociatedObjectiveSummary,
+        ?create_time: Time,
+        ?last_update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor domain: Types::AssociatedDomainSummary?
+      attr_accessor objective: Types::AssociatedObjectiveSummary?
+      attr_accessor create_time: Time?
+      attr_accessor last_update_time: Time?
+    end
+
+    module ControlBehavior
+      PREVENTIVE: String
+      PROACTIVE: String
+      DETECTIVE: String
+    end
+
+    class ControlFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?implementations: Types::ImplementationFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor implementations: Types::ImplementationFilter?
+    end
+
+    class ControlMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_arn: String,
+        ?mapping_type: String,
+        ?mapping: Types::Mapping,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_arn: String?
+      attr_accessor mapping_type: String?
+      attr_accessor mapping: Types::Mapping?
+    end
+
+    class ControlMappingFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_arns: Array[String],
+        ?common_control_arns: Array[String],
+        ?mapping_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_arns: Array[String]?
+      attr_accessor common_control_arns: Array[String]?
+      attr_accessor mapping_types: Array[String]?
+    end
+
+    class ControlParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    module ControlScope
+      GLOBAL: String
+      REGIONAL: String
+    end
+
+    module ControlSeverity
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+      CRITICAL: String
+    end
+
+    class ControlSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?aliases: Array[String],
+        ?name: String,
+        ?description: String,
+        ?behavior: String,
+        ?severity: String,
+        ?implementation: Types::ImplementationSummary,
+        ?create_time: Time,
+        ?governed_resources: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor aliases: Array[String]?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor behavior: String?
+      attr_accessor severity: String?
+      attr_accessor implementation: Types::ImplementationSummary?
+      attr_accessor create_time: Time?
+      attr_accessor governed_resources: Array[String]?
+    end
+
+    class DomainResourceFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DomainSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?create_time: Time,
+        ?last_update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor create_time: Time?
+      attr_accessor last_update_time: Time?
+    end
+
+    class FrameworkMappingDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?item: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor item: String?
+    end
+
+    class GetControlRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_arn: String?
+    end
+
+    class GetControlResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?aliases: Array[String],
+        ?name: String,
+        ?description: String,
+        ?behavior: String,
+        ?severity: String,
+        ?region_configuration: Types::RegionConfiguration,
+        ?implementation: Types::ImplementationDetails,
+        ?parameters: Array[Types::ControlParameter],
+        ?create_time: Time,
+        ?governed_resources: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor aliases: Array[String]?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor behavior: String?
+      attr_accessor severity: String?
+      attr_accessor region_configuration: Types::RegionConfiguration?
+      attr_accessor implementation: Types::ImplementationDetails?
+      attr_accessor parameters: Array[Types::ControlParameter]?
+      attr_accessor create_time: Time?
+      attr_accessor governed_resources: Array[String]?
+    end
+
+    class ImplementationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor identifier: String?
+    end
+
+    class ImplementationFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?types: Array[String],
+        ?identifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor types: Array[String]?
+      attr_accessor identifiers: Array[String]?
+    end
+
+    class ImplementationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor identifier: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListCommonControlsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?common_control_filter: Types::CommonControlFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor common_control_filter: Types::CommonControlFilter?
+    end
+
+    class ListCommonControlsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?common_controls: Array[Types::CommonControlSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor common_controls: Array[Types::CommonControlSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListControlMappingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filter: Types::ControlMappingFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filter: Types::ControlMappingFilter?
+    end
+
+    class ListControlMappingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_mappings: Array[Types::ControlMapping],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_mappings: Array[Types::ControlMapping]?
+      attr_accessor next_token: String?
+    end
+
+    class ListControlsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filter: Types::ControlFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filter: Types::ControlFilter?
+    end
+
+    class ListControlsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?controls: Array[Types::ControlSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor controls: Array[Types::ControlSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDomainsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDomainsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domains: Array[Types::DomainSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domains: Array[Types::DomainSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListObjectivesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?objective_filter: Types::ObjectiveFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor objective_filter: Types::ObjectiveFilter?
+    end
+
+    class ListObjectivesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?objectives: Array[Types::ObjectiveSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor objectives: Array[Types::ObjectiveSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class Mapping
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?framework: Types::FrameworkMappingDetails,
+        ?common_control: Types::CommonControlMappingDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor framework: Types::FrameworkMappingDetails?
+      attr_accessor common_control: Types::CommonControlMappingDetails?
+
+      class Framework < Mapping
+      end
+      class CommonControl < Mapping
+      end
+      class Unknown < Mapping
+      end
+    end
+
+    module MappingType
+      FRAMEWORK: String
+      COMMON_CONTROL: String
+    end
+
+    class ObjectiveFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domains: Array[Types::DomainResourceFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domains: Array[Types::DomainResourceFilter]?
+    end
+
+    class ObjectiveResourceFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class ObjectiveSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?domain: Types::AssociatedDomainSummary,
+        ?create_time: Time,
+        ?last_update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor domain: Types::AssociatedDomainSummary?
+      attr_accessor create_time: Time?
+      attr_accessor last_update_time: Time?
+    end
+
+    class RegionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?deployable_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor deployable_regions: Array[String]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

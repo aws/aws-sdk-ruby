@@ -1,0 +1,250 @@
+module Aws::Rbin
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Rbin::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateRuleResponse
+      include Smithy::Client::_Response[Types::CreateRuleResponse]
+      def identifier: () -> String?
+      def retention_period: () -> Types::RetentionPeriod?
+      def description: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def resource_type: () -> String?
+      def resource_tags: () -> Array[Types::ResourceTag]?
+      def status: () -> String?
+      def lock_configuration: () -> Types::LockConfiguration?
+      def lock_state: () -> String?
+      def rule_arn: () -> String?
+      def exclude_resource_tags: () -> Array[Types::ResourceTag]?
+    end
+    def create_rule: (
+      ?retention_period: {
+        retention_period_value: Integer,
+        retention_period_unit: String
+      },
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?resource_type: String,
+      ?resource_tags: Array[
+        {
+          resource_tag_key: String,
+          resource_tag_value: String
+        }
+      ],
+      ?lock_configuration: {
+        unlock_delay: {
+          unlock_delay_value: Integer,
+          unlock_delay_unit: String
+        }
+      },
+      ?exclude_resource_tags: Array[
+        {
+          resource_tag_key: String,
+          resource_tag_value: String
+        }
+      ]
+    ) -> _CreateRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRuleResponse
+
+    interface _DeleteRuleResponse
+      include Smithy::Client::_Response[Types::DeleteRuleResponse]
+    end
+    def delete_rule: (
+      ?identifier: String
+    ) -> _DeleteRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRuleResponse
+
+    interface _GetRuleResponse
+      include Smithy::Client::_Response[Types::GetRuleResponse]
+      def identifier: () -> String?
+      def description: () -> String?
+      def resource_type: () -> String?
+      def retention_period: () -> Types::RetentionPeriod?
+      def resource_tags: () -> Array[Types::ResourceTag]?
+      def status: () -> String?
+      def lock_configuration: () -> Types::LockConfiguration?
+      def lock_state: () -> String?
+      def lock_end_time: () -> Time?
+      def rule_arn: () -> String?
+      def exclude_resource_tags: () -> Array[Types::ResourceTag]?
+    end
+    def get_rule: (
+      ?identifier: String
+    ) -> _GetRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRuleResponse
+
+    interface _ListRulesResponse
+      include Smithy::Client::_Response[Types::ListRulesResponse]
+      def rules: () -> Array[Types::RuleSummary]?
+      def next_token: () -> String?
+    end
+    def list_rules: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?resource_type: String,
+      ?resource_tags: Array[
+        {
+          resource_tag_key: String,
+          resource_tag_value: String
+        }
+      ],
+      ?lock_state: String,
+      ?exclude_resource_tags: Array[
+        {
+          resource_tag_key: String,
+          resource_tag_value: String
+        }
+      ]
+    ) -> _ListRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRulesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _LockRuleResponse
+      include Smithy::Client::_Response[Types::LockRuleResponse]
+      def identifier: () -> String?
+      def description: () -> String?
+      def resource_type: () -> String?
+      def retention_period: () -> Types::RetentionPeriod?
+      def resource_tags: () -> Array[Types::ResourceTag]?
+      def status: () -> String?
+      def lock_configuration: () -> Types::LockConfiguration?
+      def lock_state: () -> String?
+      def rule_arn: () -> String?
+      def exclude_resource_tags: () -> Array[Types::ResourceTag]?
+    end
+    def lock_rule: (
+      ?identifier: String,
+      ?lock_configuration: {
+        unlock_delay: {
+          unlock_delay_value: Integer,
+          unlock_delay_unit: String
+        }
+      }
+    ) -> _LockRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _LockRuleResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UnlockRuleResponse
+      include Smithy::Client::_Response[Types::UnlockRuleResponse]
+      def identifier: () -> String?
+      def description: () -> String?
+      def resource_type: () -> String?
+      def retention_period: () -> Types::RetentionPeriod?
+      def resource_tags: () -> Array[Types::ResourceTag]?
+      def status: () -> String?
+      def lock_configuration: () -> Types::LockConfiguration?
+      def lock_state: () -> String?
+      def lock_end_time: () -> Time?
+      def rule_arn: () -> String?
+      def exclude_resource_tags: () -> Array[Types::ResourceTag]?
+    end
+    def unlock_rule: (
+      ?identifier: String
+    ) -> _UnlockRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UnlockRuleResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateRuleResponse
+      include Smithy::Client::_Response[Types::UpdateRuleResponse]
+      def identifier: () -> String?
+      def retention_period: () -> Types::RetentionPeriod?
+      def description: () -> String?
+      def resource_type: () -> String?
+      def resource_tags: () -> Array[Types::ResourceTag]?
+      def status: () -> String?
+      def lock_state: () -> String?
+      def lock_end_time: () -> Time?
+      def rule_arn: () -> String?
+      def exclude_resource_tags: () -> Array[Types::ResourceTag]?
+    end
+    def update_rule: (
+      ?identifier: String,
+      ?retention_period: {
+        retention_period_value: Integer,
+        retention_period_unit: String
+      },
+      ?description: String,
+      ?resource_type: String,
+      ?resource_tags: Array[
+        {
+          resource_tag_key: String,
+          resource_tag_value: String
+        }
+      ],
+      ?exclude_resource_tags: Array[
+        {
+          resource_tag_key: String,
+          resource_tag_value: String
+        }
+      ]
+    ) -> _UpdateRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRuleResponse
+  end
+end

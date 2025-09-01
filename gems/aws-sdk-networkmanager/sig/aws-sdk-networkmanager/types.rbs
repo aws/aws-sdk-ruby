@@ -1,0 +1,4171 @@
+module Aws::NetworkManager
+  module Types
+
+    class AWSLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?zone: String,
+        ?subnet_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor zone: String?
+      attr_accessor subnet_arn: String?
+    end
+
+    class AcceptAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+    end
+
+    class AcceptAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment: Types::Attachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment: Types::Attachment?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?slr_deployment_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor slr_deployment_status: String?
+    end
+
+    class AssociateConnectPeerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?connect_peer_id: String,
+        ?device_id: String,
+        ?link_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor connect_peer_id: String?
+      attr_accessor device_id: String?
+      attr_accessor link_id: String?
+    end
+
+    class AssociateConnectPeerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_peer_association: Types::ConnectPeerAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_peer_association: Types::ConnectPeerAssociation?
+    end
+
+    class AssociateCustomerGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer_gateway_arn: String,
+        ?global_network_id: String,
+        ?device_id: String,
+        ?link_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_gateway_arn: String?
+      attr_accessor global_network_id: String?
+      attr_accessor device_id: String?
+      attr_accessor link_id: String?
+    end
+
+    class AssociateCustomerGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer_gateway_association: Types::CustomerGatewayAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_gateway_association: Types::CustomerGatewayAssociation?
+    end
+
+    class AssociateLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?device_id: String,
+        ?link_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor device_id: String?
+      attr_accessor link_id: String?
+    end
+
+    class AssociateLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?link_association: Types::LinkAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor link_association: Types::LinkAssociation?
+    end
+
+    class AssociateTransitGatewayConnectPeerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?transit_gateway_connect_peer_arn: String,
+        ?device_id: String,
+        ?link_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor transit_gateway_connect_peer_arn: String?
+      attr_accessor device_id: String?
+      attr_accessor link_id: String?
+    end
+
+    class AssociateTransitGatewayConnectPeerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_connect_peer_association: Types::TransitGatewayConnectPeerAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_connect_peer_association: Types::TransitGatewayConnectPeerAssociation?
+    end
+
+    class Attachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?core_network_arn: String,
+        ?attachment_id: String,
+        ?owner_account_id: String,
+        ?attachment_type: String,
+        ?state: String,
+        ?edge_location: String,
+        ?edge_locations: Array[String],
+        ?resource_arn: String,
+        ?attachment_policy_rule_number: Integer,
+        ?segment_name: String,
+        ?network_function_group_name: String,
+        ?tags: Array[Types::Tag],
+        ?proposed_segment_change: Types::ProposedSegmentChange,
+        ?proposed_network_function_group_change: Types::ProposedNetworkFunctionGroupChange,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?last_modification_errors: Array[Types::AttachmentError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor core_network_arn: String?
+      attr_accessor attachment_id: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor attachment_type: String?
+      attr_accessor state: String?
+      attr_accessor edge_location: String?
+      attr_accessor edge_locations: Array[String]?
+      attr_accessor resource_arn: String?
+      attr_accessor attachment_policy_rule_number: Integer?
+      attr_accessor segment_name: String?
+      attr_accessor network_function_group_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor proposed_segment_change: Types::ProposedSegmentChange?
+      attr_accessor proposed_network_function_group_change: Types::ProposedNetworkFunctionGroupChange?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor last_modification_errors: Array[Types::AttachmentError]?
+    end
+
+    class AttachmentError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?resource_arn: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor resource_arn: String?
+      attr_accessor request_id: String?
+    end
+
+    module AttachmentErrorCode
+      VPC_NOT_FOUND: String
+      SUBNET_NOT_FOUND: String
+      SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE: String
+      SUBNET_NO_FREE_ADDRESSES: String
+      SUBNET_UNSUPPORTED_AVAILABILITY_ZONE: String
+      SUBNET_NO_IPV6_CIDRS: String
+      VPN_CONNECTION_NOT_FOUND: String
+      MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED: String
+      DIRECT_CONNECT_GATEWAY_NOT_FOUND: String
+      DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS: String
+      DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF: String
+    end
+
+    module AttachmentState
+      REJECTED: String
+      PENDING_ATTACHMENT_ACCEPTANCE: String
+      CREATING: String
+      FAILED: String
+      AVAILABLE: String
+      UPDATING: String
+      PENDING_NETWORK_UPDATE: String
+      PENDING_TAG_ACCEPTANCE: String
+      DELETING: String
+    end
+
+    module AttachmentType
+      CONNECT: String
+      SITE_TO_SITE_VPN: String
+      VPC: String
+      DIRECT_CONNECT_GATEWAY: String
+      TRANSIT_GATEWAY_ROUTE_TABLE: String
+    end
+
+    class Bandwidth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upload_speed: Integer,
+        ?download_speed: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upload_speed: Integer?
+      attr_accessor download_speed: Integer?
+    end
+
+    class BgpOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?peer_asn: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor peer_asn: Integer?
+    end
+
+    module ChangeAction
+      ADD: String
+      MODIFY: String
+      REMOVE: String
+    end
+
+    module ChangeSetState
+      PENDING_GENERATION: String
+      FAILED_GENERATION: String
+      READY_TO_EXECUTE: String
+      EXECUTING: String
+      EXECUTION_SUCCEEDED: String
+      OUT_OF_DATE: String
+    end
+
+    module ChangeStatus
+      NOT_STARTED: String
+      IN_PROGRESS: String
+      COMPLETE: String
+      FAILED: String
+    end
+
+    module ChangeType
+      CORE_NETWORK_SEGMENT: String
+      NETWORK_FUNCTION_GROUP: String
+      CORE_NETWORK_EDGE: String
+      ATTACHMENT_MAPPING: String
+      ATTACHMENT_ROUTE_PROPAGATION: String
+      ATTACHMENT_ROUTE_STATIC: String
+      CORE_NETWORK_CONFIGURATION: String
+      SEGMENTS_CONFIGURATION: String
+      SEGMENT_ACTIONS_CONFIGURATION: String
+      ATTACHMENT_POLICIES_CONFIGURATION: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ConnectAttachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment: Types::Attachment,
+        ?transport_attachment_id: String,
+        ?options: Types::ConnectAttachmentOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment: Types::Attachment?
+      attr_accessor transport_attachment_id: String?
+      attr_accessor options: Types::ConnectAttachmentOptions?
+    end
+
+    class ConnectAttachmentOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protocol: String?
+    end
+
+    class ConnectPeer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?connect_attachment_id: String,
+        ?connect_peer_id: String,
+        ?edge_location: String,
+        ?state: String,
+        ?created_at: Time,
+        ?configuration: Types::ConnectPeerConfiguration,
+        ?tags: Array[Types::Tag],
+        ?subnet_arn: String,
+        ?last_modification_errors: Array[Types::ConnectPeerError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor connect_attachment_id: String?
+      attr_accessor connect_peer_id: String?
+      attr_accessor edge_location: String?
+      attr_accessor state: String?
+      attr_accessor created_at: Time?
+      attr_accessor configuration: Types::ConnectPeerConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor subnet_arn: String?
+      attr_accessor last_modification_errors: Array[Types::ConnectPeerError]?
+    end
+
+    class ConnectPeerAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_peer_id: String,
+        ?global_network_id: String,
+        ?device_id: String,
+        ?link_id: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_peer_id: String?
+      attr_accessor global_network_id: String?
+      attr_accessor device_id: String?
+      attr_accessor link_id: String?
+      attr_accessor state: String?
+    end
+
+    module ConnectPeerAssociationState
+      pending: String
+      available: String
+      deleting: String
+      deleted: String
+    end
+
+    class ConnectPeerBgpConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_asn: Integer,
+        ?peer_asn: Integer,
+        ?core_network_address: String,
+        ?peer_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_asn: Integer?
+      attr_accessor peer_asn: Integer?
+      attr_accessor core_network_address: String?
+      attr_accessor peer_address: String?
+    end
+
+    class ConnectPeerConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_address: String,
+        ?peer_address: String,
+        ?inside_cidr_blocks: Array[String],
+        ?protocol: String,
+        ?bgp_configurations: Array[Types::ConnectPeerBgpConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_address: String?
+      attr_accessor peer_address: String?
+      attr_accessor inside_cidr_blocks: Array[String]?
+      attr_accessor protocol: String?
+      attr_accessor bgp_configurations: Array[Types::ConnectPeerBgpConfiguration]?
+    end
+
+    class ConnectPeerError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?resource_arn: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor resource_arn: String?
+      attr_accessor request_id: String?
+    end
+
+    module ConnectPeerErrorCode
+      EDGE_LOCATION_NO_FREE_IPS: String
+      EDGE_LOCATION_PEER_DUPLICATE: String
+      SUBNET_NOT_FOUND: String
+      IP_OUTSIDE_SUBNET_CIDR_RANGE: String
+      INVALID_INSIDE_CIDR_BLOCK: String
+      NO_ASSOCIATED_CIDR_BLOCK: String
+    end
+
+    module ConnectPeerState
+      CREATING: String
+      FAILED: String
+      AVAILABLE: String
+      DELETING: String
+    end
+
+    class ConnectPeerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?connect_attachment_id: String,
+        ?connect_peer_id: String,
+        ?edge_location: String,
+        ?connect_peer_state: String,
+        ?created_at: Time,
+        ?tags: Array[Types::Tag],
+        ?subnet_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor connect_attachment_id: String?
+      attr_accessor connect_peer_id: String?
+      attr_accessor edge_location: String?
+      attr_accessor connect_peer_state: String?
+      attr_accessor created_at: Time?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor subnet_arn: String?
+    end
+
+    class Connection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_id: String,
+        ?connection_arn: String,
+        ?global_network_id: String,
+        ?device_id: String,
+        ?connected_device_id: String,
+        ?link_id: String,
+        ?connected_link_id: String,
+        ?description: String,
+        ?created_at: Time,
+        ?state: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_id: String?
+      attr_accessor connection_arn: String?
+      attr_accessor global_network_id: String?
+      attr_accessor device_id: String?
+      attr_accessor connected_device_id: String?
+      attr_accessor link_id: String?
+      attr_accessor connected_link_id: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor state: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ConnectionHealth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?status: String,
+        ?timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor timestamp: Time?
+    end
+
+    module ConnectionState
+      pending: String
+      available: String
+      deleting: String
+      updating: String
+    end
+
+    module ConnectionStatus
+      UP: String
+      DOWN: String
+    end
+
+    module ConnectionType
+      BGP: String
+      IPSEC: String
+    end
+
+    class CoreNetwork
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?core_network_id: String,
+        ?core_network_arn: String,
+        ?description: String,
+        ?created_at: Time,
+        ?state: String,
+        ?segments: Array[Types::CoreNetworkSegment],
+        ?network_function_groups: Array[Types::CoreNetworkNetworkFunctionGroup],
+        ?edges: Array[Types::CoreNetworkEdge],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor core_network_id: String?
+      attr_accessor core_network_arn: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor state: String?
+      attr_accessor segments: Array[Types::CoreNetworkSegment]?
+      attr_accessor network_function_groups: Array[Types::CoreNetworkNetworkFunctionGroup]?
+      attr_accessor edges: Array[Types::CoreNetworkEdge]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CoreNetworkChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?action: String,
+        ?identifier: String,
+        ?previous_values: Types::CoreNetworkChangeValues,
+        ?new_values: Types::CoreNetworkChangeValues,
+        ?identifier_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor action: String?
+      attr_accessor identifier: String?
+      attr_accessor previous_values: Types::CoreNetworkChangeValues?
+      attr_accessor new_values: Types::CoreNetworkChangeValues?
+      attr_accessor identifier_path: String?
+    end
+
+    class CoreNetworkChangeEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?action: String,
+        ?identifier_path: String,
+        ?event_time: Time,
+        ?status: String,
+        ?values: Types::CoreNetworkChangeEventValues,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor action: String?
+      attr_accessor identifier_path: String?
+      attr_accessor event_time: Time?
+      attr_accessor status: String?
+      attr_accessor values: Types::CoreNetworkChangeEventValues?
+    end
+
+    class CoreNetworkChangeEventValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?edge_location: String,
+        ?segment_name: String,
+        ?network_function_group_name: String,
+        ?attachment_id: String,
+        ?cidr: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor edge_location: String?
+      attr_accessor segment_name: String?
+      attr_accessor network_function_group_name: String?
+      attr_accessor attachment_id: String?
+      attr_accessor cidr: String?
+    end
+
+    class CoreNetworkChangeValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?segment_name: String,
+        ?network_function_group_name: String,
+        ?edge_locations: Array[String],
+        ?asn: Integer,
+        ?cidr: String,
+        ?destination_identifier: String,
+        ?inside_cidr_blocks: Array[String],
+        ?shared_segments: Array[String],
+        ?service_insertion_actions: Array[Types::ServiceInsertionAction],
+        ?vpn_ecmp_support: bool,
+        ?dns_support: bool,
+        ?security_group_referencing_support: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor segment_name: String?
+      attr_accessor network_function_group_name: String?
+      attr_accessor edge_locations: Array[String]?
+      attr_accessor asn: Integer?
+      attr_accessor cidr: String?
+      attr_accessor destination_identifier: String?
+      attr_accessor inside_cidr_blocks: Array[String]?
+      attr_accessor shared_segments: Array[String]?
+      attr_accessor service_insertion_actions: Array[Types::ServiceInsertionAction]?
+      attr_accessor vpn_ecmp_support: bool?
+      attr_accessor dns_support: bool?
+      attr_accessor security_group_referencing_support: bool?
+    end
+
+    class CoreNetworkEdge
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?edge_location: String,
+        ?asn: Integer,
+        ?inside_cidr_blocks: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor edge_location: String?
+      attr_accessor asn: Integer?
+      attr_accessor inside_cidr_blocks: Array[String]?
+    end
+
+    class CoreNetworkNetworkFunctionGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?edge_locations: Array[String],
+        ?segments: Types::ServiceInsertionSegments,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor edge_locations: Array[String]?
+      attr_accessor segments: Types::ServiceInsertionSegments?
+    end
+
+    class CoreNetworkNetworkFunctionGroupIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?network_function_group_name: String,
+        ?edge_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor network_function_group_name: String?
+      attr_accessor edge_location: String?
+    end
+
+    class CoreNetworkPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?policy_version_id: Integer,
+        ?alias: String,
+        ?description: String,
+        ?created_at: Time,
+        ?change_set_state: String,
+        ?policy_errors: Array[Types::CoreNetworkPolicyError],
+        ?policy_document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor policy_version_id: Integer?
+      attr_accessor alias: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor change_set_state: String?
+      attr_accessor policy_errors: Array[Types::CoreNetworkPolicyError]?
+      attr_accessor policy_document: String?
+    end
+
+    module CoreNetworkPolicyAlias
+      LIVE: String
+      LATEST: String
+    end
+
+    class CoreNetworkPolicyError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+        ?path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+      attr_accessor path: String?
+    end
+
+    class CoreNetworkPolicyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?errors: Array[Types::CoreNetworkPolicyError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor errors: Array[Types::CoreNetworkPolicyError]?
+    end
+
+    class CoreNetworkPolicyVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?policy_version_id: Integer,
+        ?alias: String,
+        ?description: String,
+        ?created_at: Time,
+        ?change_set_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor policy_version_id: Integer?
+      attr_accessor alias: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor change_set_state: String?
+    end
+
+    class CoreNetworkSegment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?edge_locations: Array[String],
+        ?shared_segments: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor edge_locations: Array[String]?
+      attr_accessor shared_segments: Array[String]?
+    end
+
+    class CoreNetworkSegmentEdgeIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?segment_name: String,
+        ?edge_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor segment_name: String?
+      attr_accessor edge_location: String?
+    end
+
+    module CoreNetworkState
+      CREATING: String
+      UPDATING: String
+      AVAILABLE: String
+      DELETING: String
+    end
+
+    class CoreNetworkSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?core_network_arn: String,
+        ?global_network_id: String,
+        ?owner_account_id: String,
+        ?state: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor core_network_arn: String?
+      attr_accessor global_network_id: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor state: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateConnectAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?edge_location: String,
+        ?transport_attachment_id: String,
+        ?options: Types::ConnectAttachmentOptions,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor edge_location: String?
+      attr_accessor transport_attachment_id: String?
+      attr_accessor options: Types::ConnectAttachmentOptions?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateConnectAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_attachment: Types::ConnectAttachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_attachment: Types::ConnectAttachment?
+    end
+
+    class CreateConnectPeerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_attachment_id: String,
+        ?core_network_address: String,
+        ?peer_address: String,
+        ?bgp_options: Types::BgpOptions,
+        ?inside_cidr_blocks: Array[String],
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+        ?subnet_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_attachment_id: String?
+      attr_accessor core_network_address: String?
+      attr_accessor peer_address: String?
+      attr_accessor bgp_options: Types::BgpOptions?
+      attr_accessor inside_cidr_blocks: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+      attr_accessor subnet_arn: String?
+    end
+
+    class CreateConnectPeerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_peer: Types::ConnectPeer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_peer: Types::ConnectPeer?
+    end
+
+    class CreateConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?device_id: String,
+        ?connected_device_id: String,
+        ?link_id: String,
+        ?connected_link_id: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor device_id: String?
+      attr_accessor connected_device_id: String?
+      attr_accessor link_id: String?
+      attr_accessor connected_link_id: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection: Types::Connection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection: Types::Connection?
+    end
+
+    class CreateCoreNetworkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+        ?policy_document: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor policy_document: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateCoreNetworkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network: Types::CoreNetwork,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network: Types::CoreNetwork?
+    end
+
+    class CreateDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?aws_location: Types::AWSLocation,
+        ?description: String,
+        ?type: String,
+        ?vendor: String,
+        ?model: String,
+        ?serial_number: String,
+        ?location: Types::Location,
+        ?site_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor aws_location: Types::AWSLocation?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor vendor: String?
+      attr_accessor model: String?
+      attr_accessor serial_number: String?
+      attr_accessor location: Types::Location?
+      attr_accessor site_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDeviceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device: Types::Device,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device: Types::Device?
+    end
+
+    class CreateDirectConnectGatewayAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?direct_connect_gateway_arn: String,
+        ?edge_locations: Array[String],
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor direct_connect_gateway_arn: String?
+      attr_accessor edge_locations: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateDirectConnectGatewayAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_attachment: Types::DirectConnectGatewayAttachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_attachment: Types::DirectConnectGatewayAttachment?
+    end
+
+    class CreateGlobalNetworkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateGlobalNetworkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network: Types::GlobalNetwork,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network: Types::GlobalNetwork?
+    end
+
+    class CreateLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?description: String,
+        ?type: String,
+        ?bandwidth: Types::Bandwidth,
+        ?provider: String,
+        ?site_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor bandwidth: Types::Bandwidth?
+      attr_accessor provider: String?
+      attr_accessor site_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?link: Types::Link,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor link: Types::Link?
+    end
+
+    class CreateSiteRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?description: String,
+        ?location: Types::Location,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor description: String?
+      attr_accessor location: Types::Location?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateSiteResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site: Types::Site,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site: Types::Site?
+    end
+
+    class CreateSiteToSiteVpnAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?vpn_connection_arn: String,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor vpn_connection_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateSiteToSiteVpnAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site_to_site_vpn_attachment: Types::SiteToSiteVpnAttachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site_to_site_vpn_attachment: Types::SiteToSiteVpnAttachment?
+    end
+
+    class CreateTransitGatewayPeeringRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?transit_gateway_arn: String,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor transit_gateway_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateTransitGatewayPeeringResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_peering: Types::TransitGatewayPeering,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_peering: Types::TransitGatewayPeering?
+    end
+
+    class CreateTransitGatewayRouteTableAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?peering_id: String,
+        ?transit_gateway_route_table_arn: String,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor peering_id: String?
+      attr_accessor transit_gateway_route_table_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateTransitGatewayRouteTableAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_route_table_attachment: Types::TransitGatewayRouteTableAttachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_route_table_attachment: Types::TransitGatewayRouteTableAttachment?
+    end
+
+    class CreateVpcAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?vpc_arn: String,
+        ?subnet_arns: Array[String],
+        ?options: Types::VpcOptions,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor vpc_arn: String?
+      attr_accessor subnet_arns: Array[String]?
+      attr_accessor options: Types::VpcOptions?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateVpcAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_attachment: Types::VpcAttachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_attachment: Types::VpcAttachment?
+    end
+
+    class CustomerGatewayAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer_gateway_arn: String,
+        ?global_network_id: String,
+        ?device_id: String,
+        ?link_id: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_gateway_arn: String?
+      attr_accessor global_network_id: String?
+      attr_accessor device_id: String?
+      attr_accessor link_id: String?
+      attr_accessor state: String?
+    end
+
+    module CustomerGatewayAssociationState
+      pending: String
+      available: String
+      deleting: String
+      deleted: String
+    end
+
+    class DeleteAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+    end
+
+    class DeleteAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment: Types::Attachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment: Types::Attachment?
+    end
+
+    class DeleteConnectPeerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_peer_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_peer_id: String?
+    end
+
+    class DeleteConnectPeerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_peer: Types::ConnectPeer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_peer: Types::ConnectPeer?
+    end
+
+    class DeleteConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?connection_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor connection_id: String?
+    end
+
+    class DeleteConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection: Types::Connection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection: Types::Connection?
+    end
+
+    class DeleteCoreNetworkPolicyVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?policy_version_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor policy_version_id: Integer?
+    end
+
+    class DeleteCoreNetworkPolicyVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_policy: Types::CoreNetworkPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_policy: Types::CoreNetworkPolicy?
+    end
+
+    class DeleteCoreNetworkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+    end
+
+    class DeleteCoreNetworkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network: Types::CoreNetwork,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network: Types::CoreNetwork?
+    end
+
+    class DeleteDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?device_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor device_id: String?
+    end
+
+    class DeleteDeviceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device: Types::Device,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device: Types::Device?
+    end
+
+    class DeleteGlobalNetworkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+    end
+
+    class DeleteGlobalNetworkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network: Types::GlobalNetwork,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network: Types::GlobalNetwork?
+    end
+
+    class DeleteLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?link_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor link_id: String?
+    end
+
+    class DeleteLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?link: Types::Link,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor link: Types::Link?
+    end
+
+    class DeletePeeringRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?peering_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor peering_id: String?
+    end
+
+    class DeletePeeringResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?peering: Types::Peering,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor peering: Types::Peering?
+    end
+
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DeleteResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSiteRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?site_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor site_id: String?
+    end
+
+    class DeleteSiteResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site: Types::Site,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site: Types::Site?
+    end
+
+    class DeregisterTransitGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?transit_gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor transit_gateway_arn: String?
+    end
+
+    class DeregisterTransitGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_registration: Types::TransitGatewayRegistration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_registration: Types::TransitGatewayRegistration?
+    end
+
+    class DescribeGlobalNetworksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_ids: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_ids: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeGlobalNetworksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_networks: Array[Types::GlobalNetwork],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_networks: Array[Types::GlobalNetwork]?
+      attr_accessor next_token: String?
+    end
+
+    class Device
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_id: String,
+        ?device_arn: String,
+        ?global_network_id: String,
+        ?aws_location: Types::AWSLocation,
+        ?description: String,
+        ?type: String,
+        ?vendor: String,
+        ?model: String,
+        ?serial_number: String,
+        ?location: Types::Location,
+        ?site_id: String,
+        ?created_at: Time,
+        ?state: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_id: String?
+      attr_accessor device_arn: String?
+      attr_accessor global_network_id: String?
+      attr_accessor aws_location: Types::AWSLocation?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor vendor: String?
+      attr_accessor model: String?
+      attr_accessor serial_number: String?
+      attr_accessor location: Types::Location?
+      attr_accessor site_id: String?
+      attr_accessor created_at: Time?
+      attr_accessor state: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module DeviceState
+      pending: String
+      available: String
+      deleting: String
+      updating: String
+    end
+
+    class DirectConnectGatewayAttachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment: Types::Attachment,
+        ?direct_connect_gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment: Types::Attachment?
+      attr_accessor direct_connect_gateway_arn: String?
+    end
+
+    class DisassociateConnectPeerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?connect_peer_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor connect_peer_id: String?
+    end
+
+    class DisassociateConnectPeerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_peer_association: Types::ConnectPeerAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_peer_association: Types::ConnectPeerAssociation?
+    end
+
+    class DisassociateCustomerGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?customer_gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor customer_gateway_arn: String?
+    end
+
+    class DisassociateCustomerGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer_gateway_association: Types::CustomerGatewayAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_gateway_association: Types::CustomerGatewayAssociation?
+    end
+
+    class DisassociateLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?device_id: String,
+        ?link_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor device_id: String?
+      attr_accessor link_id: String?
+    end
+
+    class DisassociateLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?link_association: Types::LinkAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor link_association: Types::LinkAssociation?
+    end
+
+    class DisassociateTransitGatewayConnectPeerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?transit_gateway_connect_peer_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor transit_gateway_connect_peer_arn: String?
+    end
+
+    class DisassociateTransitGatewayConnectPeerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_connect_peer_association: Types::TransitGatewayConnectPeerAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_connect_peer_association: Types::TransitGatewayConnectPeerAssociation?
+    end
+
+    class EdgeOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?edge_sets: Array[Array[String]],
+        ?use_edge: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor edge_sets: Array[Array[String]]?
+      attr_accessor use_edge: String?
+    end
+
+    class ExecuteCoreNetworkChangeSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?policy_version_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor policy_version_id: Integer?
+    end
+
+    class ExecuteCoreNetworkChangeSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetConnectAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+    end
+
+    class GetConnectAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_attachment: Types::ConnectAttachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_attachment: Types::ConnectAttachment?
+    end
+
+    class GetConnectPeerAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?connect_peer_ids: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor connect_peer_ids: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetConnectPeerAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_peer_associations: Array[Types::ConnectPeerAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_peer_associations: Array[Types::ConnectPeerAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class GetConnectPeerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_peer_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_peer_id: String?
+    end
+
+    class GetConnectPeerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_peer: Types::ConnectPeer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_peer: Types::ConnectPeer?
+    end
+
+    class GetConnectionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?connection_ids: Array[String],
+        ?device_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor connection_ids: Array[String]?
+      attr_accessor device_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetConnectionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connections: Array[Types::Connection],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connections: Array[Types::Connection]?
+      attr_accessor next_token: String?
+    end
+
+    class GetCoreNetworkChangeEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?policy_version_id: Integer,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor policy_version_id: Integer?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetCoreNetworkChangeEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_change_events: Array[Types::CoreNetworkChangeEvent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_change_events: Array[Types::CoreNetworkChangeEvent]?
+      attr_accessor next_token: String?
+    end
+
+    class GetCoreNetworkChangeSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?policy_version_id: Integer,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor policy_version_id: Integer?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetCoreNetworkChangeSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_changes: Array[Types::CoreNetworkChange],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_changes: Array[Types::CoreNetworkChange]?
+      attr_accessor next_token: String?
+    end
+
+    class GetCoreNetworkPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?policy_version_id: Integer,
+        ?alias: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor policy_version_id: Integer?
+      attr_accessor alias: String?
+    end
+
+    class GetCoreNetworkPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_policy: Types::CoreNetworkPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_policy: Types::CoreNetworkPolicy?
+    end
+
+    class GetCoreNetworkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+    end
+
+    class GetCoreNetworkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network: Types::CoreNetwork,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network: Types::CoreNetwork?
+    end
+
+    class GetCustomerGatewayAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?customer_gateway_arns: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor customer_gateway_arns: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetCustomerGatewayAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer_gateway_associations: Array[Types::CustomerGatewayAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_gateway_associations: Array[Types::CustomerGatewayAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class GetDevicesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?device_ids: Array[String],
+        ?site_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor device_ids: Array[String]?
+      attr_accessor site_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetDevicesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?devices: Array[Types::Device],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor devices: Array[Types::Device]?
+      attr_accessor next_token: String?
+    end
+
+    class GetDirectConnectGatewayAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+    end
+
+    class GetDirectConnectGatewayAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_attachment: Types::DirectConnectGatewayAttachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_attachment: Types::DirectConnectGatewayAttachment?
+    end
+
+    class GetLinkAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?device_id: String,
+        ?link_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor device_id: String?
+      attr_accessor link_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetLinkAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?link_associations: Array[Types::LinkAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor link_associations: Array[Types::LinkAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class GetLinksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?link_ids: Array[String],
+        ?site_id: String,
+        ?type: String,
+        ?provider: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor link_ids: Array[String]?
+      attr_accessor site_id: String?
+      attr_accessor type: String?
+      attr_accessor provider: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetLinksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?links: Array[Types::Link],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor links: Array[Types::Link]?
+      attr_accessor next_token: String?
+    end
+
+    class GetNetworkResourceCountsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?resource_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetNetworkResourceCountsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_resource_counts: Array[Types::NetworkResourceCount],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_resource_counts: Array[Types::NetworkResourceCount]?
+      attr_accessor next_token: String?
+    end
+
+    class GetNetworkResourceRelationshipsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?core_network_id: String,
+        ?registered_gateway_arn: String,
+        ?aws_region: String,
+        ?account_id: String,
+        ?resource_type: String,
+        ?resource_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor core_network_id: String?
+      attr_accessor registered_gateway_arn: String?
+      attr_accessor aws_region: String?
+      attr_accessor account_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetNetworkResourceRelationshipsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relationships: Array[Types::Relationship],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relationships: Array[Types::Relationship]?
+      attr_accessor next_token: String?
+    end
+
+    class GetNetworkResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?core_network_id: String,
+        ?registered_gateway_arn: String,
+        ?aws_region: String,
+        ?account_id: String,
+        ?resource_type: String,
+        ?resource_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor core_network_id: String?
+      attr_accessor registered_gateway_arn: String?
+      attr_accessor aws_region: String?
+      attr_accessor account_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetNetworkResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_resources: Array[Types::NetworkResource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_resources: Array[Types::NetworkResource]?
+      attr_accessor next_token: String?
+    end
+
+    class GetNetworkRoutesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?route_table_identifier: Types::RouteTableIdentifier,
+        ?exact_cidr_matches: Array[String],
+        ?longest_prefix_matches: Array[String],
+        ?subnet_of_matches: Array[String],
+        ?supernet_of_matches: Array[String],
+        ?prefix_list_ids: Array[String],
+        ?states: Array[String],
+        ?types: Array[String],
+        ?destination_filters: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor route_table_identifier: Types::RouteTableIdentifier?
+      attr_accessor exact_cidr_matches: Array[String]?
+      attr_accessor longest_prefix_matches: Array[String]?
+      attr_accessor subnet_of_matches: Array[String]?
+      attr_accessor supernet_of_matches: Array[String]?
+      attr_accessor prefix_list_ids: Array[String]?
+      attr_accessor states: Array[String]?
+      attr_accessor types: Array[String]?
+      attr_accessor destination_filters: Hash[String, Array[String]]?
+    end
+
+    class GetNetworkRoutesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route_table_arn: String,
+        ?core_network_segment_edge: Types::CoreNetworkSegmentEdgeIdentifier,
+        ?route_table_type: String,
+        ?route_table_timestamp: Time,
+        ?network_routes: Array[Types::NetworkRoute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route_table_arn: String?
+      attr_accessor core_network_segment_edge: Types::CoreNetworkSegmentEdgeIdentifier?
+      attr_accessor route_table_type: String?
+      attr_accessor route_table_timestamp: Time?
+      attr_accessor network_routes: Array[Types::NetworkRoute]?
+    end
+
+    class GetNetworkTelemetryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?core_network_id: String,
+        ?registered_gateway_arn: String,
+        ?aws_region: String,
+        ?account_id: String,
+        ?resource_type: String,
+        ?resource_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor core_network_id: String?
+      attr_accessor registered_gateway_arn: String?
+      attr_accessor aws_region: String?
+      attr_accessor account_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetNetworkTelemetryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_telemetry: Array[Types::NetworkTelemetry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_telemetry: Array[Types::NetworkTelemetry]?
+      attr_accessor next_token: String?
+    end
+
+    class GetResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_document: String?
+    end
+
+    class GetRouteAnalysisRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?route_analysis_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor route_analysis_id: String?
+    end
+
+    class GetRouteAnalysisResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route_analysis: Types::RouteAnalysis,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route_analysis: Types::RouteAnalysis?
+    end
+
+    class GetSiteToSiteVpnAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+    end
+
+    class GetSiteToSiteVpnAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site_to_site_vpn_attachment: Types::SiteToSiteVpnAttachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site_to_site_vpn_attachment: Types::SiteToSiteVpnAttachment?
+    end
+
+    class GetSitesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?site_ids: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor site_ids: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetSitesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sites: Array[Types::Site],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sites: Array[Types::Site]?
+      attr_accessor next_token: String?
+    end
+
+    class GetTransitGatewayConnectPeerAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?transit_gateway_connect_peer_arns: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor transit_gateway_connect_peer_arns: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetTransitGatewayConnectPeerAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_connect_peer_associations: Array[Types::TransitGatewayConnectPeerAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_connect_peer_associations: Array[Types::TransitGatewayConnectPeerAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class GetTransitGatewayPeeringRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?peering_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor peering_id: String?
+    end
+
+    class GetTransitGatewayPeeringResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_peering: Types::TransitGatewayPeering,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_peering: Types::TransitGatewayPeering?
+    end
+
+    class GetTransitGatewayRegistrationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?transit_gateway_arns: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor transit_gateway_arns: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetTransitGatewayRegistrationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_registrations: Array[Types::TransitGatewayRegistration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_registrations: Array[Types::TransitGatewayRegistration]?
+      attr_accessor next_token: String?
+    end
+
+    class GetTransitGatewayRouteTableAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+    end
+
+    class GetTransitGatewayRouteTableAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_route_table_attachment: Types::TransitGatewayRouteTableAttachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_route_table_attachment: Types::TransitGatewayRouteTableAttachment?
+    end
+
+    class GetVpcAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+    end
+
+    class GetVpcAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_attachment: Types::VpcAttachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_attachment: Types::VpcAttachment?
+    end
+
+    class GlobalNetwork
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?global_network_arn: String,
+        ?description: String,
+        ?created_at: Time,
+        ?state: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor global_network_arn: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor state: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module GlobalNetworkState
+      pending: String
+      available: String
+      deleting: String
+      updating: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class Link
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?link_id: String,
+        ?link_arn: String,
+        ?global_network_id: String,
+        ?site_id: String,
+        ?description: String,
+        ?type: String,
+        ?bandwidth: Types::Bandwidth,
+        ?provider: String,
+        ?created_at: Time,
+        ?state: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor link_id: String?
+      attr_accessor link_arn: String?
+      attr_accessor global_network_id: String?
+      attr_accessor site_id: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor bandwidth: Types::Bandwidth?
+      attr_accessor provider: String?
+      attr_accessor created_at: Time?
+      attr_accessor state: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class LinkAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?device_id: String,
+        ?link_id: String,
+        ?link_association_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor device_id: String?
+      attr_accessor link_id: String?
+      attr_accessor link_association_state: String?
+    end
+
+    module LinkAssociationState
+      pending: String
+      available: String
+      deleting: String
+      deleted: String
+    end
+
+    module LinkState
+      pending: String
+      available: String
+      deleting: String
+      updating: String
+    end
+
+    class ListAttachmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?attachment_type: String,
+        ?edge_location: String,
+        ?state: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor attachment_type: String?
+      attr_accessor edge_location: String?
+      attr_accessor state: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAttachmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachments: Array[Types::Attachment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachments: Array[Types::Attachment]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectPeersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?connect_attachment_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor connect_attachment_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectPeersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_peers: Array[Types::ConnectPeerSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_peers: Array[Types::ConnectPeerSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCoreNetworkPolicyVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCoreNetworkPolicyVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_policy_versions: Array[Types::CoreNetworkPolicyVersion],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_policy_versions: Array[Types::CoreNetworkPolicyVersion]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCoreNetworksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCoreNetworksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_networks: Array[Types::CoreNetworkSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_networks: Array[Types::CoreNetworkSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListOrganizationServiceAccessStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListOrganizationServiceAccessStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_status: Types::OrganizationStatus,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_status: Types::OrganizationStatus?
+      attr_accessor next_token: String?
+    end
+
+    class ListPeeringsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?peering_type: String,
+        ?edge_location: String,
+        ?state: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor peering_type: String?
+      attr_accessor edge_location: String?
+      attr_accessor state: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPeeringsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?peerings: Array[Types::Peering],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor peerings: Array[Types::Peering]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_list: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_list: Array[Types::Tag]?
+    end
+
+    class Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address: String,
+        ?latitude: String,
+        ?longitude: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address: String?
+      attr_accessor latitude: String?
+      attr_accessor longitude: String?
+    end
+
+    class NetworkFunctionGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class NetworkResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registered_gateway_arn: String,
+        ?core_network_id: String,
+        ?aws_region: String,
+        ?account_id: String,
+        ?resource_type: String,
+        ?resource_id: String,
+        ?resource_arn: String,
+        ?definition: String,
+        ?definition_timestamp: Time,
+        ?tags: Array[Types::Tag],
+        ?metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registered_gateway_arn: String?
+      attr_accessor core_network_id: String?
+      attr_accessor aws_region: String?
+      attr_accessor account_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor definition: String?
+      attr_accessor definition_timestamp: Time?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor metadata: Hash[String, String]?
+    end
+
+    class NetworkResourceCount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor count: Integer?
+    end
+
+    class NetworkResourceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registered_gateway_arn: String,
+        ?resource_arn: String,
+        ?resource_type: String,
+        ?definition: String,
+        ?name_tag: String,
+        ?is_middlebox: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registered_gateway_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor definition: String?
+      attr_accessor name_tag: String?
+      attr_accessor is_middlebox: bool?
+    end
+
+    class NetworkRoute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_cidr_block: String,
+        ?destinations: Array[Types::NetworkRouteDestination],
+        ?prefix_list_id: String,
+        ?state: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_cidr_block: String?
+      attr_accessor destinations: Array[Types::NetworkRouteDestination]?
+      attr_accessor prefix_list_id: String?
+      attr_accessor state: String?
+      attr_accessor type: String?
+    end
+
+    class NetworkRouteDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_attachment_id: String,
+        ?transit_gateway_attachment_id: String,
+        ?segment_name: String,
+        ?network_function_group_name: String,
+        ?edge_location: String,
+        ?resource_type: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_attachment_id: String?
+      attr_accessor transit_gateway_attachment_id: String?
+      attr_accessor segment_name: String?
+      attr_accessor network_function_group_name: String?
+      attr_accessor edge_location: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+    end
+
+    class NetworkTelemetry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registered_gateway_arn: String,
+        ?core_network_id: String,
+        ?aws_region: String,
+        ?account_id: String,
+        ?resource_type: String,
+        ?resource_id: String,
+        ?resource_arn: String,
+        ?address: String,
+        ?health: Types::ConnectionHealth,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registered_gateway_arn: String?
+      attr_accessor core_network_id: String?
+      attr_accessor aws_region: String?
+      attr_accessor account_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor address: String?
+      attr_accessor health: Types::ConnectionHealth?
+    end
+
+    class OrganizationStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_id: String,
+        ?organization_aws_service_access_status: String,
+        ?slr_deployment_status: String,
+        ?account_status_list: Array[Types::AccountStatus],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_id: String?
+      attr_accessor organization_aws_service_access_status: String?
+      attr_accessor slr_deployment_status: String?
+      attr_accessor account_status_list: Array[Types::AccountStatus]?
+    end
+
+    class PathComponent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sequence: Integer,
+        ?resource: Types::NetworkResourceSummary,
+        ?destination_cidr_block: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sequence: Integer?
+      attr_accessor resource: Types::NetworkResourceSummary?
+      attr_accessor destination_cidr_block: String?
+    end
+
+    class Peering
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?core_network_arn: String,
+        ?peering_id: String,
+        ?owner_account_id: String,
+        ?peering_type: String,
+        ?state: String,
+        ?edge_location: String,
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+        ?created_at: Time,
+        ?last_modification_errors: Array[Types::PeeringError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor core_network_arn: String?
+      attr_accessor peering_id: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor peering_type: String?
+      attr_accessor state: String?
+      attr_accessor edge_location: String?
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_at: Time?
+      attr_accessor last_modification_errors: Array[Types::PeeringError]?
+    end
+
+    class PeeringError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?resource_arn: String,
+        ?request_id: String,
+        ?missing_permissions_context: Types::PermissionsErrorContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor resource_arn: String?
+      attr_accessor request_id: String?
+      attr_accessor missing_permissions_context: Types::PermissionsErrorContext?
+    end
+
+    module PeeringErrorCode
+      TRANSIT_GATEWAY_NOT_FOUND: String
+      TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED: String
+      MISSING_REQUIRED_PERMISSIONS: String
+      INTERNAL_ERROR: String
+      EDGE_LOCATION_PEER_DUPLICATE: String
+      INVALID_TRANSIT_GATEWAY_STATE: String
+    end
+
+    module PeeringState
+      CREATING: String
+      FAILED: String
+      AVAILABLE: String
+      DELETING: String
+    end
+
+    module PeeringType
+      TRANSIT_GATEWAY: String
+    end
+
+    class PermissionsErrorContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?missing_permission: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor missing_permission: String?
+    end
+
+    class ProposedNetworkFunctionGroupChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?attachment_policy_rule_number: Integer,
+        ?network_function_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor attachment_policy_rule_number: Integer?
+      attr_accessor network_function_group_name: String?
+    end
+
+    class ProposedSegmentChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?attachment_policy_rule_number: Integer,
+        ?segment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor attachment_policy_rule_number: Integer?
+      attr_accessor segment_name: String?
+    end
+
+    class PutCoreNetworkPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?policy_document: String,
+        ?description: String,
+        ?latest_version_id: Integer,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor policy_document: String?
+      attr_accessor description: String?
+      attr_accessor latest_version_id: Integer?
+      attr_accessor client_token: String?
+    end
+
+    class PutCoreNetworkPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_policy: Types::CoreNetworkPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_policy: Types::CoreNetworkPolicy?
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_document: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_document: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class PutResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RegisterTransitGatewayRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?transit_gateway_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor transit_gateway_arn: String?
+    end
+
+    class RegisterTransitGatewayResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_registration: Types::TransitGatewayRegistration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_registration: Types::TransitGatewayRegistration?
+    end
+
+    class RejectAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+    end
+
+    class RejectAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment: Types::Attachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment: Types::Attachment?
+    end
+
+    class Relationship
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from: String,
+        ?to: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from: String?
+      attr_accessor to: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?context: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor context: Hash[String, String]?
+    end
+
+    class RestoreCoreNetworkPolicyVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?policy_version_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor policy_version_id: Integer?
+    end
+
+    class RestoreCoreNetworkPolicyVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_policy: Types::CoreNetworkPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_policy: Types::CoreNetworkPolicy?
+    end
+
+    class RouteAnalysis
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?owner_account_id: String,
+        ?route_analysis_id: String,
+        ?start_timestamp: Time,
+        ?status: String,
+        ?source: Types::RouteAnalysisEndpointOptions,
+        ?destination: Types::RouteAnalysisEndpointOptions,
+        ?include_return_path: bool,
+        ?use_middleboxes: bool,
+        ?forward_path: Types::RouteAnalysisPath,
+        ?return_path: Types::RouteAnalysisPath,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor route_analysis_id: String?
+      attr_accessor start_timestamp: Time?
+      attr_accessor status: String?
+      attr_accessor source: Types::RouteAnalysisEndpointOptions?
+      attr_accessor destination: Types::RouteAnalysisEndpointOptions?
+      attr_accessor include_return_path: bool?
+      attr_accessor use_middleboxes: bool?
+      attr_accessor forward_path: Types::RouteAnalysisPath?
+      attr_accessor return_path: Types::RouteAnalysisPath?
+    end
+
+    class RouteAnalysisCompletion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_code: String,
+        ?reason_code: String,
+        ?reason_context: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_code: String?
+      attr_accessor reason_code: String?
+      attr_accessor reason_context: Hash[String, String]?
+    end
+
+    module RouteAnalysisCompletionReasonCode
+      TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND: String
+      TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY: String
+      CYCLIC_PATH_DETECTED: String
+      TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND: String
+      ROUTE_NOT_FOUND: String
+      BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND: String
+      INACTIVE_ROUTE_FOR_DESTINATION_FOUND: String
+      TRANSIT_GATEWAY_ATTACHMENT: String
+      MAX_HOPS_EXCEEDED: String
+      POSSIBLE_MIDDLEBOX: String
+      NO_DESTINATION_ARN_PROVIDED: String
+    end
+
+    module RouteAnalysisCompletionResultCode
+      CONNECTED: String
+      NOT_CONNECTED: String
+    end
+
+    class RouteAnalysisEndpointOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_attachment_arn: String,
+        ?transit_gateway_arn: String,
+        ?ip_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_attachment_arn: String?
+      attr_accessor transit_gateway_arn: String?
+      attr_accessor ip_address: String?
+    end
+
+    class RouteAnalysisEndpointOptionsSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_attachment_arn: String,
+        ?ip_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_attachment_arn: String?
+      attr_accessor ip_address: String?
+    end
+
+    class RouteAnalysisPath
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?completion_status: Types::RouteAnalysisCompletion,
+        ?path: Array[Types::PathComponent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor completion_status: Types::RouteAnalysisCompletion?
+      attr_accessor path: Array[Types::PathComponent]?
+    end
+
+    module RouteAnalysisStatus
+      running: String
+      completed: String
+      failed: String
+    end
+
+    module RouteState
+      ACTIVE: String
+      BLACKHOLE: String
+    end
+
+    class RouteTableIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_route_table_arn: String,
+        ?core_network_segment_edge: Types::CoreNetworkSegmentEdgeIdentifier,
+        ?core_network_network_function_group: Types::CoreNetworkNetworkFunctionGroupIdentifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_route_table_arn: String?
+      attr_accessor core_network_segment_edge: Types::CoreNetworkSegmentEdgeIdentifier?
+      attr_accessor core_network_network_function_group: Types::CoreNetworkNetworkFunctionGroupIdentifier?
+    end
+
+    module RouteTableType
+      TRANSIT_GATEWAY_ROUTE_TABLE: String
+      CORE_NETWORK_SEGMENT: String
+      NETWORK_FUNCTION_GROUP: String
+    end
+
+    module RouteType
+      PROPAGATED: String
+      STATIC: String
+    end
+
+    module SegmentActionServiceInsertion
+      SEND_VIA: String
+      SEND_TO: String
+    end
+
+    module SendViaMode
+      DUAL_HOP: String
+      SINGLE_HOP: String
+    end
+
+    class ServiceInsertionAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?mode: String,
+        ?when_sent_to: Types::WhenSentTo,
+        ?via: Types::Via,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor mode: String?
+      attr_accessor when_sent_to: Types::WhenSentTo?
+      attr_accessor via: Types::Via?
+    end
+
+    class ServiceInsertionSegments
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?send_via: Array[String],
+        ?send_to: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor send_via: Array[String]?
+      attr_accessor send_to: Array[String]?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?limit_code: String,
+        ?service_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor limit_code: String?
+      attr_accessor service_code: String?
+    end
+
+    class Site
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site_id: String,
+        ?site_arn: String,
+        ?global_network_id: String,
+        ?description: String,
+        ?location: Types::Location,
+        ?created_at: Time,
+        ?state: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site_id: String?
+      attr_accessor site_arn: String?
+      attr_accessor global_network_id: String?
+      attr_accessor description: String?
+      attr_accessor location: Types::Location?
+      attr_accessor created_at: Time?
+      attr_accessor state: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module SiteState
+      pending: String
+      available: String
+      deleting: String
+      updating: String
+    end
+
+    class SiteToSiteVpnAttachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment: Types::Attachment,
+        ?vpn_connection_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment: Types::Attachment?
+      attr_accessor vpn_connection_arn: String?
+    end
+
+    class StartOrganizationServiceAccessUpdateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+    end
+
+    class StartOrganizationServiceAccessUpdateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?organization_status: Types::OrganizationStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor organization_status: Types::OrganizationStatus?
+    end
+
+    class StartRouteAnalysisRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?source: Types::RouteAnalysisEndpointOptionsSpecification,
+        ?destination: Types::RouteAnalysisEndpointOptionsSpecification,
+        ?include_return_path: bool,
+        ?use_middleboxes: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor source: Types::RouteAnalysisEndpointOptionsSpecification?
+      attr_accessor destination: Types::RouteAnalysisEndpointOptionsSpecification?
+      attr_accessor include_return_path: bool?
+      attr_accessor use_middleboxes: bool?
+    end
+
+    class StartRouteAnalysisResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route_analysis: Types::RouteAnalysis,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route_analysis: Types::RouteAnalysis?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class TransitGatewayConnectPeerAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transit_gateway_connect_peer_arn: String,
+        ?global_network_id: String,
+        ?device_id: String,
+        ?link_id: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transit_gateway_connect_peer_arn: String?
+      attr_accessor global_network_id: String?
+      attr_accessor device_id: String?
+      attr_accessor link_id: String?
+      attr_accessor state: String?
+    end
+
+    module TransitGatewayConnectPeerAssociationState
+      pending: String
+      available: String
+      deleting: String
+      deleted: String
+    end
+
+    class TransitGatewayPeering
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?peering: Types::Peering,
+        ?transit_gateway_arn: String,
+        ?transit_gateway_peering_attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor peering: Types::Peering?
+      attr_accessor transit_gateway_arn: String?
+      attr_accessor transit_gateway_peering_attachment_id: String?
+    end
+
+    class TransitGatewayRegistration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?transit_gateway_arn: String,
+        ?state: Types::TransitGatewayRegistrationStateReason,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor transit_gateway_arn: String?
+      attr_accessor state: Types::TransitGatewayRegistrationStateReason?
+    end
+
+    module TransitGatewayRegistrationState
+      pending: String
+      available: String
+      deleting: String
+      deleted: String
+      failed: String
+    end
+
+    class TransitGatewayRegistrationStateReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class TransitGatewayRouteTableAttachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment: Types::Attachment,
+        ?peering_id: String,
+        ?transit_gateway_route_table_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment: Types::Attachment?
+      attr_accessor peering_id: String?
+      attr_accessor transit_gateway_route_table_arn: String?
+    end
+
+    module TunnelProtocol
+      GRE: String
+      NO_ENCAP: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?connection_id: String,
+        ?link_id: String,
+        ?connected_link_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor connection_id: String?
+      attr_accessor link_id: String?
+      attr_accessor connected_link_id: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection: Types::Connection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection: Types::Connection?
+    end
+
+    class UpdateCoreNetworkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateCoreNetworkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network: Types::CoreNetwork,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network: Types::CoreNetwork?
+    end
+
+    class UpdateDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?device_id: String,
+        ?aws_location: Types::AWSLocation,
+        ?description: String,
+        ?type: String,
+        ?vendor: String,
+        ?model: String,
+        ?serial_number: String,
+        ?location: Types::Location,
+        ?site_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor device_id: String?
+      attr_accessor aws_location: Types::AWSLocation?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor vendor: String?
+      attr_accessor model: String?
+      attr_accessor serial_number: String?
+      attr_accessor location: Types::Location?
+      attr_accessor site_id: String?
+    end
+
+    class UpdateDeviceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device: Types::Device,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device: Types::Device?
+    end
+
+    class UpdateDirectConnectGatewayAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+        ?edge_locations: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+      attr_accessor edge_locations: Array[String]?
+    end
+
+    class UpdateDirectConnectGatewayAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_connect_gateway_attachment: Types::DirectConnectGatewayAttachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_connect_gateway_attachment: Types::DirectConnectGatewayAttachment?
+    end
+
+    class UpdateGlobalNetworkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateGlobalNetworkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network: Types::GlobalNetwork,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network: Types::GlobalNetwork?
+    end
+
+    class UpdateLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?link_id: String,
+        ?description: String,
+        ?type: String,
+        ?bandwidth: Types::Bandwidth,
+        ?provider: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor link_id: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor bandwidth: Types::Bandwidth?
+      attr_accessor provider: String?
+    end
+
+    class UpdateLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?link: Types::Link,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor link: Types::Link?
+    end
+
+    class UpdateNetworkResourceMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?resource_arn: String,
+        ?metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor metadata: Hash[String, String]?
+    end
+
+    class UpdateNetworkResourceMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?metadata: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor metadata: Hash[String, String]?
+    end
+
+    class UpdateSiteRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?global_network_id: String,
+        ?site_id: String,
+        ?description: String,
+        ?location: Types::Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor global_network_id: String?
+      attr_accessor site_id: String?
+      attr_accessor description: String?
+      attr_accessor location: Types::Location?
+    end
+
+    class UpdateSiteResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?site: Types::Site,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor site: Types::Site?
+    end
+
+    class UpdateVpcAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+        ?add_subnet_arns: Array[String],
+        ?remove_subnet_arns: Array[String],
+        ?options: Types::VpcOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+      attr_accessor add_subnet_arns: Array[String]?
+      attr_accessor remove_subnet_arns: Array[String]?
+      attr_accessor options: Types::VpcOptions?
+    end
+
+    class UpdateVpcAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_attachment: Types::VpcAttachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_attachment: Types::VpcAttachment?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?fields: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor fields: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+
+    class Via
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_function_groups: Array[Types::NetworkFunctionGroup],
+        ?with_edge_overrides: Array[Types::EdgeOverride],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_function_groups: Array[Types::NetworkFunctionGroup]?
+      attr_accessor with_edge_overrides: Array[Types::EdgeOverride]?
+    end
+
+    class VpcAttachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment: Types::Attachment,
+        ?subnet_arns: Array[String],
+        ?options: Types::VpcOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment: Types::Attachment?
+      attr_accessor subnet_arns: Array[String]?
+      attr_accessor options: Types::VpcOptions?
+    end
+
+    class VpcOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ipv6_support: bool,
+        ?appliance_mode_support: bool,
+        ?dns_support: bool,
+        ?security_group_referencing_support: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ipv6_support: bool?
+      attr_accessor appliance_mode_support: bool?
+      attr_accessor dns_support: bool?
+      attr_accessor security_group_referencing_support: bool?
+    end
+
+    class WhenSentTo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?when_sent_to_segments_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor when_sent_to_segments_list: Array[String]?
+    end
+  end
+end

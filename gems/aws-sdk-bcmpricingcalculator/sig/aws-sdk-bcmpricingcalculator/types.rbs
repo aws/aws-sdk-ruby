@@ -1,0 +1,2283 @@
+module Aws::BCMPricingCalculator
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AddReservedInstanceAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reserved_instances_offering_id: String,
+        ?instance_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reserved_instances_offering_id: String?
+      attr_accessor instance_count: Integer?
+    end
+
+    class AddSavingsPlanAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plan_offering_id: String,
+        ?commitment: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plan_offering_id: String?
+      attr_accessor commitment: Float?
+    end
+
+    class BatchCreateBillScenarioCommitmentModificationEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?group: String,
+        ?usage_account_id: String,
+        ?commitment_action: Types::BillScenarioCommitmentModificationAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor group: String?
+      attr_accessor usage_account_id: String?
+      attr_accessor commitment_action: Types::BillScenarioCommitmentModificationAction?
+    end
+
+    class BatchCreateBillScenarioCommitmentModificationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?error_message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor error_message: String?
+      attr_accessor error_code: String?
+    end
+
+    module BatchCreateBillScenarioCommitmentModificationErrorCode
+      CONFLICT: String
+      INTERNAL_SERVER_ERROR: String
+      INVALID_ACCOUNT: String
+    end
+
+    class BatchCreateBillScenarioCommitmentModificationItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?id: String,
+        ?group: String,
+        ?usage_account_id: String,
+        ?commitment_action: Types::BillScenarioCommitmentModificationAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor id: String?
+      attr_accessor group: String?
+      attr_accessor usage_account_id: String?
+      attr_accessor commitment_action: Types::BillScenarioCommitmentModificationAction?
+    end
+
+    class BatchCreateBillScenarioCommitmentModificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bill_scenario_id: String,
+        ?commitment_modifications: Array[Types::BatchCreateBillScenarioCommitmentModificationEntry],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bill_scenario_id: String?
+      attr_accessor commitment_modifications: Array[Types::BatchCreateBillScenarioCommitmentModificationEntry]?
+      attr_accessor client_token: String?
+    end
+
+    class BatchCreateBillScenarioCommitmentModificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::BatchCreateBillScenarioCommitmentModificationItem],
+        ?errors: Array[Types::BatchCreateBillScenarioCommitmentModificationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::BatchCreateBillScenarioCommitmentModificationItem]?
+      attr_accessor errors: Array[Types::BatchCreateBillScenarioCommitmentModificationError]?
+    end
+
+    class BatchCreateBillScenarioUsageModificationEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?usage_type: String,
+        ?operation: String,
+        ?availability_zone: String,
+        ?key: String,
+        ?group: String,
+        ?usage_account_id: String,
+        ?amounts: Array[Types::UsageAmount],
+        ?historical_usage: Types::HistoricalUsageEntity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor usage_type: String?
+      attr_accessor operation: String?
+      attr_accessor availability_zone: String?
+      attr_accessor key: String?
+      attr_accessor group: String?
+      attr_accessor usage_account_id: String?
+      attr_accessor amounts: Array[Types::UsageAmount]?
+      attr_accessor historical_usage: Types::HistoricalUsageEntity?
+    end
+
+    class BatchCreateBillScenarioUsageModificationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?error_message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor error_message: String?
+      attr_accessor error_code: String?
+    end
+
+    module BatchCreateBillScenarioUsageModificationErrorCode
+      BAD_REQUEST: String
+      NOT_FOUND: String
+      CONFLICT: String
+      INTERNAL_SERVER_ERROR: String
+    end
+
+    class BatchCreateBillScenarioUsageModificationItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?usage_type: String,
+        ?operation: String,
+        ?location: String,
+        ?availability_zone: String,
+        ?id: String,
+        ?group: String,
+        ?usage_account_id: String,
+        ?quantities: Array[Types::UsageQuantity],
+        ?historical_usage: Types::HistoricalUsageEntity,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor usage_type: String?
+      attr_accessor operation: String?
+      attr_accessor location: String?
+      attr_accessor availability_zone: String?
+      attr_accessor id: String?
+      attr_accessor group: String?
+      attr_accessor usage_account_id: String?
+      attr_accessor quantities: Array[Types::UsageQuantity]?
+      attr_accessor historical_usage: Types::HistoricalUsageEntity?
+      attr_accessor key: String?
+    end
+
+    class BatchCreateBillScenarioUsageModificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bill_scenario_id: String,
+        ?usage_modifications: Array[Types::BatchCreateBillScenarioUsageModificationEntry],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bill_scenario_id: String?
+      attr_accessor usage_modifications: Array[Types::BatchCreateBillScenarioUsageModificationEntry]?
+      attr_accessor client_token: String?
+    end
+
+    class BatchCreateBillScenarioUsageModificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::BatchCreateBillScenarioUsageModificationItem],
+        ?errors: Array[Types::BatchCreateBillScenarioUsageModificationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::BatchCreateBillScenarioUsageModificationItem]?
+      attr_accessor errors: Array[Types::BatchCreateBillScenarioUsageModificationError]?
+    end
+
+    module BatchCreateWorkloadEstimateUsageCode
+      BAD_REQUEST: String
+      NOT_FOUND: String
+      CONFLICT: String
+      INTERNAL_SERVER_ERROR: String
+    end
+
+    class BatchCreateWorkloadEstimateUsageEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?usage_type: String,
+        ?operation: String,
+        ?key: String,
+        ?group: String,
+        ?usage_account_id: String,
+        ?amount: Float,
+        ?historical_usage: Types::HistoricalUsageEntity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor usage_type: String?
+      attr_accessor operation: String?
+      attr_accessor key: String?
+      attr_accessor group: String?
+      attr_accessor usage_account_id: String?
+      attr_accessor amount: Float?
+      attr_accessor historical_usage: Types::HistoricalUsageEntity?
+    end
+
+    class BatchCreateWorkloadEstimateUsageError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class BatchCreateWorkloadEstimateUsageItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?usage_type: String,
+        ?operation: String,
+        ?location: String,
+        ?id: String,
+        ?usage_account_id: String,
+        ?group: String,
+        ?quantity: Types::WorkloadEstimateUsageQuantity,
+        ?cost: Float,
+        ?currency: String,
+        ?status: String,
+        ?historical_usage: Types::HistoricalUsageEntity,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor usage_type: String?
+      attr_accessor operation: String?
+      attr_accessor location: String?
+      attr_accessor id: String?
+      attr_accessor usage_account_id: String?
+      attr_accessor group: String?
+      attr_accessor quantity: Types::WorkloadEstimateUsageQuantity?
+      attr_accessor cost: Float?
+      attr_accessor currency: String?
+      attr_accessor status: String?
+      attr_accessor historical_usage: Types::HistoricalUsageEntity?
+      attr_accessor key: String?
+    end
+
+    class BatchCreateWorkloadEstimateUsageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_estimate_id: String,
+        ?usage: Array[Types::BatchCreateWorkloadEstimateUsageEntry],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_estimate_id: String?
+      attr_accessor usage: Array[Types::BatchCreateWorkloadEstimateUsageEntry]?
+      attr_accessor client_token: String?
+    end
+
+    class BatchCreateWorkloadEstimateUsageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::BatchCreateWorkloadEstimateUsageItem],
+        ?errors: Array[Types::BatchCreateWorkloadEstimateUsageError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::BatchCreateWorkloadEstimateUsageItem]?
+      attr_accessor errors: Array[Types::BatchCreateWorkloadEstimateUsageError]?
+    end
+
+    class BatchDeleteBillScenarioCommitmentModificationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    module BatchDeleteBillScenarioCommitmentModificationErrorCode
+      BAD_REQUEST: String
+      CONFLICT: String
+      INTERNAL_SERVER_ERROR: String
+    end
+
+    class BatchDeleteBillScenarioCommitmentModificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bill_scenario_id: String,
+        ?ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bill_scenario_id: String?
+      attr_accessor ids: Array[String]?
+    end
+
+    class BatchDeleteBillScenarioCommitmentModificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchDeleteBillScenarioCommitmentModificationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchDeleteBillScenarioCommitmentModificationError]?
+    end
+
+    class BatchDeleteBillScenarioUsageModificationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?error_message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor error_message: String?
+      attr_accessor error_code: String?
+    end
+
+    module BatchDeleteBillScenarioUsageModificationErrorCode
+      BAD_REQUEST: String
+      CONFLICT: String
+      INTERNAL_SERVER_ERROR: String
+    end
+
+    class BatchDeleteBillScenarioUsageModificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bill_scenario_id: String,
+        ?ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bill_scenario_id: String?
+      attr_accessor ids: Array[String]?
+    end
+
+    class BatchDeleteBillScenarioUsageModificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchDeleteBillScenarioUsageModificationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchDeleteBillScenarioUsageModificationError]?
+    end
+
+    class BatchDeleteWorkloadEstimateUsageError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?error_message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor error_message: String?
+      attr_accessor error_code: String?
+    end
+
+    class BatchDeleteWorkloadEstimateUsageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_estimate_id: String,
+        ?ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_estimate_id: String?
+      attr_accessor ids: Array[String]?
+    end
+
+    class BatchDeleteWorkloadEstimateUsageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchDeleteWorkloadEstimateUsageError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchDeleteWorkloadEstimateUsageError]?
+    end
+
+    class BatchUpdateBillScenarioCommitmentModificationEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor group: String?
+    end
+
+    class BatchUpdateBillScenarioCommitmentModificationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    module BatchUpdateBillScenarioCommitmentModificationErrorCode
+      BAD_REQUEST: String
+      NOT_FOUND: String
+      CONFLICT: String
+      INTERNAL_SERVER_ERROR: String
+    end
+
+    class BatchUpdateBillScenarioCommitmentModificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bill_scenario_id: String,
+        ?commitment_modifications: Array[Types::BatchUpdateBillScenarioCommitmentModificationEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bill_scenario_id: String?
+      attr_accessor commitment_modifications: Array[Types::BatchUpdateBillScenarioCommitmentModificationEntry]?
+    end
+
+    class BatchUpdateBillScenarioCommitmentModificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::BillScenarioCommitmentModificationItem],
+        ?errors: Array[Types::BatchUpdateBillScenarioCommitmentModificationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::BillScenarioCommitmentModificationItem]?
+      attr_accessor errors: Array[Types::BatchUpdateBillScenarioCommitmentModificationError]?
+    end
+
+    class BatchUpdateBillScenarioUsageModificationEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?group: String,
+        ?amounts: Array[Types::UsageAmount],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor group: String?
+      attr_accessor amounts: Array[Types::UsageAmount]?
+    end
+
+    class BatchUpdateBillScenarioUsageModificationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?error_message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor error_message: String?
+      attr_accessor error_code: String?
+    end
+
+    module BatchUpdateBillScenarioUsageModificationErrorCode
+      BAD_REQUEST: String
+      NOT_FOUND: String
+      CONFLICT: String
+      INTERNAL_SERVER_ERROR: String
+    end
+
+    class BatchUpdateBillScenarioUsageModificationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bill_scenario_id: String,
+        ?usage_modifications: Array[Types::BatchUpdateBillScenarioUsageModificationEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bill_scenario_id: String?
+      attr_accessor usage_modifications: Array[Types::BatchUpdateBillScenarioUsageModificationEntry]?
+    end
+
+    class BatchUpdateBillScenarioUsageModificationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::BillScenarioUsageModificationItem],
+        ?errors: Array[Types::BatchUpdateBillScenarioUsageModificationError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::BillScenarioUsageModificationItem]?
+      attr_accessor errors: Array[Types::BatchUpdateBillScenarioUsageModificationError]?
+    end
+
+    class BatchUpdateWorkloadEstimateUsageEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?group: String,
+        ?amount: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor group: String?
+      attr_accessor amount: Float?
+    end
+
+    class BatchUpdateWorkloadEstimateUsageError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?error_message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor error_message: String?
+      attr_accessor error_code: String?
+    end
+
+    class BatchUpdateWorkloadEstimateUsageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_estimate_id: String,
+        ?usage: Array[Types::BatchUpdateWorkloadEstimateUsageEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_estimate_id: String?
+      attr_accessor usage: Array[Types::BatchUpdateWorkloadEstimateUsageEntry]?
+    end
+
+    class BatchUpdateWorkloadEstimateUsageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::WorkloadEstimateUsageItem],
+        ?errors: Array[Types::BatchUpdateWorkloadEstimateUsageError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::WorkloadEstimateUsageItem]?
+      attr_accessor errors: Array[Types::BatchUpdateWorkloadEstimateUsageError]?
+    end
+
+    class BillEstimateCommitmentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?purchase_agreement_type: String,
+        ?offering_id: String,
+        ?usage_account_id: String,
+        ?region: String,
+        ?term_length: String,
+        ?payment_option: String,
+        ?upfront_payment: Types::CostAmount,
+        ?monthly_payment: Types::CostAmount,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor purchase_agreement_type: String?
+      attr_accessor offering_id: String?
+      attr_accessor usage_account_id: String?
+      attr_accessor region: String?
+      attr_accessor term_length: String?
+      attr_accessor payment_option: String?
+      attr_accessor upfront_payment: Types::CostAmount?
+      attr_accessor monthly_payment: Types::CostAmount?
+    end
+
+    class BillEstimateCostSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_cost_difference: Types::CostDifference,
+        ?service_cost_differences: Hash[String, Types::CostDifference],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_cost_difference: Types::CostDifference?
+      attr_accessor service_cost_differences: Hash[String, Types::CostDifference]?
+    end
+
+    class BillEstimateInputCommitmentModificationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?group: String,
+        ?usage_account_id: String,
+        ?commitment_action: Types::BillScenarioCommitmentModificationAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor group: String?
+      attr_accessor usage_account_id: String?
+      attr_accessor commitment_action: Types::BillScenarioCommitmentModificationAction?
+    end
+
+    class BillEstimateInputUsageModificationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?usage_type: String,
+        ?operation: String,
+        ?location: String,
+        ?availability_zone: String,
+        ?id: String,
+        ?group: String,
+        ?usage_account_id: String,
+        ?quantities: Array[Types::UsageQuantity],
+        ?historical_usage: Types::HistoricalUsageEntity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor usage_type: String?
+      attr_accessor operation: String?
+      attr_accessor location: String?
+      attr_accessor availability_zone: String?
+      attr_accessor id: String?
+      attr_accessor group: String?
+      attr_accessor usage_account_id: String?
+      attr_accessor quantities: Array[Types::UsageQuantity]?
+      attr_accessor historical_usage: Types::HistoricalUsageEntity?
+    end
+
+    class BillEstimateLineItemSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?usage_type: String,
+        ?operation: String,
+        ?location: String,
+        ?availability_zone: String,
+        ?id: String,
+        ?line_item_id: String,
+        ?line_item_type: String,
+        ?payer_account_id: String,
+        ?usage_account_id: String,
+        ?estimated_usage_quantity: Types::UsageQuantityResult,
+        ?estimated_cost: Types::CostAmount,
+        ?historical_usage_quantity: Types::UsageQuantityResult,
+        ?historical_cost: Types::CostAmount,
+        ?savings_plan_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor usage_type: String?
+      attr_accessor operation: String?
+      attr_accessor location: String?
+      attr_accessor availability_zone: String?
+      attr_accessor id: String?
+      attr_accessor line_item_id: String?
+      attr_accessor line_item_type: String?
+      attr_accessor payer_account_id: String?
+      attr_accessor usage_account_id: String?
+      attr_accessor estimated_usage_quantity: Types::UsageQuantityResult?
+      attr_accessor estimated_cost: Types::CostAmount?
+      attr_accessor historical_usage_quantity: Types::UsageQuantityResult?
+      attr_accessor historical_cost: Types::CostAmount?
+      attr_accessor savings_plan_arns: Array[String]?
+    end
+
+    module BillEstimateStatus
+      IN_PROGRESS: String
+      COMPLETE: String
+      FAILED: String
+    end
+
+    class BillEstimateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?status: String,
+        ?bill_interval: Types::BillInterval,
+        ?created_at: Time,
+        ?expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor bill_interval: Types::BillInterval?
+      attr_accessor created_at: Time?
+      attr_accessor expires_at: Time?
+    end
+
+    class BillInterval
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start: Time,
+        ?end: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start: Time?
+      attr_accessor end: Time?
+    end
+
+    class BillScenarioCommitmentModificationAction
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?add_reserved_instance_action: Types::AddReservedInstanceAction,
+        ?add_savings_plan_action: Types::AddSavingsPlanAction,
+        ?negate_reserved_instance_action: Types::NegateReservedInstanceAction,
+        ?negate_savings_plan_action: Types::NegateSavingsPlanAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor add_reserved_instance_action: Types::AddReservedInstanceAction?
+      attr_accessor add_savings_plan_action: Types::AddSavingsPlanAction?
+      attr_accessor negate_reserved_instance_action: Types::NegateReservedInstanceAction?
+      attr_accessor negate_savings_plan_action: Types::NegateSavingsPlanAction?
+
+      class AddReservedInstanceAction < BillScenarioCommitmentModificationAction
+      end
+      class AddSavingsPlanAction < BillScenarioCommitmentModificationAction
+      end
+      class NegateReservedInstanceAction < BillScenarioCommitmentModificationAction
+      end
+      class NegateSavingsPlanAction < BillScenarioCommitmentModificationAction
+      end
+      class Unknown < BillScenarioCommitmentModificationAction
+      end
+    end
+
+    class BillScenarioCommitmentModificationItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?usage_account_id: String,
+        ?group: String,
+        ?commitment_action: Types::BillScenarioCommitmentModificationAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor usage_account_id: String?
+      attr_accessor group: String?
+      attr_accessor commitment_action: Types::BillScenarioCommitmentModificationAction?
+    end
+
+    module BillScenarioStatus
+      READY: String
+      LOCKED: String
+      FAILED: String
+      STALE: String
+    end
+
+    class BillScenarioSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?bill_interval: Types::BillInterval,
+        ?status: String,
+        ?created_at: Time,
+        ?expires_at: Time,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor bill_interval: Types::BillInterval?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor expires_at: Time?
+      attr_accessor failure_message: String?
+    end
+
+    class BillScenarioUsageModificationItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?usage_type: String,
+        ?operation: String,
+        ?location: String,
+        ?availability_zone: String,
+        ?id: String,
+        ?group: String,
+        ?usage_account_id: String,
+        ?quantities: Array[Types::UsageQuantity],
+        ?historical_usage: Types::HistoricalUsageEntity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor usage_type: String?
+      attr_accessor operation: String?
+      attr_accessor location: String?
+      attr_accessor availability_zone: String?
+      attr_accessor id: String?
+      attr_accessor group: String?
+      attr_accessor usage_account_id: String?
+      attr_accessor quantities: Array[Types::UsageQuantity]?
+      attr_accessor historical_usage: Types::HistoricalUsageEntity?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CostAmount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amount: Float,
+        ?currency: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amount: Float?
+      attr_accessor currency: String?
+    end
+
+    class CostDifference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?historical_cost: Types::CostAmount,
+        ?estimated_cost: Types::CostAmount,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor historical_cost: Types::CostAmount?
+      attr_accessor estimated_cost: Types::CostAmount?
+    end
+
+    class CreateBillEstimateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bill_scenario_id: String,
+        ?name: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bill_scenario_id: String?
+      attr_accessor name: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateBillEstimateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?status: String,
+        ?failure_message: String,
+        ?bill_interval: Types::BillInterval,
+        ?cost_summary: Types::BillEstimateCostSummary,
+        ?created_at: Time,
+        ?expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor failure_message: String?
+      attr_accessor bill_interval: Types::BillInterval?
+      attr_accessor cost_summary: Types::BillEstimateCostSummary?
+      attr_accessor created_at: Time?
+      attr_accessor expires_at: Time?
+    end
+
+    class CreateBillScenarioRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateBillScenarioResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?bill_interval: Types::BillInterval,
+        ?status: String,
+        ?created_at: Time,
+        ?expires_at: Time,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor bill_interval: Types::BillInterval?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor expires_at: Time?
+      attr_accessor failure_message: String?
+    end
+
+    class CreateWorkloadEstimateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?client_token: String,
+        ?rate_type: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor client_token: String?
+      attr_accessor rate_type: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateWorkloadEstimateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?created_at: Time,
+        ?expires_at: Time,
+        ?rate_type: String,
+        ?rate_timestamp: Time,
+        ?status: String,
+        ?total_cost: Float,
+        ?cost_currency: String,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor created_at: Time?
+      attr_accessor expires_at: Time?
+      attr_accessor rate_type: String?
+      attr_accessor rate_timestamp: Time?
+      attr_accessor status: String?
+      attr_accessor total_cost: Float?
+      attr_accessor cost_currency: String?
+      attr_accessor failure_message: String?
+    end
+
+    module CurrencyCode
+      USD: String
+    end
+
+    class DataUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteBillEstimateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteBillEstimateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteBillScenarioRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteBillScenarioResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteWorkloadEstimateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteWorkloadEstimateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Expression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?and: Array[Types::Expression],
+        ?or: Array[Types::Expression],
+        ?not: Types::Expression,
+        ?cost_categories: Types::ExpressionFilter,
+        ?dimensions: Types::ExpressionFilter,
+        ?tags: Types::ExpressionFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor and: Array[Types::Expression]?
+      attr_accessor or: Array[Types::Expression]?
+      attr_accessor not: Types::Expression?
+      attr_accessor cost_categories: Types::ExpressionFilter?
+      attr_accessor dimensions: Types::ExpressionFilter?
+      attr_accessor tags: Types::ExpressionFilter?
+    end
+
+    class ExpressionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?match_options: Array[String],
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor match_options: Array[String]?
+      attr_accessor values: Array[String]?
+    end
+
+    class FilterTimestamp
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_timestamp: Time,
+        ?before_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_timestamp: Time?
+      attr_accessor before_timestamp: Time?
+    end
+
+    class GetBillEstimateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetBillEstimateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?status: String,
+        ?failure_message: String,
+        ?bill_interval: Types::BillInterval,
+        ?cost_summary: Types::BillEstimateCostSummary,
+        ?created_at: Time,
+        ?expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor failure_message: String?
+      attr_accessor bill_interval: Types::BillInterval?
+      attr_accessor cost_summary: Types::BillEstimateCostSummary?
+      attr_accessor created_at: Time?
+      attr_accessor expires_at: Time?
+    end
+
+    class GetBillScenarioRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetBillScenarioResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?bill_interval: Types::BillInterval,
+        ?status: String,
+        ?created_at: Time,
+        ?expires_at: Time,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor bill_interval: Types::BillInterval?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor expires_at: Time?
+      attr_accessor failure_message: String?
+    end
+
+    class GetPreferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetPreferencesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?management_account_rate_type_selections: Array[String],
+        ?member_account_rate_type_selections: Array[String],
+        ?standalone_account_rate_type_selections: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor management_account_rate_type_selections: Array[String]?
+      attr_accessor member_account_rate_type_selections: Array[String]?
+      attr_accessor standalone_account_rate_type_selections: Array[String]?
+    end
+
+    class GetWorkloadEstimateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetWorkloadEstimateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?created_at: Time,
+        ?expires_at: Time,
+        ?rate_type: String,
+        ?rate_timestamp: Time,
+        ?status: String,
+        ?total_cost: Float,
+        ?cost_currency: String,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor created_at: Time?
+      attr_accessor expires_at: Time?
+      attr_accessor rate_type: String?
+      attr_accessor rate_timestamp: Time?
+      attr_accessor status: String?
+      attr_accessor total_cost: Float?
+      attr_accessor cost_currency: String?
+      attr_accessor failure_message: String?
+    end
+
+    class HistoricalUsageEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?usage_type: String,
+        ?operation: String,
+        ?location: String,
+        ?usage_account_id: String,
+        ?bill_interval: Types::BillInterval,
+        ?filter_expression: Types::Expression,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor usage_type: String?
+      attr_accessor operation: String?
+      attr_accessor location: String?
+      attr_accessor usage_account_id: String?
+      attr_accessor bill_interval: Types::BillInterval?
+      attr_accessor filter_expression: Types::Expression?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class ListBillEstimateCommitmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bill_estimate_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bill_estimate_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBillEstimateCommitmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::BillEstimateCommitmentSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::BillEstimateCommitmentSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBillEstimateInputCommitmentModificationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bill_estimate_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bill_estimate_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBillEstimateInputCommitmentModificationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::BillEstimateInputCommitmentModificationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::BillEstimateInputCommitmentModificationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBillEstimateInputUsageModificationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bill_estimate_id: String,
+        ?filters: Array[Types::ListUsageFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bill_estimate_id: String?
+      attr_accessor filters: Array[Types::ListUsageFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBillEstimateInputUsageModificationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::BillEstimateInputUsageModificationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::BillEstimateInputUsageModificationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBillEstimateLineItemsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?match_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor match_option: String?
+    end
+
+    module ListBillEstimateLineItemsFilterName
+      USAGE_ACCOUNT_ID: String
+      SERVICE_CODE: String
+      USAGE_TYPE: String
+      OPERATION: String
+      LOCATION: String
+      LINE_ITEM_TYPE: String
+    end
+
+    class ListBillEstimateLineItemsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bill_estimate_id: String,
+        ?filters: Array[Types::ListBillEstimateLineItemsFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bill_estimate_id: String?
+      attr_accessor filters: Array[Types::ListBillEstimateLineItemsFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBillEstimateLineItemsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::BillEstimateLineItemSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::BillEstimateLineItemSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBillEstimatesFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?match_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor match_option: String?
+    end
+
+    module ListBillEstimatesFilterName
+      STATUS: String
+      NAME: String
+    end
+
+    class ListBillEstimatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::ListBillEstimatesFilter],
+        ?created_at_filter: Types::FilterTimestamp,
+        ?expires_at_filter: Types::FilterTimestamp,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::ListBillEstimatesFilter]?
+      attr_accessor created_at_filter: Types::FilterTimestamp?
+      attr_accessor expires_at_filter: Types::FilterTimestamp?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBillEstimatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::BillEstimateSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::BillEstimateSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBillScenarioCommitmentModificationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bill_scenario_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bill_scenario_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBillScenarioCommitmentModificationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::BillScenarioCommitmentModificationItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::BillScenarioCommitmentModificationItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBillScenarioUsageModificationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bill_scenario_id: String,
+        ?filters: Array[Types::ListUsageFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bill_scenario_id: String?
+      attr_accessor filters: Array[Types::ListUsageFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBillScenarioUsageModificationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::BillScenarioUsageModificationItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::BillScenarioUsageModificationItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBillScenariosFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?match_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor match_option: String?
+    end
+
+    module ListBillScenariosFilterName
+      STATUS: String
+      NAME: String
+    end
+
+    class ListBillScenariosRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::ListBillScenariosFilter],
+        ?created_at_filter: Types::FilterTimestamp,
+        ?expires_at_filter: Types::FilterTimestamp,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::ListBillScenariosFilter]?
+      attr_accessor created_at_filter: Types::FilterTimestamp?
+      attr_accessor expires_at_filter: Types::FilterTimestamp?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBillScenariosResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::BillScenarioSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::BillScenarioSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListUsageFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?match_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor match_option: String?
+    end
+
+    module ListUsageFilterName
+      USAGE_ACCOUNT_ID: String
+      SERVICE_CODE: String
+      USAGE_TYPE: String
+      OPERATION: String
+      LOCATION: String
+      USAGE_GROUP: String
+      HISTORICAL_USAGE_ACCOUNT_ID: String
+      HISTORICAL_SERVICE_CODE: String
+      HISTORICAL_USAGE_TYPE: String
+      HISTORICAL_OPERATION: String
+      HISTORICAL_LOCATION: String
+    end
+
+    class ListWorkloadEstimateUsageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_estimate_id: String,
+        ?filters: Array[Types::ListUsageFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_estimate_id: String?
+      attr_accessor filters: Array[Types::ListUsageFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListWorkloadEstimateUsageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::WorkloadEstimateUsageItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::WorkloadEstimateUsageItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkloadEstimatesFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?match_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor match_option: String?
+    end
+
+    module ListWorkloadEstimatesFilterName
+      STATUS: String
+      NAME: String
+    end
+
+    class ListWorkloadEstimatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_at_filter: Types::FilterTimestamp,
+        ?expires_at_filter: Types::FilterTimestamp,
+        ?filters: Array[Types::ListWorkloadEstimatesFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_at_filter: Types::FilterTimestamp?
+      attr_accessor expires_at_filter: Types::FilterTimestamp?
+      attr_accessor filters: Array[Types::ListWorkloadEstimatesFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListWorkloadEstimatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::WorkloadEstimateSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::WorkloadEstimateSummary]?
+      attr_accessor next_token: String?
+    end
+
+    module MatchOption
+      EQUALS: String
+      STARTS_WITH: String
+      CONTAINS: String
+    end
+
+    class NegateReservedInstanceAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reserved_instances_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reserved_instances_id: String?
+    end
+
+    class NegateSavingsPlanAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plan_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plan_id: String?
+    end
+
+    module PurchaseAgreementType
+      SAVINGS_PLANS: String
+      RESERVED_INSTANCE: String
+    end
+
+    module RateType
+      BEFORE_DISCOUNTS: String
+      AFTER_DISCOUNTS: String
+      AFTER_DISCOUNTS_AND_COMMITMENTS: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateBillEstimateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?name: String,
+        ?expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor name: String?
+      attr_accessor expires_at: Time?
+    end
+
+    class UpdateBillEstimateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?status: String,
+        ?failure_message: String,
+        ?bill_interval: Types::BillInterval,
+        ?cost_summary: Types::BillEstimateCostSummary,
+        ?created_at: Time,
+        ?expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor failure_message: String?
+      attr_accessor bill_interval: Types::BillInterval?
+      attr_accessor cost_summary: Types::BillEstimateCostSummary?
+      attr_accessor created_at: Time?
+      attr_accessor expires_at: Time?
+    end
+
+    class UpdateBillScenarioRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?name: String,
+        ?expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor name: String?
+      attr_accessor expires_at: Time?
+    end
+
+    class UpdateBillScenarioResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?bill_interval: Types::BillInterval,
+        ?status: String,
+        ?created_at: Time,
+        ?expires_at: Time,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor bill_interval: Types::BillInterval?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor expires_at: Time?
+      attr_accessor failure_message: String?
+    end
+
+    class UpdatePreferencesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?management_account_rate_type_selections: Array[String],
+        ?member_account_rate_type_selections: Array[String],
+        ?standalone_account_rate_type_selections: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor management_account_rate_type_selections: Array[String]?
+      attr_accessor member_account_rate_type_selections: Array[String]?
+      attr_accessor standalone_account_rate_type_selections: Array[String]?
+    end
+
+    class UpdatePreferencesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?management_account_rate_type_selections: Array[String],
+        ?member_account_rate_type_selections: Array[String],
+        ?standalone_account_rate_type_selections: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor management_account_rate_type_selections: Array[String]?
+      attr_accessor member_account_rate_type_selections: Array[String]?
+      attr_accessor standalone_account_rate_type_selections: Array[String]?
+    end
+
+    class UpdateWorkloadEstimateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?name: String,
+        ?expires_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor name: String?
+      attr_accessor expires_at: Time?
+    end
+
+    class UpdateWorkloadEstimateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?created_at: Time,
+        ?expires_at: Time,
+        ?rate_type: String,
+        ?rate_timestamp: Time,
+        ?status: String,
+        ?total_cost: Float,
+        ?cost_currency: String,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor created_at: Time?
+      attr_accessor expires_at: Time?
+      attr_accessor rate_type: String?
+      attr_accessor rate_timestamp: Time?
+      attr_accessor status: String?
+      attr_accessor total_cost: Float?
+      attr_accessor cost_currency: String?
+      attr_accessor failure_message: String?
+    end
+
+    class UsageAmount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_hour: Time,
+        ?amount: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_hour: Time?
+      attr_accessor amount: Float?
+    end
+
+    class UsageQuantity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_hour: Time,
+        ?unit: String,
+        ?amount: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_hour: Time?
+      attr_accessor unit: String?
+      attr_accessor amount: Float?
+    end
+
+    class UsageQuantityResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amount: Float,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amount: Float?
+      attr_accessor unit: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      INVALID_REQUEST_FROM_MEMBER: String
+      DISALLOWED_RATE: String
+      OTHER: String
+    end
+
+    module WorkloadEstimateCostStatus
+      VALID: String
+      INVALID: String
+      STALE: String
+    end
+
+    module WorkloadEstimateRateType
+      BEFORE_DISCOUNTS: String
+      AFTER_DISCOUNTS: String
+      AFTER_DISCOUNTS_AND_COMMITMENTS: String
+    end
+
+    module WorkloadEstimateStatus
+      UPDATING: String
+      VALID: String
+      INVALID: String
+      ACTION_NEEDED: String
+    end
+
+    class WorkloadEstimateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?created_at: Time,
+        ?expires_at: Time,
+        ?rate_type: String,
+        ?rate_timestamp: Time,
+        ?status: String,
+        ?total_cost: Float,
+        ?cost_currency: String,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor created_at: Time?
+      attr_accessor expires_at: Time?
+      attr_accessor rate_type: String?
+      attr_accessor rate_timestamp: Time?
+      attr_accessor status: String?
+      attr_accessor total_cost: Float?
+      attr_accessor cost_currency: String?
+      attr_accessor failure_message: String?
+    end
+
+    module WorkloadEstimateUpdateUsageErrorCode
+      BAD_REQUEST: String
+      NOT_FOUND: String
+      CONFLICT: String
+      INTERNAL_SERVER_ERROR: String
+    end
+
+    class WorkloadEstimateUsageItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?usage_type: String,
+        ?operation: String,
+        ?location: String,
+        ?id: String,
+        ?usage_account_id: String,
+        ?group: String,
+        ?quantity: Types::WorkloadEstimateUsageQuantity,
+        ?cost: Float,
+        ?currency: String,
+        ?status: String,
+        ?historical_usage: Types::HistoricalUsageEntity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor usage_type: String?
+      attr_accessor operation: String?
+      attr_accessor location: String?
+      attr_accessor id: String?
+      attr_accessor usage_account_id: String?
+      attr_accessor group: String?
+      attr_accessor quantity: Types::WorkloadEstimateUsageQuantity?
+      attr_accessor cost: Float?
+      attr_accessor currency: String?
+      attr_accessor status: String?
+      attr_accessor historical_usage: Types::HistoricalUsageEntity?
+    end
+
+    class WorkloadEstimateUsageQuantity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unit: String,
+        ?amount: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unit: String?
+      attr_accessor amount: Float?
+    end
+  end
+end

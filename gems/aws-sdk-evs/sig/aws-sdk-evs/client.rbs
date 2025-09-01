@@ -1,0 +1,213 @@
+module Aws::Evs
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Evs::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateEnvironmentResponse
+      include Smithy::Client::_Response[Types::CreateEnvironmentResponse]
+      def environment: () -> Types::Environment?
+    end
+    def create_environment: (
+      ?client_token: String,
+      ?environment_name: String,
+      ?kms_key_id: String,
+      ?tags: Hash[String, String],
+      ?service_access_security_groups: {
+        security_groups: Array[String]
+      },
+      ?vpc_id: String,
+      ?service_access_subnet_id: String,
+      ?vcf_version: String,
+      ?terms_accepted: bool,
+      ?license_info: Array[
+        {
+          solution_key: String,
+          vsan_key: String
+        }
+      ],
+      ?initial_vlans: {
+        vmk_management: {
+          cidr: String
+        },
+        vm_management: untyped,
+        v_motion: untyped,
+        v_san: untyped,
+        v_tep: untyped,
+        edge_v_tep: untyped,
+        nsx_uplink: untyped,
+        hcx: untyped,
+        expansion_vlan1: untyped,
+        expansion_vlan2: untyped
+      },
+      ?hosts: Array[
+        {
+          host_name: String,
+          key_name: String,
+          instance_type: String,
+          placement_group_id: String,
+          dedicated_host_id: String
+        }
+      ],
+      ?connectivity_info: {
+        private_route_server_peerings: Array[String]
+      },
+      ?vcf_hostnames: {
+        v_center: String,
+        nsx: untyped,
+        nsx_manager1: untyped,
+        nsx_manager2: untyped,
+        nsx_manager3: untyped,
+        nsx_edge1: untyped,
+        nsx_edge2: untyped,
+        sddc_manager: untyped,
+        cloud_builder: untyped
+      },
+      ?site_id: String
+    ) -> _CreateEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentResponse
+
+    interface _CreateEnvironmentHostResponse
+      include Smithy::Client::_Response[Types::CreateEnvironmentHostResponse]
+      def environment_summary: () -> Types::EnvironmentSummary?
+      def host: () -> Types::Host?
+    end
+    def create_environment_host: (
+      ?client_token: String,
+      ?environment_id: String,
+      ?host: {
+        host_name: String,
+        key_name: String,
+        instance_type: String,
+        placement_group_id: String,
+        dedicated_host_id: String
+      }
+    ) -> _CreateEnvironmentHostResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentHostResponse
+
+    interface _DeleteEnvironmentResponse
+      include Smithy::Client::_Response[Types::DeleteEnvironmentResponse]
+      def environment: () -> Types::Environment?
+    end
+    def delete_environment: (
+      ?client_token: String,
+      ?environment_id: String
+    ) -> _DeleteEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentResponse
+
+    interface _DeleteEnvironmentHostResponse
+      include Smithy::Client::_Response[Types::DeleteEnvironmentHostResponse]
+      def environment_summary: () -> Types::EnvironmentSummary?
+      def host: () -> Types::Host?
+    end
+    def delete_environment_host: (
+      ?client_token: String,
+      ?environment_id: String,
+      ?host_name: String
+    ) -> _DeleteEnvironmentHostResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentHostResponse
+
+    interface _GetEnvironmentResponse
+      include Smithy::Client::_Response[Types::GetEnvironmentResponse]
+      def environment: () -> Types::Environment?
+    end
+    def get_environment: (
+      ?environment_id: String
+    ) -> _GetEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnvironmentResponse
+
+    interface _ListEnvironmentHostsResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentHostsResponse]
+      def next_token: () -> String?
+      def environment_hosts: () -> Array[Types::Host]?
+    end
+    def list_environment_hosts: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?environment_id: String
+    ) -> _ListEnvironmentHostsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentHostsResponse
+
+    interface _ListEnvironmentVlansResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentVlansResponse]
+      def next_token: () -> String?
+      def environment_vlans: () -> Array[Types::Vlan]?
+    end
+    def list_environment_vlans: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?environment_id: String
+    ) -> _ListEnvironmentVlansResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentVlansResponse
+
+    interface _ListEnvironmentsResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentsResponse]
+      def next_token: () -> String?
+      def environment_summaries: () -> Array[Types::EnvironmentSummary]?
+    end
+    def list_environments: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?state: Array[String]
+    ) -> _ListEnvironmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+  end
+end

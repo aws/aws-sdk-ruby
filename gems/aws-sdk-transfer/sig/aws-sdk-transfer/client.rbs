@@ -1,0 +1,1119 @@
+module Aws::Transfer
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Transfer::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateAccessResponse
+      include Smithy::Client::_Response[Types::CreateAccessResponse]
+      def server_id: () -> String?
+      def external_id: () -> String?
+    end
+    def create_access: (
+      ?home_directory: String,
+      ?home_directory_type: String,
+      ?home_directory_mappings: Array[
+        {
+          entry: String,
+          target: String,
+          type: String
+        }
+      ],
+      ?policy: String,
+      ?posix_profile: {
+        uid: Integer,
+        gid: untyped,
+        secondary_gids: Array[Integer]
+      },
+      ?role: String,
+      ?server_id: String,
+      ?external_id: String
+    ) -> _CreateAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessResponse
+
+    interface _CreateAgreementResponse
+      include Smithy::Client::_Response[Types::CreateAgreementResponse]
+      def agreement_id: () -> String?
+    end
+    def create_agreement: (
+      ?description: String,
+      ?server_id: String,
+      ?local_profile_id: String,
+      ?partner_profile_id: String,
+      ?base_directory: String,
+      ?access_role: String,
+      ?status: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?preserve_filename: String,
+      ?enforce_message_signing: String,
+      ?custom_directories: {
+        failed_files_directory: String,
+        mdn_files_directory: untyped,
+        payload_files_directory: untyped,
+        status_files_directory: untyped,
+        temporary_files_directory: untyped
+      }
+    ) -> _CreateAgreementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAgreementResponse
+
+    interface _CreateConnectorResponse
+      include Smithy::Client::_Response[Types::CreateConnectorResponse]
+      def connector_id: () -> String?
+    end
+    def create_connector: (
+      ?url: String,
+      ?as2_config: {
+        local_profile_id: String,
+        partner_profile_id: untyped,
+        message_subject: String,
+        compression: String,
+        encryption_algorithm: String,
+        signing_algorithm: String,
+        mdn_signing_algorithm: String,
+        mdn_response: String,
+        basic_auth_secret_id: String,
+        preserve_content_type: String
+      },
+      ?access_role: String,
+      ?logging_role: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?sftp_config: {
+        user_secret_id: String,
+        trusted_host_keys: Array[String],
+        max_concurrent_connections: Integer
+      },
+      ?security_policy_name: String
+    ) -> _CreateConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectorResponse
+
+    interface _CreateProfileResponse
+      include Smithy::Client::_Response[Types::CreateProfileResponse]
+      def profile_id: () -> String?
+    end
+    def create_profile: (
+      ?as2_id: String,
+      ?profile_type: String,
+      ?certificate_ids: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProfileResponse
+
+    interface _CreateServerResponse
+      include Smithy::Client::_Response[Types::CreateServerResponse]
+      def server_id: () -> String?
+    end
+    def create_server: (
+      ?certificate: String,
+      ?domain: String,
+      ?endpoint_details: {
+        address_allocation_ids: Array[String],
+        subnet_ids: Array[String],
+        vpc_endpoint_id: String,
+        vpc_id: String,
+        security_group_ids: Array[String]
+      },
+      ?endpoint_type: String,
+      ?host_key: String,
+      ?identity_provider_details: {
+        url: String,
+        invocation_role: String,
+        directory_id: String,
+        function: String,
+        sftp_authentication_methods: String
+      },
+      ?identity_provider_type: String,
+      ?logging_role: String,
+      ?post_authentication_login_banner: String,
+      ?pre_authentication_login_banner: String,
+      ?protocols: Array[String],
+      ?protocol_details: {
+        passive_ip: String,
+        tls_session_resumption_mode: String,
+        set_stat_option: String,
+        as2_transports: Array[String]
+      },
+      ?security_policy_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?workflow_details: {
+        on_upload: Array[
+          {
+            workflow_id: String,
+            execution_role: String
+          }
+        ],
+        on_partial_upload: Array[
+          {
+            workflow_id: untyped,
+            execution_role: untyped
+          }
+        ]
+      },
+      ?structured_log_destinations: Array[String],
+      ?s3_storage_options: {
+        directory_listing_optimization: String
+      },
+      ?ip_address_type: String
+    ) -> _CreateServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServerResponse
+
+    interface _CreateUserResponse
+      include Smithy::Client::_Response[Types::CreateUserResponse]
+      def server_id: () -> String?
+      def user_name: () -> String?
+    end
+    def create_user: (
+      ?home_directory: String,
+      ?home_directory_type: String,
+      ?home_directory_mappings: Array[
+        {
+          entry: String,
+          target: String,
+          type: String
+        }
+      ],
+      ?policy: String,
+      ?posix_profile: {
+        uid: Integer,
+        gid: untyped,
+        secondary_gids: Array[Integer]
+      },
+      ?role: String,
+      ?server_id: String,
+      ?ssh_public_key_body: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?user_name: String
+    ) -> _CreateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserResponse
+
+    interface _CreateWebAppResponse
+      include Smithy::Client::_Response[Types::CreateWebAppResponse]
+      def web_app_id: () -> String?
+    end
+    def create_web_app: (
+      ?identity_provider_details: {
+        identity_center_config: {
+          instance_arn: String,
+          role: String
+        }
+      },
+      ?access_endpoint: String,
+      ?web_app_units: {
+        provisioned: Integer
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?web_app_endpoint_policy: String
+    ) -> _CreateWebAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWebAppResponse
+
+    interface _CreateWorkflowResponse
+      include Smithy::Client::_Response[Types::CreateWorkflowResponse]
+      def workflow_id: () -> String?
+    end
+    def create_workflow: (
+      ?description: String,
+      ?steps: Array[
+        {
+          type: String,
+          copy_step_details: {
+            name: String,
+            destination_file_location: {
+              s3_file_location: {
+                bucket: String,
+                key: String
+              },
+              efs_file_location: {
+                file_system_id: String,
+                path: String
+              }
+            },
+            overwrite_existing: String,
+            source_file_location: String
+          },
+          custom_step_details: {
+            name: untyped,
+            target: String,
+            timeout_seconds: Integer,
+            source_file_location: untyped
+          },
+          delete_step_details: {
+            name: untyped,
+            source_file_location: untyped
+          },
+          tag_step_details: {
+            name: untyped,
+            tags: Array[
+              {
+                key: String,
+                value: String
+              }
+            ],
+            source_file_location: untyped
+          },
+          decrypt_step_details: {
+            name: untyped,
+            type: String,
+            source_file_location: untyped,
+            overwrite_existing: untyped,
+            destination_file_location: untyped
+          }
+        }
+      ],
+      ?on_exception_steps: Array[
+        {
+          type: String,
+          copy_step_details: {
+            name: String,
+            destination_file_location: {
+              s3_file_location: {
+                bucket: String,
+                key: String
+              },
+              efs_file_location: {
+                file_system_id: String,
+                path: String
+              }
+            },
+            overwrite_existing: String,
+            source_file_location: String
+          },
+          custom_step_details: {
+            name: untyped,
+            target: String,
+            timeout_seconds: Integer,
+            source_file_location: untyped
+          },
+          delete_step_details: {
+            name: untyped,
+            source_file_location: untyped
+          },
+          tag_step_details: {
+            name: untyped,
+            tags: Array[
+              {
+                key: String,
+                value: String
+              }
+            ],
+            source_file_location: untyped
+          },
+          decrypt_step_details: {
+            name: untyped,
+            type: String,
+            source_file_location: untyped,
+            overwrite_existing: untyped,
+            destination_file_location: untyped
+          }
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkflowResponse
+
+    interface _DeleteAccessResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_access: (
+      ?server_id: String,
+      ?external_id: String
+    ) -> _DeleteAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessResponse
+
+    interface _DeleteAgreementResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_agreement: (
+      ?agreement_id: String,
+      ?server_id: String
+    ) -> _DeleteAgreementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAgreementResponse
+
+    interface _DeleteCertificateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_certificate: (
+      ?certificate_id: String
+    ) -> _DeleteCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCertificateResponse
+
+    interface _DeleteConnectorResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_connector: (
+      ?connector_id: String
+    ) -> _DeleteConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectorResponse
+
+    interface _DeleteHostKeyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_host_key: (
+      ?server_id: String,
+      ?host_key_id: String
+    ) -> _DeleteHostKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteHostKeyResponse
+
+    interface _DeleteProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_profile: (
+      ?profile_id: String
+    ) -> _DeleteProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProfileResponse
+
+    interface _DeleteServerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_server: (
+      ?server_id: String
+    ) -> _DeleteServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServerResponse
+
+    interface _DeleteSshPublicKeyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_ssh_public_key: (
+      ?server_id: String,
+      ?ssh_public_key_id: String,
+      ?user_name: String
+    ) -> _DeleteSshPublicKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSshPublicKeyResponse
+
+    interface _DeleteUserResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_user: (
+      ?server_id: String,
+      ?user_name: String
+    ) -> _DeleteUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserResponse
+
+    interface _DeleteWebAppResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_web_app: (
+      ?web_app_id: String
+    ) -> _DeleteWebAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWebAppResponse
+
+    interface _DeleteWebAppCustomizationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_web_app_customization: (
+      ?web_app_id: String
+    ) -> _DeleteWebAppCustomizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWebAppCustomizationResponse
+
+    interface _DeleteWorkflowResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_workflow: (
+      ?workflow_id: String
+    ) -> _DeleteWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkflowResponse
+
+    interface _DescribeAccessResponse
+      include Smithy::Client::_Response[Types::DescribeAccessResponse]
+      def server_id: () -> String?
+      def access: () -> Types::DescribedAccess?
+    end
+    def describe_access: (
+      ?server_id: String,
+      ?external_id: String
+    ) -> _DescribeAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccessResponse
+
+    interface _DescribeAgreementResponse
+      include Smithy::Client::_Response[Types::DescribeAgreementResponse]
+      def agreement: () -> Types::DescribedAgreement?
+    end
+    def describe_agreement: (
+      ?agreement_id: String,
+      ?server_id: String
+    ) -> _DescribeAgreementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAgreementResponse
+
+    interface _DescribeCertificateResponse
+      include Smithy::Client::_Response[Types::DescribeCertificateResponse]
+      def certificate: () -> Types::DescribedCertificate?
+    end
+    def describe_certificate: (
+      ?certificate_id: String
+    ) -> _DescribeCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCertificateResponse
+
+    interface _DescribeConnectorResponse
+      include Smithy::Client::_Response[Types::DescribeConnectorResponse]
+      def connector: () -> Types::DescribedConnector?
+    end
+    def describe_connector: (
+      ?connector_id: String
+    ) -> _DescribeConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConnectorResponse
+
+    interface _DescribeExecutionResponse
+      include Smithy::Client::_Response[Types::DescribeExecutionResponse]
+      def workflow_id: () -> String?
+      def execution: () -> Types::DescribedExecution?
+    end
+    def describe_execution: (
+      ?execution_id: String,
+      ?workflow_id: String
+    ) -> _DescribeExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeExecutionResponse
+
+    interface _DescribeHostKeyResponse
+      include Smithy::Client::_Response[Types::DescribeHostKeyResponse]
+      def host_key: () -> Types::DescribedHostKey?
+    end
+    def describe_host_key: (
+      ?server_id: String,
+      ?host_key_id: String
+    ) -> _DescribeHostKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeHostKeyResponse
+
+    interface _DescribeProfileResponse
+      include Smithy::Client::_Response[Types::DescribeProfileResponse]
+      def profile: () -> Types::DescribedProfile?
+    end
+    def describe_profile: (
+      ?profile_id: String
+    ) -> _DescribeProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProfileResponse
+
+    interface _DescribeSecurityPolicyResponse
+      include Smithy::Client::_Response[Types::DescribeSecurityPolicyResponse]
+      def security_policy: () -> Types::DescribedSecurityPolicy?
+    end
+    def describe_security_policy: (
+      ?security_policy_name: String
+    ) -> _DescribeSecurityPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSecurityPolicyResponse
+
+    interface _DescribeServerResponse
+      include Smithy::Client::_Response[Types::DescribeServerResponse]
+      def server: () -> Types::DescribedServer?
+    end
+    def describe_server: (
+      ?server_id: String
+    ) -> _DescribeServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeServerResponse
+
+    interface _DescribeUserResponse
+      include Smithy::Client::_Response[Types::DescribeUserResponse]
+      def server_id: () -> String?
+      def user: () -> Types::DescribedUser?
+    end
+    def describe_user: (
+      ?server_id: String,
+      ?user_name: String
+    ) -> _DescribeUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUserResponse
+
+    interface _DescribeWebAppResponse
+      include Smithy::Client::_Response[Types::DescribeWebAppResponse]
+      def web_app: () -> Types::DescribedWebApp?
+    end
+    def describe_web_app: (
+      ?web_app_id: String
+    ) -> _DescribeWebAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWebAppResponse
+
+    interface _DescribeWebAppCustomizationResponse
+      include Smithy::Client::_Response[Types::DescribeWebAppCustomizationResponse]
+      def web_app_customization: () -> Types::DescribedWebAppCustomization?
+    end
+    def describe_web_app_customization: (
+      ?web_app_id: String
+    ) -> _DescribeWebAppCustomizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWebAppCustomizationResponse
+
+    interface _DescribeWorkflowResponse
+      include Smithy::Client::_Response[Types::DescribeWorkflowResponse]
+      def workflow: () -> Types::DescribedWorkflow?
+    end
+    def describe_workflow: (
+      ?workflow_id: String
+    ) -> _DescribeWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkflowResponse
+
+    interface _ImportCertificateResponse
+      include Smithy::Client::_Response[Types::ImportCertificateResponse]
+      def certificate_id: () -> String?
+    end
+    def import_certificate: (
+      ?usage: String,
+      ?certificate: String,
+      ?certificate_chain: String,
+      ?private_key: String,
+      ?active_date: Time,
+      ?inactive_date: Time,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _ImportCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportCertificateResponse
+
+    interface _ImportHostKeyResponse
+      include Smithy::Client::_Response[Types::ImportHostKeyResponse]
+      def server_id: () -> String?
+      def host_key_id: () -> String?
+    end
+    def import_host_key: (
+      ?server_id: String,
+      ?host_key_body: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _ImportHostKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportHostKeyResponse
+
+    interface _ImportSshPublicKeyResponse
+      include Smithy::Client::_Response[Types::ImportSshPublicKeyResponse]
+      def server_id: () -> String?
+      def ssh_public_key_id: () -> String?
+      def user_name: () -> String?
+    end
+    def import_ssh_public_key: (
+      ?server_id: String,
+      ?ssh_public_key_body: String,
+      ?user_name: String
+    ) -> _ImportSshPublicKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportSshPublicKeyResponse
+
+    interface _ListAccessesResponse
+      include Smithy::Client::_Response[Types::ListAccessesResponse]
+      def next_token: () -> String?
+      def server_id: () -> String?
+      def accesses: () -> Array[Types::ListedAccess]?
+    end
+    def list_accesses: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?server_id: String
+    ) -> _ListAccessesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessesResponse
+
+    interface _ListAgreementsResponse
+      include Smithy::Client::_Response[Types::ListAgreementsResponse]
+      def next_token: () -> String?
+      def agreements: () -> Array[Types::ListedAgreement]?
+    end
+    def list_agreements: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?server_id: String
+    ) -> _ListAgreementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgreementsResponse
+
+    interface _ListCertificatesResponse
+      include Smithy::Client::_Response[Types::ListCertificatesResponse]
+      def next_token: () -> String?
+      def certificates: () -> Array[Types::ListedCertificate]?
+    end
+    def list_certificates: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCertificatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCertificatesResponse
+
+    interface _ListConnectorsResponse
+      include Smithy::Client::_Response[Types::ListConnectorsResponse]
+      def next_token: () -> String?
+      def connectors: () -> Array[Types::ListedConnector]?
+    end
+    def list_connectors: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConnectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectorsResponse
+
+    interface _ListExecutionsResponse
+      include Smithy::Client::_Response[Types::ListExecutionsResponse]
+      def next_token: () -> String?
+      def workflow_id: () -> String?
+      def executions: () -> Array[Types::ListedExecution]?
+    end
+    def list_executions: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?workflow_id: String
+    ) -> _ListExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExecutionsResponse
+
+    interface _ListFileTransferResultsResponse
+      include Smithy::Client::_Response[Types::ListFileTransferResultsResponse]
+      def file_transfer_results: () -> Array[Types::ConnectorFileTransferResult]?
+      def next_token: () -> String?
+    end
+    def list_file_transfer_results: (
+      ?connector_id: String,
+      ?transfer_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFileTransferResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFileTransferResultsResponse
+
+    interface _ListHostKeysResponse
+      include Smithy::Client::_Response[Types::ListHostKeysResponse]
+      def next_token: () -> String?
+      def server_id: () -> String?
+      def host_keys: () -> Array[Types::ListedHostKey]?
+    end
+    def list_host_keys: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?server_id: String
+    ) -> _ListHostKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHostKeysResponse
+
+    interface _ListProfilesResponse
+      include Smithy::Client::_Response[Types::ListProfilesResponse]
+      def next_token: () -> String?
+      def profiles: () -> Array[Types::ListedProfile]?
+    end
+    def list_profiles: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?profile_type: String
+    ) -> _ListProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProfilesResponse
+
+    interface _ListSecurityPoliciesResponse
+      include Smithy::Client::_Response[Types::ListSecurityPoliciesResponse]
+      def next_token: () -> String?
+      def security_policy_names: () -> Array[String]?
+    end
+    def list_security_policies: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSecurityPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSecurityPoliciesResponse
+
+    interface _ListServersResponse
+      include Smithy::Client::_Response[Types::ListServersResponse]
+      def next_token: () -> String?
+      def servers: () -> Array[Types::ListedServer]?
+    end
+    def list_servers: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListServersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServersResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def arn: () -> String?
+      def next_token: () -> String?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListUsersResponse
+      include Smithy::Client::_Response[Types::ListUsersResponse]
+      def next_token: () -> String?
+      def server_id: () -> String?
+      def users: () -> Array[Types::ListedUser]?
+    end
+    def list_users: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?server_id: String
+    ) -> _ListUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUsersResponse
+
+    interface _ListWebAppsResponse
+      include Smithy::Client::_Response[Types::ListWebAppsResponse]
+      def next_token: () -> String?
+      def web_apps: () -> Array[Types::ListedWebApp]?
+    end
+    def list_web_apps: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListWebAppsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWebAppsResponse
+
+    interface _ListWorkflowsResponse
+      include Smithy::Client::_Response[Types::ListWorkflowsResponse]
+      def next_token: () -> String?
+      def workflows: () -> Array[Types::ListedWorkflow]?
+    end
+    def list_workflows: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListWorkflowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkflowsResponse
+
+    interface _SendWorkflowStepStateResponse
+      include Smithy::Client::_Response[Types::SendWorkflowStepStateResponse]
+    end
+    def send_workflow_step_state: (
+      ?workflow_id: String,
+      ?execution_id: String,
+      ?token: String,
+      ?status: String
+    ) -> _SendWorkflowStepStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendWorkflowStepStateResponse
+
+    interface _StartDirectoryListingResponse
+      include Smithy::Client::_Response[Types::StartDirectoryListingResponse]
+      def listing_id: () -> String?
+      def output_file_name: () -> String?
+    end
+    def start_directory_listing: (
+      ?connector_id: String,
+      ?remote_directory_path: String,
+      ?max_items: Integer,
+      ?output_directory_path: String
+    ) -> _StartDirectoryListingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDirectoryListingResponse
+
+    interface _StartFileTransferResponse
+      include Smithy::Client::_Response[Types::StartFileTransferResponse]
+      def transfer_id: () -> String?
+    end
+    def start_file_transfer: (
+      ?connector_id: String,
+      ?send_file_paths: Array[String],
+      ?retrieve_file_paths: Array[String],
+      ?local_directory_path: String,
+      ?remote_directory_path: String
+    ) -> _StartFileTransferResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartFileTransferResponse
+
+    interface _StartRemoteDeleteResponse
+      include Smithy::Client::_Response[Types::StartRemoteDeleteResponse]
+      def delete_id: () -> String?
+    end
+    def start_remote_delete: (
+      ?connector_id: String,
+      ?delete_path: String
+    ) -> _StartRemoteDeleteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRemoteDeleteResponse
+
+    interface _StartRemoteMoveResponse
+      include Smithy::Client::_Response[Types::StartRemoteMoveResponse]
+      def move_id: () -> String?
+    end
+    def start_remote_move: (
+      ?connector_id: String,
+      ?source_path: String,
+      ?target_path: String
+    ) -> _StartRemoteMoveResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRemoteMoveResponse
+
+    interface _StartServerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def start_server: (
+      ?server_id: String
+    ) -> _StartServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartServerResponse
+
+    interface _StopServerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def stop_server: (
+      ?server_id: String
+    ) -> _StopServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopServerResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TestConnectionResponse
+      include Smithy::Client::_Response[Types::TestConnectionResponse]
+      def connector_id: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def sftp_connection_details: () -> Types::SftpConnectorConnectionDetails?
+    end
+    def test_connection: (
+      ?connector_id: String
+    ) -> _TestConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestConnectionResponse
+
+    interface _TestIdentityProviderResponse
+      include Smithy::Client::_Response[Types::TestIdentityProviderResponse]
+      def response: () -> String?
+      def status_code: () -> Integer?
+      def message: () -> String?
+      def url: () -> String?
+    end
+    def test_identity_provider: (
+      ?server_id: String,
+      ?server_protocol: String,
+      ?source_ip: String,
+      ?user_name: String,
+      ?user_password: String
+    ) -> _TestIdentityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestIdentityProviderResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAccessResponse
+      include Smithy::Client::_Response[Types::UpdateAccessResponse]
+      def server_id: () -> String?
+      def external_id: () -> String?
+    end
+    def update_access: (
+      ?home_directory: String,
+      ?home_directory_type: String,
+      ?home_directory_mappings: Array[
+        {
+          entry: String,
+          target: String,
+          type: String
+        }
+      ],
+      ?policy: String,
+      ?posix_profile: {
+        uid: Integer,
+        gid: untyped,
+        secondary_gids: Array[Integer]
+      },
+      ?role: String,
+      ?server_id: String,
+      ?external_id: String
+    ) -> _UpdateAccessResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccessResponse
+
+    interface _UpdateAgreementResponse
+      include Smithy::Client::_Response[Types::UpdateAgreementResponse]
+      def agreement_id: () -> String?
+    end
+    def update_agreement: (
+      ?agreement_id: String,
+      ?server_id: String,
+      ?description: String,
+      ?status: String,
+      ?local_profile_id: String,
+      ?partner_profile_id: String,
+      ?base_directory: String,
+      ?access_role: String,
+      ?preserve_filename: String,
+      ?enforce_message_signing: String,
+      ?custom_directories: {
+        failed_files_directory: String,
+        mdn_files_directory: untyped,
+        payload_files_directory: untyped,
+        status_files_directory: untyped,
+        temporary_files_directory: untyped
+      }
+    ) -> _UpdateAgreementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgreementResponse
+
+    interface _UpdateCertificateResponse
+      include Smithy::Client::_Response[Types::UpdateCertificateResponse]
+      def certificate_id: () -> String?
+    end
+    def update_certificate: (
+      ?certificate_id: String,
+      ?active_date: Time,
+      ?inactive_date: Time,
+      ?description: String
+    ) -> _UpdateCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCertificateResponse
+
+    interface _UpdateConnectorResponse
+      include Smithy::Client::_Response[Types::UpdateConnectorResponse]
+      def connector_id: () -> String?
+    end
+    def update_connector: (
+      ?connector_id: String,
+      ?url: String,
+      ?as2_config: {
+        local_profile_id: String,
+        partner_profile_id: untyped,
+        message_subject: String,
+        compression: String,
+        encryption_algorithm: String,
+        signing_algorithm: String,
+        mdn_signing_algorithm: String,
+        mdn_response: String,
+        basic_auth_secret_id: String,
+        preserve_content_type: String
+      },
+      ?access_role: String,
+      ?logging_role: String,
+      ?sftp_config: {
+        user_secret_id: String,
+        trusted_host_keys: Array[String],
+        max_concurrent_connections: Integer
+      },
+      ?security_policy_name: String
+    ) -> _UpdateConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectorResponse
+
+    interface _UpdateHostKeyResponse
+      include Smithy::Client::_Response[Types::UpdateHostKeyResponse]
+      def server_id: () -> String?
+      def host_key_id: () -> String?
+    end
+    def update_host_key: (
+      ?server_id: String,
+      ?host_key_id: String,
+      ?description: String
+    ) -> _UpdateHostKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateHostKeyResponse
+
+    interface _UpdateProfileResponse
+      include Smithy::Client::_Response[Types::UpdateProfileResponse]
+      def profile_id: () -> String?
+    end
+    def update_profile: (
+      ?profile_id: String,
+      ?certificate_ids: Array[String]
+    ) -> _UpdateProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProfileResponse
+
+    interface _UpdateServerResponse
+      include Smithy::Client::_Response[Types::UpdateServerResponse]
+      def server_id: () -> String?
+    end
+    def update_server: (
+      ?certificate: String,
+      ?protocol_details: {
+        passive_ip: String,
+        tls_session_resumption_mode: String,
+        set_stat_option: String,
+        as2_transports: Array[String]
+      },
+      ?endpoint_details: {
+        address_allocation_ids: Array[String],
+        subnet_ids: Array[String],
+        vpc_endpoint_id: String,
+        vpc_id: String,
+        security_group_ids: Array[String]
+      },
+      ?endpoint_type: String,
+      ?host_key: String,
+      ?identity_provider_details: {
+        url: String,
+        invocation_role: String,
+        directory_id: String,
+        function: String,
+        sftp_authentication_methods: String
+      },
+      ?logging_role: String,
+      ?post_authentication_login_banner: String,
+      ?pre_authentication_login_banner: String,
+      ?protocols: Array[String],
+      ?security_policy_name: String,
+      ?server_id: String,
+      ?workflow_details: {
+        on_upload: Array[
+          {
+            workflow_id: String,
+            execution_role: String
+          }
+        ],
+        on_partial_upload: Array[
+          {
+            workflow_id: untyped,
+            execution_role: untyped
+          }
+        ]
+      },
+      ?structured_log_destinations: Array[String],
+      ?s3_storage_options: {
+        directory_listing_optimization: String
+      },
+      ?ip_address_type: String
+    ) -> _UpdateServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServerResponse
+
+    interface _UpdateUserResponse
+      include Smithy::Client::_Response[Types::UpdateUserResponse]
+      def server_id: () -> String?
+      def user_name: () -> String?
+    end
+    def update_user: (
+      ?home_directory: String,
+      ?home_directory_type: String,
+      ?home_directory_mappings: Array[
+        {
+          entry: String,
+          target: String,
+          type: String
+        }
+      ],
+      ?policy: String,
+      ?posix_profile: {
+        uid: Integer,
+        gid: untyped,
+        secondary_gids: Array[Integer]
+      },
+      ?role: String,
+      ?server_id: String,
+      ?user_name: String
+    ) -> _UpdateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserResponse
+
+    interface _UpdateWebAppResponse
+      include Smithy::Client::_Response[Types::UpdateWebAppResponse]
+      def web_app_id: () -> String?
+    end
+    def update_web_app: (
+      ?web_app_id: String,
+      ?identity_provider_details: {
+        identity_center_config: {
+          role: String
+        }
+      },
+      ?access_endpoint: String,
+      ?web_app_units: {
+        provisioned: Integer
+      }
+    ) -> _UpdateWebAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWebAppResponse
+
+    interface _UpdateWebAppCustomizationResponse
+      include Smithy::Client::_Response[Types::UpdateWebAppCustomizationResponse]
+      def web_app_id: () -> String?
+    end
+    def update_web_app_customization: (
+      ?web_app_id: String,
+      ?title: String,
+      ?logo_file: String,
+      ?favicon_file: String
+    ) -> _UpdateWebAppCustomizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWebAppCustomizationResponse
+  end
+end

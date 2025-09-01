@@ -1,0 +1,441 @@
+module Aws::ApplicationInsights
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ApplicationInsights::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddWorkloadResponse
+      include Smithy::Client::_Response[Types::AddWorkloadResponse]
+      def workload_id: () -> String?
+      def workload_configuration: () -> Types::WorkloadConfiguration?
+    end
+    def add_workload: (
+      ?resource_group_name: String,
+      ?component_name: String,
+      ?workload_configuration: {
+        workload_name: String,
+        tier: String,
+        configuration: String
+      }
+    ) -> _AddWorkloadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddWorkloadResponse
+
+    interface _CreateApplicationResponse
+      include Smithy::Client::_Response[Types::CreateApplicationResponse]
+      def application_info: () -> Types::ApplicationInfo?
+    end
+    def create_application: (
+      ?resource_group_name: String,
+      ?ops_center_enabled: bool,
+      ?cwe_monitor_enabled: bool,
+      ?ops_item_sns_topic_arn: String,
+      ?sns_notification_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?auto_config_enabled: bool,
+      ?auto_create: bool,
+      ?grouping_type: String,
+      ?attach_missing_permission: bool
+    ) -> _CreateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationResponse
+
+    interface _CreateComponentResponse
+      include Smithy::Client::_Response[Types::CreateComponentResponse]
+    end
+    def create_component: (
+      ?resource_group_name: String,
+      ?component_name: String,
+      ?resource_list: Array[String]
+    ) -> _CreateComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateComponentResponse
+
+    interface _CreateLogPatternResponse
+      include Smithy::Client::_Response[Types::CreateLogPatternResponse]
+      def log_pattern: () -> Types::LogPattern?
+      def resource_group_name: () -> String?
+    end
+    def create_log_pattern: (
+      ?resource_group_name: String,
+      ?pattern_set_name: String,
+      ?pattern_name: String,
+      ?pattern: String,
+      ?rank: Integer
+    ) -> _CreateLogPatternResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLogPatternResponse
+
+    interface _DeleteApplicationResponse
+      include Smithy::Client::_Response[Types::DeleteApplicationResponse]
+    end
+    def delete_application: (
+      ?resource_group_name: String
+    ) -> _DeleteApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationResponse
+
+    interface _DeleteComponentResponse
+      include Smithy::Client::_Response[Types::DeleteComponentResponse]
+    end
+    def delete_component: (
+      ?resource_group_name: String,
+      ?component_name: String
+    ) -> _DeleteComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteComponentResponse
+
+    interface _DeleteLogPatternResponse
+      include Smithy::Client::_Response[Types::DeleteLogPatternResponse]
+    end
+    def delete_log_pattern: (
+      ?resource_group_name: String,
+      ?pattern_set_name: String,
+      ?pattern_name: String
+    ) -> _DeleteLogPatternResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLogPatternResponse
+
+    interface _DescribeApplicationResponse
+      include Smithy::Client::_Response[Types::DescribeApplicationResponse]
+      def application_info: () -> Types::ApplicationInfo?
+    end
+    def describe_application: (
+      ?resource_group_name: String,
+      ?account_id: String
+    ) -> _DescribeApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeApplicationResponse
+
+    interface _DescribeComponentResponse
+      include Smithy::Client::_Response[Types::DescribeComponentResponse]
+      def application_component: () -> Types::ApplicationComponent?
+      def resource_list: () -> Array[String]?
+    end
+    def describe_component: (
+      ?resource_group_name: String,
+      ?component_name: String,
+      ?account_id: String
+    ) -> _DescribeComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeComponentResponse
+
+    interface _DescribeComponentConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeComponentConfigurationResponse]
+      def monitor: () -> bool?
+      def tier: () -> String?
+      def component_configuration: () -> String?
+    end
+    def describe_component_configuration: (
+      ?resource_group_name: String,
+      ?component_name: String,
+      ?account_id: String
+    ) -> _DescribeComponentConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeComponentConfigurationResponse
+
+    interface _DescribeComponentConfigurationRecommendationResponse
+      include Smithy::Client::_Response[Types::DescribeComponentConfigurationRecommendationResponse]
+      def component_configuration: () -> String?
+    end
+    def describe_component_configuration_recommendation: (
+      ?resource_group_name: String,
+      ?component_name: String,
+      ?tier: String,
+      ?workload_name: String,
+      ?recommendation_type: String
+    ) -> _DescribeComponentConfigurationRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeComponentConfigurationRecommendationResponse
+
+    interface _DescribeLogPatternResponse
+      include Smithy::Client::_Response[Types::DescribeLogPatternResponse]
+      def resource_group_name: () -> String?
+      def account_id: () -> String?
+      def log_pattern: () -> Types::LogPattern?
+    end
+    def describe_log_pattern: (
+      ?resource_group_name: String,
+      ?pattern_set_name: String,
+      ?pattern_name: String,
+      ?account_id: String
+    ) -> _DescribeLogPatternResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLogPatternResponse
+
+    interface _DescribeObservationResponse
+      include Smithy::Client::_Response[Types::DescribeObservationResponse]
+      def observation: () -> Types::Observation?
+    end
+    def describe_observation: (
+      ?observation_id: String,
+      ?account_id: String
+    ) -> _DescribeObservationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeObservationResponse
+
+    interface _DescribeProblemResponse
+      include Smithy::Client::_Response[Types::DescribeProblemResponse]
+      def problem: () -> Types::Problem?
+      def sns_notification_arn: () -> String?
+    end
+    def describe_problem: (
+      ?problem_id: String,
+      ?account_id: String
+    ) -> _DescribeProblemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProblemResponse
+
+    interface _DescribeProblemObservationsResponse
+      include Smithy::Client::_Response[Types::DescribeProblemObservationsResponse]
+      def related_observations: () -> Types::RelatedObservations?
+    end
+    def describe_problem_observations: (
+      ?problem_id: String,
+      ?account_id: String
+    ) -> _DescribeProblemObservationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProblemObservationsResponse
+
+    interface _DescribeWorkloadResponse
+      include Smithy::Client::_Response[Types::DescribeWorkloadResponse]
+      def workload_id: () -> String?
+      def workload_remarks: () -> String?
+      def workload_configuration: () -> Types::WorkloadConfiguration?
+    end
+    def describe_workload: (
+      ?resource_group_name: String,
+      ?component_name: String,
+      ?workload_id: String,
+      ?account_id: String
+    ) -> _DescribeWorkloadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkloadResponse
+
+    interface _ListApplicationsResponse
+      include Smithy::Client::_Response[Types::ListApplicationsResponse]
+      def application_info_list: () -> Array[Types::ApplicationInfo]?
+      def next_token: () -> String?
+    end
+    def list_applications: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?account_id: String
+    ) -> _ListApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationsResponse
+
+    interface _ListComponentsResponse
+      include Smithy::Client::_Response[Types::ListComponentsResponse]
+      def application_component_list: () -> Array[Types::ApplicationComponent]?
+      def next_token: () -> String?
+    end
+    def list_components: (
+      ?resource_group_name: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?account_id: String
+    ) -> _ListComponentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComponentsResponse
+
+    interface _ListConfigurationHistoryResponse
+      include Smithy::Client::_Response[Types::ListConfigurationHistoryResponse]
+      def event_list: () -> Array[Types::ConfigurationEvent]?
+      def next_token: () -> String?
+    end
+    def list_configuration_history: (
+      ?resource_group_name: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?event_status: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?account_id: String
+    ) -> _ListConfigurationHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfigurationHistoryResponse
+
+    interface _ListLogPatternSetsResponse
+      include Smithy::Client::_Response[Types::ListLogPatternSetsResponse]
+      def resource_group_name: () -> String?
+      def account_id: () -> String?
+      def log_pattern_sets: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_log_pattern_sets: (
+      ?resource_group_name: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?account_id: String
+    ) -> _ListLogPatternSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLogPatternSetsResponse
+
+    interface _ListLogPatternsResponse
+      include Smithy::Client::_Response[Types::ListLogPatternsResponse]
+      def resource_group_name: () -> String?
+      def account_id: () -> String?
+      def log_patterns: () -> Array[Types::LogPattern]?
+      def next_token: () -> String?
+    end
+    def list_log_patterns: (
+      ?resource_group_name: String,
+      ?pattern_set_name: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?account_id: String
+    ) -> _ListLogPatternsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLogPatternsResponse
+
+    interface _ListProblemsResponse
+      include Smithy::Client::_Response[Types::ListProblemsResponse]
+      def problem_list: () -> Array[Types::Problem]?
+      def next_token: () -> String?
+      def resource_group_name: () -> String?
+      def account_id: () -> String?
+    end
+    def list_problems: (
+      ?account_id: String,
+      ?resource_group_name: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?component_name: String,
+      ?visibility: String
+    ) -> _ListProblemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProblemsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListWorkloadsResponse
+      include Smithy::Client::_Response[Types::ListWorkloadsResponse]
+      def workload_list: () -> Array[Types::Workload]?
+      def next_token: () -> String?
+    end
+    def list_workloads: (
+      ?resource_group_name: String,
+      ?component_name: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?account_id: String
+    ) -> _ListWorkloadsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkloadsResponse
+
+    interface _RemoveWorkloadResponse
+      include Smithy::Client::_Response[Types::RemoveWorkloadResponse]
+    end
+    def remove_workload: (
+      ?resource_group_name: String,
+      ?component_name: String,
+      ?workload_id: String
+    ) -> _RemoveWorkloadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveWorkloadResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateApplicationResponse
+      include Smithy::Client::_Response[Types::UpdateApplicationResponse]
+      def application_info: () -> Types::ApplicationInfo?
+    end
+    def update_application: (
+      ?resource_group_name: String,
+      ?ops_center_enabled: bool,
+      ?cwe_monitor_enabled: bool,
+      ?ops_item_sns_topic_arn: String,
+      ?sns_notification_arn: String,
+      ?remove_sns_topic: bool,
+      ?auto_config_enabled: bool,
+      ?attach_missing_permission: bool
+    ) -> _UpdateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationResponse
+
+    interface _UpdateComponentResponse
+      include Smithy::Client::_Response[Types::UpdateComponentResponse]
+    end
+    def update_component: (
+      ?resource_group_name: String,
+      ?component_name: String,
+      ?new_component_name: String,
+      ?resource_list: Array[String]
+    ) -> _UpdateComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateComponentResponse
+
+    interface _UpdateComponentConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateComponentConfigurationResponse]
+    end
+    def update_component_configuration: (
+      ?resource_group_name: String,
+      ?component_name: String,
+      ?monitor: bool,
+      ?tier: String,
+      ?component_configuration: String,
+      ?auto_config_enabled: bool
+    ) -> _UpdateComponentConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateComponentConfigurationResponse
+
+    interface _UpdateLogPatternResponse
+      include Smithy::Client::_Response[Types::UpdateLogPatternResponse]
+      def resource_group_name: () -> String?
+      def log_pattern: () -> Types::LogPattern?
+    end
+    def update_log_pattern: (
+      ?resource_group_name: String,
+      ?pattern_set_name: String,
+      ?pattern_name: String,
+      ?pattern: String,
+      ?rank: Integer
+    ) -> _UpdateLogPatternResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLogPatternResponse
+
+    interface _UpdateProblemResponse
+      include Smithy::Client::_Response[Types::UpdateProblemResponse]
+    end
+    def update_problem: (
+      ?problem_id: String,
+      ?update_status: String,
+      ?visibility: String
+    ) -> _UpdateProblemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProblemResponse
+
+    interface _UpdateWorkloadResponse
+      include Smithy::Client::_Response[Types::UpdateWorkloadResponse]
+      def workload_id: () -> String?
+      def workload_configuration: () -> Types::WorkloadConfiguration?
+    end
+    def update_workload: (
+      ?resource_group_name: String,
+      ?component_name: String,
+      ?workload_id: String,
+      ?workload_configuration: {
+        workload_name: String,
+        tier: String,
+        configuration: String
+      }
+    ) -> _UpdateWorkloadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkloadResponse
+  end
+end

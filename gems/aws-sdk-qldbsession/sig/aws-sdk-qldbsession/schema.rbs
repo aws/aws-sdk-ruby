@@ -1,0 +1,49 @@
+module Aws::QLDBSession
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AbortTransactionRequest: StructureShape
+    AbortTransactionResult: StructureShape
+    BadRequestException: StructureShape
+    CapacityExceededException: StructureShape
+    CommitDigest: BlobShape
+    CommitTransactionRequest: StructureShape
+    CommitTransactionResult: StructureShape
+    EndSessionRequest: StructureShape
+    EndSessionResult: StructureShape
+    ErrorCode: StringShape
+    ErrorMessage: StringShape
+    ExecuteStatementRequest: StructureShape
+    ExecuteStatementResult: StructureShape
+    FetchPageRequest: StructureShape
+    FetchPageResult: StructureShape
+    IOUsage: StructureShape
+    InvalidSessionException: StructureShape
+    IonBinary: BlobShape
+    IonText: StringShape
+    LedgerName: StringShape
+    LimitExceededException: StructureShape
+    OccConflictException: StructureShape
+    Page: StructureShape
+    PageToken: StringShape
+    ProcessingTimeMilliseconds: IntegerShape
+    RateExceededException: StructureShape
+    ReadIOs: IntegerShape
+    SendCommandRequest: StructureShape
+    SendCommandResult: StructureShape
+    SessionToken: StringShape
+    StartSessionRequest: StructureShape
+    StartSessionResult: StructureShape
+    StartTransactionRequest: StructureShape
+    StartTransactionResult: StructureShape
+    Statement: StringShape
+    StatementParameters: ListShape
+    TimingInformation: StructureShape
+    TransactionId: StringShape
+    ValueHolder: StructureShape
+    ValueHolders: ListShape
+    WriteIOs: IntegerShape
+
+    QLDBSession: ServiceShape
+  end
+end

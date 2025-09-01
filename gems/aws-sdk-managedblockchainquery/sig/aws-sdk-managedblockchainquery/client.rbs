@@ -1,0 +1,219 @@
+module Aws::ManagedBlockchainQuery
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ManagedBlockchainQuery::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchGetTokenBalanceResponse
+      include Smithy::Client::_Response[Types::BatchGetTokenBalanceOutput]
+      def token_balances: () -> Array[Types::BatchGetTokenBalanceOutputItem]?
+      def errors: () -> Array[Types::BatchGetTokenBalanceErrorItem]?
+    end
+    def batch_get_token_balance: (
+      ?get_token_balance_inputs: Array[
+        {
+          token_identifier: {
+            network: String,
+            contract_address: String,
+            token_id: String
+          },
+          owner_identifier: {
+            address: untyped
+          },
+          at_blockchain_instant: {
+            time: Time
+          }
+        }
+      ]
+    ) -> _BatchGetTokenBalanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetTokenBalanceResponse
+
+    interface _GetAssetContractResponse
+      include Smithy::Client::_Response[Types::GetAssetContractOutput]
+      def contract_identifier: () -> Types::ContractIdentifier?
+      def token_standard: () -> String?
+      def deployer_address: () -> String?
+      def metadata: () -> Types::ContractMetadata?
+    end
+    def get_asset_contract: (
+      ?contract_identifier: {
+        network: String,
+        contract_address: String
+      }
+    ) -> _GetAssetContractResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssetContractResponse
+
+    interface _GetTokenBalanceResponse
+      include Smithy::Client::_Response[Types::GetTokenBalanceOutput]
+      def owner_identifier: () -> Types::OwnerIdentifier?
+      def token_identifier: () -> Types::TokenIdentifier?
+      def balance: () -> String?
+      def at_blockchain_instant: () -> Types::BlockchainInstant?
+      def last_updated_time: () -> Types::BlockchainInstant?
+    end
+    def get_token_balance: (
+      ?token_identifier: {
+        network: String,
+        contract_address: String,
+        token_id: String
+      },
+      ?owner_identifier: {
+        address: String
+      },
+      ?at_blockchain_instant: {
+        time: Time
+      }
+    ) -> _GetTokenBalanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTokenBalanceResponse
+
+    interface _GetTransactionResponse
+      include Smithy::Client::_Response[Types::GetTransactionOutput]
+      def transaction: () -> Types::Transaction?
+    end
+    def get_transaction: (
+      ?transaction_hash: String,
+      ?transaction_id: String,
+      ?network: String
+    ) -> _GetTransactionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTransactionResponse
+
+    interface _ListAssetContractsResponse
+      include Smithy::Client::_Response[Types::ListAssetContractsOutput]
+      def contracts: () -> Array[Types::AssetContract]?
+      def next_token: () -> String?
+    end
+    def list_asset_contracts: (
+      ?contract_filter: {
+        network: String,
+        token_standard: String,
+        deployer_address: String
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssetContractsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssetContractsResponse
+
+    interface _ListFilteredTransactionEventsResponse
+      include Smithy::Client::_Response[Types::ListFilteredTransactionEventsOutput]
+      def events: () -> Array[Types::TransactionEvent]?
+      def next_token: () -> String?
+    end
+    def list_filtered_transaction_events: (
+      ?network: String,
+      ?address_identifier_filter: {
+        transaction_event_to_address: Array[String]
+      },
+      ?time_filter: {
+        from: {
+          time: Time
+        },
+        to: untyped
+      },
+      ?vout_filter: {
+        vout_spent: bool
+      },
+      ?confirmation_status_filter: {
+        include: Array[String]
+      },
+      ?sort: {
+        sort_by: String,
+        sort_order: String
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFilteredTransactionEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFilteredTransactionEventsResponse
+
+    interface _ListTokenBalancesResponse
+      include Smithy::Client::_Response[Types::ListTokenBalancesOutput]
+      def token_balances: () -> Array[Types::TokenBalance]?
+      def next_token: () -> String?
+    end
+    def list_token_balances: (
+      ?owner_filter: {
+        address: String
+      },
+      ?token_filter: {
+        network: String,
+        contract_address: String,
+        token_id: String
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTokenBalancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTokenBalancesResponse
+
+    interface _ListTransactionEventsResponse
+      include Smithy::Client::_Response[Types::ListTransactionEventsOutput]
+      def events: () -> Array[Types::TransactionEvent]?
+      def next_token: () -> String?
+    end
+    def list_transaction_events: (
+      ?transaction_hash: String,
+      ?transaction_id: String,
+      ?network: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTransactionEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTransactionEventsResponse
+
+    interface _ListTransactionsResponse
+      include Smithy::Client::_Response[Types::ListTransactionsOutput]
+      def transactions: () -> Array[Types::TransactionOutputItem]?
+      def next_token: () -> String?
+    end
+    def list_transactions: (
+      ?address: String,
+      ?network: String,
+      ?from_blockchain_instant: {
+        time: Time
+      },
+      ?to_blockchain_instant: {
+        time: Time
+      },
+      ?sort: {
+        sort_by: String,
+        sort_order: String
+      },
+      ?next_token: String,
+      ?max_results: Integer,
+      ?confirmation_status_filter: {
+        include: Array[String]
+      }
+    ) -> _ListTransactionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTransactionsResponse
+  end
+end

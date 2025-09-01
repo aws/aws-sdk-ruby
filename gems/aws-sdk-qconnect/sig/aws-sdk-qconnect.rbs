@@ -1,0 +1,5 @@
+  module Aws
+    module QConnect
+      VERSION: String
+    end
+  end

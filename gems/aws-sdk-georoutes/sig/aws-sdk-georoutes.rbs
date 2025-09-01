@@ -1,0 +1,5 @@
+  module Aws
+    module GeoRoutes
+      VERSION: String
+    end
+  end

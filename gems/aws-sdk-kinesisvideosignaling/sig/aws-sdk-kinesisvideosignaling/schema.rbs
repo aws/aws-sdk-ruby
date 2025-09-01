@@ -1,0 +1,31 @@
+module Aws::KinesisVideoSignaling
+  module Schema
+    include Smithy::Schema::Shapes
+
+    Answer: StringShape
+    ClientId: StringShape
+    ClientLimitExceededException: StructureShape
+    ErrorMessage: StringShape
+    GetIceServerConfigRequest: StructureShape
+    GetIceServerConfigResponse: StructureShape
+    IceServer: StructureShape
+    IceServerList: ListShape
+    InvalidArgumentException: StructureShape
+    InvalidClientException: StructureShape
+    MessagePayload: StringShape
+    NotAuthorizedException: StructureShape
+    Password: StringShape
+    ResourceARN: StringShape
+    ResourceNotFoundException: StructureShape
+    SendAlexaOfferToMasterRequest: StructureShape
+    SendAlexaOfferToMasterResponse: StructureShape
+    Service: EnumShape
+    SessionExpiredException: StructureShape
+    Ttl: IntegerShape
+    Uri: StringShape
+    Uris: ListShape
+    Username: StringShape
+
+    AWSAcuitySignalingService: ServiceShape
+  end
+end

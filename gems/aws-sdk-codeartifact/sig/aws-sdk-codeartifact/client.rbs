@@ -1,0 +1,726 @@
+module Aws::Codeartifact
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Codeartifact::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateExternalConnectionResponse
+      include Smithy::Client::_Response[Types::AssociateExternalConnectionResult]
+      def repository: () -> Types::RepositoryDescription?
+    end
+    def associate_external_connection: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?external_connection: String
+    ) -> _AssociateExternalConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateExternalConnectionResponse
+
+    interface _CopyPackageVersionsResponse
+      include Smithy::Client::_Response[Types::CopyPackageVersionsResult]
+      def successful_versions: () -> Hash[String, Types::SuccessfulPackageVersionInfo]?
+      def failed_versions: () -> Hash[String, Types::PackageVersionError]?
+    end
+    def copy_package_versions: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?source_repository: String,
+      ?destination_repository: String,
+      ?format: String,
+      ?namespace: String,
+      ?package: String,
+      ?versions: Array[String],
+      ?version_revisions: Hash[String, String],
+      ?allow_overwrite: bool,
+      ?include_from_upstream: bool
+    ) -> _CopyPackageVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyPackageVersionsResponse
+
+    interface _CreateDomainResponse
+      include Smithy::Client::_Response[Types::CreateDomainResult]
+      def domain: () -> Types::DomainDescription?
+    end
+    def create_domain: (
+      ?domain: String,
+      ?encryption_key: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDomainResponse
+
+    interface _CreatePackageGroupResponse
+      include Smithy::Client::_Response[Types::CreatePackageGroupResult]
+      def package_group: () -> Types::PackageGroupDescription?
+    end
+    def create_package_group: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?package_group: String,
+      ?contact_info: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreatePackageGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePackageGroupResponse
+
+    interface _CreateRepositoryResponse
+      include Smithy::Client::_Response[Types::CreateRepositoryResult]
+      def repository: () -> Types::RepositoryDescription?
+    end
+    def create_repository: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?description: String,
+      ?upstreams: Array[
+        {
+          repository_name: String
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRepositoryResponse
+
+    interface _DeleteDomainResponse
+      include Smithy::Client::_Response[Types::DeleteDomainResult]
+      def domain: () -> Types::DomainDescription?
+    end
+    def delete_domain: (
+      ?domain: String,
+      ?domain_owner: String
+    ) -> _DeleteDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainResponse
+
+    interface _DeleteDomainPermissionsPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteDomainPermissionsPolicyResult]
+      def policy: () -> Types::ResourcePolicy?
+    end
+    def delete_domain_permissions_policy: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?policy_revision: String
+    ) -> _DeleteDomainPermissionsPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainPermissionsPolicyResponse
+
+    interface _DeletePackageResponse
+      include Smithy::Client::_Response[Types::DeletePackageResult]
+      def deleted_package: () -> Types::PackageSummary?
+    end
+    def delete_package: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?format: String,
+      ?namespace: String,
+      ?package: String
+    ) -> _DeletePackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePackageResponse
+
+    interface _DeletePackageGroupResponse
+      include Smithy::Client::_Response[Types::DeletePackageGroupResult]
+      def package_group: () -> Types::PackageGroupDescription?
+    end
+    def delete_package_group: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?package_group: String
+    ) -> _DeletePackageGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePackageGroupResponse
+
+    interface _DeletePackageVersionsResponse
+      include Smithy::Client::_Response[Types::DeletePackageVersionsResult]
+      def successful_versions: () -> Hash[String, Types::SuccessfulPackageVersionInfo]?
+      def failed_versions: () -> Hash[String, Types::PackageVersionError]?
+    end
+    def delete_package_versions: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?format: String,
+      ?namespace: String,
+      ?package: String,
+      ?versions: Array[String],
+      ?expected_status: String
+    ) -> _DeletePackageVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePackageVersionsResponse
+
+    interface _DeleteRepositoryResponse
+      include Smithy::Client::_Response[Types::DeleteRepositoryResult]
+      def repository: () -> Types::RepositoryDescription?
+    end
+    def delete_repository: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String
+    ) -> _DeleteRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRepositoryResponse
+
+    interface _DeleteRepositoryPermissionsPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteRepositoryPermissionsPolicyResult]
+      def policy: () -> Types::ResourcePolicy?
+    end
+    def delete_repository_permissions_policy: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?policy_revision: String
+    ) -> _DeleteRepositoryPermissionsPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRepositoryPermissionsPolicyResponse
+
+    interface _DescribeDomainResponse
+      include Smithy::Client::_Response[Types::DescribeDomainResult]
+      def domain: () -> Types::DomainDescription?
+    end
+    def describe_domain: (
+      ?domain: String,
+      ?domain_owner: String
+    ) -> _DescribeDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDomainResponse
+
+    interface _DescribePackageResponse
+      include Smithy::Client::_Response[Types::DescribePackageResult]
+      def package: () -> Types::PackageDescription?
+    end
+    def describe_package: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?format: String,
+      ?namespace: String,
+      ?package: String
+    ) -> _DescribePackageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePackageResponse
+
+    interface _DescribePackageGroupResponse
+      include Smithy::Client::_Response[Types::DescribePackageGroupResult]
+      def package_group: () -> Types::PackageGroupDescription?
+    end
+    def describe_package_group: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?package_group: String
+    ) -> _DescribePackageGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePackageGroupResponse
+
+    interface _DescribePackageVersionResponse
+      include Smithy::Client::_Response[Types::DescribePackageVersionResult]
+      def package_version: () -> Types::PackageVersionDescription?
+    end
+    def describe_package_version: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?format: String,
+      ?namespace: String,
+      ?package: String,
+      ?package_version: String
+    ) -> _DescribePackageVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePackageVersionResponse
+
+    interface _DescribeRepositoryResponse
+      include Smithy::Client::_Response[Types::DescribeRepositoryResult]
+      def repository: () -> Types::RepositoryDescription?
+    end
+    def describe_repository: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String
+    ) -> _DescribeRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRepositoryResponse
+
+    interface _DisassociateExternalConnectionResponse
+      include Smithy::Client::_Response[Types::DisassociateExternalConnectionResult]
+      def repository: () -> Types::RepositoryDescription?
+    end
+    def disassociate_external_connection: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?external_connection: String
+    ) -> _DisassociateExternalConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateExternalConnectionResponse
+
+    interface _DisposePackageVersionsResponse
+      include Smithy::Client::_Response[Types::DisposePackageVersionsResult]
+      def successful_versions: () -> Hash[String, Types::SuccessfulPackageVersionInfo]?
+      def failed_versions: () -> Hash[String, Types::PackageVersionError]?
+    end
+    def dispose_package_versions: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?format: String,
+      ?namespace: String,
+      ?package: String,
+      ?versions: Array[String],
+      ?version_revisions: Hash[String, String],
+      ?expected_status: String
+    ) -> _DisposePackageVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisposePackageVersionsResponse
+
+    interface _GetAssociatedPackageGroupResponse
+      include Smithy::Client::_Response[Types::GetAssociatedPackageGroupResult]
+      def package_group: () -> Types::PackageGroupDescription?
+      def association_type: () -> String?
+    end
+    def get_associated_package_group: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?format: String,
+      ?namespace: String,
+      ?package: String
+    ) -> _GetAssociatedPackageGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssociatedPackageGroupResponse
+
+    interface _GetAuthorizationTokenResponse
+      include Smithy::Client::_Response[Types::GetAuthorizationTokenResult]
+      def authorization_token: () -> String?
+      def expiration: () -> Time?
+    end
+    def get_authorization_token: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?duration_seconds: Integer
+    ) -> _GetAuthorizationTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAuthorizationTokenResponse
+
+    interface _GetDomainPermissionsPolicyResponse
+      include Smithy::Client::_Response[Types::GetDomainPermissionsPolicyResult]
+      def policy: () -> Types::ResourcePolicy?
+    end
+    def get_domain_permissions_policy: (
+      ?domain: String,
+      ?domain_owner: String
+    ) -> _GetDomainPermissionsPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainPermissionsPolicyResponse
+
+    interface _GetPackageVersionAssetResponse
+      include Smithy::Client::_Response[Types::GetPackageVersionAssetResult]
+      def asset: () -> String?
+      def asset_name: () -> String?
+      def package_version: () -> String?
+      def package_version_revision: () -> String?
+    end
+    def get_package_version_asset: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?format: String,
+      ?namespace: String,
+      ?package: String,
+      ?package_version: String,
+      ?asset: String,
+      ?package_version_revision: String
+    ) -> _GetPackageVersionAssetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPackageVersionAssetResponse
+
+    interface _GetPackageVersionReadmeResponse
+      include Smithy::Client::_Response[Types::GetPackageVersionReadmeResult]
+      def format: () -> String?
+      def namespace: () -> String?
+      def package: () -> String?
+      def version: () -> String?
+      def version_revision: () -> String?
+      def readme: () -> String?
+    end
+    def get_package_version_readme: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?format: String,
+      ?namespace: String,
+      ?package: String,
+      ?package_version: String
+    ) -> _GetPackageVersionReadmeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPackageVersionReadmeResponse
+
+    interface _GetRepositoryEndpointResponse
+      include Smithy::Client::_Response[Types::GetRepositoryEndpointResult]
+      def repository_endpoint: () -> String?
+    end
+    def get_repository_endpoint: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?format: String,
+      ?endpoint_type: String
+    ) -> _GetRepositoryEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRepositoryEndpointResponse
+
+    interface _GetRepositoryPermissionsPolicyResponse
+      include Smithy::Client::_Response[Types::GetRepositoryPermissionsPolicyResult]
+      def policy: () -> Types::ResourcePolicy?
+    end
+    def get_repository_permissions_policy: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String
+    ) -> _GetRepositoryPermissionsPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRepositoryPermissionsPolicyResponse
+
+    interface _ListAllowedRepositoriesForGroupResponse
+      include Smithy::Client::_Response[Types::ListAllowedRepositoriesForGroupResult]
+      def allowed_repositories: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_allowed_repositories_for_group: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?package_group: String,
+      ?origin_restriction_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAllowedRepositoriesForGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAllowedRepositoriesForGroupResponse
+
+    interface _ListAssociatedPackagesResponse
+      include Smithy::Client::_Response[Types::ListAssociatedPackagesResult]
+      def packages: () -> Array[Types::AssociatedPackage]?
+      def next_token: () -> String?
+    end
+    def list_associated_packages: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?package_group: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?preview: bool
+    ) -> _ListAssociatedPackagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssociatedPackagesResponse
+
+    interface _ListDomainsResponse
+      include Smithy::Client::_Response[Types::ListDomainsResult]
+      def domains: () -> Array[Types::DomainSummary]?
+      def next_token: () -> String?
+    end
+    def list_domains: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainsResponse
+
+    interface _ListPackageGroupsResponse
+      include Smithy::Client::_Response[Types::ListPackageGroupsResult]
+      def package_groups: () -> Array[Types::PackageGroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_package_groups: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?prefix: String
+    ) -> _ListPackageGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPackageGroupsResponse
+
+    interface _ListPackageVersionAssetsResponse
+      include Smithy::Client::_Response[Types::ListPackageVersionAssetsResult]
+      def format: () -> String?
+      def namespace: () -> String?
+      def package: () -> String?
+      def version: () -> String?
+      def version_revision: () -> String?
+      def next_token: () -> String?
+      def assets: () -> Array[Types::AssetSummary]?
+    end
+    def list_package_version_assets: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?format: String,
+      ?namespace: String,
+      ?package: String,
+      ?package_version: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPackageVersionAssetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPackageVersionAssetsResponse
+
+    interface _ListPackageVersionDependenciesResponse
+      include Smithy::Client::_Response[Types::ListPackageVersionDependenciesResult]
+      def format: () -> String?
+      def namespace: () -> String?
+      def package: () -> String?
+      def version: () -> String?
+      def version_revision: () -> String?
+      def next_token: () -> String?
+      def dependencies: () -> Array[Types::PackageDependency]?
+    end
+    def list_package_version_dependencies: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?format: String,
+      ?namespace: String,
+      ?package: String,
+      ?package_version: String,
+      ?next_token: String
+    ) -> _ListPackageVersionDependenciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPackageVersionDependenciesResponse
+
+    interface _ListPackageVersionsResponse
+      include Smithy::Client::_Response[Types::ListPackageVersionsResult]
+      def default_display_version: () -> String?
+      def format: () -> String?
+      def namespace: () -> String?
+      def package: () -> String?
+      def versions: () -> Array[Types::PackageVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_package_versions: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?format: String,
+      ?namespace: String,
+      ?package: String,
+      ?status: String,
+      ?sort_by: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?origin_type: String
+    ) -> _ListPackageVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPackageVersionsResponse
+
+    interface _ListPackagesResponse
+      include Smithy::Client::_Response[Types::ListPackagesResult]
+      def packages: () -> Array[Types::PackageSummary]?
+      def next_token: () -> String?
+    end
+    def list_packages: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?format: String,
+      ?namespace: String,
+      ?package_prefix: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?publish: String,
+      ?upstream: String
+    ) -> _ListPackagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPackagesResponse
+
+    interface _ListRepositoriesResponse
+      include Smithy::Client::_Response[Types::ListRepositoriesResult]
+      def repositories: () -> Array[Types::RepositorySummary]?
+      def next_token: () -> String?
+    end
+    def list_repositories: (
+      ?repository_prefix: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRepositoriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRepositoriesResponse
+
+    interface _ListRepositoriesInDomainResponse
+      include Smithy::Client::_Response[Types::ListRepositoriesInDomainResult]
+      def repositories: () -> Array[Types::RepositorySummary]?
+      def next_token: () -> String?
+    end
+    def list_repositories_in_domain: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?administrator_account: String,
+      ?repository_prefix: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRepositoriesInDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRepositoriesInDomainResponse
+
+    interface _ListSubPackageGroupsResponse
+      include Smithy::Client::_Response[Types::ListSubPackageGroupsResult]
+      def package_groups: () -> Array[Types::PackageGroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_sub_package_groups: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?package_group: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSubPackageGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSubPackageGroupsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResult]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PublishPackageVersionResponse
+      include Smithy::Client::_Response[Types::PublishPackageVersionResult]
+      def format: () -> String?
+      def namespace: () -> String?
+      def package: () -> String?
+      def version: () -> String?
+      def version_revision: () -> String?
+      def status: () -> String?
+      def asset: () -> Types::AssetSummary?
+    end
+    def publish_package_version: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?format: String,
+      ?namespace: String,
+      ?package: String,
+      ?package_version: String,
+      ?asset_content: String,
+      ?asset_name: String,
+      ?asset_sha256: String,
+      ?unfinished: bool
+    ) -> _PublishPackageVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishPackageVersionResponse
+
+    interface _PutDomainPermissionsPolicyResponse
+      include Smithy::Client::_Response[Types::PutDomainPermissionsPolicyResult]
+      def policy: () -> Types::ResourcePolicy?
+    end
+    def put_domain_permissions_policy: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?policy_revision: String,
+      ?policy_document: String
+    ) -> _PutDomainPermissionsPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDomainPermissionsPolicyResponse
+
+    interface _PutPackageOriginConfigurationResponse
+      include Smithy::Client::_Response[Types::PutPackageOriginConfigurationResult]
+      def origin_configuration: () -> Types::PackageOriginConfiguration?
+    end
+    def put_package_origin_configuration: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?format: String,
+      ?namespace: String,
+      ?package: String,
+      ?restrictions: {
+        publish: String,
+        upstream: String
+      }
+    ) -> _PutPackageOriginConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutPackageOriginConfigurationResponse
+
+    interface _PutRepositoryPermissionsPolicyResponse
+      include Smithy::Client::_Response[Types::PutRepositoryPermissionsPolicyResult]
+      def policy: () -> Types::ResourcePolicy?
+    end
+    def put_repository_permissions_policy: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?policy_revision: String,
+      ?policy_document: String
+    ) -> _PutRepositoryPermissionsPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRepositoryPermissionsPolicyResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResult]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResult]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdatePackageGroupResponse
+      include Smithy::Client::_Response[Types::UpdatePackageGroupResult]
+      def package_group: () -> Types::PackageGroupDescription?
+    end
+    def update_package_group: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?package_group: String,
+      ?contact_info: String,
+      ?description: String
+    ) -> _UpdatePackageGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePackageGroupResponse
+
+    interface _UpdatePackageGroupOriginConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdatePackageGroupOriginConfigurationResult]
+      def package_group: () -> Types::PackageGroupDescription?
+      def allowed_repository_updates: () -> Hash[String, Hash[String, Array[String]]]?
+    end
+    def update_package_group_origin_configuration: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?package_group: String,
+      ?restrictions: Hash[String, String],
+      ?add_allowed_repositories: Array[
+        {
+          repository_name: String,
+          origin_restriction_type: String
+        }
+      ],
+      ?remove_allowed_repositories: Array[
+        {
+          repository_name: String,
+          origin_restriction_type: String
+        }
+      ]
+    ) -> _UpdatePackageGroupOriginConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePackageGroupOriginConfigurationResponse
+
+    interface _UpdatePackageVersionsStatusResponse
+      include Smithy::Client::_Response[Types::UpdatePackageVersionsStatusResult]
+      def successful_versions: () -> Hash[String, Types::SuccessfulPackageVersionInfo]?
+      def failed_versions: () -> Hash[String, Types::PackageVersionError]?
+    end
+    def update_package_versions_status: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?format: String,
+      ?namespace: String,
+      ?package: String,
+      ?versions: Array[String],
+      ?version_revisions: Hash[String, String],
+      ?expected_status: String,
+      ?target_status: String
+    ) -> _UpdatePackageVersionsStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePackageVersionsStatusResponse
+
+    interface _UpdateRepositoryResponse
+      include Smithy::Client::_Response[Types::UpdateRepositoryResult]
+      def repository: () -> Types::RepositoryDescription?
+    end
+    def update_repository: (
+      ?domain: String,
+      ?domain_owner: String,
+      ?repository: String,
+      ?description: String,
+      ?upstreams: Array[
+        {
+          repository_name: String
+        }
+      ]
+    ) -> _UpdateRepositoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRepositoryResponse
+  end
+end

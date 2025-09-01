@@ -1,0 +1,2746 @@
+module Aws::Drs
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class Account
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class AssociateSourceNetworkStackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_network_id: String,
+        ?cfn_stack_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_network_id: String?
+      attr_accessor cfn_stack_name: String?
+    end
+
+    class AssociateSourceNetworkStackResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: Types::Job,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: Types::Job?
+    end
+
+    class CPU
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cores: Integer,
+        ?model_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cores: Integer?
+      attr_accessor model_name: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ConversionProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?volume_to_conversion_map: Hash[String, Hash[String, String]],
+        ?root_volume_name: String,
+        ?force_uefi: bool,
+        ?data_timestamp: String,
+        ?volume_to_volume_size: Hash[String, Integer],
+        ?volume_to_product_codes: Hash[String, Array[Types::ProductCode]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor volume_to_conversion_map: Hash[String, Hash[String, String]]?
+      attr_accessor root_volume_name: String?
+      attr_accessor force_uefi: bool?
+      attr_accessor data_timestamp: String?
+      attr_accessor volume_to_volume_size: Hash[String, Integer]?
+      attr_accessor volume_to_product_codes: Hash[String, Array[Types::ProductCode]]?
+    end
+
+    class CreateExtendedSourceServerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateExtendedSourceServerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server: Types::SourceServer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server: Types::SourceServer?
+    end
+
+    class CreateLaunchConfigurationTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+        ?launch_disposition: String,
+        ?target_instance_type_right_sizing_method: String,
+        ?copy_private_ip: bool,
+        ?copy_tags: bool,
+        ?licensing: Types::Licensing,
+        ?export_bucket_arn: String,
+        ?post_launch_enabled: bool,
+        ?launch_into_source_instance: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor launch_disposition: String?
+      attr_accessor target_instance_type_right_sizing_method: String?
+      attr_accessor copy_private_ip: bool?
+      attr_accessor copy_tags: bool?
+      attr_accessor licensing: Types::Licensing?
+      attr_accessor export_bucket_arn: String?
+      attr_accessor post_launch_enabled: bool?
+      attr_accessor launch_into_source_instance: bool?
+    end
+
+    class CreateLaunchConfigurationTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configuration_template: Types::LaunchConfigurationTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configuration_template: Types::LaunchConfigurationTemplate?
+    end
+
+    class CreateReplicationConfigurationTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?staging_area_subnet_id: String,
+        ?associate_default_security_group: bool,
+        ?replication_servers_security_groups_i_ds: Array[String],
+        ?replication_server_instance_type: String,
+        ?use_dedicated_replication_server: bool,
+        ?default_large_staging_disk_type: String,
+        ?ebs_encryption: String,
+        ?ebs_encryption_key_arn: String,
+        ?bandwidth_throttling: Integer,
+        ?data_plane_routing: String,
+        ?create_public_ip: bool,
+        ?staging_area_tags: Hash[String, String],
+        ?pit_policy: Array[Types::PITPolicyRule],
+        ?tags: Hash[String, String],
+        ?auto_replicate_new_disks: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor staging_area_subnet_id: String?
+      attr_accessor associate_default_security_group: bool?
+      attr_accessor replication_servers_security_groups_i_ds: Array[String]?
+      attr_accessor replication_server_instance_type: String?
+      attr_accessor use_dedicated_replication_server: bool?
+      attr_accessor default_large_staging_disk_type: String?
+      attr_accessor ebs_encryption: String?
+      attr_accessor ebs_encryption_key_arn: String?
+      attr_accessor bandwidth_throttling: Integer?
+      attr_accessor data_plane_routing: String?
+      attr_accessor create_public_ip: bool?
+      attr_accessor staging_area_tags: Hash[String, String]?
+      attr_accessor pit_policy: Array[Types::PITPolicyRule]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor auto_replicate_new_disks: bool?
+    end
+
+    class CreateReplicationConfigurationTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_configuration_template_id: String,
+        ?arn: String,
+        ?staging_area_subnet_id: String,
+        ?associate_default_security_group: bool,
+        ?replication_servers_security_groups_i_ds: Array[String],
+        ?replication_server_instance_type: String,
+        ?use_dedicated_replication_server: bool,
+        ?default_large_staging_disk_type: String,
+        ?ebs_encryption: String,
+        ?ebs_encryption_key_arn: String,
+        ?bandwidth_throttling: Integer,
+        ?data_plane_routing: String,
+        ?create_public_ip: bool,
+        ?staging_area_tags: Hash[String, String],
+        ?tags: Hash[String, String],
+        ?pit_policy: Array[Types::PITPolicyRule],
+        ?auto_replicate_new_disks: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_configuration_template_id: String?
+      attr_accessor arn: String?
+      attr_accessor staging_area_subnet_id: String?
+      attr_accessor associate_default_security_group: bool?
+      attr_accessor replication_servers_security_groups_i_ds: Array[String]?
+      attr_accessor replication_server_instance_type: String?
+      attr_accessor use_dedicated_replication_server: bool?
+      attr_accessor default_large_staging_disk_type: String?
+      attr_accessor ebs_encryption: String?
+      attr_accessor ebs_encryption_key_arn: String?
+      attr_accessor bandwidth_throttling: Integer?
+      attr_accessor data_plane_routing: String?
+      attr_accessor create_public_ip: bool?
+      attr_accessor staging_area_tags: Hash[String, String]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor pit_policy: Array[Types::PITPolicyRule]?
+      attr_accessor auto_replicate_new_disks: bool?
+    end
+
+    class CreateSourceNetworkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_id: String,
+        ?origin_account_id: String,
+        ?origin_region: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_id: String?
+      attr_accessor origin_account_id: String?
+      attr_accessor origin_region: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSourceNetworkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_network_id: String?
+    end
+
+    class DataReplicationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?raw_error: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor raw_error: String?
+    end
+
+    class DataReplicationInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lag_duration: String,
+        ?eta_date_time: String,
+        ?replicated_disks: Array[Types::DataReplicationInfoReplicatedDisk],
+        ?data_replication_state: String,
+        ?data_replication_initiation: Types::DataReplicationInitiation,
+        ?data_replication_error: Types::DataReplicationError,
+        ?staging_availability_zone: String,
+        ?staging_outpost_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lag_duration: String?
+      attr_accessor eta_date_time: String?
+      attr_accessor replicated_disks: Array[Types::DataReplicationInfoReplicatedDisk]?
+      attr_accessor data_replication_state: String?
+      attr_accessor data_replication_initiation: Types::DataReplicationInitiation?
+      attr_accessor data_replication_error: Types::DataReplicationError?
+      attr_accessor staging_availability_zone: String?
+      attr_accessor staging_outpost_arn: String?
+    end
+
+    class DataReplicationInfoReplicatedDisk
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_name: String,
+        ?total_storage_bytes: Integer,
+        ?replicated_storage_bytes: Integer,
+        ?rescanned_storage_bytes: Integer,
+        ?backlogged_storage_bytes: Integer,
+        ?volume_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_name: String?
+      attr_accessor total_storage_bytes: Integer?
+      attr_accessor replicated_storage_bytes: Integer?
+      attr_accessor rescanned_storage_bytes: Integer?
+      attr_accessor backlogged_storage_bytes: Integer?
+      attr_accessor volume_status: String?
+    end
+
+    class DataReplicationInitiation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_date_time: String,
+        ?next_attempt_date_time: String,
+        ?steps: Array[Types::DataReplicationInitiationStep],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_date_time: String?
+      attr_accessor next_attempt_date_time: String?
+      attr_accessor steps: Array[Types::DataReplicationInitiationStep]?
+    end
+
+    class DataReplicationInitiationStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor status: String?
+    end
+
+    class DeleteJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class DeleteJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLaunchActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?action_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor action_id: String?
+    end
+
+    class DeleteLaunchActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLaunchConfigurationTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configuration_template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configuration_template_id: String?
+    end
+
+    class DeleteLaunchConfigurationTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRecoveryInstanceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_instance_id: String?
+    end
+
+    class DeleteReplicationConfigurationTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_configuration_template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_configuration_template_id: String?
+    end
+
+    class DeleteReplicationConfigurationTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSourceNetworkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_network_id: String?
+    end
+
+    class DeleteSourceNetworkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSourceServerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+    end
+
+    class DeleteSourceServerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeJobLogItemsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeJobLogItemsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::JobLog],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::JobLog]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::DescribeJobsRequestFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::DescribeJobsRequestFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::Job],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::Job]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeJobsRequestFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_i_ds: Array[String],
+        ?from_date: String,
+        ?to_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_i_ds: Array[String]?
+      attr_accessor from_date: String?
+      attr_accessor to_date: String?
+    end
+
+    class DescribeLaunchConfigurationTemplatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configuration_template_i_ds: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configuration_template_i_ds: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeLaunchConfigurationTemplatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::LaunchConfigurationTemplate],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::LaunchConfigurationTemplate]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRecoveryInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::DescribeRecoveryInstancesRequestFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::DescribeRecoveryInstancesRequestFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRecoveryInstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?items: Array[Types::RecoveryInstance],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor items: Array[Types::RecoveryInstance]?
+    end
+
+    class DescribeRecoveryInstancesRequestFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_instance_i_ds: Array[String],
+        ?source_server_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_instance_i_ds: Array[String]?
+      attr_accessor source_server_i_ds: Array[String]?
+    end
+
+    class DescribeRecoverySnapshotsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?filters: Types::DescribeRecoverySnapshotsRequestFilters,
+        ?order: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor filters: Types::DescribeRecoverySnapshotsRequestFilters?
+      attr_accessor order: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRecoverySnapshotsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::RecoverySnapshot],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::RecoverySnapshot]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRecoverySnapshotsRequestFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_date_time: String,
+        ?to_date_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_date_time: String?
+      attr_accessor to_date_time: String?
+    end
+
+    class DescribeReplicationConfigurationTemplatesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_configuration_template_i_ds: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_configuration_template_i_ds: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeReplicationConfigurationTemplatesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ReplicationConfigurationTemplate],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ReplicationConfigurationTemplate]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSourceNetworksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::DescribeSourceNetworksRequestFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::DescribeSourceNetworksRequestFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSourceNetworksRequestFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_network_i_ds: Array[String],
+        ?origin_account_id: String,
+        ?origin_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_network_i_ds: Array[String]?
+      attr_accessor origin_account_id: String?
+      attr_accessor origin_region: String?
+    end
+
+    class DescribeSourceNetworksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::SourceNetwork],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::SourceNetwork]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSourceServersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Types::DescribeSourceServersRequestFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Types::DescribeSourceServersRequestFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSourceServersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::SourceServer],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::SourceServer]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSourceServersRequestFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_i_ds: Array[String],
+        ?hardware_id: String,
+        ?staging_account_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_i_ds: Array[String]?
+      attr_accessor hardware_id: String?
+      attr_accessor staging_account_i_ds: Array[String]?
+    end
+
+    class DisconnectRecoveryInstanceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_instance_id: String?
+    end
+
+    class DisconnectSourceServerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+    end
+
+    class DisconnectSourceServerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?arn: String,
+        ?tags: Hash[String, String],
+        ?recovery_instance_id: String,
+        ?last_launch_result: String,
+        ?data_replication_info: Types::DataReplicationInfo,
+        ?life_cycle: Types::LifeCycle,
+        ?source_properties: Types::SourceProperties,
+        ?staging_area: Types::StagingArea,
+        ?source_cloud_properties: Types::SourceCloudProperties,
+        ?replication_direction: String,
+        ?reversed_direction_source_server_arn: String,
+        ?source_network_id: String,
+        ?agent_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor recovery_instance_id: String?
+      attr_accessor last_launch_result: String?
+      attr_accessor data_replication_info: Types::DataReplicationInfo?
+      attr_accessor life_cycle: Types::LifeCycle?
+      attr_accessor source_properties: Types::SourceProperties?
+      attr_accessor staging_area: Types::StagingArea?
+      attr_accessor source_cloud_properties: Types::SourceCloudProperties?
+      attr_accessor replication_direction: String?
+      attr_accessor reversed_direction_source_server_arn: String?
+      attr_accessor source_network_id: String?
+      attr_accessor agent_version: String?
+    end
+
+    class Disk
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_name: String,
+        ?bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_name: String?
+      attr_accessor bytes: Integer?
+    end
+
+    class EventResourceData
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?source_network_data: Types::SourceNetworkData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_network_data: Types::SourceNetworkData?
+
+      class SourceNetworkData < EventResourceData
+      end
+      class Unknown < EventResourceData
+      end
+    end
+
+    class ExportSourceNetworkCfnTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_network_id: String?
+    end
+
+    class ExportSourceNetworkCfnTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_destination_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_destination_url: String?
+    end
+
+    class GetFailbackReplicationConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_instance_id: String?
+    end
+
+    class GetFailbackReplicationConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_instance_id: String,
+        ?name: String,
+        ?bandwidth_throttling: Integer,
+        ?use_private_ip: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_instance_id: String?
+      attr_accessor name: String?
+      attr_accessor bandwidth_throttling: Integer?
+      attr_accessor use_private_ip: bool?
+    end
+
+    class GetLaunchConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+    end
+
+    class GetLaunchConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?name: String,
+        ?ec2_launch_template_id: String,
+        ?launch_disposition: String,
+        ?target_instance_type_right_sizing_method: String,
+        ?copy_private_ip: bool,
+        ?copy_tags: bool,
+        ?licensing: Types::Licensing,
+        ?post_launch_enabled: bool,
+        ?launch_into_instance_properties: Types::LaunchIntoInstanceProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor name: String?
+      attr_accessor ec2_launch_template_id: String?
+      attr_accessor launch_disposition: String?
+      attr_accessor target_instance_type_right_sizing_method: String?
+      attr_accessor copy_private_ip: bool?
+      attr_accessor copy_tags: bool?
+      attr_accessor licensing: Types::Licensing?
+      attr_accessor post_launch_enabled: bool?
+      attr_accessor launch_into_instance_properties: Types::LaunchIntoInstanceProperties?
+    end
+
+    class GetReplicationConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+    end
+
+    class GetReplicationConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?name: String,
+        ?staging_area_subnet_id: String,
+        ?associate_default_security_group: bool,
+        ?replication_servers_security_groups_i_ds: Array[String],
+        ?replication_server_instance_type: String,
+        ?use_dedicated_replication_server: bool,
+        ?default_large_staging_disk_type: String,
+        ?replicated_disks: Array[Types::ReplicationConfigurationReplicatedDisk],
+        ?ebs_encryption: String,
+        ?ebs_encryption_key_arn: String,
+        ?bandwidth_throttling: Integer,
+        ?data_plane_routing: String,
+        ?create_public_ip: bool,
+        ?staging_area_tags: Hash[String, String],
+        ?pit_policy: Array[Types::PITPolicyRule],
+        ?auto_replicate_new_disks: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor name: String?
+      attr_accessor staging_area_subnet_id: String?
+      attr_accessor associate_default_security_group: bool?
+      attr_accessor replication_servers_security_groups_i_ds: Array[String]?
+      attr_accessor replication_server_instance_type: String?
+      attr_accessor use_dedicated_replication_server: bool?
+      attr_accessor default_large_staging_disk_type: String?
+      attr_accessor replicated_disks: Array[Types::ReplicationConfigurationReplicatedDisk]?
+      attr_accessor ebs_encryption: String?
+      attr_accessor ebs_encryption_key_arn: String?
+      attr_accessor bandwidth_throttling: Integer?
+      attr_accessor data_plane_routing: String?
+      attr_accessor create_public_ip: bool?
+      attr_accessor staging_area_tags: Hash[String, String]?
+      attr_accessor pit_policy: Array[Types::PITPolicyRule]?
+      attr_accessor auto_replicate_new_disks: bool?
+    end
+
+    class IdentificationHints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fqdn: String,
+        ?hostname: String,
+        ?vm_ware_uuid: String,
+        ?aws_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fqdn: String?
+      attr_accessor hostname: String?
+      attr_accessor vm_ware_uuid: String?
+      attr_accessor aws_instance_id: String?
+    end
+
+    class InitializeServiceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class InitializeServiceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class Job
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?arn: String,
+        ?type: String,
+        ?initiated_by: String,
+        ?creation_date_time: String,
+        ?end_date_time: String,
+        ?status: String,
+        ?participating_servers: Array[Types::ParticipatingServer],
+        ?tags: Hash[String, String],
+        ?participating_resources: Array[Types::ParticipatingResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor arn: String?
+      attr_accessor type: String?
+      attr_accessor initiated_by: String?
+      attr_accessor creation_date_time: String?
+      attr_accessor end_date_time: String?
+      attr_accessor status: String?
+      attr_accessor participating_servers: Array[Types::ParticipatingServer]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor participating_resources: Array[Types::ParticipatingResource]?
+    end
+
+    class JobLog
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_date_time: String,
+        ?event: String,
+        ?event_data: Types::JobLogEventData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_date_time: String?
+      attr_accessor event: String?
+      attr_accessor event_data: Types::JobLogEventData?
+    end
+
+    class JobLogEventData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?conversion_server_id: String,
+        ?target_instance_id: String,
+        ?raw_error: String,
+        ?conversion_properties: Types::ConversionProperties,
+        ?event_resource_data: Types::EventResourceData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor conversion_server_id: String?
+      attr_accessor target_instance_id: String?
+      attr_accessor raw_error: String?
+      attr_accessor conversion_properties: Types::ConversionProperties?
+      attr_accessor event_resource_data: Types::EventResourceData?
+    end
+
+    class LaunchAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_id: String,
+        ?action_code: String,
+        ?type: String,
+        ?name: String,
+        ?active: bool,
+        ?order: Integer,
+        ?action_version: String,
+        ?optional: bool,
+        ?parameters: Hash[String, Types::LaunchActionParameter],
+        ?description: String,
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_id: String?
+      attr_accessor action_code: String?
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor active: bool?
+      attr_accessor order: Integer?
+      attr_accessor action_version: String?
+      attr_accessor optional: bool?
+      attr_accessor parameters: Hash[String, Types::LaunchActionParameter]?
+      attr_accessor description: String?
+      attr_accessor category: String?
+    end
+
+    class LaunchActionParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor type: String?
+    end
+
+    class LaunchActionRun
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: Types::LaunchAction,
+        ?run_id: String,
+        ?status: String,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: Types::LaunchAction?
+      attr_accessor run_id: String?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+    end
+
+    class LaunchActionsRequestFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_ids: Array[String]?
+    end
+
+    class LaunchActionsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ssm_agent_discovery_datetime: String,
+        ?runs: Array[Types::LaunchActionRun],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ssm_agent_discovery_datetime: String?
+      attr_accessor runs: Array[Types::LaunchActionRun]?
+    end
+
+    class LaunchConfigurationTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configuration_template_id: String,
+        ?arn: String,
+        ?tags: Hash[String, String],
+        ?launch_disposition: String,
+        ?target_instance_type_right_sizing_method: String,
+        ?copy_private_ip: bool,
+        ?copy_tags: bool,
+        ?licensing: Types::Licensing,
+        ?export_bucket_arn: String,
+        ?post_launch_enabled: bool,
+        ?launch_into_source_instance: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configuration_template_id: String?
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor launch_disposition: String?
+      attr_accessor target_instance_type_right_sizing_method: String?
+      attr_accessor copy_private_ip: bool?
+      attr_accessor copy_tags: bool?
+      attr_accessor licensing: Types::Licensing?
+      attr_accessor export_bucket_arn: String?
+      attr_accessor post_launch_enabled: bool?
+      attr_accessor launch_into_source_instance: bool?
+    end
+
+    class LaunchIntoInstanceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_into_ec2_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_into_ec2_instance_id: String?
+    end
+
+    class Licensing
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?os_byol: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor os_byol: bool?
+    end
+
+    class LifeCycle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?added_to_service_date_time: String,
+        ?first_byte_date_time: String,
+        ?elapsed_replication_duration: String,
+        ?last_seen_by_service_date_time: String,
+        ?last_launch: Types::LifeCycleLastLaunch,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor added_to_service_date_time: String?
+      attr_accessor first_byte_date_time: String?
+      attr_accessor elapsed_replication_duration: String?
+      attr_accessor last_seen_by_service_date_time: String?
+      attr_accessor last_launch: Types::LifeCycleLastLaunch?
+    end
+
+    class LifeCycleLastLaunch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?initiated: Types::LifeCycleLastLaunchInitiated,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor initiated: Types::LifeCycleLastLaunchInitiated?
+      attr_accessor status: String?
+    end
+
+    class LifeCycleLastLaunchInitiated
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_call_date_time: String,
+        ?job_id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_call_date_time: String?
+      attr_accessor job_id: String?
+      attr_accessor type: String?
+    end
+
+    class ListExtensibleSourceServersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?staging_account_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor staging_account_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListExtensibleSourceServersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::StagingSourceServer],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::StagingSourceServer]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLaunchActionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?filters: Types::LaunchActionsRequestFilters,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor filters: Types::LaunchActionsRequestFilters?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListLaunchActionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::LaunchAction],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::LaunchAction]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStagingAccountsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListStagingAccountsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accounts: Array[Types::Account],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accounts: Array[Types::Account]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class NetworkInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mac_address: String,
+        ?ips: Array[String],
+        ?is_primary: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mac_address: String?
+      attr_accessor ips: Array[String]?
+      attr_accessor is_primary: bool?
+    end
+
+    class OS
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?full_string: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor full_string: String?
+    end
+
+    class PITPolicyRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_id: Integer,
+        ?units: String,
+        ?interval: Integer,
+        ?retention_duration: Integer,
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_id: Integer?
+      attr_accessor units: String?
+      attr_accessor interval: Integer?
+      attr_accessor retention_duration: Integer?
+      attr_accessor enabled: bool?
+    end
+
+    class ParticipatingResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?participating_resource_id: Types::ParticipatingResourceID,
+        ?launch_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor participating_resource_id: Types::ParticipatingResourceID?
+      attr_accessor launch_status: String?
+    end
+
+    class ParticipatingResourceID
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?source_network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_network_id: String?
+
+      class SourceNetworkID < ParticipatingResourceID
+      end
+      class Unknown < ParticipatingResourceID
+      end
+    end
+
+    class ParticipatingServer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?recovery_instance_id: String,
+        ?launch_status: String,
+        ?launch_actions_status: Types::LaunchActionsStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor recovery_instance_id: String?
+      attr_accessor launch_status: String?
+      attr_accessor launch_actions_status: Types::LaunchActionsStatus?
+    end
+
+    class ProductCode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_code_id: String,
+        ?product_code_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_code_id: String?
+      attr_accessor product_code_mode: String?
+    end
+
+    class PutLaunchActionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?action_code: String,
+        ?order: Integer,
+        ?action_id: String,
+        ?optional: bool,
+        ?active: bool,
+        ?name: String,
+        ?action_version: String,
+        ?category: String,
+        ?parameters: Hash[String, Types::LaunchActionParameter],
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor action_code: String?
+      attr_accessor order: Integer?
+      attr_accessor action_id: String?
+      attr_accessor optional: bool?
+      attr_accessor active: bool?
+      attr_accessor name: String?
+      attr_accessor action_version: String?
+      attr_accessor category: String?
+      attr_accessor parameters: Hash[String, Types::LaunchActionParameter]?
+      attr_accessor description: String?
+    end
+
+    class PutLaunchActionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?action_id: String,
+        ?action_code: String,
+        ?type: String,
+        ?name: String,
+        ?active: bool,
+        ?order: Integer,
+        ?action_version: String,
+        ?optional: bool,
+        ?parameters: Hash[String, Types::LaunchActionParameter],
+        ?description: String,
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor action_id: String?
+      attr_accessor action_code: String?
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor active: bool?
+      attr_accessor order: Integer?
+      attr_accessor action_version: String?
+      attr_accessor optional: bool?
+      attr_accessor parameters: Hash[String, Types::LaunchActionParameter]?
+      attr_accessor description: String?
+      attr_accessor category: String?
+    end
+
+    class RecoveryInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_instance_id: String,
+        ?ec2_instance_state: String,
+        ?job_id: String,
+        ?recovery_instance_id: String,
+        ?source_server_id: String,
+        ?arn: String,
+        ?tags: Hash[String, String],
+        ?failback: Types::RecoveryInstanceFailback,
+        ?data_replication_info: Types::RecoveryInstanceDataReplicationInfo,
+        ?recovery_instance_properties: Types::RecoveryInstanceProperties,
+        ?point_in_time_snapshot_date_time: String,
+        ?is_drill: bool,
+        ?origin_environment: String,
+        ?origin_availability_zone: String,
+        ?agent_version: String,
+        ?source_outpost_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_instance_id: String?
+      attr_accessor ec2_instance_state: String?
+      attr_accessor job_id: String?
+      attr_accessor recovery_instance_id: String?
+      attr_accessor source_server_id: String?
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor failback: Types::RecoveryInstanceFailback?
+      attr_accessor data_replication_info: Types::RecoveryInstanceDataReplicationInfo?
+      attr_accessor recovery_instance_properties: Types::RecoveryInstanceProperties?
+      attr_accessor point_in_time_snapshot_date_time: String?
+      attr_accessor is_drill: bool?
+      attr_accessor origin_environment: String?
+      attr_accessor origin_availability_zone: String?
+      attr_accessor agent_version: String?
+      attr_accessor source_outpost_arn: String?
+    end
+
+    class RecoveryInstanceDataReplicationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?raw_error: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor raw_error: String?
+    end
+
+    class RecoveryInstanceDataReplicationInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lag_duration: String,
+        ?eta_date_time: String,
+        ?replicated_disks: Array[Types::RecoveryInstanceDataReplicationInfoReplicatedDisk],
+        ?data_replication_state: String,
+        ?data_replication_initiation: Types::RecoveryInstanceDataReplicationInitiation,
+        ?data_replication_error: Types::RecoveryInstanceDataReplicationError,
+        ?staging_availability_zone: String,
+        ?staging_outpost_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lag_duration: String?
+      attr_accessor eta_date_time: String?
+      attr_accessor replicated_disks: Array[Types::RecoveryInstanceDataReplicationInfoReplicatedDisk]?
+      attr_accessor data_replication_state: String?
+      attr_accessor data_replication_initiation: Types::RecoveryInstanceDataReplicationInitiation?
+      attr_accessor data_replication_error: Types::RecoveryInstanceDataReplicationError?
+      attr_accessor staging_availability_zone: String?
+      attr_accessor staging_outpost_arn: String?
+    end
+
+    class RecoveryInstanceDataReplicationInfoReplicatedDisk
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_name: String,
+        ?total_storage_bytes: Integer,
+        ?replicated_storage_bytes: Integer,
+        ?rescanned_storage_bytes: Integer,
+        ?backlogged_storage_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_name: String?
+      attr_accessor total_storage_bytes: Integer?
+      attr_accessor replicated_storage_bytes: Integer?
+      attr_accessor rescanned_storage_bytes: Integer?
+      attr_accessor backlogged_storage_bytes: Integer?
+    end
+
+    class RecoveryInstanceDataReplicationInitiation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_date_time: String,
+        ?steps: Array[Types::RecoveryInstanceDataReplicationInitiationStep],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_date_time: String?
+      attr_accessor steps: Array[Types::RecoveryInstanceDataReplicationInitiationStep]?
+    end
+
+    class RecoveryInstanceDataReplicationInitiationStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor status: String?
+    end
+
+    class RecoveryInstanceDisk
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?internal_device_name: String,
+        ?bytes: Integer,
+        ?ebs_volume_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor internal_device_name: String?
+      attr_accessor bytes: Integer?
+      attr_accessor ebs_volume_id: String?
+    end
+
+    class RecoveryInstanceFailback
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failback_client_id: String,
+        ?failback_job_id: String,
+        ?failback_initiation_time: String,
+        ?state: String,
+        ?agent_last_seen_by_service_date_time: String,
+        ?failback_client_last_seen_by_service_date_time: String,
+        ?failback_to_original_server: bool,
+        ?first_byte_date_time: String,
+        ?elapsed_replication_duration: String,
+        ?failback_launch_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failback_client_id: String?
+      attr_accessor failback_job_id: String?
+      attr_accessor failback_initiation_time: String?
+      attr_accessor state: String?
+      attr_accessor agent_last_seen_by_service_date_time: String?
+      attr_accessor failback_client_last_seen_by_service_date_time: String?
+      attr_accessor failback_to_original_server: bool?
+      attr_accessor first_byte_date_time: String?
+      attr_accessor elapsed_replication_duration: String?
+      attr_accessor failback_launch_type: String?
+    end
+
+    class RecoveryInstanceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_updated_date_time: String,
+        ?identification_hints: Types::IdentificationHints,
+        ?network_interfaces: Array[Types::NetworkInterface],
+        ?disks: Array[Types::RecoveryInstanceDisk],
+        ?cpus: Array[Types::CPU],
+        ?ram_bytes: Integer,
+        ?os: Types::OS,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_updated_date_time: String?
+      attr_accessor identification_hints: Types::IdentificationHints?
+      attr_accessor network_interfaces: Array[Types::NetworkInterface]?
+      attr_accessor disks: Array[Types::RecoveryInstanceDisk]?
+      attr_accessor cpus: Array[Types::CPU]?
+      attr_accessor ram_bytes: Integer?
+      attr_accessor os: Types::OS?
+    end
+
+    class RecoveryLifeCycle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_call_date_time: Time,
+        ?job_id: String,
+        ?last_recovery_result: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_call_date_time: Time?
+      attr_accessor job_id: String?
+      attr_accessor last_recovery_result: String?
+    end
+
+    class RecoverySnapshot
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_id: String,
+        ?source_server_id: String,
+        ?expected_timestamp: String,
+        ?timestamp: String,
+        ?ebs_snapshots: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_id: String?
+      attr_accessor source_server_id: String?
+      attr_accessor expected_timestamp: String?
+      attr_accessor timestamp: String?
+      attr_accessor ebs_snapshots: Array[String]?
+    end
+
+    class ReplicationConfigurationReplicatedDisk
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_name: String,
+        ?is_boot_disk: bool,
+        ?staging_disk_type: String,
+        ?iops: Integer,
+        ?throughput: Integer,
+        ?optimized_staging_disk_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_name: String?
+      attr_accessor is_boot_disk: bool?
+      attr_accessor staging_disk_type: String?
+      attr_accessor iops: Integer?
+      attr_accessor throughput: Integer?
+      attr_accessor optimized_staging_disk_type: String?
+    end
+
+    class ReplicationConfigurationTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_configuration_template_id: String,
+        ?arn: String,
+        ?staging_area_subnet_id: String,
+        ?associate_default_security_group: bool,
+        ?replication_servers_security_groups_i_ds: Array[String],
+        ?replication_server_instance_type: String,
+        ?use_dedicated_replication_server: bool,
+        ?default_large_staging_disk_type: String,
+        ?ebs_encryption: String,
+        ?ebs_encryption_key_arn: String,
+        ?bandwidth_throttling: Integer,
+        ?data_plane_routing: String,
+        ?create_public_ip: bool,
+        ?staging_area_tags: Hash[String, String],
+        ?tags: Hash[String, String],
+        ?pit_policy: Array[Types::PITPolicyRule],
+        ?auto_replicate_new_disks: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_configuration_template_id: String?
+      attr_accessor arn: String?
+      attr_accessor staging_area_subnet_id: String?
+      attr_accessor associate_default_security_group: bool?
+      attr_accessor replication_servers_security_groups_i_ds: Array[String]?
+      attr_accessor replication_server_instance_type: String?
+      attr_accessor use_dedicated_replication_server: bool?
+      attr_accessor default_large_staging_disk_type: String?
+      attr_accessor ebs_encryption: String?
+      attr_accessor ebs_encryption_key_arn: String?
+      attr_accessor bandwidth_throttling: Integer?
+      attr_accessor data_plane_routing: String?
+      attr_accessor create_public_ip: bool?
+      attr_accessor staging_area_tags: Hash[String, String]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor pit_policy: Array[Types::PITPolicyRule]?
+      attr_accessor auto_replicate_new_disks: bool?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class RetryDataReplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+    end
+
+    class RetryDataReplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?arn: String,
+        ?tags: Hash[String, String],
+        ?recovery_instance_id: String,
+        ?last_launch_result: String,
+        ?data_replication_info: Types::DataReplicationInfo,
+        ?life_cycle: Types::LifeCycle,
+        ?source_properties: Types::SourceProperties,
+        ?staging_area: Types::StagingArea,
+        ?source_cloud_properties: Types::SourceCloudProperties,
+        ?replication_direction: String,
+        ?reversed_direction_source_server_arn: String,
+        ?source_network_id: String,
+        ?agent_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor recovery_instance_id: String?
+      attr_accessor last_launch_result: String?
+      attr_accessor data_replication_info: Types::DataReplicationInfo?
+      attr_accessor life_cycle: Types::LifeCycle?
+      attr_accessor source_properties: Types::SourceProperties?
+      attr_accessor staging_area: Types::StagingArea?
+      attr_accessor source_cloud_properties: Types::SourceCloudProperties?
+      attr_accessor replication_direction: String?
+      attr_accessor reversed_direction_source_server_arn: String?
+      attr_accessor source_network_id: String?
+      attr_accessor agent_version: String?
+    end
+
+    class ReverseReplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_instance_id: String?
+    end
+
+    class ReverseReplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reversed_direction_source_server_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reversed_direction_source_server_arn: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class SourceCloudProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?origin_account_id: String,
+        ?origin_region: String,
+        ?origin_availability_zone: String,
+        ?source_outpost_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor origin_account_id: String?
+      attr_accessor origin_region: String?
+      attr_accessor origin_availability_zone: String?
+      attr_accessor source_outpost_arn: String?
+    end
+
+    class SourceNetwork
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_network_id: String,
+        ?source_vpc_id: String,
+        ?arn: String,
+        ?tags: Hash[String, String],
+        ?replication_status: String,
+        ?replication_status_details: String,
+        ?cfn_stack_name: String,
+        ?source_region: String,
+        ?source_account_id: String,
+        ?last_recovery: Types::RecoveryLifeCycle,
+        ?launched_vpc_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_network_id: String?
+      attr_accessor source_vpc_id: String?
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor replication_status: String?
+      attr_accessor replication_status_details: String?
+      attr_accessor cfn_stack_name: String?
+      attr_accessor source_region: String?
+      attr_accessor source_account_id: String?
+      attr_accessor last_recovery: Types::RecoveryLifeCycle?
+      attr_accessor launched_vpc_id: String?
+    end
+
+    class SourceNetworkData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_network_id: String,
+        ?source_vpc: String,
+        ?target_vpc: String,
+        ?stack_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_network_id: String?
+      attr_accessor source_vpc: String?
+      attr_accessor target_vpc: String?
+      attr_accessor stack_name: String?
+    end
+
+    class SourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_updated_date_time: String,
+        ?recommended_instance_type: String,
+        ?identification_hints: Types::IdentificationHints,
+        ?network_interfaces: Array[Types::NetworkInterface],
+        ?disks: Array[Types::Disk],
+        ?cpus: Array[Types::CPU],
+        ?ram_bytes: Integer,
+        ?os: Types::OS,
+        ?supports_nitro_instances: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_updated_date_time: String?
+      attr_accessor recommended_instance_type: String?
+      attr_accessor identification_hints: Types::IdentificationHints?
+      attr_accessor network_interfaces: Array[Types::NetworkInterface]?
+      attr_accessor disks: Array[Types::Disk]?
+      attr_accessor cpus: Array[Types::CPU]?
+      attr_accessor ram_bytes: Integer?
+      attr_accessor os: Types::OS?
+      attr_accessor supports_nitro_instances: bool?
+    end
+
+    class SourceServer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?arn: String,
+        ?tags: Hash[String, String],
+        ?recovery_instance_id: String,
+        ?last_launch_result: String,
+        ?data_replication_info: Types::DataReplicationInfo,
+        ?life_cycle: Types::LifeCycle,
+        ?source_properties: Types::SourceProperties,
+        ?staging_area: Types::StagingArea,
+        ?source_cloud_properties: Types::SourceCloudProperties,
+        ?replication_direction: String,
+        ?reversed_direction_source_server_arn: String,
+        ?source_network_id: String,
+        ?agent_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor recovery_instance_id: String?
+      attr_accessor last_launch_result: String?
+      attr_accessor data_replication_info: Types::DataReplicationInfo?
+      attr_accessor life_cycle: Types::LifeCycle?
+      attr_accessor source_properties: Types::SourceProperties?
+      attr_accessor staging_area: Types::StagingArea?
+      attr_accessor source_cloud_properties: Types::SourceCloudProperties?
+      attr_accessor replication_direction: String?
+      attr_accessor reversed_direction_source_server_arn: String?
+      attr_accessor source_network_id: String?
+      attr_accessor agent_version: String?
+    end
+
+    class StagingArea
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?staging_account_id: String,
+        ?staging_source_server_arn: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor staging_account_id: String?
+      attr_accessor staging_source_server_arn: String?
+      attr_accessor error_message: String?
+    end
+
+    class StagingSourceServer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hostname: String,
+        ?arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hostname: String?
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartFailbackLaunchInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_instance_i_ds: Array[String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_instance_i_ds: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartFailbackLaunchOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: Types::Job,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: Types::Job?
+    end
+
+    class StartRecoveryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_servers: Array[Types::StartRecoveryRequestSourceServer],
+        ?is_drill: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_servers: Array[Types::StartRecoveryRequestSourceServer]?
+      attr_accessor is_drill: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartRecoveryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: Types::Job,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: Types::Job?
+    end
+
+    class StartRecoveryRequestSourceServer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?recovery_snapshot_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor recovery_snapshot_id: String?
+    end
+
+    class StartReplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+    end
+
+    class StartReplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server: Types::SourceServer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server: Types::SourceServer?
+    end
+
+    class StartSourceNetworkRecoveryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_networks: Array[Types::StartSourceNetworkRecoveryRequestNetworkEntry],
+        ?deploy_as_new: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_networks: Array[Types::StartSourceNetworkRecoveryRequestNetworkEntry]?
+      attr_accessor deploy_as_new: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class StartSourceNetworkRecoveryRequestNetworkEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_network_id: String,
+        ?cfn_stack_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_network_id: String?
+      attr_accessor cfn_stack_name: String?
+    end
+
+    class StartSourceNetworkRecoveryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: Types::Job,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: Types::Job?
+    end
+
+    class StartSourceNetworkReplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_network_id: String?
+    end
+
+    class StartSourceNetworkReplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_network: Types::SourceNetwork,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_network: Types::SourceNetwork?
+    end
+
+    class StopFailbackInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_instance_id: String?
+    end
+
+    class StopReplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+    end
+
+    class StopReplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server: Types::SourceServer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server: Types::SourceServer?
+    end
+
+    class StopSourceNetworkReplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_network_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_network_id: String?
+    end
+
+    class StopSourceNetworkReplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_network: Types::SourceNetwork,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_network: Types::SourceNetwork?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TerminateRecoveryInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_instance_i_ds: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_instance_i_ds: Array[String]?
+    end
+
+    class TerminateRecoveryInstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: Types::Job,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: Types::Job?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: String?
+    end
+
+    class UninitializedAccountException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateFailbackReplicationConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_instance_id: String,
+        ?name: String,
+        ?bandwidth_throttling: Integer,
+        ?use_private_ip: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_instance_id: String?
+      attr_accessor name: String?
+      attr_accessor bandwidth_throttling: Integer?
+      attr_accessor use_private_ip: bool?
+    end
+
+    class UpdateLaunchConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?name: String,
+        ?launch_disposition: String,
+        ?target_instance_type_right_sizing_method: String,
+        ?copy_private_ip: bool,
+        ?copy_tags: bool,
+        ?licensing: Types::Licensing,
+        ?post_launch_enabled: bool,
+        ?launch_into_instance_properties: Types::LaunchIntoInstanceProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor name: String?
+      attr_accessor launch_disposition: String?
+      attr_accessor target_instance_type_right_sizing_method: String?
+      attr_accessor copy_private_ip: bool?
+      attr_accessor copy_tags: bool?
+      attr_accessor licensing: Types::Licensing?
+      attr_accessor post_launch_enabled: bool?
+      attr_accessor launch_into_instance_properties: Types::LaunchIntoInstanceProperties?
+    end
+
+    class UpdateLaunchConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?name: String,
+        ?ec2_launch_template_id: String,
+        ?launch_disposition: String,
+        ?target_instance_type_right_sizing_method: String,
+        ?copy_private_ip: bool,
+        ?copy_tags: bool,
+        ?licensing: Types::Licensing,
+        ?post_launch_enabled: bool,
+        ?launch_into_instance_properties: Types::LaunchIntoInstanceProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor name: String?
+      attr_accessor ec2_launch_template_id: String?
+      attr_accessor launch_disposition: String?
+      attr_accessor target_instance_type_right_sizing_method: String?
+      attr_accessor copy_private_ip: bool?
+      attr_accessor copy_tags: bool?
+      attr_accessor licensing: Types::Licensing?
+      attr_accessor post_launch_enabled: bool?
+      attr_accessor launch_into_instance_properties: Types::LaunchIntoInstanceProperties?
+    end
+
+    class UpdateLaunchConfigurationTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configuration_template_id: String,
+        ?launch_disposition: String,
+        ?target_instance_type_right_sizing_method: String,
+        ?copy_private_ip: bool,
+        ?copy_tags: bool,
+        ?licensing: Types::Licensing,
+        ?export_bucket_arn: String,
+        ?post_launch_enabled: bool,
+        ?launch_into_source_instance: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configuration_template_id: String?
+      attr_accessor launch_disposition: String?
+      attr_accessor target_instance_type_right_sizing_method: String?
+      attr_accessor copy_private_ip: bool?
+      attr_accessor copy_tags: bool?
+      attr_accessor licensing: Types::Licensing?
+      attr_accessor export_bucket_arn: String?
+      attr_accessor post_launch_enabled: bool?
+      attr_accessor launch_into_source_instance: bool?
+    end
+
+    class UpdateLaunchConfigurationTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?launch_configuration_template: Types::LaunchConfigurationTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor launch_configuration_template: Types::LaunchConfigurationTemplate?
+    end
+
+    class UpdateReplicationConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?name: String,
+        ?staging_area_subnet_id: String,
+        ?associate_default_security_group: bool,
+        ?replication_servers_security_groups_i_ds: Array[String],
+        ?replication_server_instance_type: String,
+        ?use_dedicated_replication_server: bool,
+        ?default_large_staging_disk_type: String,
+        ?replicated_disks: Array[Types::ReplicationConfigurationReplicatedDisk],
+        ?ebs_encryption: String,
+        ?ebs_encryption_key_arn: String,
+        ?bandwidth_throttling: Integer,
+        ?data_plane_routing: String,
+        ?create_public_ip: bool,
+        ?staging_area_tags: Hash[String, String],
+        ?pit_policy: Array[Types::PITPolicyRule],
+        ?auto_replicate_new_disks: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor name: String?
+      attr_accessor staging_area_subnet_id: String?
+      attr_accessor associate_default_security_group: bool?
+      attr_accessor replication_servers_security_groups_i_ds: Array[String]?
+      attr_accessor replication_server_instance_type: String?
+      attr_accessor use_dedicated_replication_server: bool?
+      attr_accessor default_large_staging_disk_type: String?
+      attr_accessor replicated_disks: Array[Types::ReplicationConfigurationReplicatedDisk]?
+      attr_accessor ebs_encryption: String?
+      attr_accessor ebs_encryption_key_arn: String?
+      attr_accessor bandwidth_throttling: Integer?
+      attr_accessor data_plane_routing: String?
+      attr_accessor create_public_ip: bool?
+      attr_accessor staging_area_tags: Hash[String, String]?
+      attr_accessor pit_policy: Array[Types::PITPolicyRule]?
+      attr_accessor auto_replicate_new_disks: bool?
+    end
+
+    class UpdateReplicationConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_server_id: String,
+        ?name: String,
+        ?staging_area_subnet_id: String,
+        ?associate_default_security_group: bool,
+        ?replication_servers_security_groups_i_ds: Array[String],
+        ?replication_server_instance_type: String,
+        ?use_dedicated_replication_server: bool,
+        ?default_large_staging_disk_type: String,
+        ?replicated_disks: Array[Types::ReplicationConfigurationReplicatedDisk],
+        ?ebs_encryption: String,
+        ?ebs_encryption_key_arn: String,
+        ?bandwidth_throttling: Integer,
+        ?data_plane_routing: String,
+        ?create_public_ip: bool,
+        ?staging_area_tags: Hash[String, String],
+        ?pit_policy: Array[Types::PITPolicyRule],
+        ?auto_replicate_new_disks: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_server_id: String?
+      attr_accessor name: String?
+      attr_accessor staging_area_subnet_id: String?
+      attr_accessor associate_default_security_group: bool?
+      attr_accessor replication_servers_security_groups_i_ds: Array[String]?
+      attr_accessor replication_server_instance_type: String?
+      attr_accessor use_dedicated_replication_server: bool?
+      attr_accessor default_large_staging_disk_type: String?
+      attr_accessor replicated_disks: Array[Types::ReplicationConfigurationReplicatedDisk]?
+      attr_accessor ebs_encryption: String?
+      attr_accessor ebs_encryption_key_arn: String?
+      attr_accessor bandwidth_throttling: Integer?
+      attr_accessor data_plane_routing: String?
+      attr_accessor create_public_ip: bool?
+      attr_accessor staging_area_tags: Hash[String, String]?
+      attr_accessor pit_policy: Array[Types::PITPolicyRule]?
+      attr_accessor auto_replicate_new_disks: bool?
+    end
+
+    class UpdateReplicationConfigurationTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_configuration_template_id: String,
+        ?arn: String,
+        ?staging_area_subnet_id: String,
+        ?associate_default_security_group: bool,
+        ?replication_servers_security_groups_i_ds: Array[String],
+        ?replication_server_instance_type: String,
+        ?use_dedicated_replication_server: bool,
+        ?default_large_staging_disk_type: String,
+        ?ebs_encryption: String,
+        ?ebs_encryption_key_arn: String,
+        ?bandwidth_throttling: Integer,
+        ?data_plane_routing: String,
+        ?create_public_ip: bool,
+        ?staging_area_tags: Hash[String, String],
+        ?pit_policy: Array[Types::PITPolicyRule],
+        ?auto_replicate_new_disks: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_configuration_template_id: String?
+      attr_accessor arn: String?
+      attr_accessor staging_area_subnet_id: String?
+      attr_accessor associate_default_security_group: bool?
+      attr_accessor replication_servers_security_groups_i_ds: Array[String]?
+      attr_accessor replication_server_instance_type: String?
+      attr_accessor use_dedicated_replication_server: bool?
+      attr_accessor default_large_staging_disk_type: String?
+      attr_accessor ebs_encryption: String?
+      attr_accessor ebs_encryption_key_arn: String?
+      attr_accessor bandwidth_throttling: Integer?
+      attr_accessor data_plane_routing: String?
+      attr_accessor create_public_ip: bool?
+      attr_accessor staging_area_tags: Hash[String, String]?
+      attr_accessor pit_policy: Array[Types::PITPolicyRule]?
+      attr_accessor auto_replicate_new_disks: bool?
+    end
+
+    class UpdateReplicationConfigurationTemplateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_configuration_template_id: String,
+        ?arn: String,
+        ?staging_area_subnet_id: String,
+        ?associate_default_security_group: bool,
+        ?replication_servers_security_groups_i_ds: Array[String],
+        ?replication_server_instance_type: String,
+        ?use_dedicated_replication_server: bool,
+        ?default_large_staging_disk_type: String,
+        ?ebs_encryption: String,
+        ?ebs_encryption_key_arn: String,
+        ?bandwidth_throttling: Integer,
+        ?data_plane_routing: String,
+        ?create_public_ip: bool,
+        ?staging_area_tags: Hash[String, String],
+        ?tags: Hash[String, String],
+        ?pit_policy: Array[Types::PITPolicyRule],
+        ?auto_replicate_new_disks: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_configuration_template_id: String?
+      attr_accessor arn: String?
+      attr_accessor staging_area_subnet_id: String?
+      attr_accessor associate_default_security_group: bool?
+      attr_accessor replication_servers_security_groups_i_ds: Array[String]?
+      attr_accessor replication_server_instance_type: String?
+      attr_accessor use_dedicated_replication_server: bool?
+      attr_accessor default_large_staging_disk_type: String?
+      attr_accessor ebs_encryption: String?
+      attr_accessor ebs_encryption_key_arn: String?
+      attr_accessor bandwidth_throttling: Integer?
+      attr_accessor data_plane_routing: String?
+      attr_accessor create_public_ip: bool?
+      attr_accessor staging_area_tags: Hash[String, String]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor pit_policy: Array[Types::PITPolicyRule]?
+      attr_accessor auto_replicate_new_disks: bool?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+  end
+end

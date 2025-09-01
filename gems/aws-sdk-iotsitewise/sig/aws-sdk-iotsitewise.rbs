@@ -1,0 +1,5 @@
+  module Aws
+    module IoTSiteWise
+      VERSION: String
+    end
+  end

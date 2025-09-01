@@ -1,0 +1,903 @@
+module Aws::Braket
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ActionMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_type: String,
+        ?program_count: Integer,
+        ?executable_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_type: String?
+      attr_accessor program_count: Integer?
+      attr_accessor executable_count: Integer?
+    end
+
+    class AlgorithmSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?script_mode_config: Types::ScriptModeConfig,
+        ?container_image: Types::ContainerImage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor script_mode_config: Types::ScriptModeConfig?
+      attr_accessor container_image: Types::ContainerImage?
+    end
+
+    class Association
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor type: String?
+    end
+
+    class CancelJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+    end
+
+    class CancelJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?cancellation_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor cancellation_status: String?
+    end
+
+    class CancelQuantumTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quantum_task_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quantum_task_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class CancelQuantumTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quantum_task_arn: String,
+        ?cancellation_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quantum_task_arn: String?
+      attr_accessor cancellation_status: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ContainerImage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uri: String?
+    end
+
+    class CreateJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?algorithm_specification: Types::AlgorithmSpecification,
+        ?input_data_config: Array[Types::InputFileConfig],
+        ?output_data_config: Types::JobOutputDataConfig,
+        ?checkpoint_config: Types::JobCheckpointConfig,
+        ?job_name: String,
+        ?role_arn: String,
+        ?stopping_condition: Types::JobStoppingCondition,
+        ?instance_config: Types::InstanceConfig,
+        ?hyper_parameters: Hash[String, String],
+        ?device_config: Types::DeviceConfig,
+        ?tags: Hash[String, String],
+        ?associations: Array[Types::Association],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor algorithm_specification: Types::AlgorithmSpecification?
+      attr_accessor input_data_config: Array[Types::InputFileConfig]?
+      attr_accessor output_data_config: Types::JobOutputDataConfig?
+      attr_accessor checkpoint_config: Types::JobCheckpointConfig?
+      attr_accessor job_name: String?
+      attr_accessor role_arn: String?
+      attr_accessor stopping_condition: Types::JobStoppingCondition?
+      attr_accessor instance_config: Types::InstanceConfig?
+      attr_accessor hyper_parameters: Hash[String, String]?
+      attr_accessor device_config: Types::DeviceConfig?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor associations: Array[Types::Association]?
+    end
+
+    class CreateJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+    end
+
+    class CreateQuantumTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?device_arn: String,
+        ?device_parameters: String,
+        ?shots: Integer,
+        ?output_s3_bucket: String,
+        ?output_s3_key_prefix: String,
+        ?action: String,
+        ?tags: Hash[String, String],
+        ?job_token: String,
+        ?associations: Array[Types::Association],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor device_arn: String?
+      attr_accessor device_parameters: String?
+      attr_accessor shots: Integer?
+      attr_accessor output_s3_bucket: String?
+      attr_accessor output_s3_key_prefix: String?
+      attr_accessor action: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor job_token: String?
+      attr_accessor associations: Array[Types::Association]?
+    end
+
+    class CreateQuantumTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quantum_task_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quantum_task_arn: String?
+    end
+
+    class DataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_data_source: Types::S3DataSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_data_source: Types::S3DataSource?
+    end
+
+    class DeviceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device: String?
+    end
+
+    class DeviceOfflineException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeviceQueueInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue: String,
+        ?queue_size: String,
+        ?queue_priority: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue: String?
+      attr_accessor queue_size: String?
+      attr_accessor queue_priority: String?
+    end
+
+    class DeviceRetiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeviceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_arn: String,
+        ?device_name: String,
+        ?provider_name: String,
+        ?device_type: String,
+        ?device_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_arn: String?
+      attr_accessor device_name: String?
+      attr_accessor provider_name: String?
+      attr_accessor device_type: String?
+      attr_accessor device_status: String?
+    end
+
+    class GetDeviceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_arn: String?
+    end
+
+    class GetDeviceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_arn: String,
+        ?device_name: String,
+        ?provider_name: String,
+        ?device_type: String,
+        ?device_status: String,
+        ?device_capabilities: String,
+        ?device_queue_info: Array[Types::DeviceQueueInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_arn: String?
+      attr_accessor device_name: String?
+      attr_accessor provider_name: String?
+      attr_accessor device_type: String?
+      attr_accessor device_status: String?
+      attr_accessor device_capabilities: String?
+      attr_accessor device_queue_info: Array[Types::DeviceQueueInfo]?
+    end
+
+    class GetJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_arn: String,
+        ?additional_attribute_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_arn: String?
+      attr_accessor additional_attribute_names: Array[String]?
+    end
+
+    class GetJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?job_arn: String,
+        ?role_arn: String,
+        ?failure_reason: String,
+        ?job_name: String,
+        ?hyper_parameters: Hash[String, String],
+        ?input_data_config: Array[Types::InputFileConfig],
+        ?output_data_config: Types::JobOutputDataConfig,
+        ?stopping_condition: Types::JobStoppingCondition,
+        ?checkpoint_config: Types::JobCheckpointConfig,
+        ?algorithm_specification: Types::AlgorithmSpecification,
+        ?instance_config: Types::InstanceConfig,
+        ?created_at: Time,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?billable_duration: Integer,
+        ?device_config: Types::DeviceConfig,
+        ?events: Array[Types::JobEventDetails],
+        ?tags: Hash[String, String],
+        ?queue_info: Types::HybridJobQueueInfo,
+        ?associations: Array[Types::Association],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor job_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor failure_reason: String?
+      attr_accessor job_name: String?
+      attr_accessor hyper_parameters: Hash[String, String]?
+      attr_accessor input_data_config: Array[Types::InputFileConfig]?
+      attr_accessor output_data_config: Types::JobOutputDataConfig?
+      attr_accessor stopping_condition: Types::JobStoppingCondition?
+      attr_accessor checkpoint_config: Types::JobCheckpointConfig?
+      attr_accessor algorithm_specification: Types::AlgorithmSpecification?
+      attr_accessor instance_config: Types::InstanceConfig?
+      attr_accessor created_at: Time?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor billable_duration: Integer?
+      attr_accessor device_config: Types::DeviceConfig?
+      attr_accessor events: Array[Types::JobEventDetails]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor queue_info: Types::HybridJobQueueInfo?
+      attr_accessor associations: Array[Types::Association]?
+    end
+
+    class GetQuantumTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quantum_task_arn: String,
+        ?additional_attribute_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quantum_task_arn: String?
+      attr_accessor additional_attribute_names: Array[String]?
+    end
+
+    class GetQuantumTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quantum_task_arn: String,
+        ?status: String,
+        ?failure_reason: String,
+        ?device_arn: String,
+        ?device_parameters: String,
+        ?shots: Integer,
+        ?output_s3_bucket: String,
+        ?output_s3_directory: String,
+        ?created_at: Time,
+        ?ended_at: Time,
+        ?tags: Hash[String, String],
+        ?job_arn: String,
+        ?queue_info: Types::QuantumTaskQueueInfo,
+        ?associations: Array[Types::Association],
+        ?num_successful_shots: Integer,
+        ?action_metadata: Types::ActionMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quantum_task_arn: String?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor device_arn: String?
+      attr_accessor device_parameters: String?
+      attr_accessor shots: Integer?
+      attr_accessor output_s3_bucket: String?
+      attr_accessor output_s3_directory: String?
+      attr_accessor created_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor job_arn: String?
+      attr_accessor queue_info: Types::QuantumTaskQueueInfo?
+      attr_accessor associations: Array[Types::Association]?
+      attr_accessor num_successful_shots: Integer?
+      attr_accessor action_metadata: Types::ActionMetadata?
+    end
+
+    class HybridJobQueueInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue: String,
+        ?position: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue: String?
+      attr_accessor position: String?
+      attr_accessor message: String?
+    end
+
+    class InputFileConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+        ?content_type: String,
+        ?data_source: Types::DataSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+      attr_accessor content_type: String?
+      attr_accessor data_source: Types::DataSource?
+    end
+
+    class InstanceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_type: String,
+        ?volume_size_in_gb: Integer,
+        ?instance_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_type: String?
+      attr_accessor volume_size_in_gb: Integer?
+      attr_accessor instance_count: Integer?
+    end
+
+    class InternalServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class JobCheckpointConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?local_path: String,
+        ?s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor local_path: String?
+      attr_accessor s3_uri: String?
+    end
+
+    class JobEventDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_type: String,
+        ?time_of_event: Time,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_type: String?
+      attr_accessor time_of_event: Time?
+      attr_accessor message: String?
+    end
+
+    class JobOutputDataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_id: String,
+        ?s3_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_id: String?
+      attr_accessor s3_path: String?
+    end
+
+    class JobStoppingCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_runtime_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_runtime_in_seconds: Integer?
+    end
+
+    class JobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?job_arn: String,
+        ?job_name: String,
+        ?device: String,
+        ?created_at: Time,
+        ?started_at: Time,
+        ?ended_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor job_arn: String?
+      attr_accessor job_name: String?
+      attr_accessor device: String?
+      attr_accessor created_at: Time?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ProgramSetValidationFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?program_index: Integer,
+        ?inputs_index: Integer,
+        ?errors: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor program_index: Integer?
+      attr_accessor inputs_index: Integer?
+      attr_accessor errors: Array[String]?
+    end
+
+    class QuantumTaskQueueInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue: String,
+        ?position: String,
+        ?queue_priority: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue: String?
+      attr_accessor position: String?
+      attr_accessor queue_priority: String?
+      attr_accessor message: String?
+    end
+
+    class QuantumTaskSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quantum_task_arn: String,
+        ?status: String,
+        ?device_arn: String,
+        ?shots: Integer,
+        ?output_s3_bucket: String,
+        ?output_s3_directory: String,
+        ?created_at: Time,
+        ?ended_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quantum_task_arn: String?
+      attr_accessor status: String?
+      attr_accessor device_arn: String?
+      attr_accessor shots: Integer?
+      attr_accessor output_s3_bucket: String?
+      attr_accessor output_s3_directory: String?
+      attr_accessor created_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class S3DataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+    end
+
+    class ScriptModeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_point: String,
+        ?s3_uri: String,
+        ?compression_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_point: String?
+      attr_accessor s3_uri: String?
+      attr_accessor compression_type: String?
+    end
+
+    class SearchDevicesFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class SearchDevicesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::SearchDevicesFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::SearchDevicesFilter]?
+    end
+
+    class SearchDevicesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?devices: Array[Types::DeviceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor devices: Array[Types::DeviceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class SearchJobsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor operator: String?
+    end
+
+    class SearchJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::SearchJobsFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::SearchJobsFilter]?
+    end
+
+    class SearchJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::JobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::JobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class SearchQuantumTasksFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor operator: String?
+    end
+
+    class SearchQuantumTasksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::SearchQuantumTasksFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::SearchQuantumTasksFilter]?
+    end
+
+    class SearchQuantumTasksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?quantum_tasks: Array[Types::QuantumTaskSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor quantum_tasks: Array[Types::QuantumTaskSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?program_set_validation_failures: Array[Types::ProgramSetValidationFailure],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor program_set_validation_failures: Array[Types::ProgramSetValidationFailure]?
+    end
+  end
+end

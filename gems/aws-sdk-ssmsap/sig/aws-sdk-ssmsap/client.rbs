@@ -1,0 +1,309 @@
+module Aws::SsmSap
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SsmSap::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _DeleteResourcePermissionResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePermissionOperationOutput]
+      def policy: () -> String?
+    end
+    def delete_resource_permission: (
+      ?action_type: String,
+      ?source_resource_arn: String,
+      ?resource_arn: String
+    ) -> _DeleteResourcePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePermissionResponse
+
+    interface _DeregisterApplicationResponse
+      include Smithy::Client::_Response[Types::DeregisterApplicationOperationOutput]
+    end
+    def deregister_application: (
+      ?application_id: String
+    ) -> _DeregisterApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterApplicationResponse
+
+    interface _GetApplicationResponse
+      include Smithy::Client::_Response[Types::GetApplicationOperationOutput]
+      def application: () -> Types::Application?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_application: (
+      ?application_id: String,
+      ?application_arn: String,
+      ?app_registry_arn: String
+    ) -> _GetApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApplicationResponse
+
+    interface _GetComponentResponse
+      include Smithy::Client::_Response[Types::GetComponentOperationOutput]
+      def component: () -> Types::Component?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_component: (
+      ?application_id: String,
+      ?component_id: String
+    ) -> _GetComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetComponentResponse
+
+    interface _GetDatabaseResponse
+      include Smithy::Client::_Response[Types::GetDatabaseOperationOutput]
+      def database: () -> Types::Database?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_database: (
+      ?application_id: String,
+      ?component_id: String,
+      ?database_id: String,
+      ?database_arn: String
+    ) -> _GetDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDatabaseResponse
+
+    interface _GetOperationResponse
+      include Smithy::Client::_Response[Types::GetOperationOperationOutput]
+      def operation: () -> Types::Operation?
+    end
+    def get_operation: (
+      ?operation_id: String
+    ) -> _GetOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOperationResponse
+
+    interface _GetResourcePermissionResponse
+      include Smithy::Client::_Response[Types::GetResourcePermissionOperationOutput]
+      def policy: () -> String?
+    end
+    def get_resource_permission: (
+      ?action_type: String,
+      ?resource_arn: String
+    ) -> _GetResourcePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePermissionResponse
+
+    interface _ListApplicationsResponse
+      include Smithy::Client::_Response[Types::ListApplicationsOperationOutput]
+      def applications: () -> Array[Types::ApplicationSummary]?
+      def next_token: () -> String?
+    end
+    def list_applications: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          value: String,
+          operator: String
+        }
+      ]
+    ) -> _ListApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationsResponse
+
+    interface _ListComponentsResponse
+      include Smithy::Client::_Response[Types::ListComponentsOperationOutput]
+      def components: () -> Array[Types::ComponentSummary]?
+      def next_token: () -> String?
+    end
+    def list_components: (
+      ?application_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListComponentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComponentsResponse
+
+    interface _ListDatabasesResponse
+      include Smithy::Client::_Response[Types::ListDatabasesOperationOutput]
+      def databases: () -> Array[Types::DatabaseSummary]?
+      def next_token: () -> String?
+    end
+    def list_databases: (
+      ?application_id: String,
+      ?component_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDatabasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatabasesResponse
+
+    interface _ListOperationEventsResponse
+      include Smithy::Client::_Response[Types::ListOperationEventsOutput]
+      def operation_events: () -> Array[Types::OperationEvent]?
+      def next_token: () -> String?
+    end
+    def list_operation_events: (
+      ?operation_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          value: String,
+          operator: String
+        }
+      ]
+    ) -> _ListOperationEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOperationEventsResponse
+
+    interface _ListOperationsResponse
+      include Smithy::Client::_Response[Types::ListOperationsOperationOutput]
+      def operations: () -> Array[Types::Operation]?
+      def next_token: () -> String?
+    end
+    def list_operations: (
+      ?application_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          value: String,
+          operator: String
+        }
+      ]
+    ) -> _ListOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOperationsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutResourcePermissionResponse
+      include Smithy::Client::_Response[Types::PutResourcePermissionOperationOutput]
+      def policy: () -> String?
+    end
+    def put_resource_permission: (
+      ?action_type: String,
+      ?source_resource_arn: String,
+      ?resource_arn: String
+    ) -> _PutResourcePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePermissionResponse
+
+    interface _RegisterApplicationResponse
+      include Smithy::Client::_Response[Types::RegisterApplicationOperationOutput]
+      def application: () -> Types::Application?
+      def operation_id: () -> String?
+    end
+    def register_application: (
+      ?application_id: String,
+      ?application_type: String,
+      ?instances: Array[String],
+      ?sap_instance_number: String,
+      ?sid: String,
+      ?tags: Hash[String, String],
+      ?credentials: Array[
+        {
+          database_name: String,
+          credential_type: String,
+          secret_id: String
+        }
+      ],
+      ?database_arn: String,
+      ?components_info: Array[
+        {
+          component_type: String,
+          sid: String,
+          ec2_instance_id: String
+        }
+      ]
+    ) -> _RegisterApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterApplicationResponse
+
+    interface _StartApplicationResponse
+      include Smithy::Client::_Response[Types::StartApplicationOutput]
+      def operation_id: () -> String?
+    end
+    def start_application: (
+      ?application_id: String
+    ) -> _StartApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartApplicationResponse
+
+    interface _StartApplicationRefreshResponse
+      include Smithy::Client::_Response[Types::StartApplicationRefreshOutput]
+      def operation_id: () -> String?
+    end
+    def start_application_refresh: (
+      ?application_id: String
+    ) -> _StartApplicationRefreshResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartApplicationRefreshResponse
+
+    interface _StopApplicationResponse
+      include Smithy::Client::_Response[Types::StopApplicationOutput]
+      def operation_id: () -> String?
+    end
+    def stop_application: (
+      ?application_id: String,
+      ?stop_connected_entity: String,
+      ?include_ec2_instance_shutdown: bool
+    ) -> _StopApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopApplicationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateApplicationSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateApplicationSettingsOperationOutput]
+      def message: () -> String?
+      def operation_ids: () -> Array[String]?
+    end
+    def update_application_settings: (
+      ?application_id: String,
+      ?credentials_to_add_or_update: Array[
+        {
+          database_name: String,
+          credential_type: String,
+          secret_id: String
+        }
+      ],
+      ?credentials_to_remove: Array[
+        {
+          database_name: String,
+          credential_type: String,
+          secret_id: String
+        }
+      ],
+      ?backint: {
+        backint_mode: String,
+        ensure_no_backup_in_process: bool
+      },
+      ?database_arn: String
+    ) -> _UpdateApplicationSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationSettingsResponse
+  end
+end

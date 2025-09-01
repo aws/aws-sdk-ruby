@@ -1,0 +1,390 @@
+module Aws::Synthetics
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Synthetics::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateResourceResponse
+      include Smithy::Client::_Response[Types::AssociateResourceResponse]
+    end
+    def associate_resource: (
+      ?group_identifier: String,
+      ?resource_arn: String
+    ) -> _AssociateResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateResourceResponse
+
+    interface _CreateCanaryResponse
+      include Smithy::Client::_Response[Types::CreateCanaryResponse]
+      def canary: () -> Types::Canary?
+    end
+    def create_canary: (
+      ?name: String,
+      ?code: {
+        s3_bucket: String,
+        s3_key: untyped,
+        s3_version: untyped,
+        zip_file: String,
+        handler: String,
+        dependencies: Array[
+          {
+            type: String,
+            reference: untyped
+          }
+        ]
+      },
+      ?artifact_s3_location: String,
+      ?execution_role_arn: String,
+      ?schedule: {
+        expression: String,
+        duration_in_seconds: Integer,
+        retry_config: {
+          max_retries: Integer
+        }
+      },
+      ?run_config: {
+        timeout_in_seconds: Integer,
+        memory_in_mb: Integer,
+        active_tracing: bool,
+        environment_variables: Hash[String, String],
+        ephemeral_storage: Integer
+      },
+      ?success_retention_period_in_days: Integer,
+      ?failure_retention_period_in_days: Integer,
+      ?runtime_version: String,
+      ?vpc_config: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String],
+        ipv6_allowed_for_dual_stack: bool
+      },
+      ?resources_to_replicate_tags: Array[String],
+      ?provisioned_resource_cleanup: String,
+      ?tags: Hash[String, String],
+      ?artifact_config: {
+        s3_encryption: {
+          encryption_mode: String,
+          kms_key_arn: String
+        }
+      }
+    ) -> _CreateCanaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCanaryResponse
+
+    interface _CreateGroupResponse
+      include Smithy::Client::_Response[Types::CreateGroupResponse]
+      def group: () -> Types::Group?
+    end
+    def create_group: (
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGroupResponse
+
+    interface _DeleteCanaryResponse
+      include Smithy::Client::_Response[Types::DeleteCanaryResponse]
+    end
+    def delete_canary: (
+      ?name: String,
+      ?delete_lambda: bool
+    ) -> _DeleteCanaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCanaryResponse
+
+    interface _DeleteGroupResponse
+      include Smithy::Client::_Response[Types::DeleteGroupResponse]
+    end
+    def delete_group: (
+      ?group_identifier: String
+    ) -> _DeleteGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGroupResponse
+
+    interface _DescribeCanariesResponse
+      include Smithy::Client::_Response[Types::DescribeCanariesResponse]
+      def canaries: () -> Array[Types::Canary]?
+      def next_token: () -> String?
+    end
+    def describe_canaries: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?names: Array[String]
+    ) -> _DescribeCanariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCanariesResponse
+
+    interface _DescribeCanariesLastRunResponse
+      include Smithy::Client::_Response[Types::DescribeCanariesLastRunResponse]
+      def canaries_last_run: () -> Array[Types::CanaryLastRun]?
+      def next_token: () -> String?
+    end
+    def describe_canaries_last_run: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?names: Array[String]
+    ) -> _DescribeCanariesLastRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCanariesLastRunResponse
+
+    interface _DescribeRuntimeVersionsResponse
+      include Smithy::Client::_Response[Types::DescribeRuntimeVersionsResponse]
+      def runtime_versions: () -> Array[Types::RuntimeVersion]?
+      def next_token: () -> String?
+    end
+    def describe_runtime_versions: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeRuntimeVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRuntimeVersionsResponse
+
+    interface _DisassociateResourceResponse
+      include Smithy::Client::_Response[Types::DisassociateResourceResponse]
+    end
+    def disassociate_resource: (
+      ?group_identifier: String,
+      ?resource_arn: String
+    ) -> _DisassociateResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateResourceResponse
+
+    interface _GetCanaryResponse
+      include Smithy::Client::_Response[Types::GetCanaryResponse]
+      def canary: () -> Types::Canary?
+    end
+    def get_canary: (
+      ?name: String,
+      ?dry_run_id: String
+    ) -> _GetCanaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCanaryResponse
+
+    interface _GetCanaryRunsResponse
+      include Smithy::Client::_Response[Types::GetCanaryRunsResponse]
+      def canary_runs: () -> Array[Types::CanaryRun]?
+      def next_token: () -> String?
+    end
+    def get_canary_runs: (
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?dry_run_id: String,
+      ?run_type: String
+    ) -> _GetCanaryRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCanaryRunsResponse
+
+    interface _GetGroupResponse
+      include Smithy::Client::_Response[Types::GetGroupResponse]
+      def group: () -> Types::Group?
+    end
+    def get_group: (
+      ?group_identifier: String
+    ) -> _GetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGroupResponse
+
+    interface _ListAssociatedGroupsResponse
+      include Smithy::Client::_Response[Types::ListAssociatedGroupsResponse]
+      def groups: () -> Array[Types::GroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_associated_groups: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?resource_arn: String
+    ) -> _ListAssociatedGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssociatedGroupsResponse
+
+    interface _ListGroupResourcesResponse
+      include Smithy::Client::_Response[Types::ListGroupResourcesResponse]
+      def resources: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_group_resources: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?group_identifier: String
+    ) -> _ListGroupResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupResourcesResponse
+
+    interface _ListGroupsResponse
+      include Smithy::Client::_Response[Types::ListGroupsResponse]
+      def groups: () -> Array[Types::GroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_groups: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StartCanaryResponse
+      include Smithy::Client::_Response[Types::StartCanaryResponse]
+    end
+    def start_canary: (
+      ?name: String
+    ) -> _StartCanaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCanaryResponse
+
+    interface _StartCanaryDryRunResponse
+      include Smithy::Client::_Response[Types::StartCanaryDryRunResponse]
+      def dry_run_config: () -> Types::DryRunConfigOutput?
+    end
+    def start_canary_dry_run: (
+      ?name: String,
+      ?code: {
+        s3_bucket: String,
+        s3_key: untyped,
+        s3_version: untyped,
+        zip_file: String,
+        handler: String,
+        dependencies: Array[
+          {
+            type: String,
+            reference: untyped
+          }
+        ]
+      },
+      ?runtime_version: String,
+      ?run_config: {
+        timeout_in_seconds: Integer,
+        memory_in_mb: Integer,
+        active_tracing: bool,
+        environment_variables: Hash[String, String],
+        ephemeral_storage: Integer
+      },
+      ?vpc_config: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String],
+        ipv6_allowed_for_dual_stack: bool
+      },
+      ?execution_role_arn: String,
+      ?success_retention_period_in_days: Integer,
+      ?failure_retention_period_in_days: Integer,
+      ?visual_reference: {
+        base_screenshots: Array[
+          {
+            screenshot_name: String,
+            ignore_coordinates: Array[String]
+          }
+        ],
+        base_canary_run_id: untyped
+      },
+      ?artifact_s3_location: String,
+      ?artifact_config: {
+        s3_encryption: {
+          encryption_mode: String,
+          kms_key_arn: String
+        }
+      },
+      ?provisioned_resource_cleanup: String
+    ) -> _StartCanaryDryRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCanaryDryRunResponse
+
+    interface _StopCanaryResponse
+      include Smithy::Client::_Response[Types::StopCanaryResponse]
+    end
+    def stop_canary: (
+      ?name: String
+    ) -> _StopCanaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopCanaryResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateCanaryResponse
+      include Smithy::Client::_Response[Types::UpdateCanaryResponse]
+    end
+    def update_canary: (
+      ?name: String,
+      ?code: {
+        s3_bucket: String,
+        s3_key: untyped,
+        s3_version: untyped,
+        zip_file: String,
+        handler: String,
+        dependencies: Array[
+          {
+            type: String,
+            reference: untyped
+          }
+        ]
+      },
+      ?execution_role_arn: String,
+      ?runtime_version: String,
+      ?schedule: {
+        expression: String,
+        duration_in_seconds: Integer,
+        retry_config: {
+          max_retries: Integer
+        }
+      },
+      ?run_config: {
+        timeout_in_seconds: Integer,
+        memory_in_mb: Integer,
+        active_tracing: bool,
+        environment_variables: Hash[String, String],
+        ephemeral_storage: Integer
+      },
+      ?success_retention_period_in_days: Integer,
+      ?failure_retention_period_in_days: Integer,
+      ?vpc_config: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String],
+        ipv6_allowed_for_dual_stack: bool
+      },
+      ?visual_reference: {
+        base_screenshots: Array[
+          {
+            screenshot_name: String,
+            ignore_coordinates: Array[String]
+          }
+        ],
+        base_canary_run_id: untyped
+      },
+      ?artifact_s3_location: String,
+      ?artifact_config: {
+        s3_encryption: {
+          encryption_mode: String,
+          kms_key_arn: String
+        }
+      },
+      ?provisioned_resource_cleanup: String,
+      ?dry_run_id: String
+    ) -> _UpdateCanaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCanaryResponse
+  end
+end

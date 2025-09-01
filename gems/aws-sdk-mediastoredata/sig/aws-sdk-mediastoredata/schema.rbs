@@ -1,0 +1,43 @@
+module Aws::MediaStoreData
+  module Schema
+    include Smithy::Schema::Shapes
+
+    ContainerNotFoundException: StructureShape
+    ContentRangePattern: StringShape
+    ContentType: StringShape
+    DeleteObjectRequest: StructureShape
+    DeleteObjectResponse: StructureShape
+    DescribeObjectRequest: StructureShape
+    DescribeObjectResponse: StructureShape
+    ETag: StringShape
+    ErrorMessage: StringShape
+    GetObjectRequest: StructureShape
+    GetObjectResponse: StructureShape
+    InternalServerError: StructureShape
+    Item: StructureShape
+    ItemList: ListShape
+    ItemName: StringShape
+    ItemType: EnumShape
+    ListItemsRequest: StructureShape
+    ListItemsResponse: StructureShape
+    ListLimit: IntegerShape
+    ListPathNaming: StringShape
+    NonNegativeLong: IntegerShape
+    ObjectNotFoundException: StructureShape
+    PaginationToken: StringShape
+    PathNaming: StringShape
+    PayloadBlob: BlobShape
+    PutObjectRequest: StructureShape
+    PutObjectResponse: StructureShape
+    RangePattern: StringShape
+    RequestedRangeNotSatisfiableException: StructureShape
+    SHA256Hash: StringShape
+    StorageClass: EnumShape
+    StringPrimitive: StringShape
+    TimeStamp: TimestampShape
+    UploadAvailability: EnumShape
+    StatusCode: IntegerShape
+
+    MediaStoreObject20170901: ServiceShape
+  end
+end

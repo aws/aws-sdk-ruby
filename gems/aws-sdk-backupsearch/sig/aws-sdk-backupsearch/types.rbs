@@ -1,0 +1,815 @@
+module Aws::BackupSearch
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BackupCreationTimeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_after: Time,
+        ?created_before: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_after: Time?
+      attr_accessor created_before: Time?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CurrentSearchProgress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_points_scanned_count: Integer,
+        ?items_scanned_count: Integer,
+        ?items_matched_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_points_scanned_count: Integer?
+      attr_accessor items_scanned_count: Integer?
+      attr_accessor items_matched_count: Integer?
+    end
+
+    class EBSItemFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_paths: Array[Types::StringCondition],
+        ?sizes: Array[Types::LongCondition],
+        ?creation_times: Array[Types::TimeCondition],
+        ?last_modification_times: Array[Types::TimeCondition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_paths: Array[Types::StringCondition]?
+      attr_accessor sizes: Array[Types::LongCondition]?
+      attr_accessor creation_times: Array[Types::TimeCondition]?
+      attr_accessor last_modification_times: Array[Types::TimeCondition]?
+    end
+
+    class EBSResultItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_resource_arn: String,
+        ?source_resource_arn: String,
+        ?backup_vault_name: String,
+        ?file_system_identifier: String,
+        ?file_path: String,
+        ?file_size: Integer,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_resource_arn: String?
+      attr_accessor source_resource_arn: String?
+      attr_accessor backup_vault_name: String?
+      attr_accessor file_system_identifier: String?
+      attr_accessor file_path: String?
+      attr_accessor file_size: Integer?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    module ExportJobStatus
+      RUNNING: String
+      FAILED: String
+      COMPLETED: String
+    end
+
+    class ExportJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_job_identifier: String,
+        ?export_job_arn: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?completion_time: Time,
+        ?status_message: String,
+        ?search_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_job_identifier: String?
+      attr_accessor export_job_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor status_message: String?
+      attr_accessor search_job_arn: String?
+    end
+
+    class ExportSpecification
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3_export_specification: Types::S3ExportSpecification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_export_specification: Types::S3ExportSpecification?
+
+      class S3ExportSpecification < ExportSpecification
+      end
+      class Unknown < ExportSpecification
+      end
+    end
+
+    class GetSearchJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_job_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_job_identifier: String?
+    end
+
+    class GetSearchJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?search_scope_summary: Types::SearchScopeSummary,
+        ?current_search_progress: Types::CurrentSearchProgress,
+        ?status_message: String,
+        ?encryption_key_arn: String,
+        ?completion_time: Time,
+        ?status: String,
+        ?search_scope: Types::SearchScope,
+        ?item_filters: Types::ItemFilters,
+        ?creation_time: Time,
+        ?search_job_identifier: String,
+        ?search_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor search_scope_summary: Types::SearchScopeSummary?
+      attr_accessor current_search_progress: Types::CurrentSearchProgress?
+      attr_accessor status_message: String?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor completion_time: Time?
+      attr_accessor status: String?
+      attr_accessor search_scope: Types::SearchScope?
+      attr_accessor item_filters: Types::ItemFilters?
+      attr_accessor creation_time: Time?
+      attr_accessor search_job_identifier: String?
+      attr_accessor search_job_arn: String?
+    end
+
+    class GetSearchResultExportJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_job_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_job_identifier: String?
+    end
+
+    class GetSearchResultExportJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_job_identifier: String,
+        ?export_job_arn: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?completion_time: Time,
+        ?status_message: String,
+        ?export_specification: Types::ExportSpecification,
+        ?search_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_job_identifier: String?
+      attr_accessor export_job_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor status_message: String?
+      attr_accessor export_specification: Types::ExportSpecification?
+      attr_accessor search_job_arn: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class ItemFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_item_filters: Array[Types::S3ItemFilter],
+        ?ebs_item_filters: Array[Types::EBSItemFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_item_filters: Array[Types::S3ItemFilter]?
+      attr_accessor ebs_item_filters: Array[Types::EBSItemFilter]?
+    end
+
+    class ListSearchJobBackupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_job_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_job_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSearchJobBackupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::SearchJobBackupsResult],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::SearchJobBackupsResult]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSearchJobResultsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_job_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_job_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSearchJobResultsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::ResultItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::ResultItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSearchJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?by_status: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor by_status: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSearchJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_jobs: Array[Types::SearchJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_jobs: Array[Types::SearchJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSearchResultExportJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?search_job_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor search_job_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSearchResultExportJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_jobs: Array[Types::ExportJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_jobs: Array[Types::ExportJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String?]?
+    end
+
+    class LongCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Integer,
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Integer?
+      attr_accessor operator: String?
+    end
+
+    module LongConditionOperator
+      EQUALS_TO: String
+      NOT_EQUALS_TO: String
+      LESS_THAN_EQUAL_TO: String
+      GREATER_THAN_EQUAL_TO: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    module ResourceType
+      S3: String
+      EBS: String
+    end
+
+    class ResultItem
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3_result_item: Types::S3ResultItem,
+        ?ebs_result_item: Types::EBSResultItem,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_result_item: Types::S3ResultItem?
+      attr_accessor ebs_result_item: Types::EBSResultItem?
+
+      class S3ResultItem < ResultItem
+      end
+      class EBSResultItem < ResultItem
+      end
+      class Unknown < ResultItem
+      end
+    end
+
+    class S3ExportSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_bucket: String,
+        ?destination_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_bucket: String?
+      attr_accessor destination_prefix: String?
+    end
+
+    class S3ItemFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_keys: Array[Types::StringCondition],
+        ?sizes: Array[Types::LongCondition],
+        ?creation_times: Array[Types::TimeCondition],
+        ?version_ids: Array[Types::StringCondition],
+        ?e_tags: Array[Types::StringCondition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_keys: Array[Types::StringCondition]?
+      attr_accessor sizes: Array[Types::LongCondition]?
+      attr_accessor creation_times: Array[Types::TimeCondition]?
+      attr_accessor version_ids: Array[Types::StringCondition]?
+      attr_accessor e_tags: Array[Types::StringCondition]?
+    end
+
+    class S3ResultItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_resource_arn: String,
+        ?source_resource_arn: String,
+        ?backup_vault_name: String,
+        ?object_key: String,
+        ?object_size: Integer,
+        ?creation_time: Time,
+        ?e_tag: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_resource_arn: String?
+      attr_accessor source_resource_arn: String?
+      attr_accessor backup_vault_name: String?
+      attr_accessor object_key: String?
+      attr_accessor object_size: Integer?
+      attr_accessor creation_time: Time?
+      attr_accessor e_tag: String?
+      attr_accessor version_id: String?
+    end
+
+    class SearchJobBackupsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_message: String,
+        ?resource_type: String,
+        ?backup_resource_arn: String,
+        ?source_resource_arn: String,
+        ?index_creation_time: Time,
+        ?backup_creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor resource_type: String?
+      attr_accessor backup_resource_arn: String?
+      attr_accessor source_resource_arn: String?
+      attr_accessor index_creation_time: Time?
+      attr_accessor backup_creation_time: Time?
+    end
+
+    module SearchJobState
+      RUNNING: String
+      COMPLETED: String
+      STOPPING: String
+      STOPPED: String
+      FAILED: String
+    end
+
+    class SearchJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_job_identifier: String,
+        ?search_job_arn: String,
+        ?name: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?completion_time: Time,
+        ?search_scope_summary: Types::SearchScopeSummary,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_job_identifier: String?
+      attr_accessor search_job_arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor completion_time: Time?
+      attr_accessor search_scope_summary: Types::SearchScopeSummary?
+      attr_accessor status_message: String?
+    end
+
+    class SearchScope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_resource_types: Array[String],
+        ?backup_resource_creation_time: Types::BackupCreationTimeFilter,
+        ?source_resource_arns: Array[String],
+        ?backup_resource_arns: Array[String],
+        ?backup_resource_tags: Hash[String, String?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_resource_types: Array[String]?
+      attr_accessor backup_resource_creation_time: Types::BackupCreationTimeFilter?
+      attr_accessor source_resource_arns: Array[String]?
+      attr_accessor backup_resource_arns: Array[String]?
+      attr_accessor backup_resource_tags: Hash[String, String?]?
+    end
+
+    class SearchScopeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_recovery_points_to_scan_count: Integer,
+        ?total_items_to_scan_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_recovery_points_to_scan_count: Integer?
+      attr_accessor total_items_to_scan_count: Integer?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class StartSearchJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String?],
+        ?name: String,
+        ?encryption_key_arn: String,
+        ?client_token: String,
+        ?search_scope: Types::SearchScope,
+        ?item_filters: Types::ItemFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String?]?
+      attr_accessor name: String?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor client_token: String?
+      attr_accessor search_scope: Types::SearchScope?
+      attr_accessor item_filters: Types::ItemFilters?
+    end
+
+    class StartSearchJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_job_arn: String,
+        ?creation_time: Time,
+        ?search_job_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_job_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor search_job_identifier: String?
+    end
+
+    class StartSearchResultExportJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_job_identifier: String,
+        ?export_specification: Types::ExportSpecification,
+        ?client_token: String,
+        ?tags: Hash[String, String?],
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_job_identifier: String?
+      attr_accessor export_specification: Types::ExportSpecification?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String?]?
+      attr_accessor role_arn: String?
+    end
+
+    class StartSearchResultExportJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_job_arn: String,
+        ?export_job_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_job_arn: String?
+      attr_accessor export_job_identifier: String?
+    end
+
+    class StopSearchJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_job_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_job_identifier: String?
+    end
+
+    class StopSearchJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StringCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor operator: String?
+    end
+
+    module StringConditionOperator
+      EQUALS_TO: String
+      NOT_EQUALS_TO: String
+      CONTAINS: String
+      DOES_NOT_CONTAIN: String
+      BEGINS_WITH: String
+      ENDS_WITH: String
+      DOES_NOT_BEGIN_WITH: String
+      DOES_NOT_END_WITH: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String?]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class TimeCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Time,
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Time?
+      attr_accessor operator: String?
+    end
+
+    module TimeConditionOperator
+      EQUALS_TO: String
+      NOT_EQUALS_TO: String
+      LESS_THAN_EQUAL_TO: String
+      GREATER_THAN_EQUAL_TO: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

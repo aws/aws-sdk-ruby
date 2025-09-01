@@ -1,0 +1,1292 @@
+module Aws::ControlTower
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BaselineOperation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_identifier: String,
+        ?operation_type: String,
+        ?status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_identifier: String?
+      attr_accessor operation_type: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor status_message: String?
+    end
+
+    module BaselineOperationStatus
+      SUCCEEDED: String
+      FAILED: String
+      IN_PROGRESS: String
+    end
+
+    module BaselineOperationType
+      ENABLE_BASELINE: String
+      DISABLE_BASELINE: String
+      UPDATE_ENABLED_BASELINE: String
+      RESET_ENABLED_BASELINE: String
+    end
+
+    class BaselineSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ControlOperation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_type: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?status: String,
+        ?status_message: String,
+        ?operation_identifier: String,
+        ?control_identifier: String,
+        ?target_identifier: String,
+        ?enabled_control_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_type: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor operation_identifier: String?
+      attr_accessor control_identifier: String?
+      attr_accessor target_identifier: String?
+      attr_accessor enabled_control_identifier: String?
+    end
+
+    class ControlOperationFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_identifiers: Array[String],
+        ?target_identifiers: Array[String],
+        ?enabled_control_identifiers: Array[String],
+        ?statuses: Array[String],
+        ?control_operation_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_identifiers: Array[String]?
+      attr_accessor target_identifiers: Array[String]?
+      attr_accessor enabled_control_identifiers: Array[String]?
+      attr_accessor statuses: Array[String]?
+      attr_accessor control_operation_types: Array[String]?
+    end
+
+    module ControlOperationStatus
+      SUCCEEDED: String
+      FAILED: String
+      IN_PROGRESS: String
+    end
+
+    class ControlOperationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_type: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?status: String,
+        ?status_message: String,
+        ?operation_identifier: String,
+        ?control_identifier: String,
+        ?target_identifier: String,
+        ?enabled_control_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_type: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor operation_identifier: String?
+      attr_accessor control_identifier: String?
+      attr_accessor target_identifier: String?
+      attr_accessor enabled_control_identifier: String?
+    end
+
+    module ControlOperationType
+      ENABLE_CONTROL: String
+      DISABLE_CONTROL: String
+      UPDATE_ENABLED_CONTROL: String
+      RESET_ENABLED_CONTROL: String
+    end
+
+    class CreateLandingZoneInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+        ?manifest: Smithy::Schema::document,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+      attr_accessor manifest: Smithy::Schema::document?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateLandingZoneOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?operation_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor operation_identifier: String?
+    end
+
+    class DeleteLandingZoneInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?landing_zone_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor landing_zone_identifier: String?
+    end
+
+    class DeleteLandingZoneOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_identifier: String?
+    end
+
+    class DisableBaselineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled_baseline_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled_baseline_identifier: String?
+    end
+
+    class DisableBaselineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_identifier: String?
+    end
+
+    class DisableControlInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_identifier: String,
+        ?target_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_identifier: String?
+      attr_accessor target_identifier: String?
+    end
+
+    class DisableControlOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_identifier: String?
+    end
+
+    module DriftStatus
+      DRIFTED: String
+      IN_SYNC: String
+      NOT_CHECKING: String
+      UNKNOWN: String
+    end
+
+    class DriftStatusSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?drift_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor drift_status: String?
+    end
+
+    class EnableBaselineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?baseline_version: String,
+        ?parameters: Array[Types::EnabledBaselineParameter],
+        ?baseline_identifier: String,
+        ?target_identifier: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor baseline_version: String?
+      attr_accessor parameters: Array[Types::EnabledBaselineParameter]?
+      attr_accessor baseline_identifier: String?
+      attr_accessor target_identifier: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class EnableBaselineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_identifier: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_identifier: String?
+      attr_accessor arn: String?
+    end
+
+    class EnableControlInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_identifier: String,
+        ?target_identifier: String,
+        ?tags: Hash[String, String],
+        ?parameters: Array[Types::EnabledControlParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_identifier: String?
+      attr_accessor target_identifier: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor parameters: Array[Types::EnabledControlParameter]?
+    end
+
+    class EnableControlOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_identifier: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_identifier: String?
+      attr_accessor arn: String?
+    end
+
+    class EnabledBaselineDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?baseline_identifier: String,
+        ?baseline_version: String,
+        ?drift_status_summary: Types::EnabledBaselineDriftStatusSummary,
+        ?target_identifier: String,
+        ?parent_identifier: String,
+        ?status_summary: Types::EnablementStatusSummary,
+        ?parameters: Array[Types::EnabledBaselineParameterSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor baseline_identifier: String?
+      attr_accessor baseline_version: String?
+      attr_accessor drift_status_summary: Types::EnabledBaselineDriftStatusSummary?
+      attr_accessor target_identifier: String?
+      attr_accessor parent_identifier: String?
+      attr_accessor status_summary: Types::EnablementStatusSummary?
+      attr_accessor parameters: Array[Types::EnabledBaselineParameterSummary]?
+    end
+
+    module EnabledBaselineDriftStatus
+      IN_SYNC: String
+      DRIFTED: String
+    end
+
+    class EnabledBaselineDriftStatusSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?types: Types::EnabledBaselineDriftTypes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor types: Types::EnabledBaselineDriftTypes?
+    end
+
+    class EnabledBaselineDriftTypes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inheritance: Types::EnabledBaselineInheritanceDrift,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inheritance: Types::EnabledBaselineInheritanceDrift?
+    end
+
+    class EnabledBaselineFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_identifiers: Array[String],
+        ?baseline_identifiers: Array[String],
+        ?parent_identifiers: Array[String],
+        ?statuses: Array[String],
+        ?inheritance_drift_statuses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_identifiers: Array[String]?
+      attr_accessor baseline_identifiers: Array[String]?
+      attr_accessor parent_identifiers: Array[String]?
+      attr_accessor statuses: Array[String]?
+      attr_accessor inheritance_drift_statuses: Array[String]?
+    end
+
+    class EnabledBaselineInheritanceDrift
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class EnabledBaselineParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: Smithy::Schema::document?
+    end
+
+    class EnabledBaselineParameterSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: Smithy::Schema::document?
+    end
+
+    class EnabledBaselineSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?baseline_identifier: String,
+        ?baseline_version: String,
+        ?drift_status_summary: Types::EnabledBaselineDriftStatusSummary,
+        ?target_identifier: String,
+        ?parent_identifier: String,
+        ?status_summary: Types::EnablementStatusSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor baseline_identifier: String?
+      attr_accessor baseline_version: String?
+      attr_accessor drift_status_summary: Types::EnabledBaselineDriftStatusSummary?
+      attr_accessor target_identifier: String?
+      attr_accessor parent_identifier: String?
+      attr_accessor status_summary: Types::EnablementStatusSummary?
+    end
+
+    class EnabledControlDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?control_identifier: String,
+        ?target_identifier: String,
+        ?target_regions: Array[Types::Region],
+        ?status_summary: Types::EnablementStatusSummary,
+        ?drift_status_summary: Types::DriftStatusSummary,
+        ?parameters: Array[Types::EnabledControlParameterSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor control_identifier: String?
+      attr_accessor target_identifier: String?
+      attr_accessor target_regions: Array[Types::Region]?
+      attr_accessor status_summary: Types::EnablementStatusSummary?
+      attr_accessor drift_status_summary: Types::DriftStatusSummary?
+      attr_accessor parameters: Array[Types::EnabledControlParameterSummary]?
+    end
+
+    class EnabledControlFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_identifiers: Array[String],
+        ?statuses: Array[String],
+        ?drift_statuses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_identifiers: Array[String]?
+      attr_accessor statuses: Array[String]?
+      attr_accessor drift_statuses: Array[String]?
+    end
+
+    class EnabledControlParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: Smithy::Schema::document?
+    end
+
+    class EnabledControlParameterSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: Smithy::Schema::document?
+    end
+
+    class EnabledControlSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_identifier: String,
+        ?arn: String,
+        ?target_identifier: String,
+        ?status_summary: Types::EnablementStatusSummary,
+        ?drift_status_summary: Types::DriftStatusSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_identifier: String?
+      attr_accessor arn: String?
+      attr_accessor target_identifier: String?
+      attr_accessor status_summary: Types::EnablementStatusSummary?
+      attr_accessor drift_status_summary: Types::DriftStatusSummary?
+    end
+
+    module EnablementStatus
+      SUCCEEDED: String
+      FAILED: String
+      UNDER_CHANGE: String
+    end
+
+    class EnablementStatusSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?last_operation_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor last_operation_identifier: String?
+    end
+
+    class GetBaselineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?baseline_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor baseline_identifier: String?
+    end
+
+    class GetBaselineOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_identifier: String?
+    end
+
+    class GetBaselineOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?baseline_operation: Types::BaselineOperation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor baseline_operation: Types::BaselineOperation?
+    end
+
+    class GetBaselineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class GetControlOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_identifier: String?
+    end
+
+    class GetControlOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_operation: Types::ControlOperation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_operation: Types::ControlOperation?
+    end
+
+    class GetEnabledBaselineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled_baseline_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled_baseline_identifier: String?
+    end
+
+    class GetEnabledBaselineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled_baseline_details: Types::EnabledBaselineDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled_baseline_details: Types::EnabledBaselineDetails?
+    end
+
+    class GetEnabledControlInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled_control_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled_control_identifier: String?
+    end
+
+    class GetEnabledControlOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled_control_details: Types::EnabledControlDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled_control_details: Types::EnabledControlDetails?
+    end
+
+    class GetLandingZoneInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?landing_zone_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor landing_zone_identifier: String?
+    end
+
+    class GetLandingZoneOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_identifier: String?
+    end
+
+    class GetLandingZoneOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_details: Types::LandingZoneOperationDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_details: Types::LandingZoneOperationDetail?
+    end
+
+    class GetLandingZoneOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?landing_zone: Types::LandingZoneDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor landing_zone: Types::LandingZoneDetail?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LandingZoneDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+        ?manifest: Smithy::Schema::document,
+        ?arn: String,
+        ?status: String,
+        ?latest_available_version: String,
+        ?drift_status: Types::LandingZoneDriftStatusSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+      attr_accessor manifest: Smithy::Schema::document?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor latest_available_version: String?
+      attr_accessor drift_status: Types::LandingZoneDriftStatusSummary?
+    end
+
+    module LandingZoneDriftStatus
+      DRIFTED: String
+      IN_SYNC: String
+    end
+
+    class LandingZoneDriftStatusSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class LandingZoneOperationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_type: String,
+        ?operation_identifier: String,
+        ?status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_type: String?
+      attr_accessor operation_identifier: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor status_message: String?
+    end
+
+    class LandingZoneOperationFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?types: Array[String],
+        ?statuses: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor types: Array[String]?
+      attr_accessor statuses: Array[String]?
+    end
+
+    module LandingZoneOperationStatus
+      SUCCEEDED: String
+      FAILED: String
+      IN_PROGRESS: String
+    end
+
+    class LandingZoneOperationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_type: String,
+        ?operation_identifier: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_type: String?
+      attr_accessor operation_identifier: String?
+      attr_accessor status: String?
+    end
+
+    module LandingZoneOperationType
+      DELETE: String
+      CREATE: String
+      UPDATE: String
+      RESET: String
+    end
+
+    module LandingZoneStatus
+      ACTIVE: String
+      PROCESSING: String
+      FAILED: String
+    end
+
+    class LandingZoneSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class ListBaselinesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBaselinesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?baselines: Array[Types::BaselineSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor baselines: Array[Types::BaselineSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListControlOperationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::ControlOperationFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::ControlOperationFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListControlOperationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_operations: Array[Types::ControlOperationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_operations: Array[Types::ControlOperationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEnabledBaselinesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::EnabledBaselineFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?include_children: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::EnabledBaselineFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor include_children: bool?
+    end
+
+    class ListEnabledBaselinesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled_baselines: Array[Types::EnabledBaselineSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled_baselines: Array[Types::EnabledBaselineSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEnabledControlsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filter: Types::EnabledControlFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filter: Types::EnabledControlFilter?
+    end
+
+    class ListEnabledControlsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled_controls: Array[Types::EnabledControlSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled_controls: Array[Types::EnabledControlSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLandingZoneOperationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::LandingZoneOperationFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::LandingZoneOperationFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListLandingZoneOperationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?landing_zone_operations: Array[Types::LandingZoneOperationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor landing_zone_operations: Array[Types::LandingZoneOperationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLandingZonesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListLandingZonesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?landing_zones: Array[Types::LandingZoneSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor landing_zones: Array[Types::LandingZoneSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class Region
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class ResetEnabledBaselineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled_baseline_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled_baseline_identifier: String?
+    end
+
+    class ResetEnabledBaselineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_identifier: String?
+    end
+
+    class ResetEnabledControlInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled_control_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled_control_identifier: String?
+    end
+
+    class ResetEnabledControlOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_identifier: String?
+    end
+
+    class ResetLandingZoneInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?landing_zone_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor landing_zone_identifier: String?
+    end
+
+    class ResetLandingZoneOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_identifier: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateEnabledBaselineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?baseline_version: String,
+        ?parameters: Array[Types::EnabledBaselineParameter],
+        ?enabled_baseline_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor baseline_version: String?
+      attr_accessor parameters: Array[Types::EnabledBaselineParameter]?
+      attr_accessor enabled_baseline_identifier: String?
+    end
+
+    class UpdateEnabledBaselineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_identifier: String?
+    end
+
+    class UpdateEnabledControlInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameters: Array[Types::EnabledControlParameter],
+        ?enabled_control_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameters: Array[Types::EnabledControlParameter]?
+      attr_accessor enabled_control_identifier: String?
+    end
+
+    class UpdateEnabledControlOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_identifier: String?
+    end
+
+    class UpdateLandingZoneInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+        ?manifest: Smithy::Schema::document,
+        ?landing_zone_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+      attr_accessor manifest: Smithy::Schema::document?
+      attr_accessor landing_zone_identifier: String?
+    end
+
+    class UpdateLandingZoneOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_identifier: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

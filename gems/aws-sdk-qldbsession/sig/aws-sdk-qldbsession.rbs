@@ -1,0 +1,5 @@
+  module Aws
+    module QLDBSession
+      VERSION: String
+    end
+  end

@@ -1,0 +1,310 @@
+module Aws::MedicalImaging
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::MedicalImaging::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CopyImageSetResponse
+      include Smithy::Client::_Response[Types::CopyImageSetResponse]
+      def datastore_id: () -> String?
+      def source_image_set_properties: () -> Types::CopySourceImageSetProperties?
+      def destination_image_set_properties: () -> Types::CopyDestinationImageSetProperties?
+    end
+    def copy_image_set: (
+      ?datastore_id: String,
+      ?source_image_set_id: String,
+      ?copy_image_set_information: {
+        source_image_set: {
+          latest_version_id: String,
+          dicom_copies: {
+            copiable_attributes: String
+          }
+        },
+        destination_image_set: {
+          image_set_id: String,
+          latest_version_id: untyped
+        }
+      },
+      ?force: bool,
+      ?promote_to_primary: bool
+    ) -> _CopyImageSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyImageSetResponse
+
+    interface _CreateDatastoreResponse
+      include Smithy::Client::_Response[Types::CreateDatastoreResponse]
+      def datastore_id: () -> String?
+      def datastore_status: () -> String?
+    end
+    def create_datastore: (
+      ?datastore_name: String,
+      ?client_token: String,
+      ?tags: Hash[String, String],
+      ?kms_key_arn: String
+    ) -> _CreateDatastoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatastoreResponse
+
+    interface _DeleteDatastoreResponse
+      include Smithy::Client::_Response[Types::DeleteDatastoreResponse]
+      def datastore_id: () -> String?
+      def datastore_status: () -> String?
+    end
+    def delete_datastore: (
+      ?datastore_id: String
+    ) -> _DeleteDatastoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDatastoreResponse
+
+    interface _DeleteImageSetResponse
+      include Smithy::Client::_Response[Types::DeleteImageSetResponse]
+      def datastore_id: () -> String?
+      def image_set_id: () -> String?
+      def image_set_state: () -> String?
+      def image_set_workflow_status: () -> String?
+    end
+    def delete_image_set: (
+      ?datastore_id: String,
+      ?image_set_id: String
+    ) -> _DeleteImageSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteImageSetResponse
+
+    interface _GetDICOMImportJobResponse
+      include Smithy::Client::_Response[Types::GetDICOMImportJobResponse]
+      def job_properties: () -> Types::DICOMImportJobProperties?
+    end
+    def get_dicom_import_job: (
+      ?datastore_id: String,
+      ?job_id: String
+    ) -> _GetDICOMImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDICOMImportJobResponse
+
+    interface _GetDatastoreResponse
+      include Smithy::Client::_Response[Types::GetDatastoreResponse]
+      def datastore_properties: () -> Types::DatastoreProperties?
+    end
+    def get_datastore: (
+      ?datastore_id: String
+    ) -> _GetDatastoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDatastoreResponse
+
+    interface _GetImageFrameResponse
+      include Smithy::Client::_Response[Types::GetImageFrameResponse]
+      def image_frame_blob: () -> String?
+      def content_type: () -> String?
+    end
+    def get_image_frame: (
+      ?datastore_id: String,
+      ?image_set_id: String,
+      ?image_frame_information: {
+        image_frame_id: String
+      }
+    ) -> _GetImageFrameResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetImageFrameResponse
+
+    interface _GetImageSetResponse
+      include Smithy::Client::_Response[Types::GetImageSetResponse]
+      def datastore_id: () -> String?
+      def image_set_id: () -> String?
+      def version_id: () -> String?
+      def image_set_state: () -> String?
+      def image_set_workflow_status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def deleted_at: () -> Time?
+      def message: () -> String?
+      def image_set_arn: () -> String?
+      def overrides: () -> Types::Overrides?
+      def is_primary: () -> bool?
+    end
+    def get_image_set: (
+      ?datastore_id: String,
+      ?image_set_id: String,
+      ?version_id: String
+    ) -> _GetImageSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetImageSetResponse
+
+    interface _GetImageSetMetadataResponse
+      include Smithy::Client::_Response[Types::GetImageSetMetadataResponse]
+      def image_set_metadata_blob: () -> String?
+      def content_type: () -> String?
+      def content_encoding: () -> String?
+    end
+    def get_image_set_metadata: (
+      ?datastore_id: String,
+      ?image_set_id: String,
+      ?version_id: String
+    ) -> _GetImageSetMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetImageSetMetadataResponse
+
+    interface _ListDICOMImportJobsResponse
+      include Smithy::Client::_Response[Types::ListDICOMImportJobsResponse]
+      def job_summaries: () -> Array[Types::DICOMImportJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_dicom_import_jobs: (
+      ?datastore_id: String,
+      ?job_status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDICOMImportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDICOMImportJobsResponse
+
+    interface _ListDatastoresResponse
+      include Smithy::Client::_Response[Types::ListDatastoresResponse]
+      def datastore_summaries: () -> Array[Types::DatastoreSummary]?
+      def next_token: () -> String?
+    end
+    def list_datastores: (
+      ?datastore_status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDatastoresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatastoresResponse
+
+    interface _ListImageSetVersionsResponse
+      include Smithy::Client::_Response[Types::ListImageSetVersionsResponse]
+      def image_set_properties_list: () -> Array[Types::ImageSetProperties]?
+      def next_token: () -> String?
+    end
+    def list_image_set_versions: (
+      ?datastore_id: String,
+      ?image_set_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListImageSetVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListImageSetVersionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _SearchImageSetsResponse
+      include Smithy::Client::_Response[Types::SearchImageSetsResponse]
+      def image_sets_metadata_summaries: () -> Array[Types::ImageSetsMetadataSummary]?
+      def sort: () -> Types::Sort?
+      def next_token: () -> String?
+    end
+    def search_image_sets: (
+      ?datastore_id: String,
+      ?search_criteria: {
+        filters: Array[
+          {
+            values: Array[
+              {
+                dicom_patient_id: String,
+                dicom_accession_number: String,
+                dicom_study_id: String,
+                dicom_study_instance_uid: String,
+                dicom_series_instance_uid: String,
+                created_at: Time,
+                updated_at: untyped,
+                dicom_study_date_and_time: {
+                  dicom_study_date: String,
+                  dicom_study_time: String
+                },
+                is_primary: bool
+              }
+            ],
+            operator: String
+          }
+        ],
+        sort: {
+          sort_order: String,
+          sort_field: String
+        }
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _SearchImageSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchImageSetsResponse
+
+    interface _StartDICOMImportJobResponse
+      include Smithy::Client::_Response[Types::StartDICOMImportJobResponse]
+      def datastore_id: () -> String?
+      def job_id: () -> String?
+      def job_status: () -> String?
+      def submitted_at: () -> Time?
+    end
+    def start_dicom_import_job: (
+      ?job_name: String,
+      ?data_access_role_arn: String,
+      ?client_token: String,
+      ?datastore_id: String,
+      ?input_s3_uri: String,
+      ?output_s3_uri: String,
+      ?input_owner_account_id: String
+    ) -> _StartDICOMImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDICOMImportJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateImageSetMetadataResponse
+      include Smithy::Client::_Response[Types::UpdateImageSetMetadataResponse]
+      def datastore_id: () -> String?
+      def image_set_id: () -> String?
+      def latest_version_id: () -> String?
+      def image_set_state: () -> String?
+      def image_set_workflow_status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def message: () -> String?
+    end
+    def update_image_set_metadata: (
+      ?datastore_id: String,
+      ?image_set_id: String,
+      ?latest_version_id: String,
+      ?force: bool,
+      ?update_image_set_metadata_updates: {
+        dicom_updates: {
+          removable_attributes: String,
+          updatable_attributes: untyped
+        },
+        revert_to_version_id: String
+      }
+    ) -> _UpdateImageSetMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateImageSetMetadataResponse
+  end
+end

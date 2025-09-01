@@ -1,0 +1,5 @@
+  module Aws
+    module PcaConnectorAd
+      VERSION: String
+    end
+  end

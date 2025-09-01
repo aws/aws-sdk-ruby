@@ -1,0 +1,1128 @@
+module Aws::NetworkManager
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::NetworkManager::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptAttachmentResponse
+      include Smithy::Client::_Response[Types::AcceptAttachmentResponse]
+      def attachment: () -> Types::Attachment?
+    end
+    def accept_attachment: (
+      ?attachment_id: String
+    ) -> _AcceptAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptAttachmentResponse
+
+    interface _AssociateConnectPeerResponse
+      include Smithy::Client::_Response[Types::AssociateConnectPeerResponse]
+      def connect_peer_association: () -> Types::ConnectPeerAssociation?
+    end
+    def associate_connect_peer: (
+      ?global_network_id: String,
+      ?connect_peer_id: String,
+      ?device_id: String,
+      ?link_id: String
+    ) -> _AssociateConnectPeerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateConnectPeerResponse
+
+    interface _AssociateCustomerGatewayResponse
+      include Smithy::Client::_Response[Types::AssociateCustomerGatewayResponse]
+      def customer_gateway_association: () -> Types::CustomerGatewayAssociation?
+    end
+    def associate_customer_gateway: (
+      ?customer_gateway_arn: String,
+      ?global_network_id: String,
+      ?device_id: String,
+      ?link_id: String
+    ) -> _AssociateCustomerGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateCustomerGatewayResponse
+
+    interface _AssociateLinkResponse
+      include Smithy::Client::_Response[Types::AssociateLinkResponse]
+      def link_association: () -> Types::LinkAssociation?
+    end
+    def associate_link: (
+      ?global_network_id: String,
+      ?device_id: String,
+      ?link_id: String
+    ) -> _AssociateLinkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateLinkResponse
+
+    interface _AssociateTransitGatewayConnectPeerResponse
+      include Smithy::Client::_Response[Types::AssociateTransitGatewayConnectPeerResponse]
+      def transit_gateway_connect_peer_association: () -> Types::TransitGatewayConnectPeerAssociation?
+    end
+    def associate_transit_gateway_connect_peer: (
+      ?global_network_id: String,
+      ?transit_gateway_connect_peer_arn: String,
+      ?device_id: String,
+      ?link_id: String
+    ) -> _AssociateTransitGatewayConnectPeerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateTransitGatewayConnectPeerResponse
+
+    interface _CreateConnectAttachmentResponse
+      include Smithy::Client::_Response[Types::CreateConnectAttachmentResponse]
+      def connect_attachment: () -> Types::ConnectAttachment?
+    end
+    def create_connect_attachment: (
+      ?core_network_id: String,
+      ?edge_location: String,
+      ?transport_attachment_id: String,
+      ?options: {
+        protocol: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateConnectAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectAttachmentResponse
+
+    interface _CreateConnectPeerResponse
+      include Smithy::Client::_Response[Types::CreateConnectPeerResponse]
+      def connect_peer: () -> Types::ConnectPeer?
+    end
+    def create_connect_peer: (
+      ?connect_attachment_id: String,
+      ?core_network_address: String,
+      ?peer_address: String,
+      ?bgp_options: {
+        peer_asn: Integer
+      },
+      ?inside_cidr_blocks: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String,
+      ?subnet_arn: String
+    ) -> _CreateConnectPeerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectPeerResponse
+
+    interface _CreateConnectionResponse
+      include Smithy::Client::_Response[Types::CreateConnectionResponse]
+      def connection: () -> Types::Connection?
+    end
+    def create_connection: (
+      ?global_network_id: String,
+      ?device_id: String,
+      ?connected_device_id: String,
+      ?link_id: String,
+      ?connected_link_id: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectionResponse
+
+    interface _CreateCoreNetworkResponse
+      include Smithy::Client::_Response[Types::CreateCoreNetworkResponse]
+      def core_network: () -> Types::CoreNetwork?
+    end
+    def create_core_network: (
+      ?global_network_id: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?policy_document: String,
+      ?client_token: String
+    ) -> _CreateCoreNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCoreNetworkResponse
+
+    interface _CreateDeviceResponse
+      include Smithy::Client::_Response[Types::CreateDeviceResponse]
+      def device: () -> Types::Device?
+    end
+    def create_device: (
+      ?global_network_id: String,
+      ?aws_location: {
+        zone: String,
+        subnet_arn: String
+      },
+      ?description: String,
+      ?type: String,
+      ?vendor: String,
+      ?model: String,
+      ?serial_number: String,
+      ?location: {
+        address: String,
+        latitude: untyped,
+        longitude: untyped
+      },
+      ?site_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDeviceResponse
+
+    interface _CreateDirectConnectGatewayAttachmentResponse
+      include Smithy::Client::_Response[Types::CreateDirectConnectGatewayAttachmentResponse]
+      def direct_connect_gateway_attachment: () -> Types::DirectConnectGatewayAttachment?
+    end
+    def create_direct_connect_gateway_attachment: (
+      ?core_network_id: String,
+      ?direct_connect_gateway_arn: String,
+      ?edge_locations: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateDirectConnectGatewayAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDirectConnectGatewayAttachmentResponse
+
+    interface _CreateGlobalNetworkResponse
+      include Smithy::Client::_Response[Types::CreateGlobalNetworkResponse]
+      def global_network: () -> Types::GlobalNetwork?
+    end
+    def create_global_network: (
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateGlobalNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGlobalNetworkResponse
+
+    interface _CreateLinkResponse
+      include Smithy::Client::_Response[Types::CreateLinkResponse]
+      def link: () -> Types::Link?
+    end
+    def create_link: (
+      ?global_network_id: String,
+      ?description: String,
+      ?type: String,
+      ?bandwidth: {
+        upload_speed: Integer,
+        download_speed: untyped
+      },
+      ?provider: String,
+      ?site_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateLinkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLinkResponse
+
+    interface _CreateSiteResponse
+      include Smithy::Client::_Response[Types::CreateSiteResponse]
+      def site: () -> Types::Site?
+    end
+    def create_site: (
+      ?global_network_id: String,
+      ?description: String,
+      ?location: {
+        address: String,
+        latitude: untyped,
+        longitude: untyped
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateSiteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSiteResponse
+
+    interface _CreateSiteToSiteVpnAttachmentResponse
+      include Smithy::Client::_Response[Types::CreateSiteToSiteVpnAttachmentResponse]
+      def site_to_site_vpn_attachment: () -> Types::SiteToSiteVpnAttachment?
+    end
+    def create_site_to_site_vpn_attachment: (
+      ?core_network_id: String,
+      ?vpn_connection_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateSiteToSiteVpnAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSiteToSiteVpnAttachmentResponse
+
+    interface _CreateTransitGatewayPeeringResponse
+      include Smithy::Client::_Response[Types::CreateTransitGatewayPeeringResponse]
+      def transit_gateway_peering: () -> Types::TransitGatewayPeering?
+    end
+    def create_transit_gateway_peering: (
+      ?core_network_id: String,
+      ?transit_gateway_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateTransitGatewayPeeringResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTransitGatewayPeeringResponse
+
+    interface _CreateTransitGatewayRouteTableAttachmentResponse
+      include Smithy::Client::_Response[Types::CreateTransitGatewayRouteTableAttachmentResponse]
+      def transit_gateway_route_table_attachment: () -> Types::TransitGatewayRouteTableAttachment?
+    end
+    def create_transit_gateway_route_table_attachment: (
+      ?peering_id: String,
+      ?transit_gateway_route_table_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateTransitGatewayRouteTableAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTransitGatewayRouteTableAttachmentResponse
+
+    interface _CreateVpcAttachmentResponse
+      include Smithy::Client::_Response[Types::CreateVpcAttachmentResponse]
+      def vpc_attachment: () -> Types::VpcAttachment?
+    end
+    def create_vpc_attachment: (
+      ?core_network_id: String,
+      ?vpc_arn: String,
+      ?subnet_arns: Array[String],
+      ?options: {
+        ipv6_support: bool,
+        appliance_mode_support: untyped,
+        dns_support: untyped,
+        security_group_referencing_support: untyped
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateVpcAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpcAttachmentResponse
+
+    interface _DeleteAttachmentResponse
+      include Smithy::Client::_Response[Types::DeleteAttachmentResponse]
+      def attachment: () -> Types::Attachment?
+    end
+    def delete_attachment: (
+      ?attachment_id: String
+    ) -> _DeleteAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAttachmentResponse
+
+    interface _DeleteConnectPeerResponse
+      include Smithy::Client::_Response[Types::DeleteConnectPeerResponse]
+      def connect_peer: () -> Types::ConnectPeer?
+    end
+    def delete_connect_peer: (
+      ?connect_peer_id: String
+    ) -> _DeleteConnectPeerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectPeerResponse
+
+    interface _DeleteConnectionResponse
+      include Smithy::Client::_Response[Types::DeleteConnectionResponse]
+      def connection: () -> Types::Connection?
+    end
+    def delete_connection: (
+      ?global_network_id: String,
+      ?connection_id: String
+    ) -> _DeleteConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectionResponse
+
+    interface _DeleteCoreNetworkResponse
+      include Smithy::Client::_Response[Types::DeleteCoreNetworkResponse]
+      def core_network: () -> Types::CoreNetwork?
+    end
+    def delete_core_network: (
+      ?core_network_id: String
+    ) -> _DeleteCoreNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCoreNetworkResponse
+
+    interface _DeleteCoreNetworkPolicyVersionResponse
+      include Smithy::Client::_Response[Types::DeleteCoreNetworkPolicyVersionResponse]
+      def core_network_policy: () -> Types::CoreNetworkPolicy?
+    end
+    def delete_core_network_policy_version: (
+      ?core_network_id: String,
+      ?policy_version_id: Integer
+    ) -> _DeleteCoreNetworkPolicyVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCoreNetworkPolicyVersionResponse
+
+    interface _DeleteDeviceResponse
+      include Smithy::Client::_Response[Types::DeleteDeviceResponse]
+      def device: () -> Types::Device?
+    end
+    def delete_device: (
+      ?global_network_id: String,
+      ?device_id: String
+    ) -> _DeleteDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDeviceResponse
+
+    interface _DeleteGlobalNetworkResponse
+      include Smithy::Client::_Response[Types::DeleteGlobalNetworkResponse]
+      def global_network: () -> Types::GlobalNetwork?
+    end
+    def delete_global_network: (
+      ?global_network_id: String
+    ) -> _DeleteGlobalNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGlobalNetworkResponse
+
+    interface _DeleteLinkResponse
+      include Smithy::Client::_Response[Types::DeleteLinkResponse]
+      def link: () -> Types::Link?
+    end
+    def delete_link: (
+      ?global_network_id: String,
+      ?link_id: String
+    ) -> _DeleteLinkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLinkResponse
+
+    interface _DeletePeeringResponse
+      include Smithy::Client::_Response[Types::DeletePeeringResponse]
+      def peering: () -> Types::Peering?
+    end
+    def delete_peering: (
+      ?peering_id: String
+    ) -> _DeletePeeringResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePeeringResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyResponse]
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeleteSiteResponse
+      include Smithy::Client::_Response[Types::DeleteSiteResponse]
+      def site: () -> Types::Site?
+    end
+    def delete_site: (
+      ?global_network_id: String,
+      ?site_id: String
+    ) -> _DeleteSiteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSiteResponse
+
+    interface _DeregisterTransitGatewayResponse
+      include Smithy::Client::_Response[Types::DeregisterTransitGatewayResponse]
+      def transit_gateway_registration: () -> Types::TransitGatewayRegistration?
+    end
+    def deregister_transit_gateway: (
+      ?global_network_id: String,
+      ?transit_gateway_arn: String
+    ) -> _DeregisterTransitGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterTransitGatewayResponse
+
+    interface _DescribeGlobalNetworksResponse
+      include Smithy::Client::_Response[Types::DescribeGlobalNetworksResponse]
+      def global_networks: () -> Array[Types::GlobalNetwork]?
+      def next_token: () -> String?
+    end
+    def describe_global_networks: (
+      ?global_network_ids: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeGlobalNetworksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGlobalNetworksResponse
+
+    interface _DisassociateConnectPeerResponse
+      include Smithy::Client::_Response[Types::DisassociateConnectPeerResponse]
+      def connect_peer_association: () -> Types::ConnectPeerAssociation?
+    end
+    def disassociate_connect_peer: (
+      ?global_network_id: String,
+      ?connect_peer_id: String
+    ) -> _DisassociateConnectPeerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateConnectPeerResponse
+
+    interface _DisassociateCustomerGatewayResponse
+      include Smithy::Client::_Response[Types::DisassociateCustomerGatewayResponse]
+      def customer_gateway_association: () -> Types::CustomerGatewayAssociation?
+    end
+    def disassociate_customer_gateway: (
+      ?global_network_id: String,
+      ?customer_gateway_arn: String
+    ) -> _DisassociateCustomerGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateCustomerGatewayResponse
+
+    interface _DisassociateLinkResponse
+      include Smithy::Client::_Response[Types::DisassociateLinkResponse]
+      def link_association: () -> Types::LinkAssociation?
+    end
+    def disassociate_link: (
+      ?global_network_id: String,
+      ?device_id: String,
+      ?link_id: String
+    ) -> _DisassociateLinkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateLinkResponse
+
+    interface _DisassociateTransitGatewayConnectPeerResponse
+      include Smithy::Client::_Response[Types::DisassociateTransitGatewayConnectPeerResponse]
+      def transit_gateway_connect_peer_association: () -> Types::TransitGatewayConnectPeerAssociation?
+    end
+    def disassociate_transit_gateway_connect_peer: (
+      ?global_network_id: String,
+      ?transit_gateway_connect_peer_arn: String
+    ) -> _DisassociateTransitGatewayConnectPeerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateTransitGatewayConnectPeerResponse
+
+    interface _ExecuteCoreNetworkChangeSetResponse
+      include Smithy::Client::_Response[Types::ExecuteCoreNetworkChangeSetResponse]
+    end
+    def execute_core_network_change_set: (
+      ?core_network_id: String,
+      ?policy_version_id: Integer
+    ) -> _ExecuteCoreNetworkChangeSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteCoreNetworkChangeSetResponse
+
+    interface _GetConnectAttachmentResponse
+      include Smithy::Client::_Response[Types::GetConnectAttachmentResponse]
+      def connect_attachment: () -> Types::ConnectAttachment?
+    end
+    def get_connect_attachment: (
+      ?attachment_id: String
+    ) -> _GetConnectAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectAttachmentResponse
+
+    interface _GetConnectPeerResponse
+      include Smithy::Client::_Response[Types::GetConnectPeerResponse]
+      def connect_peer: () -> Types::ConnectPeer?
+    end
+    def get_connect_peer: (
+      ?connect_peer_id: String
+    ) -> _GetConnectPeerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectPeerResponse
+
+    interface _GetConnectPeerAssociationsResponse
+      include Smithy::Client::_Response[Types::GetConnectPeerAssociationsResponse]
+      def connect_peer_associations: () -> Array[Types::ConnectPeerAssociation]?
+      def next_token: () -> String?
+    end
+    def get_connect_peer_associations: (
+      ?global_network_id: String,
+      ?connect_peer_ids: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetConnectPeerAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectPeerAssociationsResponse
+
+    interface _GetConnectionsResponse
+      include Smithy::Client::_Response[Types::GetConnectionsResponse]
+      def connections: () -> Array[Types::Connection]?
+      def next_token: () -> String?
+    end
+    def get_connections: (
+      ?global_network_id: String,
+      ?connection_ids: Array[String],
+      ?device_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectionsResponse
+
+    interface _GetCoreNetworkResponse
+      include Smithy::Client::_Response[Types::GetCoreNetworkResponse]
+      def core_network: () -> Types::CoreNetwork?
+    end
+    def get_core_network: (
+      ?core_network_id: String
+    ) -> _GetCoreNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCoreNetworkResponse
+
+    interface _GetCoreNetworkChangeEventsResponse
+      include Smithy::Client::_Response[Types::GetCoreNetworkChangeEventsResponse]
+      def core_network_change_events: () -> Array[Types::CoreNetworkChangeEvent]?
+      def next_token: () -> String?
+    end
+    def get_core_network_change_events: (
+      ?core_network_id: String,
+      ?policy_version_id: Integer,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetCoreNetworkChangeEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCoreNetworkChangeEventsResponse
+
+    interface _GetCoreNetworkChangeSetResponse
+      include Smithy::Client::_Response[Types::GetCoreNetworkChangeSetResponse]
+      def core_network_changes: () -> Array[Types::CoreNetworkChange]?
+      def next_token: () -> String?
+    end
+    def get_core_network_change_set: (
+      ?core_network_id: String,
+      ?policy_version_id: Integer,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetCoreNetworkChangeSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCoreNetworkChangeSetResponse
+
+    interface _GetCoreNetworkPolicyResponse
+      include Smithy::Client::_Response[Types::GetCoreNetworkPolicyResponse]
+      def core_network_policy: () -> Types::CoreNetworkPolicy?
+    end
+    def get_core_network_policy: (
+      ?core_network_id: String,
+      ?policy_version_id: Integer,
+      ?alias: String
+    ) -> _GetCoreNetworkPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCoreNetworkPolicyResponse
+
+    interface _GetCustomerGatewayAssociationsResponse
+      include Smithy::Client::_Response[Types::GetCustomerGatewayAssociationsResponse]
+      def customer_gateway_associations: () -> Array[Types::CustomerGatewayAssociation]?
+      def next_token: () -> String?
+    end
+    def get_customer_gateway_associations: (
+      ?global_network_id: String,
+      ?customer_gateway_arns: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetCustomerGatewayAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCustomerGatewayAssociationsResponse
+
+    interface _GetDevicesResponse
+      include Smithy::Client::_Response[Types::GetDevicesResponse]
+      def devices: () -> Array[Types::Device]?
+      def next_token: () -> String?
+    end
+    def get_devices: (
+      ?global_network_id: String,
+      ?device_ids: Array[String],
+      ?site_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetDevicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDevicesResponse
+
+    interface _GetDirectConnectGatewayAttachmentResponse
+      include Smithy::Client::_Response[Types::GetDirectConnectGatewayAttachmentResponse]
+      def direct_connect_gateway_attachment: () -> Types::DirectConnectGatewayAttachment?
+    end
+    def get_direct_connect_gateway_attachment: (
+      ?attachment_id: String
+    ) -> _GetDirectConnectGatewayAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDirectConnectGatewayAttachmentResponse
+
+    interface _GetLinkAssociationsResponse
+      include Smithy::Client::_Response[Types::GetLinkAssociationsResponse]
+      def link_associations: () -> Array[Types::LinkAssociation]?
+      def next_token: () -> String?
+    end
+    def get_link_associations: (
+      ?global_network_id: String,
+      ?device_id: String,
+      ?link_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetLinkAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLinkAssociationsResponse
+
+    interface _GetLinksResponse
+      include Smithy::Client::_Response[Types::GetLinksResponse]
+      def links: () -> Array[Types::Link]?
+      def next_token: () -> String?
+    end
+    def get_links: (
+      ?global_network_id: String,
+      ?link_ids: Array[String],
+      ?site_id: String,
+      ?type: String,
+      ?provider: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetLinksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLinksResponse
+
+    interface _GetNetworkResourceCountsResponse
+      include Smithy::Client::_Response[Types::GetNetworkResourceCountsResponse]
+      def network_resource_counts: () -> Array[Types::NetworkResourceCount]?
+      def next_token: () -> String?
+    end
+    def get_network_resource_counts: (
+      ?global_network_id: String,
+      ?resource_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetNetworkResourceCountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNetworkResourceCountsResponse
+
+    interface _GetNetworkResourceRelationshipsResponse
+      include Smithy::Client::_Response[Types::GetNetworkResourceRelationshipsResponse]
+      def relationships: () -> Array[Types::Relationship]?
+      def next_token: () -> String?
+    end
+    def get_network_resource_relationships: (
+      ?global_network_id: String,
+      ?core_network_id: String,
+      ?registered_gateway_arn: String,
+      ?aws_region: String,
+      ?account_id: String,
+      ?resource_type: String,
+      ?resource_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetNetworkResourceRelationshipsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNetworkResourceRelationshipsResponse
+
+    interface _GetNetworkResourcesResponse
+      include Smithy::Client::_Response[Types::GetNetworkResourcesResponse]
+      def network_resources: () -> Array[Types::NetworkResource]?
+      def next_token: () -> String?
+    end
+    def get_network_resources: (
+      ?global_network_id: String,
+      ?core_network_id: String,
+      ?registered_gateway_arn: String,
+      ?aws_region: String,
+      ?account_id: String,
+      ?resource_type: String,
+      ?resource_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetNetworkResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNetworkResourcesResponse
+
+    interface _GetNetworkRoutesResponse
+      include Smithy::Client::_Response[Types::GetNetworkRoutesResponse]
+      def route_table_arn: () -> String?
+      def core_network_segment_edge: () -> Types::CoreNetworkSegmentEdgeIdentifier?
+      def route_table_type: () -> String?
+      def route_table_timestamp: () -> Time?
+      def network_routes: () -> Array[Types::NetworkRoute]?
+    end
+    def get_network_routes: (
+      ?global_network_id: String,
+      ?route_table_identifier: {
+        transit_gateway_route_table_arn: String,
+        core_network_segment_edge: {
+          core_network_id: String,
+          segment_name: String,
+          edge_location: String
+        },
+        core_network_network_function_group: {
+          core_network_id: untyped,
+          network_function_group_name: untyped,
+          edge_location: untyped
+        }
+      },
+      ?exact_cidr_matches: Array[String],
+      ?longest_prefix_matches: Array[String],
+      ?subnet_of_matches: Array[String],
+      ?supernet_of_matches: Array[String],
+      ?prefix_list_ids: Array[String],
+      ?states: Array[String],
+      ?types: Array[String],
+      ?destination_filters: Hash[String,
+        Array[String]
+      ]
+    ) -> _GetNetworkRoutesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNetworkRoutesResponse
+
+    interface _GetNetworkTelemetryResponse
+      include Smithy::Client::_Response[Types::GetNetworkTelemetryResponse]
+      def network_telemetry: () -> Array[Types::NetworkTelemetry]?
+      def next_token: () -> String?
+    end
+    def get_network_telemetry: (
+      ?global_network_id: String,
+      ?core_network_id: String,
+      ?registered_gateway_arn: String,
+      ?aws_region: String,
+      ?account_id: String,
+      ?resource_type: String,
+      ?resource_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetNetworkTelemetryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNetworkTelemetryResponse
+
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyResponse]
+      def policy_document: () -> String?
+    end
+    def get_resource_policy: (
+      ?resource_arn: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
+    interface _GetRouteAnalysisResponse
+      include Smithy::Client::_Response[Types::GetRouteAnalysisResponse]
+      def route_analysis: () -> Types::RouteAnalysis?
+    end
+    def get_route_analysis: (
+      ?global_network_id: String,
+      ?route_analysis_id: String
+    ) -> _GetRouteAnalysisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRouteAnalysisResponse
+
+    interface _GetSiteToSiteVpnAttachmentResponse
+      include Smithy::Client::_Response[Types::GetSiteToSiteVpnAttachmentResponse]
+      def site_to_site_vpn_attachment: () -> Types::SiteToSiteVpnAttachment?
+    end
+    def get_site_to_site_vpn_attachment: (
+      ?attachment_id: String
+    ) -> _GetSiteToSiteVpnAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSiteToSiteVpnAttachmentResponse
+
+    interface _GetSitesResponse
+      include Smithy::Client::_Response[Types::GetSitesResponse]
+      def sites: () -> Array[Types::Site]?
+      def next_token: () -> String?
+    end
+    def get_sites: (
+      ?global_network_id: String,
+      ?site_ids: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetSitesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSitesResponse
+
+    interface _GetTransitGatewayConnectPeerAssociationsResponse
+      include Smithy::Client::_Response[Types::GetTransitGatewayConnectPeerAssociationsResponse]
+      def transit_gateway_connect_peer_associations: () -> Array[Types::TransitGatewayConnectPeerAssociation]?
+      def next_token: () -> String?
+    end
+    def get_transit_gateway_connect_peer_associations: (
+      ?global_network_id: String,
+      ?transit_gateway_connect_peer_arns: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetTransitGatewayConnectPeerAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTransitGatewayConnectPeerAssociationsResponse
+
+    interface _GetTransitGatewayPeeringResponse
+      include Smithy::Client::_Response[Types::GetTransitGatewayPeeringResponse]
+      def transit_gateway_peering: () -> Types::TransitGatewayPeering?
+    end
+    def get_transit_gateway_peering: (
+      ?peering_id: String
+    ) -> _GetTransitGatewayPeeringResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTransitGatewayPeeringResponse
+
+    interface _GetTransitGatewayRegistrationsResponse
+      include Smithy::Client::_Response[Types::GetTransitGatewayRegistrationsResponse]
+      def transit_gateway_registrations: () -> Array[Types::TransitGatewayRegistration]?
+      def next_token: () -> String?
+    end
+    def get_transit_gateway_registrations: (
+      ?global_network_id: String,
+      ?transit_gateway_arns: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetTransitGatewayRegistrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTransitGatewayRegistrationsResponse
+
+    interface _GetTransitGatewayRouteTableAttachmentResponse
+      include Smithy::Client::_Response[Types::GetTransitGatewayRouteTableAttachmentResponse]
+      def transit_gateway_route_table_attachment: () -> Types::TransitGatewayRouteTableAttachment?
+    end
+    def get_transit_gateway_route_table_attachment: (
+      ?attachment_id: String
+    ) -> _GetTransitGatewayRouteTableAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTransitGatewayRouteTableAttachmentResponse
+
+    interface _GetVpcAttachmentResponse
+      include Smithy::Client::_Response[Types::GetVpcAttachmentResponse]
+      def vpc_attachment: () -> Types::VpcAttachment?
+    end
+    def get_vpc_attachment: (
+      ?attachment_id: String
+    ) -> _GetVpcAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVpcAttachmentResponse
+
+    interface _ListAttachmentsResponse
+      include Smithy::Client::_Response[Types::ListAttachmentsResponse]
+      def attachments: () -> Array[Types::Attachment]?
+      def next_token: () -> String?
+    end
+    def list_attachments: (
+      ?core_network_id: String,
+      ?attachment_type: String,
+      ?edge_location: String,
+      ?state: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAttachmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAttachmentsResponse
+
+    interface _ListConnectPeersResponse
+      include Smithy::Client::_Response[Types::ListConnectPeersResponse]
+      def connect_peers: () -> Array[Types::ConnectPeerSummary]?
+      def next_token: () -> String?
+    end
+    def list_connect_peers: (
+      ?core_network_id: String,
+      ?connect_attachment_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConnectPeersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectPeersResponse
+
+    interface _ListCoreNetworkPolicyVersionsResponse
+      include Smithy::Client::_Response[Types::ListCoreNetworkPolicyVersionsResponse]
+      def core_network_policy_versions: () -> Array[Types::CoreNetworkPolicyVersion]?
+      def next_token: () -> String?
+    end
+    def list_core_network_policy_versions: (
+      ?core_network_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCoreNetworkPolicyVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCoreNetworkPolicyVersionsResponse
+
+    interface _ListCoreNetworksResponse
+      include Smithy::Client::_Response[Types::ListCoreNetworksResponse]
+      def core_networks: () -> Array[Types::CoreNetworkSummary]?
+      def next_token: () -> String?
+    end
+    def list_core_networks: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCoreNetworksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCoreNetworksResponse
+
+    interface _ListOrganizationServiceAccessStatusResponse
+      include Smithy::Client::_Response[Types::ListOrganizationServiceAccessStatusResponse]
+      def organization_status: () -> Types::OrganizationStatus?
+      def next_token: () -> String?
+    end
+    def list_organization_service_access_status: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListOrganizationServiceAccessStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOrganizationServiceAccessStatusResponse
+
+    interface _ListPeeringsResponse
+      include Smithy::Client::_Response[Types::ListPeeringsResponse]
+      def peerings: () -> Array[Types::Peering]?
+      def next_token: () -> String?
+    end
+    def list_peerings: (
+      ?core_network_id: String,
+      ?peering_type: String,
+      ?edge_location: String,
+      ?state: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPeeringsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPeeringsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tag_list: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutCoreNetworkPolicyResponse
+      include Smithy::Client::_Response[Types::PutCoreNetworkPolicyResponse]
+      def core_network_policy: () -> Types::CoreNetworkPolicy?
+    end
+    def put_core_network_policy: (
+      ?core_network_id: String,
+      ?policy_document: String,
+      ?description: String,
+      ?latest_version_id: Integer,
+      ?client_token: String
+    ) -> _PutCoreNetworkPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutCoreNetworkPolicyResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
+    end
+    def put_resource_policy: (
+      ?policy_document: String,
+      ?resource_arn: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _RegisterTransitGatewayResponse
+      include Smithy::Client::_Response[Types::RegisterTransitGatewayResponse]
+      def transit_gateway_registration: () -> Types::TransitGatewayRegistration?
+    end
+    def register_transit_gateway: (
+      ?global_network_id: String,
+      ?transit_gateway_arn: String
+    ) -> _RegisterTransitGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterTransitGatewayResponse
+
+    interface _RejectAttachmentResponse
+      include Smithy::Client::_Response[Types::RejectAttachmentResponse]
+      def attachment: () -> Types::Attachment?
+    end
+    def reject_attachment: (
+      ?attachment_id: String
+    ) -> _RejectAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectAttachmentResponse
+
+    interface _RestoreCoreNetworkPolicyVersionResponse
+      include Smithy::Client::_Response[Types::RestoreCoreNetworkPolicyVersionResponse]
+      def core_network_policy: () -> Types::CoreNetworkPolicy?
+    end
+    def restore_core_network_policy_version: (
+      ?core_network_id: String,
+      ?policy_version_id: Integer
+    ) -> _RestoreCoreNetworkPolicyVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreCoreNetworkPolicyVersionResponse
+
+    interface _StartOrganizationServiceAccessUpdateResponse
+      include Smithy::Client::_Response[Types::StartOrganizationServiceAccessUpdateResponse]
+      def organization_status: () -> Types::OrganizationStatus?
+    end
+    def start_organization_service_access_update: (
+      ?action: String
+    ) -> _StartOrganizationServiceAccessUpdateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartOrganizationServiceAccessUpdateResponse
+
+    interface _StartRouteAnalysisResponse
+      include Smithy::Client::_Response[Types::StartRouteAnalysisResponse]
+      def route_analysis: () -> Types::RouteAnalysis?
+    end
+    def start_route_analysis: (
+      ?global_network_id: String,
+      ?source: {
+        transit_gateway_attachment_arn: String,
+        ip_address: String
+      },
+      ?destination: {
+        transit_gateway_attachment_arn: String,
+        ip_address: String
+      },
+      ?include_return_path: bool,
+      ?use_middleboxes: bool
+    ) -> _StartRouteAnalysisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRouteAnalysisResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateConnectionResponse
+      include Smithy::Client::_Response[Types::UpdateConnectionResponse]
+      def connection: () -> Types::Connection?
+    end
+    def update_connection: (
+      ?global_network_id: String,
+      ?connection_id: String,
+      ?link_id: String,
+      ?connected_link_id: String,
+      ?description: String
+    ) -> _UpdateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectionResponse
+
+    interface _UpdateCoreNetworkResponse
+      include Smithy::Client::_Response[Types::UpdateCoreNetworkResponse]
+      def core_network: () -> Types::CoreNetwork?
+    end
+    def update_core_network: (
+      ?core_network_id: String,
+      ?description: String
+    ) -> _UpdateCoreNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCoreNetworkResponse
+
+    interface _UpdateDeviceResponse
+      include Smithy::Client::_Response[Types::UpdateDeviceResponse]
+      def device: () -> Types::Device?
+    end
+    def update_device: (
+      ?global_network_id: String,
+      ?device_id: String,
+      ?aws_location: {
+        zone: String,
+        subnet_arn: String
+      },
+      ?description: String,
+      ?type: String,
+      ?vendor: String,
+      ?model: String,
+      ?serial_number: String,
+      ?location: {
+        address: String,
+        latitude: untyped,
+        longitude: untyped
+      },
+      ?site_id: String
+    ) -> _UpdateDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDeviceResponse
+
+    interface _UpdateDirectConnectGatewayAttachmentResponse
+      include Smithy::Client::_Response[Types::UpdateDirectConnectGatewayAttachmentResponse]
+      def direct_connect_gateway_attachment: () -> Types::DirectConnectGatewayAttachment?
+    end
+    def update_direct_connect_gateway_attachment: (
+      ?attachment_id: String,
+      ?edge_locations: Array[String]
+    ) -> _UpdateDirectConnectGatewayAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDirectConnectGatewayAttachmentResponse
+
+    interface _UpdateGlobalNetworkResponse
+      include Smithy::Client::_Response[Types::UpdateGlobalNetworkResponse]
+      def global_network: () -> Types::GlobalNetwork?
+    end
+    def update_global_network: (
+      ?global_network_id: String,
+      ?description: String
+    ) -> _UpdateGlobalNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGlobalNetworkResponse
+
+    interface _UpdateLinkResponse
+      include Smithy::Client::_Response[Types::UpdateLinkResponse]
+      def link: () -> Types::Link?
+    end
+    def update_link: (
+      ?global_network_id: String,
+      ?link_id: String,
+      ?description: String,
+      ?type: String,
+      ?bandwidth: {
+        upload_speed: Integer,
+        download_speed: untyped
+      },
+      ?provider: String
+    ) -> _UpdateLinkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLinkResponse
+
+    interface _UpdateNetworkResourceMetadataResponse
+      include Smithy::Client::_Response[Types::UpdateNetworkResourceMetadataResponse]
+      def resource_arn: () -> String?
+      def metadata: () -> Hash[String, String]?
+    end
+    def update_network_resource_metadata: (
+      ?global_network_id: String,
+      ?resource_arn: String,
+      ?metadata: Hash[String, String]
+    ) -> _UpdateNetworkResourceMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNetworkResourceMetadataResponse
+
+    interface _UpdateSiteResponse
+      include Smithy::Client::_Response[Types::UpdateSiteResponse]
+      def site: () -> Types::Site?
+    end
+    def update_site: (
+      ?global_network_id: String,
+      ?site_id: String,
+      ?description: String,
+      ?location: {
+        address: String,
+        latitude: untyped,
+        longitude: untyped
+      }
+    ) -> _UpdateSiteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSiteResponse
+
+    interface _UpdateVpcAttachmentResponse
+      include Smithy::Client::_Response[Types::UpdateVpcAttachmentResponse]
+      def vpc_attachment: () -> Types::VpcAttachment?
+    end
+    def update_vpc_attachment: (
+      ?attachment_id: String,
+      ?add_subnet_arns: Array[String],
+      ?remove_subnet_arns: Array[String],
+      ?options: {
+        ipv6_support: bool,
+        appliance_mode_support: untyped,
+        dns_support: untyped,
+        security_group_referencing_support: untyped
+      }
+    ) -> _UpdateVpcAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVpcAttachmentResponse
+  end
+end

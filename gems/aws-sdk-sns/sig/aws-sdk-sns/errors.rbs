@@ -1,0 +1,107 @@
+module Aws::SNS
+  module Errors
+    class AuthorizationErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BatchEntryIdsNotDistinctException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BatchRequestTooLongException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentAccessException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EmptyBatchRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EndpointDisabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class FilterPolicyLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidBatchEntryIdException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterValueException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidSecurityException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSAccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSDisabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSInvalidStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSOptInRequired < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class KMSThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OptedOutException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PlatformApplicationDisabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReplayLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class StaleTagException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SubscriptionLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagPolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyEntriesInBatchRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TopicLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UserErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class VerificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def status: () -> String?
+    end
+  end
+end

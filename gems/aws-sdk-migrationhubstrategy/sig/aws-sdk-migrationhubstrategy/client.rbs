@@ -1,0 +1,351 @@
+module Aws::MigrationHubStrategy
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::MigrationHubStrategy::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _GetApplicationComponentDetailsResponse
+      include Smithy::Client::_Response[Types::GetApplicationComponentDetailsOutput]
+      def application_component_detail: () -> Types::ApplicationComponentDetail?
+      def associated_applications: () -> Array[Types::AssociatedApplication]?
+      def more_application_resource: () -> bool?
+      def associated_server_ids: () -> Array[String]?
+    end
+    def get_application_component_details: (
+      ?application_component_id: String
+    ) -> _GetApplicationComponentDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApplicationComponentDetailsResponse
+
+    interface _GetApplicationComponentStrategiesResponse
+      include Smithy::Client::_Response[Types::GetApplicationComponentStrategiesOutput]
+      def application_component_strategies: () -> Array[Types::ApplicationComponentStrategy]?
+    end
+    def get_application_component_strategies: (
+      ?application_component_id: String
+    ) -> _GetApplicationComponentStrategiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApplicationComponentStrategiesResponse
+
+    interface _GetAssessmentResponse
+      include Smithy::Client::_Response[Types::GetAssessmentOutput]
+      def id: () -> String?
+      def data_collection_details: () -> Types::DataCollectionDetails?
+      def assessment_targets: () -> Array[Types::AssessmentTarget]?
+    end
+    def get_assessment: (
+      ?id: String
+    ) -> _GetAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssessmentResponse
+
+    interface _GetImportFileTaskResponse
+      include Smithy::Client::_Response[Types::GetImportFileTaskOutput]
+      def id: () -> String?
+      def status: () -> String?
+      def start_time: () -> Time?
+      def input_s3_bucket: () -> String?
+      def input_s3_key: () -> String?
+      def status_report_s3_bucket: () -> String?
+      def status_report_s3_key: () -> String?
+      def completion_time: () -> Time?
+      def number_of_records_success: () -> Integer?
+      def number_of_records_failed: () -> Integer?
+      def import_name: () -> String?
+    end
+    def get_import_file_task: (
+      ?id: String
+    ) -> _GetImportFileTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetImportFileTaskResponse
+
+    interface _GetLatestAssessmentIdResponse
+      include Smithy::Client::_Response[Types::GetLatestAssessmentIdOutput]
+      def id: () -> String?
+    end
+    def get_latest_assessment_id: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLatestAssessmentIdResponse
+
+    interface _GetPortfolioPreferencesResponse
+      include Smithy::Client::_Response[Types::GetPortfolioPreferencesOutput]
+      def prioritize_business_goals: () -> Types::PrioritizeBusinessGoals?
+      def application_preferences: () -> Types::ApplicationPreferences?
+      def database_preferences: () -> Types::DatabasePreferences?
+      def application_mode: () -> String?
+    end
+    def get_portfolio_preferences: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPortfolioPreferencesResponse
+
+    interface _GetPortfolioSummaryResponse
+      include Smithy::Client::_Response[Types::GetPortfolioSummaryOutput]
+      def assessment_summary: () -> Types::AssessmentSummary?
+    end
+    def get_portfolio_summary: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPortfolioSummaryResponse
+
+    interface _GetRecommendationReportDetailsResponse
+      include Smithy::Client::_Response[Types::GetRecommendationReportDetailsOutput]
+      def id: () -> String?
+      def recommendation_report_details: () -> Types::RecommendationReportDetails?
+    end
+    def get_recommendation_report_details: (
+      ?id: String
+    ) -> _GetRecommendationReportDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecommendationReportDetailsResponse
+
+    interface _GetServerDetailsResponse
+      include Smithy::Client::_Response[Types::GetServerDetailsOutput]
+      def next_token: () -> String?
+      def server_detail: () -> Types::ServerDetail?
+      def associated_applications: () -> Array[Types::AssociatedApplication]?
+    end
+    def get_server_details: (
+      ?server_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetServerDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServerDetailsResponse
+
+    interface _GetServerStrategiesResponse
+      include Smithy::Client::_Response[Types::GetServerStrategiesOutput]
+      def server_strategies: () -> Array[Types::ServerStrategy]?
+    end
+    def get_server_strategies: (
+      ?server_id: String
+    ) -> _GetServerStrategiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServerStrategiesResponse
+
+    interface _ListAnalyzableServersResponse
+      include Smithy::Client::_Response[Types::ListAnalyzableServersResponse]
+      def analyzable_servers: () -> Array[Types::AnalyzableServerSummary]?
+      def next_token: () -> String?
+    end
+    def list_analyzable_servers: (
+      ?sort: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAnalyzableServersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnalyzableServersResponse
+
+    interface _ListApplicationComponentsResponse
+      include Smithy::Client::_Response[Types::ListApplicationComponentsOutput]
+      def application_component_infos: () -> Array[Types::ApplicationComponentDetail]?
+      def next_token: () -> String?
+    end
+    def list_application_components: (
+      ?application_component_criteria: String,
+      ?filter_value: String,
+      ?sort: String,
+      ?group_id_filter: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListApplicationComponentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationComponentsResponse
+
+    interface _ListCollectorsResponse
+      include Smithy::Client::_Response[Types::ListCollectorsOutput]
+      def collectors: () -> Array[Types::Collector]?
+      def next_token: () -> String?
+    end
+    def list_collectors: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCollectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCollectorsResponse
+
+    interface _ListImportFileTaskResponse
+      include Smithy::Client::_Response[Types::ListImportFileTaskOutput]
+      def task_infos: () -> Array[Types::ImportFileTaskInformation]?
+      def next_token: () -> String?
+    end
+    def list_import_file_task: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListImportFileTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListImportFileTaskResponse
+
+    interface _ListServersResponse
+      include Smithy::Client::_Response[Types::ListServersOutput]
+      def server_infos: () -> Array[Types::ServerDetail]?
+      def next_token: () -> String?
+    end
+    def list_servers: (
+      ?server_criteria: String,
+      ?filter_value: String,
+      ?sort: String,
+      ?group_id_filter: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListServersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListServersResponse
+
+    interface _PutPortfolioPreferencesResponse
+      include Smithy::Client::_Response[Types::PutPortfolioPreferencesOutput]
+    end
+    def put_portfolio_preferences: (
+      ?prioritize_business_goals: {
+        business_goals: {
+          speed_of_migration: Integer,
+          reduce_operational_overhead_with_managed_services: untyped,
+          modernize_infrastructure_with_cloud_native_technologies: untyped,
+          license_cost_reduction: untyped
+        }
+      },
+      ?application_preferences: {
+        management_preference: {
+          aws_managed_resources: {
+            target_destination: Array[String]
+          },
+          self_manage_resources: {
+            target_destination: Array[String]
+          },
+          no_preference: {
+            target_destination: Array[String]
+          }
+        }
+      },
+      ?database_preferences: {
+        database_management_preference: String,
+        database_migration_preference: {
+          heterogeneous: {
+            target_database_engine: Array[String]
+          },
+          homogeneous: {
+            target_database_engine: Array[String]
+          },
+          no_preference: {
+            target_database_engine: Array[String]
+          }
+        }
+      },
+      ?application_mode: String
+    ) -> _PutPortfolioPreferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutPortfolioPreferencesResponse
+
+    interface _StartAssessmentResponse
+      include Smithy::Client::_Response[Types::StartAssessmentOutput]
+      def assessment_id: () -> String?
+    end
+    def start_assessment: (
+      ?s3bucket_for_analysis_data: String,
+      ?s3bucket_for_report_data: String,
+      ?assessment_targets: Array[
+        {
+          condition: String,
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?assessment_data_source_type: String
+    ) -> _StartAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAssessmentResponse
+
+    interface _StartImportFileTaskResponse
+      include Smithy::Client::_Response[Types::StartImportFileTaskOutput]
+      def id: () -> String?
+    end
+    def start_import_file_task: (
+      ?name: String,
+      ?s3_bucket: String,
+      ?s3key: String,
+      ?data_source_type: String,
+      ?group_id: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?s3bucket_for_report_data: String
+    ) -> _StartImportFileTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartImportFileTaskResponse
+
+    interface _StartRecommendationReportGenerationResponse
+      include Smithy::Client::_Response[Types::StartRecommendationReportGenerationOutput]
+      def id: () -> String?
+    end
+    def start_recommendation_report_generation: (
+      ?output_format: String,
+      ?group_id_filter: Array[
+        {
+          name: String,
+          value: String
+        }
+      ]
+    ) -> _StartRecommendationReportGenerationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRecommendationReportGenerationResponse
+
+    interface _StopAssessmentResponse
+      include Smithy::Client::_Response[Types::StopAssessmentOutput]
+    end
+    def stop_assessment: (
+      ?assessment_id: String
+    ) -> _StopAssessmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopAssessmentResponse
+
+    interface _UpdateApplicationComponentConfigResponse
+      include Smithy::Client::_Response[Types::UpdateApplicationComponentConfigOutput]
+    end
+    def update_application_component_config: (
+      ?application_component_id: String,
+      ?inclusion_status: String,
+      ?strategy_option: {
+        strategy: String,
+        tool_name: String,
+        target_destination: String,
+        is_preferred: bool
+      },
+      ?source_code_list: Array[
+        {
+          version_control: String,
+          source_version: String,
+          location: String,
+          project_name: String
+        }
+      ],
+      ?secrets_manager_key: String,
+      ?configure_only: bool,
+      ?app_type: String
+    ) -> _UpdateApplicationComponentConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationComponentConfigResponse
+
+    interface _UpdateServerConfigResponse
+      include Smithy::Client::_Response[Types::UpdateServerConfigOutput]
+    end
+    def update_server_config: (
+      ?server_id: String,
+      ?strategy_option: {
+        strategy: String,
+        tool_name: String,
+        target_destination: String,
+        is_preferred: bool
+      }
+    ) -> _UpdateServerConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServerConfigResponse
+  end
+end

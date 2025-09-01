@@ -1,0 +1,844 @@
+module Aws::LookoutEquipment
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::LookoutEquipment::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateDatasetResponse
+      include Smithy::Client::_Response[Types::CreateDatasetResponse]
+      def dataset_name: () -> String?
+      def dataset_arn: () -> String?
+      def status: () -> String?
+    end
+    def create_dataset: (
+      ?dataset_name: String,
+      ?dataset_schema: {
+        inline_data_schema: String
+      },
+      ?server_side_kms_key_id: String,
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatasetResponse
+
+    interface _CreateInferenceSchedulerResponse
+      include Smithy::Client::_Response[Types::CreateInferenceSchedulerResponse]
+      def inference_scheduler_arn: () -> String?
+      def inference_scheduler_name: () -> String?
+      def status: () -> String?
+      def model_quality: () -> String?
+    end
+    def create_inference_scheduler: (
+      ?model_name: String,
+      ?inference_scheduler_name: String,
+      ?data_delay_offset_in_minutes: Integer,
+      ?data_upload_frequency: String,
+      ?data_input_configuration: {
+        s3_input_configuration: {
+          bucket: String,
+          prefix: String
+        },
+        input_time_zone_offset: String,
+        inference_input_name_configuration: {
+          timestamp_format: String,
+          component_timestamp_delimiter: String
+        }
+      },
+      ?data_output_configuration: {
+        s3_output_configuration: {
+          bucket: String,
+          prefix: String
+        },
+        kms_key_id: String
+      },
+      ?role_arn: String,
+      ?server_side_kms_key_id: String,
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateInferenceSchedulerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInferenceSchedulerResponse
+
+    interface _CreateLabelResponse
+      include Smithy::Client::_Response[Types::CreateLabelResponse]
+      def label_id: () -> String?
+    end
+    def create_label: (
+      ?label_group_name: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?rating: String,
+      ?fault_code: String,
+      ?notes: String,
+      ?equipment: String,
+      ?client_token: String
+    ) -> _CreateLabelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLabelResponse
+
+    interface _CreateLabelGroupResponse
+      include Smithy::Client::_Response[Types::CreateLabelGroupResponse]
+      def label_group_name: () -> String?
+      def label_group_arn: () -> String?
+    end
+    def create_label_group: (
+      ?label_group_name: String,
+      ?fault_codes: Array[String],
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateLabelGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLabelGroupResponse
+
+    interface _CreateModelResponse
+      include Smithy::Client::_Response[Types::CreateModelResponse]
+      def model_arn: () -> String?
+      def status: () -> String?
+    end
+    def create_model: (
+      ?model_name: String,
+      ?dataset_name: String,
+      ?dataset_schema: {
+        inline_data_schema: String
+      },
+      ?labels_input_configuration: {
+        s3_input_configuration: {
+          bucket: String,
+          prefix: String
+        },
+        label_group_name: String
+      },
+      ?client_token: String,
+      ?training_data_start_time: Time,
+      ?training_data_end_time: Time,
+      ?evaluation_data_start_time: Time,
+      ?evaluation_data_end_time: Time,
+      ?role_arn: String,
+      ?data_pre_processing_configuration: {
+        target_sampling_rate: String
+      },
+      ?server_side_kms_key_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?off_condition: String,
+      ?model_diagnostics_output_configuration: {
+        s3_output_configuration: {
+          bucket: String,
+          prefix: String
+        },
+        kms_key_id: String
+      }
+    ) -> _CreateModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateModelResponse
+
+    interface _CreateRetrainingSchedulerResponse
+      include Smithy::Client::_Response[Types::CreateRetrainingSchedulerResponse]
+      def model_name: () -> String?
+      def model_arn: () -> String?
+      def status: () -> String?
+    end
+    def create_retraining_scheduler: (
+      ?model_name: String,
+      ?retraining_start_date: Time,
+      ?retraining_frequency: String,
+      ?lookback_window: String,
+      ?promote_mode: String,
+      ?client_token: String
+    ) -> _CreateRetrainingSchedulerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRetrainingSchedulerResponse
+
+    interface _DeleteDatasetResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_dataset: (
+      ?dataset_name: String
+    ) -> _DeleteDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDatasetResponse
+
+    interface _DeleteInferenceSchedulerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_inference_scheduler: (
+      ?inference_scheduler_name: String
+    ) -> _DeleteInferenceSchedulerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInferenceSchedulerResponse
+
+    interface _DeleteLabelResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_label: (
+      ?label_group_name: String,
+      ?label_id: String
+    ) -> _DeleteLabelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLabelResponse
+
+    interface _DeleteLabelGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_label_group: (
+      ?label_group_name: String
+    ) -> _DeleteLabelGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLabelGroupResponse
+
+    interface _DeleteModelResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_model: (
+      ?model_name: String
+    ) -> _DeleteModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteModelResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeleteRetrainingSchedulerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_retraining_scheduler: (
+      ?model_name: String
+    ) -> _DeleteRetrainingSchedulerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRetrainingSchedulerResponse
+
+    interface _DescribeDataIngestionJobResponse
+      include Smithy::Client::_Response[Types::DescribeDataIngestionJobResponse]
+      def job_id: () -> String?
+      def dataset_arn: () -> String?
+      def ingestion_input_configuration: () -> Types::IngestionInputConfiguration?
+      def role_arn: () -> String?
+      def created_at: () -> Time?
+      def status: () -> String?
+      def failed_reason: () -> String?
+      def data_quality_summary: () -> Types::DataQualitySummary?
+      def ingested_files_summary: () -> Types::IngestedFilesSummary?
+      def status_detail: () -> String?
+      def ingested_data_size: () -> Integer?
+      def data_start_time: () -> Time?
+      def data_end_time: () -> Time?
+      def source_dataset_arn: () -> String?
+    end
+    def describe_data_ingestion_job: (
+      ?job_id: String
+    ) -> _DescribeDataIngestionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDataIngestionJobResponse
+
+    interface _DescribeDatasetResponse
+      include Smithy::Client::_Response[Types::DescribeDatasetResponse]
+      def dataset_name: () -> String?
+      def dataset_arn: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def status: () -> String?
+      def schema: () -> String?
+      def server_side_kms_key_id: () -> String?
+      def ingestion_input_configuration: () -> Types::IngestionInputConfiguration?
+      def data_quality_summary: () -> Types::DataQualitySummary?
+      def ingested_files_summary: () -> Types::IngestedFilesSummary?
+      def role_arn: () -> String?
+      def data_start_time: () -> Time?
+      def data_end_time: () -> Time?
+      def source_dataset_arn: () -> String?
+    end
+    def describe_dataset: (
+      ?dataset_name: String
+    ) -> _DescribeDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeDatasetResponse
+
+    interface _DescribeInferenceSchedulerResponse
+      include Smithy::Client::_Response[Types::DescribeInferenceSchedulerResponse]
+      def model_arn: () -> String?
+      def model_name: () -> String?
+      def inference_scheduler_name: () -> String?
+      def inference_scheduler_arn: () -> String?
+      def status: () -> String?
+      def data_delay_offset_in_minutes: () -> Integer?
+      def data_upload_frequency: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def data_input_configuration: () -> Types::InferenceInputConfiguration?
+      def data_output_configuration: () -> Types::InferenceOutputConfiguration?
+      def role_arn: () -> String?
+      def server_side_kms_key_id: () -> String?
+      def latest_inference_result: () -> String?
+    end
+    def describe_inference_scheduler: (
+      ?inference_scheduler_name: String
+    ) -> _DescribeInferenceSchedulerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInferenceSchedulerResponse
+
+    interface _DescribeLabelResponse
+      include Smithy::Client::_Response[Types::DescribeLabelResponse]
+      def label_group_name: () -> String?
+      def label_group_arn: () -> String?
+      def label_id: () -> String?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def rating: () -> String?
+      def fault_code: () -> String?
+      def notes: () -> String?
+      def equipment: () -> String?
+      def created_at: () -> Time?
+    end
+    def describe_label: (
+      ?label_group_name: String,
+      ?label_id: String
+    ) -> _DescribeLabelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLabelResponse
+
+    interface _DescribeLabelGroupResponse
+      include Smithy::Client::_Response[Types::DescribeLabelGroupResponse]
+      def label_group_name: () -> String?
+      def label_group_arn: () -> String?
+      def fault_codes: () -> Array[String]?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def describe_label_group: (
+      ?label_group_name: String
+    ) -> _DescribeLabelGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLabelGroupResponse
+
+    interface _DescribeModelResponse
+      include Smithy::Client::_Response[Types::DescribeModelResponse]
+      def model_name: () -> String?
+      def model_arn: () -> String?
+      def dataset_name: () -> String?
+      def dataset_arn: () -> String?
+      def schema: () -> String?
+      def labels_input_configuration: () -> Types::LabelsInputConfiguration?
+      def training_data_start_time: () -> Time?
+      def training_data_end_time: () -> Time?
+      def evaluation_data_start_time: () -> Time?
+      def evaluation_data_end_time: () -> Time?
+      def role_arn: () -> String?
+      def data_pre_processing_configuration: () -> Types::DataPreProcessingConfiguration?
+      def status: () -> String?
+      def training_execution_start_time: () -> Time?
+      def training_execution_end_time: () -> Time?
+      def failed_reason: () -> String?
+      def model_metrics: () -> String?
+      def last_updated_time: () -> Time?
+      def created_at: () -> Time?
+      def server_side_kms_key_id: () -> String?
+      def off_condition: () -> String?
+      def source_model_version_arn: () -> String?
+      def import_job_start_time: () -> Time?
+      def import_job_end_time: () -> Time?
+      def active_model_version: () -> Integer?
+      def active_model_version_arn: () -> String?
+      def model_version_activated_at: () -> Time?
+      def previous_active_model_version: () -> Integer?
+      def previous_active_model_version_arn: () -> String?
+      def previous_model_version_activated_at: () -> Time?
+      def prior_model_metrics: () -> String?
+      def latest_scheduled_retraining_failed_reason: () -> String?
+      def latest_scheduled_retraining_status: () -> String?
+      def latest_scheduled_retraining_model_version: () -> Integer?
+      def latest_scheduled_retraining_start_time: () -> Time?
+      def latest_scheduled_retraining_available_data_in_days: () -> Integer?
+      def next_scheduled_retraining_start_date: () -> Time?
+      def accumulated_inference_data_start_time: () -> Time?
+      def accumulated_inference_data_end_time: () -> Time?
+      def retraining_scheduler_status: () -> String?
+      def model_diagnostics_output_configuration: () -> Types::ModelDiagnosticsOutputConfiguration?
+      def model_quality: () -> String?
+    end
+    def describe_model: (
+      ?model_name: String
+    ) -> _DescribeModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeModelResponse
+
+    interface _DescribeModelVersionResponse
+      include Smithy::Client::_Response[Types::DescribeModelVersionResponse]
+      def model_name: () -> String?
+      def model_arn: () -> String?
+      def model_version: () -> Integer?
+      def model_version_arn: () -> String?
+      def status: () -> String?
+      def source_type: () -> String?
+      def dataset_name: () -> String?
+      def dataset_arn: () -> String?
+      def schema: () -> String?
+      def labels_input_configuration: () -> Types::LabelsInputConfiguration?
+      def training_data_start_time: () -> Time?
+      def training_data_end_time: () -> Time?
+      def evaluation_data_start_time: () -> Time?
+      def evaluation_data_end_time: () -> Time?
+      def role_arn: () -> String?
+      def data_pre_processing_configuration: () -> Types::DataPreProcessingConfiguration?
+      def training_execution_start_time: () -> Time?
+      def training_execution_end_time: () -> Time?
+      def failed_reason: () -> String?
+      def model_metrics: () -> String?
+      def last_updated_time: () -> Time?
+      def created_at: () -> Time?
+      def server_side_kms_key_id: () -> String?
+      def off_condition: () -> String?
+      def source_model_version_arn: () -> String?
+      def import_job_start_time: () -> Time?
+      def import_job_end_time: () -> Time?
+      def imported_data_size_in_bytes: () -> Integer?
+      def prior_model_metrics: () -> String?
+      def retraining_available_data_in_days: () -> Integer?
+      def auto_promotion_result: () -> String?
+      def auto_promotion_result_reason: () -> String?
+      def model_diagnostics_output_configuration: () -> Types::ModelDiagnosticsOutputConfiguration?
+      def model_diagnostics_results_object: () -> Types::S3Object?
+      def model_quality: () -> String?
+    end
+    def describe_model_version: (
+      ?model_name: String,
+      ?model_version: Integer
+    ) -> _DescribeModelVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeModelVersionResponse
+
+    interface _DescribeResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DescribeResourcePolicyResponse]
+      def policy_revision_id: () -> String?
+      def resource_policy: () -> String?
+      def creation_time: () -> Time?
+      def last_modified_time: () -> Time?
+    end
+    def describe_resource_policy: (
+      ?resource_arn: String
+    ) -> _DescribeResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeResourcePolicyResponse
+
+    interface _DescribeRetrainingSchedulerResponse
+      include Smithy::Client::_Response[Types::DescribeRetrainingSchedulerResponse]
+      def model_name: () -> String?
+      def model_arn: () -> String?
+      def retraining_start_date: () -> Time?
+      def retraining_frequency: () -> String?
+      def lookback_window: () -> String?
+      def status: () -> String?
+      def promote_mode: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def describe_retraining_scheduler: (
+      ?model_name: String
+    ) -> _DescribeRetrainingSchedulerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRetrainingSchedulerResponse
+
+    interface _ImportDatasetResponse
+      include Smithy::Client::_Response[Types::ImportDatasetResponse]
+      def dataset_name: () -> String?
+      def dataset_arn: () -> String?
+      def status: () -> String?
+      def job_id: () -> String?
+    end
+    def import_dataset: (
+      ?source_dataset_arn: String,
+      ?dataset_name: String,
+      ?client_token: String,
+      ?server_side_kms_key_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _ImportDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportDatasetResponse
+
+    interface _ImportModelVersionResponse
+      include Smithy::Client::_Response[Types::ImportModelVersionResponse]
+      def model_name: () -> String?
+      def model_arn: () -> String?
+      def model_version_arn: () -> String?
+      def model_version: () -> Integer?
+      def status: () -> String?
+    end
+    def import_model_version: (
+      ?source_model_version_arn: String,
+      ?model_name: String,
+      ?dataset_name: String,
+      ?labels_input_configuration: {
+        s3_input_configuration: {
+          bucket: String,
+          prefix: String
+        },
+        label_group_name: String
+      },
+      ?client_token: String,
+      ?role_arn: String,
+      ?server_side_kms_key_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?inference_data_import_strategy: String
+    ) -> _ImportModelVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportModelVersionResponse
+
+    interface _ListDataIngestionJobsResponse
+      include Smithy::Client::_Response[Types::ListDataIngestionJobsResponse]
+      def next_token: () -> String?
+      def data_ingestion_job_summaries: () -> Array[Types::DataIngestionJobSummary]?
+    end
+    def list_data_ingestion_jobs: (
+      ?dataset_name: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?status: String
+    ) -> _ListDataIngestionJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataIngestionJobsResponse
+
+    interface _ListDatasetsResponse
+      include Smithy::Client::_Response[Types::ListDatasetsResponse]
+      def next_token: () -> String?
+      def dataset_summaries: () -> Array[Types::DatasetSummary]?
+    end
+    def list_datasets: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?dataset_name_begins_with: String
+    ) -> _ListDatasetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetsResponse
+
+    interface _ListInferenceEventsResponse
+      include Smithy::Client::_Response[Types::ListInferenceEventsResponse]
+      def next_token: () -> String?
+      def inference_event_summaries: () -> Array[Types::InferenceEventSummary]?
+    end
+    def list_inference_events: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?inference_scheduler_name: String,
+      ?interval_start_time: Time,
+      ?interval_end_time: Time
+    ) -> _ListInferenceEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInferenceEventsResponse
+
+    interface _ListInferenceExecutionsResponse
+      include Smithy::Client::_Response[Types::ListInferenceExecutionsResponse]
+      def next_token: () -> String?
+      def inference_execution_summaries: () -> Array[Types::InferenceExecutionSummary]?
+    end
+    def list_inference_executions: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?inference_scheduler_name: String,
+      ?data_start_time_after: Time,
+      ?data_end_time_before: Time,
+      ?status: String
+    ) -> _ListInferenceExecutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInferenceExecutionsResponse
+
+    interface _ListInferenceSchedulersResponse
+      include Smithy::Client::_Response[Types::ListInferenceSchedulersResponse]
+      def next_token: () -> String?
+      def inference_scheduler_summaries: () -> Array[Types::InferenceSchedulerSummary]?
+    end
+    def list_inference_schedulers: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?inference_scheduler_name_begins_with: String,
+      ?model_name: String,
+      ?status: String
+    ) -> _ListInferenceSchedulersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInferenceSchedulersResponse
+
+    interface _ListLabelGroupsResponse
+      include Smithy::Client::_Response[Types::ListLabelGroupsResponse]
+      def next_token: () -> String?
+      def label_group_summaries: () -> Array[Types::LabelGroupSummary]?
+    end
+    def list_label_groups: (
+      ?label_group_name_begins_with: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListLabelGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLabelGroupsResponse
+
+    interface _ListLabelsResponse
+      include Smithy::Client::_Response[Types::ListLabelsResponse]
+      def next_token: () -> String?
+      def label_summaries: () -> Array[Types::LabelSummary]?
+    end
+    def list_labels: (
+      ?label_group_name: String,
+      ?interval_start_time: Time,
+      ?interval_end_time: Time,
+      ?fault_code: String,
+      ?equipment: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListLabelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLabelsResponse
+
+    interface _ListModelVersionsResponse
+      include Smithy::Client::_Response[Types::ListModelVersionsResponse]
+      def next_token: () -> String?
+      def model_version_summaries: () -> Array[Types::ModelVersionSummary]?
+    end
+    def list_model_versions: (
+      ?model_name: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?status: String,
+      ?source_type: String,
+      ?created_at_end_time: Time,
+      ?created_at_start_time: Time,
+      ?max_model_version: Integer,
+      ?min_model_version: Integer
+    ) -> _ListModelVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListModelVersionsResponse
+
+    interface _ListModelsResponse
+      include Smithy::Client::_Response[Types::ListModelsResponse]
+      def next_token: () -> String?
+      def model_summaries: () -> Array[Types::ModelSummary]?
+    end
+    def list_models: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?status: String,
+      ?model_name_begins_with: String,
+      ?dataset_name_begins_with: String
+    ) -> _ListModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListModelsResponse
+
+    interface _ListRetrainingSchedulersResponse
+      include Smithy::Client::_Response[Types::ListRetrainingSchedulersResponse]
+      def retraining_scheduler_summaries: () -> Array[Types::RetrainingSchedulerSummary]?
+      def next_token: () -> String?
+    end
+    def list_retraining_schedulers: (
+      ?model_name_begins_with: String,
+      ?status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRetrainingSchedulersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRetrainingSchedulersResponse
+
+    interface _ListSensorStatisticsResponse
+      include Smithy::Client::_Response[Types::ListSensorStatisticsResponse]
+      def sensor_statistics_summaries: () -> Array[Types::SensorStatisticsSummary]?
+      def next_token: () -> String?
+    end
+    def list_sensor_statistics: (
+      ?dataset_name: String,
+      ?ingestion_job_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSensorStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSensorStatisticsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
+      def resource_arn: () -> String?
+      def policy_revision_id: () -> String?
+    end
+    def put_resource_policy: (
+      ?resource_arn: String,
+      ?resource_policy: String,
+      ?policy_revision_id: String,
+      ?client_token: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _StartDataIngestionJobResponse
+      include Smithy::Client::_Response[Types::StartDataIngestionJobResponse]
+      def job_id: () -> String?
+      def status: () -> String?
+    end
+    def start_data_ingestion_job: (
+      ?dataset_name: String,
+      ?ingestion_input_configuration: {
+        s3_input_configuration: {
+          bucket: String,
+          prefix: String,
+          key_pattern: String
+        }
+      },
+      ?role_arn: String,
+      ?client_token: String
+    ) -> _StartDataIngestionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDataIngestionJobResponse
+
+    interface _StartInferenceSchedulerResponse
+      include Smithy::Client::_Response[Types::StartInferenceSchedulerResponse]
+      def model_arn: () -> String?
+      def model_name: () -> String?
+      def inference_scheduler_name: () -> String?
+      def inference_scheduler_arn: () -> String?
+      def status: () -> String?
+    end
+    def start_inference_scheduler: (
+      ?inference_scheduler_name: String
+    ) -> _StartInferenceSchedulerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartInferenceSchedulerResponse
+
+    interface _StartRetrainingSchedulerResponse
+      include Smithy::Client::_Response[Types::StartRetrainingSchedulerResponse]
+      def model_name: () -> String?
+      def model_arn: () -> String?
+      def status: () -> String?
+    end
+    def start_retraining_scheduler: (
+      ?model_name: String
+    ) -> _StartRetrainingSchedulerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRetrainingSchedulerResponse
+
+    interface _StopInferenceSchedulerResponse
+      include Smithy::Client::_Response[Types::StopInferenceSchedulerResponse]
+      def model_arn: () -> String?
+      def model_name: () -> String?
+      def inference_scheduler_name: () -> String?
+      def inference_scheduler_arn: () -> String?
+      def status: () -> String?
+    end
+    def stop_inference_scheduler: (
+      ?inference_scheduler_name: String
+    ) -> _StopInferenceSchedulerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopInferenceSchedulerResponse
+
+    interface _StopRetrainingSchedulerResponse
+      include Smithy::Client::_Response[Types::StopRetrainingSchedulerResponse]
+      def model_name: () -> String?
+      def model_arn: () -> String?
+      def status: () -> String?
+    end
+    def stop_retraining_scheduler: (
+      ?model_name: String
+    ) -> _StopRetrainingSchedulerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopRetrainingSchedulerResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateActiveModelVersionResponse
+      include Smithy::Client::_Response[Types::UpdateActiveModelVersionResponse]
+      def model_name: () -> String?
+      def model_arn: () -> String?
+      def current_active_version: () -> Integer?
+      def previous_active_version: () -> Integer?
+      def current_active_version_arn: () -> String?
+      def previous_active_version_arn: () -> String?
+    end
+    def update_active_model_version: (
+      ?model_name: String,
+      ?model_version: Integer
+    ) -> _UpdateActiveModelVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateActiveModelVersionResponse
+
+    interface _UpdateInferenceSchedulerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_inference_scheduler: (
+      ?inference_scheduler_name: String,
+      ?data_delay_offset_in_minutes: Integer,
+      ?data_upload_frequency: String,
+      ?data_input_configuration: {
+        s3_input_configuration: {
+          bucket: String,
+          prefix: String
+        },
+        input_time_zone_offset: String,
+        inference_input_name_configuration: {
+          timestamp_format: String,
+          component_timestamp_delimiter: String
+        }
+      },
+      ?data_output_configuration: {
+        s3_output_configuration: {
+          bucket: String,
+          prefix: String
+        },
+        kms_key_id: String
+      },
+      ?role_arn: String
+    ) -> _UpdateInferenceSchedulerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInferenceSchedulerResponse
+
+    interface _UpdateLabelGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_label_group: (
+      ?label_group_name: String,
+      ?fault_codes: Array[String]
+    ) -> _UpdateLabelGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLabelGroupResponse
+
+    interface _UpdateModelResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_model: (
+      ?model_name: String,
+      ?labels_input_configuration: {
+        s3_input_configuration: {
+          bucket: String,
+          prefix: String
+        },
+        label_group_name: String
+      },
+      ?role_arn: String,
+      ?model_diagnostics_output_configuration: {
+        s3_output_configuration: {
+          bucket: String,
+          prefix: String
+        },
+        kms_key_id: String
+      }
+    ) -> _UpdateModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateModelResponse
+
+    interface _UpdateRetrainingSchedulerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_retraining_scheduler: (
+      ?model_name: String,
+      ?retraining_start_date: Time,
+      ?retraining_frequency: String,
+      ?lookback_window: String,
+      ?promote_mode: String
+    ) -> _UpdateRetrainingSchedulerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRetrainingSchedulerResponse
+  end
+end

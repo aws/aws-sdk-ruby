@@ -1,0 +1,994 @@
+module Aws::ServiceCatalogAppRegistry
+  module Types
+
+    class AppRegistryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_query_configuration: Types::TagQueryConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_query_configuration: Types::TagQueryConfiguration?
+    end
+
+    class Application
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?creation_time: Time,
+        ?last_update_time: Time,
+        ?tags: Hash[String, String],
+        ?application_tag: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_update_time: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor application_tag: Hash[String, String]?
+    end
+
+    class ApplicationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?creation_time: Time,
+        ?last_update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_update_time: Time?
+    end
+
+    class ApplicationTagResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_tag_status: String,
+        ?error_message: String,
+        ?resources: Array[Types::ResourcesListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_tag_status: String?
+      attr_accessor error_message: String?
+      attr_accessor resources: Array[Types::ResourcesListItem]?
+      attr_accessor next_token: String?
+    end
+
+    module ApplicationTagStatus
+      IN_PROGRESS: String
+      SUCCESS: String
+      FAILURE: String
+    end
+
+    class AssociateAttributeGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: String,
+        ?attribute_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: String?
+      attr_accessor attribute_group: String?
+    end
+
+    class AssociateAttributeGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?attribute_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor attribute_group_arn: String?
+    end
+
+    class AssociateResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: String,
+        ?resource_type: String,
+        ?resource: String,
+        ?options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource: String?
+      attr_accessor options: Array[String]?
+    end
+
+    class AssociateResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?resource_arn: String,
+        ?options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor options: Array[String]?
+    end
+
+    module AssociationOption
+      APPLY_APPLICATION_TAG: String
+      SKIP_APPLICATION_TAG: String
+    end
+
+    class AttributeGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?creation_time: Time,
+        ?last_update_time: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_update_time: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class AttributeGroupDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?created_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor created_by: String?
+    end
+
+    class AttributeGroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?creation_time: Time,
+        ?last_update_time: Time,
+        ?created_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_update_time: Time?
+      attr_accessor created_by: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: Types::Application,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: Types::Application?
+    end
+
+    class CreateAttributeGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?attributes: String,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor attributes: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateAttributeGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_group: Types::AttributeGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_group: Types::AttributeGroup?
+    end
+
+    class DeleteApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: String?
+    end
+
+    class DeleteApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: Types::ApplicationSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: Types::ApplicationSummary?
+    end
+
+    class DeleteAttributeGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_group: String?
+    end
+
+    class DeleteAttributeGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_group: Types::AttributeGroupSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_group: Types::AttributeGroupSummary?
+    end
+
+    class DisassociateAttributeGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: String,
+        ?attribute_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: String?
+      attr_accessor attribute_group: String?
+    end
+
+    class DisassociateAttributeGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?attribute_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor attribute_group_arn: String?
+    end
+
+    class DisassociateResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: String,
+        ?resource_type: String,
+        ?resource: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource: String?
+    end
+
+    class DisassociateResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class GetApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: String?
+    end
+
+    class GetApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?creation_time: Time,
+        ?last_update_time: Time,
+        ?associated_resource_count: Integer,
+        ?tags: Hash[String, String],
+        ?integrations: Types::Integrations,
+        ?application_tag: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_update_time: Time?
+      attr_accessor associated_resource_count: Integer?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor integrations: Types::Integrations?
+      attr_accessor application_tag: Hash[String, String]?
+    end
+
+    class GetAssociatedResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: String,
+        ?resource_type: String,
+        ?resource: String,
+        ?next_token: String,
+        ?resource_tag_status: Array[String],
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource: String?
+      attr_accessor next_token: String?
+      attr_accessor resource_tag_status: Array[String]?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetAssociatedResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: Types::Resource,
+        ?options: Array[String],
+        ?application_tag_result: Types::ApplicationTagResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: Types::Resource?
+      attr_accessor options: Array[String]?
+      attr_accessor application_tag_result: Types::ApplicationTagResult?
+    end
+
+    class GetAttributeGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_group: String?
+    end
+
+    class GetAttributeGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?attributes: String,
+        ?creation_time: Time,
+        ?last_update_time: Time,
+        ?tags: Hash[String, String],
+        ?created_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor attributes: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_update_time: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor created_by: String?
+    end
+
+    class GetConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::AppRegistryConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::AppRegistryConfiguration?
+    end
+
+    class Integrations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group: Types::ResourceGroup,
+        ?application_tag_resource_group: Types::ResourceGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group: Types::ResourceGroup?
+      attr_accessor application_tag_resource_group: Types::ResourceGroup?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListApplicationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListApplicationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?applications: Array[Types::ApplicationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor applications: Array[Types::ApplicationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssociatedAttributeGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAssociatedAttributeGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_groups: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_groups: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssociatedResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAssociatedResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resources: Array[Types::ResourceInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resources: Array[Types::ResourceInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAttributeGroupsForApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAttributeGroupsForApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_groups_details: Array[Types::AttributeGroupDetails],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_groups_details: Array[Types::AttributeGroupDetails]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAttributeGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAttributeGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_groups: Array[Types::AttributeGroupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_groups: Array[Types::AttributeGroupSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class PutConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::AppRegistryConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::AppRegistryConfiguration?
+    end
+
+    class Resource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?association_time: Time,
+        ?integrations: Types::ResourceIntegrations,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor association_time: Time?
+      attr_accessor integrations: Types::ResourceIntegrations?
+    end
+
+    class ResourceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_value: String?
+    end
+
+    class ResourceGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?arn: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor arn: String?
+      attr_accessor error_message: String?
+    end
+
+    module ResourceGroupState
+      CREATING: String
+      CREATE_COMPLETE: String
+      CREATE_FAILED: String
+      UPDATING: String
+      UPDATE_COMPLETE: String
+      UPDATE_FAILED: String
+    end
+
+    class ResourceInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?resource_type: String,
+        ?resource_details: Types::ResourceDetails,
+        ?options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_details: Types::ResourceDetails?
+      attr_accessor options: Array[String]?
+    end
+
+    class ResourceIntegrations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group: Types::ResourceGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group: Types::ResourceGroup?
+    end
+
+    module ResourceItemStatus
+      SUCCESS: String
+      FAILED: String
+      IN_PROGRESS: String
+      SKIPPED: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceType
+      CFN_STACK: String
+      RESOURCE_TAG_VALUE: String
+    end
+
+    class ResourcesListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?error_message: String,
+        ?status: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor error_message: String?
+      attr_accessor status: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SyncAction
+      START_SYNC: String
+      NO_ACTION: String
+    end
+
+    class SyncResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource: String?
+    end
+
+    class SyncResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?resource_arn: String,
+        ?action_taken: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor action_taken: String?
+    end
+
+    class TagQueryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_key: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: Types::Application,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: Types::Application?
+    end
+
+    class UpdateAttributeGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_group: String,
+        ?name: String,
+        ?description: String,
+        ?attributes: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_group: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor attributes: String?
+    end
+
+    class UpdateAttributeGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_group: Types::AttributeGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_group: Types::AttributeGroup?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

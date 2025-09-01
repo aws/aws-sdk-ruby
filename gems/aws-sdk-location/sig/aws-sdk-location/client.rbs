@@ -1,0 +1,963 @@
+module Aws::Location
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Location::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateTrackerConsumerResponse
+      include Smithy::Client::_Response[Types::AssociateTrackerConsumerOutput]
+    end
+    def associate_tracker_consumer: (
+      ?tracker_name: String,
+      ?consumer_arn: String
+    ) -> _AssociateTrackerConsumerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateTrackerConsumerResponse
+
+    interface _BatchDeleteDevicePositionHistoryResponse
+      include Smithy::Client::_Response[Types::BatchDeleteDevicePositionHistoryOutput]
+      def errors: () -> Array[Types::BatchDeleteDevicePositionHistoryError]?
+    end
+    def batch_delete_device_position_history: (
+      ?tracker_name: String,
+      ?device_ids: Array[String]
+    ) -> _BatchDeleteDevicePositionHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteDevicePositionHistoryResponse
+
+    interface _BatchDeleteGeofenceResponse
+      include Smithy::Client::_Response[Types::BatchDeleteGeofenceOutput]
+      def errors: () -> Array[Types::BatchDeleteGeofenceError]?
+    end
+    def batch_delete_geofence: (
+      ?collection_name: String,
+      ?geofence_ids: Array[String]
+    ) -> _BatchDeleteGeofenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteGeofenceResponse
+
+    interface _BatchEvaluateGeofencesResponse
+      include Smithy::Client::_Response[Types::BatchEvaluateGeofencesOutput]
+      def errors: () -> Array[Types::BatchEvaluateGeofencesError]?
+    end
+    def batch_evaluate_geofences: (
+      ?collection_name: String,
+      ?device_position_updates: Array[
+        {
+          device_id: String,
+          sample_time: Time,
+          position: Array[Float],
+          accuracy: {
+            horizontal: Float
+          },
+          position_properties: Hash[String, String]
+        }
+      ]
+    ) -> _BatchEvaluateGeofencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchEvaluateGeofencesResponse
+
+    interface _BatchGetDevicePositionResponse
+      include Smithy::Client::_Response[Types::BatchGetDevicePositionOutput]
+      def errors: () -> Array[Types::BatchGetDevicePositionError]?
+      def device_positions: () -> Array[Types::DevicePosition]?
+    end
+    def batch_get_device_position: (
+      ?tracker_name: String,
+      ?device_ids: Array[String]
+    ) -> _BatchGetDevicePositionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetDevicePositionResponse
+
+    interface _BatchPutGeofenceResponse
+      include Smithy::Client::_Response[Types::BatchPutGeofenceOutput]
+      def successes: () -> Array[Types::BatchPutGeofenceSuccess]?
+      def errors: () -> Array[Types::BatchPutGeofenceError]?
+    end
+    def batch_put_geofence: (
+      ?collection_name: String,
+      ?entries: Array[
+        {
+          geofence_id: String,
+          geometry: {
+            polygon: Array[
+              Array[
+                Array[Float]
+              ]
+            ],
+            circle: {
+              center: Array[Float],
+              radius: Float
+            },
+            geobuf: String,
+            multi_polygon: Array[
+              Array[
+                Array[
+                  Array[Float]
+                ]
+              ]
+            ]
+          },
+          geofence_properties: Hash[String, String]
+        }
+      ]
+    ) -> _BatchPutGeofenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchPutGeofenceResponse
+
+    interface _BatchUpdateDevicePositionResponse
+      include Smithy::Client::_Response[Types::BatchUpdateDevicePositionOutput]
+      def errors: () -> Array[Types::BatchUpdateDevicePositionError]?
+    end
+    def batch_update_device_position: (
+      ?tracker_name: String,
+      ?updates: Array[
+        {
+          device_id: String,
+          sample_time: Time,
+          position: Array[Float],
+          accuracy: {
+            horizontal: Float
+          },
+          position_properties: Hash[String, String]
+        }
+      ]
+    ) -> _BatchUpdateDevicePositionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateDevicePositionResponse
+
+    interface _CalculateRouteResponse
+      include Smithy::Client::_Response[Types::CalculateRouteOutput]
+      def legs: () -> Array[Types::Leg]?
+      def summary: () -> Types::CalculateRouteSummary?
+    end
+    def calculate_route: (
+      ?calculator_name: String,
+      ?departure_position: Array[Float],
+      ?destination_position: Array[Float],
+      ?waypoint_positions: Array[
+        Array[Float]
+      ],
+      ?travel_mode: String,
+      ?departure_time: Time,
+      ?depart_now: bool,
+      ?distance_unit: String,
+      ?include_leg_geometry: bool,
+      ?car_mode_options: {
+        avoid_ferries: bool,
+        avoid_tolls: untyped
+      },
+      ?truck_mode_options: {
+        avoid_ferries: bool,
+        avoid_tolls: untyped,
+        dimensions: {
+          length: Float,
+          height: untyped,
+          width: untyped,
+          unit: String
+        },
+        weight: {
+          total: untyped,
+          unit: String
+        }
+      },
+      ?arrival_time: Time,
+      ?optimize_for: String,
+      ?key: String
+    ) -> _CalculateRouteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CalculateRouteResponse
+
+    interface _CalculateRouteMatrixResponse
+      include Smithy::Client::_Response[Types::CalculateRouteMatrixOutput]
+      def route_matrix: () -> Array[Array[Types::RouteMatrixEntry]]?
+      def snapped_departure_positions: () -> Array[Array[Float]]?
+      def snapped_destination_positions: () -> Array[Array[Float]]?
+      def summary: () -> Types::CalculateRouteMatrixSummary?
+    end
+    def calculate_route_matrix: (
+      ?calculator_name: String,
+      ?departure_positions: Array[
+        Array[Float]
+      ],
+      ?destination_positions: Array[
+        Array[Float]
+      ],
+      ?travel_mode: String,
+      ?departure_time: Time,
+      ?depart_now: bool,
+      ?distance_unit: String,
+      ?car_mode_options: {
+        avoid_ferries: bool,
+        avoid_tolls: untyped
+      },
+      ?truck_mode_options: {
+        avoid_ferries: bool,
+        avoid_tolls: untyped,
+        dimensions: {
+          length: Float,
+          height: untyped,
+          width: untyped,
+          unit: String
+        },
+        weight: {
+          total: untyped,
+          unit: String
+        }
+      },
+      ?key: String
+    ) -> _CalculateRouteMatrixResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CalculateRouteMatrixResponse
+
+    interface _CreateGeofenceCollectionResponse
+      include Smithy::Client::_Response[Types::CreateGeofenceCollectionOutput]
+      def collection_name: () -> String?
+      def collection_arn: () -> String?
+      def create_time: () -> Time?
+    end
+    def create_geofence_collection: (
+      ?collection_name: String,
+      ?pricing_plan: String,
+      ?pricing_plan_data_source: String,
+      ?description: String,
+      ?tags: Hash[String, String],
+      ?kms_key_id: String
+    ) -> _CreateGeofenceCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGeofenceCollectionResponse
+
+    interface _CreateKeyResponse
+      include Smithy::Client::_Response[Types::CreateKeyOutput]
+      def key: () -> String?
+      def key_arn: () -> String?
+      def key_name: () -> String?
+      def create_time: () -> Time?
+    end
+    def create_key: (
+      ?key_name: String,
+      ?restrictions: {
+        allow_actions: Array[String],
+        allow_resources: Array[String],
+        allow_referers: Array[String]
+      },
+      ?description: String,
+      ?expire_time: Time,
+      ?no_expiry: bool,
+      ?tags: Hash[String, String]
+    ) -> _CreateKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateKeyResponse
+
+    interface _CreateMapResponse
+      include Smithy::Client::_Response[Types::CreateMapOutput]
+      def map_name: () -> String?
+      def map_arn: () -> String?
+      def create_time: () -> Time?
+    end
+    def create_map: (
+      ?map_name: String,
+      ?configuration: {
+        style: String,
+        political_view: String,
+        custom_layers: Array[String]
+      },
+      ?pricing_plan: String,
+      ?description: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateMapResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMapResponse
+
+    interface _CreatePlaceIndexResponse
+      include Smithy::Client::_Response[Types::CreatePlaceIndexOutput]
+      def index_name: () -> String?
+      def index_arn: () -> String?
+      def create_time: () -> Time?
+    end
+    def create_place_index: (
+      ?index_name: String,
+      ?data_source: String,
+      ?pricing_plan: String,
+      ?description: String,
+      ?data_source_configuration: {
+        intended_use: String
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreatePlaceIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePlaceIndexResponse
+
+    interface _CreateRouteCalculatorResponse
+      include Smithy::Client::_Response[Types::CreateRouteCalculatorOutput]
+      def calculator_name: () -> String?
+      def calculator_arn: () -> String?
+      def create_time: () -> Time?
+    end
+    def create_route_calculator: (
+      ?calculator_name: String,
+      ?data_source: String,
+      ?pricing_plan: String,
+      ?description: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateRouteCalculatorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRouteCalculatorResponse
+
+    interface _CreateTrackerResponse
+      include Smithy::Client::_Response[Types::CreateTrackerOutput]
+      def tracker_name: () -> String?
+      def tracker_arn: () -> String?
+      def create_time: () -> Time?
+    end
+    def create_tracker: (
+      ?tracker_name: String,
+      ?pricing_plan: String,
+      ?kms_key_id: String,
+      ?pricing_plan_data_source: String,
+      ?description: String,
+      ?tags: Hash[String, String],
+      ?position_filtering: String,
+      ?event_bridge_enabled: bool,
+      ?kms_key_enable_geospatial_queries: bool
+    ) -> _CreateTrackerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrackerResponse
+
+    interface _DeleteGeofenceCollectionResponse
+      include Smithy::Client::_Response[Types::DeleteGeofenceCollectionOutput]
+    end
+    def delete_geofence_collection: (
+      ?collection_name: String
+    ) -> _DeleteGeofenceCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGeofenceCollectionResponse
+
+    interface _DeleteKeyResponse
+      include Smithy::Client::_Response[Types::DeleteKeyOutput]
+    end
+    def delete_key: (
+      ?key_name: String,
+      ?force_delete: bool
+    ) -> _DeleteKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKeyResponse
+
+    interface _DeleteMapResponse
+      include Smithy::Client::_Response[Types::DeleteMapOutput]
+    end
+    def delete_map: (
+      ?map_name: String
+    ) -> _DeleteMapResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMapResponse
+
+    interface _DeletePlaceIndexResponse
+      include Smithy::Client::_Response[Types::DeletePlaceIndexOutput]
+    end
+    def delete_place_index: (
+      ?index_name: String
+    ) -> _DeletePlaceIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePlaceIndexResponse
+
+    interface _DeleteRouteCalculatorResponse
+      include Smithy::Client::_Response[Types::DeleteRouteCalculatorOutput]
+    end
+    def delete_route_calculator: (
+      ?calculator_name: String
+    ) -> _DeleteRouteCalculatorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRouteCalculatorResponse
+
+    interface _DeleteTrackerResponse
+      include Smithy::Client::_Response[Types::DeleteTrackerOutput]
+    end
+    def delete_tracker: (
+      ?tracker_name: String
+    ) -> _DeleteTrackerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTrackerResponse
+
+    interface _DescribeGeofenceCollectionResponse
+      include Smithy::Client::_Response[Types::DescribeGeofenceCollectionOutput]
+      def collection_name: () -> String?
+      def collection_arn: () -> String?
+      def description: () -> String?
+      def pricing_plan: () -> String?
+      def pricing_plan_data_source: () -> String?
+      def kms_key_id: () -> String?
+      def tags: () -> Hash[String, String]?
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+      def geofence_count: () -> Integer?
+    end
+    def describe_geofence_collection: (
+      ?collection_name: String
+    ) -> _DescribeGeofenceCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGeofenceCollectionResponse
+
+    interface _DescribeKeyResponse
+      include Smithy::Client::_Response[Types::DescribeKeyOutput]
+      def key: () -> String?
+      def key_arn: () -> String?
+      def key_name: () -> String?
+      def restrictions: () -> Types::ApiKeyRestrictions?
+      def create_time: () -> Time?
+      def expire_time: () -> Time?
+      def update_time: () -> Time?
+      def description: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_key: (
+      ?key_name: String
+    ) -> _DescribeKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeKeyResponse
+
+    interface _DescribeMapResponse
+      include Smithy::Client::_Response[Types::DescribeMapOutput]
+      def map_name: () -> String?
+      def map_arn: () -> String?
+      def pricing_plan: () -> String?
+      def data_source: () -> String?
+      def configuration: () -> Types::MapConfiguration?
+      def description: () -> String?
+      def tags: () -> Hash[String, String]?
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+    end
+    def describe_map: (
+      ?map_name: String
+    ) -> _DescribeMapResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMapResponse
+
+    interface _DescribePlaceIndexResponse
+      include Smithy::Client::_Response[Types::DescribePlaceIndexOutput]
+      def index_name: () -> String?
+      def index_arn: () -> String?
+      def pricing_plan: () -> String?
+      def description: () -> String?
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+      def data_source: () -> String?
+      def data_source_configuration: () -> Types::DataSourceConfiguration?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_place_index: (
+      ?index_name: String
+    ) -> _DescribePlaceIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePlaceIndexResponse
+
+    interface _DescribeRouteCalculatorResponse
+      include Smithy::Client::_Response[Types::DescribeRouteCalculatorOutput]
+      def calculator_name: () -> String?
+      def calculator_arn: () -> String?
+      def pricing_plan: () -> String?
+      def description: () -> String?
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+      def data_source: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_route_calculator: (
+      ?calculator_name: String
+    ) -> _DescribeRouteCalculatorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRouteCalculatorResponse
+
+    interface _DescribeTrackerResponse
+      include Smithy::Client::_Response[Types::DescribeTrackerOutput]
+      def tracker_name: () -> String?
+      def tracker_arn: () -> String?
+      def description: () -> String?
+      def pricing_plan: () -> String?
+      def pricing_plan_data_source: () -> String?
+      def tags: () -> Hash[String, String]?
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+      def kms_key_id: () -> String?
+      def position_filtering: () -> String?
+      def event_bridge_enabled: () -> bool?
+      def kms_key_enable_geospatial_queries: () -> bool?
+    end
+    def describe_tracker: (
+      ?tracker_name: String
+    ) -> _DescribeTrackerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTrackerResponse
+
+    interface _DisassociateTrackerConsumerResponse
+      include Smithy::Client::_Response[Types::DisassociateTrackerConsumerOutput]
+    end
+    def disassociate_tracker_consumer: (
+      ?tracker_name: String,
+      ?consumer_arn: String
+    ) -> _DisassociateTrackerConsumerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateTrackerConsumerResponse
+
+    interface _ForecastGeofenceEventsResponse
+      include Smithy::Client::_Response[Types::ForecastGeofenceEventsResponse]
+      def forecasted_events: () -> Array[Types::ForecastedEvent]?
+      def next_token: () -> String?
+      def distance_unit: () -> String?
+      def speed_unit: () -> String?
+    end
+    def forecast_geofence_events: (
+      ?collection_name: String,
+      ?device_state: {
+        position: Array[Float],
+        speed: Float
+      },
+      ?time_horizon_minutes: Float,
+      ?distance_unit: String,
+      ?speed_unit: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ForecastGeofenceEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ForecastGeofenceEventsResponse
+
+    interface _GetDevicePositionResponse
+      include Smithy::Client::_Response[Types::GetDevicePositionOutput]
+      def device_id: () -> String?
+      def sample_time: () -> Time?
+      def received_time: () -> Time?
+      def position: () -> Array[Float]?
+      def accuracy: () -> Types::PositionalAccuracy?
+      def position_properties: () -> Hash[String, String]?
+    end
+    def get_device_position: (
+      ?tracker_name: String,
+      ?device_id: String
+    ) -> _GetDevicePositionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDevicePositionResponse
+
+    interface _GetDevicePositionHistoryResponse
+      include Smithy::Client::_Response[Types::GetDevicePositionHistoryOutput]
+      def device_positions: () -> Array[Types::DevicePosition]?
+      def next_token: () -> String?
+    end
+    def get_device_position_history: (
+      ?tracker_name: String,
+      ?device_id: String,
+      ?next_token: String,
+      ?start_time_inclusive: Time,
+      ?end_time_exclusive: Time,
+      ?max_results: Integer
+    ) -> _GetDevicePositionHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDevicePositionHistoryResponse
+
+    interface _GetGeofenceResponse
+      include Smithy::Client::_Response[Types::GetGeofenceOutput]
+      def geofence_id: () -> String?
+      def geometry: () -> Types::GeofenceGeometry?
+      def status: () -> String?
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+      def geofence_properties: () -> Hash[String, String]?
+    end
+    def get_geofence: (
+      ?collection_name: String,
+      ?geofence_id: String
+    ) -> _GetGeofenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGeofenceResponse
+
+    interface _GetMapGlyphsResponse
+      include Smithy::Client::_Response[Types::GetMapGlyphsOutput]
+      def blob: () -> String?
+      def content_type: () -> String?
+      def cache_control: () -> String?
+    end
+    def get_map_glyphs: (
+      ?map_name: String,
+      ?font_stack: String,
+      ?font_unicode_range: String,
+      ?key: String
+    ) -> _GetMapGlyphsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMapGlyphsResponse
+
+    interface _GetMapSpritesResponse
+      include Smithy::Client::_Response[Types::GetMapSpritesOutput]
+      def blob: () -> String?
+      def content_type: () -> String?
+      def cache_control: () -> String?
+    end
+    def get_map_sprites: (
+      ?map_name: String,
+      ?file_name: String,
+      ?key: String
+    ) -> _GetMapSpritesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMapSpritesResponse
+
+    interface _GetMapStyleDescriptorResponse
+      include Smithy::Client::_Response[Types::GetMapStyleDescriptorOutput]
+      def blob: () -> String?
+      def content_type: () -> String?
+      def cache_control: () -> String?
+    end
+    def get_map_style_descriptor: (
+      ?map_name: String,
+      ?key: String
+    ) -> _GetMapStyleDescriptorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMapStyleDescriptorResponse
+
+    interface _GetMapTileResponse
+      include Smithy::Client::_Response[Types::GetMapTileOutput]
+      def blob: () -> String?
+      def content_type: () -> String?
+      def cache_control: () -> String?
+    end
+    def get_map_tile: (
+      ?map_name: String,
+      ?z: String,
+      ?x: String,
+      ?y: String,
+      ?key: String
+    ) -> _GetMapTileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMapTileResponse
+
+    interface _GetPlaceResponse
+      include Smithy::Client::_Response[Types::GetPlaceOutput]
+      def place: () -> Types::Place?
+    end
+    def get_place: (
+      ?index_name: String,
+      ?place_id: String,
+      ?language: String,
+      ?key: String
+    ) -> _GetPlaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPlaceResponse
+
+    interface _ListDevicePositionsResponse
+      include Smithy::Client::_Response[Types::ListDevicePositionsOutput]
+      def entries: () -> Array[Types::ListDevicePositionsResponseEntry]?
+      def next_token: () -> String?
+    end
+    def list_device_positions: (
+      ?tracker_name: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filter_geometry: {
+        polygon: Array[
+          Array[
+            Array[Float]
+          ]
+        ]
+      }
+    ) -> _ListDevicePositionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDevicePositionsResponse
+
+    interface _ListGeofenceCollectionsResponse
+      include Smithy::Client::_Response[Types::ListGeofenceCollectionsOutput]
+      def entries: () -> Array[Types::ListGeofenceCollectionsResponseEntry]?
+      def next_token: () -> String?
+    end
+    def list_geofence_collections: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListGeofenceCollectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGeofenceCollectionsResponse
+
+    interface _ListGeofencesResponse
+      include Smithy::Client::_Response[Types::ListGeofencesOutput]
+      def entries: () -> Array[Types::ListGeofenceResponseEntry]?
+      def next_token: () -> String?
+    end
+    def list_geofences: (
+      ?collection_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListGeofencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGeofencesResponse
+
+    interface _ListKeysResponse
+      include Smithy::Client::_Response[Types::ListKeysOutput]
+      def entries: () -> Array[Types::ListKeysResponseEntry]?
+      def next_token: () -> String?
+    end
+    def list_keys: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filter: {
+        key_status: String
+      }
+    ) -> _ListKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKeysResponse
+
+    interface _ListMapsResponse
+      include Smithy::Client::_Response[Types::ListMapsOutput]
+      def entries: () -> Array[Types::ListMapsResponseEntry]?
+      def next_token: () -> String?
+    end
+    def list_maps: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListMapsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMapsResponse
+
+    interface _ListPlaceIndexesResponse
+      include Smithy::Client::_Response[Types::ListPlaceIndexesOutput]
+      def entries: () -> Array[Types::ListPlaceIndexesResponseEntry]?
+      def next_token: () -> String?
+    end
+    def list_place_indexes: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPlaceIndexesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPlaceIndexesResponse
+
+    interface _ListRouteCalculatorsResponse
+      include Smithy::Client::_Response[Types::ListRouteCalculatorsOutput]
+      def entries: () -> Array[Types::ListRouteCalculatorsResponseEntry]?
+      def next_token: () -> String?
+    end
+    def list_route_calculators: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRouteCalculatorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRouteCalculatorsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTrackerConsumersResponse
+      include Smithy::Client::_Response[Types::ListTrackerConsumersOutput]
+      def consumer_arns: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_tracker_consumers: (
+      ?tracker_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTrackerConsumersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrackerConsumersResponse
+
+    interface _ListTrackersResponse
+      include Smithy::Client::_Response[Types::ListTrackersOutput]
+      def entries: () -> Array[Types::ListTrackersResponseEntry]?
+      def next_token: () -> String?
+    end
+    def list_trackers: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTrackersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrackersResponse
+
+    interface _PutGeofenceResponse
+      include Smithy::Client::_Response[Types::PutGeofenceOutput]
+      def geofence_id: () -> String?
+      def create_time: () -> Time?
+      def update_time: () -> Time?
+    end
+    def put_geofence: (
+      ?collection_name: String,
+      ?geofence_id: String,
+      ?geometry: {
+        polygon: Array[
+          Array[
+            Array[Float]
+          ]
+        ],
+        circle: {
+          center: Array[Float],
+          radius: Float
+        },
+        geobuf: String,
+        multi_polygon: Array[
+          Array[
+            Array[
+              Array[Float]
+            ]
+          ]
+        ]
+      },
+      ?geofence_properties: Hash[String, String]
+    ) -> _PutGeofenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutGeofenceResponse
+
+    interface _SearchPlaceIndexForPositionResponse
+      include Smithy::Client::_Response[Types::SearchPlaceIndexForPositionOutput]
+      def summary: () -> Types::SearchPlaceIndexForPositionSummary?
+      def results: () -> Array[Types::SearchForPositionResult]?
+    end
+    def search_place_index_for_position: (
+      ?index_name: String,
+      ?position: Array[Float],
+      ?max_results: Integer,
+      ?language: String,
+      ?key: String
+    ) -> _SearchPlaceIndexForPositionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchPlaceIndexForPositionResponse
+
+    interface _SearchPlaceIndexForSuggestionsResponse
+      include Smithy::Client::_Response[Types::SearchPlaceIndexForSuggestionsOutput]
+      def summary: () -> Types::SearchPlaceIndexForSuggestionsSummary?
+      def results: () -> Array[Types::SearchForSuggestionsResult]?
+    end
+    def search_place_index_for_suggestions: (
+      ?index_name: String,
+      ?text: String,
+      ?bias_position: Array[Float],
+      ?filter_b_box: Array[Float],
+      ?filter_countries: Array[String],
+      ?max_results: Integer,
+      ?language: String,
+      ?filter_categories: Array[String],
+      ?key: String
+    ) -> _SearchPlaceIndexForSuggestionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchPlaceIndexForSuggestionsResponse
+
+    interface _SearchPlaceIndexForTextResponse
+      include Smithy::Client::_Response[Types::SearchPlaceIndexForTextOutput]
+      def summary: () -> Types::SearchPlaceIndexForTextSummary?
+      def results: () -> Array[Types::SearchForTextResult]?
+    end
+    def search_place_index_for_text: (
+      ?index_name: String,
+      ?text: String,
+      ?bias_position: Array[Float],
+      ?filter_b_box: Array[Float],
+      ?filter_countries: Array[String],
+      ?max_results: Integer,
+      ?language: String,
+      ?filter_categories: Array[String],
+      ?key: String
+    ) -> _SearchPlaceIndexForTextResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchPlaceIndexForTextResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateGeofenceCollectionResponse
+      include Smithy::Client::_Response[Types::UpdateGeofenceCollectionOutput]
+      def collection_name: () -> String?
+      def collection_arn: () -> String?
+      def update_time: () -> Time?
+    end
+    def update_geofence_collection: (
+      ?collection_name: String,
+      ?pricing_plan: String,
+      ?pricing_plan_data_source: String,
+      ?description: String
+    ) -> _UpdateGeofenceCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGeofenceCollectionResponse
+
+    interface _UpdateKeyResponse
+      include Smithy::Client::_Response[Types::UpdateKeyOutput]
+      def key_arn: () -> String?
+      def key_name: () -> String?
+      def update_time: () -> Time?
+    end
+    def update_key: (
+      ?key_name: String,
+      ?description: String,
+      ?expire_time: Time,
+      ?no_expiry: bool,
+      ?force_update: bool,
+      ?restrictions: {
+        allow_actions: Array[String],
+        allow_resources: Array[String],
+        allow_referers: Array[String]
+      }
+    ) -> _UpdateKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateKeyResponse
+
+    interface _UpdateMapResponse
+      include Smithy::Client::_Response[Types::UpdateMapOutput]
+      def map_name: () -> String?
+      def map_arn: () -> String?
+      def update_time: () -> Time?
+    end
+    def update_map: (
+      ?map_name: String,
+      ?pricing_plan: String,
+      ?description: String,
+      ?configuration_update: {
+        political_view: String,
+        custom_layers: Array[String]
+      }
+    ) -> _UpdateMapResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMapResponse
+
+    interface _UpdatePlaceIndexResponse
+      include Smithy::Client::_Response[Types::UpdatePlaceIndexOutput]
+      def index_name: () -> String?
+      def index_arn: () -> String?
+      def update_time: () -> Time?
+    end
+    def update_place_index: (
+      ?index_name: String,
+      ?pricing_plan: String,
+      ?description: String,
+      ?data_source_configuration: {
+        intended_use: String
+      }
+    ) -> _UpdatePlaceIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePlaceIndexResponse
+
+    interface _UpdateRouteCalculatorResponse
+      include Smithy::Client::_Response[Types::UpdateRouteCalculatorOutput]
+      def calculator_name: () -> String?
+      def calculator_arn: () -> String?
+      def update_time: () -> Time?
+    end
+    def update_route_calculator: (
+      ?calculator_name: String,
+      ?pricing_plan: String,
+      ?description: String
+    ) -> _UpdateRouteCalculatorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRouteCalculatorResponse
+
+    interface _UpdateTrackerResponse
+      include Smithy::Client::_Response[Types::UpdateTrackerOutput]
+      def tracker_name: () -> String?
+      def tracker_arn: () -> String?
+      def update_time: () -> Time?
+    end
+    def update_tracker: (
+      ?tracker_name: String,
+      ?pricing_plan: String,
+      ?pricing_plan_data_source: String,
+      ?description: String,
+      ?position_filtering: String,
+      ?event_bridge_enabled: bool,
+      ?kms_key_enable_geospatial_queries: bool
+    ) -> _UpdateTrackerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTrackerResponse
+
+    interface _VerifyDevicePositionResponse
+      include Smithy::Client::_Response[Types::VerifyDevicePositionResponse]
+      def inferred_state: () -> Types::InferredState?
+      def device_id: () -> String?
+      def sample_time: () -> Time?
+      def received_time: () -> Time?
+      def distance_unit: () -> String?
+    end
+    def verify_device_position: (
+      ?tracker_name: String,
+      ?device_state: {
+        device_id: String,
+        sample_time: Time,
+        position: Array[Float],
+        accuracy: {
+          horizontal: Float
+        },
+        ipv4_address: String,
+        wi_fi_access_points: Array[
+          {
+            mac_address: untyped,
+            rss: Integer
+          }
+        ],
+        cell_signals: {
+          lte_cell_details: Array[
+            {
+              cell_id: Integer,
+              mcc: untyped,
+              mnc: untyped,
+              local_id: {
+                earfcn: Integer,
+                pci: Integer
+              },
+              network_measurements: Array[
+                {
+                  earfcn: untyped,
+                  cell_id: untyped,
+                  pci: untyped,
+                  rsrp: Integer,
+                  rsrq: Float
+                }
+              ],
+              timing_advance: untyped,
+              nr_capable: bool,
+              rsrp: untyped,
+              rsrq: untyped,
+              tac: untyped
+            }
+          ]
+        }
+      },
+      ?distance_unit: String
+    ) -> _VerifyDevicePositionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifyDevicePositionResponse
+  end
+end

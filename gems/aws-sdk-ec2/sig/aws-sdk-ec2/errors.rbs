@@ -1,0 +1,4 @@
+module Aws::EC2
+  module Errors
+  end
+end

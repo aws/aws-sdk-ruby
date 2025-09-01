@@ -1,0 +1,209 @@
+module Aws::Route53Profiles
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Route53Profiles::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateProfileResponse
+      include Smithy::Client::_Response[Types::AssociateProfileResponse]
+      def profile_association: () -> Types::ProfileAssociation?
+    end
+    def associate_profile: (
+      ?profile_id: String,
+      ?resource_id: String,
+      ?name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _AssociateProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateProfileResponse
+
+    interface _AssociateResourceToProfileResponse
+      include Smithy::Client::_Response[Types::AssociateResourceToProfileResponse]
+      def profile_resource_association: () -> Types::ProfileResourceAssociation?
+    end
+    def associate_resource_to_profile: (
+      ?profile_id: String,
+      ?resource_arn: String,
+      ?name: String,
+      ?resource_properties: String
+    ) -> _AssociateResourceToProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateResourceToProfileResponse
+
+    interface _CreateProfileResponse
+      include Smithy::Client::_Response[Types::CreateProfileResponse]
+      def profile: () -> Types::Profile?
+    end
+    def create_profile: (
+      ?name: String,
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProfileResponse
+
+    interface _DeleteProfileResponse
+      include Smithy::Client::_Response[Types::DeleteProfileResponse]
+      def profile: () -> Types::Profile?
+    end
+    def delete_profile: (
+      ?profile_id: String
+    ) -> _DeleteProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProfileResponse
+
+    interface _DisassociateProfileResponse
+      include Smithy::Client::_Response[Types::DisassociateProfileResponse]
+      def profile_association: () -> Types::ProfileAssociation?
+    end
+    def disassociate_profile: (
+      ?profile_id: String,
+      ?resource_id: String
+    ) -> _DisassociateProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateProfileResponse
+
+    interface _DisassociateResourceFromProfileResponse
+      include Smithy::Client::_Response[Types::DisassociateResourceFromProfileResponse]
+      def profile_resource_association: () -> Types::ProfileResourceAssociation?
+    end
+    def disassociate_resource_from_profile: (
+      ?profile_id: String,
+      ?resource_arn: String
+    ) -> _DisassociateResourceFromProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateResourceFromProfileResponse
+
+    interface _GetProfileResponse
+      include Smithy::Client::_Response[Types::GetProfileResponse]
+      def profile: () -> Types::Profile?
+    end
+    def get_profile: (
+      ?profile_id: String
+    ) -> _GetProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProfileResponse
+
+    interface _GetProfileAssociationResponse
+      include Smithy::Client::_Response[Types::GetProfileAssociationResponse]
+      def profile_association: () -> Types::ProfileAssociation?
+    end
+    def get_profile_association: (
+      ?profile_association_id: String
+    ) -> _GetProfileAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProfileAssociationResponse
+
+    interface _GetProfileResourceAssociationResponse
+      include Smithy::Client::_Response[Types::GetProfileResourceAssociationResponse]
+      def profile_resource_association: () -> Types::ProfileResourceAssociation?
+    end
+    def get_profile_resource_association: (
+      ?profile_resource_association_id: String
+    ) -> _GetProfileResourceAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProfileResourceAssociationResponse
+
+    interface _ListProfileAssociationsResponse
+      include Smithy::Client::_Response[Types::ListProfileAssociationsResponse]
+      def profile_associations: () -> Array[Types::ProfileAssociation]?
+      def next_token: () -> String?
+    end
+    def list_profile_associations: (
+      ?resource_id: String,
+      ?profile_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListProfileAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProfileAssociationsResponse
+
+    interface _ListProfileResourceAssociationsResponse
+      include Smithy::Client::_Response[Types::ListProfileResourceAssociationsResponse]
+      def profile_resource_associations: () -> Array[Types::ProfileResourceAssociation]?
+      def next_token: () -> String?
+    end
+    def list_profile_resource_associations: (
+      ?profile_id: String,
+      ?resource_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListProfileResourceAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProfileResourceAssociationsResponse
+
+    interface _ListProfilesResponse
+      include Smithy::Client::_Response[Types::ListProfilesResponse]
+      def profile_summaries: () -> Array[Types::ProfileSummary]?
+      def next_token: () -> String?
+    end
+    def list_profiles: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProfilesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateProfileResourceAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateProfileResourceAssociationResponse]
+      def profile_resource_association: () -> Types::ProfileResourceAssociation?
+    end
+    def update_profile_resource_association: (
+      ?profile_resource_association_id: String,
+      ?name: String,
+      ?resource_properties: String
+    ) -> _UpdateProfileResourceAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProfileResourceAssociationResponse
+  end
+end

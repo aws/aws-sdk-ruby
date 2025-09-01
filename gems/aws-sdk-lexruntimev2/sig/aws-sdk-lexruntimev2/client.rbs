@@ -1,0 +1,415 @@
+module Aws::LexRuntimeV2
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::LexRuntimeV2::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _DeleteSessionResponse
+      include Smithy::Client::_Response[Types::DeleteSessionResponse]
+      def bot_id: () -> String?
+      def bot_alias_id: () -> String?
+      def locale_id: () -> String?
+      def session_id: () -> String?
+    end
+    def delete_session: (
+      ?bot_id: String,
+      ?bot_alias_id: String,
+      ?locale_id: String,
+      ?session_id: String
+    ) -> _DeleteSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSessionResponse
+
+    interface _GetSessionResponse
+      include Smithy::Client::_Response[Types::GetSessionResponse]
+      def session_id: () -> String?
+      def messages: () -> Array[Types::Message]?
+      def interpretations: () -> Array[Types::Interpretation]?
+      def session_state: () -> Types::SessionState?
+    end
+    def get_session: (
+      ?bot_id: String,
+      ?bot_alias_id: String,
+      ?locale_id: String,
+      ?session_id: String
+    ) -> _GetSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionResponse
+
+    interface _PutSessionResponse
+      include Smithy::Client::_Response[Types::PutSessionResponse]
+      def content_type: () -> String?
+      def messages: () -> String?
+      def session_state: () -> String?
+      def request_attributes: () -> String?
+      def session_id: () -> String?
+      def audio_stream: () -> String?
+    end
+    def put_session: (
+      ?bot_id: String,
+      ?bot_alias_id: String,
+      ?locale_id: String,
+      ?session_id: String,
+      ?messages: Array[
+        {
+          content: String,
+          content_type: String,
+          image_response_card: {
+            title: String,
+            subtitle: untyped,
+            image_url: String,
+            buttons: Array[
+              {
+                text: String,
+                value: String
+              }
+            ]
+          }
+        }
+      ],
+      ?session_state: {
+        dialog_action: {
+          type: String,
+          slot_to_elicit: String,
+          slot_elicitation_style: String,
+          sub_slot_to_elicit: {
+            name: untyped,
+            sub_slot_to_elicit: untyped
+          }
+        },
+        intent: {
+          name: untyped,
+          slots: Hash[String,
+            {
+              value: {
+                original_value: untyped,
+                interpreted_value: untyped,
+                resolved_values: Array[String]
+              },
+              shape: String,
+              values: Array[
+                {
+                  value: untyped,
+                  shape: untyped,
+                  values: untyped,
+                  sub_slots: untyped
+                }
+              ],
+              sub_slots: untyped
+            }
+          ],
+          state: String,
+          confirmation_state: String
+        },
+        active_contexts: Array[
+          {
+            name: String,
+            time_to_live: {
+              time_to_live_in_seconds: Integer,
+              turns_to_live: Integer
+            },
+            context_attributes: Hash[String, String]
+          }
+        ],
+        session_attributes: Hash[String, String],
+        originating_request_id: untyped,
+        runtime_hints: {
+          slot_hints: Hash[String,
+            Hash[String,
+              {
+                runtime_hint_values: Array[
+                  {
+                    phrase: String
+                  }
+                ],
+                sub_slot_hints: Hash[String,
+                  {
+                    runtime_hint_values: untyped,
+                    sub_slot_hints: untyped
+                  }
+                ]
+              }
+            ]
+          ]
+        }
+      },
+      ?request_attributes: Hash[String, String],
+      ?response_content_type: String
+    ) -> _PutSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutSessionResponse
+
+    interface _RecognizeTextResponse
+      include Smithy::Client::_Response[Types::RecognizeTextResponse]
+      def messages: () -> Array[Types::Message]?
+      def session_state: () -> Types::SessionState?
+      def interpretations: () -> Array[Types::Interpretation]?
+      def request_attributes: () -> Hash[String, String]?
+      def session_id: () -> String?
+      def recognized_bot_member: () -> Types::RecognizedBotMember?
+    end
+    def recognize_text: (
+      ?bot_id: String,
+      ?bot_alias_id: String,
+      ?locale_id: String,
+      ?session_id: String,
+      ?text: String,
+      ?session_state: {
+        dialog_action: {
+          type: String,
+          slot_to_elicit: String,
+          slot_elicitation_style: String,
+          sub_slot_to_elicit: {
+            name: untyped,
+            sub_slot_to_elicit: untyped
+          }
+        },
+        intent: {
+          name: untyped,
+          slots: Hash[String,
+            {
+              value: {
+                original_value: untyped,
+                interpreted_value: untyped,
+                resolved_values: Array[String]
+              },
+              shape: String,
+              values: Array[
+                {
+                  value: untyped,
+                  shape: untyped,
+                  values: untyped,
+                  sub_slots: untyped
+                }
+              ],
+              sub_slots: untyped
+            }
+          ],
+          state: String,
+          confirmation_state: String
+        },
+        active_contexts: Array[
+          {
+            name: String,
+            time_to_live: {
+              time_to_live_in_seconds: Integer,
+              turns_to_live: Integer
+            },
+            context_attributes: Hash[String, String]
+          }
+        ],
+        session_attributes: Hash[String, String],
+        originating_request_id: untyped,
+        runtime_hints: {
+          slot_hints: Hash[String,
+            Hash[String,
+              {
+                runtime_hint_values: Array[
+                  {
+                    phrase: String
+                  }
+                ],
+                sub_slot_hints: Hash[String,
+                  {
+                    runtime_hint_values: untyped,
+                    sub_slot_hints: untyped
+                  }
+                ]
+              }
+            ]
+          ]
+        }
+      },
+      ?request_attributes: Hash[String, String]
+    ) -> _RecognizeTextResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RecognizeTextResponse
+
+    interface _RecognizeUtteranceResponse
+      include Smithy::Client::_Response[Types::RecognizeUtteranceResponse]
+      def input_mode: () -> String?
+      def content_type: () -> String?
+      def messages: () -> String?
+      def interpretations: () -> String?
+      def session_state: () -> String?
+      def request_attributes: () -> String?
+      def session_id: () -> String?
+      def input_transcript: () -> String?
+      def audio_stream: () -> String?
+      def recognized_bot_member: () -> String?
+    end
+    def recognize_utterance: (
+      ?bot_id: String,
+      ?bot_alias_id: String,
+      ?locale_id: String,
+      ?session_id: String,
+      ?session_state: String,
+      ?request_attributes: String,
+      ?request_content_type: String,
+      ?response_content_type: String,
+      ?input_stream: String
+    ) -> _RecognizeUtteranceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RecognizeUtteranceResponse
+
+    interface _StartConversationResponse
+      include Smithy::Client::_Response[Types::StartConversationResponse]
+      def response_event_stream: () -> Types::StartConversationResponseEventStream?
+    end
+    def start_conversation: (
+      ?bot_id: String,
+      ?bot_alias_id: String,
+      ?locale_id: String,
+      ?session_id: String,
+      ?conversation_mode: String,
+      ?request_event_stream: {
+        configuration_event: {
+          request_attributes: Hash[String, String],
+          response_content_type: String,
+          session_state: {
+            dialog_action: {
+              type: String,
+              slot_to_elicit: untyped,
+              slot_elicitation_style: String,
+              sub_slot_to_elicit: {
+                name: untyped,
+                sub_slot_to_elicit: untyped
+              }
+            },
+            intent: {
+              name: untyped,
+              slots: Hash[String,
+                {
+                  value: {
+                    original_value: untyped,
+                    interpreted_value: untyped,
+                    resolved_values: Array[String]
+                  },
+                  shape: String,
+                  values: Array[
+                    {
+                      value: untyped,
+                      shape: untyped,
+                      values: untyped,
+                      sub_slots: untyped
+                    }
+                  ],
+                  sub_slots: untyped
+                }
+              ],
+              state: String,
+              confirmation_state: String
+            },
+            active_contexts: Array[
+              {
+                name: String,
+                time_to_live: {
+                  time_to_live_in_seconds: Integer,
+                  turns_to_live: Integer
+                },
+                context_attributes: Hash[String, String]
+              }
+            ],
+            session_attributes: untyped,
+            originating_request_id: untyped,
+            runtime_hints: {
+              slot_hints: Hash[String,
+                Hash[String,
+                  {
+                    runtime_hint_values: Array[
+                      {
+                        phrase: String
+                      }
+                    ],
+                    sub_slot_hints: Hash[String,
+                      {
+                        runtime_hint_values: untyped,
+                        sub_slot_hints: untyped
+                      }
+                    ]
+                  }
+                ]
+              ]
+            }
+          },
+          welcome_messages: Array[
+            {
+              content: String,
+              content_type: String,
+              image_response_card: {
+                title: String,
+                subtitle: untyped,
+                image_url: String,
+                buttons: Array[
+                  {
+                    text: String,
+                    value: String
+                  }
+                ]
+              }
+            }
+          ],
+          disable_playback: bool,
+          event_id: String,
+          client_timestamp_millis: Integer
+        },
+        audio_input_event: {
+          audio_chunk: String,
+          content_type: untyped,
+          event_id: untyped,
+          client_timestamp_millis: untyped
+        },
+        dtmf_input_event: {
+          input_character: String,
+          event_id: untyped,
+          client_timestamp_millis: untyped
+        },
+        text_input_event: {
+          text: untyped,
+          event_id: untyped,
+          client_timestamp_millis: untyped
+        },
+        playback_completion_event: {
+          event_id: untyped,
+          client_timestamp_millis: untyped
+        },
+        disconnection_event: {
+          event_id: untyped,
+          client_timestamp_millis: untyped
+        }
+      }
+    ) -> _StartConversationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartConversationResponse
+  end
+end

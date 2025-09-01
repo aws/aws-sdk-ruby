@@ -1,0 +1,5 @@
+  module Aws
+    module RedshiftServerless
+      VERSION: String
+    end
+  end

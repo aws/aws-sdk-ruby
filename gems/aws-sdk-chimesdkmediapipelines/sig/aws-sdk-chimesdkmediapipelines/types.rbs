@@ -1,0 +1,2343 @@
+module Aws::ChimeSDKMediaPipelines
+  module Types
+
+    class ActiveSpeakerOnlyConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?active_speaker_position: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor active_speaker_position: String?
+    end
+
+    module ActiveSpeakerPosition
+      TopLeft: String
+      TopRight: String
+      BottomLeft: String
+      BottomRight: String
+    end
+
+    class AmazonTranscribeCallAnalyticsProcessorConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language_code: String,
+        ?vocabulary_name: String,
+        ?vocabulary_filter_name: String,
+        ?vocabulary_filter_method: String,
+        ?language_model_name: String,
+        ?enable_partial_results_stabilization: bool,
+        ?partial_results_stability: String,
+        ?content_identification_type: String,
+        ?content_redaction_type: String,
+        ?pii_entity_types: String,
+        ?filter_partial_results: bool,
+        ?post_call_analytics_settings: Types::PostCallAnalyticsSettings,
+        ?call_analytics_stream_categories: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language_code: String?
+      attr_accessor vocabulary_name: String?
+      attr_accessor vocabulary_filter_name: String?
+      attr_accessor vocabulary_filter_method: String?
+      attr_accessor language_model_name: String?
+      attr_accessor enable_partial_results_stabilization: bool?
+      attr_accessor partial_results_stability: String?
+      attr_accessor content_identification_type: String?
+      attr_accessor content_redaction_type: String?
+      attr_accessor pii_entity_types: String?
+      attr_accessor filter_partial_results: bool?
+      attr_accessor post_call_analytics_settings: Types::PostCallAnalyticsSettings?
+      attr_accessor call_analytics_stream_categories: Array[String]?
+    end
+
+    class AmazonTranscribeProcessorConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language_code: String,
+        ?vocabulary_name: String,
+        ?vocabulary_filter_name: String,
+        ?vocabulary_filter_method: String,
+        ?show_speaker_label: bool,
+        ?enable_partial_results_stabilization: bool,
+        ?partial_results_stability: String,
+        ?content_identification_type: String,
+        ?content_redaction_type: String,
+        ?pii_entity_types: String,
+        ?language_model_name: String,
+        ?filter_partial_results: bool,
+        ?identify_language: bool,
+        ?identify_multiple_languages: bool,
+        ?language_options: String,
+        ?preferred_language: String,
+        ?vocabulary_names: String,
+        ?vocabulary_filter_names: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language_code: String?
+      attr_accessor vocabulary_name: String?
+      attr_accessor vocabulary_filter_name: String?
+      attr_accessor vocabulary_filter_method: String?
+      attr_accessor show_speaker_label: bool?
+      attr_accessor enable_partial_results_stabilization: bool?
+      attr_accessor partial_results_stability: String?
+      attr_accessor content_identification_type: String?
+      attr_accessor content_redaction_type: String?
+      attr_accessor pii_entity_types: String?
+      attr_accessor language_model_name: String?
+      attr_accessor filter_partial_results: bool?
+      attr_accessor identify_language: bool?
+      attr_accessor identify_multiple_languages: bool?
+      attr_accessor language_options: String?
+      attr_accessor preferred_language: String?
+      attr_accessor vocabulary_names: String?
+      attr_accessor vocabulary_filter_names: String?
+    end
+
+    class ArtifactsConcatenationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audio: Types::AudioConcatenationConfiguration,
+        ?video: Types::VideoConcatenationConfiguration,
+        ?content: Types::ContentConcatenationConfiguration,
+        ?data_channel: Types::DataChannelConcatenationConfiguration,
+        ?transcription_messages: Types::TranscriptionMessagesConcatenationConfiguration,
+        ?meeting_events: Types::MeetingEventsConcatenationConfiguration,
+        ?composited_video: Types::CompositedVideoConcatenationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio: Types::AudioConcatenationConfiguration?
+      attr_accessor video: Types::VideoConcatenationConfiguration?
+      attr_accessor content: Types::ContentConcatenationConfiguration?
+      attr_accessor data_channel: Types::DataChannelConcatenationConfiguration?
+      attr_accessor transcription_messages: Types::TranscriptionMessagesConcatenationConfiguration?
+      attr_accessor meeting_events: Types::MeetingEventsConcatenationConfiguration?
+      attr_accessor composited_video: Types::CompositedVideoConcatenationConfiguration?
+    end
+
+    module ArtifactsConcatenationState
+      Enabled: String
+      Disabled: String
+    end
+
+    class ArtifactsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audio: Types::AudioArtifactsConfiguration,
+        ?video: Types::VideoArtifactsConfiguration,
+        ?content: Types::ContentArtifactsConfiguration,
+        ?composited_video: Types::CompositedVideoArtifactsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audio: Types::AudioArtifactsConfiguration?
+      attr_accessor video: Types::VideoArtifactsConfiguration?
+      attr_accessor content: Types::ContentArtifactsConfiguration?
+      attr_accessor composited_video: Types::CompositedVideoArtifactsConfiguration?
+    end
+
+    module ArtifactsState
+      Enabled: String
+      Disabled: String
+    end
+
+    module AudioArtifactsConcatenationState
+      Enabled: String
+    end
+
+    class AudioArtifactsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mux_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mux_type: String?
+    end
+
+    module AudioChannelsOption
+      Stereo: String
+      Mono: String
+    end
+
+    class AudioConcatenationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    module AudioMuxType
+      AudioOnly: String
+      AudioWithActiveSpeakerVideo: String
+      AudioWithCompositedVideo: String
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    module BorderColor
+      Black: String
+      Blue: String
+      Red: String
+      Green: String
+      White: String
+      Yellow: String
+    end
+
+    module CallAnalyticsLanguageCode
+      EN_US: String
+      EN_GB: String
+      ES_US: String
+      FR_CA: String
+      FR_FR: String
+      EN_AU: String
+      IT_IT: String
+      DE_DE: String
+      PT_BR: String
+    end
+
+    module CanvasOrientation
+      Landscape: String
+      Portrait: String
+    end
+
+    class ChannelDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_id: Integer,
+        ?participant_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_id: Integer?
+      attr_accessor participant_role: String?
+    end
+
+    class ChimeSdkMeetingConcatenationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?artifacts_configuration: Types::ArtifactsConcatenationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor artifacts_configuration: Types::ArtifactsConcatenationConfiguration?
+    end
+
+    class ChimeSdkMeetingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_configuration: Types::SourceConfiguration,
+        ?artifacts_configuration: Types::ArtifactsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_configuration: Types::SourceConfiguration?
+      attr_accessor artifacts_configuration: Types::ArtifactsConfiguration?
+    end
+
+    class ChimeSdkMeetingLiveConnectorConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?mux_type: String,
+        ?composited_video: Types::CompositedVideoArtifactsConfiguration,
+        ?source_configuration: Types::SourceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor mux_type: String?
+      attr_accessor composited_video: Types::CompositedVideoArtifactsConfiguration?
+      attr_accessor source_configuration: Types::SourceConfiguration?
+    end
+
+    class CompositedVideoArtifactsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?layout: String,
+        ?resolution: String,
+        ?grid_view_configuration: Types::GridViewConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor layout: String?
+      attr_accessor resolution: String?
+      attr_accessor grid_view_configuration: Types::GridViewConfiguration?
+    end
+
+    class CompositedVideoConcatenationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    class ConcatenationSink
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?s3_bucket_sink_configuration: Types::S3BucketSinkConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor s3_bucket_sink_configuration: Types::S3BucketSinkConfiguration?
+    end
+
+    module ConcatenationSinkType
+      S3Bucket: String
+    end
+
+    class ConcatenationSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?media_capture_pipeline_source_configuration: Types::MediaCapturePipelineSourceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor media_capture_pipeline_source_configuration: Types::MediaCapturePipelineSourceConfiguration?
+    end
+
+    module ConcatenationSourceType
+      MediaCapturePipeline: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class ContentArtifactsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?mux_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor mux_type: String?
+    end
+
+    class ContentConcatenationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    module ContentMuxType
+      ContentOnly: String
+    end
+
+    module ContentRedactionOutput
+      REDACTED: String
+      REDACTED_AND_UNREDACTED: String
+    end
+
+    module ContentShareLayoutOption
+      PresenterOnly: String
+      Horizontal: String
+      Vertical: String
+      ActiveSpeakerOnly: String
+    end
+
+    module ContentType
+      PII: String
+    end
+
+    class CreateMediaCapturePipelineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_type: String,
+        ?source_arn: String,
+        ?sink_type: String,
+        ?sink_arn: String,
+        ?client_request_token: String,
+        ?chime_sdk_meeting_configuration: Types::ChimeSdkMeetingConfiguration,
+        ?sse_aws_key_management_params: Types::SseAwsKeyManagementParams,
+        ?sink_iam_role_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_type: String?
+      attr_accessor source_arn: String?
+      attr_accessor sink_type: String?
+      attr_accessor sink_arn: String?
+      attr_accessor client_request_token: String?
+      attr_accessor chime_sdk_meeting_configuration: Types::ChimeSdkMeetingConfiguration?
+      attr_accessor sse_aws_key_management_params: Types::SseAwsKeyManagementParams?
+      attr_accessor sink_iam_role_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateMediaCapturePipelineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_capture_pipeline: Types::MediaCapturePipeline,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_capture_pipeline: Types::MediaCapturePipeline?
+    end
+
+    class CreateMediaConcatenationPipelineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sources: Array[Types::ConcatenationSource],
+        ?sinks: Array[Types::ConcatenationSink],
+        ?client_request_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sources: Array[Types::ConcatenationSource]?
+      attr_accessor sinks: Array[Types::ConcatenationSink]?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateMediaConcatenationPipelineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_concatenation_pipeline: Types::MediaConcatenationPipeline,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_concatenation_pipeline: Types::MediaConcatenationPipeline?
+    end
+
+    class CreateMediaInsightsPipelineConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_insights_pipeline_configuration_name: String,
+        ?resource_access_role_arn: String,
+        ?real_time_alert_configuration: Types::RealTimeAlertConfiguration,
+        ?elements: Array[Types::MediaInsightsPipelineConfigurationElement],
+        ?tags: Array[Types::Tag],
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_insights_pipeline_configuration_name: String?
+      attr_accessor resource_access_role_arn: String?
+      attr_accessor real_time_alert_configuration: Types::RealTimeAlertConfiguration?
+      attr_accessor elements: Array[Types::MediaInsightsPipelineConfigurationElement]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_request_token: String?
+    end
+
+    class CreateMediaInsightsPipelineConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_insights_pipeline_configuration: Types::MediaInsightsPipelineConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_insights_pipeline_configuration: Types::MediaInsightsPipelineConfiguration?
+    end
+
+    class CreateMediaInsightsPipelineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_insights_pipeline_configuration_arn: String,
+        ?kinesis_video_stream_source_runtime_configuration: Types::KinesisVideoStreamSourceRuntimeConfiguration,
+        ?media_insights_runtime_metadata: Hash[String, String],
+        ?kinesis_video_stream_recording_source_runtime_configuration: Types::KinesisVideoStreamRecordingSourceRuntimeConfiguration,
+        ?s3_recording_sink_runtime_configuration: Types::S3RecordingSinkRuntimeConfiguration,
+        ?tags: Array[Types::Tag],
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_insights_pipeline_configuration_arn: String?
+      attr_accessor kinesis_video_stream_source_runtime_configuration: Types::KinesisVideoStreamSourceRuntimeConfiguration?
+      attr_accessor media_insights_runtime_metadata: Hash[String, String]?
+      attr_accessor kinesis_video_stream_recording_source_runtime_configuration: Types::KinesisVideoStreamRecordingSourceRuntimeConfiguration?
+      attr_accessor s3_recording_sink_runtime_configuration: Types::S3RecordingSinkRuntimeConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_request_token: String?
+    end
+
+    class CreateMediaInsightsPipelineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_insights_pipeline: Types::MediaInsightsPipeline,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_insights_pipeline: Types::MediaInsightsPipeline?
+    end
+
+    class CreateMediaLiveConnectorPipelineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sources: Array[Types::LiveConnectorSourceConfiguration],
+        ?sinks: Array[Types::LiveConnectorSinkConfiguration],
+        ?client_request_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sources: Array[Types::LiveConnectorSourceConfiguration]?
+      attr_accessor sinks: Array[Types::LiveConnectorSinkConfiguration]?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateMediaLiveConnectorPipelineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_live_connector_pipeline: Types::MediaLiveConnectorPipeline,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_live_connector_pipeline: Types::MediaLiveConnectorPipeline?
+    end
+
+    class CreateMediaPipelineKinesisVideoStreamPoolRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_configuration: Types::KinesisVideoStreamConfiguration,
+        ?pool_name: String,
+        ?client_request_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_configuration: Types::KinesisVideoStreamConfiguration?
+      attr_accessor pool_name: String?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateMediaPipelineKinesisVideoStreamPoolResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kinesis_video_stream_pool_configuration: Types::KinesisVideoStreamPoolConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kinesis_video_stream_pool_configuration: Types::KinesisVideoStreamPoolConfiguration?
+    end
+
+    class CreateMediaStreamPipelineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sources: Array[Types::MediaStreamSource],
+        ?sinks: Array[Types::MediaStreamSink],
+        ?client_request_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sources: Array[Types::MediaStreamSource]?
+      attr_accessor sinks: Array[Types::MediaStreamSink]?
+      attr_accessor client_request_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateMediaStreamPipelineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_stream_pipeline: Types::MediaStreamPipeline,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_stream_pipeline: Types::MediaStreamPipeline?
+    end
+
+    class DataChannelConcatenationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    class DeleteMediaCapturePipelineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_pipeline_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_pipeline_id: String?
+    end
+
+    class DeleteMediaInsightsPipelineConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteMediaPipelineKinesisVideoStreamPoolRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteMediaPipelineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_pipeline_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_pipeline_id: String?
+    end
+
+    module ErrorCode
+      BadRequest: String
+      Forbidden: String
+      NotFound: String
+      ResourceLimitExceeded: String
+      ServiceFailure: String
+      ServiceUnavailable: String
+      Throttling: String
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class FragmentSelector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fragment_selector_type: String,
+        ?timestamp_range: Types::TimestampRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fragment_selector_type: String?
+      attr_accessor timestamp_range: Types::TimestampRange?
+    end
+
+    module FragmentSelectorType
+      ProducerTimestamp: String
+      ServerTimestamp: String
+    end
+
+    class GetMediaCapturePipelineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_pipeline_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_pipeline_id: String?
+    end
+
+    class GetMediaCapturePipelineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_capture_pipeline: Types::MediaCapturePipeline,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_capture_pipeline: Types::MediaCapturePipeline?
+    end
+
+    class GetMediaInsightsPipelineConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetMediaInsightsPipelineConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_insights_pipeline_configuration: Types::MediaInsightsPipelineConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_insights_pipeline_configuration: Types::MediaInsightsPipelineConfiguration?
+    end
+
+    class GetMediaPipelineKinesisVideoStreamPoolRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetMediaPipelineKinesisVideoStreamPoolResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kinesis_video_stream_pool_configuration: Types::KinesisVideoStreamPoolConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kinesis_video_stream_pool_configuration: Types::KinesisVideoStreamPoolConfiguration?
+    end
+
+    class GetMediaPipelineRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_pipeline_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_pipeline_id: String?
+    end
+
+    class GetMediaPipelineResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_pipeline: Types::MediaPipeline,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_pipeline: Types::MediaPipeline?
+    end
+
+    class GetSpeakerSearchTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?speaker_search_task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor speaker_search_task_id: String?
+    end
+
+    class GetSpeakerSearchTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?speaker_search_task: Types::SpeakerSearchTask,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor speaker_search_task: Types::SpeakerSearchTask?
+    end
+
+    class GetVoiceToneAnalysisTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?voice_tone_analysis_task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor voice_tone_analysis_task_id: String?
+    end
+
+    class GetVoiceToneAnalysisTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_tone_analysis_task: Types::VoiceToneAnalysisTask,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_tone_analysis_task: Types::VoiceToneAnalysisTask?
+    end
+
+    class GridViewConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_share_layout: String,
+        ?presenter_only_configuration: Types::PresenterOnlyConfiguration,
+        ?active_speaker_only_configuration: Types::ActiveSpeakerOnlyConfiguration,
+        ?horizontal_layout_configuration: Types::HorizontalLayoutConfiguration,
+        ?vertical_layout_configuration: Types::VerticalLayoutConfiguration,
+        ?video_attribute: Types::VideoAttribute,
+        ?canvas_orientation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_share_layout: String?
+      attr_accessor presenter_only_configuration: Types::PresenterOnlyConfiguration?
+      attr_accessor active_speaker_only_configuration: Types::ActiveSpeakerOnlyConfiguration?
+      attr_accessor horizontal_layout_configuration: Types::HorizontalLayoutConfiguration?
+      attr_accessor vertical_layout_configuration: Types::VerticalLayoutConfiguration?
+      attr_accessor video_attribute: Types::VideoAttribute?
+      attr_accessor canvas_orientation: String?
+    end
+
+    module HighlightColor
+      Black: String
+      Blue: String
+      Red: String
+      Green: String
+      White: String
+      Yellow: String
+    end
+
+    class HorizontalLayoutConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tile_order: String,
+        ?tile_position: String,
+        ?tile_count: Integer,
+        ?tile_aspect_ratio: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tile_order: String?
+      attr_accessor tile_position: String?
+      attr_accessor tile_count: Integer?
+      attr_accessor tile_aspect_ratio: String?
+    end
+
+    module HorizontalTilePosition
+      Top: String
+      Bottom: String
+    end
+
+    class IssueDetectionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+    end
+
+    class KeywordMatchConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?keywords: Array[String],
+        ?negate: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor keywords: Array[String]?
+      attr_accessor negate: bool?
+    end
+
+    class KinesisDataStreamSinkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insights_target: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insights_target: String?
+    end
+
+    class KinesisVideoStreamConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?data_retention_in_hours: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor data_retention_in_hours: Integer?
+    end
+
+    class KinesisVideoStreamConfigurationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_retention_in_hours: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_retention_in_hours: Integer?
+    end
+
+    class KinesisVideoStreamPoolConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_arn: String,
+        ?pool_name: String,
+        ?pool_id: String,
+        ?pool_status: String,
+        ?pool_size: Integer,
+        ?stream_configuration: Types::KinesisVideoStreamConfiguration,
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_arn: String?
+      attr_accessor pool_name: String?
+      attr_accessor pool_id: String?
+      attr_accessor pool_status: String?
+      attr_accessor pool_size: Integer?
+      attr_accessor stream_configuration: Types::KinesisVideoStreamConfiguration?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+    end
+
+    module KinesisVideoStreamPoolStatus
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+      FAILED: String
+    end
+
+    class KinesisVideoStreamPoolSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_name: String,
+        ?pool_id: String,
+        ?pool_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_name: String?
+      attr_accessor pool_id: String?
+      attr_accessor pool_arn: String?
+    end
+
+    class KinesisVideoStreamRecordingSourceRuntimeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?streams: Array[Types::RecordingStreamConfiguration],
+        ?fragment_selector: Types::FragmentSelector,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor streams: Array[Types::RecordingStreamConfiguration]?
+      attr_accessor fragment_selector: Types::FragmentSelector?
+    end
+
+    class KinesisVideoStreamSourceRuntimeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?streams: Array[Types::StreamConfiguration],
+        ?media_encoding: String,
+        ?media_sample_rate: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor streams: Array[Types::StreamConfiguration]?
+      attr_accessor media_encoding: String?
+      attr_accessor media_sample_rate: Integer?
+    end
+
+    class KinesisVideoStreamSourceTaskConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?channel_id: Integer,
+        ?fragment_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor channel_id: Integer?
+      attr_accessor fragment_number: String?
+    end
+
+    class LambdaFunctionSinkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insights_target: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insights_target: String?
+    end
+
+    module LayoutOption
+      GridView: String
+    end
+
+    class ListMediaCapturePipelinesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMediaCapturePipelinesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_capture_pipelines: Array[Types::MediaCapturePipelineSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_capture_pipelines: Array[Types::MediaCapturePipelineSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMediaInsightsPipelineConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMediaInsightsPipelineConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_insights_pipeline_configurations: Array[Types::MediaInsightsPipelineConfigurationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_insights_pipeline_configurations: Array[Types::MediaInsightsPipelineConfigurationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMediaPipelineKinesisVideoStreamPoolsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMediaPipelineKinesisVideoStreamPoolsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kinesis_video_stream_pools: Array[Types::KinesisVideoStreamPoolSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kinesis_video_stream_pools: Array[Types::KinesisVideoStreamPoolSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMediaPipelinesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMediaPipelinesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_pipelines: Array[Types::MediaPipelineSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_pipelines: Array[Types::MediaPipelineSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module LiveConnectorMuxType
+      AudioWithCompositedVideo: String
+      AudioWithActiveSpeakerVideo: String
+    end
+
+    class LiveConnectorRTMPConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?audio_channels: String,
+        ?audio_sample_rate: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor audio_channels: String?
+      attr_accessor audio_sample_rate: String?
+    end
+
+    class LiveConnectorSinkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sink_type: String,
+        ?rtmp_configuration: Types::LiveConnectorRTMPConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sink_type: String?
+      attr_accessor rtmp_configuration: Types::LiveConnectorRTMPConfiguration?
+    end
+
+    module LiveConnectorSinkType
+      RTMP: String
+    end
+
+    class LiveConnectorSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_type: String,
+        ?chime_sdk_meeting_live_connector_configuration: Types::ChimeSdkMeetingLiveConnectorConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_type: String?
+      attr_accessor chime_sdk_meeting_live_connector_configuration: Types::ChimeSdkMeetingLiveConnectorConfiguration?
+    end
+
+    module LiveConnectorSourceType
+      ChimeSdkMeeting: String
+    end
+
+    class MediaCapturePipeline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_pipeline_id: String,
+        ?media_pipeline_arn: String,
+        ?source_type: String,
+        ?source_arn: String,
+        ?status: String,
+        ?sink_type: String,
+        ?sink_arn: String,
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+        ?chime_sdk_meeting_configuration: Types::ChimeSdkMeetingConfiguration,
+        ?sse_aws_key_management_params: Types::SseAwsKeyManagementParams,
+        ?sink_iam_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_pipeline_id: String?
+      attr_accessor media_pipeline_arn: String?
+      attr_accessor source_type: String?
+      attr_accessor source_arn: String?
+      attr_accessor status: String?
+      attr_accessor sink_type: String?
+      attr_accessor sink_arn: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+      attr_accessor chime_sdk_meeting_configuration: Types::ChimeSdkMeetingConfiguration?
+      attr_accessor sse_aws_key_management_params: Types::SseAwsKeyManagementParams?
+      attr_accessor sink_iam_role_arn: String?
+    end
+
+    class MediaCapturePipelineSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_pipeline_arn: String,
+        ?chime_sdk_meeting_configuration: Types::ChimeSdkMeetingConcatenationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_pipeline_arn: String?
+      attr_accessor chime_sdk_meeting_configuration: Types::ChimeSdkMeetingConcatenationConfiguration?
+    end
+
+    class MediaCapturePipelineSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_pipeline_id: String,
+        ?media_pipeline_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_pipeline_id: String?
+      attr_accessor media_pipeline_arn: String?
+    end
+
+    class MediaConcatenationPipeline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_pipeline_id: String,
+        ?media_pipeline_arn: String,
+        ?sources: Array[Types::ConcatenationSource],
+        ?sinks: Array[Types::ConcatenationSink],
+        ?status: String,
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_pipeline_id: String?
+      attr_accessor media_pipeline_arn: String?
+      attr_accessor sources: Array[Types::ConcatenationSource]?
+      attr_accessor sinks: Array[Types::ConcatenationSink]?
+      attr_accessor status: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+    end
+
+    module MediaEncoding
+      PCM: String
+    end
+
+    class MediaInsightsPipeline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_pipeline_id: String,
+        ?media_pipeline_arn: String,
+        ?media_insights_pipeline_configuration_arn: String,
+        ?status: String,
+        ?kinesis_video_stream_source_runtime_configuration: Types::KinesisVideoStreamSourceRuntimeConfiguration,
+        ?media_insights_runtime_metadata: Hash[String, String],
+        ?kinesis_video_stream_recording_source_runtime_configuration: Types::KinesisVideoStreamRecordingSourceRuntimeConfiguration,
+        ?s3_recording_sink_runtime_configuration: Types::S3RecordingSinkRuntimeConfiguration,
+        ?created_timestamp: Time,
+        ?element_statuses: Array[Types::MediaInsightsPipelineElementStatus],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_pipeline_id: String?
+      attr_accessor media_pipeline_arn: String?
+      attr_accessor media_insights_pipeline_configuration_arn: String?
+      attr_accessor status: String?
+      attr_accessor kinesis_video_stream_source_runtime_configuration: Types::KinesisVideoStreamSourceRuntimeConfiguration?
+      attr_accessor media_insights_runtime_metadata: Hash[String, String]?
+      attr_accessor kinesis_video_stream_recording_source_runtime_configuration: Types::KinesisVideoStreamRecordingSourceRuntimeConfiguration?
+      attr_accessor s3_recording_sink_runtime_configuration: Types::S3RecordingSinkRuntimeConfiguration?
+      attr_accessor created_timestamp: Time?
+      attr_accessor element_statuses: Array[Types::MediaInsightsPipelineElementStatus]?
+    end
+
+    class MediaInsightsPipelineConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_insights_pipeline_configuration_name: String,
+        ?media_insights_pipeline_configuration_arn: String,
+        ?resource_access_role_arn: String,
+        ?real_time_alert_configuration: Types::RealTimeAlertConfiguration,
+        ?elements: Array[Types::MediaInsightsPipelineConfigurationElement],
+        ?media_insights_pipeline_configuration_id: String,
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_insights_pipeline_configuration_name: String?
+      attr_accessor media_insights_pipeline_configuration_arn: String?
+      attr_accessor resource_access_role_arn: String?
+      attr_accessor real_time_alert_configuration: Types::RealTimeAlertConfiguration?
+      attr_accessor elements: Array[Types::MediaInsightsPipelineConfigurationElement]?
+      attr_accessor media_insights_pipeline_configuration_id: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+    end
+
+    class MediaInsightsPipelineConfigurationElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?amazon_transcribe_call_analytics_processor_configuration: Types::AmazonTranscribeCallAnalyticsProcessorConfiguration,
+        ?amazon_transcribe_processor_configuration: Types::AmazonTranscribeProcessorConfiguration,
+        ?kinesis_data_stream_sink_configuration: Types::KinesisDataStreamSinkConfiguration,
+        ?s3_recording_sink_configuration: Types::S3RecordingSinkConfiguration,
+        ?voice_analytics_processor_configuration: Types::VoiceAnalyticsProcessorConfiguration,
+        ?lambda_function_sink_configuration: Types::LambdaFunctionSinkConfiguration,
+        ?sqs_queue_sink_configuration: Types::SqsQueueSinkConfiguration,
+        ?sns_topic_sink_configuration: Types::SnsTopicSinkConfiguration,
+        ?voice_enhancement_sink_configuration: Types::VoiceEnhancementSinkConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor amazon_transcribe_call_analytics_processor_configuration: Types::AmazonTranscribeCallAnalyticsProcessorConfiguration?
+      attr_accessor amazon_transcribe_processor_configuration: Types::AmazonTranscribeProcessorConfiguration?
+      attr_accessor kinesis_data_stream_sink_configuration: Types::KinesisDataStreamSinkConfiguration?
+      attr_accessor s3_recording_sink_configuration: Types::S3RecordingSinkConfiguration?
+      attr_accessor voice_analytics_processor_configuration: Types::VoiceAnalyticsProcessorConfiguration?
+      attr_accessor lambda_function_sink_configuration: Types::LambdaFunctionSinkConfiguration?
+      attr_accessor sqs_queue_sink_configuration: Types::SqsQueueSinkConfiguration?
+      attr_accessor sns_topic_sink_configuration: Types::SnsTopicSinkConfiguration?
+      attr_accessor voice_enhancement_sink_configuration: Types::VoiceEnhancementSinkConfiguration?
+    end
+
+    module MediaInsightsPipelineConfigurationElementType
+      AMAZON_TRANSCRIBE_CALL_ANALYTICS_PROCESSOR: String
+      VOICE_ANALYTICS_PROCESSOR: String
+      AMAZON_TRANSCRIBE_PROCESSOR: String
+      KINESIS_DATA_STREAM_SINK: String
+      LAMBDA_FUNCTION_SINK: String
+      SQS_QUEUE_SINK: String
+      SNS_TOPIC_SINK: String
+      S3_RECORDING_SINK: String
+      VOICE_ENHANCEMENT_SINK: String
+    end
+
+    class MediaInsightsPipelineConfigurationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_insights_pipeline_configuration_name: String,
+        ?media_insights_pipeline_configuration_id: String,
+        ?media_insights_pipeline_configuration_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_insights_pipeline_configuration_name: String?
+      attr_accessor media_insights_pipeline_configuration_id: String?
+      attr_accessor media_insights_pipeline_configuration_arn: String?
+    end
+
+    class MediaInsightsPipelineElementStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor status: String?
+    end
+
+    class MediaLiveConnectorPipeline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sources: Array[Types::LiveConnectorSourceConfiguration],
+        ?sinks: Array[Types::LiveConnectorSinkConfiguration],
+        ?media_pipeline_id: String,
+        ?media_pipeline_arn: String,
+        ?status: String,
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sources: Array[Types::LiveConnectorSourceConfiguration]?
+      attr_accessor sinks: Array[Types::LiveConnectorSinkConfiguration]?
+      attr_accessor media_pipeline_id: String?
+      attr_accessor media_pipeline_arn: String?
+      attr_accessor status: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+    end
+
+    class MediaPipeline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_capture_pipeline: Types::MediaCapturePipeline,
+        ?media_live_connector_pipeline: Types::MediaLiveConnectorPipeline,
+        ?media_concatenation_pipeline: Types::MediaConcatenationPipeline,
+        ?media_insights_pipeline: Types::MediaInsightsPipeline,
+        ?media_stream_pipeline: Types::MediaStreamPipeline,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_capture_pipeline: Types::MediaCapturePipeline?
+      attr_accessor media_live_connector_pipeline: Types::MediaLiveConnectorPipeline?
+      attr_accessor media_concatenation_pipeline: Types::MediaConcatenationPipeline?
+      attr_accessor media_insights_pipeline: Types::MediaInsightsPipeline?
+      attr_accessor media_stream_pipeline: Types::MediaStreamPipeline?
+    end
+
+    module MediaPipelineElementStatus
+      NotStarted: String
+      NotSupported: String
+      Initializing: String
+      InProgress: String
+      Failed: String
+      Stopping: String
+      Stopped: String
+      Paused: String
+    end
+
+    module MediaPipelineSinkType
+      S3Bucket: String
+    end
+
+    module MediaPipelineSourceType
+      ChimeSdkMeeting: String
+    end
+
+    module MediaPipelineStatus
+      Initializing: String
+      InProgress: String
+      Failed: String
+      Stopping: String
+      Stopped: String
+      Paused: String
+      NotStarted: String
+    end
+
+    module MediaPipelineStatusUpdate
+      Pause: String
+      Resume: String
+    end
+
+    class MediaPipelineSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_pipeline_id: String,
+        ?media_pipeline_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_pipeline_id: String?
+      attr_accessor media_pipeline_arn: String?
+    end
+
+    module MediaPipelineTaskStatus
+      NotStarted: String
+      Initializing: String
+      InProgress: String
+      Failed: String
+      Stopping: String
+      Stopped: String
+    end
+
+    class MediaStreamPipeline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_pipeline_id: String,
+        ?media_pipeline_arn: String,
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+        ?status: String,
+        ?sources: Array[Types::MediaStreamSource],
+        ?sinks: Array[Types::MediaStreamSink],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_pipeline_id: String?
+      attr_accessor media_pipeline_arn: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+      attr_accessor status: String?
+      attr_accessor sources: Array[Types::MediaStreamSource]?
+      attr_accessor sinks: Array[Types::MediaStreamSink]?
+    end
+
+    module MediaStreamPipelineSinkType
+      KinesisVideoStreamPool: String
+    end
+
+    class MediaStreamSink
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sink_arn: String,
+        ?sink_type: String,
+        ?reserved_stream_capacity: Integer,
+        ?media_stream_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sink_arn: String?
+      attr_accessor sink_type: String?
+      attr_accessor reserved_stream_capacity: Integer?
+      attr_accessor media_stream_type: String?
+    end
+
+    class MediaStreamSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_type: String,
+        ?source_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_type: String?
+      attr_accessor source_arn: String?
+    end
+
+    module MediaStreamType
+      MixedAudio: String
+      IndividualAudio: String
+    end
+
+    class MeetingEventsConcatenationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    module PartialResultsStability
+      HIGH: String
+      MEDIUM: String
+      LOW: String
+    end
+
+    module ParticipantRole
+      AGENT: String
+      CUSTOMER: String
+    end
+
+    class PostCallAnalyticsSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_location: String,
+        ?data_access_role_arn: String,
+        ?content_redaction_output: String,
+        ?output_encryption_kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_location: String?
+      attr_accessor data_access_role_arn: String?
+      attr_accessor content_redaction_output: String?
+      attr_accessor output_encryption_kms_key_id: String?
+    end
+
+    class PresenterOnlyConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?presenter_position: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor presenter_position: String?
+    end
+
+    module PresenterPosition
+      TopLeft: String
+      TopRight: String
+      BottomLeft: String
+      BottomRight: String
+    end
+
+    class RealTimeAlertConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?disabled: bool,
+        ?rules: Array[Types::RealTimeAlertRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor disabled: bool?
+      attr_accessor rules: Array[Types::RealTimeAlertRule]?
+    end
+
+    class RealTimeAlertRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?keyword_match_configuration: Types::KeywordMatchConfiguration,
+        ?sentiment_configuration: Types::SentimentConfiguration,
+        ?issue_detection_configuration: Types::IssueDetectionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor keyword_match_configuration: Types::KeywordMatchConfiguration?
+      attr_accessor sentiment_configuration: Types::SentimentConfiguration?
+      attr_accessor issue_detection_configuration: Types::IssueDetectionConfiguration?
+    end
+
+    module RealTimeAlertRuleType
+      KeywordMatch: String
+      Sentiment: String
+      IssueDetection: String
+    end
+
+    module RecordingFileFormat
+      Wav: String
+      Opus: String
+    end
+
+    class RecordingStreamConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+    end
+
+    module ResolutionOption
+      HD: String
+      FHD: String
+    end
+
+    class ResourceLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class S3BucketSinkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: String?
+    end
+
+    class S3RecordingSinkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: String,
+        ?recording_file_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: String?
+      attr_accessor recording_file_format: String?
+    end
+
+    class S3RecordingSinkRuntimeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: String,
+        ?recording_file_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: String?
+      attr_accessor recording_file_format: String?
+    end
+
+    class SelectedVideoStreams
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attendee_ids: Array[String],
+        ?external_user_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attendee_ids: Array[String]?
+      attr_accessor external_user_ids: Array[String]?
+    end
+
+    class SentimentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?sentiment_type: String,
+        ?time_period: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor sentiment_type: String?
+      attr_accessor time_period: Integer?
+    end
+
+    module SentimentType
+      NEGATIVE: String
+    end
+
+    class ServiceFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class SnsTopicSinkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insights_target: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insights_target: String?
+    end
+
+    class SourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?selected_video_streams: Types::SelectedVideoStreams,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor selected_video_streams: Types::SelectedVideoStreams?
+    end
+
+    class SpeakerSearchTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?speaker_search_task_id: String,
+        ?speaker_search_task_status: String,
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor speaker_search_task_id: String?
+      attr_accessor speaker_search_task_status: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+    end
+
+    class SqsQueueSinkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?insights_target: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor insights_target: String?
+    end
+
+    class SseAwsKeyManagementParams
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_kms_key_id: String,
+        ?aws_kms_encryption_context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_kms_key_id: String?
+      attr_accessor aws_kms_encryption_context: String?
+    end
+
+    class StartSpeakerSearchTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?voice_profile_domain_arn: String,
+        ?kinesis_video_stream_source_task_configuration: Types::KinesisVideoStreamSourceTaskConfiguration,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor voice_profile_domain_arn: String?
+      attr_accessor kinesis_video_stream_source_task_configuration: Types::KinesisVideoStreamSourceTaskConfiguration?
+      attr_accessor client_request_token: String?
+    end
+
+    class StartSpeakerSearchTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?speaker_search_task: Types::SpeakerSearchTask,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor speaker_search_task: Types::SpeakerSearchTask?
+    end
+
+    class StartVoiceToneAnalysisTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?language_code: String,
+        ?kinesis_video_stream_source_task_configuration: Types::KinesisVideoStreamSourceTaskConfiguration,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor language_code: String?
+      attr_accessor kinesis_video_stream_source_task_configuration: Types::KinesisVideoStreamSourceTaskConfiguration?
+      attr_accessor client_request_token: String?
+    end
+
+    class StartVoiceToneAnalysisTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_tone_analysis_task: Types::VoiceToneAnalysisTask,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_tone_analysis_task: Types::VoiceToneAnalysisTask?
+    end
+
+    class StopSpeakerSearchTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?speaker_search_task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor speaker_search_task_id: String?
+    end
+
+    class StopVoiceToneAnalysisTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?voice_tone_analysis_task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor voice_tone_analysis_task_id: String?
+    end
+
+    class StreamChannelDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?number_of_channels: Integer,
+        ?channel_definitions: Array[Types::ChannelDefinition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor number_of_channels: Integer?
+      attr_accessor channel_definitions: Array[Types::ChannelDefinition]?
+    end
+
+    class StreamConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?fragment_number: String,
+        ?stream_channel_definition: Types::StreamChannelDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor fragment_number: String?
+      attr_accessor stream_channel_definition: Types::StreamChannelDefinition?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottledClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    module TileOrder
+      JoinSequence: String
+      SpeakerSequence: String
+    end
+
+    class TimestampRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_timestamp: Time,
+        ?end_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_timestamp: Time?
+      attr_accessor end_timestamp: Time?
+    end
+
+    class TranscriptionMessagesConcatenationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    class UnauthorizedClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor request_id: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateMediaInsightsPipelineConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?resource_access_role_arn: String,
+        ?real_time_alert_configuration: Types::RealTimeAlertConfiguration,
+        ?elements: Array[Types::MediaInsightsPipelineConfigurationElement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor resource_access_role_arn: String?
+      attr_accessor real_time_alert_configuration: Types::RealTimeAlertConfiguration?
+      attr_accessor elements: Array[Types::MediaInsightsPipelineConfigurationElement]?
+    end
+
+    class UpdateMediaInsightsPipelineConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_insights_pipeline_configuration: Types::MediaInsightsPipelineConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_insights_pipeline_configuration: Types::MediaInsightsPipelineConfiguration?
+    end
+
+    class UpdateMediaInsightsPipelineStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?update_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor update_status: String?
+    end
+
+    class UpdateMediaPipelineKinesisVideoStreamPoolRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?stream_configuration: Types::KinesisVideoStreamConfigurationUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor stream_configuration: Types::KinesisVideoStreamConfigurationUpdate?
+    end
+
+    class UpdateMediaPipelineKinesisVideoStreamPoolResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kinesis_video_stream_pool_configuration: Types::KinesisVideoStreamPoolConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kinesis_video_stream_pool_configuration: Types::KinesisVideoStreamPoolConfiguration?
+    end
+
+    class VerticalLayoutConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tile_order: String,
+        ?tile_position: String,
+        ?tile_count: Integer,
+        ?tile_aspect_ratio: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tile_order: String?
+      attr_accessor tile_position: String?
+      attr_accessor tile_count: Integer?
+      attr_accessor tile_aspect_ratio: String?
+    end
+
+    module VerticalTilePosition
+      Left: String
+      Right: String
+    end
+
+    class VideoArtifactsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?mux_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor mux_type: String?
+    end
+
+    class VideoAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?corner_radius: Integer,
+        ?border_color: String,
+        ?highlight_color: String,
+        ?border_thickness: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor corner_radius: Integer?
+      attr_accessor border_color: String?
+      attr_accessor highlight_color: String?
+      attr_accessor border_thickness: Integer?
+    end
+
+    class VideoConcatenationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    module VideoMuxType
+      VideoOnly: String
+    end
+
+    module VocabularyFilterMethod
+      REMOVE: String
+      MASK: String
+      TAG: String
+    end
+
+    module VoiceAnalyticsConfigurationStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module VoiceAnalyticsLanguageCode
+      EN_US: String
+    end
+
+    class VoiceAnalyticsProcessorConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?speaker_search_status: String,
+        ?voice_tone_analysis_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor speaker_search_status: String?
+      attr_accessor voice_tone_analysis_status: String?
+    end
+
+    class VoiceEnhancementSinkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?disabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor disabled: bool?
+    end
+
+    class VoiceToneAnalysisTask
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?voice_tone_analysis_task_id: String,
+        ?voice_tone_analysis_task_status: String,
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor voice_tone_analysis_task_id: String?
+      attr_accessor voice_tone_analysis_task_status: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+    end
+  end
+end

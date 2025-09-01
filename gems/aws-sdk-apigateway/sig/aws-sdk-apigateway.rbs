@@ -1,0 +1,5 @@
+  module Aws
+    module APIGateway
+      VERSION: String
+    end
+  end

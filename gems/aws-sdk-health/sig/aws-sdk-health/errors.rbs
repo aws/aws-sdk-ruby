@@ -1,0 +1,13 @@
+module Aws::Health
+  module Errors
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPaginationToken < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedLocale < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

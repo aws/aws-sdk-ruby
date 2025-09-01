@@ -1,0 +1,5 @@
+  module Aws
+    module MigrationHubConfig
+      VERSION: String
+    end
+  end

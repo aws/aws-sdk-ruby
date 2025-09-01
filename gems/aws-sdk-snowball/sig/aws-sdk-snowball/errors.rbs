@@ -1,0 +1,39 @@
+module Aws::Snowball
+  module Errors
+    class ClusterLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def conflict_resource: () -> String?
+      def message: () -> String?
+    end
+    class Ec2RequestFailedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidAddressException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInputCombinationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidJobStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNextTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidResourceException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_type: () -> String?
+    end
+    class KMSRequestFailedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ReturnShippingLabelAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedAddressException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

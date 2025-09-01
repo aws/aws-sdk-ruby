@@ -1,0 +1,415 @@
+module Aws::AppIntegrations
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::AppIntegrations::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateApplicationResponse
+      include Smithy::Client::_Response[Types::CreateApplicationResponse]
+      def arn: () -> String?
+      def id: () -> String?
+    end
+    def create_application: (
+      ?name: String,
+      ?namespace: String,
+      ?description: String,
+      ?application_source_config: {
+        external_url_config: {
+          access_url: String,
+          approved_origins: Array[String]
+        }
+      },
+      ?subscriptions: Array[
+        {
+          event: String,
+          description: String
+        }
+      ],
+      ?publications: Array[
+        {
+          event: String,
+          schema: String,
+          description: String
+        }
+      ],
+      ?client_token: String,
+      ?tags: Hash[String, String],
+      ?permissions: Array[String],
+      ?is_service: bool,
+      ?initialization_timeout: Integer,
+      ?application_config: {
+        contact_handling: {
+          scope: String
+        }
+      },
+      ?iframe_config: {
+        allow: Array[String],
+        sandbox: untyped
+      }
+    ) -> _CreateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationResponse
+
+    interface _CreateDataIntegrationResponse
+      include Smithy::Client::_Response[Types::CreateDataIntegrationResponse]
+      def arn: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def kms_key: () -> String?
+      def source_uri: () -> String?
+      def schedule_configuration: () -> Types::ScheduleConfiguration?
+      def tags: () -> Hash[String, String]?
+      def client_token: () -> String?
+      def file_configuration: () -> Types::FileConfiguration?
+      def object_configuration: () -> Hash[String, Hash[String, Array[String]]]?
+    end
+    def create_data_integration: (
+      ?name: String,
+      ?description: String,
+      ?kms_key: String,
+      ?source_uri: String,
+      ?schedule_config: {
+        first_execution_from: String,
+        object: String,
+        schedule_expression: untyped
+      },
+      ?tags: Hash[String, String],
+      ?client_token: String,
+      ?file_configuration: {
+        folders: Array[String],
+        filters: Hash[String,
+          Array[String]
+        ]
+      },
+      ?object_configuration: Hash[String,
+        Hash[String,
+          Array[String]
+        ]
+      ]
+    ) -> _CreateDataIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataIntegrationResponse
+
+    interface _CreateDataIntegrationAssociationResponse
+      include Smithy::Client::_Response[Types::CreateDataIntegrationAssociationResponse]
+      def data_integration_association_id: () -> String?
+      def data_integration_arn: () -> String?
+    end
+    def create_data_integration_association: (
+      ?data_integration_identifier: String,
+      ?client_id: String,
+      ?object_configuration: Hash[String,
+        Hash[String,
+          Array[String]
+        ]
+      ],
+      ?destination_uri: String,
+      ?client_association_metadata: Hash[String, String],
+      ?client_token: String,
+      ?execution_configuration: {
+        execution_mode: String,
+        on_demand_configuration: {
+          start_time: String,
+          end_time: untyped
+        },
+        schedule_configuration: {
+          first_execution_from: untyped,
+          object: String,
+          schedule_expression: untyped
+        }
+      }
+    ) -> _CreateDataIntegrationAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataIntegrationAssociationResponse
+
+    interface _CreateEventIntegrationResponse
+      include Smithy::Client::_Response[Types::CreateEventIntegrationResponse]
+      def event_integration_arn: () -> String?
+    end
+    def create_event_integration: (
+      ?name: String,
+      ?description: String,
+      ?event_filter: {
+        source: String
+      },
+      ?event_bridge_bus: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateEventIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEventIntegrationResponse
+
+    interface _DeleteApplicationResponse
+      include Smithy::Client::_Response[Types::DeleteApplicationResponse]
+    end
+    def delete_application: (
+      ?arn: String
+    ) -> _DeleteApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationResponse
+
+    interface _DeleteDataIntegrationResponse
+      include Smithy::Client::_Response[Types::DeleteDataIntegrationResponse]
+    end
+    def delete_data_integration: (
+      ?data_integration_identifier: String
+    ) -> _DeleteDataIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataIntegrationResponse
+
+    interface _DeleteEventIntegrationResponse
+      include Smithy::Client::_Response[Types::DeleteEventIntegrationResponse]
+    end
+    def delete_event_integration: (
+      ?name: String
+    ) -> _DeleteEventIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventIntegrationResponse
+
+    interface _GetApplicationResponse
+      include Smithy::Client::_Response[Types::GetApplicationResponse]
+      def arn: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def namespace: () -> String?
+      def description: () -> String?
+      def application_source_config: () -> Types::ApplicationSourceConfig?
+      def subscriptions: () -> Array[Types::Subscription]?
+      def publications: () -> Array[Types::Publication]?
+      def created_time: () -> Time?
+      def last_modified_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def permissions: () -> Array[String]?
+      def is_service: () -> bool?
+      def initialization_timeout: () -> Integer?
+      def application_config: () -> Types::ApplicationConfig?
+      def iframe_config: () -> Types::IframeConfig?
+    end
+    def get_application: (
+      ?arn: String
+    ) -> _GetApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApplicationResponse
+
+    interface _GetDataIntegrationResponse
+      include Smithy::Client::_Response[Types::GetDataIntegrationResponse]
+      def arn: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def kms_key: () -> String?
+      def source_uri: () -> String?
+      def schedule_configuration: () -> Types::ScheduleConfiguration?
+      def tags: () -> Hash[String, String]?
+      def file_configuration: () -> Types::FileConfiguration?
+      def object_configuration: () -> Hash[String, Hash[String, Array[String]]]?
+    end
+    def get_data_integration: (
+      ?identifier: String
+    ) -> _GetDataIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataIntegrationResponse
+
+    interface _GetEventIntegrationResponse
+      include Smithy::Client::_Response[Types::GetEventIntegrationResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def event_integration_arn: () -> String?
+      def event_bridge_bus: () -> String?
+      def event_filter: () -> Types::EventFilter?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_event_integration: (
+      ?name: String
+    ) -> _GetEventIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventIntegrationResponse
+
+    interface _ListApplicationAssociationsResponse
+      include Smithy::Client::_Response[Types::ListApplicationAssociationsResponse]
+      def application_associations: () -> Array[Types::ApplicationAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_application_associations: (
+      ?application_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListApplicationAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationAssociationsResponse
+
+    interface _ListApplicationsResponse
+      include Smithy::Client::_Response[Types::ListApplicationsResponse]
+      def applications: () -> Array[Types::ApplicationSummary]?
+      def next_token: () -> String?
+    end
+    def list_applications: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationsResponse
+
+    interface _ListDataIntegrationAssociationsResponse
+      include Smithy::Client::_Response[Types::ListDataIntegrationAssociationsResponse]
+      def data_integration_associations: () -> Array[Types::DataIntegrationAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_data_integration_associations: (
+      ?data_integration_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataIntegrationAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataIntegrationAssociationsResponse
+
+    interface _ListDataIntegrationsResponse
+      include Smithy::Client::_Response[Types::ListDataIntegrationsResponse]
+      def data_integrations: () -> Array[Types::DataIntegrationSummary]?
+      def next_token: () -> String?
+    end
+    def list_data_integrations: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataIntegrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataIntegrationsResponse
+
+    interface _ListEventIntegrationAssociationsResponse
+      include Smithy::Client::_Response[Types::ListEventIntegrationAssociationsResponse]
+      def event_integration_associations: () -> Array[Types::EventIntegrationAssociation]?
+      def next_token: () -> String?
+    end
+    def list_event_integration_associations: (
+      ?event_integration_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEventIntegrationAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventIntegrationAssociationsResponse
+
+    interface _ListEventIntegrationsResponse
+      include Smithy::Client::_Response[Types::ListEventIntegrationsResponse]
+      def event_integrations: () -> Array[Types::EventIntegration]?
+      def next_token: () -> String?
+    end
+    def list_event_integrations: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEventIntegrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventIntegrationsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateApplicationResponse
+      include Smithy::Client::_Response[Types::UpdateApplicationResponse]
+    end
+    def update_application: (
+      ?arn: String,
+      ?name: String,
+      ?description: String,
+      ?application_source_config: {
+        external_url_config: {
+          access_url: String,
+          approved_origins: Array[String]
+        }
+      },
+      ?subscriptions: Array[
+        {
+          event: String,
+          description: String
+        }
+      ],
+      ?publications: Array[
+        {
+          event: String,
+          schema: String,
+          description: String
+        }
+      ],
+      ?permissions: Array[String],
+      ?is_service: bool,
+      ?initialization_timeout: Integer,
+      ?application_config: {
+        contact_handling: {
+          scope: String
+        }
+      },
+      ?iframe_config: {
+        allow: Array[String],
+        sandbox: untyped
+      }
+    ) -> _UpdateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationResponse
+
+    interface _UpdateDataIntegrationResponse
+      include Smithy::Client::_Response[Types::UpdateDataIntegrationResponse]
+    end
+    def update_data_integration: (
+      ?identifier: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateDataIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataIntegrationResponse
+
+    interface _UpdateDataIntegrationAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateDataIntegrationAssociationResponse]
+    end
+    def update_data_integration_association: (
+      ?data_integration_identifier: String,
+      ?data_integration_association_identifier: String,
+      ?execution_configuration: {
+        execution_mode: String,
+        on_demand_configuration: {
+          start_time: String,
+          end_time: untyped
+        },
+        schedule_configuration: {
+          first_execution_from: untyped,
+          object: String,
+          schedule_expression: untyped
+        }
+      }
+    ) -> _UpdateDataIntegrationAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataIntegrationAssociationResponse
+
+    interface _UpdateEventIntegrationResponse
+      include Smithy::Client::_Response[Types::UpdateEventIntegrationResponse]
+    end
+    def update_event_integration: (
+      ?name: String,
+      ?description: String
+    ) -> _UpdateEventIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEventIntegrationResponse
+  end
+end

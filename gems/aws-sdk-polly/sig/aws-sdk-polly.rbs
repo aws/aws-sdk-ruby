@@ -1,0 +1,5 @@
+  module Aws
+    module Polly
+      VERSION: String
+    end
+  end

@@ -1,0 +1,5 @@
+  module Aws
+    module Textract
+      VERSION: String
+    end
+  end

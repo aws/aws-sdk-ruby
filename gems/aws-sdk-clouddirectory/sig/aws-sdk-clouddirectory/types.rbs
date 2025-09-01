@@ -1,0 +1,3646 @@
+module Aws::CloudDirectory
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AddFacetToObjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?schema_facet: Types::SchemaFacet,
+        ?object_attribute_list: Array[Types::AttributeKeyAndValue],
+        ?object_reference: Types::ObjectReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor schema_facet: Types::SchemaFacet?
+      attr_accessor object_attribute_list: Array[Types::AttributeKeyAndValue]?
+      attr_accessor object_reference: Types::ObjectReference?
+    end
+
+    class AddFacetToObjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ApplySchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?published_schema_arn: String,
+        ?directory_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor published_schema_arn: String?
+      attr_accessor directory_arn: String?
+    end
+
+    class ApplySchemaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?applied_schema_arn: String,
+        ?directory_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor applied_schema_arn: String?
+      attr_accessor directory_arn: String?
+    end
+
+    class AttachObjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?parent_reference: Types::ObjectReference,
+        ?child_reference: Types::ObjectReference,
+        ?link_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor parent_reference: Types::ObjectReference?
+      attr_accessor child_reference: Types::ObjectReference?
+      attr_accessor link_name: String?
+    end
+
+    class AttachObjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attached_object_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attached_object_identifier: String?
+    end
+
+    class AttachPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?policy_reference: Types::ObjectReference,
+        ?object_reference: Types::ObjectReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor policy_reference: Types::ObjectReference?
+      attr_accessor object_reference: Types::ObjectReference?
+    end
+
+    class AttachPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AttachToIndexRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?index_reference: Types::ObjectReference,
+        ?target_reference: Types::ObjectReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor index_reference: Types::ObjectReference?
+      attr_accessor target_reference: Types::ObjectReference?
+    end
+
+    class AttachToIndexResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attached_object_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attached_object_identifier: String?
+    end
+
+    class AttachTypedLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?source_object_reference: Types::ObjectReference,
+        ?target_object_reference: Types::ObjectReference,
+        ?typed_link_facet: Types::TypedLinkSchemaAndFacetName,
+        ?attributes: Array[Types::AttributeNameAndValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor source_object_reference: Types::ObjectReference?
+      attr_accessor target_object_reference: Types::ObjectReference?
+      attr_accessor typed_link_facet: Types::TypedLinkSchemaAndFacetName?
+      attr_accessor attributes: Array[Types::AttributeNameAndValue]?
+    end
+
+    class AttachTypedLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?typed_link_specifier: Types::TypedLinkSpecifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor typed_link_specifier: Types::TypedLinkSpecifier?
+    end
+
+    class AttributeKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?facet_name: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor facet_name: String?
+      attr_accessor name: String?
+    end
+
+    class AttributeKeyAndValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: Types::AttributeKey,
+        ?value: Types::TypedAttributeValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: Types::AttributeKey?
+      attr_accessor value: Types::TypedAttributeValue?
+    end
+
+    class AttributeNameAndValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?value: Types::TypedAttributeValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor value: Types::TypedAttributeValue?
+    end
+
+    class BatchAddFacetToObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_facet: Types::SchemaFacet,
+        ?object_attribute_list: Array[Types::AttributeKeyAndValue],
+        ?object_reference: Types::ObjectReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_facet: Types::SchemaFacet?
+      attr_accessor object_attribute_list: Array[Types::AttributeKeyAndValue]?
+      attr_accessor object_reference: Types::ObjectReference?
+    end
+
+    class BatchAddFacetToObjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class BatchAttachObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parent_reference: Types::ObjectReference,
+        ?child_reference: Types::ObjectReference,
+        ?link_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parent_reference: Types::ObjectReference?
+      attr_accessor child_reference: Types::ObjectReference?
+      attr_accessor link_name: String?
+    end
+
+    class BatchAttachObjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attached_object_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attached_object_identifier: String?
+    end
+
+    class BatchAttachPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_reference: Types::ObjectReference,
+        ?object_reference: Types::ObjectReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_reference: Types::ObjectReference?
+      attr_accessor object_reference: Types::ObjectReference?
+    end
+
+    class BatchAttachPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class BatchAttachToIndex
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_reference: Types::ObjectReference,
+        ?target_reference: Types::ObjectReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_reference: Types::ObjectReference?
+      attr_accessor target_reference: Types::ObjectReference?
+    end
+
+    class BatchAttachToIndexResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attached_object_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attached_object_identifier: String?
+    end
+
+    class BatchAttachTypedLink
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_object_reference: Types::ObjectReference,
+        ?target_object_reference: Types::ObjectReference,
+        ?typed_link_facet: Types::TypedLinkSchemaAndFacetName,
+        ?attributes: Array[Types::AttributeNameAndValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_object_reference: Types::ObjectReference?
+      attr_accessor target_object_reference: Types::ObjectReference?
+      attr_accessor typed_link_facet: Types::TypedLinkSchemaAndFacetName?
+      attr_accessor attributes: Array[Types::AttributeNameAndValue]?
+    end
+
+    class BatchAttachTypedLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?typed_link_specifier: Types::TypedLinkSpecifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor typed_link_specifier: Types::TypedLinkSpecifier?
+    end
+
+    class BatchCreateIndex
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ordered_indexed_attribute_list: Array[Types::AttributeKey],
+        ?is_unique: bool,
+        ?parent_reference: Types::ObjectReference,
+        ?link_name: String,
+        ?batch_reference_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ordered_indexed_attribute_list: Array[Types::AttributeKey]?
+      attr_accessor is_unique: bool?
+      attr_accessor parent_reference: Types::ObjectReference?
+      attr_accessor link_name: String?
+      attr_accessor batch_reference_name: String?
+    end
+
+    class BatchCreateIndexResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_identifier: String?
+    end
+
+    class BatchCreateObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_facet: Array[Types::SchemaFacet],
+        ?object_attribute_list: Array[Types::AttributeKeyAndValue],
+        ?parent_reference: Types::ObjectReference,
+        ?link_name: String,
+        ?batch_reference_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_facet: Array[Types::SchemaFacet]?
+      attr_accessor object_attribute_list: Array[Types::AttributeKeyAndValue]?
+      attr_accessor parent_reference: Types::ObjectReference?
+      attr_accessor link_name: String?
+      attr_accessor batch_reference_name: String?
+    end
+
+    class BatchCreateObjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_identifier: String?
+    end
+
+    class BatchDeleteObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_reference: Types::ObjectReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_reference: Types::ObjectReference?
+    end
+
+    class BatchDeleteObjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class BatchDetachFromIndex
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_reference: Types::ObjectReference,
+        ?target_reference: Types::ObjectReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_reference: Types::ObjectReference?
+      attr_accessor target_reference: Types::ObjectReference?
+    end
+
+    class BatchDetachFromIndexResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detached_object_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detached_object_identifier: String?
+    end
+
+    class BatchDetachObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parent_reference: Types::ObjectReference,
+        ?link_name: String,
+        ?batch_reference_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parent_reference: Types::ObjectReference?
+      attr_accessor link_name: String?
+      attr_accessor batch_reference_name: String?
+    end
+
+    class BatchDetachObjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detached_object_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detached_object_identifier: String?
+    end
+
+    class BatchDetachPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_reference: Types::ObjectReference,
+        ?object_reference: Types::ObjectReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_reference: Types::ObjectReference?
+      attr_accessor object_reference: Types::ObjectReference?
+    end
+
+    class BatchDetachPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class BatchDetachTypedLink
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?typed_link_specifier: Types::TypedLinkSpecifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor typed_link_specifier: Types::TypedLinkSpecifier?
+    end
+
+    class BatchDetachTypedLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class BatchGetLinkAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?typed_link_specifier: Types::TypedLinkSpecifier,
+        ?attribute_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor typed_link_specifier: Types::TypedLinkSpecifier?
+      attr_accessor attribute_names: Array[String]?
+    end
+
+    class BatchGetLinkAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::AttributeKeyAndValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::AttributeKeyAndValue]?
+    end
+
+    class BatchGetObjectAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_reference: Types::ObjectReference,
+        ?schema_facet: Types::SchemaFacet,
+        ?attribute_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor schema_facet: Types::SchemaFacet?
+      attr_accessor attribute_names: Array[String]?
+    end
+
+    class BatchGetObjectAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::AttributeKeyAndValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::AttributeKeyAndValue]?
+    end
+
+    class BatchGetObjectInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_reference: Types::ObjectReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_reference: Types::ObjectReference?
+    end
+
+    class BatchGetObjectInformationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_facets: Array[Types::SchemaFacet],
+        ?object_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_facets: Array[Types::SchemaFacet]?
+      attr_accessor object_identifier: String?
+    end
+
+    class BatchListAttachedIndices
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_reference: Types::ObjectReference,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_reference: Types::ObjectReference?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class BatchListAttachedIndicesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_attachments: Array[Types::IndexAttachment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_attachments: Array[Types::IndexAttachment]?
+      attr_accessor next_token: String?
+    end
+
+    class BatchListIncomingTypedLinks
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_reference: Types::ObjectReference,
+        ?filter_attribute_ranges: Array[Types::TypedLinkAttributeRange],
+        ?filter_typed_link: Types::TypedLinkSchemaAndFacetName,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor filter_attribute_ranges: Array[Types::TypedLinkAttributeRange]?
+      attr_accessor filter_typed_link: Types::TypedLinkSchemaAndFacetName?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class BatchListIncomingTypedLinksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?link_specifiers: Array[Types::TypedLinkSpecifier],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor link_specifiers: Array[Types::TypedLinkSpecifier]?
+      attr_accessor next_token: String?
+    end
+
+    class BatchListIndex
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ranges_on_indexed_values: Array[Types::ObjectAttributeRange],
+        ?index_reference: Types::ObjectReference,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ranges_on_indexed_values: Array[Types::ObjectAttributeRange]?
+      attr_accessor index_reference: Types::ObjectReference?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class BatchListIndexResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_attachments: Array[Types::IndexAttachment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_attachments: Array[Types::IndexAttachment]?
+      attr_accessor next_token: String?
+    end
+
+    class BatchListObjectAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_reference: Types::ObjectReference,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?facet_filter: Types::SchemaFacet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor facet_filter: Types::SchemaFacet?
+    end
+
+    class BatchListObjectAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::AttributeKeyAndValue],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::AttributeKeyAndValue]?
+      attr_accessor next_token: String?
+    end
+
+    class BatchListObjectChildren
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_reference: Types::ObjectReference,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class BatchListObjectChildrenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?children: Hash[String, String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor children: Hash[String, String]?
+      attr_accessor next_token: String?
+    end
+
+    class BatchListObjectParentPaths
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_reference: Types::ObjectReference,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class BatchListObjectParentPathsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path_to_object_identifiers_list: Array[Types::PathToObjectIdentifiers],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path_to_object_identifiers_list: Array[Types::PathToObjectIdentifiers]?
+      attr_accessor next_token: String?
+    end
+
+    class BatchListObjectParents
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_reference: Types::ObjectReference,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class BatchListObjectParentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parent_links: Array[Types::ObjectIdentifierAndLinkNameTuple],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parent_links: Array[Types::ObjectIdentifierAndLinkNameTuple]?
+      attr_accessor next_token: String?
+    end
+
+    class BatchListObjectPolicies
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_reference: Types::ObjectReference,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class BatchListObjectPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attached_policy_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attached_policy_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class BatchListOutgoingTypedLinks
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_reference: Types::ObjectReference,
+        ?filter_attribute_ranges: Array[Types::TypedLinkAttributeRange],
+        ?filter_typed_link: Types::TypedLinkSchemaAndFacetName,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor filter_attribute_ranges: Array[Types::TypedLinkAttributeRange]?
+      attr_accessor filter_typed_link: Types::TypedLinkSchemaAndFacetName?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class BatchListOutgoingTypedLinksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?typed_link_specifiers: Array[Types::TypedLinkSpecifier],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor typed_link_specifiers: Array[Types::TypedLinkSpecifier]?
+      attr_accessor next_token: String?
+    end
+
+    class BatchListPolicyAttachments
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_reference: Types::ObjectReference,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_reference: Types::ObjectReference?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class BatchListPolicyAttachmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_identifiers: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_identifiers: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class BatchLookupPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_reference: Types::ObjectReference,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class BatchLookupPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_to_path_list: Array[Types::PolicyToPath],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_to_path_list: Array[Types::PolicyToPath]?
+      attr_accessor next_token: String?
+    end
+
+    class BatchReadException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    module BatchReadExceptionType
+      ValidationException: String
+      InvalidArnException: String
+      ResourceNotFoundException: String
+      InvalidNextTokenException: String
+      AccessDeniedException: String
+      NotNodeException: String
+      FacetValidationException: String
+      CannotListParentOfRootException: String
+      NotIndexException: String
+      NotPolicyException: String
+      DirectoryNotEnabledException: String
+      LimitExceededException: String
+      InternalServiceException: String
+    end
+
+    class BatchReadOperation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?list_object_attributes: Types::BatchListObjectAttributes,
+        ?list_object_children: Types::BatchListObjectChildren,
+        ?list_attached_indices: Types::BatchListAttachedIndices,
+        ?list_object_parent_paths: Types::BatchListObjectParentPaths,
+        ?get_object_information: Types::BatchGetObjectInformation,
+        ?get_object_attributes: Types::BatchGetObjectAttributes,
+        ?list_object_parents: Types::BatchListObjectParents,
+        ?list_object_policies: Types::BatchListObjectPolicies,
+        ?list_policy_attachments: Types::BatchListPolicyAttachments,
+        ?lookup_policy: Types::BatchLookupPolicy,
+        ?list_index: Types::BatchListIndex,
+        ?list_outgoing_typed_links: Types::BatchListOutgoingTypedLinks,
+        ?list_incoming_typed_links: Types::BatchListIncomingTypedLinks,
+        ?get_link_attributes: Types::BatchGetLinkAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor list_object_attributes: Types::BatchListObjectAttributes?
+      attr_accessor list_object_children: Types::BatchListObjectChildren?
+      attr_accessor list_attached_indices: Types::BatchListAttachedIndices?
+      attr_accessor list_object_parent_paths: Types::BatchListObjectParentPaths?
+      attr_accessor get_object_information: Types::BatchGetObjectInformation?
+      attr_accessor get_object_attributes: Types::BatchGetObjectAttributes?
+      attr_accessor list_object_parents: Types::BatchListObjectParents?
+      attr_accessor list_object_policies: Types::BatchListObjectPolicies?
+      attr_accessor list_policy_attachments: Types::BatchListPolicyAttachments?
+      attr_accessor lookup_policy: Types::BatchLookupPolicy?
+      attr_accessor list_index: Types::BatchListIndex?
+      attr_accessor list_outgoing_typed_links: Types::BatchListOutgoingTypedLinks?
+      attr_accessor list_incoming_typed_links: Types::BatchListIncomingTypedLinks?
+      attr_accessor get_link_attributes: Types::BatchGetLinkAttributes?
+    end
+
+    class BatchReadOperationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful_response: Types::BatchReadSuccessfulResponse,
+        ?exception_response: Types::BatchReadException,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful_response: Types::BatchReadSuccessfulResponse?
+      attr_accessor exception_response: Types::BatchReadException?
+    end
+
+    class BatchReadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?operations: Array[Types::BatchReadOperation],
+        ?consistency_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor operations: Array[Types::BatchReadOperation]?
+      attr_accessor consistency_level: String?
+    end
+
+    class BatchReadResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?responses: Array[Types::BatchReadOperationResponse],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor responses: Array[Types::BatchReadOperationResponse]?
+    end
+
+    class BatchReadSuccessfulResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?list_object_attributes: Types::BatchListObjectAttributesResponse,
+        ?list_object_children: Types::BatchListObjectChildrenResponse,
+        ?get_object_information: Types::BatchGetObjectInformationResponse,
+        ?get_object_attributes: Types::BatchGetObjectAttributesResponse,
+        ?list_attached_indices: Types::BatchListAttachedIndicesResponse,
+        ?list_object_parent_paths: Types::BatchListObjectParentPathsResponse,
+        ?list_object_policies: Types::BatchListObjectPoliciesResponse,
+        ?list_policy_attachments: Types::BatchListPolicyAttachmentsResponse,
+        ?lookup_policy: Types::BatchLookupPolicyResponse,
+        ?list_index: Types::BatchListIndexResponse,
+        ?list_outgoing_typed_links: Types::BatchListOutgoingTypedLinksResponse,
+        ?list_incoming_typed_links: Types::BatchListIncomingTypedLinksResponse,
+        ?get_link_attributes: Types::BatchGetLinkAttributesResponse,
+        ?list_object_parents: Types::BatchListObjectParentsResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor list_object_attributes: Types::BatchListObjectAttributesResponse?
+      attr_accessor list_object_children: Types::BatchListObjectChildrenResponse?
+      attr_accessor get_object_information: Types::BatchGetObjectInformationResponse?
+      attr_accessor get_object_attributes: Types::BatchGetObjectAttributesResponse?
+      attr_accessor list_attached_indices: Types::BatchListAttachedIndicesResponse?
+      attr_accessor list_object_parent_paths: Types::BatchListObjectParentPathsResponse?
+      attr_accessor list_object_policies: Types::BatchListObjectPoliciesResponse?
+      attr_accessor list_policy_attachments: Types::BatchListPolicyAttachmentsResponse?
+      attr_accessor lookup_policy: Types::BatchLookupPolicyResponse?
+      attr_accessor list_index: Types::BatchListIndexResponse?
+      attr_accessor list_outgoing_typed_links: Types::BatchListOutgoingTypedLinksResponse?
+      attr_accessor list_incoming_typed_links: Types::BatchListIncomingTypedLinksResponse?
+      attr_accessor get_link_attributes: Types::BatchGetLinkAttributesResponse?
+      attr_accessor list_object_parents: Types::BatchListObjectParentsResponse?
+    end
+
+    class BatchRemoveFacetFromObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_facet: Types::SchemaFacet,
+        ?object_reference: Types::ObjectReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_facet: Types::SchemaFacet?
+      attr_accessor object_reference: Types::ObjectReference?
+    end
+
+    class BatchRemoveFacetFromObjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class BatchUpdateLinkAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?typed_link_specifier: Types::TypedLinkSpecifier,
+        ?attribute_updates: Array[Types::LinkAttributeUpdate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor typed_link_specifier: Types::TypedLinkSpecifier?
+      attr_accessor attribute_updates: Array[Types::LinkAttributeUpdate]?
+    end
+
+    class BatchUpdateLinkAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class BatchUpdateObjectAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_reference: Types::ObjectReference,
+        ?attribute_updates: Array[Types::ObjectAttributeUpdate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor attribute_updates: Array[Types::ObjectAttributeUpdate]?
+    end
+
+    class BatchUpdateObjectAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_identifier: String?
+    end
+
+    class BatchWriteException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index: Integer,
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index: Integer?
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    module BatchWriteExceptionType
+      InternalServiceException: String
+      ValidationException: String
+      InvalidArnException: String
+      LinkNameAlreadyInUseException: String
+      StillContainsLinksException: String
+      FacetValidationException: String
+      ObjectNotDetachedException: String
+      ResourceNotFoundException: String
+      AccessDeniedException: String
+      InvalidAttachmentException: String
+      NotIndexException: String
+      NotNodeException: String
+      IndexedAttributeMissingException: String
+      ObjectAlreadyDetachedException: String
+      NotPolicyException: String
+      DirectoryNotEnabledException: String
+      LimitExceededException: String
+      UnsupportedIndexTypeException: String
+    end
+
+    class BatchWriteOperation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_object: Types::BatchCreateObject,
+        ?attach_object: Types::BatchAttachObject,
+        ?detach_object: Types::BatchDetachObject,
+        ?update_object_attributes: Types::BatchUpdateObjectAttributes,
+        ?delete_object: Types::BatchDeleteObject,
+        ?add_facet_to_object: Types::BatchAddFacetToObject,
+        ?remove_facet_from_object: Types::BatchRemoveFacetFromObject,
+        ?attach_policy: Types::BatchAttachPolicy,
+        ?detach_policy: Types::BatchDetachPolicy,
+        ?create_index: Types::BatchCreateIndex,
+        ?attach_to_index: Types::BatchAttachToIndex,
+        ?detach_from_index: Types::BatchDetachFromIndex,
+        ?attach_typed_link: Types::BatchAttachTypedLink,
+        ?detach_typed_link: Types::BatchDetachTypedLink,
+        ?update_link_attributes: Types::BatchUpdateLinkAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_object: Types::BatchCreateObject?
+      attr_accessor attach_object: Types::BatchAttachObject?
+      attr_accessor detach_object: Types::BatchDetachObject?
+      attr_accessor update_object_attributes: Types::BatchUpdateObjectAttributes?
+      attr_accessor delete_object: Types::BatchDeleteObject?
+      attr_accessor add_facet_to_object: Types::BatchAddFacetToObject?
+      attr_accessor remove_facet_from_object: Types::BatchRemoveFacetFromObject?
+      attr_accessor attach_policy: Types::BatchAttachPolicy?
+      attr_accessor detach_policy: Types::BatchDetachPolicy?
+      attr_accessor create_index: Types::BatchCreateIndex?
+      attr_accessor attach_to_index: Types::BatchAttachToIndex?
+      attr_accessor detach_from_index: Types::BatchDetachFromIndex?
+      attr_accessor attach_typed_link: Types::BatchAttachTypedLink?
+      attr_accessor detach_typed_link: Types::BatchDetachTypedLink?
+      attr_accessor update_link_attributes: Types::BatchUpdateLinkAttributes?
+    end
+
+    class BatchWriteOperationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_object: Types::BatchCreateObjectResponse,
+        ?attach_object: Types::BatchAttachObjectResponse,
+        ?detach_object: Types::BatchDetachObjectResponse,
+        ?update_object_attributes: Types::BatchUpdateObjectAttributesResponse,
+        ?delete_object: Types::BatchDeleteObjectResponse,
+        ?add_facet_to_object: Types::BatchAddFacetToObjectResponse,
+        ?remove_facet_from_object: Types::BatchRemoveFacetFromObjectResponse,
+        ?attach_policy: Types::BatchAttachPolicyResponse,
+        ?detach_policy: Types::BatchDetachPolicyResponse,
+        ?create_index: Types::BatchCreateIndexResponse,
+        ?attach_to_index: Types::BatchAttachToIndexResponse,
+        ?detach_from_index: Types::BatchDetachFromIndexResponse,
+        ?attach_typed_link: Types::BatchAttachTypedLinkResponse,
+        ?detach_typed_link: Types::BatchDetachTypedLinkResponse,
+        ?update_link_attributes: Types::BatchUpdateLinkAttributesResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_object: Types::BatchCreateObjectResponse?
+      attr_accessor attach_object: Types::BatchAttachObjectResponse?
+      attr_accessor detach_object: Types::BatchDetachObjectResponse?
+      attr_accessor update_object_attributes: Types::BatchUpdateObjectAttributesResponse?
+      attr_accessor delete_object: Types::BatchDeleteObjectResponse?
+      attr_accessor add_facet_to_object: Types::BatchAddFacetToObjectResponse?
+      attr_accessor remove_facet_from_object: Types::BatchRemoveFacetFromObjectResponse?
+      attr_accessor attach_policy: Types::BatchAttachPolicyResponse?
+      attr_accessor detach_policy: Types::BatchDetachPolicyResponse?
+      attr_accessor create_index: Types::BatchCreateIndexResponse?
+      attr_accessor attach_to_index: Types::BatchAttachToIndexResponse?
+      attr_accessor detach_from_index: Types::BatchDetachFromIndexResponse?
+      attr_accessor attach_typed_link: Types::BatchAttachTypedLinkResponse?
+      attr_accessor detach_typed_link: Types::BatchDetachTypedLinkResponse?
+      attr_accessor update_link_attributes: Types::BatchUpdateLinkAttributesResponse?
+    end
+
+    class BatchWriteRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?operations: Array[Types::BatchWriteOperation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor operations: Array[Types::BatchWriteOperation]?
+    end
+
+    class BatchWriteResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?responses: Array[Types::BatchWriteOperationResponse],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor responses: Array[Types::BatchWriteOperationResponse]?
+    end
+
+    class CannotListParentOfRootException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ConsistencyLevel
+      SERIALIZABLE: String
+      EVENTUAL: String
+    end
+
+    class CreateDirectoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?schema_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor schema_arn: String?
+    end
+
+    class CreateDirectoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?name: String,
+        ?object_identifier: String,
+        ?applied_schema_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor name: String?
+      attr_accessor object_identifier: String?
+      attr_accessor applied_schema_arn: String?
+    end
+
+    class CreateFacetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?name: String,
+        ?attributes: Array[Types::FacetAttribute],
+        ?object_type: String,
+        ?facet_style: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor name: String?
+      attr_accessor attributes: Array[Types::FacetAttribute]?
+      attr_accessor object_type: String?
+      attr_accessor facet_style: String?
+    end
+
+    class CreateFacetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateIndexRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?ordered_indexed_attribute_list: Array[Types::AttributeKey],
+        ?is_unique: bool,
+        ?parent_reference: Types::ObjectReference,
+        ?link_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor ordered_indexed_attribute_list: Array[Types::AttributeKey]?
+      attr_accessor is_unique: bool?
+      attr_accessor parent_reference: Types::ObjectReference?
+      attr_accessor link_name: String?
+    end
+
+    class CreateIndexResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_identifier: String?
+    end
+
+    class CreateObjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?schema_facets: Array[Types::SchemaFacet],
+        ?object_attribute_list: Array[Types::AttributeKeyAndValue],
+        ?parent_reference: Types::ObjectReference,
+        ?link_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor schema_facets: Array[Types::SchemaFacet]?
+      attr_accessor object_attribute_list: Array[Types::AttributeKeyAndValue]?
+      attr_accessor parent_reference: Types::ObjectReference?
+      attr_accessor link_name: String?
+    end
+
+    class CreateObjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_identifier: String?
+    end
+
+    class CreateSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class CreateSchemaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+    end
+
+    class CreateTypedLinkFacetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?facet: Types::TypedLinkFacet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor facet: Types::TypedLinkFacet?
+    end
+
+    class CreateTypedLinkFacetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDirectoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+    end
+
+    class DeleteDirectoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+    end
+
+    class DeleteFacetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteFacetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteObjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?object_reference: Types::ObjectReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor object_reference: Types::ObjectReference?
+    end
+
+    class DeleteObjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+    end
+
+    class DeleteSchemaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+    end
+
+    class DeleteTypedLinkFacetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteTypedLinkFacetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DetachFromIndexRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?index_reference: Types::ObjectReference,
+        ?target_reference: Types::ObjectReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor index_reference: Types::ObjectReference?
+      attr_accessor target_reference: Types::ObjectReference?
+    end
+
+    class DetachFromIndexResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detached_object_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detached_object_identifier: String?
+    end
+
+    class DetachObjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?parent_reference: Types::ObjectReference,
+        ?link_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor parent_reference: Types::ObjectReference?
+      attr_accessor link_name: String?
+    end
+
+    class DetachObjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detached_object_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detached_object_identifier: String?
+    end
+
+    class DetachPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?policy_reference: Types::ObjectReference,
+        ?object_reference: Types::ObjectReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor policy_reference: Types::ObjectReference?
+      attr_accessor object_reference: Types::ObjectReference?
+    end
+
+    class DetachPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DetachTypedLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?typed_link_specifier: Types::TypedLinkSpecifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor typed_link_specifier: Types::TypedLinkSpecifier?
+    end
+
+    class Directory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?directory_arn: String,
+        ?state: String,
+        ?creation_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor directory_arn: String?
+      attr_accessor state: String?
+      attr_accessor creation_date_time: Time?
+    end
+
+    class DirectoryAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DirectoryDeletedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DirectoryNotDisabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DirectoryNotEnabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module DirectoryState
+      ENABLED: String
+      DISABLED: String
+      DELETED: String
+    end
+
+    class DisableDirectoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+    end
+
+    class DisableDirectoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+    end
+
+    class EnableDirectoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+    end
+
+    class EnableDirectoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+    end
+
+    class Facet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?object_type: String,
+        ?facet_style: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor object_type: String?
+      attr_accessor facet_style: String?
+    end
+
+    class FacetAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class FacetAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?attribute_definition: Types::FacetAttributeDefinition,
+        ?attribute_reference: Types::FacetAttributeReference,
+        ?required_behavior: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor attribute_definition: Types::FacetAttributeDefinition?
+      attr_accessor attribute_reference: Types::FacetAttributeReference?
+      attr_accessor required_behavior: String?
+    end
+
+    class FacetAttributeDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?default_value: Types::TypedAttributeValue,
+        ?is_immutable: bool,
+        ?rules: Hash[String, Types::Rule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor default_value: Types::TypedAttributeValue?
+      attr_accessor is_immutable: bool?
+      attr_accessor rules: Hash[String, Types::Rule]?
+    end
+
+    class FacetAttributeReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_facet_name: String,
+        ?target_attribute_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_facet_name: String?
+      attr_accessor target_attribute_name: String?
+    end
+
+    module FacetAttributeType
+      STRING: String
+      BINARY: String
+      BOOLEAN: String
+      NUMBER: String
+      DATETIME: String
+      VARIANT: String
+    end
+
+    class FacetAttributeUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute: Types::FacetAttribute,
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: Types::FacetAttribute?
+      attr_accessor action: String?
+    end
+
+    class FacetInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class FacetNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module FacetStyle
+      STATIC: String
+      DYNAMIC: String
+    end
+
+    class FacetValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetAppliedSchemaVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+    end
+
+    class GetAppliedSchemaVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?applied_schema_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor applied_schema_arn: String?
+    end
+
+    class GetDirectoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+    end
+
+    class GetDirectoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory: Types::Directory,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory: Types::Directory?
+    end
+
+    class GetFacetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor name: String?
+    end
+
+    class GetFacetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?facet: Types::Facet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor facet: Types::Facet?
+    end
+
+    class GetLinkAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?typed_link_specifier: Types::TypedLinkSpecifier,
+        ?attribute_names: Array[String],
+        ?consistency_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor typed_link_specifier: Types::TypedLinkSpecifier?
+      attr_accessor attribute_names: Array[String]?
+      attr_accessor consistency_level: String?
+    end
+
+    class GetLinkAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::AttributeKeyAndValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::AttributeKeyAndValue]?
+    end
+
+    class GetObjectAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?object_reference: Types::ObjectReference,
+        ?consistency_level: String,
+        ?schema_facet: Types::SchemaFacet,
+        ?attribute_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor consistency_level: String?
+      attr_accessor schema_facet: Types::SchemaFacet?
+      attr_accessor attribute_names: Array[String]?
+    end
+
+    class GetObjectAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::AttributeKeyAndValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::AttributeKeyAndValue]?
+    end
+
+    class GetObjectInformationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?object_reference: Types::ObjectReference,
+        ?consistency_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor consistency_level: String?
+    end
+
+    class GetObjectInformationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_facets: Array[Types::SchemaFacet],
+        ?object_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_facets: Array[Types::SchemaFacet]?
+      attr_accessor object_identifier: String?
+    end
+
+    class GetSchemaAsJsonRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+    end
+
+    class GetSchemaAsJsonResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor document: String?
+    end
+
+    class GetTypedLinkFacetInformationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor name: String?
+    end
+
+    class GetTypedLinkFacetInformationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_attribute_order: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_attribute_order: Array[String]?
+    end
+
+    class IncompatibleSchemaException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IndexAttachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?indexed_attributes: Array[Types::AttributeKeyAndValue],
+        ?object_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor indexed_attributes: Array[Types::AttributeKeyAndValue]?
+      attr_accessor object_identifier: String?
+    end
+
+    class IndexedAttributeMissingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InternalServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidArnException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidAttachmentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidFacetUpdateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRuleException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSchemaDocException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTaggingRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LinkAttributeAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_action_type: String,
+        ?attribute_update_value: Types::TypedAttributeValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_action_type: String?
+      attr_accessor attribute_update_value: Types::TypedAttributeValue?
+    end
+
+    class LinkAttributeUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_key: Types::AttributeKey,
+        ?attribute_action: Types::LinkAttributeAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_key: Types::AttributeKey?
+      attr_accessor attribute_action: Types::LinkAttributeAction?
+    end
+
+    class LinkNameAlreadyInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAppliedSchemaArnsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?schema_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor schema_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAppliedSchemaArnsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arns: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arns: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAttachedIndicesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?target_reference: Types::ObjectReference,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?consistency_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor target_reference: Types::ObjectReference?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor consistency_level: String?
+    end
+
+    class ListAttachedIndicesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_attachments: Array[Types::IndexAttachment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_attachments: Array[Types::IndexAttachment]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDevelopmentSchemaArnsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDevelopmentSchemaArnsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arns: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arns: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDirectoriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor state: String?
+    end
+
+    class ListDirectoriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directories: Array[Types::Directory],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directories: Array[Types::Directory]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFacetAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFacetAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::FacetAttribute],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::FacetAttribute]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFacetNamesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFacetNamesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?facet_names: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor facet_names: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIncomingTypedLinksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?object_reference: Types::ObjectReference,
+        ?filter_attribute_ranges: Array[Types::TypedLinkAttributeRange],
+        ?filter_typed_link: Types::TypedLinkSchemaAndFacetName,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?consistency_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor filter_attribute_ranges: Array[Types::TypedLinkAttributeRange]?
+      attr_accessor filter_typed_link: Types::TypedLinkSchemaAndFacetName?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor consistency_level: String?
+    end
+
+    class ListIncomingTypedLinksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?link_specifiers: Array[Types::TypedLinkSpecifier],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor link_specifiers: Array[Types::TypedLinkSpecifier]?
+      attr_accessor next_token: String?
+    end
+
+    class ListIndexRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?ranges_on_indexed_values: Array[Types::ObjectAttributeRange],
+        ?index_reference: Types::ObjectReference,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?consistency_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor ranges_on_indexed_values: Array[Types::ObjectAttributeRange]?
+      attr_accessor index_reference: Types::ObjectReference?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor consistency_level: String?
+    end
+
+    class ListIndexResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_attachments: Array[Types::IndexAttachment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_attachments: Array[Types::IndexAttachment]?
+      attr_accessor next_token: String?
+    end
+
+    class ListManagedSchemaArnsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListManagedSchemaArnsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arns: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arns: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListObjectAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?object_reference: Types::ObjectReference,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?consistency_level: String,
+        ?facet_filter: Types::SchemaFacet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor consistency_level: String?
+      attr_accessor facet_filter: Types::SchemaFacet?
+    end
+
+    class ListObjectAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::AttributeKeyAndValue],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::AttributeKeyAndValue]?
+      attr_accessor next_token: String?
+    end
+
+    class ListObjectChildrenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?object_reference: Types::ObjectReference,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?consistency_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor consistency_level: String?
+    end
+
+    class ListObjectChildrenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?children: Hash[String, String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor children: Hash[String, String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListObjectParentPathsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?object_reference: Types::ObjectReference,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListObjectParentPathsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path_to_object_identifiers_list: Array[Types::PathToObjectIdentifiers],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path_to_object_identifiers_list: Array[Types::PathToObjectIdentifiers]?
+      attr_accessor next_token: String?
+    end
+
+    class ListObjectParentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?object_reference: Types::ObjectReference,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?consistency_level: String,
+        ?include_all_links_to_each_parent: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor consistency_level: String?
+      attr_accessor include_all_links_to_each_parent: bool?
+    end
+
+    class ListObjectParentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parents: Hash[String, String],
+        ?next_token: String,
+        ?parent_links: Array[Types::ObjectIdentifierAndLinkNameTuple],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parents: Hash[String, String]?
+      attr_accessor next_token: String?
+      attr_accessor parent_links: Array[Types::ObjectIdentifierAndLinkNameTuple]?
+    end
+
+    class ListObjectPoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?object_reference: Types::ObjectReference,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?consistency_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor consistency_level: String?
+    end
+
+    class ListObjectPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attached_policy_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attached_policy_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListOutgoingTypedLinksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?object_reference: Types::ObjectReference,
+        ?filter_attribute_ranges: Array[Types::TypedLinkAttributeRange],
+        ?filter_typed_link: Types::TypedLinkSchemaAndFacetName,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?consistency_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor filter_attribute_ranges: Array[Types::TypedLinkAttributeRange]?
+      attr_accessor filter_typed_link: Types::TypedLinkSchemaAndFacetName?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor consistency_level: String?
+    end
+
+    class ListOutgoingTypedLinksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?typed_link_specifiers: Array[Types::TypedLinkSpecifier],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor typed_link_specifiers: Array[Types::TypedLinkSpecifier]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPolicyAttachmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?policy_reference: Types::ObjectReference,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?consistency_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor policy_reference: Types::ObjectReference?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor consistency_level: String?
+    end
+
+    class ListPolicyAttachmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_identifiers: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_identifiers: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPublishedSchemaArnsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPublishedSchemaArnsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arns: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arns: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTypedLinkFacetAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTypedLinkFacetAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::TypedLinkAttributeDefinition],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::TypedLinkAttributeDefinition]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTypedLinkFacetNamesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTypedLinkFacetNamesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?facet_names: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor facet_names: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class LookupPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?object_reference: Types::ObjectReference,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class LookupPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_to_path_list: Array[Types::PolicyToPath],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_to_path_list: Array[Types::PolicyToPath]?
+      attr_accessor next_token: String?
+    end
+
+    class NotIndexException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NotNodeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NotPolicyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ObjectAlreadyDetachedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ObjectAttributeAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_attribute_action_type: String,
+        ?object_attribute_update_value: Types::TypedAttributeValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_attribute_action_type: String?
+      attr_accessor object_attribute_update_value: Types::TypedAttributeValue?
+    end
+
+    class ObjectAttributeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_key: Types::AttributeKey,
+        ?range: Types::TypedAttributeValueRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_key: Types::AttributeKey?
+      attr_accessor range: Types::TypedAttributeValueRange?
+    end
+
+    class ObjectAttributeUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_attribute_key: Types::AttributeKey,
+        ?object_attribute_action: Types::ObjectAttributeAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_attribute_key: Types::AttributeKey?
+      attr_accessor object_attribute_action: Types::ObjectAttributeAction?
+    end
+
+    class ObjectIdentifierAndLinkNameTuple
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_identifier: String,
+        ?link_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_identifier: String?
+      attr_accessor link_name: String?
+    end
+
+    class ObjectNotDetachedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ObjectReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?selector: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor selector: String?
+    end
+
+    module ObjectType
+      NODE: String
+      LEAF_NODE: String
+      POLICY: String
+      INDEX: String
+    end
+
+    class PathToObjectIdentifiers
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?object_identifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor object_identifiers: Array[String]?
+    end
+
+    class PolicyAttachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_id: String,
+        ?object_identifier: String,
+        ?policy_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_id: String?
+      attr_accessor object_identifier: String?
+      attr_accessor policy_type: String?
+    end
+
+    class PolicyToPath
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?policies: Array[Types::PolicyAttachment],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor policies: Array[Types::PolicyAttachment]?
+    end
+
+    class PublishSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?development_schema_arn: String,
+        ?version: String,
+        ?minor_version: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor development_schema_arn: String?
+      attr_accessor version: String?
+      attr_accessor minor_version: String?
+      attr_accessor name: String?
+    end
+
+    class PublishSchemaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?published_schema_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor published_schema_arn: String?
+    end
+
+    class PutSchemaFromJsonRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor document: String?
+    end
+
+    class PutSchemaFromJsonResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    module RangeMode
+      FIRST: String
+      LAST: String
+      LAST_BEFORE_MISSING_VALUES: String
+      INCLUSIVE: String
+      EXCLUSIVE: String
+    end
+
+    class RemoveFacetFromObjectRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?schema_facet: Types::SchemaFacet,
+        ?object_reference: Types::ObjectReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor schema_facet: Types::SchemaFacet?
+      attr_accessor object_reference: Types::ObjectReference?
+    end
+
+    class RemoveFacetFromObjectResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module RequiredAttributeBehavior
+      REQUIRED_ALWAYS: String
+      NOT_REQUIRED: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RetryableConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Rule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor parameters: Hash[String, String]?
+    end
+
+    module RuleType
+      BINARY_LENGTH: String
+      NUMBER_COMPARISON: String
+      STRING_FROM_SET: String
+      STRING_LENGTH: String
+    end
+
+    class SchemaAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SchemaAlreadyPublishedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SchemaFacet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?facet_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor facet_name: String?
+    end
+
+    class StillContainsLinksException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TypedAttributeValue
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?string_value: String,
+        ?binary_value: String,
+        ?boolean_value: bool,
+        ?number_value: String,
+        ?datetime_value: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_value: String?
+      attr_accessor binary_value: String?
+      attr_accessor boolean_value: bool?
+      attr_accessor number_value: String?
+      attr_accessor datetime_value: Time?
+
+      class StringValue < TypedAttributeValue
+      end
+      class BinaryValue < TypedAttributeValue
+      end
+      class BooleanValue < TypedAttributeValue
+      end
+      class NumberValue < TypedAttributeValue
+      end
+      class DatetimeValue < TypedAttributeValue
+      end
+      class Unknown < TypedAttributeValue
+      end
+    end
+
+    class TypedAttributeValueRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_mode: String,
+        ?start_value: Types::TypedAttributeValue,
+        ?end_mode: String,
+        ?end_value: Types::TypedAttributeValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_mode: String?
+      attr_accessor start_value: Types::TypedAttributeValue?
+      attr_accessor end_mode: String?
+      attr_accessor end_value: Types::TypedAttributeValue?
+    end
+
+    class TypedLinkAttributeDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?default_value: Types::TypedAttributeValue,
+        ?is_immutable: bool,
+        ?rules: Hash[String, Types::Rule],
+        ?required_behavior: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor default_value: Types::TypedAttributeValue?
+      attr_accessor is_immutable: bool?
+      attr_accessor rules: Hash[String, Types::Rule]?
+      attr_accessor required_behavior: String?
+    end
+
+    class TypedLinkAttributeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?range: Types::TypedAttributeValueRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor range: Types::TypedAttributeValueRange?
+    end
+
+    class TypedLinkFacet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?attributes: Array[Types::TypedLinkAttributeDefinition],
+        ?identity_attribute_order: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor attributes: Array[Types::TypedLinkAttributeDefinition]?
+      attr_accessor identity_attribute_order: Array[String]?
+    end
+
+    class TypedLinkFacetAttributeUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute: Types::TypedLinkAttributeDefinition,
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute: Types::TypedLinkAttributeDefinition?
+      attr_accessor action: String?
+    end
+
+    class TypedLinkSchemaAndFacetName
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?typed_link_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor typed_link_name: String?
+    end
+
+    class TypedLinkSpecifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?typed_link_facet: Types::TypedLinkSchemaAndFacetName,
+        ?source_object_reference: Types::ObjectReference,
+        ?target_object_reference: Types::ObjectReference,
+        ?identity_attribute_values: Array[Types::AttributeNameAndValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor typed_link_facet: Types::TypedLinkSchemaAndFacetName?
+      attr_accessor source_object_reference: Types::ObjectReference?
+      attr_accessor target_object_reference: Types::ObjectReference?
+      attr_accessor identity_attribute_values: Array[Types::AttributeNameAndValue]?
+    end
+
+    class UnsupportedIndexTypeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module UpdateActionType
+      CREATE_OR_UPDATE: String
+      DELETE: String
+    end
+
+    class UpdateFacetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?name: String,
+        ?attribute_updates: Array[Types::FacetAttributeUpdate],
+        ?object_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor name: String?
+      attr_accessor attribute_updates: Array[Types::FacetAttributeUpdate]?
+      attr_accessor object_type: String?
+    end
+
+    class UpdateFacetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLinkAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?typed_link_specifier: Types::TypedLinkSpecifier,
+        ?attribute_updates: Array[Types::LinkAttributeUpdate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor typed_link_specifier: Types::TypedLinkSpecifier?
+      attr_accessor attribute_updates: Array[Types::LinkAttributeUpdate]?
+    end
+
+    class UpdateLinkAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateObjectAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_arn: String,
+        ?object_reference: Types::ObjectReference,
+        ?attribute_updates: Array[Types::ObjectAttributeUpdate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_arn: String?
+      attr_accessor object_reference: Types::ObjectReference?
+      attr_accessor attribute_updates: Array[Types::ObjectAttributeUpdate]?
+    end
+
+    class UpdateObjectAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_identifier: String?
+    end
+
+    class UpdateSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor name: String?
+    end
+
+    class UpdateSchemaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+    end
+
+    class UpdateTypedLinkFacetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?name: String,
+        ?attribute_updates: Array[Types::TypedLinkFacetAttributeUpdate],
+        ?identity_attribute_order: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor name: String?
+      attr_accessor attribute_updates: Array[Types::TypedLinkFacetAttributeUpdate]?
+      attr_accessor identity_attribute_order: Array[String]?
+    end
+
+    class UpdateTypedLinkFacetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpgradeAppliedSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?published_schema_arn: String,
+        ?directory_arn: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor published_schema_arn: String?
+      attr_accessor directory_arn: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class UpgradeAppliedSchemaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upgraded_schema_arn: String,
+        ?directory_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upgraded_schema_arn: String?
+      attr_accessor directory_arn: String?
+    end
+
+    class UpgradePublishedSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?development_schema_arn: String,
+        ?published_schema_arn: String,
+        ?minor_version: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor development_schema_arn: String?
+      attr_accessor published_schema_arn: String?
+      attr_accessor minor_version: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class UpgradePublishedSchemaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upgraded_schema_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upgraded_schema_arn: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

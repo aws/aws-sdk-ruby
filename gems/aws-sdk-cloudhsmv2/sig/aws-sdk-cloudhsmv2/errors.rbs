@@ -1,0 +1,25 @@
+module Aws::CloudHSMV2
+  module Errors
+    class CloudHsmAccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CloudHsmInternalFailureException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CloudHsmInvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CloudHsmResourceLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CloudHsmResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CloudHsmServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CloudHsmTagException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

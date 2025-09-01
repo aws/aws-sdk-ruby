@@ -1,0 +1,5 @@
+module Aws::MigrationHubStrategy
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

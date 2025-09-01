@@ -1,0 +1,463 @@
+module Aws::Finspacedata
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Finspacedata::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateUserToPermissionGroupResponse
+      include Smithy::Client::_Response[Types::AssociateUserToPermissionGroupResponse]
+      def status_code: () -> Integer?
+    end
+    def associate_user_to_permission_group: (
+      ?permission_group_id: String,
+      ?user_id: String,
+      ?client_token: String
+    ) -> _AssociateUserToPermissionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateUserToPermissionGroupResponse
+
+    interface _CreateChangesetResponse
+      include Smithy::Client::_Response[Types::CreateChangesetResponse]
+      def dataset_id: () -> String?
+      def changeset_id: () -> String?
+    end
+    def create_changeset: (
+      ?client_token: String,
+      ?dataset_id: String,
+      ?change_type: String,
+      ?source_params: Hash[String, String],
+      ?format_params: Hash[String, String]
+    ) -> _CreateChangesetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChangesetResponse
+
+    interface _CreateDataViewResponse
+      include Smithy::Client::_Response[Types::CreateDataViewResponse]
+      def dataset_id: () -> String?
+      def data_view_id: () -> String?
+    end
+    def create_data_view: (
+      ?client_token: String,
+      ?dataset_id: String,
+      ?auto_update: bool,
+      ?sort_columns: Array[String],
+      ?partition_columns: Array[String],
+      ?as_of_timestamp: Integer,
+      ?destination_type_params: {
+        destination_type: String,
+        s3_destination_export_file_format: String,
+        s3_destination_export_file_format_options: Hash[String, String]
+      }
+    ) -> _CreateDataViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataViewResponse
+
+    interface _CreateDatasetResponse
+      include Smithy::Client::_Response[Types::CreateDatasetResponse]
+      def dataset_id: () -> String?
+    end
+    def create_dataset: (
+      ?client_token: String,
+      ?dataset_title: String,
+      ?kind: String,
+      ?dataset_description: String,
+      ?owner_info: {
+        name: String,
+        phone_number: String,
+        email: String
+      },
+      ?permission_group_params: {
+        permission_group_id: String,
+        dataset_permissions: Array[
+          {
+            permission: String
+          }
+        ]
+      },
+      ?alias: String,
+      ?schema_definition: {
+        tabular_schema_config: {
+          columns: Array[
+            {
+              data_type: String,
+              column_name: String,
+              column_description: String
+            }
+          ],
+          primary_key_columns: Array[String]
+        }
+      }
+    ) -> _CreateDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatasetResponse
+
+    interface _CreatePermissionGroupResponse
+      include Smithy::Client::_Response[Types::CreatePermissionGroupResponse]
+      def permission_group_id: () -> String?
+    end
+    def create_permission_group: (
+      ?name: String,
+      ?description: String,
+      ?application_permissions: Array[String],
+      ?client_token: String
+    ) -> _CreatePermissionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePermissionGroupResponse
+
+    interface _CreateUserResponse
+      include Smithy::Client::_Response[Types::CreateUserResponse]
+      def user_id: () -> String?
+    end
+    def create_user: (
+      ?email_address: String,
+      ?type: String,
+      ?first_name: String,
+      ?last_name: String,
+      ?api_access: String,
+      ?api_access_principal_arn: String,
+      ?client_token: String
+    ) -> _CreateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserResponse
+
+    interface _DeleteDatasetResponse
+      include Smithy::Client::_Response[Types::DeleteDatasetResponse]
+      def dataset_id: () -> String?
+    end
+    def delete_dataset: (
+      ?client_token: String,
+      ?dataset_id: String
+    ) -> _DeleteDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDatasetResponse
+
+    interface _DeletePermissionGroupResponse
+      include Smithy::Client::_Response[Types::DeletePermissionGroupResponse]
+      def permission_group_id: () -> String?
+    end
+    def delete_permission_group: (
+      ?permission_group_id: String,
+      ?client_token: String
+    ) -> _DeletePermissionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePermissionGroupResponse
+
+    interface _DisableUserResponse
+      include Smithy::Client::_Response[Types::DisableUserResponse]
+      def user_id: () -> String?
+    end
+    def disable_user: (
+      ?user_id: String,
+      ?client_token: String
+    ) -> _DisableUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableUserResponse
+
+    interface _DisassociateUserFromPermissionGroupResponse
+      include Smithy::Client::_Response[Types::DisassociateUserFromPermissionGroupResponse]
+      def status_code: () -> Integer?
+    end
+    def disassociate_user_from_permission_group: (
+      ?permission_group_id: String,
+      ?user_id: String,
+      ?client_token: String
+    ) -> _DisassociateUserFromPermissionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateUserFromPermissionGroupResponse
+
+    interface _EnableUserResponse
+      include Smithy::Client::_Response[Types::EnableUserResponse]
+      def user_id: () -> String?
+    end
+    def enable_user: (
+      ?user_id: String,
+      ?client_token: String
+    ) -> _EnableUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableUserResponse
+
+    interface _GetChangesetResponse
+      include Smithy::Client::_Response[Types::GetChangesetResponse]
+      def changeset_id: () -> String?
+      def changeset_arn: () -> String?
+      def dataset_id: () -> String?
+      def change_type: () -> String?
+      def source_params: () -> Hash[String, String]?
+      def format_params: () -> Hash[String, String]?
+      def create_time: () -> Integer?
+      def status: () -> String?
+      def error_info: () -> Types::ChangesetErrorInfo?
+      def active_until_timestamp: () -> Integer?
+      def active_from_timestamp: () -> Integer?
+      def updates_changeset_id: () -> String?
+      def updated_by_changeset_id: () -> String?
+    end
+    def get_changeset: (
+      ?dataset_id: String,
+      ?changeset_id: String
+    ) -> _GetChangesetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetChangesetResponse
+
+    interface _GetDataViewResponse
+      include Smithy::Client::_Response[Types::GetDataViewResponse]
+      def auto_update: () -> bool?
+      def partition_columns: () -> Array[String]?
+      def dataset_id: () -> String?
+      def as_of_timestamp: () -> Integer?
+      def error_info: () -> Types::DataViewErrorInfo?
+      def last_modified_time: () -> Integer?
+      def create_time: () -> Integer?
+      def sort_columns: () -> Array[String]?
+      def data_view_id: () -> String?
+      def data_view_arn: () -> String?
+      def destination_type_params: () -> Types::DataViewDestinationTypeParams?
+      def status: () -> String?
+    end
+    def get_data_view: (
+      ?data_view_id: String,
+      ?dataset_id: String
+    ) -> _GetDataViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataViewResponse
+
+    interface _GetDatasetResponse
+      include Smithy::Client::_Response[Types::GetDatasetResponse]
+      def dataset_id: () -> String?
+      def dataset_arn: () -> String?
+      def dataset_title: () -> String?
+      def kind: () -> String?
+      def dataset_description: () -> String?
+      def create_time: () -> Integer?
+      def last_modified_time: () -> Integer?
+      def schema_definition: () -> Types::SchemaUnion?
+      def alias: () -> String?
+      def status: () -> String?
+    end
+    def get_dataset: (
+      ?dataset_id: String
+    ) -> _GetDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDatasetResponse
+
+    interface _GetExternalDataViewAccessDetailsResponse
+      include Smithy::Client::_Response[Types::GetExternalDataViewAccessDetailsResponse]
+      def credentials: () -> Types::AwsCredentials?
+      def s3_location: () -> Types::S3Location?
+    end
+    def get_external_data_view_access_details: (
+      ?data_view_id: String,
+      ?dataset_id: String
+    ) -> _GetExternalDataViewAccessDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExternalDataViewAccessDetailsResponse
+
+    interface _GetPermissionGroupResponse
+      include Smithy::Client::_Response[Types::GetPermissionGroupResponse]
+      def permission_group: () -> Types::PermissionGroup?
+    end
+    def get_permission_group: (
+      ?permission_group_id: String
+    ) -> _GetPermissionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPermissionGroupResponse
+
+    interface _GetProgrammaticAccessCredentialsResponse
+      include Smithy::Client::_Response[Types::GetProgrammaticAccessCredentialsResponse]
+      def credentials: () -> Types::Credentials?
+      def duration_in_minutes: () -> Integer?
+    end
+    def get_programmatic_access_credentials: (
+      ?duration_in_minutes: Integer,
+      ?environment_id: String
+    ) -> _GetProgrammaticAccessCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProgrammaticAccessCredentialsResponse
+
+    interface _GetUserResponse
+      include Smithy::Client::_Response[Types::GetUserResponse]
+      def user_id: () -> String?
+      def status: () -> String?
+      def first_name: () -> String?
+      def last_name: () -> String?
+      def email_address: () -> String?
+      def type: () -> String?
+      def api_access: () -> String?
+      def api_access_principal_arn: () -> String?
+      def create_time: () -> Integer?
+      def last_enabled_time: () -> Integer?
+      def last_disabled_time: () -> Integer?
+      def last_modified_time: () -> Integer?
+      def last_login_time: () -> Integer?
+    end
+    def get_user: (
+      ?user_id: String
+    ) -> _GetUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserResponse
+
+    interface _GetWorkingLocationResponse
+      include Smithy::Client::_Response[Types::GetWorkingLocationResponse]
+      def s3_uri: () -> String?
+      def s3_path: () -> String?
+      def s3_bucket: () -> String?
+    end
+    def get_working_location: (
+      ?location_type: String
+    ) -> _GetWorkingLocationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkingLocationResponse
+
+    interface _ListChangesetsResponse
+      include Smithy::Client::_Response[Types::ListChangesetsResponse]
+      def changesets: () -> Array[Types::ChangesetSummary]?
+      def next_token: () -> String?
+    end
+    def list_changesets: (
+      ?dataset_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListChangesetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListChangesetsResponse
+
+    interface _ListDataViewsResponse
+      include Smithy::Client::_Response[Types::ListDataViewsResponse]
+      def next_token: () -> String?
+      def data_views: () -> Array[Types::DataViewSummary]?
+    end
+    def list_data_views: (
+      ?dataset_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataViewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataViewsResponse
+
+    interface _ListDatasetsResponse
+      include Smithy::Client::_Response[Types::ListDatasetsResponse]
+      def datasets: () -> Array[Types::Dataset]?
+      def next_token: () -> String?
+    end
+    def list_datasets: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDatasetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatasetsResponse
+
+    interface _ListPermissionGroupsResponse
+      include Smithy::Client::_Response[Types::ListPermissionGroupsResponse]
+      def permission_groups: () -> Array[Types::PermissionGroup]?
+      def next_token: () -> String?
+    end
+    def list_permission_groups: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPermissionGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPermissionGroupsResponse
+
+    interface _ListPermissionGroupsByUserResponse
+      include Smithy::Client::_Response[Types::ListPermissionGroupsByUserResponse]
+      def permission_groups: () -> Array[Types::PermissionGroupByUser]?
+      def next_token: () -> String?
+    end
+    def list_permission_groups_by_user: (
+      ?user_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPermissionGroupsByUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPermissionGroupsByUserResponse
+
+    interface _ListUsersResponse
+      include Smithy::Client::_Response[Types::ListUsersResponse]
+      def users: () -> Array[Types::User]?
+      def next_token: () -> String?
+    end
+    def list_users: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUsersResponse
+
+    interface _ListUsersByPermissionGroupResponse
+      include Smithy::Client::_Response[Types::ListUsersByPermissionGroupResponse]
+      def users: () -> Array[Types::UserByPermissionGroup]?
+      def next_token: () -> String?
+    end
+    def list_users_by_permission_group: (
+      ?permission_group_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListUsersByPermissionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUsersByPermissionGroupResponse
+
+    interface _ResetUserPasswordResponse
+      include Smithy::Client::_Response[Types::ResetUserPasswordResponse]
+      def user_id: () -> String?
+      def temporary_password: () -> String?
+    end
+    def reset_user_password: (
+      ?user_id: String,
+      ?client_token: String
+    ) -> _ResetUserPasswordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetUserPasswordResponse
+
+    interface _UpdateChangesetResponse
+      include Smithy::Client::_Response[Types::UpdateChangesetResponse]
+      def changeset_id: () -> String?
+      def dataset_id: () -> String?
+    end
+    def update_changeset: (
+      ?client_token: String,
+      ?dataset_id: String,
+      ?changeset_id: String,
+      ?source_params: Hash[String, String],
+      ?format_params: Hash[String, String]
+    ) -> _UpdateChangesetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChangesetResponse
+
+    interface _UpdateDatasetResponse
+      include Smithy::Client::_Response[Types::UpdateDatasetResponse]
+      def dataset_id: () -> String?
+    end
+    def update_dataset: (
+      ?client_token: String,
+      ?dataset_id: String,
+      ?dataset_title: String,
+      ?kind: String,
+      ?dataset_description: String,
+      ?alias: String,
+      ?schema_definition: {
+        tabular_schema_config: {
+          columns: Array[
+            {
+              data_type: String,
+              column_name: String,
+              column_description: String
+            }
+          ],
+          primary_key_columns: Array[String]
+        }
+      }
+    ) -> _UpdateDatasetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDatasetResponse
+
+    interface _UpdatePermissionGroupResponse
+      include Smithy::Client::_Response[Types::UpdatePermissionGroupResponse]
+      def permission_group_id: () -> String?
+    end
+    def update_permission_group: (
+      ?permission_group_id: String,
+      ?name: String,
+      ?description: String,
+      ?application_permissions: Array[String],
+      ?client_token: String
+    ) -> _UpdatePermissionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePermissionGroupResponse
+
+    interface _UpdateUserResponse
+      include Smithy::Client::_Response[Types::UpdateUserResponse]
+      def user_id: () -> String?
+    end
+    def update_user: (
+      ?user_id: String,
+      ?type: String,
+      ?first_name: String,
+      ?last_name: String,
+      ?api_access: String,
+      ?api_access_principal_arn: String,
+      ?client_token: String
+    ) -> _UpdateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserResponse
+  end
+end

@@ -1,0 +1,5 @@
+module Aws::KinesisVideoSignaling
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

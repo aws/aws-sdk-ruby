@@ -1,0 +1,1371 @@
+module Aws::MigrationHubRefactorSpaces
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApiGatewayProxyConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_url: String,
+        ?api_gateway_id: String,
+        ?vpc_link_id: String,
+        ?nlb_arn: String,
+        ?nlb_name: String,
+        ?endpoint_type: String,
+        ?stage_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_url: String?
+      attr_accessor api_gateway_id: String?
+      attr_accessor vpc_link_id: String?
+      attr_accessor nlb_arn: String?
+      attr_accessor nlb_name: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor stage_name: String?
+    end
+
+    class ApiGatewayProxyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_type: String,
+        ?stage_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_type: String?
+      attr_accessor stage_name: String?
+    end
+
+    class ApiGatewayProxySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proxy_url: String,
+        ?api_gateway_id: String,
+        ?vpc_link_id: String,
+        ?nlb_arn: String,
+        ?nlb_name: String,
+        ?endpoint_type: String,
+        ?stage_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proxy_url: String?
+      attr_accessor api_gateway_id: String?
+      attr_accessor vpc_link_id: String?
+      attr_accessor nlb_arn: String?
+      attr_accessor nlb_name: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor stage_name: String?
+    end
+
+    class ApplicationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?owner_account_id: String,
+        ?created_by_account_id: String,
+        ?application_id: String,
+        ?environment_id: String,
+        ?vpc_id: String,
+        ?proxy_type: String,
+        ?api_gateway_proxy: Types::ApiGatewayProxySummary,
+        ?state: String,
+        ?tags: Hash[String, String],
+        ?error: Types::ErrorResponse,
+        ?last_updated_time: Time,
+        ?created_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor created_by_account_id: String?
+      attr_accessor application_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor vpc_id: String?
+      attr_accessor proxy_type: String?
+      attr_accessor api_gateway_proxy: Types::ApiGatewayProxySummary?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor error: Types::ErrorResponse?
+      attr_accessor last_updated_time: Time?
+      attr_accessor created_time: Time?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?environment_identifier: String,
+        ?vpc_id: String,
+        ?proxy_type: String,
+        ?api_gateway_proxy: Types::ApiGatewayProxyInput,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor environment_identifier: String?
+      attr_accessor vpc_id: String?
+      attr_accessor proxy_type: String?
+      attr_accessor api_gateway_proxy: Types::ApiGatewayProxyInput?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?owner_account_id: String,
+        ?created_by_account_id: String,
+        ?application_id: String,
+        ?environment_id: String,
+        ?vpc_id: String,
+        ?proxy_type: String,
+        ?api_gateway_proxy: Types::ApiGatewayProxyInput,
+        ?state: String,
+        ?tags: Hash[String, String],
+        ?last_updated_time: Time,
+        ?created_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor created_by_account_id: String?
+      attr_accessor application_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor vpc_id: String?
+      attr_accessor proxy_type: String?
+      attr_accessor api_gateway_proxy: Types::ApiGatewayProxyInput?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor last_updated_time: Time?
+      attr_accessor created_time: Time?
+    end
+
+    class CreateEnvironmentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?network_fabric_type: String,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor network_fabric_type: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateEnvironmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?description: String,
+        ?environment_id: String,
+        ?network_fabric_type: String,
+        ?owner_account_id: String,
+        ?state: String,
+        ?tags: Hash[String, String],
+        ?last_updated_time: Time,
+        ?created_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor environment_id: String?
+      attr_accessor network_fabric_type: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor last_updated_time: Time?
+      attr_accessor created_time: Time?
+    end
+
+    class CreateRouteInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_identifier: String,
+        ?application_identifier: String,
+        ?service_identifier: String,
+        ?route_type: String,
+        ?default_route: Types::DefaultRouteInput,
+        ?uri_path_route: Types::UriPathRouteInput,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_identifier: String?
+      attr_accessor application_identifier: String?
+      attr_accessor service_identifier: String?
+      attr_accessor route_type: String?
+      attr_accessor default_route: Types::DefaultRouteInput?
+      attr_accessor uri_path_route: Types::UriPathRouteInput?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateRouteOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route_id: String,
+        ?arn: String,
+        ?owner_account_id: String,
+        ?created_by_account_id: String,
+        ?route_type: String,
+        ?service_id: String,
+        ?application_id: String,
+        ?uri_path_route: Types::UriPathRouteInput,
+        ?state: String,
+        ?tags: Hash[String, String],
+        ?last_updated_time: Time,
+        ?created_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route_id: String?
+      attr_accessor arn: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor created_by_account_id: String?
+      attr_accessor route_type: String?
+      attr_accessor service_id: String?
+      attr_accessor application_id: String?
+      attr_accessor uri_path_route: Types::UriPathRouteInput?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor last_updated_time: Time?
+      attr_accessor created_time: Time?
+    end
+
+    class CreateServiceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?environment_identifier: String,
+        ?application_identifier: String,
+        ?vpc_id: String,
+        ?endpoint_type: String,
+        ?url_endpoint: Types::UrlEndpointInput,
+        ?lambda_endpoint: Types::LambdaEndpointInput,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor environment_identifier: String?
+      attr_accessor application_identifier: String?
+      attr_accessor vpc_id: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor url_endpoint: Types::UrlEndpointInput?
+      attr_accessor lambda_endpoint: Types::LambdaEndpointInput?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateServiceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_id: String,
+        ?name: String,
+        ?arn: String,
+        ?owner_account_id: String,
+        ?created_by_account_id: String,
+        ?description: String,
+        ?environment_id: String,
+        ?application_id: String,
+        ?vpc_id: String,
+        ?endpoint_type: String,
+        ?url_endpoint: Types::UrlEndpointInput,
+        ?lambda_endpoint: Types::LambdaEndpointInput,
+        ?state: String,
+        ?tags: Hash[String, String],
+        ?last_updated_time: Time,
+        ?created_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor created_by_account_id: String?
+      attr_accessor description: String?
+      attr_accessor environment_id: String?
+      attr_accessor application_id: String?
+      attr_accessor vpc_id: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor url_endpoint: Types::UrlEndpointInput?
+      attr_accessor lambda_endpoint: Types::LambdaEndpointInput?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor last_updated_time: Time?
+      attr_accessor created_time: Time?
+    end
+
+    class DefaultRouteInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?activation_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor activation_state: String?
+    end
+
+    class DeleteApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_identifier: String,
+        ?application_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_identifier: String?
+      attr_accessor application_identifier: String?
+    end
+
+    class DeleteApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?application_id: String,
+        ?environment_id: String,
+        ?state: String,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor application_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor state: String?
+      attr_accessor last_updated_time: Time?
+    end
+
+    class DeleteEnvironmentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_identifier: String?
+    end
+
+    class DeleteEnvironmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?environment_id: String,
+        ?state: String,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor environment_id: String?
+      attr_accessor state: String?
+      attr_accessor last_updated_time: Time?
+    end
+
+    class DeleteResourcePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteResourcePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRouteInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_identifier: String,
+        ?application_identifier: String,
+        ?route_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_identifier: String?
+      attr_accessor application_identifier: String?
+      attr_accessor route_identifier: String?
+    end
+
+    class DeleteRouteOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route_id: String,
+        ?arn: String,
+        ?service_id: String,
+        ?application_id: String,
+        ?state: String,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route_id: String?
+      attr_accessor arn: String?
+      attr_accessor service_id: String?
+      attr_accessor application_id: String?
+      attr_accessor state: String?
+      attr_accessor last_updated_time: Time?
+    end
+
+    class DeleteServiceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_identifier: String,
+        ?application_identifier: String,
+        ?service_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_identifier: String?
+      attr_accessor application_identifier: String?
+      attr_accessor service_identifier: String?
+    end
+
+    class DeleteServiceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_id: String,
+        ?name: String,
+        ?arn: String,
+        ?environment_id: String,
+        ?application_id: String,
+        ?state: String,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor environment_id: String?
+      attr_accessor application_id: String?
+      attr_accessor state: String?
+      attr_accessor last_updated_time: Time?
+    end
+
+    class EnvironmentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?description: String,
+        ?environment_id: String,
+        ?network_fabric_type: String,
+        ?owner_account_id: String,
+        ?transit_gateway_id: String,
+        ?state: String,
+        ?tags: Hash[String, String],
+        ?error: Types::ErrorResponse,
+        ?last_updated_time: Time,
+        ?created_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor environment_id: String?
+      attr_accessor network_fabric_type: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor transit_gateway_id: String?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor error: Types::ErrorResponse?
+      attr_accessor last_updated_time: Time?
+      attr_accessor created_time: Time?
+    end
+
+    class EnvironmentVpc
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+        ?vpc_id: String,
+        ?account_id: String,
+        ?cidr_blocks: Array[String],
+        ?vpc_name: String,
+        ?last_updated_time: Time,
+        ?created_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+      attr_accessor vpc_id: String?
+      attr_accessor account_id: String?
+      attr_accessor cidr_blocks: Array[String]?
+      attr_accessor vpc_name: String?
+      attr_accessor last_updated_time: Time?
+      attr_accessor created_time: Time?
+    end
+
+    class ErrorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+        ?account_id: String,
+        ?resource_identifier: String,
+        ?resource_type: String,
+        ?additional_details: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+      attr_accessor account_id: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor resource_type: String?
+      attr_accessor additional_details: Hash[String, String]?
+    end
+
+    class GetApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_identifier: String,
+        ?application_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_identifier: String?
+      attr_accessor application_identifier: String?
+    end
+
+    class GetApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?owner_account_id: String,
+        ?created_by_account_id: String,
+        ?application_id: String,
+        ?environment_id: String,
+        ?vpc_id: String,
+        ?proxy_type: String,
+        ?api_gateway_proxy: Types::ApiGatewayProxyConfig,
+        ?state: String,
+        ?tags: Hash[String, String],
+        ?error: Types::ErrorResponse,
+        ?last_updated_time: Time,
+        ?created_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor created_by_account_id: String?
+      attr_accessor application_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor vpc_id: String?
+      attr_accessor proxy_type: String?
+      attr_accessor api_gateway_proxy: Types::ApiGatewayProxyConfig?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor error: Types::ErrorResponse?
+      attr_accessor last_updated_time: Time?
+      attr_accessor created_time: Time?
+    end
+
+    class GetEnvironmentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_identifier: String?
+    end
+
+    class GetEnvironmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?description: String,
+        ?environment_id: String,
+        ?network_fabric_type: String,
+        ?owner_account_id: String,
+        ?transit_gateway_id: String,
+        ?state: String,
+        ?tags: Hash[String, String],
+        ?error: Types::ErrorResponse,
+        ?last_updated_time: Time,
+        ?created_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor environment_id: String?
+      attr_accessor network_fabric_type: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor transit_gateway_id: String?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor error: Types::ErrorResponse?
+      attr_accessor last_updated_time: Time?
+      attr_accessor created_time: Time?
+    end
+
+    class GetResourcePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetResourcePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    class GetRouteInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_identifier: String,
+        ?application_identifier: String,
+        ?route_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_identifier: String?
+      attr_accessor application_identifier: String?
+      attr_accessor route_identifier: String?
+    end
+
+    class GetRouteOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route_id: String,
+        ?arn: String,
+        ?owner_account_id: String,
+        ?created_by_account_id: String,
+        ?route_type: String,
+        ?service_id: String,
+        ?application_id: String,
+        ?environment_id: String,
+        ?source_path: String,
+        ?methods: Array[String],
+        ?include_child_paths: bool,
+        ?path_resource_to_id: Hash[String, String],
+        ?state: String,
+        ?tags: Hash[String, String],
+        ?error: Types::ErrorResponse,
+        ?last_updated_time: Time,
+        ?created_time: Time,
+        ?append_source_path: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route_id: String?
+      attr_accessor arn: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor created_by_account_id: String?
+      attr_accessor route_type: String?
+      attr_accessor service_id: String?
+      attr_accessor application_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor source_path: String?
+      attr_accessor methods: Array[String]?
+      attr_accessor include_child_paths: bool?
+      attr_accessor path_resource_to_id: Hash[String, String]?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor error: Types::ErrorResponse?
+      attr_accessor last_updated_time: Time?
+      attr_accessor created_time: Time?
+      attr_accessor append_source_path: bool?
+    end
+
+    class GetServiceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_identifier: String,
+        ?application_identifier: String,
+        ?service_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_identifier: String?
+      attr_accessor application_identifier: String?
+      attr_accessor service_identifier: String?
+    end
+
+    class GetServiceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_id: String,
+        ?name: String,
+        ?arn: String,
+        ?owner_account_id: String,
+        ?created_by_account_id: String,
+        ?description: String,
+        ?environment_id: String,
+        ?application_id: String,
+        ?vpc_id: String,
+        ?endpoint_type: String,
+        ?url_endpoint: Types::UrlEndpointConfig,
+        ?lambda_endpoint: Types::LambdaEndpointConfig,
+        ?state: String,
+        ?tags: Hash[String, String],
+        ?error: Types::ErrorResponse,
+        ?last_updated_time: Time,
+        ?created_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor created_by_account_id: String?
+      attr_accessor description: String?
+      attr_accessor environment_id: String?
+      attr_accessor application_id: String?
+      attr_accessor vpc_id: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor url_endpoint: Types::UrlEndpointConfig?
+      attr_accessor lambda_endpoint: Types::LambdaEndpointConfig?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor error: Types::ErrorResponse?
+      attr_accessor last_updated_time: Time?
+      attr_accessor created_time: Time?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidResourcePolicyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LambdaEndpointConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class LambdaEndpointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class LambdaEndpointSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class ListApplicationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListApplicationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_summary_list: Array[Types::ApplicationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_summary_list: Array[Types::ApplicationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEnvironmentVpcsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEnvironmentVpcsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_vpc_list: Array[Types::EnvironmentVpc],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_vpc_list: Array[Types::EnvironmentVpc]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEnvironmentsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEnvironmentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_summary_list: Array[Types::EnvironmentSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_summary_list: Array[Types::EnvironmentSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRoutesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_identifier: String,
+        ?application_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_identifier: String?
+      attr_accessor application_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRoutesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route_summary_list: Array[Types::RouteSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route_summary_list: Array[Types::RouteSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServicesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_identifier: String,
+        ?application_identifier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_identifier: String?
+      attr_accessor application_identifier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListServicesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_summary_list: Array[Types::ServiceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_summary_list: Array[Types::ServiceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class PutResourcePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class PutResourcePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class RouteSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route_id: String,
+        ?arn: String,
+        ?owner_account_id: String,
+        ?created_by_account_id: String,
+        ?route_type: String,
+        ?service_id: String,
+        ?application_id: String,
+        ?environment_id: String,
+        ?source_path: String,
+        ?methods: Array[String],
+        ?include_child_paths: bool,
+        ?path_resource_to_id: Hash[String, String],
+        ?state: String,
+        ?tags: Hash[String, String],
+        ?error: Types::ErrorResponse,
+        ?last_updated_time: Time,
+        ?created_time: Time,
+        ?append_source_path: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route_id: String?
+      attr_accessor arn: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor created_by_account_id: String?
+      attr_accessor route_type: String?
+      attr_accessor service_id: String?
+      attr_accessor application_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor source_path: String?
+      attr_accessor methods: Array[String]?
+      attr_accessor include_child_paths: bool?
+      attr_accessor path_resource_to_id: Hash[String, String]?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor error: Types::ErrorResponse?
+      attr_accessor last_updated_time: Time?
+      attr_accessor created_time: Time?
+      attr_accessor append_source_path: bool?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?quota_code: String,
+        ?service_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor quota_code: String?
+      attr_accessor service_code: String?
+    end
+
+    class ServiceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_id: String,
+        ?name: String,
+        ?arn: String,
+        ?owner_account_id: String,
+        ?created_by_account_id: String,
+        ?description: String,
+        ?environment_id: String,
+        ?application_id: String,
+        ?vpc_id: String,
+        ?endpoint_type: String,
+        ?url_endpoint: Types::UrlEndpointSummary,
+        ?lambda_endpoint: Types::LambdaEndpointSummary,
+        ?state: String,
+        ?tags: Hash[String, String],
+        ?error: Types::ErrorResponse,
+        ?last_updated_time: Time,
+        ?created_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor created_by_account_id: String?
+      attr_accessor description: String?
+      attr_accessor environment_id: String?
+      attr_accessor application_id: String?
+      attr_accessor vpc_id: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor url_endpoint: Types::UrlEndpointSummary?
+      attr_accessor lambda_endpoint: Types::LambdaEndpointSummary?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor error: Types::ErrorResponse?
+      attr_accessor last_updated_time: Time?
+      attr_accessor created_time: Time?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?quota_code: String,
+        ?service_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor quota_code: String?
+      attr_accessor service_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateRouteInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_identifier: String,
+        ?application_identifier: String,
+        ?route_identifier: String,
+        ?activation_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_identifier: String?
+      attr_accessor application_identifier: String?
+      attr_accessor route_identifier: String?
+      attr_accessor activation_state: String?
+    end
+
+    class UpdateRouteOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route_id: String,
+        ?arn: String,
+        ?service_id: String,
+        ?application_id: String,
+        ?state: String,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route_id: String?
+      attr_accessor arn: String?
+      attr_accessor service_id: String?
+      attr_accessor application_id: String?
+      attr_accessor state: String?
+      attr_accessor last_updated_time: Time?
+    end
+
+    class UriPathRouteInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_path: String,
+        ?activation_state: String,
+        ?methods: Array[String],
+        ?include_child_paths: bool,
+        ?append_source_path: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_path: String?
+      attr_accessor activation_state: String?
+      attr_accessor methods: Array[String]?
+      attr_accessor include_child_paths: bool?
+      attr_accessor append_source_path: bool?
+    end
+
+    class UrlEndpointConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?health_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor health_url: String?
+    end
+
+    class UrlEndpointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?health_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor health_url: String?
+    end
+
+    class UrlEndpointSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?health_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor health_url: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

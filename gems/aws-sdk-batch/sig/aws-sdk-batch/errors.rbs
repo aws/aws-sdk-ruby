@@ -1,0 +1,10 @@
+module Aws::Batch
+  module Errors
+    class ClientException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

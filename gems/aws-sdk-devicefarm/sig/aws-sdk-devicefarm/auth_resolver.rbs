@@ -1,0 +1,5 @@
+module Aws::DeviceFarm
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

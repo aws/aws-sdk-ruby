@@ -1,0 +1,750 @@
+module Aws::AppConfig
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::AppConfig::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateApplicationResponse
+      include Smithy::Client::_Response[Types::CreateApplicationOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+    end
+    def create_application: (
+      ?name: String,
+      ?description: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateApplicationResponse
+
+    interface _CreateConfigurationProfileResponse
+      include Smithy::Client::_Response[Types::CreateConfigurationProfileOutput]
+      def application_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def location_uri: () -> String?
+      def retrieval_role_arn: () -> String?
+      def validators: () -> Array[Types::Validator]?
+      def type: () -> String?
+      def kms_key_arn: () -> String?
+      def kms_key_identifier: () -> String?
+    end
+    def create_configuration_profile: (
+      ?application_id: String,
+      ?name: String,
+      ?description: String,
+      ?location_uri: String,
+      ?retrieval_role_arn: String,
+      ?validators: Array[
+        {
+          type: String,
+          content: String
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?type: String,
+      ?kms_key_identifier: String
+    ) -> _CreateConfigurationProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfigurationProfileResponse
+
+    interface _CreateDeploymentStrategyResponse
+      include Smithy::Client::_Response[Types::CreateDeploymentStrategyOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def deployment_duration_in_minutes: () -> Integer?
+      def growth_type: () -> String?
+      def growth_factor: () -> Float?
+      def final_bake_time_in_minutes: () -> Integer?
+      def replicate_to: () -> String?
+    end
+    def create_deployment_strategy: (
+      ?name: String,
+      ?description: String,
+      ?deployment_duration_in_minutes: Integer,
+      ?final_bake_time_in_minutes: Integer,
+      ?growth_factor: Float,
+      ?growth_type: String,
+      ?replicate_to: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateDeploymentStrategyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDeploymentStrategyResponse
+
+    interface _CreateEnvironmentResponse
+      include Smithy::Client::_Response[Types::CreateEnvironmentOutput]
+      def application_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def state: () -> String?
+      def monitors: () -> Array[Types::Monitor]?
+    end
+    def create_environment: (
+      ?application_id: String,
+      ?name: String,
+      ?description: String,
+      ?monitors: Array[
+        {
+          alarm_arn: String,
+          alarm_role_arn: String
+        }
+      ],
+      ?tags: Hash[String, String]
+    ) -> _CreateEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentResponse
+
+    interface _CreateExtensionResponse
+      include Smithy::Client::_Response[Types::CreateExtensionOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def version_number: () -> Integer?
+      def arn: () -> String?
+      def description: () -> String?
+      def actions: () -> Hash[String, Array[Types::Action]]?
+      def parameters: () -> Hash[String, Types::Parameter]?
+    end
+    def create_extension: (
+      ?name: String,
+      ?description: String,
+      ?actions: Hash[String,
+        Array[
+          {
+            name: String,
+            description: String,
+            uri: String,
+            role_arn: String
+          }
+        ]
+      ],
+      ?parameters: Hash[String,
+        {
+          description: String,
+          required: bool,
+          dynamic: untyped
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?latest_version_number: Integer
+    ) -> _CreateExtensionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateExtensionResponse
+
+    interface _CreateExtensionAssociationResponse
+      include Smithy::Client::_Response[Types::CreateExtensionAssociationOutput]
+      def id: () -> String?
+      def extension_arn: () -> String?
+      def resource_arn: () -> String?
+      def arn: () -> String?
+      def parameters: () -> Hash[String, String]?
+      def extension_version_number: () -> Integer?
+    end
+    def create_extension_association: (
+      ?extension_identifier: String,
+      ?extension_version_number: Integer,
+      ?resource_identifier: String,
+      ?parameters: Hash[String, String],
+      ?tags: Hash[String, String]
+    ) -> _CreateExtensionAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateExtensionAssociationResponse
+
+    interface _CreateHostedConfigurationVersionResponse
+      include Smithy::Client::_Response[Types::CreateHostedConfigurationVersionOutput]
+      def application_id: () -> String?
+      def configuration_profile_id: () -> String?
+      def version_number: () -> Integer?
+      def description: () -> String?
+      def content: () -> String?
+      def content_type: () -> String?
+      def version_label: () -> String?
+      def kms_key_arn: () -> String?
+    end
+    def create_hosted_configuration_version: (
+      ?application_id: String,
+      ?configuration_profile_id: String,
+      ?description: String,
+      ?content: String,
+      ?content_type: String,
+      ?latest_version_number: Integer,
+      ?version_label: String
+    ) -> _CreateHostedConfigurationVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateHostedConfigurationVersionResponse
+
+    interface _DeleteApplicationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_application: (
+      ?application_id: String
+    ) -> _DeleteApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteApplicationResponse
+
+    interface _DeleteConfigurationProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_configuration_profile: (
+      ?application_id: String,
+      ?configuration_profile_id: String,
+      ?deletion_protection_check: String
+    ) -> _DeleteConfigurationProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfigurationProfileResponse
+
+    interface _DeleteDeploymentStrategyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_deployment_strategy: (
+      ?deployment_strategy_id: String
+    ) -> _DeleteDeploymentStrategyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDeploymentStrategyResponse
+
+    interface _DeleteEnvironmentResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_environment: (
+      ?environment_id: String,
+      ?application_id: String,
+      ?deletion_protection_check: String
+    ) -> _DeleteEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentResponse
+
+    interface _DeleteExtensionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_extension: (
+      ?extension_identifier: String,
+      ?version_number: Integer
+    ) -> _DeleteExtensionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteExtensionResponse
+
+    interface _DeleteExtensionAssociationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_extension_association: (
+      ?extension_association_id: String
+    ) -> _DeleteExtensionAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteExtensionAssociationResponse
+
+    interface _DeleteHostedConfigurationVersionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_hosted_configuration_version: (
+      ?application_id: String,
+      ?configuration_profile_id: String,
+      ?version_number: Integer
+    ) -> _DeleteHostedConfigurationVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteHostedConfigurationVersionResponse
+
+    interface _GetAccountSettingsResponse
+      include Smithy::Client::_Response[Types::GetAccountSettingsOutput]
+      def deletion_protection: () -> Types::DeletionProtectionSettings?
+    end
+    def get_account_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountSettingsResponse
+
+    interface _GetApplicationResponse
+      include Smithy::Client::_Response[Types::GetApplicationOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+    end
+    def get_application: (
+      ?application_id: String
+    ) -> _GetApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetApplicationResponse
+
+    interface _GetConfigurationResponse
+      include Smithy::Client::_Response[Types::GetConfigurationOutput]
+      def content: () -> String?
+      def configuration_version: () -> String?
+      def content_type: () -> String?
+    end
+    def get_configuration: (
+      ?application: String,
+      ?environment: String,
+      ?configuration: String,
+      ?client_id: String,
+      ?client_configuration_version: String
+    ) -> _GetConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfigurationResponse
+
+    interface _GetConfigurationProfileResponse
+      include Smithy::Client::_Response[Types::GetConfigurationProfileOutput]
+      def application_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def location_uri: () -> String?
+      def retrieval_role_arn: () -> String?
+      def validators: () -> Array[Types::Validator]?
+      def type: () -> String?
+      def kms_key_arn: () -> String?
+      def kms_key_identifier: () -> String?
+    end
+    def get_configuration_profile: (
+      ?application_id: String,
+      ?configuration_profile_id: String
+    ) -> _GetConfigurationProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfigurationProfileResponse
+
+    interface _GetDeploymentResponse
+      include Smithy::Client::_Response[Types::GetDeploymentOutput]
+      def application_id: () -> String?
+      def environment_id: () -> String?
+      def deployment_strategy_id: () -> String?
+      def configuration_profile_id: () -> String?
+      def deployment_number: () -> Integer?
+      def configuration_name: () -> String?
+      def configuration_location_uri: () -> String?
+      def configuration_version: () -> String?
+      def description: () -> String?
+      def deployment_duration_in_minutes: () -> Integer?
+      def growth_type: () -> String?
+      def growth_factor: () -> Float?
+      def final_bake_time_in_minutes: () -> Integer?
+      def state: () -> String?
+      def event_log: () -> Array[Types::DeploymentEvent]?
+      def percentage_complete: () -> Float?
+      def started_at: () -> Time?
+      def completed_at: () -> Time?
+      def applied_extensions: () -> Array[Types::AppliedExtension]?
+      def kms_key_arn: () -> String?
+      def kms_key_identifier: () -> String?
+      def version_label: () -> String?
+    end
+    def get_deployment: (
+      ?application_id: String,
+      ?environment_id: String,
+      ?deployment_number: Integer
+    ) -> _GetDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeploymentResponse
+
+    interface _GetDeploymentStrategyResponse
+      include Smithy::Client::_Response[Types::GetDeploymentStrategyOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def deployment_duration_in_minutes: () -> Integer?
+      def growth_type: () -> String?
+      def growth_factor: () -> Float?
+      def final_bake_time_in_minutes: () -> Integer?
+      def replicate_to: () -> String?
+    end
+    def get_deployment_strategy: (
+      ?deployment_strategy_id: String
+    ) -> _GetDeploymentStrategyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeploymentStrategyResponse
+
+    interface _GetEnvironmentResponse
+      include Smithy::Client::_Response[Types::GetEnvironmentOutput]
+      def application_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def state: () -> String?
+      def monitors: () -> Array[Types::Monitor]?
+    end
+    def get_environment: (
+      ?application_id: String,
+      ?environment_id: String
+    ) -> _GetEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnvironmentResponse
+
+    interface _GetExtensionResponse
+      include Smithy::Client::_Response[Types::GetExtensionOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def version_number: () -> Integer?
+      def arn: () -> String?
+      def description: () -> String?
+      def actions: () -> Hash[String, Array[Types::Action]]?
+      def parameters: () -> Hash[String, Types::Parameter]?
+    end
+    def get_extension: (
+      ?extension_identifier: String,
+      ?version_number: Integer
+    ) -> _GetExtensionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExtensionResponse
+
+    interface _GetExtensionAssociationResponse
+      include Smithy::Client::_Response[Types::GetExtensionAssociationOutput]
+      def id: () -> String?
+      def extension_arn: () -> String?
+      def resource_arn: () -> String?
+      def arn: () -> String?
+      def parameters: () -> Hash[String, String]?
+      def extension_version_number: () -> Integer?
+    end
+    def get_extension_association: (
+      ?extension_association_id: String
+    ) -> _GetExtensionAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExtensionAssociationResponse
+
+    interface _GetHostedConfigurationVersionResponse
+      include Smithy::Client::_Response[Types::GetHostedConfigurationVersionOutput]
+      def application_id: () -> String?
+      def configuration_profile_id: () -> String?
+      def version_number: () -> Integer?
+      def description: () -> String?
+      def content: () -> String?
+      def content_type: () -> String?
+      def version_label: () -> String?
+      def kms_key_arn: () -> String?
+    end
+    def get_hosted_configuration_version: (
+      ?application_id: String,
+      ?configuration_profile_id: String,
+      ?version_number: Integer
+    ) -> _GetHostedConfigurationVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHostedConfigurationVersionResponse
+
+    interface _ListApplicationsResponse
+      include Smithy::Client::_Response[Types::ListApplicationsOutput]
+      def items: () -> Array[Types::Application]?
+      def next_token: () -> String?
+    end
+    def list_applications: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationsResponse
+
+    interface _ListConfigurationProfilesResponse
+      include Smithy::Client::_Response[Types::ListConfigurationProfilesOutput]
+      def items: () -> Array[Types::ConfigurationProfileSummary]?
+      def next_token: () -> String?
+    end
+    def list_configuration_profiles: (
+      ?application_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?type: String
+    ) -> _ListConfigurationProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfigurationProfilesResponse
+
+    interface _ListDeploymentStrategiesResponse
+      include Smithy::Client::_Response[Types::ListDeploymentStrategiesOutput]
+      def items: () -> Array[Types::DeploymentStrategy]?
+      def next_token: () -> String?
+    end
+    def list_deployment_strategies: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDeploymentStrategiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeploymentStrategiesResponse
+
+    interface _ListDeploymentsResponse
+      include Smithy::Client::_Response[Types::ListDeploymentsOutput]
+      def items: () -> Array[Types::DeploymentSummary]?
+      def next_token: () -> String?
+    end
+    def list_deployments: (
+      ?application_id: String,
+      ?environment_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDeploymentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeploymentsResponse
+
+    interface _ListEnvironmentsResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentsOutput]
+      def items: () -> Array[Types::Environment]?
+      def next_token: () -> String?
+    end
+    def list_environments: (
+      ?application_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEnvironmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentsResponse
+
+    interface _ListExtensionAssociationsResponse
+      include Smithy::Client::_Response[Types::ListExtensionAssociationsOutput]
+      def items: () -> Array[Types::ExtensionAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_extension_associations: (
+      ?resource_identifier: String,
+      ?extension_identifier: String,
+      ?extension_version_number: Integer,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListExtensionAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExtensionAssociationsResponse
+
+    interface _ListExtensionsResponse
+      include Smithy::Client::_Response[Types::ListExtensionsOutput]
+      def items: () -> Array[Types::ExtensionSummary]?
+      def next_token: () -> String?
+    end
+    def list_extensions: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?name: String
+    ) -> _ListExtensionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExtensionsResponse
+
+    interface _ListHostedConfigurationVersionsResponse
+      include Smithy::Client::_Response[Types::ListHostedConfigurationVersionsOutput]
+      def items: () -> Array[Types::HostedConfigurationVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_hosted_configuration_versions: (
+      ?application_id: String,
+      ?configuration_profile_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?version_label: String
+    ) -> _ListHostedConfigurationVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHostedConfigurationVersionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StartDeploymentResponse
+      include Smithy::Client::_Response[Types::StartDeploymentOutput]
+      def application_id: () -> String?
+      def environment_id: () -> String?
+      def deployment_strategy_id: () -> String?
+      def configuration_profile_id: () -> String?
+      def deployment_number: () -> Integer?
+      def configuration_name: () -> String?
+      def configuration_location_uri: () -> String?
+      def configuration_version: () -> String?
+      def description: () -> String?
+      def deployment_duration_in_minutes: () -> Integer?
+      def growth_type: () -> String?
+      def growth_factor: () -> Float?
+      def final_bake_time_in_minutes: () -> Integer?
+      def state: () -> String?
+      def event_log: () -> Array[Types::DeploymentEvent]?
+      def percentage_complete: () -> Float?
+      def started_at: () -> Time?
+      def completed_at: () -> Time?
+      def applied_extensions: () -> Array[Types::AppliedExtension]?
+      def kms_key_arn: () -> String?
+      def kms_key_identifier: () -> String?
+      def version_label: () -> String?
+    end
+    def start_deployment: (
+      ?application_id: String,
+      ?environment_id: String,
+      ?deployment_strategy_id: String,
+      ?configuration_profile_id: String,
+      ?configuration_version: String,
+      ?description: String,
+      ?tags: Hash[String, String],
+      ?kms_key_identifier: String,
+      ?dynamic_extension_parameters: Hash[String, String]
+    ) -> _StartDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDeploymentResponse
+
+    interface _StopDeploymentResponse
+      include Smithy::Client::_Response[Types::StopDeploymentOutput]
+      def application_id: () -> String?
+      def environment_id: () -> String?
+      def deployment_strategy_id: () -> String?
+      def configuration_profile_id: () -> String?
+      def deployment_number: () -> Integer?
+      def configuration_name: () -> String?
+      def configuration_location_uri: () -> String?
+      def configuration_version: () -> String?
+      def description: () -> String?
+      def deployment_duration_in_minutes: () -> Integer?
+      def growth_type: () -> String?
+      def growth_factor: () -> Float?
+      def final_bake_time_in_minutes: () -> Integer?
+      def state: () -> String?
+      def event_log: () -> Array[Types::DeploymentEvent]?
+      def percentage_complete: () -> Float?
+      def started_at: () -> Time?
+      def completed_at: () -> Time?
+      def applied_extensions: () -> Array[Types::AppliedExtension]?
+      def kms_key_arn: () -> String?
+      def kms_key_identifier: () -> String?
+      def version_label: () -> String?
+    end
+    def stop_deployment: (
+      ?application_id: String,
+      ?environment_id: String,
+      ?deployment_number: Integer,
+      ?allow_revert: bool
+    ) -> _StopDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopDeploymentResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAccountSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateAccountSettingsOutput]
+      def deletion_protection: () -> Types::DeletionProtectionSettings?
+    end
+    def update_account_settings: (
+      ?deletion_protection: {
+        enabled: bool,
+        protection_period_in_minutes: Integer
+      }
+    ) -> _UpdateAccountSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccountSettingsResponse
+
+    interface _UpdateApplicationResponse
+      include Smithy::Client::_Response[Types::UpdateApplicationOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+    end
+    def update_application: (
+      ?application_id: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApplicationResponse
+
+    interface _UpdateConfigurationProfileResponse
+      include Smithy::Client::_Response[Types::UpdateConfigurationProfileOutput]
+      def application_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def location_uri: () -> String?
+      def retrieval_role_arn: () -> String?
+      def validators: () -> Array[Types::Validator]?
+      def type: () -> String?
+      def kms_key_arn: () -> String?
+      def kms_key_identifier: () -> String?
+    end
+    def update_configuration_profile: (
+      ?application_id: String,
+      ?configuration_profile_id: String,
+      ?name: String,
+      ?description: String,
+      ?retrieval_role_arn: String,
+      ?validators: Array[
+        {
+          type: String,
+          content: String
+        }
+      ],
+      ?kms_key_identifier: String
+    ) -> _UpdateConfigurationProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfigurationProfileResponse
+
+    interface _UpdateDeploymentStrategyResponse
+      include Smithy::Client::_Response[Types::UpdateDeploymentStrategyOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def deployment_duration_in_minutes: () -> Integer?
+      def growth_type: () -> String?
+      def growth_factor: () -> Float?
+      def final_bake_time_in_minutes: () -> Integer?
+      def replicate_to: () -> String?
+    end
+    def update_deployment_strategy: (
+      ?deployment_strategy_id: String,
+      ?description: String,
+      ?deployment_duration_in_minutes: Integer,
+      ?final_bake_time_in_minutes: Integer,
+      ?growth_factor: Float,
+      ?growth_type: String
+    ) -> _UpdateDeploymentStrategyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDeploymentStrategyResponse
+
+    interface _UpdateEnvironmentResponse
+      include Smithy::Client::_Response[Types::UpdateEnvironmentOutput]
+      def application_id: () -> String?
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def state: () -> String?
+      def monitors: () -> Array[Types::Monitor]?
+    end
+    def update_environment: (
+      ?application_id: String,
+      ?environment_id: String,
+      ?name: String,
+      ?description: String,
+      ?monitors: Array[
+        {
+          alarm_arn: String,
+          alarm_role_arn: String
+        }
+      ]
+    ) -> _UpdateEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnvironmentResponse
+
+    interface _UpdateExtensionResponse
+      include Smithy::Client::_Response[Types::UpdateExtensionOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def version_number: () -> Integer?
+      def arn: () -> String?
+      def description: () -> String?
+      def actions: () -> Hash[String, Array[Types::Action]]?
+      def parameters: () -> Hash[String, Types::Parameter]?
+    end
+    def update_extension: (
+      ?extension_identifier: String,
+      ?description: String,
+      ?actions: Hash[String,
+        Array[
+          {
+            name: String,
+            description: String,
+            uri: String,
+            role_arn: String
+          }
+        ]
+      ],
+      ?parameters: Hash[String,
+        {
+          description: String,
+          required: bool,
+          dynamic: untyped
+        }
+      ],
+      ?version_number: Integer
+    ) -> _UpdateExtensionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateExtensionResponse
+
+    interface _UpdateExtensionAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateExtensionAssociationOutput]
+      def id: () -> String?
+      def extension_arn: () -> String?
+      def resource_arn: () -> String?
+      def arn: () -> String?
+      def parameters: () -> Hash[String, String]?
+      def extension_version_number: () -> Integer?
+    end
+    def update_extension_association: (
+      ?extension_association_id: String,
+      ?parameters: Hash[String, String]
+    ) -> _UpdateExtensionAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateExtensionAssociationResponse
+
+    interface _ValidateConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def validate_configuration: (
+      ?application_id: String,
+      ?configuration_profile_id: String,
+      ?configuration_version: String
+    ) -> _ValidateConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ValidateConfigurationResponse
+  end
+end

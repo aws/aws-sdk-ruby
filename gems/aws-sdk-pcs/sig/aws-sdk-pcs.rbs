@@ -1,0 +1,5 @@
+  module Aws
+    module PCS
+      VERSION: String
+    end
+  end

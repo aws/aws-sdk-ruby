@@ -1,0 +1,1680 @@
+module Aws::GreengrassV2
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AssociateClientDeviceWithCoreDeviceEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_name: String?
+    end
+
+    class AssociateClientDeviceWithCoreDeviceErrorEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_name: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_name: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class AssociateServiceRoleToAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+    end
+
+    class AssociateServiceRoleToAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associated_at: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associated_at: String?
+    end
+
+    class AssociatedClientDevice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_name: String,
+        ?association_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_name: String?
+      attr_accessor association_timestamp: Time?
+    end
+
+    class BatchAssociateClientDeviceWithCoreDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::AssociateClientDeviceWithCoreDeviceEntry],
+        ?core_device_thing_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::AssociateClientDeviceWithCoreDeviceEntry]?
+      attr_accessor core_device_thing_name: String?
+    end
+
+    class BatchAssociateClientDeviceWithCoreDeviceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_entries: Array[Types::AssociateClientDeviceWithCoreDeviceErrorEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_entries: Array[Types::AssociateClientDeviceWithCoreDeviceErrorEntry]?
+    end
+
+    class BatchDisassociateClientDeviceFromCoreDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::DisassociateClientDeviceFromCoreDeviceEntry],
+        ?core_device_thing_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::DisassociateClientDeviceFromCoreDeviceEntry]?
+      attr_accessor core_device_thing_name: String?
+    end
+
+    class BatchDisassociateClientDeviceFromCoreDeviceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_entries: Array[Types::DisassociateClientDeviceFromCoreDeviceErrorEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_entries: Array[Types::DisassociateClientDeviceFromCoreDeviceErrorEntry]?
+    end
+
+    class CancelDeploymentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+    end
+
+    class CancelDeploymentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module CloudComponentState
+      REQUESTED: String
+      INITIATED: String
+      DEPLOYABLE: String
+      FAILED: String
+      DEPRECATED: String
+    end
+
+    class CloudComponentStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_state: String,
+        ?message: String,
+        ?errors: Hash[String, String],
+        ?vendor_guidance: String,
+        ?vendor_guidance_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_state: String?
+      attr_accessor message: String?
+      attr_accessor errors: Hash[String, String]?
+      attr_accessor vendor_guidance: String?
+      attr_accessor vendor_guidance_message: String?
+    end
+
+    class Component
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?component_name: String,
+        ?latest_version: Types::ComponentLatestVersion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor component_name: String?
+      attr_accessor latest_version: Types::ComponentLatestVersion?
+    end
+
+    class ComponentCandidate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_name: String,
+        ?component_version: String,
+        ?version_requirements: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_name: String?
+      attr_accessor component_version: String?
+      attr_accessor version_requirements: Hash[String, String]?
+    end
+
+    class ComponentConfigurationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?merge: String,
+        ?reset: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor merge: String?
+      attr_accessor reset: Array[String]?
+    end
+
+    class ComponentDependencyRequirement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_requirement: String,
+        ?dependency_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_requirement: String?
+      attr_accessor dependency_type: String?
+    end
+
+    module ComponentDependencyType
+      HARD: String
+      SOFT: String
+    end
+
+    class ComponentDeploymentSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_version: String,
+        ?configuration_update: Types::ComponentConfigurationUpdate,
+        ?run_with: Types::ComponentRunWith,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_version: String?
+      attr_accessor configuration_update: Types::ComponentConfigurationUpdate?
+      attr_accessor run_with: Types::ComponentRunWith?
+    end
+
+    class ComponentLatestVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?component_version: String,
+        ?creation_timestamp: Time,
+        ?description: String,
+        ?publisher: String,
+        ?platforms: Array[Types::ComponentPlatform],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor component_version: String?
+      attr_accessor creation_timestamp: Time?
+      attr_accessor description: String?
+      attr_accessor publisher: String?
+      attr_accessor platforms: Array[Types::ComponentPlatform]?
+    end
+
+    class ComponentPlatform
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class ComponentRunWith
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?posix_user: String,
+        ?system_resource_limits: Types::SystemResourceLimits,
+        ?windows_user: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor posix_user: String?
+      attr_accessor system_resource_limits: Types::SystemResourceLimits?
+      attr_accessor windows_user: String?
+    end
+
+    class ComponentVersionListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_name: String,
+        ?component_version: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_name: String?
+      attr_accessor component_version: String?
+      attr_accessor arn: String?
+    end
+
+    module ComponentVisibilityScope
+      PRIVATE: String
+      PUBLIC: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ConnectivityInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?host_address: String,
+        ?port_number: Integer,
+        ?metadata: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor host_address: String?
+      attr_accessor port_number: Integer?
+      attr_accessor metadata: String?
+    end
+
+    class CoreDevice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_device_thing_name: String,
+        ?status: String,
+        ?last_status_update_timestamp: Time,
+        ?platform: String,
+        ?architecture: String,
+        ?runtime: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_device_thing_name: String?
+      attr_accessor status: String?
+      attr_accessor last_status_update_timestamp: Time?
+      attr_accessor platform: String?
+      attr_accessor architecture: String?
+      attr_accessor runtime: String?
+    end
+
+    module CoreDeviceStatus
+      HEALTHY: String
+      UNHEALTHY: String
+    end
+
+    class CreateComponentVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inline_recipe: String,
+        ?lambda_function: Types::LambdaFunctionRecipeSource,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inline_recipe: String?
+      attr_accessor lambda_function: Types::LambdaFunctionRecipeSource?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateComponentVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?component_name: String,
+        ?component_version: String,
+        ?creation_timestamp: Time,
+        ?status: Types::CloudComponentStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor component_name: String?
+      attr_accessor component_version: String?
+      attr_accessor creation_timestamp: Time?
+      attr_accessor status: Types::CloudComponentStatus?
+    end
+
+    class CreateDeploymentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_arn: String,
+        ?deployment_name: String,
+        ?components: Hash[String, Types::ComponentDeploymentSpecification],
+        ?iot_job_configuration: Types::DeploymentIoTJobConfiguration,
+        ?deployment_policies: Types::DeploymentPolicies,
+        ?parent_target_arn: String,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_arn: String?
+      attr_accessor deployment_name: String?
+      attr_accessor components: Hash[String, Types::ComponentDeploymentSpecification]?
+      attr_accessor iot_job_configuration: Types::DeploymentIoTJobConfiguration?
+      attr_accessor deployment_policies: Types::DeploymentPolicies?
+      attr_accessor parent_target_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateDeploymentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?iot_job_id: String,
+        ?iot_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor iot_job_id: String?
+      attr_accessor iot_job_arn: String?
+    end
+
+    class DeleteComponentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeleteCoreDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_device_thing_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_device_thing_name: String?
+    end
+
+    class DeleteDeploymentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+    end
+
+    class Deployment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_arn: String,
+        ?revision_id: String,
+        ?deployment_id: String,
+        ?deployment_name: String,
+        ?creation_timestamp: Time,
+        ?deployment_status: String,
+        ?is_latest_for_target: bool,
+        ?parent_target_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_arn: String?
+      attr_accessor revision_id: String?
+      attr_accessor deployment_id: String?
+      attr_accessor deployment_name: String?
+      attr_accessor creation_timestamp: Time?
+      attr_accessor deployment_status: String?
+      attr_accessor is_latest_for_target: bool?
+      attr_accessor parent_target_arn: String?
+    end
+
+    class DeploymentComponentUpdatePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_in_seconds: Integer,
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_in_seconds: Integer?
+      attr_accessor action: String?
+    end
+
+    module DeploymentComponentUpdatePolicyAction
+      NOTIFY_COMPONENTS: String
+      SKIP_NOTIFY_COMPONENTS: String
+    end
+
+    class DeploymentConfigurationValidationPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_in_seconds: Integer?
+    end
+
+    module DeploymentFailureHandlingPolicy
+      ROLLBACK: String
+      DO_NOTHING: String
+    end
+
+    module DeploymentHistoryFilter
+      ALL: String
+      LATEST_ONLY: String
+    end
+
+    class DeploymentIoTJobConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_executions_rollout_config: Types::IoTJobExecutionsRolloutConfig,
+        ?abort_config: Types::IoTJobAbortConfig,
+        ?timeout_config: Types::IoTJobTimeoutConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_executions_rollout_config: Types::IoTJobExecutionsRolloutConfig?
+      attr_accessor abort_config: Types::IoTJobAbortConfig?
+      attr_accessor timeout_config: Types::IoTJobTimeoutConfig?
+    end
+
+    class DeploymentPolicies
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failure_handling_policy: String,
+        ?component_update_policy: Types::DeploymentComponentUpdatePolicy,
+        ?configuration_validation_policy: Types::DeploymentConfigurationValidationPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failure_handling_policy: String?
+      attr_accessor component_update_policy: Types::DeploymentComponentUpdatePolicy?
+      attr_accessor configuration_validation_policy: Types::DeploymentConfigurationValidationPolicy?
+    end
+
+    module DeploymentStatus
+      ACTIVE: String
+      COMPLETED: String
+      CANCELED: String
+      FAILED: String
+      INACTIVE: String
+    end
+
+    class DescribeComponentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DescribeComponentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?component_name: String,
+        ?component_version: String,
+        ?creation_timestamp: Time,
+        ?publisher: String,
+        ?description: String,
+        ?status: Types::CloudComponentStatus,
+        ?platforms: Array[Types::ComponentPlatform],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor component_name: String?
+      attr_accessor component_version: String?
+      attr_accessor creation_timestamp: Time?
+      attr_accessor publisher: String?
+      attr_accessor description: String?
+      attr_accessor status: Types::CloudComponentStatus?
+      attr_accessor platforms: Array[Types::ComponentPlatform]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DisassociateClientDeviceFromCoreDeviceEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_name: String?
+    end
+
+    class DisassociateClientDeviceFromCoreDeviceErrorEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_name: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_name: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class DisassociateServiceRoleFromAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateServiceRoleFromAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?disassociated_at: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor disassociated_at: String?
+    end
+
+    class EffectiveDeployment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?deployment_name: String,
+        ?iot_job_id: String,
+        ?iot_job_arn: String,
+        ?description: String,
+        ?target_arn: String,
+        ?core_device_execution_status: String,
+        ?reason: String,
+        ?creation_timestamp: Time,
+        ?modified_timestamp: Time,
+        ?status_details: Types::EffectiveDeploymentStatusDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor deployment_name: String?
+      attr_accessor iot_job_id: String?
+      attr_accessor iot_job_arn: String?
+      attr_accessor description: String?
+      attr_accessor target_arn: String?
+      attr_accessor core_device_execution_status: String?
+      attr_accessor reason: String?
+      attr_accessor creation_timestamp: Time?
+      attr_accessor modified_timestamp: Time?
+      attr_accessor status_details: Types::EffectiveDeploymentStatusDetails?
+    end
+
+    module EffectiveDeploymentExecutionStatus
+      IN_PROGRESS: String
+      QUEUED: String
+      FAILED: String
+      COMPLETED: String
+      TIMED_OUT: String
+      CANCELED: String
+      REJECTED: String
+      SUCCEEDED: String
+    end
+
+    class EffectiveDeploymentStatusDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_stack: Array[String],
+        ?error_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_stack: Array[String]?
+      attr_accessor error_types: Array[String]?
+    end
+
+    class GetComponentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recipe_output_format: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recipe_output_format: String?
+      attr_accessor arn: String?
+    end
+
+    class GetComponentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recipe_output_format: String,
+        ?recipe: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recipe_output_format: String?
+      attr_accessor recipe: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetComponentVersionArtifactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?artifact_name: String,
+        ?s3_endpoint_type: String,
+        ?iot_endpoint_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor artifact_name: String?
+      attr_accessor s3_endpoint_type: String?
+      attr_accessor iot_endpoint_type: String?
+    end
+
+    class GetComponentVersionArtifactResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pre_signed_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pre_signed_url: String?
+    end
+
+    class GetConnectivityInfoRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_name: String?
+    end
+
+    class GetConnectivityInfoResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connectivity_info: Array[Types::ConnectivityInfo],
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connectivity_info: Array[Types::ConnectivityInfo]?
+      attr_accessor message: String?
+    end
+
+    class GetCoreDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_device_thing_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_device_thing_name: String?
+    end
+
+    class GetCoreDeviceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_device_thing_name: String,
+        ?core_version: String,
+        ?platform: String,
+        ?architecture: String,
+        ?runtime: String,
+        ?status: String,
+        ?last_status_update_timestamp: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_device_thing_name: String?
+      attr_accessor core_version: String?
+      attr_accessor platform: String?
+      attr_accessor architecture: String?
+      attr_accessor runtime: String?
+      attr_accessor status: String?
+      attr_accessor last_status_update_timestamp: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetDeploymentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+    end
+
+    class GetDeploymentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_arn: String,
+        ?revision_id: String,
+        ?deployment_id: String,
+        ?deployment_name: String,
+        ?deployment_status: String,
+        ?iot_job_id: String,
+        ?iot_job_arn: String,
+        ?components: Hash[String, Types::ComponentDeploymentSpecification],
+        ?deployment_policies: Types::DeploymentPolicies,
+        ?iot_job_configuration: Types::DeploymentIoTJobConfiguration,
+        ?creation_timestamp: Time,
+        ?is_latest_for_target: bool,
+        ?parent_target_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_arn: String?
+      attr_accessor revision_id: String?
+      attr_accessor deployment_id: String?
+      attr_accessor deployment_name: String?
+      attr_accessor deployment_status: String?
+      attr_accessor iot_job_id: String?
+      attr_accessor iot_job_arn: String?
+      attr_accessor components: Hash[String, Types::ComponentDeploymentSpecification]?
+      attr_accessor deployment_policies: Types::DeploymentPolicies?
+      attr_accessor iot_job_configuration: Types::DeploymentIoTJobConfiguration?
+      attr_accessor creation_timestamp: Time?
+      attr_accessor is_latest_for_target: bool?
+      attr_accessor parent_target_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetServiceRoleForAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetServiceRoleForAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associated_at: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associated_at: String?
+      attr_accessor role_arn: String?
+    end
+
+    class InstalledComponent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_name: String,
+        ?component_version: String,
+        ?lifecycle_state: String,
+        ?lifecycle_state_details: String,
+        ?is_root: bool,
+        ?last_status_change_timestamp: Time,
+        ?last_reported_timestamp: Time,
+        ?last_installation_source: String,
+        ?lifecycle_status_codes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_name: String?
+      attr_accessor component_version: String?
+      attr_accessor lifecycle_state: String?
+      attr_accessor lifecycle_state_details: String?
+      attr_accessor is_root: bool?
+      attr_accessor last_status_change_timestamp: Time?
+      attr_accessor last_reported_timestamp: Time?
+      attr_accessor last_installation_source: String?
+      attr_accessor lifecycle_status_codes: Array[String]?
+    end
+
+    module InstalledComponentLifecycleState
+      NEW: String
+      INSTALLED: String
+      STARTING: String
+      RUNNING: String
+      STOPPING: String
+      ERRORED: String
+      BROKEN: String
+      FINISHED: String
+    end
+
+    module InstalledComponentTopologyFilter
+      ALL: String
+      ROOT: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    module IoTJobAbortAction
+      CANCEL: String
+    end
+
+    class IoTJobAbortConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?criteria_list: Array[Types::IoTJobAbortCriteria],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor criteria_list: Array[Types::IoTJobAbortCriteria]?
+    end
+
+    class IoTJobAbortCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failure_type: String,
+        ?action: String,
+        ?threshold_percentage: Float,
+        ?min_number_of_executed_things: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failure_type: String?
+      attr_accessor action: String?
+      attr_accessor threshold_percentage: Float?
+      attr_accessor min_number_of_executed_things: Integer?
+    end
+
+    module IoTJobExecutionFailureType
+      FAILED: String
+      REJECTED: String
+      TIMED_OUT: String
+      ALL: String
+    end
+
+    class IoTJobExecutionsRolloutConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exponential_rate: Types::IoTJobExponentialRolloutRate,
+        ?maximum_per_minute: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exponential_rate: Types::IoTJobExponentialRolloutRate?
+      attr_accessor maximum_per_minute: Integer?
+    end
+
+    class IoTJobExponentialRolloutRate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?base_rate_per_minute: Integer,
+        ?increment_factor: Float,
+        ?rate_increase_criteria: Types::IoTJobRateIncreaseCriteria,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor base_rate_per_minute: Integer?
+      attr_accessor increment_factor: Float?
+      attr_accessor rate_increase_criteria: Types::IoTJobRateIncreaseCriteria?
+    end
+
+    class IoTJobRateIncreaseCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?number_of_notified_things: Integer,
+        ?number_of_succeeded_things: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor number_of_notified_things: Integer?
+      attr_accessor number_of_succeeded_things: Integer?
+    end
+
+    class IoTJobTimeoutConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?in_progress_timeout_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor in_progress_timeout_in_minutes: Integer?
+    end
+
+    module IotEndpointType
+      fips: String
+      standard: String
+    end
+
+    class LambdaContainerParams
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?memory_size_in_kb: Integer,
+        ?mount_ro_sysfs: bool,
+        ?volumes: Array[Types::LambdaVolumeMount],
+        ?devices: Array[Types::LambdaDeviceMount],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor memory_size_in_kb: Integer?
+      attr_accessor mount_ro_sysfs: bool?
+      attr_accessor volumes: Array[Types::LambdaVolumeMount]?
+      attr_accessor devices: Array[Types::LambdaDeviceMount]?
+    end
+
+    class LambdaDeviceMount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?permission: String,
+        ?add_group_owner: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor permission: String?
+      attr_accessor add_group_owner: bool?
+    end
+
+    class LambdaEventSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic: String?
+      attr_accessor type: String?
+    end
+
+    module LambdaEventSourceType
+      PUB_SUB: String
+      IOT_CORE: String
+    end
+
+    class LambdaExecutionParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_sources: Array[Types::LambdaEventSource],
+        ?max_queue_size: Integer,
+        ?max_instances_count: Integer,
+        ?max_idle_time_in_seconds: Integer,
+        ?timeout_in_seconds: Integer,
+        ?status_timeout_in_seconds: Integer,
+        ?pinned: bool,
+        ?input_payload_encoding_type: String,
+        ?exec_args: Array[String],
+        ?environment_variables: Hash[String, String],
+        ?linux_process_params: Types::LambdaLinuxProcessParams,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_sources: Array[Types::LambdaEventSource]?
+      attr_accessor max_queue_size: Integer?
+      attr_accessor max_instances_count: Integer?
+      attr_accessor max_idle_time_in_seconds: Integer?
+      attr_accessor timeout_in_seconds: Integer?
+      attr_accessor status_timeout_in_seconds: Integer?
+      attr_accessor pinned: bool?
+      attr_accessor input_payload_encoding_type: String?
+      attr_accessor exec_args: Array[String]?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor linux_process_params: Types::LambdaLinuxProcessParams?
+    end
+
+    module LambdaFilesystemPermission
+      RO: String
+      RW: String
+    end
+
+    class LambdaFunctionRecipeSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lambda_arn: String,
+        ?component_name: String,
+        ?component_version: String,
+        ?component_platforms: Array[Types::ComponentPlatform],
+        ?component_dependencies: Hash[String, Types::ComponentDependencyRequirement],
+        ?component_lambda_parameters: Types::LambdaExecutionParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lambda_arn: String?
+      attr_accessor component_name: String?
+      attr_accessor component_version: String?
+      attr_accessor component_platforms: Array[Types::ComponentPlatform]?
+      attr_accessor component_dependencies: Hash[String, Types::ComponentDependencyRequirement]?
+      attr_accessor component_lambda_parameters: Types::LambdaExecutionParameters?
+    end
+
+    module LambdaInputPayloadEncodingType
+      JSON: String
+      BINARY: String
+    end
+
+    module LambdaIsolationMode
+      GREENGRASS_CONTAINER: String
+      NO_CONTAINER: String
+    end
+
+    class LambdaLinuxProcessParams
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?isolation_mode: String,
+        ?container_params: Types::LambdaContainerParams,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor isolation_mode: String?
+      attr_accessor container_params: Types::LambdaContainerParams?
+    end
+
+    class LambdaVolumeMount
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_path: String,
+        ?destination_path: String,
+        ?permission: String,
+        ?add_group_owner: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_path: String?
+      attr_accessor destination_path: String?
+      attr_accessor permission: String?
+      attr_accessor add_group_owner: bool?
+    end
+
+    class ListClientDevicesAssociatedWithCoreDeviceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_device_thing_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_device_thing_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListClientDevicesAssociatedWithCoreDeviceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associated_client_devices: Array[Types::AssociatedClientDevice],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associated_client_devices: Array[Types::AssociatedClientDevice]?
+      attr_accessor next_token: String?
+    end
+
+    class ListComponentVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListComponentVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_versions: Array[Types::ComponentVersionListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_versions: Array[Types::ComponentVersionListItem]?
+      attr_accessor next_token: String?
+    end
+
+    class ListComponentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListComponentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?components: Array[Types::Component],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor components: Array[Types::Component]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCoreDevicesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_group_arn: String,
+        ?status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?runtime: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_group_arn: String?
+      attr_accessor status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor runtime: String?
+    end
+
+    class ListCoreDevicesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_devices: Array[Types::CoreDevice],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_devices: Array[Types::CoreDevice]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_arn: String,
+        ?history_filter: String,
+        ?parent_target_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_arn: String?
+      attr_accessor history_filter: String?
+      attr_accessor parent_target_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployments: Array[Types::Deployment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployments: Array[Types::Deployment]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEffectiveDeploymentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_device_thing_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_device_thing_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListEffectiveDeploymentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?effective_deployments: Array[Types::EffectiveDeployment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor effective_deployments: Array[Types::EffectiveDeployment]?
+      attr_accessor next_token: String?
+    end
+
+    class ListInstalledComponentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_device_thing_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?topology_filter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_device_thing_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor topology_filter: String?
+    end
+
+    class ListInstalledComponentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?installed_components: Array[Types::InstalledComponent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor installed_components: Array[Types::InstalledComponent]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module RecipeOutputFormat
+      JSON: String
+      YAML: String
+    end
+
+    class RequestAlreadyInProgressException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResolveComponentCandidatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?platform: Types::ComponentPlatform,
+        ?component_candidates: Array[Types::ComponentCandidate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor platform: Types::ComponentPlatform?
+      attr_accessor component_candidates: Array[Types::ComponentCandidate]?
+    end
+
+    class ResolveComponentCandidatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resolved_component_versions: Array[Types::ResolvedComponentVersion],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resolved_component_versions: Array[Types::ResolvedComponentVersion]?
+    end
+
+    class ResolvedComponentVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?component_name: String,
+        ?component_version: String,
+        ?recipe: String,
+        ?vendor_guidance: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor component_name: String?
+      attr_accessor component_version: String?
+      attr_accessor recipe: String?
+      attr_accessor vendor_guidance: String?
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    module S3EndpointType
+      REGIONAL: String
+      GLOBAL: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?quota_code: String,
+        ?service_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor quota_code: String?
+      attr_accessor service_code: String?
+    end
+
+    class SystemResourceLimits
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?memory: Integer,
+        ?cpus: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor memory: Integer?
+      attr_accessor cpus: Float?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?quota_code: String,
+        ?service_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor quota_code: String?
+      attr_accessor service_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateConnectivityInfoRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?thing_name: String,
+        ?connectivity_info: Array[Types::ConnectivityInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor thing_name: String?
+      attr_accessor connectivity_info: Array[Types::ConnectivityInfo]?
+    end
+
+    class UpdateConnectivityInfoResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+      attr_accessor message: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?fields: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor fields: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+
+    module VendorGuidance
+      ACTIVE: String
+      DISCONTINUED: String
+      DELETED: String
+    end
+  end
+end

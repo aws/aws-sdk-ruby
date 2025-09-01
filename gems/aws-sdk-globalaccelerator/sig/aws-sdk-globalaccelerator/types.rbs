@@ -1,0 +1,2106 @@
+module Aws::GlobalAccelerator
+  module Types
+
+    class Accelerator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_arn: String,
+        ?name: String,
+        ?ip_address_type: String,
+        ?enabled: bool,
+        ?ip_sets: Array[Types::IpSet],
+        ?dns_name: String,
+        ?status: String,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+        ?dual_stack_dns_name: String,
+        ?events: Array[Types::AcceleratorEvent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_arn: String?
+      attr_accessor name: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor enabled: bool?
+      attr_accessor ip_sets: Array[Types::IpSet]?
+      attr_accessor dns_name: String?
+      attr_accessor status: String?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor dual_stack_dns_name: String?
+      attr_accessor events: Array[Types::AcceleratorEvent]?
+    end
+
+    class AcceleratorAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_logs_enabled: bool,
+        ?flow_logs_s3_bucket: String,
+        ?flow_logs_s3_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_logs_enabled: bool?
+      attr_accessor flow_logs_s3_bucket: String?
+      attr_accessor flow_logs_s3_prefix: String?
+    end
+
+    class AcceleratorEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor timestamp: Time?
+    end
+
+    class AcceleratorNotDisabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AcceleratorNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AcceleratorStatus
+      DEPLOYED: String
+      IN_PROGRESS: String
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AddCustomRoutingEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_configurations: Array[Types::CustomRoutingEndpointConfiguration],
+        ?endpoint_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_configurations: Array[Types::CustomRoutingEndpointConfiguration]?
+      attr_accessor endpoint_group_arn: String?
+    end
+
+    class AddCustomRoutingEndpointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_descriptions: Array[Types::CustomRoutingEndpointDescription],
+        ?endpoint_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_descriptions: Array[Types::CustomRoutingEndpointDescription]?
+      attr_accessor endpoint_group_arn: String?
+    end
+
+    class AddEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_configurations: Array[Types::EndpointConfiguration],
+        ?endpoint_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_configurations: Array[Types::EndpointConfiguration]?
+      attr_accessor endpoint_group_arn: String?
+    end
+
+    class AddEndpointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_descriptions: Array[Types::EndpointDescription],
+        ?endpoint_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_descriptions: Array[Types::EndpointDescription]?
+      attr_accessor endpoint_group_arn: String?
+    end
+
+    class AdvertiseByoipCidrRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidr: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidr: String?
+    end
+
+    class AdvertiseByoipCidrResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?byoip_cidr: Types::ByoipCidr,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor byoip_cidr: Types::ByoipCidr?
+    end
+
+    class AllowCustomRoutingTrafficRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_group_arn: String,
+        ?endpoint_id: String,
+        ?destination_addresses: Array[String],
+        ?destination_ports: Array[Integer],
+        ?allow_all_traffic_to_endpoint: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_group_arn: String?
+      attr_accessor endpoint_id: String?
+      attr_accessor destination_addresses: Array[String]?
+      attr_accessor destination_ports: Array[Integer]?
+      attr_accessor allow_all_traffic_to_endpoint: bool?
+    end
+
+    class AssociatedEndpointGroupFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AssociatedListenerFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Attachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_arn: String,
+        ?name: String,
+        ?principals: Array[String],
+        ?resources: Array[Types::Resource],
+        ?last_modified_time: Time,
+        ?created_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_arn: String?
+      attr_accessor name: String?
+      attr_accessor principals: Array[String]?
+      attr_accessor resources: Array[Types::Resource]?
+      attr_accessor last_modified_time: Time?
+      attr_accessor created_time: Time?
+    end
+
+    class AttachmentNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ByoipCidr
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidr: String,
+        ?state: String,
+        ?events: Array[Types::ByoipCidrEvent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidr: String?
+      attr_accessor state: String?
+      attr_accessor events: Array[Types::ByoipCidrEvent]?
+    end
+
+    class ByoipCidrEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor timestamp: Time?
+    end
+
+    class ByoipCidrNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ByoipCidrState
+      PENDING_PROVISIONING: String
+      READY: String
+      PENDING_ADVERTISING: String
+      ADVERTISING: String
+      PENDING_WITHDRAWING: String
+      PENDING_DEPROVISIONING: String
+      DEPROVISIONED: String
+      FAILED_PROVISION: String
+      FAILED_ADVERTISING: String
+      FAILED_WITHDRAW: String
+      FAILED_DEPROVISION: String
+    end
+
+    class CidrAuthorizationContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?signature: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor signature: String?
+    end
+
+    module ClientAffinity
+      NONE: String
+      SOURCE_IP: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateAcceleratorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?ip_address_type: String,
+        ?ip_addresses: Array[String],
+        ?enabled: bool,
+        ?idempotency_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor ip_addresses: Array[String]?
+      attr_accessor enabled: bool?
+      attr_accessor idempotency_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateAcceleratorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator: Types::Accelerator,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator: Types::Accelerator?
+    end
+
+    class CreateCrossAccountAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?principals: Array[String],
+        ?resources: Array[Types::Resource],
+        ?idempotency_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor principals: Array[String]?
+      attr_accessor resources: Array[Types::Resource]?
+      attr_accessor idempotency_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateCrossAccountAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cross_account_attachment: Types::Attachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cross_account_attachment: Types::Attachment?
+    end
+
+    class CreateCustomRoutingAcceleratorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?ip_address_type: String,
+        ?ip_addresses: Array[String],
+        ?enabled: bool,
+        ?idempotency_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor ip_addresses: Array[String]?
+      attr_accessor enabled: bool?
+      attr_accessor idempotency_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateCustomRoutingAcceleratorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator: Types::CustomRoutingAccelerator,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator: Types::CustomRoutingAccelerator?
+    end
+
+    class CreateCustomRoutingEndpointGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+        ?endpoint_group_region: String,
+        ?destination_configurations: Array[Types::CustomRoutingDestinationConfiguration],
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+      attr_accessor endpoint_group_region: String?
+      attr_accessor destination_configurations: Array[Types::CustomRoutingDestinationConfiguration]?
+      attr_accessor idempotency_token: String?
+    end
+
+    class CreateCustomRoutingEndpointGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_group: Types::CustomRoutingEndpointGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_group: Types::CustomRoutingEndpointGroup?
+    end
+
+    class CreateCustomRoutingListenerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_arn: String,
+        ?port_ranges: Array[Types::PortRange],
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_arn: String?
+      attr_accessor port_ranges: Array[Types::PortRange]?
+      attr_accessor idempotency_token: String?
+    end
+
+    class CreateCustomRoutingListenerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener: Types::CustomRoutingListener,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener: Types::CustomRoutingListener?
+    end
+
+    class CreateEndpointGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+        ?endpoint_group_region: String,
+        ?endpoint_configurations: Array[Types::EndpointConfiguration],
+        ?traffic_dial_percentage: Float,
+        ?health_check_port: Integer,
+        ?health_check_protocol: String,
+        ?health_check_path: String,
+        ?health_check_interval_seconds: Integer,
+        ?threshold_count: Integer,
+        ?idempotency_token: String,
+        ?port_overrides: Array[Types::PortOverride],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+      attr_accessor endpoint_group_region: String?
+      attr_accessor endpoint_configurations: Array[Types::EndpointConfiguration]?
+      attr_accessor traffic_dial_percentage: Float?
+      attr_accessor health_check_port: Integer?
+      attr_accessor health_check_protocol: String?
+      attr_accessor health_check_path: String?
+      attr_accessor health_check_interval_seconds: Integer?
+      attr_accessor threshold_count: Integer?
+      attr_accessor idempotency_token: String?
+      attr_accessor port_overrides: Array[Types::PortOverride]?
+    end
+
+    class CreateEndpointGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_group: Types::EndpointGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_group: Types::EndpointGroup?
+    end
+
+    class CreateListenerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_arn: String,
+        ?port_ranges: Array[Types::PortRange],
+        ?protocol: String,
+        ?client_affinity: String,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_arn: String?
+      attr_accessor port_ranges: Array[Types::PortRange]?
+      attr_accessor protocol: String?
+      attr_accessor client_affinity: String?
+      attr_accessor idempotency_token: String?
+    end
+
+    class CreateListenerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener: Types::Listener,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener: Types::Listener?
+    end
+
+    class CrossAccountResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_id: String,
+        ?cidr: String,
+        ?attachment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_id: String?
+      attr_accessor cidr: String?
+      attr_accessor attachment_arn: String?
+    end
+
+    class CustomRoutingAccelerator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_arn: String,
+        ?name: String,
+        ?ip_address_type: String,
+        ?enabled: bool,
+        ?ip_sets: Array[Types::IpSet],
+        ?dns_name: String,
+        ?status: String,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_arn: String?
+      attr_accessor name: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor enabled: bool?
+      attr_accessor ip_sets: Array[Types::IpSet]?
+      attr_accessor dns_name: String?
+      attr_accessor status: String?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class CustomRoutingAcceleratorAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_logs_enabled: bool,
+        ?flow_logs_s3_bucket: String,
+        ?flow_logs_s3_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_logs_enabled: bool?
+      attr_accessor flow_logs_s3_bucket: String?
+      attr_accessor flow_logs_s3_prefix: String?
+    end
+
+    module CustomRoutingAcceleratorStatus
+      DEPLOYED: String
+      IN_PROGRESS: String
+    end
+
+    class CustomRoutingDestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_port: Integer,
+        ?to_port: Integer,
+        ?protocols: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_port: Integer?
+      attr_accessor to_port: Integer?
+      attr_accessor protocols: Array[String]?
+    end
+
+    class CustomRoutingDestinationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_port: Integer,
+        ?to_port: Integer,
+        ?protocols: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_port: Integer?
+      attr_accessor to_port: Integer?
+      attr_accessor protocols: Array[String]?
+    end
+
+    module CustomRoutingDestinationTrafficState
+      ALLOW: String
+      DENY: String
+    end
+
+    class CustomRoutingEndpointConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_id: String,
+        ?attachment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_id: String?
+      attr_accessor attachment_arn: String?
+    end
+
+    class CustomRoutingEndpointDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_id: String?
+    end
+
+    class CustomRoutingEndpointGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_group_arn: String,
+        ?endpoint_group_region: String,
+        ?destination_descriptions: Array[Types::CustomRoutingDestinationDescription],
+        ?endpoint_descriptions: Array[Types::CustomRoutingEndpointDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_group_arn: String?
+      attr_accessor endpoint_group_region: String?
+      attr_accessor destination_descriptions: Array[Types::CustomRoutingDestinationDescription]?
+      attr_accessor endpoint_descriptions: Array[Types::CustomRoutingEndpointDescription]?
+    end
+
+    class CustomRoutingListener
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+        ?port_ranges: Array[Types::PortRange],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+      attr_accessor port_ranges: Array[Types::PortRange]?
+    end
+
+    module CustomRoutingProtocol
+      TCP: String
+      UDP: String
+    end
+
+    class DeleteAcceleratorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_arn: String?
+    end
+
+    class DeleteCrossAccountAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_arn: String?
+    end
+
+    class DeleteCustomRoutingAcceleratorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_arn: String?
+    end
+
+    class DeleteCustomRoutingEndpointGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_group_arn: String?
+    end
+
+    class DeleteCustomRoutingListenerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+    end
+
+    class DeleteEndpointGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_group_arn: String?
+    end
+
+    class DeleteListenerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+    end
+
+    class DenyCustomRoutingTrafficRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_group_arn: String,
+        ?endpoint_id: String,
+        ?destination_addresses: Array[String],
+        ?destination_ports: Array[Integer],
+        ?deny_all_traffic_to_endpoint: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_group_arn: String?
+      attr_accessor endpoint_id: String?
+      attr_accessor destination_addresses: Array[String]?
+      attr_accessor destination_ports: Array[Integer]?
+      attr_accessor deny_all_traffic_to_endpoint: bool?
+    end
+
+    class DeprovisionByoipCidrRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidr: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidr: String?
+    end
+
+    class DeprovisionByoipCidrResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?byoip_cidr: Types::ByoipCidr,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor byoip_cidr: Types::ByoipCidr?
+    end
+
+    class DescribeAcceleratorAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_arn: String?
+    end
+
+    class DescribeAcceleratorAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_attributes: Types::AcceleratorAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_attributes: Types::AcceleratorAttributes?
+    end
+
+    class DescribeAcceleratorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_arn: String?
+    end
+
+    class DescribeAcceleratorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator: Types::Accelerator,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator: Types::Accelerator?
+    end
+
+    class DescribeCrossAccountAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_arn: String?
+    end
+
+    class DescribeCrossAccountAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cross_account_attachment: Types::Attachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cross_account_attachment: Types::Attachment?
+    end
+
+    class DescribeCustomRoutingAcceleratorAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_arn: String?
+    end
+
+    class DescribeCustomRoutingAcceleratorAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_attributes: Types::CustomRoutingAcceleratorAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_attributes: Types::CustomRoutingAcceleratorAttributes?
+    end
+
+    class DescribeCustomRoutingAcceleratorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_arn: String?
+    end
+
+    class DescribeCustomRoutingAcceleratorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator: Types::CustomRoutingAccelerator,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator: Types::CustomRoutingAccelerator?
+    end
+
+    class DescribeCustomRoutingEndpointGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_group_arn: String?
+    end
+
+    class DescribeCustomRoutingEndpointGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_group: Types::CustomRoutingEndpointGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_group: Types::CustomRoutingEndpointGroup?
+    end
+
+    class DescribeCustomRoutingListenerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+    end
+
+    class DescribeCustomRoutingListenerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener: Types::CustomRoutingListener,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener: Types::CustomRoutingListener?
+    end
+
+    class DescribeEndpointGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_group_arn: String?
+    end
+
+    class DescribeEndpointGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_group: Types::EndpointGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_group: Types::EndpointGroup?
+    end
+
+    class DescribeListenerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+    end
+
+    class DescribeListenerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener: Types::Listener,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener: Types::Listener?
+    end
+
+    class DestinationPortMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_arn: String,
+        ?accelerator_socket_addresses: Array[Types::SocketAddress],
+        ?endpoint_group_arn: String,
+        ?endpoint_id: String,
+        ?endpoint_group_region: String,
+        ?destination_socket_address: Types::SocketAddress,
+        ?ip_address_type: String,
+        ?destination_traffic_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_arn: String?
+      attr_accessor accelerator_socket_addresses: Array[Types::SocketAddress]?
+      attr_accessor endpoint_group_arn: String?
+      attr_accessor endpoint_id: String?
+      attr_accessor endpoint_group_region: String?
+      attr_accessor destination_socket_address: Types::SocketAddress?
+      attr_accessor ip_address_type: String?
+      attr_accessor destination_traffic_state: String?
+    end
+
+    class EndpointAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EndpointConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_id: String,
+        ?weight: Integer,
+        ?client_ip_preservation_enabled: bool,
+        ?attachment_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_id: String?
+      attr_accessor weight: Integer?
+      attr_accessor client_ip_preservation_enabled: bool?
+      attr_accessor attachment_arn: String?
+    end
+
+    class EndpointDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_id: String,
+        ?weight: Integer,
+        ?health_state: String,
+        ?health_reason: String,
+        ?client_ip_preservation_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_id: String?
+      attr_accessor weight: Integer?
+      attr_accessor health_state: String?
+      attr_accessor health_reason: String?
+      attr_accessor client_ip_preservation_enabled: bool?
+    end
+
+    class EndpointGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_group_arn: String,
+        ?endpoint_group_region: String,
+        ?endpoint_descriptions: Array[Types::EndpointDescription],
+        ?traffic_dial_percentage: Float,
+        ?health_check_port: Integer,
+        ?health_check_protocol: String,
+        ?health_check_path: String,
+        ?health_check_interval_seconds: Integer,
+        ?threshold_count: Integer,
+        ?port_overrides: Array[Types::PortOverride],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_group_arn: String?
+      attr_accessor endpoint_group_region: String?
+      attr_accessor endpoint_descriptions: Array[Types::EndpointDescription]?
+      attr_accessor traffic_dial_percentage: Float?
+      attr_accessor health_check_port: Integer?
+      attr_accessor health_check_protocol: String?
+      attr_accessor health_check_path: String?
+      attr_accessor health_check_interval_seconds: Integer?
+      attr_accessor threshold_count: Integer?
+      attr_accessor port_overrides: Array[Types::PortOverride]?
+    end
+
+    class EndpointGroupAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EndpointGroupNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EndpointIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_id: String,
+        ?client_ip_preservation_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_id: String?
+      attr_accessor client_ip_preservation_enabled: bool?
+    end
+
+    class EndpointNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module HealthCheckProtocol
+      TCP: String
+      HTTP: String
+      HTTPS: String
+    end
+
+    module HealthState
+      INITIAL: String
+      HEALTHY: String
+      UNHEALTHY: String
+    end
+
+    class IncorrectCidrStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InternalServiceErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidArgumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidPortRangeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module IpAddressFamily
+      IPv4: String
+      IPv6: String
+    end
+
+    module IpAddressType
+      IPV4: String
+      DUAL_STACK: String
+    end
+
+    class IpSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_family: String,
+        ?ip_addresses: Array[String],
+        ?ip_address_family: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_family: String?
+      attr_accessor ip_addresses: Array[String]?
+      attr_accessor ip_address_family: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAcceleratorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAcceleratorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerators: Array[Types::Accelerator],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerators: Array[Types::Accelerator]?
+      attr_accessor next_token: String?
+    end
+
+    class ListByoipCidrsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListByoipCidrsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?byoip_cidrs: Array[Types::ByoipCidr],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor byoip_cidrs: Array[Types::ByoipCidr]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCrossAccountAttachmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCrossAccountAttachmentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cross_account_attachments: Array[Types::Attachment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cross_account_attachments: Array[Types::Attachment]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCrossAccountResourceAccountsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ListCrossAccountResourceAccountsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_owner_aws_account_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_owner_aws_account_ids: Array[String]?
+    end
+
+    class ListCrossAccountResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_arn: String,
+        ?resource_owner_aws_account_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_arn: String?
+      attr_accessor resource_owner_aws_account_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCrossAccountResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cross_account_resources: Array[Types::CrossAccountResource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cross_account_resources: Array[Types::CrossAccountResource]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomRoutingAcceleratorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomRoutingAcceleratorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerators: Array[Types::CustomRoutingAccelerator],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerators: Array[Types::CustomRoutingAccelerator]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomRoutingEndpointGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomRoutingEndpointGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_groups: Array[Types::CustomRoutingEndpointGroup],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_groups: Array[Types::CustomRoutingEndpointGroup]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomRoutingListenersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomRoutingListenersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listeners: Array[Types::CustomRoutingListener],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listeners: Array[Types::CustomRoutingListener]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomRoutingPortMappingsByDestinationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_id: String,
+        ?destination_address: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_id: String?
+      attr_accessor destination_address: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomRoutingPortMappingsByDestinationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_port_mappings: Array[Types::DestinationPortMapping],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_port_mappings: Array[Types::DestinationPortMapping]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomRoutingPortMappingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_arn: String,
+        ?endpoint_group_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_arn: String?
+      attr_accessor endpoint_group_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCustomRoutingPortMappingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?port_mappings: Array[Types::PortMapping],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor port_mappings: Array[Types::PortMapping]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEndpointGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListEndpointGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_groups: Array[Types::EndpointGroup],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_groups: Array[Types::EndpointGroup]?
+      attr_accessor next_token: String?
+    end
+
+    class ListListenersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListListenersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listeners: Array[Types::Listener],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listeners: Array[Types::Listener]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class Listener
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+        ?port_ranges: Array[Types::PortRange],
+        ?protocol: String,
+        ?client_affinity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+      attr_accessor port_ranges: Array[Types::PortRange]?
+      attr_accessor protocol: String?
+      attr_accessor client_affinity: String?
+    end
+
+    class ListenerNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PortMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_port: Integer,
+        ?endpoint_group_arn: String,
+        ?endpoint_id: String,
+        ?destination_socket_address: Types::SocketAddress,
+        ?protocols: Array[String],
+        ?destination_traffic_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_port: Integer?
+      attr_accessor endpoint_group_arn: String?
+      attr_accessor endpoint_id: String?
+      attr_accessor destination_socket_address: Types::SocketAddress?
+      attr_accessor protocols: Array[String]?
+      attr_accessor destination_traffic_state: String?
+    end
+
+    class PortOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_port: Integer,
+        ?endpoint_port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_port: Integer?
+      attr_accessor endpoint_port: Integer?
+    end
+
+    class PortRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from_port: Integer,
+        ?to_port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from_port: Integer?
+      attr_accessor to_port: Integer?
+    end
+
+    module Protocol
+      TCP: String
+      UDP: String
+    end
+
+    class ProvisionByoipCidrRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidr: String,
+        ?cidr_authorization_context: Types::CidrAuthorizationContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidr: String?
+      attr_accessor cidr_authorization_context: Types::CidrAuthorizationContext?
+    end
+
+    class ProvisionByoipCidrResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?byoip_cidr: Types::ByoipCidr,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor byoip_cidr: Types::ByoipCidr?
+    end
+
+    class RemoveCustomRoutingEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_ids: Array[String],
+        ?endpoint_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_ids: Array[String]?
+      attr_accessor endpoint_group_arn: String?
+    end
+
+    class RemoveEndpointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_identifiers: Array[Types::EndpointIdentifier],
+        ?endpoint_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_identifiers: Array[Types::EndpointIdentifier]?
+      attr_accessor endpoint_group_arn: String?
+    end
+
+    class Resource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_id: String,
+        ?cidr: String,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_id: String?
+      attr_accessor cidr: String?
+      attr_accessor region: String?
+    end
+
+    class SocketAddress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_address: String,
+        ?port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_address: String?
+      attr_accessor port: Integer?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TransactionInProgressException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAcceleratorAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_arn: String,
+        ?flow_logs_enabled: bool,
+        ?flow_logs_s3_bucket: String,
+        ?flow_logs_s3_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_arn: String?
+      attr_accessor flow_logs_enabled: bool?
+      attr_accessor flow_logs_s3_bucket: String?
+      attr_accessor flow_logs_s3_prefix: String?
+    end
+
+    class UpdateAcceleratorAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_attributes: Types::AcceleratorAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_attributes: Types::AcceleratorAttributes?
+    end
+
+    class UpdateAcceleratorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_arn: String,
+        ?name: String,
+        ?ip_address_type: String,
+        ?ip_addresses: Array[String],
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_arn: String?
+      attr_accessor name: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor ip_addresses: Array[String]?
+      attr_accessor enabled: bool?
+    end
+
+    class UpdateAcceleratorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator: Types::Accelerator,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator: Types::Accelerator?
+    end
+
+    class UpdateCrossAccountAttachmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_arn: String,
+        ?name: String,
+        ?add_principals: Array[String],
+        ?remove_principals: Array[String],
+        ?add_resources: Array[Types::Resource],
+        ?remove_resources: Array[Types::Resource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_arn: String?
+      attr_accessor name: String?
+      attr_accessor add_principals: Array[String]?
+      attr_accessor remove_principals: Array[String]?
+      attr_accessor add_resources: Array[Types::Resource]?
+      attr_accessor remove_resources: Array[Types::Resource]?
+    end
+
+    class UpdateCrossAccountAttachmentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cross_account_attachment: Types::Attachment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cross_account_attachment: Types::Attachment?
+    end
+
+    class UpdateCustomRoutingAcceleratorAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_arn: String,
+        ?flow_logs_enabled: bool,
+        ?flow_logs_s3_bucket: String,
+        ?flow_logs_s3_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_arn: String?
+      attr_accessor flow_logs_enabled: bool?
+      attr_accessor flow_logs_s3_bucket: String?
+      attr_accessor flow_logs_s3_prefix: String?
+    end
+
+    class UpdateCustomRoutingAcceleratorAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_attributes: Types::CustomRoutingAcceleratorAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_attributes: Types::CustomRoutingAcceleratorAttributes?
+    end
+
+    class UpdateCustomRoutingAcceleratorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator_arn: String,
+        ?name: String,
+        ?ip_address_type: String,
+        ?ip_addresses: Array[String],
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator_arn: String?
+      attr_accessor name: String?
+      attr_accessor ip_address_type: String?
+      attr_accessor ip_addresses: Array[String]?
+      attr_accessor enabled: bool?
+    end
+
+    class UpdateCustomRoutingAcceleratorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerator: Types::CustomRoutingAccelerator,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerator: Types::CustomRoutingAccelerator?
+    end
+
+    class UpdateCustomRoutingListenerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+        ?port_ranges: Array[Types::PortRange],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+      attr_accessor port_ranges: Array[Types::PortRange]?
+    end
+
+    class UpdateCustomRoutingListenerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener: Types::CustomRoutingListener,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener: Types::CustomRoutingListener?
+    end
+
+    class UpdateEndpointGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_group_arn: String,
+        ?endpoint_configurations: Array[Types::EndpointConfiguration],
+        ?traffic_dial_percentage: Float,
+        ?health_check_port: Integer,
+        ?health_check_protocol: String,
+        ?health_check_path: String,
+        ?health_check_interval_seconds: Integer,
+        ?threshold_count: Integer,
+        ?port_overrides: Array[Types::PortOverride],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_group_arn: String?
+      attr_accessor endpoint_configurations: Array[Types::EndpointConfiguration]?
+      attr_accessor traffic_dial_percentage: Float?
+      attr_accessor health_check_port: Integer?
+      attr_accessor health_check_protocol: String?
+      attr_accessor health_check_path: String?
+      attr_accessor health_check_interval_seconds: Integer?
+      attr_accessor threshold_count: Integer?
+      attr_accessor port_overrides: Array[Types::PortOverride]?
+    end
+
+    class UpdateEndpointGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_group: Types::EndpointGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_group: Types::EndpointGroup?
+    end
+
+    class UpdateListenerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arn: String,
+        ?port_ranges: Array[Types::PortRange],
+        ?protocol: String,
+        ?client_affinity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arn: String?
+      attr_accessor port_ranges: Array[Types::PortRange]?
+      attr_accessor protocol: String?
+      attr_accessor client_affinity: String?
+    end
+
+    class UpdateListenerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener: Types::Listener,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener: Types::Listener?
+    end
+
+    class WithdrawByoipCidrRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cidr: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cidr: String?
+    end
+
+    class WithdrawByoipCidrResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?byoip_cidr: Types::ByoipCidr,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor byoip_cidr: Types::ByoipCidr?
+    end
+  end
+end

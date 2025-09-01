@@ -1,0 +1,185 @@
+module Aws::Neptunedata
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class BadRequestException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class BulkLoadIdNotFoundException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+      def retryable?: () -> true
+    end
+    class CancelledByUserException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class ClientTimeoutException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+      def retryable?: () -> true
+    end
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+      def retryable?: () -> true
+    end
+    class ConstraintViolationException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+      def retryable?: () -> true
+    end
+    class ExpiredStreamException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class FailureByQueryException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+      def retryable?: () -> true
+    end
+    class IllegalArgumentException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class InternalFailureException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class InvalidArgumentException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class InvalidNumericDataException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class LoadUrlAccessDeniedException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class MLResourceNotFoundException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class MalformedQueryException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class MemoryLimitExceededException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+      def retryable?: () -> true
+    end
+    class MethodNotAllowedException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class MissingParameterException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class ParsingException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class PreconditionsFailedException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class QueryLimitExceededException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+      def retryable?: () -> true
+    end
+    class QueryLimitException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class QueryTooLargeException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class ReadOnlyViolationException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class S3Exception < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+      def retryable?: () -> true
+    end
+    class ServerShutdownException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class StatisticsNotAvailableException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class StreamRecordsNotFoundException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+      def retryable?: () -> true
+    end
+    class TimeLimitExceededException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+      def retryable?: () -> true
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+      def retryable?: () -> true
+    end
+    class UnsupportedOperationException < Smithy::Client::ServiceError
+      def detailed_message: () -> String?
+      def request_id: () -> String?
+      def code: () -> String?
+    end
+  end
+end

@@ -1,0 +1,981 @@
+module Aws::RUM
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AppMonitor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?domain: String,
+        ?domain_list: Array[String],
+        ?id: String,
+        ?created: String,
+        ?last_modified: String,
+        ?tags: Hash[String, String],
+        ?state: String,
+        ?app_monitor_configuration: Types::AppMonitorConfiguration,
+        ?data_storage: Types::DataStorage,
+        ?custom_events: Types::CustomEvents,
+        ?deobfuscation_configuration: Types::DeobfuscationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor domain: String?
+      attr_accessor domain_list: Array[String]?
+      attr_accessor id: String?
+      attr_accessor created: String?
+      attr_accessor last_modified: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor state: String?
+      attr_accessor app_monitor_configuration: Types::AppMonitorConfiguration?
+      attr_accessor data_storage: Types::DataStorage?
+      attr_accessor custom_events: Types::CustomEvents?
+      attr_accessor deobfuscation_configuration: Types::DeobfuscationConfiguration?
+    end
+
+    class AppMonitorConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_pool_id: String,
+        ?excluded_pages: Array[String],
+        ?included_pages: Array[String],
+        ?favorite_pages: Array[String],
+        ?session_sample_rate: Float,
+        ?guest_role_arn: String,
+        ?allow_cookies: bool,
+        ?telemetries: Array[String],
+        ?enable_x_ray: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_pool_id: String?
+      attr_accessor excluded_pages: Array[String]?
+      attr_accessor included_pages: Array[String]?
+      attr_accessor favorite_pages: Array[String]?
+      attr_accessor session_sample_rate: Float?
+      attr_accessor guest_role_arn: String?
+      attr_accessor allow_cookies: bool?
+      attr_accessor telemetries: Array[String]?
+      attr_accessor enable_x_ray: bool?
+    end
+
+    class AppMonitorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor version: String?
+    end
+
+    class AppMonitorSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+        ?created: String,
+        ?last_modified: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+      attr_accessor created: String?
+      attr_accessor last_modified: String?
+      attr_accessor state: String?
+    end
+
+    class BatchCreateRumMetricDefinitionsError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_definition: Types::MetricDefinitionRequest,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_definition: Types::MetricDefinitionRequest?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class BatchCreateRumMetricDefinitionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_monitor_name: String,
+        ?destination: String,
+        ?destination_arn: String,
+        ?metric_definitions: Array[Types::MetricDefinitionRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_monitor_name: String?
+      attr_accessor destination: String?
+      attr_accessor destination_arn: String?
+      attr_accessor metric_definitions: Array[Types::MetricDefinitionRequest]?
+    end
+
+    class BatchCreateRumMetricDefinitionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchCreateRumMetricDefinitionsError],
+        ?metric_definitions: Array[Types::MetricDefinition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchCreateRumMetricDefinitionsError]?
+      attr_accessor metric_definitions: Array[Types::MetricDefinition]?
+    end
+
+    class BatchDeleteRumMetricDefinitionsError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_definition_id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_definition_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class BatchDeleteRumMetricDefinitionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_monitor_name: String,
+        ?destination: String,
+        ?destination_arn: String,
+        ?metric_definition_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_monitor_name: String?
+      attr_accessor destination: String?
+      attr_accessor destination_arn: String?
+      attr_accessor metric_definition_ids: Array[String]?
+    end
+
+    class BatchDeleteRumMetricDefinitionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchDeleteRumMetricDefinitionsError],
+        ?metric_definition_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchDeleteRumMetricDefinitionsError]?
+      attr_accessor metric_definition_ids: Array[String]?
+    end
+
+    class BatchGetRumMetricDefinitionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_monitor_name: String,
+        ?destination: String,
+        ?destination_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_monitor_name: String?
+      attr_accessor destination: String?
+      attr_accessor destination_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class BatchGetRumMetricDefinitionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_definitions: Array[Types::MetricDefinition],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_definitions: Array[Types::MetricDefinition]?
+      attr_accessor next_token: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateAppMonitorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?domain: String,
+        ?domain_list: Array[String],
+        ?tags: Hash[String, String],
+        ?app_monitor_configuration: Types::AppMonitorConfiguration,
+        ?cw_log_enabled: bool,
+        ?custom_events: Types::CustomEvents,
+        ?deobfuscation_configuration: Types::DeobfuscationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor domain: String?
+      attr_accessor domain_list: Array[String]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor app_monitor_configuration: Types::AppMonitorConfiguration?
+      attr_accessor cw_log_enabled: bool?
+      attr_accessor custom_events: Types::CustomEvents?
+      attr_accessor deobfuscation_configuration: Types::DeobfuscationConfiguration?
+    end
+
+    class CreateAppMonitorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class CustomEvents
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class CwLog
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cw_log_enabled: bool,
+        ?cw_log_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cw_log_enabled: bool?
+      attr_accessor cw_log_group: String?
+    end
+
+    class DataStorage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cw_log: Types::CwLog,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cw_log: Types::CwLog?
+    end
+
+    class DeleteAppMonitorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteAppMonitorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?policy_revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor policy_revision_id: String?
+    end
+
+    class DeleteResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_revision_id: String?
+    end
+
+    class DeleteRumMetricsDestinationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_monitor_name: String,
+        ?destination: String,
+        ?destination_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_monitor_name: String?
+      attr_accessor destination: String?
+      attr_accessor destination_arn: String?
+    end
+
+    class DeleteRumMetricsDestinationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeobfuscationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?java_script_source_maps: Types::JavaScriptSourceMaps,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor java_script_source_maps: Types::JavaScriptSourceMaps?
+    end
+
+    class GetAppMonitorDataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?time_range: Types::TimeRange,
+        ?filters: Array[Types::QueryFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor time_range: Types::TimeRange?
+      attr_accessor filters: Array[Types::QueryFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetAppMonitorDataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class GetAppMonitorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetAppMonitorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_monitor: Types::AppMonitor,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_monitor: Types::AppMonitor?
+    end
+
+    class GetResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_document: String,
+        ?policy_revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_document: String?
+      attr_accessor policy_revision_id: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class InvalidPolicyRevisionIdException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class JavaScriptSourceMaps
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor s3_uri: String?
+    end
+
+    class ListAppMonitorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAppMonitorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?app_monitor_summaries: Array[Types::AppMonitorSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor app_monitor_summaries: Array[Types::AppMonitorSummary]?
+    end
+
+    class ListRumMetricsDestinationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_monitor_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_monitor_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRumMetricsDestinationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destinations: Array[Types::MetricDestinationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destinations: Array[Types::MetricDestinationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class MalformedPolicyDocumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MetricDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_definition_id: String,
+        ?name: String,
+        ?value_key: String,
+        ?unit_label: String,
+        ?dimension_keys: Hash[String, String],
+        ?event_pattern: String,
+        ?namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_definition_id: String?
+      attr_accessor name: String?
+      attr_accessor value_key: String?
+      attr_accessor unit_label: String?
+      attr_accessor dimension_keys: Hash[String, String]?
+      attr_accessor event_pattern: String?
+      attr_accessor namespace: String?
+    end
+
+    class MetricDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value_key: String,
+        ?unit_label: String,
+        ?dimension_keys: Hash[String, String],
+        ?event_pattern: String,
+        ?namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value_key: String?
+      attr_accessor unit_label: String?
+      attr_accessor dimension_keys: Hash[String, String]?
+      attr_accessor event_pattern: String?
+      attr_accessor namespace: String?
+    end
+
+    class MetricDestinationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination: String,
+        ?destination_arn: String,
+        ?iam_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination: String?
+      attr_accessor destination_arn: String?
+      attr_accessor iam_role_arn: String?
+    end
+
+    class PolicyNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PolicySizeLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?policy_document: String,
+        ?policy_revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor policy_document: String?
+      attr_accessor policy_revision_id: String?
+    end
+
+    class PutResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_document: String,
+        ?policy_revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_document: String?
+      attr_accessor policy_revision_id: String?
+    end
+
+    class PutRumEventsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?batch_id: String,
+        ?app_monitor_details: Types::AppMonitorDetails,
+        ?user_details: Types::UserDetails,
+        ?rum_events: Array[Types::RumEvent],
+        ?alias: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor batch_id: String?
+      attr_accessor app_monitor_details: Types::AppMonitorDetails?
+      attr_accessor user_details: Types::UserDetails?
+      attr_accessor rum_events: Array[Types::RumEvent]?
+      attr_accessor alias: String?
+    end
+
+    class PutRumEventsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutRumMetricsDestinationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_monitor_name: String,
+        ?destination: String,
+        ?destination_arn: String,
+        ?iam_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_monitor_name: String?
+      attr_accessor destination: String?
+      attr_accessor destination_arn: String?
+      attr_accessor iam_role_arn: String?
+    end
+
+    class PutRumMetricsDestinationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class QueryFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+      attr_accessor resource_type: String?
+    end
+
+    class RumEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?timestamp: Time,
+        ?type: String,
+        ?metadata: String,
+        ?details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor timestamp: Time?
+      attr_accessor type: String?
+      attr_accessor metadata: String?
+      attr_accessor details: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class TimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after: Integer,
+        ?before: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after: Integer?
+      attr_accessor before: Integer?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAppMonitorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?domain: String,
+        ?domain_list: Array[String],
+        ?app_monitor_configuration: Types::AppMonitorConfiguration,
+        ?cw_log_enabled: bool,
+        ?custom_events: Types::CustomEvents,
+        ?deobfuscation_configuration: Types::DeobfuscationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor domain: String?
+      attr_accessor domain_list: Array[String]?
+      attr_accessor app_monitor_configuration: Types::AppMonitorConfiguration?
+      attr_accessor cw_log_enabled: bool?
+      attr_accessor custom_events: Types::CustomEvents?
+      attr_accessor deobfuscation_configuration: Types::DeobfuscationConfiguration?
+    end
+
+    class UpdateAppMonitorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateRumMetricDefinitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?app_monitor_name: String,
+        ?destination: String,
+        ?destination_arn: String,
+        ?metric_definition: Types::MetricDefinitionRequest,
+        ?metric_definition_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor app_monitor_name: String?
+      attr_accessor destination: String?
+      attr_accessor destination_arn: String?
+      attr_accessor metric_definition: Types::MetricDefinitionRequest?
+      attr_accessor metric_definition_id: String?
+    end
+
+    class UpdateRumMetricDefinitionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UserDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor session_id: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

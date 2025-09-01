@@ -1,0 +1,35 @@
+module Aws::MigrationHub
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DryRunOperation < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class HomeRegionNotSetException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidInputException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PolicyErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retry_after_seconds: () -> Integer?
+    end
+    class UnauthorizedOperation < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

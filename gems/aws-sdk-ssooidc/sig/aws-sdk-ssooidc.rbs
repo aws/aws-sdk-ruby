@@ -1,0 +1,5 @@
+  module Aws
+    module SSOOIDC
+      VERSION: String
+    end
+  end

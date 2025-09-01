@@ -1,0 +1,49 @@
+module Aws::CloudWatch
+  module Errors
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DashboardInvalidInputError < Smithy::Client::ServiceError
+      def message: () -> String?
+      def dashboard_validation_messages: () -> Array[Types::DashboardValidationMessage]?
+    end
+    class DashboardNotFoundError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServiceFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidFormatFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNextToken < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterCombinationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidParameterValueException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MissingRequiredParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFound < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def resource_type: () -> String?
+      def resource_id: () -> String?
+      def message: () -> String?
+    end
+  end
+end

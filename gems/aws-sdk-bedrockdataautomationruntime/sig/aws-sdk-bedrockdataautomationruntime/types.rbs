@@ -1,0 +1,371 @@
+module Aws::BedrockDataAutomationRuntime
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AssetProcessingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?video: Types::VideoAssetProcessingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor video: Types::VideoAssetProcessingConfiguration?
+    end
+
+    module AutomationJobStatus
+      CREATED: String
+      IN_PROGRESS: String
+      SUCCESS: String
+      SERVICE_ERROR: String
+      CLIENT_ERROR: String
+    end
+
+    class Blueprint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blueprint_arn: String,
+        ?version: String,
+        ?stage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blueprint_arn: String?
+      attr_accessor version: String?
+      attr_accessor stage: String?
+    end
+
+    module BlueprintStage
+      DEVELOPMENT: String
+      LIVE: String
+    end
+
+    class DataAutomationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_automation_project_arn: String,
+        ?stage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_automation_project_arn: String?
+      attr_accessor stage: String?
+    end
+
+    module DataAutomationStage
+      LIVE: String
+      DEVELOPMENT: String
+    end
+
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_id: String,
+        ?kms_encryption_context: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_id: String?
+      attr_accessor kms_encryption_context: Hash[String, String]?
+    end
+
+    class EventBridgeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_bridge_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_bridge_enabled: bool?
+    end
+
+    class GetDataAutomationStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invocation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invocation_arn: String?
+    end
+
+    class GetDataAutomationStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?error_type: String,
+        ?error_message: String,
+        ?output_configuration: Types::OutputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor error_type: String?
+      attr_accessor error_message: String?
+      attr_accessor output_configuration: Types::OutputConfiguration?
+    end
+
+    class InputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+        ?asset_processing_configuration: Types::AssetProcessingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+      attr_accessor asset_processing_configuration: Types::AssetProcessingConfiguration?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvokeDataAutomationAsyncRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?input_configuration: Types::InputConfiguration,
+        ?output_configuration: Types::OutputConfiguration,
+        ?data_automation_configuration: Types::DataAutomationConfiguration,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?notification_configuration: Types::NotificationConfiguration,
+        ?blueprints: Array[Types::Blueprint],
+        ?data_automation_profile_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor input_configuration: Types::InputConfiguration?
+      attr_accessor output_configuration: Types::OutputConfiguration?
+      attr_accessor data_automation_configuration: Types::DataAutomationConfiguration?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor notification_configuration: Types::NotificationConfiguration?
+      attr_accessor blueprints: Array[Types::Blueprint]?
+      attr_accessor data_automation_profile_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class InvokeDataAutomationAsyncResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invocation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invocation_arn: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class NotificationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_bridge_configuration: Types::EventBridgeConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_bridge_configuration: Types::EventBridgeConfiguration?
+    end
+
+    class OutputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TimestampSegment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time_millis: Integer,
+        ?end_time_millis: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time_millis: Integer?
+      attr_accessor end_time_millis: Integer?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class VideoAssetProcessingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?segment_configuration: Types::VideoSegmentConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor segment_configuration: Types::VideoSegmentConfiguration?
+    end
+
+    class VideoSegmentConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?timestamp_segment: Types::TimestampSegment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp_segment: Types::TimestampSegment?
+
+      class TimestampSegment < VideoSegmentConfiguration
+      end
+      class Unknown < VideoSegmentConfiguration
+      end
+    end
+  end
+end

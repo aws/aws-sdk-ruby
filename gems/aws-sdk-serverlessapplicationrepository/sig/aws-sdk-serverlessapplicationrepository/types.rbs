@@ -1,0 +1,787 @@
+module Aws::ServerlessApplicationRepository
+  module Types
+
+    class ApplicationDependencySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?semantic_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor semantic_version: String?
+    end
+
+    class ApplicationPolicyStatement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?actions: Array[String],
+        ?principal_org_i_ds: Array[String],
+        ?principals: Array[String],
+        ?statement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor actions: Array[String]?
+      attr_accessor principal_org_i_ds: Array[String]?
+      attr_accessor principals: Array[String]?
+      attr_accessor statement_id: String?
+    end
+
+    class ApplicationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?author: String,
+        ?creation_time: String,
+        ?description: String,
+        ?home_page_url: String,
+        ?labels: Array[String],
+        ?name: String,
+        ?spdx_license_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor author: String?
+      attr_accessor creation_time: String?
+      attr_accessor description: String?
+      attr_accessor home_page_url: String?
+      attr_accessor labels: Array[String]?
+      attr_accessor name: String?
+      attr_accessor spdx_license_id: String?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    module Capability
+      CAPABILITY_IAM: String
+      CAPABILITY_NAMED_IAM: String
+      CAPABILITY_AUTO_EXPAND: String
+      CAPABILITY_RESOURCE_POLICY: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class CreateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?author: String,
+        ?description: String,
+        ?home_page_url: String,
+        ?labels: Array[String],
+        ?license_body: String,
+        ?license_url: String,
+        ?name: String,
+        ?readme_body: String,
+        ?readme_url: String,
+        ?semantic_version: String,
+        ?source_code_archive_url: String,
+        ?source_code_url: String,
+        ?spdx_license_id: String,
+        ?template_body: String,
+        ?template_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor author: String?
+      attr_accessor description: String?
+      attr_accessor home_page_url: String?
+      attr_accessor labels: Array[String]?
+      attr_accessor license_body: String?
+      attr_accessor license_url: String?
+      attr_accessor name: String?
+      attr_accessor readme_body: String?
+      attr_accessor readme_url: String?
+      attr_accessor semantic_version: String?
+      attr_accessor source_code_archive_url: String?
+      attr_accessor source_code_url: String?
+      attr_accessor spdx_license_id: String?
+      attr_accessor template_body: String?
+      attr_accessor template_url: String?
+    end
+
+    class CreateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?author: String,
+        ?creation_time: String,
+        ?description: String,
+        ?home_page_url: String,
+        ?is_verified_author: bool,
+        ?labels: Array[String],
+        ?license_url: String,
+        ?name: String,
+        ?readme_url: String,
+        ?spdx_license_id: String,
+        ?verified_author_url: String,
+        ?version: Types::Version,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor author: String?
+      attr_accessor creation_time: String?
+      attr_accessor description: String?
+      attr_accessor home_page_url: String?
+      attr_accessor is_verified_author: bool?
+      attr_accessor labels: Array[String]?
+      attr_accessor license_url: String?
+      attr_accessor name: String?
+      attr_accessor readme_url: String?
+      attr_accessor spdx_license_id: String?
+      attr_accessor verified_author_url: String?
+      attr_accessor version: Types::Version?
+    end
+
+    class CreateApplicationVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?semantic_version: String,
+        ?source_code_archive_url: String,
+        ?source_code_url: String,
+        ?template_body: String,
+        ?template_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor semantic_version: String?
+      attr_accessor source_code_archive_url: String?
+      attr_accessor source_code_url: String?
+      attr_accessor template_body: String?
+      attr_accessor template_url: String?
+    end
+
+    class CreateApplicationVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?creation_time: String,
+        ?parameter_definitions: Array[Types::ParameterDefinition],
+        ?required_capabilities: Array[String],
+        ?resources_supported: bool,
+        ?semantic_version: String,
+        ?source_code_archive_url: String,
+        ?source_code_url: String,
+        ?template_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor creation_time: String?
+      attr_accessor parameter_definitions: Array[Types::ParameterDefinition]?
+      attr_accessor required_capabilities: Array[String]?
+      attr_accessor resources_supported: bool?
+      attr_accessor semantic_version: String?
+      attr_accessor source_code_archive_url: String?
+      attr_accessor source_code_url: String?
+      attr_accessor template_url: String?
+    end
+
+    class CreateCloudFormationChangeSetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?capabilities: Array[String],
+        ?change_set_name: String,
+        ?client_token: String,
+        ?description: String,
+        ?notification_arns: Array[String],
+        ?parameter_overrides: Array[Types::ParameterValue],
+        ?resource_types: Array[String],
+        ?rollback_configuration: Types::RollbackConfiguration,
+        ?semantic_version: String,
+        ?stack_name: String,
+        ?tags: Array[Types::Tag],
+        ?template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor capabilities: Array[String]?
+      attr_accessor change_set_name: String?
+      attr_accessor client_token: String?
+      attr_accessor description: String?
+      attr_accessor notification_arns: Array[String]?
+      attr_accessor parameter_overrides: Array[Types::ParameterValue]?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor rollback_configuration: Types::RollbackConfiguration?
+      attr_accessor semantic_version: String?
+      attr_accessor stack_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor template_id: String?
+    end
+
+    class CreateCloudFormationChangeSetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?change_set_id: String,
+        ?semantic_version: String,
+        ?stack_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor change_set_id: String?
+      attr_accessor semantic_version: String?
+      attr_accessor stack_id: String?
+    end
+
+    class CreateCloudFormationTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?semantic_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor semantic_version: String?
+    end
+
+    class CreateCloudFormationTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?creation_time: String,
+        ?expiration_time: String,
+        ?semantic_version: String,
+        ?status: String,
+        ?template_id: String,
+        ?template_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor creation_time: String?
+      attr_accessor expiration_time: String?
+      attr_accessor semantic_version: String?
+      attr_accessor status: String?
+      attr_accessor template_id: String?
+      attr_accessor template_url: String?
+    end
+
+    class DeleteApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class GetApplicationPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+    end
+
+    class GetApplicationPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statements: Array[Types::ApplicationPolicyStatement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statements: Array[Types::ApplicationPolicyStatement]?
+    end
+
+    class GetApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?semantic_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor semantic_version: String?
+    end
+
+    class GetApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?author: String,
+        ?creation_time: String,
+        ?description: String,
+        ?home_page_url: String,
+        ?is_verified_author: bool,
+        ?labels: Array[String],
+        ?license_url: String,
+        ?name: String,
+        ?readme_url: String,
+        ?spdx_license_id: String,
+        ?verified_author_url: String,
+        ?version: Types::Version,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor author: String?
+      attr_accessor creation_time: String?
+      attr_accessor description: String?
+      attr_accessor home_page_url: String?
+      attr_accessor is_verified_author: bool?
+      attr_accessor labels: Array[String]?
+      attr_accessor license_url: String?
+      attr_accessor name: String?
+      attr_accessor readme_url: String?
+      attr_accessor spdx_license_id: String?
+      attr_accessor verified_author_url: String?
+      attr_accessor version: Types::Version?
+    end
+
+    class GetCloudFormationTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?template_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor template_id: String?
+    end
+
+    class GetCloudFormationTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?creation_time: String,
+        ?expiration_time: String,
+        ?semantic_version: String,
+        ?status: String,
+        ?template_id: String,
+        ?template_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor creation_time: String?
+      attr_accessor expiration_time: String?
+      attr_accessor semantic_version: String?
+      attr_accessor status: String?
+      attr_accessor template_id: String?
+      attr_accessor template_url: String?
+    end
+
+    class InternalServerErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class ListApplicationDependenciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?max_items: Integer,
+        ?next_token: String,
+        ?semantic_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor max_items: Integer?
+      attr_accessor next_token: String?
+      attr_accessor semantic_version: String?
+    end
+
+    class ListApplicationDependenciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dependencies: Array[Types::ApplicationDependencySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dependencies: Array[Types::ApplicationDependencySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?max_items: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor max_items: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?versions: Array[Types::VersionSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor versions: Array[Types::VersionSummary]?
+    end
+
+    class ListApplicationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_items: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_items: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?applications: Array[Types::ApplicationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor applications: Array[Types::ApplicationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class ParameterDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_pattern: String,
+        ?allowed_values: Array[String],
+        ?constraint_description: String,
+        ?default_value: String,
+        ?description: String,
+        ?max_length: Integer,
+        ?max_value: Integer,
+        ?min_length: Integer,
+        ?min_value: Integer,
+        ?name: String,
+        ?no_echo: bool,
+        ?referenced_by_resources: Array[String],
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_pattern: String?
+      attr_accessor allowed_values: Array[String]?
+      attr_accessor constraint_description: String?
+      attr_accessor default_value: String?
+      attr_accessor description: String?
+      attr_accessor max_length: Integer?
+      attr_accessor max_value: Integer?
+      attr_accessor min_length: Integer?
+      attr_accessor min_value: Integer?
+      attr_accessor name: String?
+      attr_accessor no_echo: bool?
+      attr_accessor referenced_by_resources: Array[String]?
+      attr_accessor type: String?
+    end
+
+    class ParameterValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class PutApplicationPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?statements: Array[Types::ApplicationPolicyStatement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor statements: Array[Types::ApplicationPolicyStatement]?
+    end
+
+    class PutApplicationPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?statements: Array[Types::ApplicationPolicyStatement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor statements: Array[Types::ApplicationPolicyStatement]?
+    end
+
+    class RollbackConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitoring_time_in_minutes: Integer,
+        ?rollback_triggers: Array[Types::RollbackTrigger],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitoring_time_in_minutes: Integer?
+      attr_accessor rollback_triggers: Array[Types::RollbackTrigger]?
+    end
+
+    class RollbackTrigger
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor type: String?
+    end
+
+    module Status
+      PREPARING: String
+      ACTIVE: String
+      EXPIRED: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class UnshareApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?organization_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor organization_id: String?
+    end
+
+    class UpdateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?author: String,
+        ?description: String,
+        ?home_page_url: String,
+        ?labels: Array[String],
+        ?readme_body: String,
+        ?readme_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor author: String?
+      attr_accessor description: String?
+      attr_accessor home_page_url: String?
+      attr_accessor labels: Array[String]?
+      attr_accessor readme_body: String?
+      attr_accessor readme_url: String?
+    end
+
+    class UpdateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?author: String,
+        ?creation_time: String,
+        ?description: String,
+        ?home_page_url: String,
+        ?is_verified_author: bool,
+        ?labels: Array[String],
+        ?license_url: String,
+        ?name: String,
+        ?readme_url: String,
+        ?spdx_license_id: String,
+        ?verified_author_url: String,
+        ?version: Types::Version,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor author: String?
+      attr_accessor creation_time: String?
+      attr_accessor description: String?
+      attr_accessor home_page_url: String?
+      attr_accessor is_verified_author: bool?
+      attr_accessor labels: Array[String]?
+      attr_accessor license_url: String?
+      attr_accessor name: String?
+      attr_accessor readme_url: String?
+      attr_accessor spdx_license_id: String?
+      attr_accessor verified_author_url: String?
+      attr_accessor version: Types::Version?
+    end
+
+    class Version
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?creation_time: String,
+        ?parameter_definitions: Array[Types::ParameterDefinition],
+        ?required_capabilities: Array[String],
+        ?resources_supported: bool,
+        ?semantic_version: String,
+        ?source_code_archive_url: String,
+        ?source_code_url: String,
+        ?template_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor creation_time: String?
+      attr_accessor parameter_definitions: Array[Types::ParameterDefinition]?
+      attr_accessor required_capabilities: Array[String]?
+      attr_accessor resources_supported: bool?
+      attr_accessor semantic_version: String?
+      attr_accessor source_code_archive_url: String?
+      attr_accessor source_code_url: String?
+      attr_accessor template_url: String?
+    end
+
+    class VersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?creation_time: String,
+        ?semantic_version: String,
+        ?source_code_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor creation_time: String?
+      attr_accessor semantic_version: String?
+      attr_accessor source_code_url: String?
+    end
+  end
+end

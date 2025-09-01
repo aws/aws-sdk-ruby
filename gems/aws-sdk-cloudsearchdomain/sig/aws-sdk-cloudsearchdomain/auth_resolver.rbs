@@ -1,0 +1,5 @@
+module Aws::CloudSearchDomain
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

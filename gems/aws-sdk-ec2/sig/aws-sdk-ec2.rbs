@@ -1,0 +1,5 @@
+  module Aws
+    module EC2
+      VERSION: String
+    end
+  end

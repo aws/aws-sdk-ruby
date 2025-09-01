@@ -1,0 +1,304 @@
+module Aws::PCS
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::PCS::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateClusterResponse
+      include Smithy::Client::_Response[Types::CreateClusterResponse]
+      def cluster: () -> Types::Cluster?
+    end
+    def create_cluster: (
+      ?cluster_name: String,
+      ?scheduler: {
+        type: String,
+        version: String
+      },
+      ?size: String,
+      ?networking: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String],
+        network_type: String
+      },
+      ?slurm_configuration: {
+        scale_down_idle_time_in_seconds: Integer,
+        slurm_custom_settings: Array[
+          {
+            parameter_name: String,
+            parameter_value: untyped
+          }
+        ],
+        accounting: {
+          mode: String,
+          default_purge_time_in_days: untyped
+        }
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateClusterResponse
+
+    interface _CreateComputeNodeGroupResponse
+      include Smithy::Client::_Response[Types::CreateComputeNodeGroupResponse]
+      def compute_node_group: () -> Types::ComputeNodeGroup?
+    end
+    def create_compute_node_group: (
+      ?cluster_identifier: String,
+      ?compute_node_group_name: String,
+      ?ami_id: String,
+      ?subnet_ids: Array[String],
+      ?purchase_option: String,
+      ?custom_launch_template: {
+        id: String,
+        version: untyped
+      },
+      ?iam_instance_profile_arn: String,
+      ?scaling_configuration: {
+        min_instance_count: Integer,
+        max_instance_count: untyped
+      },
+      ?instance_configs: Array[
+        {
+          instance_type: String
+        }
+      ],
+      ?spot_options: {
+        allocation_strategy: String
+      },
+      ?slurm_configuration: {
+        slurm_custom_settings: Array[
+          {
+            parameter_name: String,
+            parameter_value: untyped
+          }
+        ]
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateComputeNodeGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateComputeNodeGroupResponse
+
+    interface _CreateQueueResponse
+      include Smithy::Client::_Response[Types::CreateQueueResponse]
+      def queue: () -> Types::Queue?
+    end
+    def create_queue: (
+      ?cluster_identifier: String,
+      ?queue_name: String,
+      ?compute_node_group_configurations: Array[
+        {
+          compute_node_group_id: String
+        }
+      ],
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQueueResponse
+
+    interface _DeleteClusterResponse
+      include Smithy::Client::_Response[Types::DeleteClusterResponse]
+    end
+    def delete_cluster: (
+      ?cluster_identifier: String,
+      ?client_token: String
+    ) -> _DeleteClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteClusterResponse
+
+    interface _DeleteComputeNodeGroupResponse
+      include Smithy::Client::_Response[Types::DeleteComputeNodeGroupResponse]
+    end
+    def delete_compute_node_group: (
+      ?cluster_identifier: String,
+      ?compute_node_group_identifier: String,
+      ?client_token: String
+    ) -> _DeleteComputeNodeGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteComputeNodeGroupResponse
+
+    interface _DeleteQueueResponse
+      include Smithy::Client::_Response[Types::DeleteQueueResponse]
+    end
+    def delete_queue: (
+      ?cluster_identifier: String,
+      ?queue_identifier: String,
+      ?client_token: String
+    ) -> _DeleteQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQueueResponse
+
+    interface _GetClusterResponse
+      include Smithy::Client::_Response[Types::GetClusterResponse]
+      def cluster: () -> Types::Cluster?
+    end
+    def get_cluster: (
+      ?cluster_identifier: String
+    ) -> _GetClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetClusterResponse
+
+    interface _GetComputeNodeGroupResponse
+      include Smithy::Client::_Response[Types::GetComputeNodeGroupResponse]
+      def compute_node_group: () -> Types::ComputeNodeGroup?
+    end
+    def get_compute_node_group: (
+      ?cluster_identifier: String,
+      ?compute_node_group_identifier: String
+    ) -> _GetComputeNodeGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetComputeNodeGroupResponse
+
+    interface _GetQueueResponse
+      include Smithy::Client::_Response[Types::GetQueueResponse]
+      def queue: () -> Types::Queue?
+    end
+    def get_queue: (
+      ?cluster_identifier: String,
+      ?queue_identifier: String
+    ) -> _GetQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetQueueResponse
+
+    interface _ListClustersResponse
+      include Smithy::Client::_Response[Types::ListClustersResponse]
+      def clusters: () -> Array[Types::ClusterSummary]?
+      def next_token: () -> String?
+    end
+    def list_clusters: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListClustersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListClustersResponse
+
+    interface _ListComputeNodeGroupsResponse
+      include Smithy::Client::_Response[Types::ListComputeNodeGroupsResponse]
+      def compute_node_groups: () -> Array[Types::ComputeNodeGroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_compute_node_groups: (
+      ?cluster_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListComputeNodeGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComputeNodeGroupsResponse
+
+    interface _ListQueuesResponse
+      include Smithy::Client::_Response[Types::ListQueuesResponse]
+      def queues: () -> Array[Types::QueueSummary]?
+      def next_token: () -> String?
+    end
+    def list_queues: (
+      ?cluster_identifier: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListQueuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueuesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RegisterComputeNodeGroupInstanceResponse
+      include Smithy::Client::_Response[Types::RegisterComputeNodeGroupInstanceResponse]
+      def node_id: () -> String?
+      def shared_secret: () -> String?
+      def endpoints: () -> Array[Types::Endpoint]?
+    end
+    def register_compute_node_group_instance: (
+      ?cluster_identifier: String,
+      ?bootstrap_id: String
+    ) -> _RegisterComputeNodeGroupInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterComputeNodeGroupInstanceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateComputeNodeGroupResponse
+      include Smithy::Client::_Response[Types::UpdateComputeNodeGroupResponse]
+      def compute_node_group: () -> Types::ComputeNodeGroup?
+    end
+    def update_compute_node_group: (
+      ?cluster_identifier: String,
+      ?compute_node_group_identifier: String,
+      ?ami_id: String,
+      ?subnet_ids: Array[String],
+      ?custom_launch_template: {
+        id: String,
+        version: untyped
+      },
+      ?purchase_option: String,
+      ?spot_options: {
+        allocation_strategy: String
+      },
+      ?scaling_configuration: {
+        min_instance_count: Integer,
+        max_instance_count: untyped
+      },
+      ?iam_instance_profile_arn: String,
+      ?slurm_configuration: {
+        slurm_custom_settings: Array[
+          {
+            parameter_name: String,
+            parameter_value: untyped
+          }
+        ]
+      },
+      ?client_token: String
+    ) -> _UpdateComputeNodeGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateComputeNodeGroupResponse
+
+    interface _UpdateQueueResponse
+      include Smithy::Client::_Response[Types::UpdateQueueResponse]
+      def queue: () -> Types::Queue?
+    end
+    def update_queue: (
+      ?cluster_identifier: String,
+      ?queue_identifier: String,
+      ?compute_node_group_configurations: Array[
+        {
+          compute_node_group_id: String
+        }
+      ],
+      ?client_token: String
+    ) -> _UpdateQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQueueResponse
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module KinesisAnalytics
+      VERSION: String
+    end
+  end

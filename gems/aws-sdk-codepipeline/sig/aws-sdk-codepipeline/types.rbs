@@ -1,0 +1,3565 @@
+module Aws::CodePipeline
+  module Types
+
+    class AWSSessionCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_key_id: String,
+        ?secret_access_key: String,
+        ?session_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_key_id: String?
+      attr_accessor secret_access_key: String?
+      attr_accessor session_token: String?
+    end
+
+    class AcknowledgeJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?nonce: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor nonce: String?
+    end
+
+    class AcknowledgeJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class AcknowledgeThirdPartyJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?nonce: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor nonce: String?
+      attr_accessor client_token: String?
+    end
+
+    class AcknowledgeThirdPartyJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    module ActionCategory
+      Source: String
+      Build: String
+      Deploy: String
+      Test: String
+      Invoke: String
+      Approval: String
+      Compute: String
+    end
+
+    class ActionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Hash[String, String]?
+    end
+
+    class ActionConfigurationProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?required: bool,
+        ?key: bool,
+        ?secret: bool,
+        ?queryable: bool,
+        ?description: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor required: bool?
+      attr_accessor key: bool?
+      attr_accessor secret: bool?
+      attr_accessor queryable: bool?
+      attr_accessor description: String?
+      attr_accessor type: String?
+    end
+
+    module ActionConfigurationPropertyType
+      String: String
+      Number: String
+      Boolean: String
+    end
+
+    class ActionContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?action_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor action_execution_id: String?
+    end
+
+    class ActionDeclaration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?action_type_id: Types::ActionTypeId,
+        ?run_order: Integer,
+        ?configuration: Hash[String, String],
+        ?commands: Array[String],
+        ?output_artifacts: Array[Types::OutputArtifact],
+        ?input_artifacts: Array[Types::InputArtifact],
+        ?output_variables: Array[String],
+        ?role_arn: String,
+        ?region: String,
+        ?namespace: String,
+        ?timeout_in_minutes: Integer,
+        ?environment_variables: Array[Types::EnvironmentVariable],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor action_type_id: Types::ActionTypeId?
+      attr_accessor run_order: Integer?
+      attr_accessor configuration: Hash[String, String]?
+      attr_accessor commands: Array[String]?
+      attr_accessor output_artifacts: Array[Types::OutputArtifact]?
+      attr_accessor input_artifacts: Array[Types::InputArtifact]?
+      attr_accessor output_variables: Array[String]?
+      attr_accessor role_arn: String?
+      attr_accessor region: String?
+      attr_accessor namespace: String?
+      attr_accessor timeout_in_minutes: Integer?
+      attr_accessor environment_variables: Array[Types::EnvironmentVariable]?
+    end
+
+    class ActionExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_execution_id: String,
+        ?status: String,
+        ?summary: String,
+        ?last_status_change: Time,
+        ?token: String,
+        ?last_updated_by: String,
+        ?external_execution_id: String,
+        ?external_execution_url: String,
+        ?percent_complete: Integer,
+        ?error_details: Types::ErrorDetails,
+        ?log_stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_execution_id: String?
+      attr_accessor status: String?
+      attr_accessor summary: String?
+      attr_accessor last_status_change: Time?
+      attr_accessor token: String?
+      attr_accessor last_updated_by: String?
+      attr_accessor external_execution_id: String?
+      attr_accessor external_execution_url: String?
+      attr_accessor percent_complete: Integer?
+      attr_accessor error_details: Types::ErrorDetails?
+      attr_accessor log_stream_arn: String?
+    end
+
+    class ActionExecutionDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_execution_id: String,
+        ?action_execution_id: String,
+        ?pipeline_version: Integer,
+        ?stage_name: String,
+        ?action_name: String,
+        ?start_time: Time,
+        ?last_update_time: Time,
+        ?updated_by: String,
+        ?status: String,
+        ?input: Types::ActionExecutionInput,
+        ?output: Types::ActionExecutionOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_execution_id: String?
+      attr_accessor action_execution_id: String?
+      attr_accessor pipeline_version: Integer?
+      attr_accessor stage_name: String?
+      attr_accessor action_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor last_update_time: Time?
+      attr_accessor updated_by: String?
+      attr_accessor status: String?
+      attr_accessor input: Types::ActionExecutionInput?
+      attr_accessor output: Types::ActionExecutionOutput?
+    end
+
+    class ActionExecutionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_execution_id: String,
+        ?latest_in_pipeline_execution: Types::LatestInPipelineExecutionFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_execution_id: String?
+      attr_accessor latest_in_pipeline_execution: Types::LatestInPipelineExecutionFilter?
+    end
+
+    class ActionExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_type_id: Types::ActionTypeId,
+        ?configuration: Hash[String, String],
+        ?resolved_configuration: Hash[String, String],
+        ?role_arn: String,
+        ?region: String,
+        ?input_artifacts: Array[Types::ArtifactDetail],
+        ?namespace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_type_id: Types::ActionTypeId?
+      attr_accessor configuration: Hash[String, String]?
+      attr_accessor resolved_configuration: Hash[String, String]?
+      attr_accessor role_arn: String?
+      attr_accessor region: String?
+      attr_accessor input_artifacts: Array[Types::ArtifactDetail]?
+      attr_accessor namespace: String?
+    end
+
+    class ActionExecutionNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ActionExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_artifacts: Array[Types::ArtifactDetail],
+        ?execution_result: Types::ActionExecutionResult,
+        ?output_variables: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_artifacts: Array[Types::ArtifactDetail]?
+      attr_accessor execution_result: Types::ActionExecutionResult?
+      attr_accessor output_variables: Hash[String, String]?
+    end
+
+    class ActionExecutionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?external_execution_id: String,
+        ?external_execution_summary: String,
+        ?external_execution_url: String,
+        ?error_details: Types::ErrorDetails,
+        ?log_stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor external_execution_id: String?
+      attr_accessor external_execution_summary: String?
+      attr_accessor external_execution_url: String?
+      attr_accessor error_details: Types::ErrorDetails?
+      attr_accessor log_stream_arn: String?
+    end
+
+    module ActionExecutionStatus
+      InProgress: String
+      Abandoned: String
+      Succeeded: String
+      Failed: String
+    end
+
+    class ActionNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ActionOwner
+      AWS: String
+      ThirdParty: String
+      Custom: String
+    end
+
+    class ActionRevision
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision_id: String,
+        ?revision_change_id: String,
+        ?created: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision_id: String?
+      attr_accessor revision_change_id: String?
+      attr_accessor created: Time?
+    end
+
+    class ActionState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_name: String,
+        ?current_revision: Types::ActionRevision,
+        ?latest_execution: Types::ActionExecution,
+        ?entity_url: String,
+        ?revision_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_name: String?
+      attr_accessor current_revision: Types::ActionRevision?
+      attr_accessor latest_execution: Types::ActionExecution?
+      attr_accessor entity_url: String?
+      attr_accessor revision_url: String?
+    end
+
+    class ActionType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: Types::ActionTypeId,
+        ?settings: Types::ActionTypeSettings,
+        ?action_configuration_properties: Array[Types::ActionConfigurationProperty],
+        ?input_artifact_details: Types::ArtifactDetails,
+        ?output_artifact_details: Types::ArtifactDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: Types::ActionTypeId?
+      attr_accessor settings: Types::ActionTypeSettings?
+      attr_accessor action_configuration_properties: Array[Types::ActionConfigurationProperty]?
+      attr_accessor input_artifact_details: Types::ArtifactDetails?
+      attr_accessor output_artifact_details: Types::ArtifactDetails?
+    end
+
+    class ActionTypeArtifactDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minimum_count: Integer,
+        ?maximum_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minimum_count: Integer?
+      attr_accessor maximum_count: Integer?
+    end
+
+    class ActionTypeDeclaration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?executor: Types::ActionTypeExecutor,
+        ?id: Types::ActionTypeIdentifier,
+        ?input_artifact_details: Types::ActionTypeArtifactDetails,
+        ?output_artifact_details: Types::ActionTypeArtifactDetails,
+        ?permissions: Types::ActionTypePermissions,
+        ?properties: Array[Types::ActionTypeProperty],
+        ?urls: Types::ActionTypeUrls,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor executor: Types::ActionTypeExecutor?
+      attr_accessor id: Types::ActionTypeIdentifier?
+      attr_accessor input_artifact_details: Types::ActionTypeArtifactDetails?
+      attr_accessor output_artifact_details: Types::ActionTypeArtifactDetails?
+      attr_accessor permissions: Types::ActionTypePermissions?
+      attr_accessor properties: Array[Types::ActionTypeProperty]?
+      attr_accessor urls: Types::ActionTypeUrls?
+    end
+
+    class ActionTypeExecutor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::ExecutorConfiguration,
+        ?type: String,
+        ?policy_statements_template: String,
+        ?job_timeout: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::ExecutorConfiguration?
+      attr_accessor type: String?
+      attr_accessor policy_statements_template: String?
+      attr_accessor job_timeout: Integer?
+    end
+
+    class ActionTypeId
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+        ?owner: String,
+        ?provider: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
+      attr_accessor owner: String?
+      attr_accessor provider: String?
+      attr_accessor version: String?
+    end
+
+    class ActionTypeIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+        ?owner: String,
+        ?provider: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
+      attr_accessor owner: String?
+      attr_accessor provider: String?
+      attr_accessor version: String?
+    end
+
+    class ActionTypeNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ActionTypePermissions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_accounts: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_accounts: Array[String]?
+    end
+
+    class ActionTypeProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?optional: bool,
+        ?key: bool,
+        ?no_echo: bool,
+        ?queryable: bool,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor optional: bool?
+      attr_accessor key: bool?
+      attr_accessor no_echo: bool?
+      attr_accessor queryable: bool?
+      attr_accessor description: String?
+    end
+
+    class ActionTypeSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?third_party_configuration_url: String,
+        ?entity_url_template: String,
+        ?execution_url_template: String,
+        ?revision_url_template: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor third_party_configuration_url: String?
+      attr_accessor entity_url_template: String?
+      attr_accessor execution_url_template: String?
+      attr_accessor revision_url_template: String?
+    end
+
+    class ActionTypeUrls
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration_url: String,
+        ?entity_url_template: String,
+        ?execution_url_template: String,
+        ?revision_url_template: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration_url: String?
+      attr_accessor entity_url_template: String?
+      attr_accessor execution_url_template: String?
+      attr_accessor revision_url_template: String?
+    end
+
+    class ApprovalAlreadyCompletedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApprovalResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: String?
+      attr_accessor status: String?
+    end
+
+    module ApprovalStatus
+      Approved: String
+      Rejected: String
+    end
+
+    class Artifact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?revision: String,
+        ?location: Types::ArtifactLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor revision: String?
+      attr_accessor location: Types::ArtifactLocation?
+    end
+
+    class ArtifactDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?s3location: Types::S3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor s3location: Types::S3Location?
+    end
+
+    class ArtifactDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minimum_count: Integer,
+        ?maximum_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minimum_count: Integer?
+      attr_accessor maximum_count: Integer?
+    end
+
+    class ArtifactLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?s3_location: Types::S3ArtifactLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor s3_location: Types::S3ArtifactLocation?
+    end
+
+    module ArtifactLocationType
+      S3: String
+    end
+
+    class ArtifactRevision
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?revision_id: String,
+        ?revision_change_identifier: String,
+        ?revision_summary: String,
+        ?created: Time,
+        ?revision_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor revision_id: String?
+      attr_accessor revision_change_identifier: String?
+      attr_accessor revision_summary: String?
+      attr_accessor created: Time?
+      attr_accessor revision_url: String?
+    end
+
+    class ArtifactStore
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?location: String,
+        ?encryption_key: Types::EncryptionKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor location: String?
+      attr_accessor encryption_key: Types::EncryptionKey?
+    end
+
+    module ArtifactStoreType
+      S3: String
+    end
+
+    class BeforeEntryConditions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conditions: Array[Types::Condition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conditions: Array[Types::Condition]?
+    end
+
+    class BlockerDeclaration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+    end
+
+    module BlockerType
+      Schedule: String
+    end
+
+    class ConcurrentModificationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConcurrentPipelineExecutionsLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Condition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result: String,
+        ?rules: Array[Types::RuleDeclaration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: String?
+      attr_accessor rules: Array[Types::RuleDeclaration]?
+    end
+
+    class ConditionExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?summary: String,
+        ?last_status_change: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor summary: String?
+      attr_accessor last_status_change: Time?
+    end
+
+    module ConditionExecutionStatus
+      InProgress: String
+      Failed: String
+      Errored: String
+      Succeeded: String
+      Cancelled: String
+      Abandoned: String
+      Overridden: String
+    end
+
+    class ConditionNotOverridableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConditionState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?latest_execution: Types::ConditionExecution,
+        ?rule_states: Array[Types::RuleState],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor latest_execution: Types::ConditionExecution?
+      attr_accessor rule_states: Array[Types::RuleState]?
+    end
+
+    module ConditionType
+      BEFORE_ENTRY: String
+      ON_SUCCESS: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateCustomActionTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+        ?provider: String,
+        ?version: String,
+        ?settings: Types::ActionTypeSettings,
+        ?configuration_properties: Array[Types::ActionConfigurationProperty],
+        ?input_artifact_details: Types::ArtifactDetails,
+        ?output_artifact_details: Types::ArtifactDetails,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
+      attr_accessor provider: String?
+      attr_accessor version: String?
+      attr_accessor settings: Types::ActionTypeSettings?
+      attr_accessor configuration_properties: Array[Types::ActionConfigurationProperty]?
+      attr_accessor input_artifact_details: Types::ArtifactDetails?
+      attr_accessor output_artifact_details: Types::ArtifactDetails?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateCustomActionTypeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_type: Types::ActionType,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_type: Types::ActionType?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreatePipelineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline: Types::PipelineDeclaration,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline: Types::PipelineDeclaration?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreatePipelineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline: Types::PipelineDeclaration,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline: Types::PipelineDeclaration?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CurrentRevision
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision: String,
+        ?change_identifier: String,
+        ?created: Time,
+        ?revision_summary: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision: String?
+      attr_accessor change_identifier: String?
+      attr_accessor created: Time?
+      attr_accessor revision_summary: String?
+    end
+
+    class DeleteCustomActionTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+        ?provider: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
+      attr_accessor provider: String?
+      attr_accessor version: String?
+    end
+
+    class DeletePipelineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteWebhookInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteWebhookOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeployActionExecutionTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_id: String,
+        ?target_type: String,
+        ?status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?events: Array[Types::DeployTargetEvent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_id: String?
+      attr_accessor target_type: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor events: Array[Types::DeployTargetEvent]?
+    end
+
+    class DeployTargetEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?context: Types::DeployTargetEventContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor context: Types::DeployTargetEventContext?
+    end
+
+    class DeployTargetEventContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ssm_command_id: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ssm_command_id: String?
+      attr_accessor message: String?
+    end
+
+    class DeregisterWebhookWithThirdPartyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhook_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhook_name: String?
+    end
+
+    class DeregisterWebhookWithThirdPartyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisableStageTransitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_name: String,
+        ?stage_name: String,
+        ?transition_type: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_name: String?
+      attr_accessor stage_name: String?
+      attr_accessor transition_type: String?
+      attr_accessor reason: String?
+    end
+
+    class DuplicatedStopRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EnableStageTransitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_name: String,
+        ?stage_name: String,
+        ?transition_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_name: String?
+      attr_accessor stage_name: String?
+      attr_accessor transition_type: String?
+    end
+
+    class EncryptionKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+    end
+
+    module EncryptionKeyType
+      KMS: String
+    end
+
+    class EnvironmentVariable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+      attr_accessor type: String?
+    end
+
+    module EnvironmentVariableType
+      PLAINTEXT: String
+      SECRETS_MANAGER: String
+    end
+
+    class ErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class ExecutionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: String,
+        ?external_execution_id: String,
+        ?percent_complete: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: String?
+      attr_accessor external_execution_id: String?
+      attr_accessor percent_complete: Integer?
+    end
+
+    module ExecutionMode
+      QUEUED: String
+      SUPERSEDED: String
+      PARALLEL: String
+    end
+
+    class ExecutionTrigger
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trigger_type: String,
+        ?trigger_detail: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trigger_type: String?
+      attr_accessor trigger_detail: String?
+    end
+
+    module ExecutionType
+      STANDARD: String
+      ROLLBACK: String
+    end
+
+    class ExecutorConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lambda_executor_configuration: Types::LambdaExecutorConfiguration,
+        ?job_worker_executor_configuration: Types::JobWorkerExecutorConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lambda_executor_configuration: Types::LambdaExecutorConfiguration?
+      attr_accessor job_worker_executor_configuration: Types::JobWorkerExecutorConfiguration?
+    end
+
+    module ExecutorType
+      JobWorker: String
+      Lambda: String
+    end
+
+    class FailureConditions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result: String,
+        ?retry_configuration: Types::RetryConfiguration,
+        ?conditions: Array[Types::Condition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: String?
+      attr_accessor retry_configuration: Types::RetryConfiguration?
+      attr_accessor conditions: Array[Types::Condition]?
+    end
+
+    class FailureDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+        ?external_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+      attr_accessor external_execution_id: String?
+    end
+
+    module FailureType
+      JobFailed: String
+      ConfigurationError: String
+      PermissionError: String
+      RevisionOutOfSync: String
+      RevisionUnavailable: String
+      SystemUnavailable: String
+    end
+
+    class GetActionTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+        ?owner: String,
+        ?provider: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
+      attr_accessor owner: String?
+      attr_accessor provider: String?
+      attr_accessor version: String?
+    end
+
+    class GetActionTypeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_type: Types::ActionTypeDeclaration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_type: Types::ActionTypeDeclaration?
+    end
+
+    class GetJobDetailsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class GetJobDetailsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_details: Types::JobDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_details: Types::JobDetails?
+    end
+
+    class GetPipelineExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_name: String,
+        ?pipeline_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_name: String?
+      attr_accessor pipeline_execution_id: String?
+    end
+
+    class GetPipelineExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_execution: Types::PipelineExecution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_execution: Types::PipelineExecution?
+    end
+
+    class GetPipelineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: Integer?
+    end
+
+    class GetPipelineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline: Types::PipelineDeclaration,
+        ?metadata: Types::PipelineMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline: Types::PipelineDeclaration?
+      attr_accessor metadata: Types::PipelineMetadata?
+    end
+
+    class GetPipelineStateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetPipelineStateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_name: String,
+        ?pipeline_version: Integer,
+        ?stage_states: Array[Types::StageState],
+        ?created: Time,
+        ?updated: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_name: String?
+      attr_accessor pipeline_version: Integer?
+      attr_accessor stage_states: Array[Types::StageState]?
+      attr_accessor created: Time?
+      attr_accessor updated: Time?
+    end
+
+    class GetThirdPartyJobDetailsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class GetThirdPartyJobDetailsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_details: Types::ThirdPartyJobDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_details: Types::ThirdPartyJobDetails?
+    end
+
+    class GitBranchFilterCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?includes: Array[String],
+        ?excludes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor includes: Array[String]?
+      attr_accessor excludes: Array[String]?
+    end
+
+    class GitConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_action_name: String,
+        ?push: Array[Types::GitPushFilter],
+        ?pull_request: Array[Types::GitPullRequestFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_action_name: String?
+      attr_accessor push: Array[Types::GitPushFilter]?
+      attr_accessor pull_request: Array[Types::GitPullRequestFilter]?
+    end
+
+    class GitFilePathFilterCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?includes: Array[String],
+        ?excludes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor includes: Array[String]?
+      attr_accessor excludes: Array[String]?
+    end
+
+    module GitPullRequestEventType
+      OPEN: String
+      UPDATED: String
+      CLOSED: String
+    end
+
+    class GitPullRequestFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[String],
+        ?branches: Types::GitBranchFilterCriteria,
+        ?file_paths: Types::GitFilePathFilterCriteria,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[String]?
+      attr_accessor branches: Types::GitBranchFilterCriteria?
+      attr_accessor file_paths: Types::GitFilePathFilterCriteria?
+    end
+
+    class GitPushFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Types::GitTagFilterCriteria,
+        ?branches: Types::GitBranchFilterCriteria,
+        ?file_paths: Types::GitFilePathFilterCriteria,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Types::GitTagFilterCriteria?
+      attr_accessor branches: Types::GitBranchFilterCriteria?
+      attr_accessor file_paths: Types::GitFilePathFilterCriteria?
+    end
+
+    class GitTagFilterCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?includes: Array[String],
+        ?excludes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor includes: Array[String]?
+      attr_accessor excludes: Array[String]?
+    end
+
+    class InputArtifact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class InvalidActionDeclarationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidApprovalTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidArnException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidBlockerDeclarationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidClientTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidJobException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidJobStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNonceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidStageDeclarationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidStructureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidWebhookAuthenticationParametersException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidWebhookFilterPatternException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Job
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?data: Types::JobData,
+        ?nonce: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor data: Types::JobData?
+      attr_accessor nonce: String?
+      attr_accessor account_id: String?
+    end
+
+    class JobData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_type_id: Types::ActionTypeId,
+        ?action_configuration: Types::ActionConfiguration,
+        ?pipeline_context: Types::PipelineContext,
+        ?input_artifacts: Array[Types::Artifact],
+        ?output_artifacts: Array[Types::Artifact],
+        ?artifact_credentials: Types::AWSSessionCredentials,
+        ?continuation_token: String,
+        ?encryption_key: Types::EncryptionKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_type_id: Types::ActionTypeId?
+      attr_accessor action_configuration: Types::ActionConfiguration?
+      attr_accessor pipeline_context: Types::PipelineContext?
+      attr_accessor input_artifacts: Array[Types::Artifact]?
+      attr_accessor output_artifacts: Array[Types::Artifact]?
+      attr_accessor artifact_credentials: Types::AWSSessionCredentials?
+      attr_accessor continuation_token: String?
+      attr_accessor encryption_key: Types::EncryptionKey?
+    end
+
+    class JobDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?data: Types::JobData,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor data: Types::JobData?
+      attr_accessor account_id: String?
+    end
+
+    class JobNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module JobStatus
+      Created: String
+      Queued: String
+      Dispatched: String
+      InProgress: String
+      TimedOut: String
+      Succeeded: String
+      Failed: String
+    end
+
+    class JobWorkerExecutorConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?polling_accounts: Array[String],
+        ?polling_service_principals: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor polling_accounts: Array[String]?
+      attr_accessor polling_service_principals: Array[String]?
+    end
+
+    class LambdaExecutorConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lambda_function_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lambda_function_arn: String?
+    end
+
+    class LatestInPipelineExecutionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_execution_id: String,
+        ?start_time_range: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_execution_id: String?
+      attr_accessor start_time_range: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListActionExecutionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_name: String,
+        ?filter: Types::ActionExecutionFilter,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_name: String?
+      attr_accessor filter: Types::ActionExecutionFilter?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListActionExecutionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_execution_details: Array[Types::ActionExecutionDetail],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_execution_details: Array[Types::ActionExecutionDetail]?
+      attr_accessor next_token: String?
+    end
+
+    class ListActionTypesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_owner_filter: String,
+        ?next_token: String,
+        ?region_filter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_owner_filter: String?
+      attr_accessor next_token: String?
+      attr_accessor region_filter: String?
+    end
+
+    class ListActionTypesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_types: Array[Types::ActionType],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_types: Array[Types::ActionType]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeployActionExecutionTargetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_name: String,
+        ?action_execution_id: String,
+        ?filters: Array[Types::TargetFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_name: String?
+      attr_accessor action_execution_id: String?
+      attr_accessor filters: Array[Types::TargetFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeployActionExecutionTargetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?targets: Array[Types::DeployActionExecutionTarget],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor targets: Array[Types::DeployActionExecutionTarget]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPipelineExecutionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_name: String,
+        ?max_results: Integer,
+        ?filter: Types::PipelineExecutionFilter,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filter: Types::PipelineExecutionFilter?
+      attr_accessor next_token: String?
+    end
+
+    class ListPipelineExecutionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_execution_summaries: Array[Types::PipelineExecutionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_execution_summaries: Array[Types::PipelineExecutionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPipelinesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPipelinesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipelines: Array[Types::PipelineSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipelines: Array[Types::PipelineSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRuleExecutionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_name: String,
+        ?filter: Types::RuleExecutionFilter,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_name: String?
+      attr_accessor filter: Types::RuleExecutionFilter?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRuleExecutionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_execution_details: Array[Types::RuleExecutionDetail],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_execution_details: Array[Types::RuleExecutionDetail]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRuleTypesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_owner_filter: String,
+        ?region_filter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_owner_filter: String?
+      attr_accessor region_filter: String?
+    end
+
+    class ListRuleTypesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_types: Array[Types::RuleType],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_types: Array[Types::RuleType]?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWebhookItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?definition: Types::WebhookDefinition,
+        ?url: String,
+        ?error_message: String,
+        ?error_code: String,
+        ?last_triggered: Time,
+        ?arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor definition: Types::WebhookDefinition?
+      attr_accessor url: String?
+      attr_accessor error_message: String?
+      attr_accessor error_code: String?
+      attr_accessor last_triggered: Time?
+      attr_accessor arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListWebhooksInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListWebhooksOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhooks: Array[Types::ListWebhookItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhooks: Array[Types::ListWebhookItem]?
+      attr_accessor next_token: String?
+    end
+
+    class NotLatestPipelineExecutionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OutputArtifact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?files: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor files: Array[String]?
+    end
+
+    class OutputVariablesSizeExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OverrideStageConditionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_name: String,
+        ?stage_name: String,
+        ?pipeline_execution_id: String,
+        ?condition_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_name: String?
+      attr_accessor stage_name: String?
+      attr_accessor pipeline_execution_id: String?
+      attr_accessor condition_type: String?
+    end
+
+    class PipelineContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_name: String,
+        ?stage: Types::StageContext,
+        ?action: Types::ActionContext,
+        ?pipeline_arn: String,
+        ?pipeline_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_name: String?
+      attr_accessor stage: Types::StageContext?
+      attr_accessor action: Types::ActionContext?
+      attr_accessor pipeline_arn: String?
+      attr_accessor pipeline_execution_id: String?
+    end
+
+    class PipelineDeclaration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?role_arn: String,
+        ?artifact_store: Types::ArtifactStore,
+        ?artifact_stores: Hash[String, Types::ArtifactStore],
+        ?stages: Array[Types::StageDeclaration],
+        ?version: Integer,
+        ?execution_mode: String,
+        ?pipeline_type: String,
+        ?variables: Array[Types::PipelineVariableDeclaration],
+        ?triggers: Array[Types::PipelineTriggerDeclaration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor role_arn: String?
+      attr_accessor artifact_store: Types::ArtifactStore?
+      attr_accessor artifact_stores: Hash[String, Types::ArtifactStore]?
+      attr_accessor stages: Array[Types::StageDeclaration]?
+      attr_accessor version: Integer?
+      attr_accessor execution_mode: String?
+      attr_accessor pipeline_type: String?
+      attr_accessor variables: Array[Types::PipelineVariableDeclaration]?
+      attr_accessor triggers: Array[Types::PipelineTriggerDeclaration]?
+    end
+
+    class PipelineExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_name: String,
+        ?pipeline_version: Integer,
+        ?pipeline_execution_id: String,
+        ?status: String,
+        ?status_summary: String,
+        ?artifact_revisions: Array[Types::ArtifactRevision],
+        ?variables: Array[Types::ResolvedPipelineVariable],
+        ?trigger: Types::ExecutionTrigger,
+        ?execution_mode: String,
+        ?execution_type: String,
+        ?rollback_metadata: Types::PipelineRollbackMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_name: String?
+      attr_accessor pipeline_version: Integer?
+      attr_accessor pipeline_execution_id: String?
+      attr_accessor status: String?
+      attr_accessor status_summary: String?
+      attr_accessor artifact_revisions: Array[Types::ArtifactRevision]?
+      attr_accessor variables: Array[Types::ResolvedPipelineVariable]?
+      attr_accessor trigger: Types::ExecutionTrigger?
+      attr_accessor execution_mode: String?
+      attr_accessor execution_type: String?
+      attr_accessor rollback_metadata: Types::PipelineRollbackMetadata?
+    end
+
+    class PipelineExecutionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?succeeded_in_stage: Types::SucceededInStageFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor succeeded_in_stage: Types::SucceededInStageFilter?
+    end
+
+    class PipelineExecutionNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PipelineExecutionNotStoppableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PipelineExecutionOutdatedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module PipelineExecutionStatus
+      Cancelled: String
+      InProgress: String
+      Stopped: String
+      Stopping: String
+      Succeeded: String
+      Superseded: String
+      Failed: String
+    end
+
+    class PipelineExecutionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_execution_id: String,
+        ?status: String,
+        ?status_summary: String,
+        ?start_time: Time,
+        ?last_update_time: Time,
+        ?source_revisions: Array[Types::SourceRevision],
+        ?trigger: Types::ExecutionTrigger,
+        ?stop_trigger: Types::StopExecutionTrigger,
+        ?execution_mode: String,
+        ?execution_type: String,
+        ?rollback_metadata: Types::PipelineRollbackMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_execution_id: String?
+      attr_accessor status: String?
+      attr_accessor status_summary: String?
+      attr_accessor start_time: Time?
+      attr_accessor last_update_time: Time?
+      attr_accessor source_revisions: Array[Types::SourceRevision]?
+      attr_accessor trigger: Types::ExecutionTrigger?
+      attr_accessor stop_trigger: Types::StopExecutionTrigger?
+      attr_accessor execution_mode: String?
+      attr_accessor execution_type: String?
+      attr_accessor rollback_metadata: Types::PipelineRollbackMetadata?
+    end
+
+    class PipelineMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_arn: String,
+        ?created: Time,
+        ?updated: Time,
+        ?polling_disabled_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_arn: String?
+      attr_accessor created: Time?
+      attr_accessor updated: Time?
+      attr_accessor polling_disabled_at: Time?
+    end
+
+    class PipelineNameInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PipelineNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PipelineRollbackMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rollback_target_pipeline_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rollback_target_pipeline_execution_id: String?
+    end
+
+    class PipelineSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?version: Integer,
+        ?pipeline_type: String,
+        ?execution_mode: String,
+        ?created: Time,
+        ?updated: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor version: Integer?
+      attr_accessor pipeline_type: String?
+      attr_accessor execution_mode: String?
+      attr_accessor created: Time?
+      attr_accessor updated: Time?
+    end
+
+    class PipelineTriggerDeclaration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider_type: String,
+        ?git_configuration: Types::GitConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider_type: String?
+      attr_accessor git_configuration: Types::GitConfiguration?
+    end
+
+    module PipelineTriggerProviderType
+      CodeStarSourceConnection: String
+    end
+
+    module PipelineType
+      V1: String
+      V2: String
+    end
+
+    class PipelineVariable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class PipelineVariableDeclaration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?default_value: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor default_value: String?
+      attr_accessor description: String?
+    end
+
+    class PipelineVersionNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PollForJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_type_id: Types::ActionTypeId,
+        ?max_batch_size: Integer,
+        ?query_param: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_type_id: Types::ActionTypeId?
+      attr_accessor max_batch_size: Integer?
+      attr_accessor query_param: Hash[String, String]?
+    end
+
+    class PollForJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::Job],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::Job]?
+    end
+
+    class PollForThirdPartyJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_type_id: Types::ActionTypeId,
+        ?max_batch_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_type_id: Types::ActionTypeId?
+      attr_accessor max_batch_size: Integer?
+    end
+
+    class PollForThirdPartyJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs: Array[Types::ThirdPartyJob],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs: Array[Types::ThirdPartyJob]?
+    end
+
+    class PutActionRevisionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_name: String,
+        ?stage_name: String,
+        ?action_name: String,
+        ?action_revision: Types::ActionRevision,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_name: String?
+      attr_accessor stage_name: String?
+      attr_accessor action_name: String?
+      attr_accessor action_revision: Types::ActionRevision?
+    end
+
+    class PutActionRevisionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?new_revision: bool,
+        ?pipeline_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor new_revision: bool?
+      attr_accessor pipeline_execution_id: String?
+    end
+
+    class PutApprovalResultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_name: String,
+        ?stage_name: String,
+        ?action_name: String,
+        ?result: Types::ApprovalResult,
+        ?token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_name: String?
+      attr_accessor stage_name: String?
+      attr_accessor action_name: String?
+      attr_accessor result: Types::ApprovalResult?
+      attr_accessor token: String?
+    end
+
+    class PutApprovalResultOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approved_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approved_at: Time?
+    end
+
+    class PutJobFailureResultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?failure_details: Types::FailureDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor failure_details: Types::FailureDetails?
+    end
+
+    class PutJobSuccessResultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?current_revision: Types::CurrentRevision,
+        ?continuation_token: String,
+        ?execution_details: Types::ExecutionDetails,
+        ?output_variables: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor current_revision: Types::CurrentRevision?
+      attr_accessor continuation_token: String?
+      attr_accessor execution_details: Types::ExecutionDetails?
+      attr_accessor output_variables: Hash[String, String]?
+    end
+
+    class PutThirdPartyJobFailureResultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?client_token: String,
+        ?failure_details: Types::FailureDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor client_token: String?
+      attr_accessor failure_details: Types::FailureDetails?
+    end
+
+    class PutThirdPartyJobSuccessResultInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?client_token: String,
+        ?current_revision: Types::CurrentRevision,
+        ?continuation_token: String,
+        ?execution_details: Types::ExecutionDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor client_token: String?
+      attr_accessor current_revision: Types::CurrentRevision?
+      attr_accessor continuation_token: String?
+      attr_accessor execution_details: Types::ExecutionDetails?
+    end
+
+    class PutWebhookInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhook: Types::WebhookDefinition,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhook: Types::WebhookDefinition?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutWebhookOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhook: Types::ListWebhookItem,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhook: Types::ListWebhookItem?
+    end
+
+    class RegisterWebhookWithThirdPartyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?webhook_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor webhook_name: String?
+    end
+
+    class RegisterWebhookWithThirdPartyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RequestFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResolvedPipelineVariable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?resolved_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor resolved_value: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Result
+      ROLLBACK: String
+      FAIL: String
+      RETRY: String
+      SKIP: String
+    end
+
+    class RetryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retry_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retry_mode: String?
+    end
+
+    class RetryStageExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_name: String,
+        ?stage_name: String,
+        ?pipeline_execution_id: String,
+        ?retry_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_name: String?
+      attr_accessor stage_name: String?
+      attr_accessor pipeline_execution_id: String?
+      attr_accessor retry_mode: String?
+    end
+
+    class RetryStageExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_execution_id: String?
+    end
+
+    class RetryStageMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_stage_retry_attempt: Integer,
+        ?manual_stage_retry_attempt: Integer,
+        ?latest_retry_trigger: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_stage_retry_attempt: Integer?
+      attr_accessor manual_stage_retry_attempt: Integer?
+      attr_accessor latest_retry_trigger: String?
+    end
+
+    module RetryTrigger
+      AutomatedStageRetry: String
+      ManualStageRetry: String
+    end
+
+    class RollbackStageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_name: String,
+        ?stage_name: String,
+        ?target_pipeline_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_name: String?
+      attr_accessor stage_name: String?
+      attr_accessor target_pipeline_execution_id: String?
+    end
+
+    class RollbackStageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_execution_id: String?
+    end
+
+    module RuleCategory
+      Rule: String
+    end
+
+    class RuleConfigurationProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?required: bool,
+        ?key: bool,
+        ?secret: bool,
+        ?queryable: bool,
+        ?description: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor required: bool?
+      attr_accessor key: bool?
+      attr_accessor secret: bool?
+      attr_accessor queryable: bool?
+      attr_accessor description: String?
+      attr_accessor type: String?
+    end
+
+    module RuleConfigurationPropertyType
+      String: String
+      Number: String
+      Boolean: String
+    end
+
+    class RuleDeclaration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?rule_type_id: Types::RuleTypeId,
+        ?configuration: Hash[String, String],
+        ?commands: Array[String],
+        ?input_artifacts: Array[Types::InputArtifact],
+        ?role_arn: String,
+        ?region: String,
+        ?timeout_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor rule_type_id: Types::RuleTypeId?
+      attr_accessor configuration: Hash[String, String]?
+      attr_accessor commands: Array[String]?
+      attr_accessor input_artifacts: Array[Types::InputArtifact]?
+      attr_accessor role_arn: String?
+      attr_accessor region: String?
+      attr_accessor timeout_in_minutes: Integer?
+    end
+
+    class RuleExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_execution_id: String,
+        ?status: String,
+        ?summary: String,
+        ?last_status_change: Time,
+        ?token: String,
+        ?last_updated_by: String,
+        ?external_execution_id: String,
+        ?external_execution_url: String,
+        ?error_details: Types::ErrorDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_execution_id: String?
+      attr_accessor status: String?
+      attr_accessor summary: String?
+      attr_accessor last_status_change: Time?
+      attr_accessor token: String?
+      attr_accessor last_updated_by: String?
+      attr_accessor external_execution_id: String?
+      attr_accessor external_execution_url: String?
+      attr_accessor error_details: Types::ErrorDetails?
+    end
+
+    class RuleExecutionDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_execution_id: String,
+        ?rule_execution_id: String,
+        ?pipeline_version: Integer,
+        ?stage_name: String,
+        ?rule_name: String,
+        ?start_time: Time,
+        ?last_update_time: Time,
+        ?updated_by: String,
+        ?status: String,
+        ?input: Types::RuleExecutionInput,
+        ?output: Types::RuleExecutionOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_execution_id: String?
+      attr_accessor rule_execution_id: String?
+      attr_accessor pipeline_version: Integer?
+      attr_accessor stage_name: String?
+      attr_accessor rule_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor last_update_time: Time?
+      attr_accessor updated_by: String?
+      attr_accessor status: String?
+      attr_accessor input: Types::RuleExecutionInput?
+      attr_accessor output: Types::RuleExecutionOutput?
+    end
+
+    class RuleExecutionFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_execution_id: String,
+        ?latest_in_pipeline_execution: Types::LatestInPipelineExecutionFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_execution_id: String?
+      attr_accessor latest_in_pipeline_execution: Types::LatestInPipelineExecutionFilter?
+    end
+
+    class RuleExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_type_id: Types::RuleTypeId,
+        ?configuration: Hash[String, String],
+        ?resolved_configuration: Hash[String, String],
+        ?role_arn: String,
+        ?region: String,
+        ?input_artifacts: Array[Types::ArtifactDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_type_id: Types::RuleTypeId?
+      attr_accessor configuration: Hash[String, String]?
+      attr_accessor resolved_configuration: Hash[String, String]?
+      attr_accessor role_arn: String?
+      attr_accessor region: String?
+      attr_accessor input_artifacts: Array[Types::ArtifactDetail]?
+    end
+
+    class RuleExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_result: Types::RuleExecutionResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_result: Types::RuleExecutionResult?
+    end
+
+    class RuleExecutionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?external_execution_id: String,
+        ?external_execution_summary: String,
+        ?external_execution_url: String,
+        ?error_details: Types::ErrorDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor external_execution_id: String?
+      attr_accessor external_execution_summary: String?
+      attr_accessor external_execution_url: String?
+      attr_accessor error_details: Types::ErrorDetails?
+    end
+
+    module RuleExecutionStatus
+      InProgress: String
+      Abandoned: String
+      Succeeded: String
+      Failed: String
+    end
+
+    module RuleOwner
+      AWS: String
+    end
+
+    class RuleRevision
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision_id: String,
+        ?revision_change_id: String,
+        ?created: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision_id: String?
+      attr_accessor revision_change_id: String?
+      attr_accessor created: Time?
+    end
+
+    class RuleState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?current_revision: Types::RuleRevision,
+        ?latest_execution: Types::RuleExecution,
+        ?entity_url: String,
+        ?revision_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor current_revision: Types::RuleRevision?
+      attr_accessor latest_execution: Types::RuleExecution?
+      attr_accessor entity_url: String?
+      attr_accessor revision_url: String?
+    end
+
+    class RuleType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: Types::RuleTypeId,
+        ?settings: Types::RuleTypeSettings,
+        ?rule_configuration_properties: Array[Types::RuleConfigurationProperty],
+        ?input_artifact_details: Types::ArtifactDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: Types::RuleTypeId?
+      attr_accessor settings: Types::RuleTypeSettings?
+      attr_accessor rule_configuration_properties: Array[Types::RuleConfigurationProperty]?
+      attr_accessor input_artifact_details: Types::ArtifactDetails?
+    end
+
+    class RuleTypeId
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+        ?owner: String,
+        ?provider: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
+      attr_accessor owner: String?
+      attr_accessor provider: String?
+      attr_accessor version: String?
+    end
+
+    class RuleTypeSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?third_party_configuration_url: String,
+        ?entity_url_template: String,
+        ?execution_url_template: String,
+        ?revision_url_template: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor third_party_configuration_url: String?
+      attr_accessor entity_url_template: String?
+      attr_accessor execution_url_template: String?
+      attr_accessor revision_url_template: String?
+    end
+
+    class S3ArtifactLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?object_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor object_key: String?
+    end
+
+    class S3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+    end
+
+    class SourceRevision
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_name: String,
+        ?revision_id: String,
+        ?revision_summary: String,
+        ?revision_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_name: String?
+      attr_accessor revision_id: String?
+      attr_accessor revision_summary: String?
+      attr_accessor revision_url: String?
+    end
+
+    class SourceRevisionOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_name: String,
+        ?revision_type: String,
+        ?revision_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_name: String?
+      attr_accessor revision_type: String?
+      attr_accessor revision_value: String?
+    end
+
+    module SourceRevisionType
+      COMMIT_ID: String
+      IMAGE_DIGEST: String
+      S3_OBJECT_VERSION_ID: String
+      S3_OBJECT_KEY: String
+    end
+
+    class StageConditionState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?latest_execution: Types::StageConditionsExecution,
+        ?condition_states: Array[Types::ConditionState],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor latest_execution: Types::StageConditionsExecution?
+      attr_accessor condition_states: Array[Types::ConditionState]?
+    end
+
+    class StageConditionsExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?summary: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor summary: String?
+    end
+
+    class StageContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class StageDeclaration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?blockers: Array[Types::BlockerDeclaration],
+        ?actions: Array[Types::ActionDeclaration],
+        ?on_failure: Types::FailureConditions,
+        ?on_success: Types::SuccessConditions,
+        ?before_entry: Types::BeforeEntryConditions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor blockers: Array[Types::BlockerDeclaration]?
+      attr_accessor actions: Array[Types::ActionDeclaration]?
+      attr_accessor on_failure: Types::FailureConditions?
+      attr_accessor on_success: Types::SuccessConditions?
+      attr_accessor before_entry: Types::BeforeEntryConditions?
+    end
+
+    class StageExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_execution_id: String,
+        ?status: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_execution_id: String?
+      attr_accessor status: String?
+      attr_accessor type: String?
+    end
+
+    module StageExecutionStatus
+      Cancelled: String
+      InProgress: String
+      Failed: String
+      Stopped: String
+      Stopping: String
+      Succeeded: String
+      Skipped: String
+    end
+
+    class StageNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StageNotRetryableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module StageRetryMode
+      FAILED_ACTIONS: String
+      ALL_ACTIONS: String
+    end
+
+    class StageState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stage_name: String,
+        ?inbound_execution: Types::StageExecution,
+        ?inbound_executions: Array[Types::StageExecution],
+        ?inbound_transition_state: Types::TransitionState,
+        ?action_states: Array[Types::ActionState],
+        ?latest_execution: Types::StageExecution,
+        ?before_entry_condition_state: Types::StageConditionState,
+        ?on_success_condition_state: Types::StageConditionState,
+        ?on_failure_condition_state: Types::StageConditionState,
+        ?retry_stage_metadata: Types::RetryStageMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stage_name: String?
+      attr_accessor inbound_execution: Types::StageExecution?
+      attr_accessor inbound_executions: Array[Types::StageExecution]?
+      attr_accessor inbound_transition_state: Types::TransitionState?
+      attr_accessor action_states: Array[Types::ActionState]?
+      attr_accessor latest_execution: Types::StageExecution?
+      attr_accessor before_entry_condition_state: Types::StageConditionState?
+      attr_accessor on_success_condition_state: Types::StageConditionState?
+      attr_accessor on_failure_condition_state: Types::StageConditionState?
+      attr_accessor retry_stage_metadata: Types::RetryStageMetadata?
+    end
+
+    module StageTransitionType
+      Inbound: String
+      Outbound: String
+    end
+
+    class StartPipelineExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?variables: Array[Types::PipelineVariable],
+        ?client_request_token: String,
+        ?source_revisions: Array[Types::SourceRevisionOverride],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor variables: Array[Types::PipelineVariable]?
+      attr_accessor client_request_token: String?
+      attr_accessor source_revisions: Array[Types::SourceRevisionOverride]?
+    end
+
+    class StartPipelineExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_execution_id: String?
+    end
+
+    module StartTimeRange
+      Latest: String
+      All: String
+    end
+
+    class StopExecutionTrigger
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+    end
+
+    class StopPipelineExecutionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_name: String,
+        ?pipeline_execution_id: String,
+        ?abandon: bool,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_name: String?
+      attr_accessor pipeline_execution_id: String?
+      attr_accessor abandon: bool?
+      attr_accessor reason: String?
+    end
+
+    class StopPipelineExecutionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_execution_id: String?
+    end
+
+    class SucceededInStageFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stage_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stage_name: String?
+    end
+
+    class SuccessConditions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conditions: Array[Types::Condition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conditions: Array[Types::Condition]?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TargetFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module TargetFilterName
+      TARGET_STATUS: String
+    end
+
+    class ThirdPartyJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor job_id: String?
+    end
+
+    class ThirdPartyJobData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_type_id: Types::ActionTypeId,
+        ?action_configuration: Types::ActionConfiguration,
+        ?pipeline_context: Types::PipelineContext,
+        ?input_artifacts: Array[Types::Artifact],
+        ?output_artifacts: Array[Types::Artifact],
+        ?artifact_credentials: Types::AWSSessionCredentials,
+        ?continuation_token: String,
+        ?encryption_key: Types::EncryptionKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_type_id: Types::ActionTypeId?
+      attr_accessor action_configuration: Types::ActionConfiguration?
+      attr_accessor pipeline_context: Types::PipelineContext?
+      attr_accessor input_artifacts: Array[Types::Artifact]?
+      attr_accessor output_artifacts: Array[Types::Artifact]?
+      attr_accessor artifact_credentials: Types::AWSSessionCredentials?
+      attr_accessor continuation_token: String?
+      attr_accessor encryption_key: Types::EncryptionKey?
+    end
+
+    class ThirdPartyJobDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?data: Types::ThirdPartyJobData,
+        ?nonce: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor data: Types::ThirdPartyJobData?
+      attr_accessor nonce: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TransitionState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?last_changed_by: String,
+        ?last_changed_at: Time,
+        ?disabled_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor last_changed_by: String?
+      attr_accessor last_changed_at: Time?
+      attr_accessor disabled_reason: String?
+    end
+
+    module TriggerType
+      CreatePipeline: String
+      StartPipelineExecution: String
+      PollForSourceChanges: String
+      Webhook: String
+      CloudWatchEvent: String
+      PutActionRevision: String
+      WebhookV2: String
+      ManualRollback: String
+      AutomatedRollback: String
+    end
+
+    class UnableToRollbackStageException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateActionTypeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_type: Types::ActionTypeDeclaration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_type: Types::ActionTypeDeclaration?
+    end
+
+    class UpdatePipelineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline: Types::PipelineDeclaration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline: Types::PipelineDeclaration?
+    end
+
+    class UpdatePipelineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline: Types::PipelineDeclaration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline: Types::PipelineDeclaration?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WebhookAuthConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_ip_range: String,
+        ?secret_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_ip_range: String?
+      attr_accessor secret_token: String?
+    end
+
+    module WebhookAuthenticationType
+      GITHUB_HMAC: String
+      IP: String
+      UNAUTHENTICATED: String
+    end
+
+    class WebhookDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?target_pipeline: String,
+        ?target_action: String,
+        ?filters: Array[Types::WebhookFilterRule],
+        ?authentication: String,
+        ?authentication_configuration: Types::WebhookAuthConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor target_pipeline: String?
+      attr_accessor target_action: String?
+      attr_accessor filters: Array[Types::WebhookFilterRule]?
+      attr_accessor authentication: String?
+      attr_accessor authentication_configuration: Types::WebhookAuthConfiguration?
+    end
+
+    class WebhookFilterRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?json_path: String,
+        ?match_equals: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor json_path: String?
+      attr_accessor match_equals: String?
+    end
+
+    class WebhookNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+  end
+end

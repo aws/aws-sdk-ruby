@@ -1,0 +1,206 @@
+module Aws::SSMQuickSetup
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SSMQuickSetup::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateConfigurationManagerResponse
+      include Smithy::Client::_Response[Types::CreateConfigurationManagerOutput]
+      def manager_arn: () -> String?
+    end
+    def create_configuration_manager: (
+      ?name: String,
+      ?description: String,
+      ?configuration_definitions: Array[
+        {
+          type: String,
+          parameters: Hash[String, String],
+          type_version: untyped,
+          local_deployment_execution_role_name: untyped,
+          local_deployment_administration_role_arn: String
+        }
+      ],
+      ?tags: Hash[String, String]
+    ) -> _CreateConfigurationManagerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfigurationManagerResponse
+
+    interface _DeleteConfigurationManagerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_configuration_manager: (
+      ?manager_arn: String
+    ) -> _DeleteConfigurationManagerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfigurationManagerResponse
+
+    interface _GetConfigurationResponse
+      include Smithy::Client::_Response[Types::GetConfigurationOutput]
+      def id: () -> String?
+      def manager_arn: () -> String?
+      def configuration_definition_id: () -> String?
+      def type: () -> String?
+      def type_version: () -> String?
+      def account: () -> String?
+      def region: () -> String?
+      def created_at: () -> Time?
+      def last_modified_at: () -> Time?
+      def status_summaries: () -> Array[Types::StatusSummary]?
+      def parameters: () -> Hash[String, String]?
+    end
+    def get_configuration: (
+      ?configuration_id: String
+    ) -> _GetConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfigurationResponse
+
+    interface _GetConfigurationManagerResponse
+      include Smithy::Client::_Response[Types::GetConfigurationManagerOutput]
+      def manager_arn: () -> String?
+      def description: () -> String?
+      def name: () -> String?
+      def created_at: () -> Time?
+      def last_modified_at: () -> Time?
+      def status_summaries: () -> Array[Types::StatusSummary]?
+      def configuration_definitions: () -> Array[Types::ConfigurationDefinition]?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_configuration_manager: (
+      ?manager_arn: String
+    ) -> _GetConfigurationManagerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfigurationManagerResponse
+
+    interface _GetServiceSettingsResponse
+      include Smithy::Client::_Response[Types::GetServiceSettingsOutput]
+      def service_settings: () -> Types::ServiceSettings?
+    end
+    def get_service_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceSettingsResponse
+
+    interface _ListConfigurationManagersResponse
+      include Smithy::Client::_Response[Types::ListConfigurationManagersOutput]
+      def configuration_managers_list: () -> Array[Types::ConfigurationManagerSummary]?
+      def next_token: () -> String?
+    end
+    def list_configuration_managers: (
+      ?starting_token: String,
+      ?max_items: Integer,
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListConfigurationManagersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfigurationManagersResponse
+
+    interface _ListConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListConfigurationsOutput]
+      def configurations_list: () -> Array[Types::ConfigurationSummary]?
+      def next_token: () -> String?
+    end
+    def list_configurations: (
+      ?starting_token: String,
+      ?max_items: Integer,
+      ?filters: Array[
+        {
+          key: String,
+          values: Array[String]
+        }
+      ],
+      ?manager_arn: String,
+      ?configuration_definition_id: String
+    ) -> _ListConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfigurationsResponse
+
+    interface _ListQuickSetupTypesResponse
+      include Smithy::Client::_Response[Types::ListQuickSetupTypesOutput]
+      def quick_setup_type_list: () -> Array[Types::QuickSetupTypeOutput]?
+    end
+    def list_quick_setup_types: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQuickSetupTypesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::TagEntry]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateConfigurationDefinitionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_configuration_definition: (
+      ?manager_arn: String,
+      ?id: String,
+      ?type_version: String,
+      ?parameters: Hash[String, String],
+      ?local_deployment_execution_role_name: String,
+      ?local_deployment_administration_role_arn: String
+    ) -> _UpdateConfigurationDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfigurationDefinitionResponse
+
+    interface _UpdateConfigurationManagerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_configuration_manager: (
+      ?manager_arn: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateConfigurationManagerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfigurationManagerResponse
+
+    interface _UpdateServiceSettingsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_service_settings: (
+      ?explorer_enabling_role_arn: String
+    ) -> _UpdateServiceSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateServiceSettingsResponse
+  end
+end

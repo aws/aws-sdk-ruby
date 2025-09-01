@@ -1,0 +1,862 @@
+module Aws::PartnerCentralSelling
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::PartnerCentralSelling::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptEngagementInvitationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def accept_engagement_invitation: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _AcceptEngagementInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptEngagementInvitationResponse
+
+    interface _AssignOpportunityResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def assign_opportunity: (
+      ?catalog: String,
+      ?identifier: String,
+      ?assignee: {
+        email: String,
+        first_name: String,
+        last_name: untyped,
+        business_title: String
+      }
+    ) -> _AssignOpportunityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssignOpportunityResponse
+
+    interface _AssociateOpportunityResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_opportunity: (
+      ?catalog: String,
+      ?opportunity_identifier: String,
+      ?related_entity_type: String,
+      ?related_entity_identifier: String
+    ) -> _AssociateOpportunityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateOpportunityResponse
+
+    interface _CreateEngagementResponse
+      include Smithy::Client::_Response[Types::CreateEngagementResponse]
+      def id: () -> String?
+      def arn: () -> String?
+    end
+    def create_engagement: (
+      ?catalog: String,
+      ?client_token: String,
+      ?title: String,
+      ?description: String,
+      ?contexts: Array[
+        {
+          type: String,
+          payload: {
+            customer_project: {
+              customer: {
+                industry: String,
+                company_name: String,
+                website_url: String,
+                country_code: String
+              },
+              project: {
+                title: String,
+                business_problem: String,
+                target_completion_date: String
+              }
+            }
+          }
+        }
+      ]
+    ) -> _CreateEngagementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEngagementResponse
+
+    interface _CreateEngagementInvitationResponse
+      include Smithy::Client::_Response[Types::CreateEngagementInvitationResponse]
+      def id: () -> String?
+      def arn: () -> String?
+    end
+    def create_engagement_invitation: (
+      ?catalog: String,
+      ?client_token: String,
+      ?engagement_identifier: String,
+      ?invitation: {
+        message: String,
+        receiver: {
+          account: {
+            alias: String,
+            aws_account_id: String
+          }
+        },
+        payload: {
+          opportunity_invitation: {
+            sender_contacts: Array[
+              {
+                email: String,
+                first_name: String,
+                last_name: untyped,
+                business_title: String,
+                phone: String
+              }
+            ],
+            receiver_responsibilities: Array[String],
+            customer: {
+              industry: String,
+              company_name: String,
+              website_url: String,
+              country_code: String
+            },
+            project: {
+              business_problem: String,
+              title: String,
+              target_completion_date: String,
+              expected_customer_spend: Array[
+                {
+                  amount: String,
+                  currency_code: String,
+                  frequency: String,
+                  target_company: untyped,
+                  estimation_url: String
+                }
+              ]
+            }
+          }
+        }
+      }
+    ) -> _CreateEngagementInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEngagementInvitationResponse
+
+    interface _CreateOpportunityResponse
+      include Smithy::Client::_Response[Types::CreateOpportunityResponse]
+      def id: () -> String?
+      def partner_opportunity_identifier: () -> String?
+      def last_modified_date: () -> Time?
+    end
+    def create_opportunity: (
+      ?catalog: String,
+      ?primary_needs_from_aws: Array[String],
+      ?national_security: String,
+      ?partner_opportunity_identifier: String,
+      ?customer: {
+        account: {
+          industry: String,
+          other_industry: String,
+          company_name: String,
+          website_url: String,
+          aws_account_id: String,
+          address: {
+            city: String,
+            postal_code: untyped,
+            state_or_region: untyped,
+            country_code: String,
+            street_address: untyped
+          },
+          duns: String
+        },
+        contacts: Array[
+          {
+            email: String,
+            first_name: untyped,
+            last_name: untyped,
+            business_title: String,
+            phone: String
+          }
+        ]
+      },
+      ?project: {
+        delivery_models: Array[String],
+        expected_customer_spend: Array[
+          {
+            amount: String,
+            currency_code: String,
+            frequency: String,
+            target_company: String,
+            estimation_url: String
+          }
+        ],
+        title: String,
+        apn_programs: Array[String],
+        customer_business_problem: untyped,
+        customer_use_case: untyped,
+        related_opportunity_identifier: String,
+        sales_activities: Array[String],
+        competitor_name: String,
+        other_competitor_names: untyped,
+        other_solution_description: untyped,
+        additional_comments: untyped
+      },
+      ?opportunity_type: String,
+      ?marketing: {
+        campaign_name: String,
+        source: String,
+        use_cases: Array[String],
+        channels: Array[String],
+        aws_funding_used: String
+      },
+      ?software_revenue: {
+        delivery_model: String,
+        value: {
+          amount: String,
+          currency_code: String
+        },
+        effective_date: String,
+        expiration_date: untyped
+      },
+      ?client_token: String,
+      ?life_cycle: {
+        stage: String,
+        closed_lost_reason: String,
+        next_steps: String,
+        target_close_date: String,
+        review_status: String,
+        review_comments: String,
+        review_status_reason: untyped,
+        next_steps_history: Array[
+          {
+            value: untyped,
+            time: Time
+          }
+        ]
+      },
+      ?origin: String,
+      ?opportunity_team: Array[
+        {
+          email: String,
+          first_name: String,
+          last_name: untyped,
+          business_title: String,
+          phone: String
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateOpportunityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOpportunityResponse
+
+    interface _CreateResourceSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateResourceSnapshotResponse]
+      def arn: () -> String?
+      def revision: () -> Integer?
+    end
+    def create_resource_snapshot: (
+      ?catalog: String,
+      ?engagement_identifier: String,
+      ?resource_type: String,
+      ?resource_identifier: String,
+      ?resource_snapshot_template_identifier: String,
+      ?client_token: String
+    ) -> _CreateResourceSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceSnapshotResponse
+
+    interface _CreateResourceSnapshotJobResponse
+      include Smithy::Client::_Response[Types::CreateResourceSnapshotJobResponse]
+      def id: () -> String?
+      def arn: () -> String?
+    end
+    def create_resource_snapshot_job: (
+      ?catalog: String,
+      ?client_token: String,
+      ?engagement_identifier: String,
+      ?resource_type: String,
+      ?resource_identifier: String,
+      ?resource_snapshot_template_identifier: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateResourceSnapshotJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceSnapshotJobResponse
+
+    interface _DeleteResourceSnapshotJobResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_resource_snapshot_job: (
+      ?catalog: String,
+      ?resource_snapshot_job_identifier: String
+    ) -> _DeleteResourceSnapshotJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourceSnapshotJobResponse
+
+    interface _DisassociateOpportunityResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_opportunity: (
+      ?catalog: String,
+      ?opportunity_identifier: String,
+      ?related_entity_type: String,
+      ?related_entity_identifier: String
+    ) -> _DisassociateOpportunityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateOpportunityResponse
+
+    interface _GetAwsOpportunitySummaryResponse
+      include Smithy::Client::_Response[Types::GetAwsOpportunitySummaryResponse]
+      def catalog: () -> String?
+      def related_opportunity_id: () -> String?
+      def origin: () -> String?
+      def involvement_type: () -> String?
+      def visibility: () -> String?
+      def life_cycle: () -> Types::AwsOpportunityLifeCycle?
+      def opportunity_team: () -> Array[Types::AwsTeamMember]?
+      def insights: () -> Types::AwsOpportunityInsights?
+      def involvement_type_change_reason: () -> String?
+      def related_entity_ids: () -> Types::AwsOpportunityRelatedEntities?
+      def customer: () -> Types::AwsOpportunityCustomer?
+      def project: () -> Types::AwsOpportunityProject?
+    end
+    def get_aws_opportunity_summary: (
+      ?catalog: String,
+      ?related_opportunity_identifier: String
+    ) -> _GetAwsOpportunitySummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAwsOpportunitySummaryResponse
+
+    interface _GetEngagementResponse
+      include Smithy::Client::_Response[Types::GetEngagementResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def title: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def member_count: () -> Integer?
+      def contexts: () -> Array[Types::EngagementContextDetails]?
+    end
+    def get_engagement: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _GetEngagementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEngagementResponse
+
+    interface _GetEngagementInvitationResponse
+      include Smithy::Client::_Response[Types::GetEngagementInvitationResponse]
+      def arn: () -> String?
+      def payload_type: () -> String?
+      def id: () -> String?
+      def engagement_id: () -> String?
+      def engagement_title: () -> String?
+      def status: () -> String?
+      def invitation_date: () -> Time?
+      def expiration_date: () -> Time?
+      def sender_aws_account_id: () -> String?
+      def sender_company_name: () -> String?
+      def receiver: () -> Types::Receiver?
+      def catalog: () -> String?
+      def rejection_reason: () -> String?
+      def payload: () -> Types::Payload?
+      def invitation_message: () -> String?
+      def engagement_description: () -> String?
+      def existing_members: () -> Array[Types::EngagementMemberSummary]?
+    end
+    def get_engagement_invitation: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _GetEngagementInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEngagementInvitationResponse
+
+    interface _GetOpportunityResponse
+      include Smithy::Client::_Response[Types::GetOpportunityResponse]
+      def catalog: () -> String?
+      def primary_needs_from_aws: () -> Array[String]?
+      def national_security: () -> String?
+      def partner_opportunity_identifier: () -> String?
+      def customer: () -> Types::Customer?
+      def project: () -> Types::Project?
+      def opportunity_type: () -> String?
+      def marketing: () -> Types::Marketing?
+      def software_revenue: () -> Types::SoftwareRevenue?
+      def id: () -> String?
+      def arn: () -> String?
+      def last_modified_date: () -> Time?
+      def created_date: () -> Time?
+      def related_entity_identifiers: () -> Types::RelatedEntityIdentifiers?
+      def life_cycle: () -> Types::LifeCycle?
+      def opportunity_team: () -> Array[Types::Contact]?
+    end
+    def get_opportunity: (
+      ?catalog: String,
+      ?identifier: String
+    ) -> _GetOpportunityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOpportunityResponse
+
+    interface _GetResourceSnapshotResponse
+      include Smithy::Client::_Response[Types::GetResourceSnapshotResponse]
+      def catalog: () -> String?
+      def arn: () -> String?
+      def created_by: () -> String?
+      def created_at: () -> Time?
+      def engagement_id: () -> String?
+      def resource_type: () -> String?
+      def resource_id: () -> String?
+      def resource_snapshot_template_name: () -> String?
+      def revision: () -> Integer?
+      def payload: () -> Types::ResourceSnapshotPayload?
+    end
+    def get_resource_snapshot: (
+      ?catalog: String,
+      ?engagement_identifier: String,
+      ?resource_type: String,
+      ?resource_identifier: String,
+      ?resource_snapshot_template_identifier: String,
+      ?revision: Integer
+    ) -> _GetResourceSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceSnapshotResponse
+
+    interface _GetResourceSnapshotJobResponse
+      include Smithy::Client::_Response[Types::GetResourceSnapshotJobResponse]
+      def catalog: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def engagement_id: () -> String?
+      def resource_type: () -> String?
+      def resource_id: () -> String?
+      def resource_arn: () -> String?
+      def resource_snapshot_template_name: () -> String?
+      def created_at: () -> Time?
+      def status: () -> String?
+      def last_successful_execution_date: () -> Time?
+      def last_failure: () -> String?
+    end
+    def get_resource_snapshot_job: (
+      ?catalog: String,
+      ?resource_snapshot_job_identifier: String
+    ) -> _GetResourceSnapshotJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceSnapshotJobResponse
+
+    interface _GetSellingSystemSettingsResponse
+      include Smithy::Client::_Response[Types::GetSellingSystemSettingsResponse]
+      def catalog: () -> String?
+      def resource_snapshot_job_role_arn: () -> String?
+    end
+    def get_selling_system_settings: (
+      ?catalog: String
+    ) -> _GetSellingSystemSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSellingSystemSettingsResponse
+
+    interface _ListEngagementByAcceptingInvitationTasksResponse
+      include Smithy::Client::_Response[Types::ListEngagementByAcceptingInvitationTasksResponse]
+      def task_summaries: () -> Array[Types::ListEngagementByAcceptingInvitationTaskSummary]?
+      def next_token: () -> String?
+    end
+    def list_engagement_by_accepting_invitation_tasks: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort: {
+        sort_order: String,
+        sort_by: String
+      },
+      ?catalog: String,
+      ?task_status: Array[String],
+      ?opportunity_identifier: Array[String],
+      ?engagement_invitation_identifier: Array[String],
+      ?task_identifier: Array[String]
+    ) -> _ListEngagementByAcceptingInvitationTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEngagementByAcceptingInvitationTasksResponse
+
+    interface _ListEngagementFromOpportunityTasksResponse
+      include Smithy::Client::_Response[Types::ListEngagementFromOpportunityTasksResponse]
+      def task_summaries: () -> Array[Types::ListEngagementFromOpportunityTaskSummary]?
+      def next_token: () -> String?
+    end
+    def list_engagement_from_opportunity_tasks: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort: {
+        sort_order: String,
+        sort_by: String
+      },
+      ?catalog: String,
+      ?task_status: Array[String],
+      ?task_identifier: Array[String],
+      ?opportunity_identifier: Array[String],
+      ?engagement_identifier: Array[String]
+    ) -> _ListEngagementFromOpportunityTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEngagementFromOpportunityTasksResponse
+
+    interface _ListEngagementInvitationsResponse
+      include Smithy::Client::_Response[Types::ListEngagementInvitationsResponse]
+      def engagement_invitation_summaries: () -> Array[Types::EngagementInvitationSummary]?
+      def next_token: () -> String?
+    end
+    def list_engagement_invitations: (
+      ?catalog: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort: {
+        sort_order: String,
+        sort_by: String
+      },
+      ?payload_type: Array[String],
+      ?participant_type: String,
+      ?status: Array[String],
+      ?engagement_identifier: Array[String],
+      ?sender_aws_account_id: Array[String]
+    ) -> _ListEngagementInvitationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEngagementInvitationsResponse
+
+    interface _ListEngagementMembersResponse
+      include Smithy::Client::_Response[Types::ListEngagementMembersResponse]
+      def engagement_member_list: () -> Array[Types::EngagementMember]?
+      def next_token: () -> String?
+    end
+    def list_engagement_members: (
+      ?catalog: String,
+      ?identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEngagementMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEngagementMembersResponse
+
+    interface _ListEngagementResourceAssociationsResponse
+      include Smithy::Client::_Response[Types::ListEngagementResourceAssociationsResponse]
+      def engagement_resource_association_summaries: () -> Array[Types::EngagementResourceAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_engagement_resource_associations: (
+      ?catalog: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?engagement_identifier: String,
+      ?resource_type: String,
+      ?resource_identifier: String,
+      ?created_by: String
+    ) -> _ListEngagementResourceAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEngagementResourceAssociationsResponse
+
+    interface _ListEngagementsResponse
+      include Smithy::Client::_Response[Types::ListEngagementsResponse]
+      def engagement_summary_list: () -> Array[Types::EngagementSummary]?
+      def next_token: () -> String?
+    end
+    def list_engagements: (
+      ?catalog: String,
+      ?created_by: Array[String],
+      ?exclude_created_by: Array[String],
+      ?sort: {
+        sort_order: String,
+        sort_by: String
+      },
+      ?max_results: Integer,
+      ?next_token: String,
+      ?engagement_identifier: Array[String]
+    ) -> _ListEngagementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEngagementsResponse
+
+    interface _ListOpportunitiesResponse
+      include Smithy::Client::_Response[Types::ListOpportunitiesResponse]
+      def opportunity_summaries: () -> Array[Types::OpportunitySummary]?
+      def next_token: () -> String?
+    end
+    def list_opportunities: (
+      ?catalog: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort: {
+        sort_order: String,
+        sort_by: String
+      },
+      ?last_modified_date: {
+        after_last_modified_date: Time,
+        before_last_modified_date: untyped
+      },
+      ?identifier: Array[String],
+      ?life_cycle_stage: Array[String],
+      ?life_cycle_review_status: Array[String],
+      ?customer_company_name: Array[String]
+    ) -> _ListOpportunitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOpportunitiesResponse
+
+    interface _ListResourceSnapshotJobsResponse
+      include Smithy::Client::_Response[Types::ListResourceSnapshotJobsResponse]
+      def resource_snapshot_job_summaries: () -> Array[Types::ResourceSnapshotJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_resource_snapshot_jobs: (
+      ?catalog: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?engagement_identifier: String,
+      ?status: String,
+      ?sort: {
+        sort_by: String,
+        sort_order: String
+      }
+    ) -> _ListResourceSnapshotJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceSnapshotJobsResponse
+
+    interface _ListResourceSnapshotsResponse
+      include Smithy::Client::_Response[Types::ListResourceSnapshotsResponse]
+      def resource_snapshot_summaries: () -> Array[Types::ResourceSnapshotSummary]?
+      def next_token: () -> String?
+    end
+    def list_resource_snapshots: (
+      ?catalog: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?engagement_identifier: String,
+      ?resource_type: String,
+      ?resource_identifier: String,
+      ?resource_snapshot_template_identifier: String,
+      ?created_by: String
+    ) -> _ListResourceSnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceSnapshotsResponse
+
+    interface _ListSolutionsResponse
+      include Smithy::Client::_Response[Types::ListSolutionsResponse]
+      def solution_summaries: () -> Array[Types::SolutionBase]?
+      def next_token: () -> String?
+    end
+    def list_solutions: (
+      ?catalog: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort: {
+        sort_order: String,
+        sort_by: String
+      },
+      ?status: Array[String],
+      ?identifier: Array[String],
+      ?category: Array[String]
+    ) -> _ListSolutionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSolutionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutSellingSystemSettingsResponse
+      include Smithy::Client::_Response[Types::PutSellingSystemSettingsResponse]
+      def catalog: () -> String?
+      def resource_snapshot_job_role_arn: () -> String?
+    end
+    def put_selling_system_settings: (
+      ?catalog: String,
+      ?resource_snapshot_job_role_identifier: String
+    ) -> _PutSellingSystemSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutSellingSystemSettingsResponse
+
+    interface _RejectEngagementInvitationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def reject_engagement_invitation: (
+      ?catalog: String,
+      ?identifier: String,
+      ?rejection_reason: String
+    ) -> _RejectEngagementInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectEngagementInvitationResponse
+
+    interface _StartEngagementByAcceptingInvitationTaskResponse
+      include Smithy::Client::_Response[Types::StartEngagementByAcceptingInvitationTaskResponse]
+      def task_id: () -> String?
+      def task_arn: () -> String?
+      def start_time: () -> Time?
+      def task_status: () -> String?
+      def message: () -> String?
+      def reason_code: () -> String?
+      def opportunity_id: () -> String?
+      def resource_snapshot_job_id: () -> String?
+      def engagement_invitation_id: () -> String?
+    end
+    def start_engagement_by_accepting_invitation_task: (
+      ?catalog: String,
+      ?client_token: String,
+      ?identifier: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _StartEngagementByAcceptingInvitationTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartEngagementByAcceptingInvitationTaskResponse
+
+    interface _StartEngagementFromOpportunityTaskResponse
+      include Smithy::Client::_Response[Types::StartEngagementFromOpportunityTaskResponse]
+      def task_id: () -> String?
+      def task_arn: () -> String?
+      def start_time: () -> Time?
+      def task_status: () -> String?
+      def message: () -> String?
+      def reason_code: () -> String?
+      def opportunity_id: () -> String?
+      def resource_snapshot_job_id: () -> String?
+      def engagement_id: () -> String?
+      def engagement_invitation_id: () -> String?
+    end
+    def start_engagement_from_opportunity_task: (
+      ?catalog: String,
+      ?client_token: String,
+      ?identifier: String,
+      ?aws_submission: {
+        involvement_type: String,
+        visibility: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _StartEngagementFromOpportunityTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartEngagementFromOpportunityTaskResponse
+
+    interface _StartResourceSnapshotJobResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def start_resource_snapshot_job: (
+      ?catalog: String,
+      ?resource_snapshot_job_identifier: String
+    ) -> _StartResourceSnapshotJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartResourceSnapshotJobResponse
+
+    interface _StopResourceSnapshotJobResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def stop_resource_snapshot_job: (
+      ?catalog: String,
+      ?resource_snapshot_job_identifier: String
+    ) -> _StopResourceSnapshotJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopResourceSnapshotJobResponse
+
+    interface _SubmitOpportunityResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def submit_opportunity: (
+      ?catalog: String,
+      ?identifier: String,
+      ?involvement_type: String,
+      ?visibility: String
+    ) -> _SubmitOpportunityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SubmitOpportunityResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateOpportunityResponse
+      include Smithy::Client::_Response[Types::UpdateOpportunityResponse]
+      def id: () -> String?
+      def last_modified_date: () -> Time?
+    end
+    def update_opportunity: (
+      ?catalog: String,
+      ?primary_needs_from_aws: Array[String],
+      ?national_security: String,
+      ?partner_opportunity_identifier: String,
+      ?customer: {
+        account: {
+          industry: String,
+          other_industry: String,
+          company_name: String,
+          website_url: String,
+          aws_account_id: String,
+          address: {
+            city: String,
+            postal_code: untyped,
+            state_or_region: untyped,
+            country_code: String,
+            street_address: untyped
+          },
+          duns: String
+        },
+        contacts: Array[
+          {
+            email: String,
+            first_name: untyped,
+            last_name: untyped,
+            business_title: String,
+            phone: String
+          }
+        ]
+      },
+      ?project: {
+        delivery_models: Array[String],
+        expected_customer_spend: Array[
+          {
+            amount: String,
+            currency_code: String,
+            frequency: String,
+            target_company: String,
+            estimation_url: String
+          }
+        ],
+        title: String,
+        apn_programs: Array[String],
+        customer_business_problem: untyped,
+        customer_use_case: untyped,
+        related_opportunity_identifier: String,
+        sales_activities: Array[String],
+        competitor_name: String,
+        other_competitor_names: untyped,
+        other_solution_description: untyped,
+        additional_comments: untyped
+      },
+      ?opportunity_type: String,
+      ?marketing: {
+        campaign_name: String,
+        source: String,
+        use_cases: Array[String],
+        channels: Array[String],
+        aws_funding_used: String
+      },
+      ?software_revenue: {
+        delivery_model: String,
+        value: {
+          amount: String,
+          currency_code: String
+        },
+        effective_date: String,
+        expiration_date: untyped
+      },
+      ?last_modified_date: Time,
+      ?identifier: String,
+      ?life_cycle: {
+        stage: String,
+        closed_lost_reason: String,
+        next_steps: String,
+        target_close_date: String,
+        review_status: String,
+        review_comments: String,
+        review_status_reason: untyped,
+        next_steps_history: Array[
+          {
+            value: untyped,
+            time: Time
+          }
+        ]
+      }
+    ) -> _UpdateOpportunityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOpportunityResponse
+  end
+end

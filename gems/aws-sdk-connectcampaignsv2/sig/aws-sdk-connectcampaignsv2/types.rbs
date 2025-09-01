@@ -1,0 +1,1576 @@
+module Aws::ConnectCampaignsV2
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?x_amz_error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor x_amz_error_type: String?
+    end
+
+    class AgentlessConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AnswerMachineDetectionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_answer_machine_detection: bool,
+        ?await_answer_machine_prompt: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_answer_machine_detection: bool?
+      attr_accessor await_answer_machine_prompt: bool?
+    end
+
+    class Campaign
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?connect_instance_id: String,
+        ?channel_subtype_config: Types::ChannelSubtypeConfig,
+        ?source: Types::Source,
+        ?connect_campaign_flow_arn: String,
+        ?schedule: Types::Schedule,
+        ?communication_time_config: Types::CommunicationTimeConfig,
+        ?communication_limits_override: Types::CommunicationLimitsConfig,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor connect_instance_id: String?
+      attr_accessor channel_subtype_config: Types::ChannelSubtypeConfig?
+      attr_accessor source: Types::Source?
+      attr_accessor connect_campaign_flow_arn: String?
+      attr_accessor schedule: Types::Schedule?
+      attr_accessor communication_time_config: Types::CommunicationTimeConfig?
+      attr_accessor communication_limits_override: Types::CommunicationLimitsConfig?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CampaignFilters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id_filter: Types::InstanceIdFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id_filter: Types::InstanceIdFilter?
+    end
+
+    class CampaignSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?name: String,
+        ?connect_instance_id: String,
+        ?channel_subtypes: Array[String],
+        ?schedule: Types::Schedule,
+        ?connect_campaign_flow_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor connect_instance_id: String?
+      attr_accessor channel_subtypes: Array[String]?
+      attr_accessor schedule: Types::Schedule?
+      attr_accessor connect_campaign_flow_arn: String?
+    end
+
+    class ChannelSubtypeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?telephony: Types::TelephonyChannelSubtypeConfig,
+        ?sms: Types::SmsChannelSubtypeConfig,
+        ?email: Types::EmailChannelSubtypeConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor telephony: Types::TelephonyChannelSubtypeConfig?
+      attr_accessor sms: Types::SmsChannelSubtypeConfig?
+      attr_accessor email: Types::EmailChannelSubtypeConfig?
+    end
+
+    class ChannelSubtypeParameters
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?telephony: Types::TelephonyChannelSubtypeParameters,
+        ?sms: Types::SmsChannelSubtypeParameters,
+        ?email: Types::EmailChannelSubtypeParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor telephony: Types::TelephonyChannelSubtypeParameters?
+      attr_accessor sms: Types::SmsChannelSubtypeParameters?
+      attr_accessor email: Types::EmailChannelSubtypeParameters?
+
+      class Telephony < ChannelSubtypeParameters
+      end
+      class Sms < ChannelSubtypeParameters
+      end
+      class Email < ChannelSubtypeParameters
+      end
+      class Unknown < ChannelSubtypeParameters
+      end
+    end
+
+    class CommunicationLimit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_count_per_recipient: Integer,
+        ?frequency: Integer,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_count_per_recipient: Integer?
+      attr_accessor frequency: Integer?
+      attr_accessor unit: String?
+    end
+
+    class CommunicationLimits
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?communication_limits_list: Array[Types::CommunicationLimit],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor communication_limits_list: Array[Types::CommunicationLimit]?
+
+      class CommunicationLimitsList < CommunicationLimits
+      end
+      class Unknown < CommunicationLimits
+      end
+    end
+
+    class CommunicationLimitsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?all_channel_subtypes: Types::CommunicationLimits,
+        ?instance_limits_handling: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor all_channel_subtypes: Types::CommunicationLimits?
+      attr_accessor instance_limits_handling: String?
+    end
+
+    class CommunicationTimeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?local_time_zone_config: Types::LocalTimeZoneConfig,
+        ?telephony: Types::TimeWindow,
+        ?sms: Types::TimeWindow,
+        ?email: Types::TimeWindow,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor local_time_zone_config: Types::LocalTimeZoneConfig?
+      attr_accessor telephony: Types::TimeWindow?
+      attr_accessor sms: Types::TimeWindow?
+      attr_accessor email: Types::TimeWindow?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?x_amz_error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor x_amz_error_type: String?
+    end
+
+    class CreateCampaignRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?connect_instance_id: String,
+        ?channel_subtype_config: Types::ChannelSubtypeConfig,
+        ?source: Types::Source,
+        ?connect_campaign_flow_arn: String,
+        ?schedule: Types::Schedule,
+        ?communication_time_config: Types::CommunicationTimeConfig,
+        ?communication_limits_override: Types::CommunicationLimitsConfig,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor connect_instance_id: String?
+      attr_accessor channel_subtype_config: Types::ChannelSubtypeConfig?
+      attr_accessor source: Types::Source?
+      attr_accessor connect_campaign_flow_arn: String?
+      attr_accessor schedule: Types::Schedule?
+      attr_accessor communication_time_config: Types::CommunicationTimeConfig?
+      attr_accessor communication_limits_override: Types::CommunicationLimitsConfig?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateCampaignResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CustomerProfilesIntegrationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_arn: String,
+        ?object_type_names: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_arn: String?
+      attr_accessor object_type_names: Hash[String, String]?
+    end
+
+    class CustomerProfilesIntegrationIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_arn: String?
+    end
+
+    class CustomerProfilesIntegrationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_arn: String,
+        ?object_type_names: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_arn: String?
+      attr_accessor object_type_names: Hash[String, String]?
+    end
+
+    class DeleteCampaignChannelSubtypeConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?channel_subtype: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor channel_subtype: String?
+    end
+
+    class DeleteCampaignCommunicationLimitsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?config: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor config: String?
+    end
+
+    class DeleteCampaignCommunicationTimeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?config: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor config: String?
+    end
+
+    class DeleteCampaignRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteConnectInstanceConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_instance_id: String,
+        ?campaign_deletion_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_instance_id: String?
+      attr_accessor campaign_deletion_policy: String?
+    end
+
+    class DeleteConnectInstanceIntegrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_instance_id: String,
+        ?integration_identifier: Types::IntegrationIdentifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_instance_id: String?
+      attr_accessor integration_identifier: Types::IntegrationIdentifier?
+    end
+
+    class DeleteInstanceOnboardingJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_instance_id: String?
+    end
+
+    class DescribeCampaignRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DescribeCampaignResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaign: Types::Campaign,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaign: Types::Campaign?
+    end
+
+    class EmailChannelSubtypeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity: Float,
+        ?outbound_mode: Types::EmailOutboundMode,
+        ?default_outbound_config: Types::EmailOutboundConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity: Float?
+      attr_accessor outbound_mode: Types::EmailOutboundMode?
+      attr_accessor default_outbound_config: Types::EmailOutboundConfig?
+    end
+
+    class EmailChannelSubtypeParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_email_address: String,
+        ?connect_source_email_address: String,
+        ?template_arn: String,
+        ?template_parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_email_address: String?
+      attr_accessor connect_source_email_address: String?
+      attr_accessor template_arn: String?
+      attr_accessor template_parameters: Hash[String, String]?
+    end
+
+    class EmailOutboundConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_source_email_address: String,
+        ?source_email_address_display_name: String,
+        ?wisdom_template_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_source_email_address: String?
+      attr_accessor source_email_address_display_name: String?
+      attr_accessor wisdom_template_arn: String?
+    end
+
+    class EmailOutboundMode
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?agentless: Types::AgentlessConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agentless: Types::AgentlessConfig?
+
+      class Agentless < EmailOutboundMode
+      end
+      class Unknown < EmailOutboundMode
+      end
+    end
+
+    class EncryptionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?encryption_type: String,
+        ?key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor encryption_type: String?
+      attr_accessor key_arn: String?
+    end
+
+    class EventTrigger
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?customer_profiles_domain_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_profiles_domain_arn: String?
+    end
+
+    class FailedCampaignStateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaign_id: String,
+        ?failure_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaign_id: String?
+      attr_accessor failure_code: String?
+    end
+
+    class FailedProfileOutboundRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?id: String,
+        ?failure_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor id: String?
+      attr_accessor failure_code: String?
+    end
+
+    class FailedRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?id: String,
+        ?failure_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor id: String?
+      attr_accessor failure_code: String?
+    end
+
+    class GetCampaignStateBatchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaign_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaign_ids: Array[String]?
+    end
+
+    class GetCampaignStateBatchResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful_requests: Array[Types::SuccessfulCampaignStateResponse],
+        ?failed_requests: Array[Types::FailedCampaignStateResponse],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful_requests: Array[Types::SuccessfulCampaignStateResponse]?
+      attr_accessor failed_requests: Array[Types::FailedCampaignStateResponse]?
+    end
+
+    class GetCampaignStateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetCampaignStateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+    end
+
+    class GetConnectInstanceConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_instance_id: String?
+    end
+
+    class GetConnectInstanceConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_instance_config: Types::InstanceConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_instance_config: Types::InstanceConfig?
+    end
+
+    class GetInstanceCommunicationLimitsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_instance_id: String?
+    end
+
+    class GetInstanceCommunicationLimitsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?communication_limits_config: Types::InstanceCommunicationLimitsConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor communication_limits_config: Types::InstanceCommunicationLimitsConfig?
+    end
+
+    class GetInstanceOnboardingJobStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_instance_id: String?
+    end
+
+    class GetInstanceOnboardingJobStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_instance_onboarding_job_status: Types::InstanceOnboardingJobStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_instance_onboarding_job_status: Types::InstanceOnboardingJobStatus?
+    end
+
+    class InstanceCommunicationLimitsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?all_channel_subtypes: Types::CommunicationLimits,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor all_channel_subtypes: Types::CommunicationLimits?
+    end
+
+    class InstanceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_instance_id: String,
+        ?service_linked_role_arn: String,
+        ?encryption_config: Types::EncryptionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_instance_id: String?
+      attr_accessor service_linked_role_arn: String?
+      attr_accessor encryption_config: Types::EncryptionConfig?
+    end
+
+    class InstanceIdFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor operator: String?
+    end
+
+    class InstanceOnboardingJobStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_instance_id: String,
+        ?status: String,
+        ?failure_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_instance_id: String?
+      attr_accessor status: String?
+      attr_accessor failure_code: String?
+    end
+
+    class IntegrationConfig
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?customer_profiles: Types::CustomerProfilesIntegrationConfig,
+        ?q_connect: Types::QConnectIntegrationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_profiles: Types::CustomerProfilesIntegrationConfig?
+      attr_accessor q_connect: Types::QConnectIntegrationConfig?
+
+      class CustomerProfiles < IntegrationConfig
+      end
+      class QConnect < IntegrationConfig
+      end
+      class Unknown < IntegrationConfig
+      end
+    end
+
+    class IntegrationIdentifier
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?customer_profiles: Types::CustomerProfilesIntegrationIdentifier,
+        ?q_connect: Types::QConnectIntegrationIdentifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_profiles: Types::CustomerProfilesIntegrationIdentifier?
+      attr_accessor q_connect: Types::QConnectIntegrationIdentifier?
+
+      class CustomerProfiles < IntegrationIdentifier
+      end
+      class QConnect < IntegrationIdentifier
+      end
+      class Unknown < IntegrationIdentifier
+      end
+    end
+
+    class IntegrationSummary
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?customer_profiles: Types::CustomerProfilesIntegrationSummary,
+        ?q_connect: Types::QConnectIntegrationSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_profiles: Types::CustomerProfilesIntegrationSummary?
+      attr_accessor q_connect: Types::QConnectIntegrationSummary?
+
+      class CustomerProfiles < IntegrationSummary
+      end
+      class QConnect < IntegrationSummary
+      end
+      class Unknown < IntegrationSummary
+      end
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?x_amz_error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor x_amz_error_type: String?
+    end
+
+    class InvalidCampaignStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?message: String,
+        ?x_amz_error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor message: String?
+      attr_accessor x_amz_error_type: String?
+    end
+
+    class InvalidStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?x_amz_error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor x_amz_error_type: String?
+    end
+
+    class ListCampaignsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Types::CampaignFilters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Types::CampaignFilters?
+    end
+
+    class ListCampaignsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?campaign_summary_list: Array[Types::CampaignSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor campaign_summary_list: Array[Types::CampaignSummary]?
+    end
+
+    class ListConnectInstanceIntegrationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_instance_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_instance_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectInstanceIntegrationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?integration_summary_list: Array[Types::IntegrationSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor integration_summary_list: Array[Types::IntegrationSummary]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class LocalTimeZoneConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_time_zone: String,
+        ?local_time_zone_detection: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_time_zone: String?
+      attr_accessor local_time_zone_detection: Array[String]?
+    end
+
+    class OpenHours
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?daily_hours: Hash[String, Array[Types::TimeRange]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor daily_hours: Hash[String, Array[Types::TimeRange]]?
+
+      class DailyHours < OpenHours
+      end
+      class Unknown < OpenHours
+      end
+    end
+
+    class OutboundRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?expiration_time: Time,
+        ?channel_subtype_parameters: Types::ChannelSubtypeParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor expiration_time: Time?
+      attr_accessor channel_subtype_parameters: Types::ChannelSubtypeParameters?
+    end
+
+    class PauseCampaignRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class PredictiveConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bandwidth_allocation: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bandwidth_allocation: Float?
+    end
+
+    class ProfileOutboundRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?profile_id: String,
+        ?expiration_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor profile_id: String?
+      attr_accessor expiration_time: Time?
+    end
+
+    class ProgressiveConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bandwidth_allocation: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bandwidth_allocation: Float?
+    end
+
+    class PutConnectInstanceIntegrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_instance_id: String,
+        ?integration_config: Types::IntegrationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_instance_id: String?
+      attr_accessor integration_config: Types::IntegrationConfig?
+    end
+
+    class PutInstanceCommunicationLimitsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_instance_id: String,
+        ?communication_limits_config: Types::InstanceCommunicationLimitsConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_instance_id: String?
+      attr_accessor communication_limits_config: Types::InstanceCommunicationLimitsConfig?
+    end
+
+    class PutOutboundRequestBatchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?outbound_requests: Array[Types::OutboundRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor outbound_requests: Array[Types::OutboundRequest]?
+    end
+
+    class PutOutboundRequestBatchResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful_requests: Array[Types::SuccessfulRequest],
+        ?failed_requests: Array[Types::FailedRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful_requests: Array[Types::SuccessfulRequest]?
+      attr_accessor failed_requests: Array[Types::FailedRequest]?
+    end
+
+    class PutProfileOutboundRequestBatchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?profile_outbound_requests: Array[Types::ProfileOutboundRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor profile_outbound_requests: Array[Types::ProfileOutboundRequest]?
+    end
+
+    class PutProfileOutboundRequestBatchResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful_requests: Array[Types::SuccessfulProfileOutboundRequest],
+        ?failed_requests: Array[Types::FailedProfileOutboundRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful_requests: Array[Types::SuccessfulProfileOutboundRequest]?
+      attr_accessor failed_requests: Array[Types::FailedProfileOutboundRequest]?
+    end
+
+    class QConnectIntegrationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_arn: String?
+    end
+
+    class QConnectIntegrationIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_arn: String?
+    end
+
+    class QConnectIntegrationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?knowledge_base_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor knowledge_base_arn: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?x_amz_error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor x_amz_error_type: String?
+    end
+
+    class RestrictedPeriod
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?start_date: String,
+        ?end_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor start_date: String?
+      attr_accessor end_date: String?
+    end
+
+    class RestrictedPeriods
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?restricted_period_list: Array[Types::RestrictedPeriod],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restricted_period_list: Array[Types::RestrictedPeriod]?
+
+      class RestrictedPeriodList < RestrictedPeriods
+      end
+      class Unknown < RestrictedPeriods
+      end
+    end
+
+    class ResumeCampaignRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class Schedule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?refresh_frequency: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor refresh_frequency: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?x_amz_error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor x_amz_error_type: String?
+    end
+
+    class SmsChannelSubtypeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity: Float,
+        ?outbound_mode: Types::SmsOutboundMode,
+        ?default_outbound_config: Types::SmsOutboundConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity: Float?
+      attr_accessor outbound_mode: Types::SmsOutboundMode?
+      attr_accessor default_outbound_config: Types::SmsOutboundConfig?
+    end
+
+    class SmsChannelSubtypeParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_phone_number: String,
+        ?connect_source_phone_number_arn: String,
+        ?template_arn: String,
+        ?template_parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_phone_number: String?
+      attr_accessor connect_source_phone_number_arn: String?
+      attr_accessor template_arn: String?
+      attr_accessor template_parameters: Hash[String, String]?
+    end
+
+    class SmsOutboundConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_source_phone_number_arn: String,
+        ?wisdom_template_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_source_phone_number_arn: String?
+      attr_accessor wisdom_template_arn: String?
+    end
+
+    class SmsOutboundMode
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?agentless: Types::AgentlessConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agentless: Types::AgentlessConfig?
+
+      class Agentless < SmsOutboundMode
+      end
+      class Unknown < SmsOutboundMode
+      end
+    end
+
+    class Source
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?customer_profiles_segment_arn: String,
+        ?event_trigger: Types::EventTrigger,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor customer_profiles_segment_arn: String?
+      attr_accessor event_trigger: Types::EventTrigger?
+
+      class CustomerProfilesSegmentArn < Source
+      end
+      class EventTrigger < Source
+      end
+      class Unknown < Source
+      end
+    end
+
+    class StartCampaignRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class StartInstanceOnboardingJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_instance_id: String,
+        ?encryption_config: Types::EncryptionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_instance_id: String?
+      attr_accessor encryption_config: Types::EncryptionConfig?
+    end
+
+    class StartInstanceOnboardingJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_instance_onboarding_job_status: Types::InstanceOnboardingJobStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_instance_onboarding_job_status: Types::InstanceOnboardingJobStatus?
+    end
+
+    class StopCampaignRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class SuccessfulCampaignStateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaign_id: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaign_id: String?
+      attr_accessor state: String?
+    end
+
+    class SuccessfulProfileOutboundRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor id: String?
+    end
+
+    class SuccessfulRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor id: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TelephonyChannelSubtypeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity: Float,
+        ?connect_queue_id: String,
+        ?outbound_mode: Types::TelephonyOutboundMode,
+        ?default_outbound_config: Types::TelephonyOutboundConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity: Float?
+      attr_accessor connect_queue_id: String?
+      attr_accessor outbound_mode: Types::TelephonyOutboundMode?
+      attr_accessor default_outbound_config: Types::TelephonyOutboundConfig?
+    end
+
+    class TelephonyChannelSubtypeParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_phone_number: String,
+        ?attributes: Hash[String, String],
+        ?connect_source_phone_number: String,
+        ?answer_machine_detection_config: Types::AnswerMachineDetectionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_phone_number: String?
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor connect_source_phone_number: String?
+      attr_accessor answer_machine_detection_config: Types::AnswerMachineDetectionConfig?
+    end
+
+    class TelephonyOutboundConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connect_contact_flow_id: String,
+        ?connect_source_phone_number: String,
+        ?answer_machine_detection_config: Types::AnswerMachineDetectionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connect_contact_flow_id: String?
+      attr_accessor connect_source_phone_number: String?
+      attr_accessor answer_machine_detection_config: Types::AnswerMachineDetectionConfig?
+    end
+
+    class TelephonyOutboundMode
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?progressive: Types::ProgressiveConfig,
+        ?predictive: Types::PredictiveConfig,
+        ?agentless: Types::AgentlessConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor progressive: Types::ProgressiveConfig?
+      attr_accessor predictive: Types::PredictiveConfig?
+      attr_accessor agentless: Types::AgentlessConfig?
+
+      class Progressive < TelephonyOutboundMode
+      end
+      class Predictive < TelephonyOutboundMode
+      end
+      class Agentless < TelephonyOutboundMode
+      end
+      class Unknown < TelephonyOutboundMode
+      end
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?x_amz_error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor x_amz_error_type: String?
+    end
+
+    class TimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: String,
+        ?end_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: String?
+      attr_accessor end_time: String?
+    end
+
+    class TimeWindow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?open_hours: Types::OpenHours,
+        ?restricted_periods: Types::RestrictedPeriods,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor open_hours: Types::OpenHours?
+      attr_accessor restricted_periods: Types::RestrictedPeriods?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateCampaignChannelSubtypeConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?channel_subtype_config: Types::ChannelSubtypeConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor channel_subtype_config: Types::ChannelSubtypeConfig?
+    end
+
+    class UpdateCampaignCommunicationLimitsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?communication_limits_override: Types::CommunicationLimitsConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor communication_limits_override: Types::CommunicationLimitsConfig?
+    end
+
+    class UpdateCampaignCommunicationTimeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?communication_time_config: Types::CommunicationTimeConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor communication_time_config: Types::CommunicationTimeConfig?
+    end
+
+    class UpdateCampaignFlowAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?connect_campaign_flow_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor connect_campaign_flow_arn: String?
+    end
+
+    class UpdateCampaignNameRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    class UpdateCampaignScheduleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?schedule: Types::Schedule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor schedule: Types::Schedule?
+    end
+
+    class UpdateCampaignSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?source: Types::Source,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor source: Types::Source?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?x_amz_error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor x_amz_error_type: String?
+    end
+  end
+end

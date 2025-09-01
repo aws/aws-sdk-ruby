@@ -1,0 +1,11 @@
+module Aws::CloudSearchDomain
+  module Errors
+    class DocumentServiceException < Smithy::Client::ServiceError
+      def status: () -> String?
+      def message: () -> String?
+    end
+    class SearchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

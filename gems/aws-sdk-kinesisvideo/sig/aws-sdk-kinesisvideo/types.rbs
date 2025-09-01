@@ -1,0 +1,1429 @@
+module Aws::KinesisVideo
+  module Types
+
+    module APIName
+      PUT_MEDIA: String
+      GET_MEDIA: String
+      LIST_FRAGMENTS: String
+      GET_MEDIA_FOR_FRAGMENT_LIST: String
+      GET_HLS_STREAMING_SESSION_URL: String
+      GET_DASH_STREAMING_SESSION_URL: String
+      GET_CLIP: String
+      GET_IMAGES: String
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountChannelLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountStreamLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ChannelInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+        ?channel_arn: String,
+        ?channel_type: String,
+        ?channel_status: String,
+        ?creation_time: Time,
+        ?single_master_configuration: Types::SingleMasterConfiguration,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+      attr_accessor channel_arn: String?
+      attr_accessor channel_type: String?
+      attr_accessor channel_status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor single_master_configuration: Types::SingleMasterConfiguration?
+      attr_accessor version: String?
+    end
+
+    class ChannelNameCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comparison_operator: String,
+        ?comparison_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comparison_operator: String?
+      attr_accessor comparison_value: String?
+    end
+
+    module ChannelProtocol
+      WSS: String
+      HTTPS: String
+      WEBRTC: String
+    end
+
+    module ChannelRole
+      MASTER: String
+      VIEWER: String
+    end
+
+    module ChannelType
+      SINGLE_MASTER: String
+      FULL_MESH: String
+    end
+
+    class ClientLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ComparisonOperator
+      BEGINS_WITH: String
+    end
+
+    module ConfigurationStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class CreateSignalingChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+        ?channel_type: String,
+        ?single_master_configuration: Types::SingleMasterConfiguration,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+      attr_accessor channel_type: String?
+      attr_accessor single_master_configuration: Types::SingleMasterConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateSignalingChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+    end
+
+    class CreateStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_name: String,
+        ?stream_name: String,
+        ?media_type: String,
+        ?kms_key_id: String,
+        ?data_retention_in_hours: Integer,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_name: String?
+      attr_accessor stream_name: String?
+      attr_accessor media_type: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor data_retention_in_hours: Integer?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+    end
+
+    class DeleteEdgeConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+    end
+
+    class DeleteEdgeConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSignalingChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?current_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor current_version: String?
+    end
+
+    class DeleteSignalingChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?current_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor current_version: String?
+    end
+
+    class DeleteStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?edge_retention_in_hours: Integer,
+        ?local_size_config: Types::LocalSizeConfig,
+        ?delete_after_upload: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor edge_retention_in_hours: Integer?
+      attr_accessor local_size_config: Types::LocalSizeConfig?
+      attr_accessor delete_after_upload: bool?
+    end
+
+    class DescribeEdgeConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+    end
+
+    class DescribeEdgeConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+        ?sync_status: String,
+        ?failed_status_details: String,
+        ?edge_config: Types::EdgeConfig,
+        ?edge_agent_status: Types::EdgeAgentStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor sync_status: String?
+      attr_accessor failed_status_details: String?
+      attr_accessor edge_config: Types::EdgeConfig?
+      attr_accessor edge_agent_status: Types::EdgeAgentStatus?
+    end
+
+    class DescribeImageGenerationConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+    end
+
+    class DescribeImageGenerationConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_generation_configuration: Types::ImageGenerationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_generation_configuration: Types::ImageGenerationConfiguration?
+    end
+
+    class DescribeMappedResourceConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeMappedResourceConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mapped_resource_configuration_list: Array[Types::MappedResourceConfigurationListItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mapped_resource_configuration_list: Array[Types::MappedResourceConfigurationListItem]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeMediaStorageConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+        ?channel_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+      attr_accessor channel_arn: String?
+    end
+
+    class DescribeMediaStorageConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_storage_configuration: Types::MediaStorageConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_storage_configuration: Types::MediaStorageConfiguration?
+    end
+
+    class DescribeNotificationConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+    end
+
+    class DescribeNotificationConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_configuration: Types::NotificationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_configuration: Types::NotificationConfiguration?
+    end
+
+    class DescribeSignalingChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+        ?channel_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+      attr_accessor channel_arn: String?
+    end
+
+    class DescribeSignalingChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_info: Types::ChannelInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_info: Types::ChannelInfo?
+    end
+
+    class DescribeStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+    end
+
+    class DescribeStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_info: Types::StreamInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_info: Types::StreamInfo?
+    end
+
+    class DeviceStreamLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EdgeAgentStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_recorder_status: Types::LastRecorderStatus,
+        ?last_uploader_status: Types::LastUploaderStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_recorder_status: Types::LastRecorderStatus?
+      attr_accessor last_uploader_status: Types::LastUploaderStatus?
+    end
+
+    class EdgeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hub_device_arn: String,
+        ?recorder_config: Types::RecorderConfig,
+        ?uploader_config: Types::UploaderConfig,
+        ?deletion_config: Types::DeletionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hub_device_arn: String?
+      attr_accessor recorder_config: Types::RecorderConfig?
+      attr_accessor uploader_config: Types::UploaderConfig?
+      attr_accessor deletion_config: Types::DeletionConfig?
+    end
+
+    module Format
+      JPEG: String
+      PNG: String
+    end
+
+    module FormatConfigKey
+      JPEGQuality: String
+    end
+
+    class GetDataEndpointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?api_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor api_name: String?
+    end
+
+    class GetDataEndpointOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_endpoint: String?
+    end
+
+    class GetSignalingChannelEndpointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?single_master_channel_endpoint_configuration: Types::SingleMasterChannelEndpointConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor single_master_channel_endpoint_configuration: Types::SingleMasterChannelEndpointConfiguration?
+    end
+
+    class GetSignalingChannelEndpointOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_endpoint_list: Array[Types::ResourceEndpointListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_endpoint_list: Array[Types::ResourceEndpointListItem]?
+    end
+
+    class ImageGenerationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?image_selector_type: String,
+        ?destination_config: Types::ImageGenerationDestinationConfig,
+        ?sampling_interval: Integer,
+        ?format: String,
+        ?format_config: Hash[String, String],
+        ?width_pixels: Integer,
+        ?height_pixels: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor image_selector_type: String?
+      attr_accessor destination_config: Types::ImageGenerationDestinationConfig?
+      attr_accessor sampling_interval: Integer?
+      attr_accessor format: String?
+      attr_accessor format_config: Hash[String, String]?
+      attr_accessor width_pixels: Integer?
+      attr_accessor height_pixels: Integer?
+    end
+
+    class ImageGenerationDestinationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uri: String,
+        ?destination_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uri: String?
+      attr_accessor destination_region: String?
+    end
+
+    module ImageSelectorType
+      SERVER_TIMESTAMP: String
+      PRODUCER_TIMESTAMP: String
+    end
+
+    class InvalidArgumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDeviceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidResourceFormatException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LastRecorderStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_status_details: String,
+        ?last_collected_time: Time,
+        ?last_updated_time: Time,
+        ?recorder_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_status_details: String?
+      attr_accessor last_collected_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor recorder_status: String?
+    end
+
+    class LastUploaderStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_status_details: String,
+        ?last_collected_time: Time,
+        ?last_updated_time: Time,
+        ?uploader_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_status_details: String?
+      attr_accessor last_collected_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor uploader_status: String?
+    end
+
+    class ListEdgeAgentConfigurationsEdgeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+        ?sync_status: String,
+        ?failed_status_details: String,
+        ?edge_config: Types::EdgeConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor sync_status: String?
+      attr_accessor failed_status_details: String?
+      attr_accessor edge_config: Types::EdgeConfig?
+    end
+
+    class ListEdgeAgentConfigurationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hub_device_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hub_device_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListEdgeAgentConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?edge_configs: Array[Types::ListEdgeAgentConfigurationsEdgeConfig],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor edge_configs: Array[Types::ListEdgeAgentConfigurationsEdgeConfig]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSignalingChannelsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?channel_name_condition: Types::ChannelNameCondition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor channel_name_condition: Types::ChannelNameCondition?
+    end
+
+    class ListSignalingChannelsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_info_list: Array[Types::ChannelInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_info_list: Array[Types::ChannelInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class ListStreamsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?stream_name_condition: Types::StreamNameCondition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor stream_name_condition: Types::StreamNameCondition?
+    end
+
+    class ListStreamsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_info_list: Array[Types::StreamInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_info_list: Array[Types::StreamInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTagsForStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?stream_arn: String,
+        ?stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor stream_arn: String?
+      attr_accessor stream_name: String?
+    end
+
+    class ListTagsForStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class LocalSizeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_local_media_size_in_mb: Integer,
+        ?strategy_on_full_size: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_local_media_size_in_mb: Integer?
+      attr_accessor strategy_on_full_size: String?
+    end
+
+    class MappedResourceConfigurationListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor arn: String?
+    end
+
+    class MediaSourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_uri_secret_arn: String,
+        ?media_uri_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_uri_secret_arn: String?
+      attr_accessor media_uri_type: String?
+    end
+
+    class MediaStorageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor status: String?
+    end
+
+    module MediaStorageConfigurationStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module MediaUriType
+      RTSP_URI: String
+      FILE_URI: String
+    end
+
+    class NoDataRetentionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NotAuthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NotificationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?destination_config: Types::NotificationDestinationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor destination_config: Types::NotificationDestinationConfig?
+    end
+
+    class NotificationDestinationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uri: String?
+    end
+
+    class RecorderConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?media_source_config: Types::MediaSourceConfig,
+        ?schedule_config: Types::ScheduleConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor media_source_config: Types::MediaSourceConfig?
+      attr_accessor schedule_config: Types::ScheduleConfig?
+    end
+
+    module RecorderStatus
+      SUCCESS: String
+      USER_ERROR: String
+      SYSTEM_ERROR: String
+    end
+
+    class ResourceEndpointListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protocol: String,
+        ?resource_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protocol: String?
+      attr_accessor resource_endpoint: String?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ScheduleConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schedule_expression: String,
+        ?duration_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schedule_expression: String?
+      attr_accessor duration_in_seconds: Integer?
+    end
+
+    class SingleMasterChannelEndpointConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?protocols: Array[String],
+        ?role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor protocols: Array[String]?
+      attr_accessor role: String?
+    end
+
+    class SingleMasterConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_ttl_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_ttl_seconds: Integer?
+    end
+
+    class StartEdgeConfigurationUpdateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?edge_config: Types::EdgeConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor edge_config: Types::EdgeConfig?
+    end
+
+    class StartEdgeConfigurationUpdateOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+        ?sync_status: String,
+        ?failed_status_details: String,
+        ?edge_config: Types::EdgeConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor sync_status: String?
+      attr_accessor failed_status_details: String?
+      attr_accessor edge_config: Types::EdgeConfig?
+    end
+
+    module Status
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+    end
+
+    module StrategyOnFullSize
+      DELETE_OLDEST_MEDIA: String
+      DENY_NEW_MEDIA: String
+    end
+
+    class StreamEdgeConfigurationNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StreamInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_name: String,
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?media_type: String,
+        ?kms_key_id: String,
+        ?version: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?data_retention_in_hours: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_name: String?
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor media_type: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor version: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor data_retention_in_hours: Integer?
+    end
+
+    class StreamNameCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?comparison_operator: String,
+        ?comparison_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor comparison_operator: String?
+      attr_accessor comparison_value: String?
+    end
+
+    module SyncStatus
+      SYNCING: String
+      ACKNOWLEDGED: String
+      IN_SYNC: String
+      SYNC_FAILED: String
+      DELETING: String
+      DELETE_FAILED: String
+      DELETING_ACKNOWLEDGED: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TagStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?stream_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor stream_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TagsPerResourceExceededLimitException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_key_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_key_list: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UntagStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?stream_name: String,
+        ?tag_key_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor stream_name: String?
+      attr_accessor tag_key_list: Array[String]?
+    end
+
+    class UntagStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDataRetentionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?current_version: String,
+        ?operation: String,
+        ?data_retention_change_in_hours: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor current_version: String?
+      attr_accessor operation: String?
+      attr_accessor data_retention_change_in_hours: Integer?
+    end
+
+    module UpdateDataRetentionOperation
+      INCREASE_DATA_RETENTION: String
+      DECREASE_DATA_RETENTION: String
+    end
+
+    class UpdateDataRetentionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateImageGenerationConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?image_generation_configuration: Types::ImageGenerationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor image_generation_configuration: Types::ImageGenerationConfiguration?
+    end
+
+    class UpdateImageGenerationConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateMediaStorageConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?media_storage_configuration: Types::MediaStorageConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor media_storage_configuration: Types::MediaStorageConfiguration?
+    end
+
+    class UpdateMediaStorageConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateNotificationConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?notification_configuration: Types::NotificationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor notification_configuration: Types::NotificationConfiguration?
+    end
+
+    class UpdateNotificationConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateSignalingChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?current_version: String,
+        ?single_master_configuration: Types::SingleMasterConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor current_version: String?
+      attr_accessor single_master_configuration: Types::SingleMasterConfiguration?
+    end
+
+    class UpdateSignalingChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_name: String,
+        ?stream_arn: String,
+        ?current_version: String,
+        ?device_name: String,
+        ?media_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_name: String?
+      attr_accessor stream_arn: String?
+      attr_accessor current_version: String?
+      attr_accessor device_name: String?
+      attr_accessor media_type: String?
+    end
+
+    class UpdateStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UploaderConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schedule_config: Types::ScheduleConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schedule_config: Types::ScheduleConfig?
+    end
+
+    module UploaderStatus
+      SUCCESS: String
+      USER_ERROR: String
+      SYSTEM_ERROR: String
+    end
+
+    class VersionMismatchException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

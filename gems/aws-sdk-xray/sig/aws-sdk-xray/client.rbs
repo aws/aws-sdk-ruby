@@ -1,0 +1,515 @@
+module Aws::XRay
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::XRay::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchGetTracesResponse
+      include Smithy::Client::_Response[Types::BatchGetTracesResult]
+      def traces: () -> Array[Types::Trace]?
+      def unprocessed_trace_ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def batch_get_traces: (
+      ?trace_ids: Array[String],
+      ?next_token: String
+    ) -> _BatchGetTracesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetTracesResponse
+
+    interface _CancelTraceRetrievalResponse
+      include Smithy::Client::_Response[Types::CancelTraceRetrievalResult]
+    end
+    def cancel_trace_retrieval: (
+      ?retrieval_token: String
+    ) -> _CancelTraceRetrievalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelTraceRetrievalResponse
+
+    interface _CreateGroupResponse
+      include Smithy::Client::_Response[Types::CreateGroupResult]
+      def group: () -> Types::Group?
+    end
+    def create_group: (
+      ?group_name: String,
+      ?filter_expression: String,
+      ?insights_configuration: {
+        insights_enabled: bool,
+        notifications_enabled: untyped
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGroupResponse
+
+    interface _CreateSamplingRuleResponse
+      include Smithy::Client::_Response[Types::CreateSamplingRuleResult]
+      def sampling_rule_record: () -> Types::SamplingRuleRecord?
+    end
+    def create_sampling_rule: (
+      ?sampling_rule: {
+        rule_name: String,
+        rule_arn: String,
+        resource_arn: String,
+        priority: Integer,
+        fixed_rate: Float,
+        reservoir_size: Integer,
+        service_name: String,
+        service_type: String,
+        host: String,
+        http_method: String,
+        url_path: String,
+        version: Integer,
+        attributes: Hash[String, String]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateSamplingRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSamplingRuleResponse
+
+    interface _DeleteGroupResponse
+      include Smithy::Client::_Response[Types::DeleteGroupResult]
+    end
+    def delete_group: (
+      ?group_name: String,
+      ?group_arn: String
+    ) -> _DeleteGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGroupResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyResult]
+    end
+    def delete_resource_policy: (
+      ?policy_name: String,
+      ?policy_revision_id: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeleteSamplingRuleResponse
+      include Smithy::Client::_Response[Types::DeleteSamplingRuleResult]
+      def sampling_rule_record: () -> Types::SamplingRuleRecord?
+    end
+    def delete_sampling_rule: (
+      ?rule_name: String,
+      ?rule_arn: String
+    ) -> _DeleteSamplingRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSamplingRuleResponse
+
+    interface _GetEncryptionConfigResponse
+      include Smithy::Client::_Response[Types::GetEncryptionConfigResult]
+      def encryption_config: () -> Types::EncryptionConfig?
+    end
+    def get_encryption_config: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEncryptionConfigResponse
+
+    interface _GetGroupResponse
+      include Smithy::Client::_Response[Types::GetGroupResult]
+      def group: () -> Types::Group?
+    end
+    def get_group: (
+      ?group_name: String,
+      ?group_arn: String
+    ) -> _GetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGroupResponse
+
+    interface _GetGroupsResponse
+      include Smithy::Client::_Response[Types::GetGroupsResult]
+      def groups: () -> Array[Types::GroupSummary]?
+      def next_token: () -> String?
+    end
+    def get_groups: (
+      ?next_token: String
+    ) -> _GetGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGroupsResponse
+
+    interface _GetIndexingRulesResponse
+      include Smithy::Client::_Response[Types::GetIndexingRulesResult]
+      def indexing_rules: () -> Array[Types::IndexingRule]?
+      def next_token: () -> String?
+    end
+    def get_indexing_rules: (
+      ?next_token: String
+    ) -> _GetIndexingRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIndexingRulesResponse
+
+    interface _GetInsightResponse
+      include Smithy::Client::_Response[Types::GetInsightResult]
+      def insight: () -> Types::Insight?
+    end
+    def get_insight: (
+      ?insight_id: String
+    ) -> _GetInsightResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInsightResponse
+
+    interface _GetInsightEventsResponse
+      include Smithy::Client::_Response[Types::GetInsightEventsResult]
+      def insight_events: () -> Array[Types::InsightEvent]?
+      def next_token: () -> String?
+    end
+    def get_insight_events: (
+      ?insight_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetInsightEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInsightEventsResponse
+
+    interface _GetInsightImpactGraphResponse
+      include Smithy::Client::_Response[Types::GetInsightImpactGraphResult]
+      def insight_id: () -> String?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def service_graph_start_time: () -> Time?
+      def service_graph_end_time: () -> Time?
+      def services: () -> Array[Types::InsightImpactGraphService]?
+      def next_token: () -> String?
+    end
+    def get_insight_impact_graph: (
+      ?insight_id: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?next_token: String
+    ) -> _GetInsightImpactGraphResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInsightImpactGraphResponse
+
+    interface _GetInsightSummariesResponse
+      include Smithy::Client::_Response[Types::GetInsightSummariesResult]
+      def insight_summaries: () -> Array[Types::InsightSummary]?
+      def next_token: () -> String?
+    end
+    def get_insight_summaries: (
+      ?states: Array[String],
+      ?group_arn: String,
+      ?group_name: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetInsightSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInsightSummariesResponse
+
+    interface _GetRetrievedTracesGraphResponse
+      include Smithy::Client::_Response[Types::GetRetrievedTracesGraphResult]
+      def retrieval_status: () -> String?
+      def services: () -> Array[Types::RetrievedService]?
+      def next_token: () -> String?
+    end
+    def get_retrieved_traces_graph: (
+      ?retrieval_token: String,
+      ?next_token: String
+    ) -> _GetRetrievedTracesGraphResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRetrievedTracesGraphResponse
+
+    interface _GetSamplingRulesResponse
+      include Smithy::Client::_Response[Types::GetSamplingRulesResult]
+      def sampling_rule_records: () -> Array[Types::SamplingRuleRecord]?
+      def next_token: () -> String?
+    end
+    def get_sampling_rules: (
+      ?next_token: String
+    ) -> _GetSamplingRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSamplingRulesResponse
+
+    interface _GetSamplingStatisticSummariesResponse
+      include Smithy::Client::_Response[Types::GetSamplingStatisticSummariesResult]
+      def sampling_statistic_summaries: () -> Array[Types::SamplingStatisticSummary]?
+      def next_token: () -> String?
+    end
+    def get_sampling_statistic_summaries: (
+      ?next_token: String
+    ) -> _GetSamplingStatisticSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSamplingStatisticSummariesResponse
+
+    interface _GetSamplingTargetsResponse
+      include Smithy::Client::_Response[Types::GetSamplingTargetsResult]
+      def sampling_target_documents: () -> Array[Types::SamplingTargetDocument]?
+      def last_rule_modification: () -> Time?
+      def unprocessed_statistics: () -> Array[Types::UnprocessedStatistics]?
+    end
+    def get_sampling_targets: (
+      ?sampling_statistics_documents: Array[
+        {
+          rule_name: String,
+          client_id: String,
+          timestamp: Time,
+          request_count: Integer,
+          sampled_count: Integer,
+          borrow_count: Integer
+        }
+      ]
+    ) -> _GetSamplingTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSamplingTargetsResponse
+
+    interface _GetServiceGraphResponse
+      include Smithy::Client::_Response[Types::GetServiceGraphResult]
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def services: () -> Array[Types::Service]?
+      def contains_old_group_versions: () -> bool?
+      def next_token: () -> String?
+    end
+    def get_service_graph: (
+      ?start_time: Time,
+      ?end_time: Time,
+      ?group_name: String,
+      ?group_arn: String,
+      ?next_token: String
+    ) -> _GetServiceGraphResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServiceGraphResponse
+
+    interface _GetTimeSeriesServiceStatisticsResponse
+      include Smithy::Client::_Response[Types::GetTimeSeriesServiceStatisticsResult]
+      def time_series_service_statistics: () -> Array[Types::TimeSeriesServiceStatistics]?
+      def contains_old_group_versions: () -> bool?
+      def next_token: () -> String?
+    end
+    def get_time_series_service_statistics: (
+      ?start_time: Time,
+      ?end_time: Time,
+      ?group_name: String,
+      ?group_arn: String,
+      ?entity_selector_expression: String,
+      ?period: Integer,
+      ?forecast_statistics: bool,
+      ?next_token: String
+    ) -> _GetTimeSeriesServiceStatisticsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTimeSeriesServiceStatisticsResponse
+
+    interface _GetTraceGraphResponse
+      include Smithy::Client::_Response[Types::GetTraceGraphResult]
+      def services: () -> Array[Types::Service]?
+      def next_token: () -> String?
+    end
+    def get_trace_graph: (
+      ?trace_ids: Array[String],
+      ?next_token: String
+    ) -> _GetTraceGraphResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTraceGraphResponse
+
+    interface _GetTraceSegmentDestinationResponse
+      include Smithy::Client::_Response[Types::GetTraceSegmentDestinationResult]
+      def destination: () -> String?
+      def status: () -> String?
+    end
+    def get_trace_segment_destination: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTraceSegmentDestinationResponse
+
+    interface _GetTraceSummariesResponse
+      include Smithy::Client::_Response[Types::GetTraceSummariesResult]
+      def trace_summaries: () -> Array[Types::TraceSummary]?
+      def approximate_time: () -> Time?
+      def traces_processed_count: () -> Integer?
+      def next_token: () -> String?
+    end
+    def get_trace_summaries: (
+      ?start_time: Time,
+      ?end_time: Time,
+      ?time_range_type: String,
+      ?sampling: bool,
+      ?sampling_strategy: {
+        name: String,
+        value: Float
+      },
+      ?filter_expression: String,
+      ?next_token: String
+    ) -> _GetTraceSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTraceSummariesResponse
+
+    interface _ListResourcePoliciesResponse
+      include Smithy::Client::_Response[Types::ListResourcePoliciesResult]
+      def resource_policies: () -> Array[Types::ResourcePolicy]?
+      def next_token: () -> String?
+    end
+    def list_resource_policies: (
+      ?next_token: String
+    ) -> _ListResourcePoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourcePoliciesResponse
+
+    interface _ListRetrievedTracesResponse
+      include Smithy::Client::_Response[Types::ListRetrievedTracesResult]
+      def retrieval_status: () -> String?
+      def trace_format: () -> String?
+      def traces: () -> Array[Types::RetrievedTrace]?
+      def next_token: () -> String?
+    end
+    def list_retrieved_traces: (
+      ?retrieval_token: String,
+      ?trace_format: String,
+      ?next_token: String
+    ) -> _ListRetrievedTracesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRetrievedTracesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String,
+      ?next_token: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutEncryptionConfigResponse
+      include Smithy::Client::_Response[Types::PutEncryptionConfigResult]
+      def encryption_config: () -> Types::EncryptionConfig?
+    end
+    def put_encryption_config: (
+      ?key_id: String,
+      ?type: String
+    ) -> _PutEncryptionConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutEncryptionConfigResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResult]
+      def resource_policy: () -> Types::ResourcePolicy?
+    end
+    def put_resource_policy: (
+      ?policy_name: String,
+      ?policy_document: String,
+      ?policy_revision_id: String,
+      ?bypass_policy_lockout_check: bool
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _PutTelemetryRecordsResponse
+      include Smithy::Client::_Response[Types::PutTelemetryRecordsResult]
+    end
+    def put_telemetry_records: (
+      ?telemetry_records: Array[
+        {
+          timestamp: Time,
+          segments_received_count: Integer,
+          segments_sent_count: untyped,
+          segments_spillover_count: untyped,
+          segments_rejected_count: untyped,
+          backend_connection_errors: {
+            timeout_count: untyped,
+            connection_refused_count: untyped,
+            http_code4_xx_count: untyped,
+            http_code5_xx_count: untyped,
+            unknown_host_count: untyped,
+            other_count: untyped
+          }
+        }
+      ],
+      ?ec2_instance_id: String,
+      ?hostname: String,
+      ?resource_arn: String
+    ) -> _PutTelemetryRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTelemetryRecordsResponse
+
+    interface _PutTraceSegmentsResponse
+      include Smithy::Client::_Response[Types::PutTraceSegmentsResult]
+      def unprocessed_trace_segments: () -> Array[Types::UnprocessedTraceSegment]?
+    end
+    def put_trace_segments: (
+      ?trace_segment_documents: Array[String]
+    ) -> _PutTraceSegmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutTraceSegmentsResponse
+
+    interface _StartTraceRetrievalResponse
+      include Smithy::Client::_Response[Types::StartTraceRetrievalResult]
+      def retrieval_token: () -> String?
+    end
+    def start_trace_retrieval: (
+      ?trace_ids: Array[String],
+      ?start_time: Time,
+      ?end_time: Time
+    ) -> _StartTraceRetrievalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTraceRetrievalResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateGroupResponse
+      include Smithy::Client::_Response[Types::UpdateGroupResult]
+      def group: () -> Types::Group?
+    end
+    def update_group: (
+      ?group_name: String,
+      ?group_arn: String,
+      ?filter_expression: String,
+      ?insights_configuration: {
+        insights_enabled: bool,
+        notifications_enabled: untyped
+      }
+    ) -> _UpdateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGroupResponse
+
+    interface _UpdateIndexingRuleResponse
+      include Smithy::Client::_Response[Types::UpdateIndexingRuleResult]
+      def indexing_rule: () -> Types::IndexingRule?
+    end
+    def update_indexing_rule: (
+      ?name: String,
+      ?rule: {
+        probabilistic: {
+          desired_sampling_percentage: Float
+        }
+      }
+    ) -> _UpdateIndexingRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIndexingRuleResponse
+
+    interface _UpdateSamplingRuleResponse
+      include Smithy::Client::_Response[Types::UpdateSamplingRuleResult]
+      def sampling_rule_record: () -> Types::SamplingRuleRecord?
+    end
+    def update_sampling_rule: (
+      ?sampling_rule_update: {
+        rule_name: String,
+        rule_arn: String,
+        resource_arn: String,
+        priority: Integer,
+        fixed_rate: Float,
+        reservoir_size: untyped,
+        host: String,
+        service_name: String,
+        service_type: String,
+        http_method: String,
+        url_path: String,
+        attributes: Hash[String, String]
+      }
+    ) -> _UpdateSamplingRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSamplingRuleResponse
+
+    interface _UpdateTraceSegmentDestinationResponse
+      include Smithy::Client::_Response[Types::UpdateTraceSegmentDestinationResult]
+      def destination: () -> String?
+      def status: () -> String?
+    end
+    def update_trace_segment_destination: (
+      ?destination: String
+    ) -> _UpdateTraceSegmentDestinationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTraceSegmentDestinationResponse
+  end
+end

@@ -1,0 +1,471 @@
+module Aws::RAM
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::RAM::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptResourceShareInvitationResponse
+      include Smithy::Client::_Response[Types::AcceptResourceShareInvitationResponse]
+      def resource_share_invitation: () -> Types::ResourceShareInvitation?
+      def client_token: () -> String?
+    end
+    def accept_resource_share_invitation: (
+      ?resource_share_invitation_arn: String,
+      ?client_token: String
+    ) -> _AcceptResourceShareInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptResourceShareInvitationResponse
+
+    interface _AssociateResourceShareResponse
+      include Smithy::Client::_Response[Types::AssociateResourceShareResponse]
+      def resource_share_associations: () -> Array[Types::ResourceShareAssociation]?
+      def client_token: () -> String?
+    end
+    def associate_resource_share: (
+      ?resource_share_arn: String,
+      ?resource_arns: Array[String],
+      ?principals: Array[String],
+      ?client_token: String,
+      ?sources: Array[String]
+    ) -> _AssociateResourceShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateResourceShareResponse
+
+    interface _AssociateResourceSharePermissionResponse
+      include Smithy::Client::_Response[Types::AssociateResourceSharePermissionResponse]
+      def return_value: () -> bool?
+      def client_token: () -> String?
+    end
+    def associate_resource_share_permission: (
+      ?resource_share_arn: String,
+      ?permission_arn: String,
+      ?replace: bool,
+      ?client_token: String,
+      ?permission_version: Integer
+    ) -> _AssociateResourceSharePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateResourceSharePermissionResponse
+
+    interface _CreatePermissionResponse
+      include Smithy::Client::_Response[Types::CreatePermissionResponse]
+      def permission: () -> Types::ResourceSharePermissionSummary?
+      def client_token: () -> String?
+    end
+    def create_permission: (
+      ?name: String,
+      ?resource_type: String,
+      ?policy_template: String,
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreatePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePermissionResponse
+
+    interface _CreatePermissionVersionResponse
+      include Smithy::Client::_Response[Types::CreatePermissionVersionResponse]
+      def permission: () -> Types::ResourceSharePermissionDetail?
+      def client_token: () -> String?
+    end
+    def create_permission_version: (
+      ?permission_arn: String,
+      ?policy_template: String,
+      ?client_token: String
+    ) -> _CreatePermissionVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePermissionVersionResponse
+
+    interface _CreateResourceShareResponse
+      include Smithy::Client::_Response[Types::CreateResourceShareResponse]
+      def resource_share: () -> Types::ResourceShare?
+      def client_token: () -> String?
+    end
+    def create_resource_share: (
+      ?name: String,
+      ?resource_arns: Array[String],
+      ?principals: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?allow_external_principals: bool,
+      ?client_token: String,
+      ?permission_arns: Array[String],
+      ?sources: Array[String]
+    ) -> _CreateResourceShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceShareResponse
+
+    interface _DeletePermissionResponse
+      include Smithy::Client::_Response[Types::DeletePermissionResponse]
+      def return_value: () -> bool?
+      def client_token: () -> String?
+      def permission_status: () -> String?
+    end
+    def delete_permission: (
+      ?permission_arn: String,
+      ?client_token: String
+    ) -> _DeletePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePermissionResponse
+
+    interface _DeletePermissionVersionResponse
+      include Smithy::Client::_Response[Types::DeletePermissionVersionResponse]
+      def return_value: () -> bool?
+      def client_token: () -> String?
+      def permission_status: () -> String?
+    end
+    def delete_permission_version: (
+      ?permission_arn: String,
+      ?permission_version: Integer,
+      ?client_token: String
+    ) -> _DeletePermissionVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePermissionVersionResponse
+
+    interface _DeleteResourceShareResponse
+      include Smithy::Client::_Response[Types::DeleteResourceShareResponse]
+      def return_value: () -> bool?
+      def client_token: () -> String?
+    end
+    def delete_resource_share: (
+      ?resource_share_arn: String,
+      ?client_token: String
+    ) -> _DeleteResourceShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourceShareResponse
+
+    interface _DisassociateResourceShareResponse
+      include Smithy::Client::_Response[Types::DisassociateResourceShareResponse]
+      def resource_share_associations: () -> Array[Types::ResourceShareAssociation]?
+      def client_token: () -> String?
+    end
+    def disassociate_resource_share: (
+      ?resource_share_arn: String,
+      ?resource_arns: Array[String],
+      ?principals: Array[String],
+      ?client_token: String,
+      ?sources: Array[String]
+    ) -> _DisassociateResourceShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateResourceShareResponse
+
+    interface _DisassociateResourceSharePermissionResponse
+      include Smithy::Client::_Response[Types::DisassociateResourceSharePermissionResponse]
+      def return_value: () -> bool?
+      def client_token: () -> String?
+    end
+    def disassociate_resource_share_permission: (
+      ?resource_share_arn: String,
+      ?permission_arn: String,
+      ?client_token: String
+    ) -> _DisassociateResourceSharePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateResourceSharePermissionResponse
+
+    interface _EnableSharingWithAwsOrganizationResponse
+      include Smithy::Client::_Response[Types::EnableSharingWithAwsOrganizationResponse]
+      def return_value: () -> bool?
+    end
+    def enable_sharing_with_aws_organization: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableSharingWithAwsOrganizationResponse
+
+    interface _GetPermissionResponse
+      include Smithy::Client::_Response[Types::GetPermissionResponse]
+      def permission: () -> Types::ResourceSharePermissionDetail?
+    end
+    def get_permission: (
+      ?permission_arn: String,
+      ?permission_version: Integer
+    ) -> _GetPermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPermissionResponse
+
+    interface _GetResourcePoliciesResponse
+      include Smithy::Client::_Response[Types::GetResourcePoliciesResponse]
+      def policies: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def get_resource_policies: (
+      ?resource_arns: Array[String],
+      ?principal: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetResourcePoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePoliciesResponse
+
+    interface _GetResourceShareAssociationsResponse
+      include Smithy::Client::_Response[Types::GetResourceShareAssociationsResponse]
+      def resource_share_associations: () -> Array[Types::ResourceShareAssociation]?
+      def next_token: () -> String?
+    end
+    def get_resource_share_associations: (
+      ?association_type: String,
+      ?resource_share_arns: Array[String],
+      ?resource_arn: String,
+      ?principal: String,
+      ?association_status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetResourceShareAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceShareAssociationsResponse
+
+    interface _GetResourceShareInvitationsResponse
+      include Smithy::Client::_Response[Types::GetResourceShareInvitationsResponse]
+      def resource_share_invitations: () -> Array[Types::ResourceShareInvitation]?
+      def next_token: () -> String?
+    end
+    def get_resource_share_invitations: (
+      ?resource_share_invitation_arns: Array[String],
+      ?resource_share_arns: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetResourceShareInvitationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceShareInvitationsResponse
+
+    interface _GetResourceSharesResponse
+      include Smithy::Client::_Response[Types::GetResourceSharesResponse]
+      def resource_shares: () -> Array[Types::ResourceShare]?
+      def next_token: () -> String?
+    end
+    def get_resource_shares: (
+      ?resource_share_arns: Array[String],
+      ?resource_share_status: String,
+      ?resource_owner: String,
+      ?name: String,
+      ?tag_filters: Array[
+        {
+          tag_key: String,
+          tag_values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?permission_arn: String,
+      ?permission_version: Integer
+    ) -> _GetResourceSharesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceSharesResponse
+
+    interface _ListPendingInvitationResourcesResponse
+      include Smithy::Client::_Response[Types::ListPendingInvitationResourcesResponse]
+      def resources: () -> Array[Types::Resource]?
+      def next_token: () -> String?
+    end
+    def list_pending_invitation_resources: (
+      ?resource_share_invitation_arn: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?resource_region_scope: String
+    ) -> _ListPendingInvitationResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPendingInvitationResourcesResponse
+
+    interface _ListPermissionAssociationsResponse
+      include Smithy::Client::_Response[Types::ListPermissionAssociationsResponse]
+      def permissions: () -> Array[Types::AssociatedPermission]?
+      def next_token: () -> String?
+    end
+    def list_permission_associations: (
+      ?permission_arn: String,
+      ?permission_version: Integer,
+      ?association_status: String,
+      ?resource_type: String,
+      ?feature_set: String,
+      ?default_version: bool,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPermissionAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPermissionAssociationsResponse
+
+    interface _ListPermissionVersionsResponse
+      include Smithy::Client::_Response[Types::ListPermissionVersionsResponse]
+      def permissions: () -> Array[Types::ResourceSharePermissionSummary]?
+      def next_token: () -> String?
+    end
+    def list_permission_versions: (
+      ?permission_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPermissionVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPermissionVersionsResponse
+
+    interface _ListPermissionsResponse
+      include Smithy::Client::_Response[Types::ListPermissionsResponse]
+      def permissions: () -> Array[Types::ResourceSharePermissionSummary]?
+      def next_token: () -> String?
+    end
+    def list_permissions: (
+      ?resource_type: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?permission_type: String
+    ) -> _ListPermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPermissionsResponse
+
+    interface _ListPrincipalsResponse
+      include Smithy::Client::_Response[Types::ListPrincipalsResponse]
+      def principals: () -> Array[Types::Principal]?
+      def next_token: () -> String?
+    end
+    def list_principals: (
+      ?resource_owner: String,
+      ?resource_arn: String,
+      ?principals: Array[String],
+      ?resource_type: String,
+      ?resource_share_arns: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPrincipalsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPrincipalsResponse
+
+    interface _ListReplacePermissionAssociationsWorkResponse
+      include Smithy::Client::_Response[Types::ListReplacePermissionAssociationsWorkResponse]
+      def replace_permission_associations_works: () -> Array[Types::ReplacePermissionAssociationsWork]?
+      def next_token: () -> String?
+    end
+    def list_replace_permission_associations_work: (
+      ?work_ids: Array[String],
+      ?status: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListReplacePermissionAssociationsWorkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReplacePermissionAssociationsWorkResponse
+
+    interface _ListResourceSharePermissionsResponse
+      include Smithy::Client::_Response[Types::ListResourceSharePermissionsResponse]
+      def permissions: () -> Array[Types::ResourceSharePermissionSummary]?
+      def next_token: () -> String?
+    end
+    def list_resource_share_permissions: (
+      ?resource_share_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListResourceSharePermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceSharePermissionsResponse
+
+    interface _ListResourceTypesResponse
+      include Smithy::Client::_Response[Types::ListResourceTypesResponse]
+      def resource_types: () -> Array[Types::ServiceNameAndResourceType]?
+      def next_token: () -> String?
+    end
+    def list_resource_types: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?resource_region_scope: String
+    ) -> _ListResourceTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceTypesResponse
+
+    interface _ListResourcesResponse
+      include Smithy::Client::_Response[Types::ListResourcesResponse]
+      def resources: () -> Array[Types::Resource]?
+      def next_token: () -> String?
+    end
+    def list_resources: (
+      ?resource_owner: String,
+      ?principal: String,
+      ?resource_type: String,
+      ?resource_arns: Array[String],
+      ?resource_share_arns: Array[String],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?resource_region_scope: String
+    ) -> _ListResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourcesResponse
+
+    interface _PromotePermissionCreatedFromPolicyResponse
+      include Smithy::Client::_Response[Types::PromotePermissionCreatedFromPolicyResponse]
+      def permission: () -> Types::ResourceSharePermissionSummary?
+      def client_token: () -> String?
+    end
+    def promote_permission_created_from_policy: (
+      ?permission_arn: String,
+      ?name: String,
+      ?client_token: String
+    ) -> _PromotePermissionCreatedFromPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PromotePermissionCreatedFromPolicyResponse
+
+    interface _PromoteResourceShareCreatedFromPolicyResponse
+      include Smithy::Client::_Response[Types::PromoteResourceShareCreatedFromPolicyResponse]
+      def return_value: () -> bool?
+    end
+    def promote_resource_share_created_from_policy: (
+      ?resource_share_arn: String
+    ) -> _PromoteResourceShareCreatedFromPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PromoteResourceShareCreatedFromPolicyResponse
+
+    interface _RejectResourceShareInvitationResponse
+      include Smithy::Client::_Response[Types::RejectResourceShareInvitationResponse]
+      def resource_share_invitation: () -> Types::ResourceShareInvitation?
+      def client_token: () -> String?
+    end
+    def reject_resource_share_invitation: (
+      ?resource_share_invitation_arn: String,
+      ?client_token: String
+    ) -> _RejectResourceShareInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectResourceShareInvitationResponse
+
+    interface _ReplacePermissionAssociationsResponse
+      include Smithy::Client::_Response[Types::ReplacePermissionAssociationsResponse]
+      def replace_permission_associations_work: () -> Types::ReplacePermissionAssociationsWork?
+      def client_token: () -> String?
+    end
+    def replace_permission_associations: (
+      ?from_permission_arn: String,
+      ?from_permission_version: Integer,
+      ?to_permission_arn: String,
+      ?client_token: String
+    ) -> _ReplacePermissionAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReplacePermissionAssociationsResponse
+
+    interface _SetDefaultPermissionVersionResponse
+      include Smithy::Client::_Response[Types::SetDefaultPermissionVersionResponse]
+      def return_value: () -> bool?
+      def client_token: () -> String?
+    end
+    def set_default_permission_version: (
+      ?permission_arn: String,
+      ?permission_version: Integer,
+      ?client_token: String
+    ) -> _SetDefaultPermissionVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetDefaultPermissionVersionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_share_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?resource_arn: String
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_share_arn: String,
+      ?tag_keys: Array[String],
+      ?resource_arn: String
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateResourceShareResponse
+      include Smithy::Client::_Response[Types::UpdateResourceShareResponse]
+      def resource_share: () -> Types::ResourceShare?
+      def client_token: () -> String?
+    end
+    def update_resource_share: (
+      ?resource_share_arn: String,
+      ?name: String,
+      ?allow_external_principals: bool,
+      ?client_token: String
+    ) -> _UpdateResourceShareResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResourceShareResponse
+  end
+end

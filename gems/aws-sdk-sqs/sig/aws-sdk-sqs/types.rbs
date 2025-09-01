@@ -1,0 +1,1048 @@
+module Aws::SQS
+  module Types
+
+    class AddPermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+        ?label: String,
+        ?aws_account_ids: Array[String],
+        ?actions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+      attr_accessor label: String?
+      attr_accessor aws_account_ids: Array[String]?
+      attr_accessor actions: Array[String]?
+    end
+
+    class BatchEntryIdsNotDistinct
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BatchRequestTooLong
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BatchResultErrorEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?sender_fault: bool,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor sender_fault: bool?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class CancelMessageMoveTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_handle: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_handle: String?
+    end
+
+    class CancelMessageMoveTaskResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approximate_number_of_messages_moved: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approximate_number_of_messages_moved: Integer?
+    end
+
+    class ChangeMessageVisibilityBatchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+        ?entries: Array[Types::ChangeMessageVisibilityBatchRequestEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+      attr_accessor entries: Array[Types::ChangeMessageVisibilityBatchRequestEntry]?
+    end
+
+    class ChangeMessageVisibilityBatchRequestEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?receipt_handle: String,
+        ?visibility_timeout: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor receipt_handle: String?
+      attr_accessor visibility_timeout: Integer?
+    end
+
+    class ChangeMessageVisibilityBatchResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful: Array[Types::ChangeMessageVisibilityBatchResultEntry],
+        ?failed: Array[Types::BatchResultErrorEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful: Array[Types::ChangeMessageVisibilityBatchResultEntry]?
+      attr_accessor failed: Array[Types::BatchResultErrorEntry]?
+    end
+
+    class ChangeMessageVisibilityBatchResultEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class ChangeMessageVisibilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+        ?receipt_handle: String,
+        ?visibility_timeout: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+      attr_accessor receipt_handle: String?
+      attr_accessor visibility_timeout: Integer?
+    end
+
+    class CreateQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_name: String,
+        ?attributes: Hash[String, String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_name: String?
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateQueueResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+    end
+
+    class DeleteMessageBatchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+        ?entries: Array[Types::DeleteMessageBatchRequestEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+      attr_accessor entries: Array[Types::DeleteMessageBatchRequestEntry]?
+    end
+
+    class DeleteMessageBatchRequestEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?receipt_handle: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor receipt_handle: String?
+    end
+
+    class DeleteMessageBatchResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful: Array[Types::DeleteMessageBatchResultEntry],
+        ?failed: Array[Types::BatchResultErrorEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful: Array[Types::DeleteMessageBatchResultEntry]?
+      attr_accessor failed: Array[Types::BatchResultErrorEntry]?
+    end
+
+    class DeleteMessageBatchResultEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+        ?receipt_handle: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+      attr_accessor receipt_handle: String?
+    end
+
+    class DeleteQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+    end
+
+    class EmptyBatchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetQueueAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+        ?attribute_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+      attr_accessor attribute_names: Array[String]?
+    end
+
+    class GetQueueAttributesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class GetQueueUrlRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_name: String,
+        ?queue_owner_aws_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_name: String?
+      attr_accessor queue_owner_aws_account_id: String?
+    end
+
+    class GetQueueUrlResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+    end
+
+    class InvalidAddress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidAttributeName
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidAttributeValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidBatchEntryId
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidIdFormat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class InvalidMessageContents
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSecurity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KmsAccessDenied
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KmsDisabled
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KmsInvalidKeyUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KmsInvalidState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KmsNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KmsOptInRequired
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KmsThrottled
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListDeadLetterSourceQueuesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDeadLetterSourceQueuesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_urls: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_urls: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMessageMoveTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_arn: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_arn: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMessageMoveTasksResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::ListMessageMoveTasksResultEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::ListMessageMoveTasksResultEntry]?
+    end
+
+    class ListMessageMoveTasksResultEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_handle: String,
+        ?status: String,
+        ?source_arn: String,
+        ?destination_arn: String,
+        ?max_number_of_messages_per_second: Integer,
+        ?approximate_number_of_messages_moved: Integer,
+        ?approximate_number_of_messages_to_move: Integer,
+        ?failure_reason: String,
+        ?started_timestamp: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_handle: String?
+      attr_accessor status: String?
+      attr_accessor source_arn: String?
+      attr_accessor destination_arn: String?
+      attr_accessor max_number_of_messages_per_second: Integer?
+      attr_accessor approximate_number_of_messages_moved: Integer?
+      attr_accessor approximate_number_of_messages_to_move: Integer?
+      attr_accessor failure_reason: String?
+      attr_accessor started_timestamp: Integer?
+    end
+
+    class ListQueueTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+    end
+
+    class ListQueueTagsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListQueuesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_name_prefix: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_name_prefix: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListQueuesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_urls: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_urls: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class Message
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+        ?receipt_handle: String,
+        ?md5_of_body: String,
+        ?body: String,
+        ?attributes: Hash[String, String],
+        ?md5_of_message_attributes: String,
+        ?message_attributes: Hash[String, Types::MessageAttributeValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+      attr_accessor receipt_handle: String?
+      attr_accessor md5_of_body: String?
+      attr_accessor body: String?
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor md5_of_message_attributes: String?
+      attr_accessor message_attributes: Hash[String, Types::MessageAttributeValue]?
+    end
+
+    class MessageAttributeValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?string_value: String,
+        ?binary_value: String,
+        ?string_list_values: Array[String],
+        ?binary_list_values: Array[String],
+        ?data_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_value: String?
+      attr_accessor binary_value: String?
+      attr_accessor string_list_values: Array[String]?
+      attr_accessor binary_list_values: Array[String]?
+      attr_accessor data_type: String?
+    end
+
+    class MessageNotInflight
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module MessageSystemAttributeName
+      All: String
+      SenderId: String
+      SentTimestamp: String
+      ApproximateReceiveCount: String
+      ApproximateFirstReceiveTimestamp: String
+      SequenceNumber: String
+      MessageDeduplicationId: String
+      MessageGroupId: String
+      AWSTraceHeader: String
+      DeadLetterQueueSourceArn: String
+    end
+
+    module MessageSystemAttributeNameForSends
+      AWSTraceHeader: String
+    end
+
+    class MessageSystemAttributeValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?string_value: String,
+        ?binary_value: String,
+        ?string_list_values: Array[String],
+        ?binary_list_values: Array[String],
+        ?data_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_value: String?
+      attr_accessor binary_value: String?
+      attr_accessor string_list_values: Array[String]?
+      attr_accessor binary_list_values: Array[String]?
+      attr_accessor data_type: String?
+    end
+
+    class OverLimit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PurgeQueueInProgress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PurgeQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+    end
+
+    module QueueAttributeName
+      All: String
+      Policy: String
+      VisibilityTimeout: String
+      MaximumMessageSize: String
+      MessageRetentionPeriod: String
+      ApproximateNumberOfMessages: String
+      ApproximateNumberOfMessagesNotVisible: String
+      CreatedTimestamp: String
+      LastModifiedTimestamp: String
+      QueueArn: String
+      ApproximateNumberOfMessagesDelayed: String
+      DelaySeconds: String
+      ReceiveMessageWaitTimeSeconds: String
+      RedrivePolicy: String
+      FifoQueue: String
+      ContentBasedDeduplication: String
+      KmsMasterKeyId: String
+      KmsDataKeyReusePeriodSeconds: String
+      DeduplicationScope: String
+      FifoThroughputLimit: String
+      RedriveAllowPolicy: String
+      SqsManagedSseEnabled: String
+    end
+
+    class QueueDeletedRecently
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class QueueDoesNotExist
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class QueueNameExists
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReceiptHandleIsInvalid
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReceiveMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+        ?attribute_names: Array[String],
+        ?message_system_attribute_names: Array[String],
+        ?message_attribute_names: Array[String],
+        ?max_number_of_messages: Integer,
+        ?visibility_timeout: Integer,
+        ?wait_time_seconds: Integer,
+        ?receive_request_attempt_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+      attr_accessor attribute_names: Array[String]?
+      attr_accessor message_system_attribute_names: Array[String]?
+      attr_accessor message_attribute_names: Array[String]?
+      attr_accessor max_number_of_messages: Integer?
+      attr_accessor visibility_timeout: Integer?
+      attr_accessor wait_time_seconds: Integer?
+      attr_accessor receive_request_attempt_id: String?
+    end
+
+    class ReceiveMessageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?messages: Array[Types::Message],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor messages: Array[Types::Message]?
+    end
+
+    class RemovePermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+        ?label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+      attr_accessor label: String?
+    end
+
+    class RequestThrottled
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SendMessageBatchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+        ?entries: Array[Types::SendMessageBatchRequestEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+      attr_accessor entries: Array[Types::SendMessageBatchRequestEntry]?
+    end
+
+    class SendMessageBatchRequestEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?message_body: String,
+        ?delay_seconds: Integer,
+        ?message_attributes: Hash[String, Types::MessageAttributeValue],
+        ?message_system_attributes: Hash[String, Types::MessageSystemAttributeValue],
+        ?message_deduplication_id: String,
+        ?message_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor message_body: String?
+      attr_accessor delay_seconds: Integer?
+      attr_accessor message_attributes: Hash[String, Types::MessageAttributeValue]?
+      attr_accessor message_system_attributes: Hash[String, Types::MessageSystemAttributeValue]?
+      attr_accessor message_deduplication_id: String?
+      attr_accessor message_group_id: String?
+    end
+
+    class SendMessageBatchResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful: Array[Types::SendMessageBatchResultEntry],
+        ?failed: Array[Types::BatchResultErrorEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful: Array[Types::SendMessageBatchResultEntry]?
+      attr_accessor failed: Array[Types::BatchResultErrorEntry]?
+    end
+
+    class SendMessageBatchResultEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?message_id: String,
+        ?md5_of_message_body: String,
+        ?md5_of_message_attributes: String,
+        ?md5_of_message_system_attributes: String,
+        ?sequence_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor message_id: String?
+      attr_accessor md5_of_message_body: String?
+      attr_accessor md5_of_message_attributes: String?
+      attr_accessor md5_of_message_system_attributes: String?
+      attr_accessor sequence_number: String?
+    end
+
+    class SendMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+        ?message_body: String,
+        ?delay_seconds: Integer,
+        ?message_attributes: Hash[String, Types::MessageAttributeValue],
+        ?message_system_attributes: Hash[String, Types::MessageSystemAttributeValue],
+        ?message_deduplication_id: String,
+        ?message_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+      attr_accessor message_body: String?
+      attr_accessor delay_seconds: Integer?
+      attr_accessor message_attributes: Hash[String, Types::MessageAttributeValue]?
+      attr_accessor message_system_attributes: Hash[String, Types::MessageSystemAttributeValue]?
+      attr_accessor message_deduplication_id: String?
+      attr_accessor message_group_id: String?
+    end
+
+    class SendMessageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?md5_of_message_body: String,
+        ?md5_of_message_attributes: String,
+        ?md5_of_message_system_attributes: String,
+        ?message_id: String,
+        ?sequence_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor md5_of_message_body: String?
+      attr_accessor md5_of_message_attributes: String?
+      attr_accessor md5_of_message_system_attributes: String?
+      attr_accessor message_id: String?
+      attr_accessor sequence_number: String?
+    end
+
+    class SetQueueAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class StartMessageMoveTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_arn: String,
+        ?destination_arn: String,
+        ?max_number_of_messages_per_second: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_arn: String?
+      attr_accessor destination_arn: String?
+      attr_accessor max_number_of_messages_per_second: Integer?
+    end
+
+    class StartMessageMoveTaskResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_handle: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_handle: String?
+    end
+
+    class TagQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TooManyEntriesInBatchRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnsupportedOperation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagQueueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+  end
+end

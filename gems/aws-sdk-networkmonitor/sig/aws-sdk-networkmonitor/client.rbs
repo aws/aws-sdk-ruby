@@ -1,0 +1,229 @@
+module Aws::NetworkMonitor
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::NetworkMonitor::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateMonitorResponse
+      include Smithy::Client::_Response[Types::CreateMonitorOutput]
+      def monitor_arn: () -> String?
+      def monitor_name: () -> String?
+      def state: () -> String?
+      def aggregation_period: () -> Integer?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_monitor: (
+      ?monitor_name: String,
+      ?probes: Array[
+        {
+          source_arn: String,
+          destination: String,
+          destination_port: Integer,
+          protocol: String,
+          packet_size: Integer,
+          probe_tags: Hash[String, String]
+        }
+      ],
+      ?aggregation_period: Integer,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMonitorResponse
+
+    interface _CreateProbeResponse
+      include Smithy::Client::_Response[Types::CreateProbeOutput]
+      def probe_id: () -> String?
+      def probe_arn: () -> String?
+      def source_arn: () -> String?
+      def destination: () -> String?
+      def destination_port: () -> Integer?
+      def protocol: () -> String?
+      def packet_size: () -> Integer?
+      def address_family: () -> String?
+      def vpc_id: () -> String?
+      def state: () -> String?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_probe: (
+      ?monitor_name: String,
+      ?probe: {
+        source_arn: String,
+        destination: String,
+        destination_port: Integer,
+        protocol: String,
+        packet_size: Integer,
+        tags: Hash[String, String]
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateProbeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProbeResponse
+
+    interface _DeleteMonitorResponse
+      include Smithy::Client::_Response[Types::DeleteMonitorOutput]
+    end
+    def delete_monitor: (
+      ?monitor_name: String
+    ) -> _DeleteMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMonitorResponse
+
+    interface _DeleteProbeResponse
+      include Smithy::Client::_Response[Types::DeleteProbeOutput]
+    end
+    def delete_probe: (
+      ?monitor_name: String,
+      ?probe_id: String
+    ) -> _DeleteProbeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProbeResponse
+
+    interface _GetMonitorResponse
+      include Smithy::Client::_Response[Types::GetMonitorOutput]
+      def monitor_arn: () -> String?
+      def monitor_name: () -> String?
+      def state: () -> String?
+      def aggregation_period: () -> Integer?
+      def tags: () -> Hash[String, String]?
+      def probes: () -> Array[Types::Probe]?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+    end
+    def get_monitor: (
+      ?monitor_name: String
+    ) -> _GetMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMonitorResponse
+
+    interface _GetProbeResponse
+      include Smithy::Client::_Response[Types::GetProbeOutput]
+      def probe_id: () -> String?
+      def probe_arn: () -> String?
+      def source_arn: () -> String?
+      def destination: () -> String?
+      def destination_port: () -> Integer?
+      def protocol: () -> String?
+      def packet_size: () -> Integer?
+      def address_family: () -> String?
+      def vpc_id: () -> String?
+      def state: () -> String?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_probe: (
+      ?monitor_name: String,
+      ?probe_id: String
+    ) -> _GetProbeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProbeResponse
+
+    interface _ListMonitorsResponse
+      include Smithy::Client::_Response[Types::ListMonitorsOutput]
+      def monitors: () -> Array[Types::MonitorSummary]?
+      def next_token: () -> String?
+    end
+    def list_monitors: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?state: String
+    ) -> _ListMonitorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMonitorsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateMonitorResponse
+      include Smithy::Client::_Response[Types::UpdateMonitorOutput]
+      def monitor_arn: () -> String?
+      def monitor_name: () -> String?
+      def state: () -> String?
+      def aggregation_period: () -> Integer?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_monitor: (
+      ?monitor_name: String,
+      ?aggregation_period: Integer
+    ) -> _UpdateMonitorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMonitorResponse
+
+    interface _UpdateProbeResponse
+      include Smithy::Client::_Response[Types::UpdateProbeOutput]
+      def probe_id: () -> String?
+      def probe_arn: () -> String?
+      def source_arn: () -> String?
+      def destination: () -> String?
+      def destination_port: () -> Integer?
+      def protocol: () -> String?
+      def packet_size: () -> Integer?
+      def address_family: () -> String?
+      def vpc_id: () -> String?
+      def state: () -> String?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_probe: (
+      ?monitor_name: String,
+      ?probe_id: String,
+      ?state: String,
+      ?destination: String,
+      ?destination_port: Integer,
+      ?protocol: String,
+      ?packet_size: Integer
+    ) -> _UpdateProbeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProbeResponse
+  end
+end

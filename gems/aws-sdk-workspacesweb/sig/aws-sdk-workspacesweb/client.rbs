@@ -1,0 +1,942 @@
+module Aws::WorkSpacesWeb
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::WorkSpacesWeb::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateBrowserSettingsResponse
+      include Smithy::Client::_Response[Types::AssociateBrowserSettingsResponse]
+      def portal_arn: () -> String?
+      def browser_settings_arn: () -> String?
+    end
+    def associate_browser_settings: (
+      ?portal_arn: String,
+      ?browser_settings_arn: String
+    ) -> _AssociateBrowserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateBrowserSettingsResponse
+
+    interface _AssociateDataProtectionSettingsResponse
+      include Smithy::Client::_Response[Types::AssociateDataProtectionSettingsResponse]
+      def portal_arn: () -> String?
+      def data_protection_settings_arn: () -> String?
+    end
+    def associate_data_protection_settings: (
+      ?portal_arn: String,
+      ?data_protection_settings_arn: String
+    ) -> _AssociateDataProtectionSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateDataProtectionSettingsResponse
+
+    interface _AssociateIpAccessSettingsResponse
+      include Smithy::Client::_Response[Types::AssociateIpAccessSettingsResponse]
+      def portal_arn: () -> String?
+      def ip_access_settings_arn: () -> String?
+    end
+    def associate_ip_access_settings: (
+      ?portal_arn: String,
+      ?ip_access_settings_arn: String
+    ) -> _AssociateIpAccessSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateIpAccessSettingsResponse
+
+    interface _AssociateNetworkSettingsResponse
+      include Smithy::Client::_Response[Types::AssociateNetworkSettingsResponse]
+      def portal_arn: () -> String?
+      def network_settings_arn: () -> String?
+    end
+    def associate_network_settings: (
+      ?portal_arn: String,
+      ?network_settings_arn: String
+    ) -> _AssociateNetworkSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateNetworkSettingsResponse
+
+    interface _AssociateSessionLoggerResponse
+      include Smithy::Client::_Response[Types::AssociateSessionLoggerResponse]
+      def portal_arn: () -> String?
+      def session_logger_arn: () -> String?
+    end
+    def associate_session_logger: (
+      ?portal_arn: String,
+      ?session_logger_arn: String
+    ) -> _AssociateSessionLoggerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateSessionLoggerResponse
+
+    interface _AssociateTrustStoreResponse
+      include Smithy::Client::_Response[Types::AssociateTrustStoreResponse]
+      def portal_arn: () -> String?
+      def trust_store_arn: () -> String?
+    end
+    def associate_trust_store: (
+      ?portal_arn: String,
+      ?trust_store_arn: String
+    ) -> _AssociateTrustStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateTrustStoreResponse
+
+    interface _AssociateUserAccessLoggingSettingsResponse
+      include Smithy::Client::_Response[Types::AssociateUserAccessLoggingSettingsResponse]
+      def portal_arn: () -> String?
+      def user_access_logging_settings_arn: () -> String?
+    end
+    def associate_user_access_logging_settings: (
+      ?portal_arn: String,
+      ?user_access_logging_settings_arn: String
+    ) -> _AssociateUserAccessLoggingSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateUserAccessLoggingSettingsResponse
+
+    interface _AssociateUserSettingsResponse
+      include Smithy::Client::_Response[Types::AssociateUserSettingsResponse]
+      def portal_arn: () -> String?
+      def user_settings_arn: () -> String?
+    end
+    def associate_user_settings: (
+      ?portal_arn: String,
+      ?user_settings_arn: String
+    ) -> _AssociateUserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateUserSettingsResponse
+
+    interface _CreateBrowserSettingsResponse
+      include Smithy::Client::_Response[Types::CreateBrowserSettingsResponse]
+      def browser_settings_arn: () -> String?
+    end
+    def create_browser_settings: (
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?customer_managed_key: String,
+      ?additional_encryption_context: Hash[String, String],
+      ?browser_policy: String,
+      ?client_token: String
+    ) -> _CreateBrowserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBrowserSettingsResponse
+
+    interface _CreateDataProtectionSettingsResponse
+      include Smithy::Client::_Response[Types::CreateDataProtectionSettingsResponse]
+      def data_protection_settings_arn: () -> String?
+    end
+    def create_data_protection_settings: (
+      ?display_name: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?customer_managed_key: String,
+      ?additional_encryption_context: Hash[String, String],
+      ?inline_redaction_configuration: {
+        inline_redaction_patterns: Array[
+          {
+            built_in_pattern_id: String,
+            custom_pattern: {
+              pattern_name: String,
+              pattern_regex: String,
+              pattern_description: String,
+              keyword_regex: untyped
+            },
+            redaction_place_holder: {
+              redaction_place_holder_type: String,
+              redaction_place_holder_text: String
+            },
+            enforced_urls: Array[String],
+            exempt_urls: untyped,
+            confidence_level: Integer
+          }
+        ],
+        global_enforced_urls: Array[String],
+        global_exempt_urls: untyped,
+        global_confidence_level: untyped
+      },
+      ?client_token: String
+    ) -> _CreateDataProtectionSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataProtectionSettingsResponse
+
+    interface _CreateIdentityProviderResponse
+      include Smithy::Client::_Response[Types::CreateIdentityProviderResponse]
+      def identity_provider_arn: () -> String?
+    end
+    def create_identity_provider: (
+      ?portal_arn: String,
+      ?identity_provider_name: String,
+      ?identity_provider_type: String,
+      ?identity_provider_details: Hash[String, String],
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateIdentityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIdentityProviderResponse
+
+    interface _CreateIpAccessSettingsResponse
+      include Smithy::Client::_Response[Types::CreateIpAccessSettingsResponse]
+      def ip_access_settings_arn: () -> String?
+    end
+    def create_ip_access_settings: (
+      ?display_name: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?customer_managed_key: String,
+      ?additional_encryption_context: Hash[String, String],
+      ?ip_rules: Array[
+        {
+          ip_range: String,
+          description: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateIpAccessSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIpAccessSettingsResponse
+
+    interface _CreateNetworkSettingsResponse
+      include Smithy::Client::_Response[Types::CreateNetworkSettingsResponse]
+      def network_settings_arn: () -> String?
+    end
+    def create_network_settings: (
+      ?vpc_id: String,
+      ?subnet_ids: Array[String],
+      ?security_group_ids: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateNetworkSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNetworkSettingsResponse
+
+    interface _CreatePortalResponse
+      include Smithy::Client::_Response[Types::CreatePortalResponse]
+      def portal_arn: () -> String?
+      def portal_endpoint: () -> String?
+    end
+    def create_portal: (
+      ?display_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?customer_managed_key: String,
+      ?additional_encryption_context: Hash[String, String],
+      ?client_token: String,
+      ?authentication_type: String,
+      ?instance_type: String,
+      ?max_concurrent_sessions: Integer
+    ) -> _CreatePortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePortalResponse
+
+    interface _CreateSessionLoggerResponse
+      include Smithy::Client::_Response[Types::CreateSessionLoggerResponse]
+      def session_logger_arn: () -> String?
+    end
+    def create_session_logger: (
+      ?event_filter: {
+        all: {
+        },
+        include: Array[String]
+      },
+      ?log_configuration: {
+        s3: {
+          bucket: String,
+          key_prefix: String,
+          bucket_owner: String,
+          log_file_format: String,
+          folder_structure: String
+        }
+      },
+      ?display_name: String,
+      ?customer_managed_key: String,
+      ?additional_encryption_context: Hash[String, String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateSessionLoggerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSessionLoggerResponse
+
+    interface _CreateTrustStoreResponse
+      include Smithy::Client::_Response[Types::CreateTrustStoreResponse]
+      def trust_store_arn: () -> String?
+    end
+    def create_trust_store: (
+      ?certificate_list: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateTrustStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrustStoreResponse
+
+    interface _CreateUserAccessLoggingSettingsResponse
+      include Smithy::Client::_Response[Types::CreateUserAccessLoggingSettingsResponse]
+      def user_access_logging_settings_arn: () -> String?
+    end
+    def create_user_access_logging_settings: (
+      ?kinesis_stream_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateUserAccessLoggingSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserAccessLoggingSettingsResponse
+
+    interface _CreateUserSettingsResponse
+      include Smithy::Client::_Response[Types::CreateUserSettingsResponse]
+      def user_settings_arn: () -> String?
+    end
+    def create_user_settings: (
+      ?copy_allowed: String,
+      ?paste_allowed: String,
+      ?download_allowed: String,
+      ?upload_allowed: String,
+      ?print_allowed: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?disconnect_timeout_in_minutes: Integer,
+      ?idle_disconnect_timeout_in_minutes: Integer,
+      ?client_token: String,
+      ?cookie_synchronization_configuration: {
+        allowlist: Array[
+          {
+            domain: String,
+            name: String,
+            path: String
+          }
+        ],
+        blocklist: untyped
+      },
+      ?customer_managed_key: String,
+      ?additional_encryption_context: Hash[String, String],
+      ?deep_link_allowed: String,
+      ?toolbar_configuration: {
+        toolbar_type: String,
+        visual_mode: String,
+        hidden_toolbar_items: Array[String],
+        max_display_resolution: String
+      }
+    ) -> _CreateUserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserSettingsResponse
+
+    interface _DeleteBrowserSettingsResponse
+      include Smithy::Client::_Response[Types::DeleteBrowserSettingsResponse]
+    end
+    def delete_browser_settings: (
+      ?browser_settings_arn: String
+    ) -> _DeleteBrowserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBrowserSettingsResponse
+
+    interface _DeleteDataProtectionSettingsResponse
+      include Smithy::Client::_Response[Types::DeleteDataProtectionSettingsResponse]
+    end
+    def delete_data_protection_settings: (
+      ?data_protection_settings_arn: String
+    ) -> _DeleteDataProtectionSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataProtectionSettingsResponse
+
+    interface _DeleteIdentityProviderResponse
+      include Smithy::Client::_Response[Types::DeleteIdentityProviderResponse]
+    end
+    def delete_identity_provider: (
+      ?identity_provider_arn: String
+    ) -> _DeleteIdentityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIdentityProviderResponse
+
+    interface _DeleteIpAccessSettingsResponse
+      include Smithy::Client::_Response[Types::DeleteIpAccessSettingsResponse]
+    end
+    def delete_ip_access_settings: (
+      ?ip_access_settings_arn: String
+    ) -> _DeleteIpAccessSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIpAccessSettingsResponse
+
+    interface _DeleteNetworkSettingsResponse
+      include Smithy::Client::_Response[Types::DeleteNetworkSettingsResponse]
+    end
+    def delete_network_settings: (
+      ?network_settings_arn: String
+    ) -> _DeleteNetworkSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNetworkSettingsResponse
+
+    interface _DeletePortalResponse
+      include Smithy::Client::_Response[Types::DeletePortalResponse]
+    end
+    def delete_portal: (
+      ?portal_arn: String
+    ) -> _DeletePortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePortalResponse
+
+    interface _DeleteSessionLoggerResponse
+      include Smithy::Client::_Response[Types::DeleteSessionLoggerResponse]
+    end
+    def delete_session_logger: (
+      ?session_logger_arn: String
+    ) -> _DeleteSessionLoggerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSessionLoggerResponse
+
+    interface _DeleteTrustStoreResponse
+      include Smithy::Client::_Response[Types::DeleteTrustStoreResponse]
+    end
+    def delete_trust_store: (
+      ?trust_store_arn: String
+    ) -> _DeleteTrustStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTrustStoreResponse
+
+    interface _DeleteUserAccessLoggingSettingsResponse
+      include Smithy::Client::_Response[Types::DeleteUserAccessLoggingSettingsResponse]
+    end
+    def delete_user_access_logging_settings: (
+      ?user_access_logging_settings_arn: String
+    ) -> _DeleteUserAccessLoggingSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserAccessLoggingSettingsResponse
+
+    interface _DeleteUserSettingsResponse
+      include Smithy::Client::_Response[Types::DeleteUserSettingsResponse]
+    end
+    def delete_user_settings: (
+      ?user_settings_arn: String
+    ) -> _DeleteUserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserSettingsResponse
+
+    interface _DisassociateBrowserSettingsResponse
+      include Smithy::Client::_Response[Types::DisassociateBrowserSettingsResponse]
+    end
+    def disassociate_browser_settings: (
+      ?portal_arn: String
+    ) -> _DisassociateBrowserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateBrowserSettingsResponse
+
+    interface _DisassociateDataProtectionSettingsResponse
+      include Smithy::Client::_Response[Types::DisassociateDataProtectionSettingsResponse]
+    end
+    def disassociate_data_protection_settings: (
+      ?portal_arn: String
+    ) -> _DisassociateDataProtectionSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateDataProtectionSettingsResponse
+
+    interface _DisassociateIpAccessSettingsResponse
+      include Smithy::Client::_Response[Types::DisassociateIpAccessSettingsResponse]
+    end
+    def disassociate_ip_access_settings: (
+      ?portal_arn: String
+    ) -> _DisassociateIpAccessSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateIpAccessSettingsResponse
+
+    interface _DisassociateNetworkSettingsResponse
+      include Smithy::Client::_Response[Types::DisassociateNetworkSettingsResponse]
+    end
+    def disassociate_network_settings: (
+      ?portal_arn: String
+    ) -> _DisassociateNetworkSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateNetworkSettingsResponse
+
+    interface _DisassociateSessionLoggerResponse
+      include Smithy::Client::_Response[Types::DisassociateSessionLoggerResponse]
+    end
+    def disassociate_session_logger: (
+      ?portal_arn: String
+    ) -> _DisassociateSessionLoggerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateSessionLoggerResponse
+
+    interface _DisassociateTrustStoreResponse
+      include Smithy::Client::_Response[Types::DisassociateTrustStoreResponse]
+    end
+    def disassociate_trust_store: (
+      ?portal_arn: String
+    ) -> _DisassociateTrustStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateTrustStoreResponse
+
+    interface _DisassociateUserAccessLoggingSettingsResponse
+      include Smithy::Client::_Response[Types::DisassociateUserAccessLoggingSettingsResponse]
+    end
+    def disassociate_user_access_logging_settings: (
+      ?portal_arn: String
+    ) -> _DisassociateUserAccessLoggingSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateUserAccessLoggingSettingsResponse
+
+    interface _DisassociateUserSettingsResponse
+      include Smithy::Client::_Response[Types::DisassociateUserSettingsResponse]
+    end
+    def disassociate_user_settings: (
+      ?portal_arn: String
+    ) -> _DisassociateUserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateUserSettingsResponse
+
+    interface _ExpireSessionResponse
+      include Smithy::Client::_Response[Types::ExpireSessionResponse]
+    end
+    def expire_session: (
+      ?portal_id: String,
+      ?session_id: String
+    ) -> _ExpireSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExpireSessionResponse
+
+    interface _GetBrowserSettingsResponse
+      include Smithy::Client::_Response[Types::GetBrowserSettingsResponse]
+      def browser_settings: () -> Types::BrowserSettings?
+    end
+    def get_browser_settings: (
+      ?browser_settings_arn: String
+    ) -> _GetBrowserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBrowserSettingsResponse
+
+    interface _GetDataProtectionSettingsResponse
+      include Smithy::Client::_Response[Types::GetDataProtectionSettingsResponse]
+      def data_protection_settings: () -> Types::DataProtectionSettings?
+    end
+    def get_data_protection_settings: (
+      ?data_protection_settings_arn: String
+    ) -> _GetDataProtectionSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataProtectionSettingsResponse
+
+    interface _GetIdentityProviderResponse
+      include Smithy::Client::_Response[Types::GetIdentityProviderResponse]
+      def identity_provider: () -> Types::IdentityProvider?
+    end
+    def get_identity_provider: (
+      ?identity_provider_arn: String
+    ) -> _GetIdentityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIdentityProviderResponse
+
+    interface _GetIpAccessSettingsResponse
+      include Smithy::Client::_Response[Types::GetIpAccessSettingsResponse]
+      def ip_access_settings: () -> Types::IpAccessSettings?
+    end
+    def get_ip_access_settings: (
+      ?ip_access_settings_arn: String
+    ) -> _GetIpAccessSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIpAccessSettingsResponse
+
+    interface _GetNetworkSettingsResponse
+      include Smithy::Client::_Response[Types::GetNetworkSettingsResponse]
+      def network_settings: () -> Types::NetworkSettings?
+    end
+    def get_network_settings: (
+      ?network_settings_arn: String
+    ) -> _GetNetworkSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNetworkSettingsResponse
+
+    interface _GetPortalResponse
+      include Smithy::Client::_Response[Types::GetPortalResponse]
+      def portal: () -> Types::Portal?
+    end
+    def get_portal: (
+      ?portal_arn: String
+    ) -> _GetPortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPortalResponse
+
+    interface _GetPortalServiceProviderMetadataResponse
+      include Smithy::Client::_Response[Types::GetPortalServiceProviderMetadataResponse]
+      def portal_arn: () -> String?
+      def service_provider_saml_metadata: () -> String?
+    end
+    def get_portal_service_provider_metadata: (
+      ?portal_arn: String
+    ) -> _GetPortalServiceProviderMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPortalServiceProviderMetadataResponse
+
+    interface _GetSessionResponse
+      include Smithy::Client::_Response[Types::GetSessionResponse]
+      def session: () -> Types::Session?
+    end
+    def get_session: (
+      ?portal_id: String,
+      ?session_id: String
+    ) -> _GetSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionResponse
+
+    interface _GetSessionLoggerResponse
+      include Smithy::Client::_Response[Types::GetSessionLoggerResponse]
+      def session_logger: () -> Types::SessionLogger?
+    end
+    def get_session_logger: (
+      ?session_logger_arn: String
+    ) -> _GetSessionLoggerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionLoggerResponse
+
+    interface _GetTrustStoreResponse
+      include Smithy::Client::_Response[Types::GetTrustStoreResponse]
+      def trust_store: () -> Types::TrustStore?
+    end
+    def get_trust_store: (
+      ?trust_store_arn: String
+    ) -> _GetTrustStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTrustStoreResponse
+
+    interface _GetTrustStoreCertificateResponse
+      include Smithy::Client::_Response[Types::GetTrustStoreCertificateResponse]
+      def trust_store_arn: () -> String?
+      def certificate: () -> Types::Certificate?
+    end
+    def get_trust_store_certificate: (
+      ?trust_store_arn: String,
+      ?thumbprint: String
+    ) -> _GetTrustStoreCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTrustStoreCertificateResponse
+
+    interface _GetUserAccessLoggingSettingsResponse
+      include Smithy::Client::_Response[Types::GetUserAccessLoggingSettingsResponse]
+      def user_access_logging_settings: () -> Types::UserAccessLoggingSettings?
+    end
+    def get_user_access_logging_settings: (
+      ?user_access_logging_settings_arn: String
+    ) -> _GetUserAccessLoggingSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserAccessLoggingSettingsResponse
+
+    interface _GetUserSettingsResponse
+      include Smithy::Client::_Response[Types::GetUserSettingsResponse]
+      def user_settings: () -> Types::UserSettings?
+    end
+    def get_user_settings: (
+      ?user_settings_arn: String
+    ) -> _GetUserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserSettingsResponse
+
+    interface _ListBrowserSettingsResponse
+      include Smithy::Client::_Response[Types::ListBrowserSettingsResponse]
+      def browser_settings: () -> Array[Types::BrowserSettingsSummary]?
+      def next_token: () -> String?
+    end
+    def list_browser_settings: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListBrowserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBrowserSettingsResponse
+
+    interface _ListDataProtectionSettingsResponse
+      include Smithy::Client::_Response[Types::ListDataProtectionSettingsResponse]
+      def data_protection_settings: () -> Array[Types::DataProtectionSettingsSummary]?
+      def next_token: () -> String?
+    end
+    def list_data_protection_settings: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDataProtectionSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataProtectionSettingsResponse
+
+    interface _ListIdentityProvidersResponse
+      include Smithy::Client::_Response[Types::ListIdentityProvidersResponse]
+      def next_token: () -> String?
+      def identity_providers: () -> Array[Types::IdentityProviderSummary]?
+    end
+    def list_identity_providers: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?portal_arn: String
+    ) -> _ListIdentityProvidersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIdentityProvidersResponse
+
+    interface _ListIpAccessSettingsResponse
+      include Smithy::Client::_Response[Types::ListIpAccessSettingsResponse]
+      def ip_access_settings: () -> Array[Types::IpAccessSettingsSummary]?
+      def next_token: () -> String?
+    end
+    def list_ip_access_settings: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListIpAccessSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIpAccessSettingsResponse
+
+    interface _ListNetworkSettingsResponse
+      include Smithy::Client::_Response[Types::ListNetworkSettingsResponse]
+      def network_settings: () -> Array[Types::NetworkSettingsSummary]?
+      def next_token: () -> String?
+    end
+    def list_network_settings: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListNetworkSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworkSettingsResponse
+
+    interface _ListPortalsResponse
+      include Smithy::Client::_Response[Types::ListPortalsResponse]
+      def portals: () -> Array[Types::PortalSummary]?
+      def next_token: () -> String?
+    end
+    def list_portals: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPortalsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPortalsResponse
+
+    interface _ListSessionLoggersResponse
+      include Smithy::Client::_Response[Types::ListSessionLoggersResponse]
+      def session_loggers: () -> Array[Types::SessionLoggerSummary]?
+      def next_token: () -> String?
+    end
+    def list_session_loggers: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSessionLoggersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSessionLoggersResponse
+
+    interface _ListSessionsResponse
+      include Smithy::Client::_Response[Types::ListSessionsResponse]
+      def sessions: () -> Array[Types::SessionSummary]?
+      def next_token: () -> String?
+    end
+    def list_sessions: (
+      ?portal_id: String,
+      ?username: String,
+      ?session_id: String,
+      ?sort_by: String,
+      ?status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSessionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTrustStoreCertificatesResponse
+      include Smithy::Client::_Response[Types::ListTrustStoreCertificatesResponse]
+      def certificate_list: () -> Array[Types::CertificateSummary]?
+      def trust_store_arn: () -> String?
+      def next_token: () -> String?
+    end
+    def list_trust_store_certificates: (
+      ?trust_store_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTrustStoreCertificatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrustStoreCertificatesResponse
+
+    interface _ListTrustStoresResponse
+      include Smithy::Client::_Response[Types::ListTrustStoresResponse]
+      def trust_stores: () -> Array[Types::TrustStoreSummary]?
+      def next_token: () -> String?
+    end
+    def list_trust_stores: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTrustStoresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrustStoresResponse
+
+    interface _ListUserAccessLoggingSettingsResponse
+      include Smithy::Client::_Response[Types::ListUserAccessLoggingSettingsResponse]
+      def user_access_logging_settings: () -> Array[Types::UserAccessLoggingSettingsSummary]?
+      def next_token: () -> String?
+    end
+    def list_user_access_logging_settings: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListUserAccessLoggingSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUserAccessLoggingSettingsResponse
+
+    interface _ListUserSettingsResponse
+      include Smithy::Client::_Response[Types::ListUserSettingsResponse]
+      def user_settings: () -> Array[Types::UserSettingsSummary]?
+      def next_token: () -> String?
+    end
+    def list_user_settings: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListUserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUserSettingsResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateBrowserSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateBrowserSettingsResponse]
+      def browser_settings: () -> Types::BrowserSettings?
+    end
+    def update_browser_settings: (
+      ?browser_settings_arn: String,
+      ?browser_policy: String,
+      ?client_token: String
+    ) -> _UpdateBrowserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBrowserSettingsResponse
+
+    interface _UpdateDataProtectionSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateDataProtectionSettingsResponse]
+      def data_protection_settings: () -> Types::DataProtectionSettings?
+    end
+    def update_data_protection_settings: (
+      ?data_protection_settings_arn: String,
+      ?inline_redaction_configuration: {
+        inline_redaction_patterns: Array[
+          {
+            built_in_pattern_id: String,
+            custom_pattern: {
+              pattern_name: String,
+              pattern_regex: String,
+              pattern_description: String,
+              keyword_regex: untyped
+            },
+            redaction_place_holder: {
+              redaction_place_holder_type: String,
+              redaction_place_holder_text: String
+            },
+            enforced_urls: Array[String],
+            exempt_urls: untyped,
+            confidence_level: Integer
+          }
+        ],
+        global_enforced_urls: Array[String],
+        global_exempt_urls: untyped,
+        global_confidence_level: untyped
+      },
+      ?display_name: String,
+      ?description: String,
+      ?client_token: String
+    ) -> _UpdateDataProtectionSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataProtectionSettingsResponse
+
+    interface _UpdateIdentityProviderResponse
+      include Smithy::Client::_Response[Types::UpdateIdentityProviderResponse]
+      def identity_provider: () -> Types::IdentityProvider?
+    end
+    def update_identity_provider: (
+      ?identity_provider_arn: String,
+      ?identity_provider_name: String,
+      ?identity_provider_type: String,
+      ?identity_provider_details: Hash[String, String],
+      ?client_token: String
+    ) -> _UpdateIdentityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIdentityProviderResponse
+
+    interface _UpdateIpAccessSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateIpAccessSettingsResponse]
+      def ip_access_settings: () -> Types::IpAccessSettings?
+    end
+    def update_ip_access_settings: (
+      ?ip_access_settings_arn: String,
+      ?display_name: String,
+      ?description: String,
+      ?ip_rules: Array[
+        {
+          ip_range: String,
+          description: String
+        }
+      ],
+      ?client_token: String
+    ) -> _UpdateIpAccessSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIpAccessSettingsResponse
+
+    interface _UpdateNetworkSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateNetworkSettingsResponse]
+      def network_settings: () -> Types::NetworkSettings?
+    end
+    def update_network_settings: (
+      ?network_settings_arn: String,
+      ?vpc_id: String,
+      ?subnet_ids: Array[String],
+      ?security_group_ids: Array[String],
+      ?client_token: String
+    ) -> _UpdateNetworkSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNetworkSettingsResponse
+
+    interface _UpdatePortalResponse
+      include Smithy::Client::_Response[Types::UpdatePortalResponse]
+      def portal: () -> Types::Portal?
+    end
+    def update_portal: (
+      ?portal_arn: String,
+      ?display_name: String,
+      ?authentication_type: String,
+      ?instance_type: String,
+      ?max_concurrent_sessions: Integer
+    ) -> _UpdatePortalResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePortalResponse
+
+    interface _UpdateSessionLoggerResponse
+      include Smithy::Client::_Response[Types::UpdateSessionLoggerResponse]
+      def session_logger: () -> Types::SessionLogger?
+    end
+    def update_session_logger: (
+      ?session_logger_arn: String,
+      ?event_filter: {
+        all: {
+        },
+        include: Array[String]
+      },
+      ?log_configuration: {
+        s3: {
+          bucket: String,
+          key_prefix: String,
+          bucket_owner: String,
+          log_file_format: String,
+          folder_structure: String
+        }
+      },
+      ?display_name: String
+    ) -> _UpdateSessionLoggerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSessionLoggerResponse
+
+    interface _UpdateTrustStoreResponse
+      include Smithy::Client::_Response[Types::UpdateTrustStoreResponse]
+      def trust_store_arn: () -> String?
+    end
+    def update_trust_store: (
+      ?trust_store_arn: String,
+      ?certificates_to_add: Array[String],
+      ?certificates_to_delete: Array[String],
+      ?client_token: String
+    ) -> _UpdateTrustStoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTrustStoreResponse
+
+    interface _UpdateUserAccessLoggingSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateUserAccessLoggingSettingsResponse]
+      def user_access_logging_settings: () -> Types::UserAccessLoggingSettings?
+    end
+    def update_user_access_logging_settings: (
+      ?user_access_logging_settings_arn: String,
+      ?kinesis_stream_arn: String,
+      ?client_token: String
+    ) -> _UpdateUserAccessLoggingSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserAccessLoggingSettingsResponse
+
+    interface _UpdateUserSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateUserSettingsResponse]
+      def user_settings: () -> Types::UserSettings?
+    end
+    def update_user_settings: (
+      ?user_settings_arn: String,
+      ?copy_allowed: String,
+      ?paste_allowed: String,
+      ?download_allowed: String,
+      ?upload_allowed: String,
+      ?print_allowed: String,
+      ?disconnect_timeout_in_minutes: Integer,
+      ?idle_disconnect_timeout_in_minutes: Integer,
+      ?client_token: String,
+      ?cookie_synchronization_configuration: {
+        allowlist: Array[
+          {
+            domain: String,
+            name: String,
+            path: String
+          }
+        ],
+        blocklist: untyped
+      },
+      ?deep_link_allowed: String,
+      ?toolbar_configuration: {
+        toolbar_type: String,
+        visual_mode: String,
+        hidden_toolbar_items: Array[String],
+        max_display_resolution: String
+      }
+    ) -> _UpdateUserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserSettingsResponse
+  end
+end

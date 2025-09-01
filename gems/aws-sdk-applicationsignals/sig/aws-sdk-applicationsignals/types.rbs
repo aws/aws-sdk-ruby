@@ -1,0 +1,1225 @@
+module Aws::ApplicationSignals
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BatchGetServiceLevelObjectiveBudgetReportInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Time,
+        ?slo_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Time?
+      attr_accessor slo_ids: Array[String]?
+    end
+
+    class BatchGetServiceLevelObjectiveBudgetReportOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Time,
+        ?reports: Array[Types::ServiceLevelObjectiveBudgetReport],
+        ?errors: Array[Types::ServiceLevelObjectiveBudgetReportError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Time?
+      attr_accessor reports: Array[Types::ServiceLevelObjectiveBudgetReport]?
+      attr_accessor errors: Array[Types::ServiceLevelObjectiveBudgetReportError]?
+    end
+
+    class BatchUpdateExclusionWindowsError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slo_id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slo_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class BatchUpdateExclusionWindowsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slo_ids: Array[String],
+        ?add_exclusion_windows: Array[Types::ExclusionWindow],
+        ?remove_exclusion_windows: Array[Types::ExclusionWindow],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slo_ids: Array[String]?
+      attr_accessor add_exclusion_windows: Array[Types::ExclusionWindow]?
+      attr_accessor remove_exclusion_windows: Array[Types::ExclusionWindow]?
+    end
+
+    class BatchUpdateExclusionWindowsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slo_ids: Array[String],
+        ?errors: Array[Types::BatchUpdateExclusionWindowsError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slo_ids: Array[String]?
+      attr_accessor errors: Array[Types::BatchUpdateExclusionWindowsError]?
+    end
+
+    class BurnRateConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?look_back_window_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor look_back_window_minutes: Integer?
+    end
+
+    class CalendarInterval
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?duration_unit: String,
+        ?duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor duration_unit: String?
+      attr_accessor duration: Integer?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateServiceLevelObjectiveInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?sli_config: Types::ServiceLevelIndicatorConfig,
+        ?request_based_sli_config: Types::RequestBasedServiceLevelIndicatorConfig,
+        ?goal: Types::Goal,
+        ?tags: Array[Types::Tag],
+        ?burn_rate_configurations: Array[Types::BurnRateConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor sli_config: Types::ServiceLevelIndicatorConfig?
+      attr_accessor request_based_sli_config: Types::RequestBasedServiceLevelIndicatorConfig?
+      attr_accessor goal: Types::Goal?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor burn_rate_configurations: Array[Types::BurnRateConfiguration]?
+    end
+
+    class CreateServiceLevelObjectiveOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slo: Types::ServiceLevelObjective,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slo: Types::ServiceLevelObjective?
+    end
+
+    class DeleteServiceLevelObjectiveInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteServiceLevelObjectiveOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DependencyConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dependency_key_attributes: Hash[String, String],
+        ?dependency_operation_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dependency_key_attributes: Hash[String, String]?
+      attr_accessor dependency_operation_name: String?
+    end
+
+    class Dimension
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    module DurationUnit
+      MINUTE: String
+      HOUR: String
+      DAY: String
+      MONTH: String
+    end
+
+    module EvaluationType
+      PERIOD_BASED: String
+      REQUEST_BASED: String
+    end
+
+    class ExclusionWindow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?window: Types::Window,
+        ?start_time: Time,
+        ?recurrence_rule: Types::RecurrenceRule,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor window: Types::Window?
+      attr_accessor start_time: Time?
+      attr_accessor recurrence_rule: Types::RecurrenceRule?
+      attr_accessor reason: String?
+    end
+
+    class GetServiceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?key_attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor key_attributes: Hash[String, String]?
+    end
+
+    class GetServiceLevelObjectiveInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetServiceLevelObjectiveOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slo: Types::ServiceLevelObjective,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slo: Types::ServiceLevelObjective?
+    end
+
+    class GetServiceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: Types::Service,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?log_group_references: Array[Hash[String, String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::Service?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor log_group_references: Array[Hash[String, String]]?
+    end
+
+    class Goal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interval: Types::Interval,
+        ?attainment_goal: Float,
+        ?warning_threshold: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interval: Types::Interval?
+      attr_accessor attainment_goal: Float?
+      attr_accessor warning_threshold: Float?
+    end
+
+    class Interval
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?rolling_interval: Types::RollingInterval,
+        ?calendar_interval: Types::CalendarInterval,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rolling_interval: Types::RollingInterval?
+      attr_accessor calendar_interval: Types::CalendarInterval?
+
+      class RollingInterval < Interval
+      end
+      class CalendarInterval < Interval
+      end
+      class Unknown < Interval
+      end
+    end
+
+    class ListServiceDependenciesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?key_attributes: Hash[String, String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor key_attributes: Hash[String, String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceDependenciesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?service_dependencies: Array[Types::ServiceDependency],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor service_dependencies: Array[Types::ServiceDependency]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceDependentsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?key_attributes: Hash[String, String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor key_attributes: Hash[String, String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceDependentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?service_dependents: Array[Types::ServiceDependent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor service_dependents: Array[Types::ServiceDependent]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceLevelObjectiveExclusionWindowsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceLevelObjectiveExclusionWindowsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exclusion_windows: Array[Types::ExclusionWindow],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exclusion_windows: Array[Types::ExclusionWindow]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceLevelObjectivesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_attributes: Hash[String, String],
+        ?operation_name: String,
+        ?dependency_config: Types::DependencyConfig,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?metric_source_types: Array[String],
+        ?include_linked_accounts: bool,
+        ?slo_owner_aws_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_attributes: Hash[String, String]?
+      attr_accessor operation_name: String?
+      attr_accessor dependency_config: Types::DependencyConfig?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor metric_source_types: Array[String]?
+      attr_accessor include_linked_accounts: bool?
+      attr_accessor slo_owner_aws_account_id: String?
+    end
+
+    class ListServiceLevelObjectivesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slo_summaries: Array[Types::ServiceLevelObjectiveSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slo_summaries: Array[Types::ServiceLevelObjectiveSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceOperationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?key_attributes: Hash[String, String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor key_attributes: Hash[String, String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceOperationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?service_operations: Array[Types::ServiceOperation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor service_operations: Array[Types::ServiceOperation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServicesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?include_linked_accounts: bool,
+        ?aws_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor include_linked_accounts: bool?
+      attr_accessor aws_account_id: String?
+    end
+
+    class ListServicesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+        ?service_summaries: Array[Types::ServiceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor service_summaries: Array[Types::ServiceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class Metric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: String,
+        ?metric_name: String,
+        ?dimensions: Array[Types::Dimension],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: String?
+      attr_accessor metric_name: String?
+      attr_accessor dimensions: Array[Types::Dimension]?
+    end
+
+    class MetricDataQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?metric_stat: Types::MetricStat,
+        ?expression: String,
+        ?label: String,
+        ?return_data: bool,
+        ?period: Integer,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor metric_stat: Types::MetricStat?
+      attr_accessor expression: String?
+      attr_accessor label: String?
+      attr_accessor return_data: bool?
+      attr_accessor period: Integer?
+      attr_accessor account_id: String?
+    end
+
+    class MetricReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: String,
+        ?metric_type: String,
+        ?dimensions: Array[Types::Dimension],
+        ?metric_name: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: String?
+      attr_accessor metric_type: String?
+      attr_accessor dimensions: Array[Types::Dimension]?
+      attr_accessor metric_name: String?
+      attr_accessor account_id: String?
+    end
+
+    module MetricSourceType
+      SERVICE_OPERATION: String
+      CLOUDWATCH_METRIC: String
+      SERVICE_DEPENDENCY: String
+    end
+
+    class MetricStat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric: Types::Metric,
+        ?period: Integer,
+        ?stat: String,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric: Types::Metric?
+      attr_accessor period: Integer?
+      attr_accessor stat: String?
+      attr_accessor unit: String?
+    end
+
+    class MonitoredRequestCountMetricDataQueries
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?good_count_metric: Array[Types::MetricDataQuery],
+        ?bad_count_metric: Array[Types::MetricDataQuery],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor good_count_metric: Array[Types::MetricDataQuery]?
+      attr_accessor bad_count_metric: Array[Types::MetricDataQuery]?
+
+      class GoodCountMetric < MonitoredRequestCountMetricDataQueries
+      end
+      class BadCountMetric < MonitoredRequestCountMetricDataQueries
+      end
+      class Unknown < MonitoredRequestCountMetricDataQueries
+      end
+    end
+
+    class RecurrenceRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expression: String?
+    end
+
+    class RequestBasedServiceLevelIndicator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_based_sli_metric: Types::RequestBasedServiceLevelIndicatorMetric,
+        ?metric_threshold: Float,
+        ?comparison_operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_based_sli_metric: Types::RequestBasedServiceLevelIndicatorMetric?
+      attr_accessor metric_threshold: Float?
+      attr_accessor comparison_operator: String?
+    end
+
+    class RequestBasedServiceLevelIndicatorConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_based_sli_metric_config: Types::RequestBasedServiceLevelIndicatorMetricConfig,
+        ?metric_threshold: Float,
+        ?comparison_operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_based_sli_metric_config: Types::RequestBasedServiceLevelIndicatorMetricConfig?
+      attr_accessor metric_threshold: Float?
+      attr_accessor comparison_operator: String?
+    end
+
+    class RequestBasedServiceLevelIndicatorMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_attributes: Hash[String, String],
+        ?operation_name: String,
+        ?metric_type: String,
+        ?total_request_count_metric: Array[Types::MetricDataQuery],
+        ?monitored_request_count_metric: Types::MonitoredRequestCountMetricDataQueries,
+        ?dependency_config: Types::DependencyConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_attributes: Hash[String, String]?
+      attr_accessor operation_name: String?
+      attr_accessor metric_type: String?
+      attr_accessor total_request_count_metric: Array[Types::MetricDataQuery]?
+      attr_accessor monitored_request_count_metric: Types::MonitoredRequestCountMetricDataQueries?
+      attr_accessor dependency_config: Types::DependencyConfig?
+    end
+
+    class RequestBasedServiceLevelIndicatorMetricConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_attributes: Hash[String, String],
+        ?operation_name: String,
+        ?metric_type: String,
+        ?total_request_count_metric: Array[Types::MetricDataQuery],
+        ?monitored_request_count_metric: Types::MonitoredRequestCountMetricDataQueries,
+        ?dependency_config: Types::DependencyConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_attributes: Hash[String, String]?
+      attr_accessor operation_name: String?
+      attr_accessor metric_type: String?
+      attr_accessor total_request_count_metric: Array[Types::MetricDataQuery]?
+      attr_accessor monitored_request_count_metric: Types::MonitoredRequestCountMetricDataQueries?
+      attr_accessor dependency_config: Types::DependencyConfig?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?resource_id: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+      attr_accessor message: String?
+    end
+
+    class RollingInterval
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration_unit: String,
+        ?duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration_unit: String?
+      attr_accessor duration: Integer?
+    end
+
+    class Service
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_attributes: Hash[String, String],
+        ?attribute_maps: Array[Hash[String, String]],
+        ?metric_references: Array[Types::MetricReference],
+        ?log_group_references: Array[Hash[String, String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_attributes: Hash[String, String]?
+      attr_accessor attribute_maps: Array[Hash[String, String]]?
+      attr_accessor metric_references: Array[Types::MetricReference]?
+      attr_accessor log_group_references: Array[Hash[String, String]]?
+    end
+
+    class ServiceDependency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_name: String,
+        ?dependency_key_attributes: Hash[String, String],
+        ?dependency_operation_name: String,
+        ?metric_references: Array[Types::MetricReference],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_name: String?
+      attr_accessor dependency_key_attributes: Hash[String, String]?
+      attr_accessor dependency_operation_name: String?
+      attr_accessor metric_references: Array[Types::MetricReference]?
+    end
+
+    class ServiceDependent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?operation_name: String,
+        ?dependent_key_attributes: Hash[String, String],
+        ?dependent_operation_name: String,
+        ?metric_references: Array[Types::MetricReference],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor operation_name: String?
+      attr_accessor dependent_key_attributes: Hash[String, String]?
+      attr_accessor dependent_operation_name: String?
+      attr_accessor metric_references: Array[Types::MetricReference]?
+    end
+
+    class ServiceLevelIndicator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sli_metric: Types::ServiceLevelIndicatorMetric,
+        ?metric_threshold: Float,
+        ?comparison_operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sli_metric: Types::ServiceLevelIndicatorMetric?
+      attr_accessor metric_threshold: Float?
+      attr_accessor comparison_operator: String?
+    end
+
+    module ServiceLevelIndicatorComparisonOperator
+      GREATER_THAN_OR_EQUAL_TO: String
+      GREATER_THAN: String
+      LESS_THAN: String
+      LESS_THAN_OR_EQUAL_TO: String
+    end
+
+    class ServiceLevelIndicatorConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sli_metric_config: Types::ServiceLevelIndicatorMetricConfig,
+        ?metric_threshold: Float,
+        ?comparison_operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sli_metric_config: Types::ServiceLevelIndicatorMetricConfig?
+      attr_accessor metric_threshold: Float?
+      attr_accessor comparison_operator: String?
+    end
+
+    class ServiceLevelIndicatorMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_attributes: Hash[String, String],
+        ?operation_name: String,
+        ?metric_type: String,
+        ?metric_data_queries: Array[Types::MetricDataQuery],
+        ?dependency_config: Types::DependencyConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_attributes: Hash[String, String]?
+      attr_accessor operation_name: String?
+      attr_accessor metric_type: String?
+      attr_accessor metric_data_queries: Array[Types::MetricDataQuery]?
+      attr_accessor dependency_config: Types::DependencyConfig?
+    end
+
+    class ServiceLevelIndicatorMetricConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_attributes: Hash[String, String],
+        ?operation_name: String,
+        ?metric_type: String,
+        ?statistic: String,
+        ?period_seconds: Integer,
+        ?metric_data_queries: Array[Types::MetricDataQuery],
+        ?dependency_config: Types::DependencyConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_attributes: Hash[String, String]?
+      attr_accessor operation_name: String?
+      attr_accessor metric_type: String?
+      attr_accessor statistic: String?
+      attr_accessor period_seconds: Integer?
+      attr_accessor metric_data_queries: Array[Types::MetricDataQuery]?
+      attr_accessor dependency_config: Types::DependencyConfig?
+    end
+
+    module ServiceLevelIndicatorMetricType
+      LATENCY: String
+      AVAILABILITY: String
+    end
+
+    class ServiceLevelObjective
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?created_time: Time,
+        ?last_updated_time: Time,
+        ?sli: Types::ServiceLevelIndicator,
+        ?request_based_sli: Types::RequestBasedServiceLevelIndicator,
+        ?evaluation_type: String,
+        ?goal: Types::Goal,
+        ?burn_rate_configurations: Array[Types::BurnRateConfiguration],
+        ?metric_source_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor created_time: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor sli: Types::ServiceLevelIndicator?
+      attr_accessor request_based_sli: Types::RequestBasedServiceLevelIndicator?
+      attr_accessor evaluation_type: String?
+      attr_accessor goal: Types::Goal?
+      attr_accessor burn_rate_configurations: Array[Types::BurnRateConfiguration]?
+      attr_accessor metric_source_type: String?
+    end
+
+    class ServiceLevelObjectiveBudgetReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?evaluation_type: String,
+        ?budget_status: String,
+        ?attainment: Float,
+        ?total_budget_seconds: Integer,
+        ?budget_seconds_remaining: Integer,
+        ?total_budget_requests: Integer,
+        ?budget_requests_remaining: Integer,
+        ?sli: Types::ServiceLevelIndicator,
+        ?request_based_sli: Types::RequestBasedServiceLevelIndicator,
+        ?goal: Types::Goal,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor evaluation_type: String?
+      attr_accessor budget_status: String?
+      attr_accessor attainment: Float?
+      attr_accessor total_budget_seconds: Integer?
+      attr_accessor budget_seconds_remaining: Integer?
+      attr_accessor total_budget_requests: Integer?
+      attr_accessor budget_requests_remaining: Integer?
+      attr_accessor sli: Types::ServiceLevelIndicator?
+      attr_accessor request_based_sli: Types::RequestBasedServiceLevelIndicator?
+      attr_accessor goal: Types::Goal?
+    end
+
+    class ServiceLevelObjectiveBudgetReportError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    module ServiceLevelObjectiveBudgetStatus
+      OK: String
+      WARNING: String
+      BREACHED: String
+      INSUFFICIENT_DATA: String
+    end
+
+    class ServiceLevelObjectiveSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?key_attributes: Hash[String, String],
+        ?operation_name: String,
+        ?dependency_config: Types::DependencyConfig,
+        ?created_time: Time,
+        ?evaluation_type: String,
+        ?metric_source_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor key_attributes: Hash[String, String]?
+      attr_accessor operation_name: String?
+      attr_accessor dependency_config: Types::DependencyConfig?
+      attr_accessor created_time: Time?
+      attr_accessor evaluation_type: String?
+      attr_accessor metric_source_type: String?
+    end
+
+    class ServiceOperation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?metric_references: Array[Types::MetricReference],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor metric_references: Array[Types::MetricReference]?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_attributes: Hash[String, String],
+        ?attribute_maps: Array[Hash[String, String]],
+        ?metric_references: Array[Types::MetricReference],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_attributes: Hash[String, String]?
+      attr_accessor attribute_maps: Array[Hash[String, String]]?
+      attr_accessor metric_references: Array[Types::MetricReference]?
+    end
+
+    module StandardUnit
+      MICROSECONDS: String
+      MILLISECONDS: String
+      SECONDS: String
+      BYTES: String
+      KILOBYTES: String
+      MEGABYTES: String
+      GIGABYTES: String
+      TERABYTES: String
+      BITS: String
+      KILOBITS: String
+      MEGABITS: String
+      GIGABITS: String
+      TERABITS: String
+      PERCENT: String
+      COUNT: String
+      BYTES_SECOND: String
+      KILOBYTES_SECOND: String
+      MEGABYTES_SECOND: String
+      GIGABYTES_SECOND: String
+      TERABYTES_SECOND: String
+      BITS_SECOND: String
+      KILOBITS_SECOND: String
+      MEGABITS_SECOND: String
+      GIGABITS_SECOND: String
+      TERABITS_SECOND: String
+      COUNT_SECOND: String
+      NONE: String
+    end
+
+    class StartDiscoveryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StartDiscoveryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateServiceLevelObjectiveInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?description: String,
+        ?sli_config: Types::ServiceLevelIndicatorConfig,
+        ?request_based_sli_config: Types::RequestBasedServiceLevelIndicatorConfig,
+        ?goal: Types::Goal,
+        ?burn_rate_configurations: Array[Types::BurnRateConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor description: String?
+      attr_accessor sli_config: Types::ServiceLevelIndicatorConfig?
+      attr_accessor request_based_sli_config: Types::RequestBasedServiceLevelIndicatorConfig?
+      attr_accessor goal: Types::Goal?
+      attr_accessor burn_rate_configurations: Array[Types::BurnRateConfiguration]?
+    end
+
+    class UpdateServiceLevelObjectiveOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?slo: Types::ServiceLevelObjective,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor slo: Types::ServiceLevelObjective?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Window
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration_unit: String,
+        ?duration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration_unit: String?
+      attr_accessor duration: Integer?
+    end
+  end
+end

@@ -1,0 +1,567 @@
+module Aws::SMS
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::SMS::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateAppResponse
+      include Smithy::Client::_Response[Types::CreateAppResponse]
+      def app_summary: () -> Types::AppSummary?
+      def server_groups: () -> Array[Types::ServerGroup]?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def create_app: (
+      ?name: String,
+      ?description: String,
+      ?role_name: String,
+      ?client_token: String,
+      ?server_groups: Array[
+        {
+          server_group_id: String,
+          name: String,
+          server_list: Array[
+            {
+              server_id: String,
+              server_type: String,
+              vm_server: {
+                vm_server_address: {
+                  vm_manager_id: String,
+                  vm_id: String
+                },
+                vm_name: String,
+                vm_manager_name: String,
+                vm_manager_type: String,
+                vm_path: String
+              },
+              replication_job_id: String,
+              replication_job_terminated: bool
+            }
+          ]
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAppResponse
+
+    interface _CreateReplicationJobResponse
+      include Smithy::Client::_Response[Types::CreateReplicationJobResponse]
+      def replication_job_id: () -> String?
+    end
+    def create_replication_job: (
+      ?server_id: String,
+      ?seed_replication_time: Time,
+      ?frequency: Integer,
+      ?run_once: bool,
+      ?license_type: String,
+      ?role_name: String,
+      ?description: String,
+      ?number_of_recent_amis_to_keep: Integer,
+      ?encrypted: bool,
+      ?kms_key_id: String
+    ) -> _CreateReplicationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReplicationJobResponse
+
+    interface _DeleteAppResponse
+      include Smithy::Client::_Response[Types::DeleteAppResponse]
+    end
+    def delete_app: (
+      ?app_id: String,
+      ?force_stop_app_replication: bool,
+      ?force_terminate_app: bool
+    ) -> _DeleteAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppResponse
+
+    interface _DeleteAppLaunchConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteAppLaunchConfigurationResponse]
+    end
+    def delete_app_launch_configuration: (
+      ?app_id: String
+    ) -> _DeleteAppLaunchConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppLaunchConfigurationResponse
+
+    interface _DeleteAppReplicationConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteAppReplicationConfigurationResponse]
+    end
+    def delete_app_replication_configuration: (
+      ?app_id: String
+    ) -> _DeleteAppReplicationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppReplicationConfigurationResponse
+
+    interface _DeleteAppValidationConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteAppValidationConfigurationResponse]
+    end
+    def delete_app_validation_configuration: (
+      ?app_id: String
+    ) -> _DeleteAppValidationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppValidationConfigurationResponse
+
+    interface _DeleteReplicationJobResponse
+      include Smithy::Client::_Response[Types::DeleteReplicationJobResponse]
+    end
+    def delete_replication_job: (
+      ?replication_job_id: String
+    ) -> _DeleteReplicationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReplicationJobResponse
+
+    interface _DeleteServerCatalogResponse
+      include Smithy::Client::_Response[Types::DeleteServerCatalogResponse]
+    end
+    def delete_server_catalog: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServerCatalogResponse
+
+    interface _DisassociateConnectorResponse
+      include Smithy::Client::_Response[Types::DisassociateConnectorResponse]
+    end
+    def disassociate_connector: (
+      ?connector_id: String
+    ) -> _DisassociateConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateConnectorResponse
+
+    interface _GenerateChangeSetResponse
+      include Smithy::Client::_Response[Types::GenerateChangeSetResponse]
+      def s3_location: () -> Types::S3Location?
+    end
+    def generate_change_set: (
+      ?app_id: String,
+      ?changeset_format: String
+    ) -> _GenerateChangeSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateChangeSetResponse
+
+    interface _GenerateTemplateResponse
+      include Smithy::Client::_Response[Types::GenerateTemplateResponse]
+      def s3_location: () -> Types::S3Location?
+    end
+    def generate_template: (
+      ?app_id: String,
+      ?template_format: String
+    ) -> _GenerateTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateTemplateResponse
+
+    interface _GetAppResponse
+      include Smithy::Client::_Response[Types::GetAppResponse]
+      def app_summary: () -> Types::AppSummary?
+      def server_groups: () -> Array[Types::ServerGroup]?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def get_app: (
+      ?app_id: String
+    ) -> _GetAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAppResponse
+
+    interface _GetAppLaunchConfigurationResponse
+      include Smithy::Client::_Response[Types::GetAppLaunchConfigurationResponse]
+      def app_id: () -> String?
+      def role_name: () -> String?
+      def auto_launch: () -> bool?
+      def server_group_launch_configurations: () -> Array[Types::ServerGroupLaunchConfiguration]?
+    end
+    def get_app_launch_configuration: (
+      ?app_id: String
+    ) -> _GetAppLaunchConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAppLaunchConfigurationResponse
+
+    interface _GetAppReplicationConfigurationResponse
+      include Smithy::Client::_Response[Types::GetAppReplicationConfigurationResponse]
+      def server_group_replication_configurations: () -> Array[Types::ServerGroupReplicationConfiguration]?
+    end
+    def get_app_replication_configuration: (
+      ?app_id: String
+    ) -> _GetAppReplicationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAppReplicationConfigurationResponse
+
+    interface _GetAppValidationConfigurationResponse
+      include Smithy::Client::_Response[Types::GetAppValidationConfigurationResponse]
+      def app_validation_configurations: () -> Array[Types::AppValidationConfiguration]?
+      def server_group_validation_configurations: () -> Array[Types::ServerGroupValidationConfiguration]?
+    end
+    def get_app_validation_configuration: (
+      ?app_id: String
+    ) -> _GetAppValidationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAppValidationConfigurationResponse
+
+    interface _GetAppValidationOutputResponse
+      include Smithy::Client::_Response[Types::GetAppValidationOutputResponse]
+      def validation_output_list: () -> Array[Types::ValidationOutput]?
+    end
+    def get_app_validation_output: (
+      ?app_id: String
+    ) -> _GetAppValidationOutputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAppValidationOutputResponse
+
+    interface _GetConnectorsResponse
+      include Smithy::Client::_Response[Types::GetConnectorsResponse]
+      def connector_list: () -> Array[Types::Connector]?
+      def next_token: () -> String?
+    end
+    def get_connectors: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetConnectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectorsResponse
+
+    interface _GetReplicationJobsResponse
+      include Smithy::Client::_Response[Types::GetReplicationJobsResponse]
+      def replication_job_list: () -> Array[Types::ReplicationJob]?
+      def next_token: () -> String?
+    end
+    def get_replication_jobs: (
+      ?replication_job_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetReplicationJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReplicationJobsResponse
+
+    interface _GetReplicationRunsResponse
+      include Smithy::Client::_Response[Types::GetReplicationRunsResponse]
+      def replication_job: () -> Types::ReplicationJob?
+      def replication_run_list: () -> Array[Types::ReplicationRun]?
+      def next_token: () -> String?
+    end
+    def get_replication_runs: (
+      ?replication_job_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetReplicationRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetReplicationRunsResponse
+
+    interface _GetServersResponse
+      include Smithy::Client::_Response[Types::GetServersResponse]
+      def last_modified_on: () -> Time?
+      def server_catalog_status: () -> String?
+      def server_list: () -> Array[Types::Server]?
+      def next_token: () -> String?
+    end
+    def get_servers: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?vm_server_address_list: Array[
+        {
+          vm_manager_id: String,
+          vm_id: String
+        }
+      ]
+    ) -> _GetServersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetServersResponse
+
+    interface _ImportAppCatalogResponse
+      include Smithy::Client::_Response[Types::ImportAppCatalogResponse]
+    end
+    def import_app_catalog: (
+      ?role_name: String
+    ) -> _ImportAppCatalogResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportAppCatalogResponse
+
+    interface _ImportServerCatalogResponse
+      include Smithy::Client::_Response[Types::ImportServerCatalogResponse]
+    end
+    def import_server_catalog: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportServerCatalogResponse
+
+    interface _LaunchAppResponse
+      include Smithy::Client::_Response[Types::LaunchAppResponse]
+    end
+    def launch_app: (
+      ?app_id: String
+    ) -> _LaunchAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _LaunchAppResponse
+
+    interface _ListAppsResponse
+      include Smithy::Client::_Response[Types::ListAppsResponse]
+      def apps: () -> Array[Types::AppSummary]?
+      def next_token: () -> String?
+    end
+    def list_apps: (
+      ?app_ids: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAppsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppsResponse
+
+    interface _NotifyAppValidationOutputResponse
+      include Smithy::Client::_Response[Types::NotifyAppValidationOutputResponse]
+    end
+    def notify_app_validation_output: (
+      ?app_id: String,
+      ?notification_context: {
+        validation_id: String,
+        status: String,
+        status_message: String
+      }
+    ) -> _NotifyAppValidationOutputResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _NotifyAppValidationOutputResponse
+
+    interface _PutAppLaunchConfigurationResponse
+      include Smithy::Client::_Response[Types::PutAppLaunchConfigurationResponse]
+    end
+    def put_app_launch_configuration: (
+      ?app_id: String,
+      ?role_name: String,
+      ?auto_launch: bool,
+      ?server_group_launch_configurations: Array[
+        {
+          server_group_id: String,
+          launch_order: Integer,
+          server_launch_configurations: Array[
+            {
+              server: {
+                server_id: String,
+                server_type: String,
+                vm_server: {
+                  vm_server_address: {
+                    vm_manager_id: String,
+                    vm_id: String
+                  },
+                  vm_name: String,
+                  vm_manager_name: String,
+                  vm_manager_type: String,
+                  vm_path: String
+                },
+                replication_job_id: String,
+                replication_job_terminated: bool
+              },
+              logical_id: String,
+              vpc: String,
+              subnet: String,
+              security_group: String,
+              ec2_key_name: String,
+              user_data: {
+                s3_location: {
+                  bucket: String,
+                  key: String
+                }
+              },
+              instance_type: String,
+              associate_public_ip_address: bool,
+              iam_instance_profile_name: String,
+              configure_script: untyped,
+              configure_script_type: String
+            }
+          ]
+        }
+      ]
+    ) -> _PutAppLaunchConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAppLaunchConfigurationResponse
+
+    interface _PutAppReplicationConfigurationResponse
+      include Smithy::Client::_Response[Types::PutAppReplicationConfigurationResponse]
+    end
+    def put_app_replication_configuration: (
+      ?app_id: String,
+      ?server_group_replication_configurations: Array[
+        {
+          server_group_id: String,
+          server_replication_configurations: Array[
+            {
+              server: {
+                server_id: String,
+                server_type: String,
+                vm_server: {
+                  vm_server_address: {
+                    vm_manager_id: String,
+                    vm_id: String
+                  },
+                  vm_name: String,
+                  vm_manager_name: String,
+                  vm_manager_type: String,
+                  vm_path: String
+                },
+                replication_job_id: String,
+                replication_job_terminated: bool
+              },
+              server_replication_parameters: {
+                seed_time: Time,
+                frequency: Integer,
+                run_once: bool,
+                license_type: String,
+                number_of_recent_amis_to_keep: Integer,
+                encrypted: bool,
+                kms_key_id: String
+              }
+            }
+          ]
+        }
+      ]
+    ) -> _PutAppReplicationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAppReplicationConfigurationResponse
+
+    interface _PutAppValidationConfigurationResponse
+      include Smithy::Client::_Response[Types::PutAppValidationConfigurationResponse]
+    end
+    def put_app_validation_configuration: (
+      ?app_id: String,
+      ?app_validation_configurations: Array[
+        {
+          validation_id: String,
+          name: String,
+          app_validation_strategy: String,
+          ssm_validation_parameters: {
+            source: {
+              s3_location: {
+                bucket: String,
+                key: String
+              }
+            },
+            instance_id: String,
+            script_type: String,
+            command: String,
+            execution_timeout_seconds: Integer,
+            output_s3_bucket_name: String
+          }
+        }
+      ],
+      ?server_group_validation_configurations: Array[
+        {
+          server_group_id: String,
+          server_validation_configurations: Array[
+            {
+              server: {
+                server_id: String,
+                server_type: String,
+                vm_server: {
+                  vm_server_address: {
+                    vm_manager_id: String,
+                    vm_id: String
+                  },
+                  vm_name: String,
+                  vm_manager_name: String,
+                  vm_manager_type: String,
+                  vm_path: String
+                },
+                replication_job_id: String,
+                replication_job_terminated: bool
+              },
+              validation_id: String,
+              name: String,
+              server_validation_strategy: String,
+              user_data_validation_parameters: {
+                source: {
+                  s3_location: {
+                    bucket: String,
+                    key: String
+                  }
+                },
+                script_type: String
+              }
+            }
+          ]
+        }
+      ]
+    ) -> _PutAppValidationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAppValidationConfigurationResponse
+
+    interface _StartAppReplicationResponse
+      include Smithy::Client::_Response[Types::StartAppReplicationResponse]
+    end
+    def start_app_replication: (
+      ?app_id: String
+    ) -> _StartAppReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAppReplicationResponse
+
+    interface _StartOnDemandAppReplicationResponse
+      include Smithy::Client::_Response[Types::StartOnDemandAppReplicationResponse]
+    end
+    def start_on_demand_app_replication: (
+      ?app_id: String,
+      ?description: String
+    ) -> _StartOnDemandAppReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartOnDemandAppReplicationResponse
+
+    interface _StartOnDemandReplicationRunResponse
+      include Smithy::Client::_Response[Types::StartOnDemandReplicationRunResponse]
+      def replication_run_id: () -> String?
+    end
+    def start_on_demand_replication_run: (
+      ?replication_job_id: String,
+      ?description: String
+    ) -> _StartOnDemandReplicationRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartOnDemandReplicationRunResponse
+
+    interface _StopAppReplicationResponse
+      include Smithy::Client::_Response[Types::StopAppReplicationResponse]
+    end
+    def stop_app_replication: (
+      ?app_id: String
+    ) -> _StopAppReplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopAppReplicationResponse
+
+    interface _TerminateAppResponse
+      include Smithy::Client::_Response[Types::TerminateAppResponse]
+    end
+    def terminate_app: (
+      ?app_id: String
+    ) -> _TerminateAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateAppResponse
+
+    interface _UpdateAppResponse
+      include Smithy::Client::_Response[Types::UpdateAppResponse]
+      def app_summary: () -> Types::AppSummary?
+      def server_groups: () -> Array[Types::ServerGroup]?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def update_app: (
+      ?app_id: String,
+      ?name: String,
+      ?description: String,
+      ?role_name: String,
+      ?server_groups: Array[
+        {
+          server_group_id: String,
+          name: String,
+          server_list: Array[
+            {
+              server_id: String,
+              server_type: String,
+              vm_server: {
+                vm_server_address: {
+                  vm_manager_id: String,
+                  vm_id: String
+                },
+                vm_name: String,
+                vm_manager_name: String,
+                vm_manager_type: String,
+                vm_path: String
+              },
+              replication_job_id: String,
+              replication_job_terminated: bool
+            }
+          ]
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _UpdateAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAppResponse
+
+    interface _UpdateReplicationJobResponse
+      include Smithy::Client::_Response[Types::UpdateReplicationJobResponse]
+    end
+    def update_replication_job: (
+      ?replication_job_id: String,
+      ?frequency: Integer,
+      ?next_replication_run_start_time: Time,
+      ?license_type: String,
+      ?role_name: String,
+      ?description: String,
+      ?number_of_recent_amis_to_keep: Integer,
+      ?encrypted: bool,
+      ?kms_key_id: String
+    ) -> _UpdateReplicationJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReplicationJobResponse
+  end
+end

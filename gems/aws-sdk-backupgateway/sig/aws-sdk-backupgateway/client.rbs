@@ -1,0 +1,317 @@
+module Aws::BackupGateway
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::BackupGateway::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateGatewayToServerResponse
+      include Smithy::Client::_Response[Types::AssociateGatewayToServerOperationOutput]
+      def gateway_arn: () -> String?
+    end
+    def associate_gateway_to_server: (
+      ?gateway_arn: String,
+      ?server_arn: String
+    ) -> _AssociateGatewayToServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateGatewayToServerResponse
+
+    interface _CreateGatewayResponse
+      include Smithy::Client::_Response[Types::CreateGatewayOperationOutput]
+      def gateway_arn: () -> String?
+    end
+    def create_gateway: (
+      ?activation_key: String,
+      ?gateway_display_name: String,
+      ?gateway_type: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGatewayResponse
+
+    interface _DeleteGatewayResponse
+      include Smithy::Client::_Response[Types::DeleteGatewayOperationOutput]
+      def gateway_arn: () -> String?
+    end
+    def delete_gateway: (
+      ?gateway_arn: String
+    ) -> _DeleteGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGatewayResponse
+
+    interface _DeleteHypervisorResponse
+      include Smithy::Client::_Response[Types::DeleteHypervisorOperationOutput]
+      def hypervisor_arn: () -> String?
+    end
+    def delete_hypervisor: (
+      ?hypervisor_arn: String
+    ) -> _DeleteHypervisorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteHypervisorResponse
+
+    interface _DisassociateGatewayFromServerResponse
+      include Smithy::Client::_Response[Types::DisassociateGatewayFromServerOperationOutput]
+      def gateway_arn: () -> String?
+    end
+    def disassociate_gateway_from_server: (
+      ?gateway_arn: String
+    ) -> _DisassociateGatewayFromServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateGatewayFromServerResponse
+
+    interface _GetBandwidthRateLimitScheduleResponse
+      include Smithy::Client::_Response[Types::GetBandwidthRateLimitScheduleOperationOutput]
+      def gateway_arn: () -> String?
+      def bandwidth_rate_limit_intervals: () -> Array[Types::BandwidthRateLimitInterval]?
+    end
+    def get_bandwidth_rate_limit_schedule: (
+      ?gateway_arn: String
+    ) -> _GetBandwidthRateLimitScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBandwidthRateLimitScheduleResponse
+
+    interface _GetGatewayResponse
+      include Smithy::Client::_Response[Types::GetGatewayOperationOutput]
+      def gateway: () -> Types::GatewayDetails?
+    end
+    def get_gateway: (
+      ?gateway_arn: String
+    ) -> _GetGatewayResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGatewayResponse
+
+    interface _GetHypervisorResponse
+      include Smithy::Client::_Response[Types::GetHypervisorOperationOutput]
+      def hypervisor: () -> Types::HypervisorDetails?
+    end
+    def get_hypervisor: (
+      ?hypervisor_arn: String
+    ) -> _GetHypervisorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHypervisorResponse
+
+    interface _GetHypervisorPropertyMappingsResponse
+      include Smithy::Client::_Response[Types::GetHypervisorPropertyMappingsOperationOutput]
+      def hypervisor_arn: () -> String?
+      def vmware_to_aws_tag_mappings: () -> Array[Types::VmwareToAwsTagMapping]?
+      def iam_role_arn: () -> String?
+    end
+    def get_hypervisor_property_mappings: (
+      ?hypervisor_arn: String
+    ) -> _GetHypervisorPropertyMappingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHypervisorPropertyMappingsResponse
+
+    interface _GetVirtualMachineResponse
+      include Smithy::Client::_Response[Types::GetVirtualMachineOperationOutput]
+      def virtual_machine: () -> Types::VirtualMachineDetails?
+    end
+    def get_virtual_machine: (
+      ?resource_arn: String
+    ) -> _GetVirtualMachineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVirtualMachineResponse
+
+    interface _ImportHypervisorConfigurationResponse
+      include Smithy::Client::_Response[Types::ImportHypervisorConfigurationOperationOutput]
+      def hypervisor_arn: () -> String?
+    end
+    def import_hypervisor_configuration: (
+      ?name: String,
+      ?host: String,
+      ?username: String,
+      ?password: String,
+      ?kms_key_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _ImportHypervisorConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportHypervisorConfigurationResponse
+
+    interface _ListGatewaysResponse
+      include Smithy::Client::_Response[Types::ListGatewaysOperationOutput]
+      def gateways: () -> Array[Types::Gateway]?
+      def next_token: () -> String?
+    end
+    def list_gateways: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListGatewaysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGatewaysResponse
+
+    interface _ListHypervisorsResponse
+      include Smithy::Client::_Response[Types::ListHypervisorsOperationOutput]
+      def hypervisors: () -> Array[Types::Hypervisor]?
+      def next_token: () -> String?
+    end
+    def list_hypervisors: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListHypervisorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHypervisorsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOperationOutput]
+      def resource_arn: () -> String?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListVirtualMachinesResponse
+      include Smithy::Client::_Response[Types::ListVirtualMachinesOperationOutput]
+      def virtual_machines: () -> Array[Types::VirtualMachine]?
+      def next_token: () -> String?
+    end
+    def list_virtual_machines: (
+      ?hypervisor_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListVirtualMachinesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVirtualMachinesResponse
+
+    interface _PutBandwidthRateLimitScheduleResponse
+      include Smithy::Client::_Response[Types::PutBandwidthRateLimitScheduleOperationOutput]
+      def gateway_arn: () -> String?
+    end
+    def put_bandwidth_rate_limit_schedule: (
+      ?gateway_arn: String,
+      ?bandwidth_rate_limit_intervals: Array[
+        {
+          average_upload_rate_limit_in_bits_per_sec: Integer,
+          start_hour_of_day: Integer,
+          end_hour_of_day: untyped,
+          start_minute_of_hour: Integer,
+          end_minute_of_hour: untyped,
+          days_of_week: Array[Integer]
+        }
+      ]
+    ) -> _PutBandwidthRateLimitScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBandwidthRateLimitScheduleResponse
+
+    interface _PutHypervisorPropertyMappingsResponse
+      include Smithy::Client::_Response[Types::PutHypervisorPropertyMappingsOperationOutput]
+      def hypervisor_arn: () -> String?
+    end
+    def put_hypervisor_property_mappings: (
+      ?hypervisor_arn: String,
+      ?vmware_to_aws_tag_mappings: Array[
+        {
+          vmware_category: String,
+          vmware_tag_name: String,
+          aws_tag_key: String,
+          aws_tag_value: String
+        }
+      ],
+      ?iam_role_arn: String
+    ) -> _PutHypervisorPropertyMappingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutHypervisorPropertyMappingsResponse
+
+    interface _PutMaintenanceStartTimeResponse
+      include Smithy::Client::_Response[Types::PutMaintenanceStartTimeOperationOutput]
+      def gateway_arn: () -> String?
+    end
+    def put_maintenance_start_time: (
+      ?gateway_arn: String,
+      ?hour_of_day: Integer,
+      ?minute_of_hour: Integer,
+      ?day_of_week: Integer,
+      ?day_of_month: Integer
+    ) -> _PutMaintenanceStartTimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutMaintenanceStartTimeResponse
+
+    interface _StartVirtualMachinesMetadataSyncResponse
+      include Smithy::Client::_Response[Types::StartVirtualMachinesMetadataSyncOperationOutput]
+      def hypervisor_arn: () -> String?
+    end
+    def start_virtual_machines_metadata_sync: (
+      ?hypervisor_arn: String
+    ) -> _StartVirtualMachinesMetadataSyncResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartVirtualMachinesMetadataSyncResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOperationOutput]
+      def resource_arn: () -> String?
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TestHypervisorConfigurationResponse
+      include Smithy::Client::_Response[Types::TestHypervisorConfigurationOperationOutput]
+    end
+    def test_hypervisor_configuration: (
+      ?gateway_arn: String,
+      ?host: String,
+      ?username: String,
+      ?password: String
+    ) -> _TestHypervisorConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestHypervisorConfigurationResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOperationOutput]
+      def resource_arn: () -> String?
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateGatewayInformationResponse
+      include Smithy::Client::_Response[Types::UpdateGatewayInformationOperationOutput]
+      def gateway_arn: () -> String?
+    end
+    def update_gateway_information: (
+      ?gateway_arn: String,
+      ?gateway_display_name: String
+    ) -> _UpdateGatewayInformationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGatewayInformationResponse
+
+    interface _UpdateGatewaySoftwareNowResponse
+      include Smithy::Client::_Response[Types::UpdateGatewaySoftwareNowOperationOutput]
+      def gateway_arn: () -> String?
+    end
+    def update_gateway_software_now: (
+      ?gateway_arn: String
+    ) -> _UpdateGatewaySoftwareNowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGatewaySoftwareNowResponse
+
+    interface _UpdateHypervisorResponse
+      include Smithy::Client::_Response[Types::UpdateHypervisorOperationOutput]
+      def hypervisor_arn: () -> String?
+    end
+    def update_hypervisor: (
+      ?hypervisor_arn: String,
+      ?host: String,
+      ?username: String,
+      ?password: String,
+      ?name: String,
+      ?log_group_arn: String
+    ) -> _UpdateHypervisorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateHypervisorResponse
+  end
+end

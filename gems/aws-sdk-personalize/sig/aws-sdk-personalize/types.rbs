@@ -1,0 +1,3316 @@
+module Aws::Personalize
+  module Types
+
+    class Algorithm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?algorithm_arn: String,
+        ?algorithm_image: Types::AlgorithmImage,
+        ?default_hyper_parameters: Hash[String, String],
+        ?default_hyper_parameter_ranges: Types::DefaultHyperParameterRanges,
+        ?default_resource_config: Hash[String, String],
+        ?training_input_mode: String,
+        ?role_arn: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor algorithm_arn: String?
+      attr_accessor algorithm_image: Types::AlgorithmImage?
+      attr_accessor default_hyper_parameters: Hash[String, String]?
+      attr_accessor default_hyper_parameter_ranges: Types::DefaultHyperParameterRanges?
+      attr_accessor default_resource_config: Hash[String, String]?
+      attr_accessor training_input_mode: String?
+      attr_accessor role_arn: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+    end
+
+    class AlgorithmImage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?docker_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor docker_uri: String?
+    end
+
+    class AutoMLConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_name: String,
+        ?recipe_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_name: String?
+      attr_accessor recipe_list: Array[String]?
+    end
+
+    class AutoMLResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?best_recipe_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor best_recipe_arn: String?
+    end
+
+    class AutoTrainingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduling_expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduling_expression: String?
+    end
+
+    class BatchInferenceJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?batch_inference_job_arn: String,
+        ?filter_arn: String,
+        ?failure_reason: String,
+        ?solution_version_arn: String,
+        ?num_results: Integer,
+        ?job_input: Types::BatchInferenceJobInput,
+        ?job_output: Types::BatchInferenceJobOutput,
+        ?batch_inference_job_config: Types::BatchInferenceJobConfig,
+        ?role_arn: String,
+        ?batch_inference_job_mode: String,
+        ?theme_generation_config: Types::ThemeGenerationConfig,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor batch_inference_job_arn: String?
+      attr_accessor filter_arn: String?
+      attr_accessor failure_reason: String?
+      attr_accessor solution_version_arn: String?
+      attr_accessor num_results: Integer?
+      attr_accessor job_input: Types::BatchInferenceJobInput?
+      attr_accessor job_output: Types::BatchInferenceJobOutput?
+      attr_accessor batch_inference_job_config: Types::BatchInferenceJobConfig?
+      attr_accessor role_arn: String?
+      attr_accessor batch_inference_job_mode: String?
+      attr_accessor theme_generation_config: Types::ThemeGenerationConfig?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+    end
+
+    class BatchInferenceJobConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item_exploration_config: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item_exploration_config: Hash[String, String]?
+    end
+
+    class BatchInferenceJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_data_source: Types::S3DataConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_data_source: Types::S3DataConfig?
+    end
+
+    module BatchInferenceJobMode
+      BATCH_INFERENCE: String
+      THEME_GENERATION: String
+    end
+
+    class BatchInferenceJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_data_destination: Types::S3DataConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_data_destination: Types::S3DataConfig?
+    end
+
+    class BatchInferenceJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_inference_job_arn: String,
+        ?job_name: String,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?failure_reason: String,
+        ?solution_version_arn: String,
+        ?batch_inference_job_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_inference_job_arn: String?
+      attr_accessor job_name: String?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor failure_reason: String?
+      attr_accessor solution_version_arn: String?
+      attr_accessor batch_inference_job_mode: String?
+    end
+
+    class BatchSegmentJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?batch_segment_job_arn: String,
+        ?filter_arn: String,
+        ?failure_reason: String,
+        ?solution_version_arn: String,
+        ?num_results: Integer,
+        ?job_input: Types::BatchSegmentJobInput,
+        ?job_output: Types::BatchSegmentJobOutput,
+        ?role_arn: String,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor batch_segment_job_arn: String?
+      attr_accessor filter_arn: String?
+      attr_accessor failure_reason: String?
+      attr_accessor solution_version_arn: String?
+      attr_accessor num_results: Integer?
+      attr_accessor job_input: Types::BatchSegmentJobInput?
+      attr_accessor job_output: Types::BatchSegmentJobOutput?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+    end
+
+    class BatchSegmentJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_data_source: Types::S3DataConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_data_source: Types::S3DataConfig?
+    end
+
+    class BatchSegmentJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_data_destination: Types::S3DataConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_data_destination: Types::S3DataConfig?
+    end
+
+    class BatchSegmentJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_segment_job_arn: String,
+        ?job_name: String,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?failure_reason: String,
+        ?solution_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_segment_job_arn: String?
+      attr_accessor job_name: String?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor failure_reason: String?
+      attr_accessor solution_version_arn: String?
+    end
+
+    class Campaign
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?campaign_arn: String,
+        ?solution_version_arn: String,
+        ?min_provisioned_tps: Integer,
+        ?campaign_config: Types::CampaignConfig,
+        ?status: String,
+        ?failure_reason: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?latest_campaign_update: Types::CampaignUpdateSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor campaign_arn: String?
+      attr_accessor solution_version_arn: String?
+      attr_accessor min_provisioned_tps: Integer?
+      attr_accessor campaign_config: Types::CampaignConfig?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor latest_campaign_update: Types::CampaignUpdateSummary?
+    end
+
+    class CampaignConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item_exploration_config: Hash[String, String],
+        ?enable_metadata_with_recommendations: bool,
+        ?sync_with_latest_solution_version: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item_exploration_config: Hash[String, String]?
+      attr_accessor enable_metadata_with_recommendations: bool?
+      attr_accessor sync_with_latest_solution_version: bool?
+    end
+
+    class CampaignSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?campaign_arn: String,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor campaign_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor failure_reason: String?
+    end
+
+    class CampaignUpdateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_version_arn: String,
+        ?min_provisioned_tps: Integer,
+        ?campaign_config: Types::CampaignConfig,
+        ?status: String,
+        ?failure_reason: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_version_arn: String?
+      attr_accessor min_provisioned_tps: Integer?
+      attr_accessor campaign_config: Types::CampaignConfig?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+    end
+
+    class CategoricalHyperParameterRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class ContinuousHyperParameterRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?min_value: Float,
+        ?max_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor min_value: Float?
+      attr_accessor max_value: Float?
+    end
+
+    class CreateBatchInferenceJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?solution_version_arn: String,
+        ?filter_arn: String,
+        ?num_results: Integer,
+        ?job_input: Types::BatchInferenceJobInput,
+        ?job_output: Types::BatchInferenceJobOutput,
+        ?role_arn: String,
+        ?batch_inference_job_config: Types::BatchInferenceJobConfig,
+        ?tags: Array[Types::Tag],
+        ?batch_inference_job_mode: String,
+        ?theme_generation_config: Types::ThemeGenerationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor solution_version_arn: String?
+      attr_accessor filter_arn: String?
+      attr_accessor num_results: Integer?
+      attr_accessor job_input: Types::BatchInferenceJobInput?
+      attr_accessor job_output: Types::BatchInferenceJobOutput?
+      attr_accessor role_arn: String?
+      attr_accessor batch_inference_job_config: Types::BatchInferenceJobConfig?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor batch_inference_job_mode: String?
+      attr_accessor theme_generation_config: Types::ThemeGenerationConfig?
+    end
+
+    class CreateBatchInferenceJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_inference_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_inference_job_arn: String?
+    end
+
+    class CreateBatchSegmentJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?solution_version_arn: String,
+        ?filter_arn: String,
+        ?num_results: Integer,
+        ?job_input: Types::BatchSegmentJobInput,
+        ?job_output: Types::BatchSegmentJobOutput,
+        ?role_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor solution_version_arn: String?
+      attr_accessor filter_arn: String?
+      attr_accessor num_results: Integer?
+      attr_accessor job_input: Types::BatchSegmentJobInput?
+      attr_accessor job_output: Types::BatchSegmentJobOutput?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateBatchSegmentJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_segment_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_segment_job_arn: String?
+    end
+
+    class CreateCampaignRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?solution_version_arn: String,
+        ?min_provisioned_tps: Integer,
+        ?campaign_config: Types::CampaignConfig,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor solution_version_arn: String?
+      attr_accessor min_provisioned_tps: Integer?
+      attr_accessor campaign_config: Types::CampaignConfig?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateCampaignResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaign_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaign_arn: String?
+    end
+
+    class CreateDataDeletionJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?dataset_group_arn: String,
+        ?data_source: Types::DataSource,
+        ?role_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor data_source: Types::DataSource?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDataDeletionJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_deletion_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_deletion_job_arn: String?
+    end
+
+    class CreateDatasetExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?dataset_arn: String,
+        ?ingestion_mode: String,
+        ?role_arn: String,
+        ?job_output: Types::DatasetExportJobOutput,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor ingestion_mode: String?
+      attr_accessor role_arn: String?
+      attr_accessor job_output: Types::DatasetExportJobOutput?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDatasetExportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_export_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_export_job_arn: String?
+    end
+
+    class CreateDatasetGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?role_arn: String,
+        ?kms_key_arn: String,
+        ?domain: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor role_arn: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor domain: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDatasetGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group_arn: String,
+        ?domain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group_arn: String?
+      attr_accessor domain: String?
+    end
+
+    class CreateDatasetImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?dataset_arn: String,
+        ?data_source: Types::DataSource,
+        ?role_arn: String,
+        ?tags: Array[Types::Tag],
+        ?import_mode: String,
+        ?publish_attribution_metrics_to_s3: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor data_source: Types::DataSource?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor import_mode: String?
+      attr_accessor publish_attribution_metrics_to_s3: bool?
+    end
+
+    class CreateDatasetImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_import_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_import_job_arn: String?
+    end
+
+    class CreateDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?schema_arn: String,
+        ?dataset_group_arn: String,
+        ?dataset_type: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor schema_arn: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor dataset_type: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_arn: String?
+    end
+
+    class CreateEventTrackerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?dataset_group_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateEventTrackerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_tracker_arn: String,
+        ?tracking_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_tracker_arn: String?
+      attr_accessor tracking_id: String?
+    end
+
+    class CreateFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?dataset_group_arn: String,
+        ?filter_expression: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor filter_expression: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateFilterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_arn: String?
+    end
+
+    class CreateMetricAttributionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?dataset_group_arn: String,
+        ?metrics: Array[Types::MetricAttribute],
+        ?metrics_output_config: Types::MetricAttributionOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor metrics: Array[Types::MetricAttribute]?
+      attr_accessor metrics_output_config: Types::MetricAttributionOutput?
+    end
+
+    class CreateMetricAttributionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_attribution_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_attribution_arn: String?
+    end
+
+    class CreateRecommenderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?dataset_group_arn: String,
+        ?recipe_arn: String,
+        ?recommender_config: Types::RecommenderConfig,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor recipe_arn: String?
+      attr_accessor recommender_config: Types::RecommenderConfig?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateRecommenderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_arn: String?
+    end
+
+    class CreateSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?schema: String,
+        ?domain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor schema: String?
+      attr_accessor domain: String?
+    end
+
+    class CreateSchemaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+    end
+
+    class CreateSolutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?perform_hpo: bool,
+        ?perform_auto_ml: bool,
+        ?perform_auto_training: bool,
+        ?recipe_arn: String,
+        ?dataset_group_arn: String,
+        ?event_type: String,
+        ?solution_config: Types::SolutionConfig,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor perform_hpo: bool?
+      attr_accessor perform_auto_ml: bool?
+      attr_accessor perform_auto_training: bool?
+      attr_accessor recipe_arn: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor event_type: String?
+      attr_accessor solution_config: Types::SolutionConfig?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateSolutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_arn: String?
+    end
+
+    class CreateSolutionVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?solution_arn: String,
+        ?training_mode: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor solution_arn: String?
+      attr_accessor training_mode: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateSolutionVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_version_arn: String?
+    end
+
+    class DataDeletionJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?data_deletion_job_arn: String,
+        ?dataset_group_arn: String,
+        ?data_source: Types::DataSource,
+        ?role_arn: String,
+        ?status: String,
+        ?num_deleted: Integer,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor data_deletion_job_arn: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor data_source: Types::DataSource?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor num_deleted: Integer?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor failure_reason: String?
+    end
+
+    class DataDeletionJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_deletion_job_arn: String,
+        ?dataset_group_arn: String,
+        ?job_name: String,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_deletion_job_arn: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor job_name: String?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor failure_reason: String?
+    end
+
+    class DataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_location: String?
+    end
+
+    class Dataset
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?dataset_arn: String,
+        ?dataset_group_arn: String,
+        ?dataset_type: String,
+        ?schema_arn: String,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?latest_dataset_update: Types::DatasetUpdateSummary,
+        ?tracking_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor dataset_type: String?
+      attr_accessor schema_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor latest_dataset_update: Types::DatasetUpdateSummary?
+      attr_accessor tracking_id: String?
+    end
+
+    class DatasetExportJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?dataset_export_job_arn: String,
+        ?dataset_arn: String,
+        ?ingestion_mode: String,
+        ?role_arn: String,
+        ?status: String,
+        ?job_output: Types::DatasetExportJobOutput,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor dataset_export_job_arn: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor ingestion_mode: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor job_output: Types::DatasetExportJobOutput?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor failure_reason: String?
+    end
+
+    class DatasetExportJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_data_destination: Types::S3DataConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_data_destination: Types::S3DataConfig?
+    end
+
+    class DatasetExportJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_export_job_arn: String,
+        ?job_name: String,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_export_job_arn: String?
+      attr_accessor job_name: String?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor failure_reason: String?
+    end
+
+    class DatasetGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?dataset_group_arn: String,
+        ?status: String,
+        ?role_arn: String,
+        ?kms_key_arn: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?failure_reason: String,
+        ?domain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor status: String?
+      attr_accessor role_arn: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor failure_reason: String?
+      attr_accessor domain: String?
+    end
+
+    class DatasetGroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?dataset_group_arn: String,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?failure_reason: String,
+        ?domain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor failure_reason: String?
+      attr_accessor domain: String?
+    end
+
+    class DatasetImportJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_name: String,
+        ?dataset_import_job_arn: String,
+        ?dataset_arn: String,
+        ?data_source: Types::DataSource,
+        ?role_arn: String,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?failure_reason: String,
+        ?import_mode: String,
+        ?publish_attribution_metrics_to_s3: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_name: String?
+      attr_accessor dataset_import_job_arn: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor data_source: Types::DataSource?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor failure_reason: String?
+      attr_accessor import_mode: String?
+      attr_accessor publish_attribution_metrics_to_s3: bool?
+    end
+
+    class DatasetImportJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_import_job_arn: String,
+        ?job_name: String,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?failure_reason: String,
+        ?import_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_import_job_arn: String?
+      attr_accessor job_name: String?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor failure_reason: String?
+      attr_accessor import_mode: String?
+    end
+
+    class DatasetSchema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?schema_arn: String,
+        ?schema: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?domain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor schema_arn: String?
+      attr_accessor schema: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor domain: String?
+    end
+
+    class DatasetSchemaSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?schema_arn: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?domain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor schema_arn: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor domain: String?
+    end
+
+    class DatasetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?dataset_arn: String,
+        ?dataset_type: String,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor dataset_type: String?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+    end
+
+    class DatasetUpdateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+        ?status: String,
+        ?failure_reason: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+    end
+
+    class DefaultCategoricalHyperParameterRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?is_tunable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor is_tunable: bool?
+    end
+
+    class DefaultContinuousHyperParameterRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?min_value: Float,
+        ?max_value: Float,
+        ?is_tunable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor min_value: Float?
+      attr_accessor max_value: Float?
+      attr_accessor is_tunable: bool?
+    end
+
+    class DefaultHyperParameterRanges
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integer_hyper_parameter_ranges: Array[Types::DefaultIntegerHyperParameterRange],
+        ?continuous_hyper_parameter_ranges: Array[Types::DefaultContinuousHyperParameterRange],
+        ?categorical_hyper_parameter_ranges: Array[Types::DefaultCategoricalHyperParameterRange],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integer_hyper_parameter_ranges: Array[Types::DefaultIntegerHyperParameterRange]?
+      attr_accessor continuous_hyper_parameter_ranges: Array[Types::DefaultContinuousHyperParameterRange]?
+      attr_accessor categorical_hyper_parameter_ranges: Array[Types::DefaultCategoricalHyperParameterRange]?
+    end
+
+    class DefaultIntegerHyperParameterRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?min_value: Integer,
+        ?max_value: Integer,
+        ?is_tunable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor min_value: Integer?
+      attr_accessor max_value: Integer?
+      attr_accessor is_tunable: bool?
+    end
+
+    class DeleteCampaignRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaign_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaign_arn: String?
+    end
+
+    class DeleteDatasetGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group_arn: String?
+    end
+
+    class DeleteDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_arn: String?
+    end
+
+    class DeleteEventTrackerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_tracker_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_tracker_arn: String?
+    end
+
+    class DeleteFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_arn: String?
+    end
+
+    class DeleteMetricAttributionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_attribution_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_attribution_arn: String?
+    end
+
+    class DeleteRecommenderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_arn: String?
+    end
+
+    class DeleteSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+    end
+
+    class DeleteSolutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_arn: String?
+    end
+
+    class DescribeAlgorithmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?algorithm_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor algorithm_arn: String?
+    end
+
+    class DescribeAlgorithmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?algorithm: Types::Algorithm,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor algorithm: Types::Algorithm?
+    end
+
+    class DescribeBatchInferenceJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_inference_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_inference_job_arn: String?
+    end
+
+    class DescribeBatchInferenceJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_inference_job: Types::BatchInferenceJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_inference_job: Types::BatchInferenceJob?
+    end
+
+    class DescribeBatchSegmentJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_segment_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_segment_job_arn: String?
+    end
+
+    class DescribeBatchSegmentJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_segment_job: Types::BatchSegmentJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_segment_job: Types::BatchSegmentJob?
+    end
+
+    class DescribeCampaignRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaign_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaign_arn: String?
+    end
+
+    class DescribeCampaignResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaign: Types::Campaign,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaign: Types::Campaign?
+    end
+
+    class DescribeDataDeletionJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_deletion_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_deletion_job_arn: String?
+    end
+
+    class DescribeDataDeletionJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_deletion_job: Types::DataDeletionJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_deletion_job: Types::DataDeletionJob?
+    end
+
+    class DescribeDatasetExportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_export_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_export_job_arn: String?
+    end
+
+    class DescribeDatasetExportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_export_job: Types::DatasetExportJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_export_job: Types::DatasetExportJob?
+    end
+
+    class DescribeDatasetGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group_arn: String?
+    end
+
+    class DescribeDatasetGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group: Types::DatasetGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group: Types::DatasetGroup?
+    end
+
+    class DescribeDatasetImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_import_job_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_import_job_arn: String?
+    end
+
+    class DescribeDatasetImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_import_job: Types::DatasetImportJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_import_job: Types::DatasetImportJob?
+    end
+
+    class DescribeDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_arn: String?
+    end
+
+    class DescribeDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset: Types::Dataset,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset: Types::Dataset?
+    end
+
+    class DescribeEventTrackerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_tracker_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_tracker_arn: String?
+    end
+
+    class DescribeEventTrackerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_tracker: Types::EventTracker,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_tracker: Types::EventTracker?
+    end
+
+    class DescribeFeatureTransformationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?feature_transformation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor feature_transformation_arn: String?
+    end
+
+    class DescribeFeatureTransformationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?feature_transformation: Types::FeatureTransformation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor feature_transformation: Types::FeatureTransformation?
+    end
+
+    class DescribeFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_arn: String?
+    end
+
+    class DescribeFilterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::Filter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::Filter?
+    end
+
+    class DescribeMetricAttributionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_attribution_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_attribution_arn: String?
+    end
+
+    class DescribeMetricAttributionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_attribution: Types::MetricAttribution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_attribution: Types::MetricAttribution?
+    end
+
+    class DescribeRecipeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recipe_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recipe_arn: String?
+    end
+
+    class DescribeRecipeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recipe: Types::Recipe,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recipe: Types::Recipe?
+    end
+
+    class DescribeRecommenderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_arn: String?
+    end
+
+    class DescribeRecommenderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender: Types::Recommender,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender: Types::Recommender?
+    end
+
+    class DescribeSchemaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_arn: String?
+    end
+
+    class DescribeSchemaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema: Types::DatasetSchema,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema: Types::DatasetSchema?
+    end
+
+    class DescribeSolutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_arn: String?
+    end
+
+    class DescribeSolutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution: Types::Solution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution: Types::Solution?
+    end
+
+    class DescribeSolutionVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_version_arn: String?
+    end
+
+    class DescribeSolutionVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_version: Types::SolutionVersion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_version: Types::SolutionVersion?
+    end
+
+    module Domain
+      ECOMMERCE: String
+      VIDEO_ON_DEMAND: String
+    end
+
+    class EventParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_type: String,
+        ?event_value_threshold: Float,
+        ?weight: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_type: String?
+      attr_accessor event_value_threshold: Float?
+      attr_accessor weight: Float?
+    end
+
+    class EventTracker
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?event_tracker_arn: String,
+        ?account_id: String,
+        ?tracking_id: String,
+        ?dataset_group_arn: String,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor event_tracker_arn: String?
+      attr_accessor account_id: String?
+      attr_accessor tracking_id: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+    end
+
+    class EventTrackerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?event_tracker_arn: String,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor event_tracker_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+    end
+
+    class EventsConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_parameters_list: Array[Types::EventParameters],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_parameters_list: Array[Types::EventParameters]?
+    end
+
+    class FeatureTransformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?feature_transformation_arn: String,
+        ?default_parameters: Hash[String, String],
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor feature_transformation_arn: String?
+      attr_accessor default_parameters: Hash[String, String]?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor status: String?
+    end
+
+    class FieldsForThemeGeneration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item_name: String?
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?filter_arn: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?dataset_group_arn: String,
+        ?failure_reason: String,
+        ?filter_expression: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor filter_arn: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor failure_reason: String?
+      attr_accessor filter_expression: String?
+      attr_accessor status: String?
+    end
+
+    class FilterSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?filter_arn: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?dataset_group_arn: String,
+        ?failure_reason: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor filter_arn: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor failure_reason: String?
+      attr_accessor status: String?
+    end
+
+    class GetSolutionMetricsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_version_arn: String?
+    end
+
+    class GetSolutionMetricsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_version_arn: String,
+        ?metrics: Hash[String, Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_version_arn: String?
+      attr_accessor metrics: Hash[String, Float]?
+    end
+
+    class HPOConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hpo_objective: Types::HPOObjective,
+        ?hpo_resource_config: Types::HPOResourceConfig,
+        ?algorithm_hyper_parameter_ranges: Types::HyperParameterRanges,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hpo_objective: Types::HPOObjective?
+      attr_accessor hpo_resource_config: Types::HPOResourceConfig?
+      attr_accessor algorithm_hyper_parameter_ranges: Types::HyperParameterRanges?
+    end
+
+    class HPOObjective
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?metric_name: String,
+        ?metric_regex: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor metric_name: String?
+      attr_accessor metric_regex: String?
+    end
+
+    class HPOResourceConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_number_of_training_jobs: String,
+        ?max_parallel_training_jobs: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_number_of_training_jobs: String?
+      attr_accessor max_parallel_training_jobs: String?
+    end
+
+    class HyperParameterRanges
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integer_hyper_parameter_ranges: Array[Types::IntegerHyperParameterRange],
+        ?continuous_hyper_parameter_ranges: Array[Types::ContinuousHyperParameterRange],
+        ?categorical_hyper_parameter_ranges: Array[Types::CategoricalHyperParameterRange],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integer_hyper_parameter_ranges: Array[Types::IntegerHyperParameterRange]?
+      attr_accessor continuous_hyper_parameter_ranges: Array[Types::ContinuousHyperParameterRange]?
+      attr_accessor categorical_hyper_parameter_ranges: Array[Types::CategoricalHyperParameterRange]?
+    end
+
+    module ImportMode
+      FULL: String
+      INCREMENTAL: String
+    end
+
+    module IngestionMode
+      BULK: String
+      PUT: String
+      ALL: String
+    end
+
+    class IntegerHyperParameterRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?min_value: Integer,
+        ?max_value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor min_value: Integer?
+      attr_accessor max_value: Integer?
+    end
+
+    class InvalidInputException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListBatchInferenceJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_version_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_version_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBatchInferenceJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_inference_jobs: Array[Types::BatchInferenceJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_inference_jobs: Array[Types::BatchInferenceJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBatchSegmentJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_version_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_version_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListBatchSegmentJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_segment_jobs: Array[Types::BatchSegmentJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_segment_jobs: Array[Types::BatchSegmentJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCampaignsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCampaignsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaigns: Array[Types::CampaignSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaigns: Array[Types::CampaignSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataDeletionJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDataDeletionJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_deletion_jobs: Array[Types::DataDeletionJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_deletion_jobs: Array[Types::DataDeletionJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDatasetExportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDatasetExportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_export_jobs: Array[Types::DatasetExportJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_export_jobs: Array[Types::DatasetExportJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDatasetGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDatasetGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_groups: Array[Types::DatasetGroupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_groups: Array[Types::DatasetGroupSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDatasetImportJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDatasetImportJobsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_import_jobs: Array[Types::DatasetImportJobSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_import_jobs: Array[Types::DatasetImportJobSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDatasetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDatasetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datasets: Array[Types::DatasetSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datasets: Array[Types::DatasetSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEventTrackersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEventTrackersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_trackers: Array[Types::EventTrackerSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_trackers: Array[Types::EventTrackerSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFiltersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFiltersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Array[Types::FilterSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Array[Types::FilterSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMetricAttributionMetricsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_attribution_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_attribution_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMetricAttributionMetricsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metrics: Array[Types::MetricAttribute],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metrics: Array[Types::MetricAttribute]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMetricAttributionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListMetricAttributionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_attributions: Array[Types::MetricAttributionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_attributions: Array[Types::MetricAttributionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecipesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recipe_provider: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?domain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recipe_provider: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor domain: String?
+    end
+
+    class ListRecipesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recipes: Array[Types::RecipeSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recipes: Array[Types::RecipeSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRecommendersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRecommendersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommenders: Array[Types::RecommenderSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommenders: Array[Types::RecommenderSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSchemasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSchemasResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schemas: Array[Types::DatasetSchemaSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schemas: Array[Types::DatasetSchemaSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSolutionVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSolutionVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_versions: Array[Types::SolutionVersionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_versions: Array[Types::SolutionVersionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSolutionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_group_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_group_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSolutionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solutions: Array[Types::SolutionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solutions: Array[Types::SolutionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class MetricAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_type: String,
+        ?metric_name: String,
+        ?expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_type: String?
+      attr_accessor metric_name: String?
+      attr_accessor expression: String?
+    end
+
+    class MetricAttribution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?metric_attribution_arn: String,
+        ?dataset_group_arn: String,
+        ?metrics_output_config: Types::MetricAttributionOutput,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor metric_attribution_arn: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor metrics_output_config: Types::MetricAttributionOutput?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor failure_reason: String?
+    end
+
+    class MetricAttributionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_data_destination: Types::S3DataConfig,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_data_destination: Types::S3DataConfig?
+      attr_accessor role_arn: String?
+    end
+
+    class MetricAttributionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?metric_attribution_arn: String,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor metric_attribution_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor failure_reason: String?
+    end
+
+    module ObjectiveSensitivity
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+      OFF: String
+    end
+
+    class OptimizationObjective
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item_attribute: String,
+        ?objective_sensitivity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item_attribute: String?
+      attr_accessor objective_sensitivity: String?
+    end
+
+    class Recipe
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?recipe_arn: String,
+        ?algorithm_arn: String,
+        ?feature_transformation_arn: String,
+        ?status: String,
+        ?description: String,
+        ?creation_date_time: Time,
+        ?recipe_type: String,
+        ?last_updated_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor recipe_arn: String?
+      attr_accessor algorithm_arn: String?
+      attr_accessor feature_transformation_arn: String?
+      attr_accessor status: String?
+      attr_accessor description: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor recipe_type: String?
+      attr_accessor last_updated_date_time: Time?
+    end
+
+    module RecipeProvider
+      SERVICE: String
+    end
+
+    class RecipeSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?recipe_arn: String,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?domain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor recipe_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor domain: String?
+    end
+
+    class Recommender
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_arn: String,
+        ?dataset_group_arn: String,
+        ?name: String,
+        ?recipe_arn: String,
+        ?recommender_config: Types::RecommenderConfig,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?status: String,
+        ?failure_reason: String,
+        ?latest_recommender_update: Types::RecommenderUpdateSummary,
+        ?model_metrics: Hash[String, Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_arn: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor name: String?
+      attr_accessor recipe_arn: String?
+      attr_accessor recommender_config: Types::RecommenderConfig?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor latest_recommender_update: Types::RecommenderUpdateSummary?
+      attr_accessor model_metrics: Hash[String, Float]?
+    end
+
+    class RecommenderConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?item_exploration_config: Hash[String, String],
+        ?min_recommendation_requests_per_second: Integer,
+        ?training_data_config: Types::TrainingDataConfig,
+        ?enable_metadata_with_recommendations: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor item_exploration_config: Hash[String, String]?
+      attr_accessor min_recommendation_requests_per_second: Integer?
+      attr_accessor training_data_config: Types::TrainingDataConfig?
+      attr_accessor enable_metadata_with_recommendations: bool?
+    end
+
+    class RecommenderSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?recommender_arn: String,
+        ?dataset_group_arn: String,
+        ?recipe_arn: String,
+        ?recommender_config: Types::RecommenderConfig,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor recommender_arn: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor recipe_arn: String?
+      attr_accessor recommender_config: Types::RecommenderConfig?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+    end
+
+    class RecommenderUpdateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_config: Types::RecommenderConfig,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?status: String,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_config: Types::RecommenderConfig?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+    end
+
+    class ResourceAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class S3DataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class Solution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?solution_arn: String,
+        ?perform_hpo: bool,
+        ?perform_auto_ml: bool,
+        ?perform_auto_training: bool,
+        ?recipe_arn: String,
+        ?dataset_group_arn: String,
+        ?event_type: String,
+        ?solution_config: Types::SolutionConfig,
+        ?auto_ml_result: Types::AutoMLResult,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?latest_solution_version: Types::SolutionVersionSummary,
+        ?latest_solution_update: Types::SolutionUpdateSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor solution_arn: String?
+      attr_accessor perform_hpo: bool?
+      attr_accessor perform_auto_ml: bool?
+      attr_accessor perform_auto_training: bool?
+      attr_accessor recipe_arn: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor event_type: String?
+      attr_accessor solution_config: Types::SolutionConfig?
+      attr_accessor auto_ml_result: Types::AutoMLResult?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor latest_solution_version: Types::SolutionVersionSummary?
+      attr_accessor latest_solution_update: Types::SolutionUpdateSummary?
+    end
+
+    class SolutionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_value_threshold: String,
+        ?hpo_config: Types::HPOConfig,
+        ?algorithm_hyper_parameters: Hash[String, String],
+        ?feature_transformation_parameters: Hash[String, String],
+        ?auto_ml_config: Types::AutoMLConfig,
+        ?events_config: Types::EventsConfig,
+        ?optimization_objective: Types::OptimizationObjective,
+        ?training_data_config: Types::TrainingDataConfig,
+        ?auto_training_config: Types::AutoTrainingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_value_threshold: String?
+      attr_accessor hpo_config: Types::HPOConfig?
+      attr_accessor algorithm_hyper_parameters: Hash[String, String]?
+      attr_accessor feature_transformation_parameters: Hash[String, String]?
+      attr_accessor auto_ml_config: Types::AutoMLConfig?
+      attr_accessor events_config: Types::EventsConfig?
+      attr_accessor optimization_objective: Types::OptimizationObjective?
+      attr_accessor training_data_config: Types::TrainingDataConfig?
+      attr_accessor auto_training_config: Types::AutoTrainingConfig?
+    end
+
+    class SolutionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?solution_arn: String,
+        ?status: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?recipe_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor solution_arn: String?
+      attr_accessor status: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor recipe_arn: String?
+    end
+
+    class SolutionUpdateConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_training_config: Types::AutoTrainingConfig,
+        ?events_config: Types::EventsConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_training_config: Types::AutoTrainingConfig?
+      attr_accessor events_config: Types::EventsConfig?
+    end
+
+    class SolutionUpdateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_update_config: Types::SolutionUpdateConfig,
+        ?status: String,
+        ?perform_auto_training: bool,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_update_config: Types::SolutionUpdateConfig?
+      attr_accessor status: String?
+      attr_accessor perform_auto_training: bool?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor failure_reason: String?
+    end
+
+    class SolutionVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?solution_version_arn: String,
+        ?solution_arn: String,
+        ?perform_hpo: bool,
+        ?perform_auto_ml: bool,
+        ?recipe_arn: String,
+        ?event_type: String,
+        ?dataset_group_arn: String,
+        ?solution_config: Types::SolutionConfig,
+        ?training_hours: Float,
+        ?training_mode: String,
+        ?tuned_hpo_params: Types::TunedHPOParams,
+        ?status: String,
+        ?failure_reason: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?training_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor solution_version_arn: String?
+      attr_accessor solution_arn: String?
+      attr_accessor perform_hpo: bool?
+      attr_accessor perform_auto_ml: bool?
+      attr_accessor recipe_arn: String?
+      attr_accessor event_type: String?
+      attr_accessor dataset_group_arn: String?
+      attr_accessor solution_config: Types::SolutionConfig?
+      attr_accessor training_hours: Float?
+      attr_accessor training_mode: String?
+      attr_accessor tuned_hpo_params: Types::TunedHPOParams?
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor training_type: String?
+    end
+
+    class SolutionVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_version_arn: String,
+        ?status: String,
+        ?training_mode: String,
+        ?training_type: String,
+        ?creation_date_time: Time,
+        ?last_updated_date_time: Time,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_version_arn: String?
+      attr_accessor status: String?
+      attr_accessor training_mode: String?
+      attr_accessor training_type: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor last_updated_date_time: Time?
+      attr_accessor failure_reason: String?
+    end
+
+    class StartRecommenderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_arn: String?
+    end
+
+    class StartRecommenderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_arn: String?
+    end
+
+    class StopRecommenderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_arn: String?
+    end
+
+    class StopRecommenderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_arn: String?
+    end
+
+    class StopSolutionVersionCreationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_version_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_version_arn: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_key: String,
+        ?tag_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_key: String?
+      attr_accessor tag_value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThemeGenerationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fields_for_theme_generation: Types::FieldsForThemeGeneration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fields_for_theme_generation: Types::FieldsForThemeGeneration?
+    end
+
+    class TooManyTagKeysException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TrainingDataConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?excluded_dataset_columns: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor excluded_dataset_columns: Hash[String, Array[String]]?
+    end
+
+    module TrainingMode
+      FULL: String
+      UPDATE: String
+      AUTOTRAIN: String
+    end
+
+    module TrainingType
+      AUTOMATIC: String
+      MANUAL: String
+    end
+
+    class TunedHPOParams
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?algorithm_hyper_parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor algorithm_hyper_parameters: Hash[String, String]?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateCampaignRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaign_arn: String,
+        ?solution_version_arn: String,
+        ?min_provisioned_tps: Integer,
+        ?campaign_config: Types::CampaignConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaign_arn: String?
+      attr_accessor solution_version_arn: String?
+      attr_accessor min_provisioned_tps: Integer?
+      attr_accessor campaign_config: Types::CampaignConfig?
+    end
+
+    class UpdateCampaignResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?campaign_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor campaign_arn: String?
+    end
+
+    class UpdateDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_arn: String,
+        ?schema_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_arn: String?
+      attr_accessor schema_arn: String?
+    end
+
+    class UpdateDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_arn: String?
+    end
+
+    class UpdateMetricAttributionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?add_metrics: Array[Types::MetricAttribute],
+        ?remove_metrics: Array[String],
+        ?metrics_output_config: Types::MetricAttributionOutput,
+        ?metric_attribution_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor add_metrics: Array[Types::MetricAttribute]?
+      attr_accessor remove_metrics: Array[String]?
+      attr_accessor metrics_output_config: Types::MetricAttributionOutput?
+      attr_accessor metric_attribution_arn: String?
+    end
+
+    class UpdateMetricAttributionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_attribution_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_attribution_arn: String?
+    end
+
+    class UpdateRecommenderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_arn: String,
+        ?recommender_config: Types::RecommenderConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_arn: String?
+      attr_accessor recommender_config: Types::RecommenderConfig?
+    end
+
+    class UpdateRecommenderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommender_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommender_arn: String?
+    end
+
+    class UpdateSolutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_arn: String,
+        ?perform_auto_training: bool,
+        ?solution_update_config: Types::SolutionUpdateConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_arn: String?
+      attr_accessor perform_auto_training: bool?
+      attr_accessor solution_update_config: Types::SolutionUpdateConfig?
+    end
+
+    class UpdateSolutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?solution_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor solution_arn: String?
+    end
+  end
+end

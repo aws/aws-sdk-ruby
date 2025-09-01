@@ -1,0 +1,13 @@
+module Aws::DataSync
+  module Errors
+    class InternalException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error_code: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error_code: () -> String?
+      def datasync_error_code: () -> String?
+    end
+  end
+end

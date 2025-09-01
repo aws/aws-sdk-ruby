@@ -1,0 +1,478 @@
+module Aws::KeyspacesStreams
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetRecordsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shard_iterator: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shard_iterator: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetRecordsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?change_records: Array[Types::Record],
+        ?next_shard_iterator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor change_records: Array[Types::Record]?
+      attr_accessor next_shard_iterator: String?
+    end
+
+    class GetShardIteratorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?shard_id: String,
+        ?shard_iterator_type: String,
+        ?sequence_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor shard_id: String?
+      attr_accessor shard_iterator_type: String?
+      attr_accessor sequence_number: String?
+    end
+
+    class GetShardIteratorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shard_iterator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shard_iterator: String?
+    end
+
+    class GetStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?max_results: Integer,
+        ?shard_filter: Types::ShardFilter,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor shard_filter: Types::ShardFilter?
+      attr_accessor next_token: String?
+    end
+
+    class GetStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?stream_label: String,
+        ?stream_status: String,
+        ?stream_view_type: String,
+        ?creation_request_date_time: Time,
+        ?keyspace_name: String,
+        ?table_name: String,
+        ?shards: Array[Types::Shard],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor stream_label: String?
+      attr_accessor stream_status: String?
+      attr_accessor stream_view_type: String?
+      attr_accessor creation_request_date_time: Time?
+      attr_accessor keyspace_name: String?
+      attr_accessor table_name: String?
+      attr_accessor shards: Array[Types::Shard]?
+      attr_accessor next_token: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KeyspacesCell
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Types::KeyspacesCellValue,
+        ?metadata: Types::KeyspacesMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Types::KeyspacesCellValue?
+      attr_accessor metadata: Types::KeyspacesMetadata?
+    end
+
+    class KeyspacesCellMapDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: Types::KeyspacesCellValue,
+        ?value: Types::KeyspacesCellValue,
+        ?metadata: Types::KeyspacesMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: Types::KeyspacesCellValue?
+      attr_accessor value: Types::KeyspacesCellValue?
+      attr_accessor metadata: Types::KeyspacesMetadata?
+    end
+
+    class KeyspacesCellValue
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?ascii_t: String,
+        ?bigint_t: String,
+        ?blob_t: String,
+        ?bool_t: bool,
+        ?counter_t: String,
+        ?date_t: String,
+        ?decimal_t: String,
+        ?double_t: String,
+        ?float_t: String,
+        ?inet_t: String,
+        ?int_t: String,
+        ?list_t: Array[Types::KeyspacesCell],
+        ?map_t: Array[Types::KeyspacesCellMapDefinition],
+        ?set_t: Array[Types::KeyspacesCell],
+        ?smallint_t: String,
+        ?text_t: String,
+        ?time_t: String,
+        ?timestamp_t: String,
+        ?timeuuid_t: String,
+        ?tinyint_t: String,
+        ?tuple_t: Array[Types::KeyspacesCell],
+        ?uuid_t: String,
+        ?varchar_t: String,
+        ?varint_t: String,
+        ?udt_t: Hash[String, Types::KeyspacesCell],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ascii_t: String?
+      attr_accessor bigint_t: String?
+      attr_accessor blob_t: String?
+      attr_accessor bool_t: bool?
+      attr_accessor counter_t: String?
+      attr_accessor date_t: String?
+      attr_accessor decimal_t: String?
+      attr_accessor double_t: String?
+      attr_accessor float_t: String?
+      attr_accessor inet_t: String?
+      attr_accessor int_t: String?
+      attr_accessor list_t: Array[Types::KeyspacesCell]?
+      attr_accessor map_t: Array[Types::KeyspacesCellMapDefinition]?
+      attr_accessor set_t: Array[Types::KeyspacesCell]?
+      attr_accessor smallint_t: String?
+      attr_accessor text_t: String?
+      attr_accessor time_t: String?
+      attr_accessor timestamp_t: String?
+      attr_accessor timeuuid_t: String?
+      attr_accessor tinyint_t: String?
+      attr_accessor tuple_t: Array[Types::KeyspacesCell]?
+      attr_accessor uuid_t: String?
+      attr_accessor varchar_t: String?
+      attr_accessor varint_t: String?
+      attr_accessor udt_t: Hash[String, Types::KeyspacesCell]?
+
+      class AsciiT < KeyspacesCellValue
+      end
+      class BigintT < KeyspacesCellValue
+      end
+      class BlobT < KeyspacesCellValue
+      end
+      class BoolT < KeyspacesCellValue
+      end
+      class CounterT < KeyspacesCellValue
+      end
+      class DateT < KeyspacesCellValue
+      end
+      class DecimalT < KeyspacesCellValue
+      end
+      class DoubleT < KeyspacesCellValue
+      end
+      class FloatT < KeyspacesCellValue
+      end
+      class InetT < KeyspacesCellValue
+      end
+      class IntT < KeyspacesCellValue
+      end
+      class ListT < KeyspacesCellValue
+      end
+      class MapT < KeyspacesCellValue
+      end
+      class SetT < KeyspacesCellValue
+      end
+      class SmallintT < KeyspacesCellValue
+      end
+      class TextT < KeyspacesCellValue
+      end
+      class TimeT < KeyspacesCellValue
+      end
+      class TimestampT < KeyspacesCellValue
+      end
+      class TimeuuidT < KeyspacesCellValue
+      end
+      class TinyintT < KeyspacesCellValue
+      end
+      class TupleT < KeyspacesCellValue
+      end
+      class UuidT < KeyspacesCellValue
+      end
+      class VarcharT < KeyspacesCellValue
+      end
+      class VarintT < KeyspacesCellValue
+      end
+      class UdtT < KeyspacesCellValue
+      end
+      class Unknown < KeyspacesCellValue
+      end
+    end
+
+    class KeyspacesMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expiration_time: String,
+        ?write_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expiration_time: String?
+      attr_accessor write_time: String?
+    end
+
+    class KeyspacesRow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_cells: Hash[String, Types::KeyspacesCell],
+        ?static_cells: Hash[String, Types::KeyspacesCell],
+        ?row_metadata: Types::KeyspacesMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_cells: Hash[String, Types::KeyspacesCell]?
+      attr_accessor static_cells: Hash[String, Types::KeyspacesCell]?
+      attr_accessor row_metadata: Types::KeyspacesMetadata?
+    end
+
+    class ListStreamsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keyspace_name: String,
+        ?table_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keyspace_name: String?
+      attr_accessor table_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListStreamsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?streams: Array[Types::Stream],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor streams: Array[Types::Stream]?
+      attr_accessor next_token: String?
+    end
+
+    module OriginType
+      USER: String
+      REPLICATION: String
+      TTL: String
+    end
+
+    class Record
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_version: String,
+        ?created_at: Time,
+        ?origin: String,
+        ?partition_keys: Hash[String, Types::KeyspacesCellValue],
+        ?clustering_keys: Hash[String, Types::KeyspacesCellValue],
+        ?new_image: Types::KeyspacesRow,
+        ?old_image: Types::KeyspacesRow,
+        ?sequence_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_version: String?
+      attr_accessor created_at: Time?
+      attr_accessor origin: String?
+      attr_accessor partition_keys: Hash[String, Types::KeyspacesCellValue]?
+      attr_accessor clustering_keys: Hash[String, Types::KeyspacesCellValue]?
+      attr_accessor new_image: Types::KeyspacesRow?
+      attr_accessor old_image: Types::KeyspacesRow?
+      attr_accessor sequence_number: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SequenceNumberRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?starting_sequence_number: String,
+        ?ending_sequence_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor starting_sequence_number: String?
+      attr_accessor ending_sequence_number: String?
+    end
+
+    class Shard
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shard_id: String,
+        ?sequence_number_range: Types::SequenceNumberRange,
+        ?parent_shard_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shard_id: String?
+      attr_accessor sequence_number_range: Types::SequenceNumberRange?
+      attr_accessor parent_shard_ids: Array[String]?
+    end
+
+    class ShardFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?shard_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor shard_id: String?
+    end
+
+    module ShardFilterType
+      CHILD_SHARDS: String
+    end
+
+    module ShardIteratorType
+      TRIM_HORIZON: String
+      LATEST: String
+      AT_SEQUENCE_NUMBER: String
+      AFTER_SEQUENCE_NUMBER: String
+    end
+
+    class Stream
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?keyspace_name: String,
+        ?table_name: String,
+        ?stream_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor keyspace_name: String?
+      attr_accessor table_name: String?
+      attr_accessor stream_label: String?
+    end
+
+    module StreamStatus
+      ENABLING: String
+      ENABLED: String
+      DISABLING: String
+      DISABLED: String
+    end
+
+    module StreamViewType
+      NEW_IMAGE: String
+      OLD_IMAGE: String
+      NEW_AND_OLD_IMAGES: String
+      KEYS_ONLY: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+    end
+
+    module ValidationExceptionType
+      InvalidFormat: String
+      TrimmedDataAccess: String
+      ExpiredIterator: String
+      ExpiredNextToken: String
+    end
+  end
+end

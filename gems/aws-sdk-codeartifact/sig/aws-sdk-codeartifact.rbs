@@ -1,0 +1,5 @@
+  module Aws
+    module Codeartifact
+      VERSION: String
+    end
+  end

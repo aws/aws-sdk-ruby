@@ -1,0 +1,29 @@
+module Aws::MarketplaceEntitlementService
+  module Schema
+    include Smithy::Schema::Shapes
+
+    Boolean: BooleanShape
+    Double: FloatShape
+    Entitlement: StructureShape
+    EntitlementList: ListShape
+    EntitlementValue: StructureShape
+    ErrorMessage: StringShape
+    FilterValue: StringShape
+    FilterValueList: ListShape
+    GetEntitlementFilterName: EnumShape
+    GetEntitlementFilters: MapShape
+    GetEntitlementsRequest: StructureShape
+    GetEntitlementsResult: StructureShape
+    Integer: IntegerShape
+    InternalServiceErrorException: StructureShape
+    InvalidParameterException: StructureShape
+    NonEmptyString: StringShape
+    PageSizeInteger: IntegerShape
+    ProductCode: StringShape
+    String: StringShape
+    ThrottlingException: StructureShape
+    Timestamp: TimestampShape
+
+    AWSMPEntitlementService: ServiceShape
+  end
+end

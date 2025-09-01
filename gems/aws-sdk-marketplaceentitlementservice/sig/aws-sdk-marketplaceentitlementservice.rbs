@@ -1,0 +1,5 @@
+  module Aws
+    module MarketplaceEntitlementService
+      VERSION: String
+    end
+  end

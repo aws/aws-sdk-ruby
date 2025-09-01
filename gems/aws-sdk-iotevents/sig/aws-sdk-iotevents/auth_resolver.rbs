@@ -1,0 +1,5 @@
+module Aws::IoTEvents
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

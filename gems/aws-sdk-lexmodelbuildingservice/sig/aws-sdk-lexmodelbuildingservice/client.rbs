@@ -1,0 +1,842 @@
+module Aws::LexModelBuildingService
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::LexModelBuildingService::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateBotVersionResponse
+      include Smithy::Client::_Response[Types::CreateBotVersionResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def intents: () -> Array[Types::Intent]?
+      def clarification_prompt: () -> Types::Prompt?
+      def abort_statement: () -> Types::Statement?
+      def status: () -> String?
+      def failure_reason: () -> String?
+      def last_updated_date: () -> Time?
+      def created_date: () -> Time?
+      def idle_session_ttl_in_seconds: () -> Integer?
+      def voice_id: () -> String?
+      def checksum: () -> String?
+      def version: () -> String?
+      def locale: () -> String?
+      def child_directed: () -> bool?
+      def enable_model_improvements: () -> bool?
+      def detect_sentiment: () -> bool?
+    end
+    def create_bot_version: (
+      ?name: String,
+      ?checksum: String
+    ) -> _CreateBotVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBotVersionResponse
+
+    interface _CreateIntentVersionResponse
+      include Smithy::Client::_Response[Types::CreateIntentVersionResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def slots: () -> Array[Types::Slot]?
+      def sample_utterances: () -> Array[String]?
+      def confirmation_prompt: () -> Types::Prompt?
+      def rejection_statement: () -> Types::Statement?
+      def follow_up_prompt: () -> Types::FollowUpPrompt?
+      def conclusion_statement: () -> Types::Statement?
+      def dialog_code_hook: () -> Types::CodeHook?
+      def fulfillment_activity: () -> Types::FulfillmentActivity?
+      def parent_intent_signature: () -> String?
+      def last_updated_date: () -> Time?
+      def created_date: () -> Time?
+      def version: () -> String?
+      def checksum: () -> String?
+      def kendra_configuration: () -> Types::KendraConfiguration?
+      def input_contexts: () -> Array[Types::InputContext]?
+      def output_contexts: () -> Array[Types::OutputContext]?
+    end
+    def create_intent_version: (
+      ?name: String,
+      ?checksum: String
+    ) -> _CreateIntentVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIntentVersionResponse
+
+    interface _CreateSlotTypeVersionResponse
+      include Smithy::Client::_Response[Types::CreateSlotTypeVersionResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def enumeration_values: () -> Array[Types::EnumerationValue]?
+      def last_updated_date: () -> Time?
+      def created_date: () -> Time?
+      def version: () -> String?
+      def checksum: () -> String?
+      def value_selection_strategy: () -> String?
+      def parent_slot_type_signature: () -> String?
+      def slot_type_configurations: () -> Array[Types::SlotTypeConfiguration]?
+    end
+    def create_slot_type_version: (
+      ?name: String,
+      ?checksum: String
+    ) -> _CreateSlotTypeVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSlotTypeVersionResponse
+
+    interface _DeleteBotResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bot: (
+      ?name: String
+    ) -> _DeleteBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBotResponse
+
+    interface _DeleteBotAliasResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bot_alias: (
+      ?name: String,
+      ?bot_name: String
+    ) -> _DeleteBotAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBotAliasResponse
+
+    interface _DeleteBotChannelAssociationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bot_channel_association: (
+      ?name: String,
+      ?bot_name: String,
+      ?bot_alias: String
+    ) -> _DeleteBotChannelAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBotChannelAssociationResponse
+
+    interface _DeleteBotVersionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_bot_version: (
+      ?name: String,
+      ?version: String
+    ) -> _DeleteBotVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBotVersionResponse
+
+    interface _DeleteIntentResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_intent: (
+      ?name: String
+    ) -> _DeleteIntentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIntentResponse
+
+    interface _DeleteIntentVersionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_intent_version: (
+      ?name: String,
+      ?version: String
+    ) -> _DeleteIntentVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIntentVersionResponse
+
+    interface _DeleteSlotTypeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_slot_type: (
+      ?name: String
+    ) -> _DeleteSlotTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSlotTypeResponse
+
+    interface _DeleteSlotTypeVersionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_slot_type_version: (
+      ?name: String,
+      ?version: String
+    ) -> _DeleteSlotTypeVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSlotTypeVersionResponse
+
+    interface _DeleteUtterancesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_utterances: (
+      ?bot_name: String,
+      ?user_id: String
+    ) -> _DeleteUtterancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUtterancesResponse
+
+    interface _GetBotResponse
+      include Smithy::Client::_Response[Types::GetBotResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def intents: () -> Array[Types::Intent]?
+      def enable_model_improvements: () -> bool?
+      def nlu_intent_confidence_threshold: () -> Float?
+      def clarification_prompt: () -> Types::Prompt?
+      def abort_statement: () -> Types::Statement?
+      def status: () -> String?
+      def failure_reason: () -> String?
+      def last_updated_date: () -> Time?
+      def created_date: () -> Time?
+      def idle_session_ttl_in_seconds: () -> Integer?
+      def voice_id: () -> String?
+      def checksum: () -> String?
+      def version: () -> String?
+      def locale: () -> String?
+      def child_directed: () -> bool?
+      def detect_sentiment: () -> bool?
+    end
+    def get_bot: (
+      ?name: String,
+      ?version_or_alias: String
+    ) -> _GetBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBotResponse
+
+    interface _GetBotAliasResponse
+      include Smithy::Client::_Response[Types::GetBotAliasResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def bot_version: () -> String?
+      def bot_name: () -> String?
+      def last_updated_date: () -> Time?
+      def created_date: () -> Time?
+      def checksum: () -> String?
+      def conversation_logs: () -> Types::ConversationLogsResponse?
+    end
+    def get_bot_alias: (
+      ?name: String,
+      ?bot_name: String
+    ) -> _GetBotAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBotAliasResponse
+
+    interface _GetBotAliasesResponse
+      include Smithy::Client::_Response[Types::GetBotAliasesResponse]
+      def bot_aliases: () -> Array[Types::BotAliasMetadata]?
+      def next_token: () -> String?
+    end
+    def get_bot_aliases: (
+      ?bot_name: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?name_contains: String
+    ) -> _GetBotAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBotAliasesResponse
+
+    interface _GetBotChannelAssociationResponse
+      include Smithy::Client::_Response[Types::GetBotChannelAssociationResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def bot_alias: () -> String?
+      def bot_name: () -> String?
+      def created_date: () -> Time?
+      def type: () -> String?
+      def bot_configuration: () -> Hash[String, String]?
+      def status: () -> String?
+      def failure_reason: () -> String?
+    end
+    def get_bot_channel_association: (
+      ?name: String,
+      ?bot_name: String,
+      ?bot_alias: String
+    ) -> _GetBotChannelAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBotChannelAssociationResponse
+
+    interface _GetBotChannelAssociationsResponse
+      include Smithy::Client::_Response[Types::GetBotChannelAssociationsResponse]
+      def bot_channel_associations: () -> Array[Types::BotChannelAssociation]?
+      def next_token: () -> String?
+    end
+    def get_bot_channel_associations: (
+      ?bot_name: String,
+      ?bot_alias: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?name_contains: String
+    ) -> _GetBotChannelAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBotChannelAssociationsResponse
+
+    interface _GetBotVersionsResponse
+      include Smithy::Client::_Response[Types::GetBotVersionsResponse]
+      def bots: () -> Array[Types::BotMetadata]?
+      def next_token: () -> String?
+    end
+    def get_bot_versions: (
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetBotVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBotVersionsResponse
+
+    interface _GetBotsResponse
+      include Smithy::Client::_Response[Types::GetBotsResponse]
+      def bots: () -> Array[Types::BotMetadata]?
+      def next_token: () -> String?
+    end
+    def get_bots: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?name_contains: String
+    ) -> _GetBotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBotsResponse
+
+    interface _GetBuiltinIntentResponse
+      include Smithy::Client::_Response[Types::GetBuiltinIntentResponse]
+      def signature: () -> String?
+      def supported_locales: () -> Array[String]?
+      def slots: () -> Array[Types::BuiltinIntentSlot]?
+    end
+    def get_builtin_intent: (
+      ?signature: String
+    ) -> _GetBuiltinIntentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBuiltinIntentResponse
+
+    interface _GetBuiltinIntentsResponse
+      include Smithy::Client::_Response[Types::GetBuiltinIntentsResponse]
+      def intents: () -> Array[Types::BuiltinIntentMetadata]?
+      def next_token: () -> String?
+    end
+    def get_builtin_intents: (
+      ?locale: String,
+      ?signature_contains: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetBuiltinIntentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBuiltinIntentsResponse
+
+    interface _GetBuiltinSlotTypesResponse
+      include Smithy::Client::_Response[Types::GetBuiltinSlotTypesResponse]
+      def slot_types: () -> Array[Types::BuiltinSlotTypeMetadata]?
+      def next_token: () -> String?
+    end
+    def get_builtin_slot_types: (
+      ?locale: String,
+      ?signature_contains: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetBuiltinSlotTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBuiltinSlotTypesResponse
+
+    interface _GetExportResponse
+      include Smithy::Client::_Response[Types::GetExportResponse]
+      def name: () -> String?
+      def version: () -> String?
+      def resource_type: () -> String?
+      def export_type: () -> String?
+      def export_status: () -> String?
+      def failure_reason: () -> String?
+      def url: () -> String?
+    end
+    def get_export: (
+      ?name: String,
+      ?version: String,
+      ?resource_type: String,
+      ?export_type: String
+    ) -> _GetExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExportResponse
+
+    interface _GetImportResponse
+      include Smithy::Client::_Response[Types::GetImportResponse]
+      def name: () -> String?
+      def resource_type: () -> String?
+      def merge_strategy: () -> String?
+      def import_id: () -> String?
+      def import_status: () -> String?
+      def failure_reason: () -> Array[String]?
+      def created_date: () -> Time?
+    end
+    def get_import: (
+      ?import_id: String
+    ) -> _GetImportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetImportResponse
+
+    interface _GetIntentResponse
+      include Smithy::Client::_Response[Types::GetIntentResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def slots: () -> Array[Types::Slot]?
+      def sample_utterances: () -> Array[String]?
+      def confirmation_prompt: () -> Types::Prompt?
+      def rejection_statement: () -> Types::Statement?
+      def follow_up_prompt: () -> Types::FollowUpPrompt?
+      def conclusion_statement: () -> Types::Statement?
+      def dialog_code_hook: () -> Types::CodeHook?
+      def fulfillment_activity: () -> Types::FulfillmentActivity?
+      def parent_intent_signature: () -> String?
+      def last_updated_date: () -> Time?
+      def created_date: () -> Time?
+      def version: () -> String?
+      def checksum: () -> String?
+      def kendra_configuration: () -> Types::KendraConfiguration?
+      def input_contexts: () -> Array[Types::InputContext]?
+      def output_contexts: () -> Array[Types::OutputContext]?
+    end
+    def get_intent: (
+      ?name: String,
+      ?version: String
+    ) -> _GetIntentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIntentResponse
+
+    interface _GetIntentVersionsResponse
+      include Smithy::Client::_Response[Types::GetIntentVersionsResponse]
+      def intents: () -> Array[Types::IntentMetadata]?
+      def next_token: () -> String?
+    end
+    def get_intent_versions: (
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetIntentVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIntentVersionsResponse
+
+    interface _GetIntentsResponse
+      include Smithy::Client::_Response[Types::GetIntentsResponse]
+      def intents: () -> Array[Types::IntentMetadata]?
+      def next_token: () -> String?
+    end
+    def get_intents: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?name_contains: String
+    ) -> _GetIntentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIntentsResponse
+
+    interface _GetMigrationResponse
+      include Smithy::Client::_Response[Types::GetMigrationResponse]
+      def migration_id: () -> String?
+      def v1_bot_name: () -> String?
+      def v1_bot_version: () -> String?
+      def v1_bot_locale: () -> String?
+      def v2_bot_id: () -> String?
+      def v2_bot_role: () -> String?
+      def migration_status: () -> String?
+      def migration_strategy: () -> String?
+      def migration_timestamp: () -> Time?
+      def alerts: () -> Array[Types::MigrationAlert]?
+    end
+    def get_migration: (
+      ?migration_id: String
+    ) -> _GetMigrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMigrationResponse
+
+    interface _GetMigrationsResponse
+      include Smithy::Client::_Response[Types::GetMigrationsResponse]
+      def migration_summaries: () -> Array[Types::MigrationSummary]?
+      def next_token: () -> String?
+    end
+    def get_migrations: (
+      ?sort_by_attribute: String,
+      ?sort_by_order: String,
+      ?v1_bot_name_contains: String,
+      ?migration_status_equals: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _GetMigrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMigrationsResponse
+
+    interface _GetSlotTypeResponse
+      include Smithy::Client::_Response[Types::GetSlotTypeResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def enumeration_values: () -> Array[Types::EnumerationValue]?
+      def last_updated_date: () -> Time?
+      def created_date: () -> Time?
+      def version: () -> String?
+      def checksum: () -> String?
+      def value_selection_strategy: () -> String?
+      def parent_slot_type_signature: () -> String?
+      def slot_type_configurations: () -> Array[Types::SlotTypeConfiguration]?
+    end
+    def get_slot_type: (
+      ?name: String,
+      ?version: String
+    ) -> _GetSlotTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSlotTypeResponse
+
+    interface _GetSlotTypeVersionsResponse
+      include Smithy::Client::_Response[Types::GetSlotTypeVersionsResponse]
+      def slot_types: () -> Array[Types::SlotTypeMetadata]?
+      def next_token: () -> String?
+    end
+    def get_slot_type_versions: (
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetSlotTypeVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSlotTypeVersionsResponse
+
+    interface _GetSlotTypesResponse
+      include Smithy::Client::_Response[Types::GetSlotTypesResponse]
+      def slot_types: () -> Array[Types::SlotTypeMetadata]?
+      def next_token: () -> String?
+    end
+    def get_slot_types: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?name_contains: String
+    ) -> _GetSlotTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSlotTypesResponse
+
+    interface _GetUtterancesViewResponse
+      include Smithy::Client::_Response[Types::GetUtterancesViewResponse]
+      def bot_name: () -> String?
+      def utterances: () -> Array[Types::UtteranceList]?
+    end
+    def get_utterances_view: (
+      ?bot_name: String,
+      ?bot_versions: Array[String],
+      ?status_type: String
+    ) -> _GetUtterancesViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUtterancesViewResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutBotResponse
+      include Smithy::Client::_Response[Types::PutBotResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def intents: () -> Array[Types::Intent]?
+      def enable_model_improvements: () -> bool?
+      def nlu_intent_confidence_threshold: () -> Float?
+      def clarification_prompt: () -> Types::Prompt?
+      def abort_statement: () -> Types::Statement?
+      def status: () -> String?
+      def failure_reason: () -> String?
+      def last_updated_date: () -> Time?
+      def created_date: () -> Time?
+      def idle_session_ttl_in_seconds: () -> Integer?
+      def voice_id: () -> String?
+      def checksum: () -> String?
+      def version: () -> String?
+      def locale: () -> String?
+      def child_directed: () -> bool?
+      def create_version: () -> bool?
+      def detect_sentiment: () -> bool?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def put_bot: (
+      ?name: String,
+      ?description: String,
+      ?intents: Array[
+        {
+          intent_name: String,
+          intent_version: String
+        }
+      ],
+      ?enable_model_improvements: bool,
+      ?nlu_intent_confidence_threshold: Float,
+      ?clarification_prompt: {
+        messages: Array[
+          {
+            content_type: String,
+            content: String,
+            group_number: Integer
+          }
+        ],
+        max_attempts: Integer,
+        response_card: String
+      },
+      ?abort_statement: {
+        messages: Array[
+          {
+            content_type: String,
+            content: String,
+            group_number: Integer
+          }
+        ],
+        response_card: String
+      },
+      ?idle_session_ttl_in_seconds: Integer,
+      ?voice_id: String,
+      ?checksum: String,
+      ?process_behavior: String,
+      ?locale: String,
+      ?child_directed: bool,
+      ?detect_sentiment: bool,
+      ?create_version: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBotResponse
+
+    interface _PutBotAliasResponse
+      include Smithy::Client::_Response[Types::PutBotAliasResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def bot_version: () -> String?
+      def bot_name: () -> String?
+      def last_updated_date: () -> Time?
+      def created_date: () -> Time?
+      def checksum: () -> String?
+      def conversation_logs: () -> Types::ConversationLogsResponse?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def put_bot_alias: (
+      ?name: String,
+      ?description: String,
+      ?bot_version: String,
+      ?bot_name: String,
+      ?checksum: String,
+      ?conversation_logs: {
+        log_settings: Array[
+          {
+            log_type: String,
+            destination: String,
+            kms_key_arn: String,
+            resource_arn: String
+          }
+        ],
+        iam_role_arn: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _PutBotAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBotAliasResponse
+
+    interface _PutIntentResponse
+      include Smithy::Client::_Response[Types::PutIntentResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def slots: () -> Array[Types::Slot]?
+      def sample_utterances: () -> Array[String]?
+      def confirmation_prompt: () -> Types::Prompt?
+      def rejection_statement: () -> Types::Statement?
+      def follow_up_prompt: () -> Types::FollowUpPrompt?
+      def conclusion_statement: () -> Types::Statement?
+      def dialog_code_hook: () -> Types::CodeHook?
+      def fulfillment_activity: () -> Types::FulfillmentActivity?
+      def parent_intent_signature: () -> String?
+      def last_updated_date: () -> Time?
+      def created_date: () -> Time?
+      def version: () -> String?
+      def checksum: () -> String?
+      def create_version: () -> bool?
+      def kendra_configuration: () -> Types::KendraConfiguration?
+      def input_contexts: () -> Array[Types::InputContext]?
+      def output_contexts: () -> Array[Types::OutputContext]?
+    end
+    def put_intent: (
+      ?name: String,
+      ?description: String,
+      ?slots: Array[
+        {
+          name: String,
+          description: String,
+          slot_constraint: String,
+          slot_type: String,
+          slot_type_version: String,
+          value_elicitation_prompt: {
+            messages: Array[
+              {
+                content_type: String,
+                content: String,
+                group_number: Integer
+              }
+            ],
+            max_attempts: Integer,
+            response_card: String
+          },
+          priority: Integer,
+          sample_utterances: Array[String],
+          response_card: untyped,
+          obfuscation_setting: String,
+          default_value_spec: {
+            default_value_list: Array[
+              {
+                default_value: String
+              }
+            ]
+          }
+        }
+      ],
+      ?sample_utterances: Array[String],
+      ?confirmation_prompt: {
+        messages: Array[
+          {
+            content_type: String,
+            content: String,
+            group_number: Integer
+          }
+        ],
+        max_attempts: Integer,
+        response_card: String
+      },
+      ?rejection_statement: {
+        messages: Array[
+          {
+            content_type: String,
+            content: String,
+            group_number: Integer
+          }
+        ],
+        response_card: String
+      },
+      ?follow_up_prompt: {
+        prompt: {
+          messages: Array[
+            {
+              content_type: String,
+              content: String,
+              group_number: Integer
+            }
+          ],
+          max_attempts: Integer,
+          response_card: String
+        },
+        rejection_statement: {
+          messages: untyped,
+          response_card: untyped
+        }
+      },
+      ?conclusion_statement: {
+        messages: Array[
+          {
+            content_type: String,
+            content: String,
+            group_number: Integer
+          }
+        ],
+        response_card: String
+      },
+      ?dialog_code_hook: {
+        uri: String,
+        message_version: String
+      },
+      ?fulfillment_activity: {
+        type: String,
+        code_hook: {
+          uri: String,
+          message_version: String
+        }
+      },
+      ?parent_intent_signature: String,
+      ?checksum: String,
+      ?create_version: bool,
+      ?kendra_configuration: {
+        kendra_index: String,
+        query_filter_string: String,
+        role: String
+      },
+      ?input_contexts: Array[
+        {
+          name: String
+        }
+      ],
+      ?output_contexts: Array[
+        {
+          name: String,
+          time_to_live_in_seconds: Integer,
+          turns_to_live: Integer
+        }
+      ]
+    ) -> _PutIntentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutIntentResponse
+
+    interface _PutSlotTypeResponse
+      include Smithy::Client::_Response[Types::PutSlotTypeResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def enumeration_values: () -> Array[Types::EnumerationValue]?
+      def last_updated_date: () -> Time?
+      def created_date: () -> Time?
+      def version: () -> String?
+      def checksum: () -> String?
+      def value_selection_strategy: () -> String?
+      def create_version: () -> bool?
+      def parent_slot_type_signature: () -> String?
+      def slot_type_configurations: () -> Array[Types::SlotTypeConfiguration]?
+    end
+    def put_slot_type: (
+      ?name: String,
+      ?description: String,
+      ?enumeration_values: Array[
+        {
+          value: String,
+          synonyms: Array[String]
+        }
+      ],
+      ?checksum: String,
+      ?value_selection_strategy: String,
+      ?create_version: bool,
+      ?parent_slot_type_signature: String,
+      ?slot_type_configurations: Array[
+        {
+          regex_configuration: {
+            pattern: String
+          }
+        }
+      ]
+    ) -> _PutSlotTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutSlotTypeResponse
+
+    interface _StartImportResponse
+      include Smithy::Client::_Response[Types::StartImportResponse]
+      def name: () -> String?
+      def resource_type: () -> String?
+      def merge_strategy: () -> String?
+      def import_id: () -> String?
+      def import_status: () -> String?
+      def tags: () -> Array[Types::Tag]?
+      def created_date: () -> Time?
+    end
+    def start_import: (
+      ?payload: String,
+      ?resource_type: String,
+      ?merge_strategy: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _StartImportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartImportResponse
+
+    interface _StartMigrationResponse
+      include Smithy::Client::_Response[Types::StartMigrationResponse]
+      def v1_bot_name: () -> String?
+      def v1_bot_version: () -> String?
+      def v1_bot_locale: () -> String?
+      def v2_bot_id: () -> String?
+      def v2_bot_role: () -> String?
+      def migration_id: () -> String?
+      def migration_strategy: () -> String?
+      def migration_timestamp: () -> Time?
+    end
+    def start_migration: (
+      ?v1_bot_name: String,
+      ?v1_bot_version: String,
+      ?v2_bot_name: String,
+      ?v2_bot_role: String,
+      ?migration_strategy: String
+    ) -> _StartMigrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMigrationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+  end
+end

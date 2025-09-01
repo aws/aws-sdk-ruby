@@ -1,0 +1,1752 @@
+module Aws::CognitoIdentityProvider
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CognitoIdentityProvider::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddCustomAttributesResponse
+      include Smithy::Client::_Response[Types::AddCustomAttributesResponse]
+    end
+    def add_custom_attributes: (
+      ?user_pool_id: String,
+      ?custom_attributes: Array[
+        {
+          name: String,
+          attribute_data_type: String,
+          developer_only_attribute: bool,
+          mutable: untyped,
+          required: untyped,
+          number_attribute_constraints: {
+            min_value: String,
+            max_value: untyped
+          },
+          string_attribute_constraints: {
+            min_length: untyped,
+            max_length: untyped
+          }
+        }
+      ]
+    ) -> _AddCustomAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddCustomAttributesResponse
+
+    interface _AdminAddUserToGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def admin_add_user_to_group: (
+      ?user_pool_id: String,
+      ?username: String,
+      ?group_name: String
+    ) -> _AdminAddUserToGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminAddUserToGroupResponse
+
+    interface _AdminConfirmSignUpResponse
+      include Smithy::Client::_Response[Types::AdminConfirmSignUpResponse]
+    end
+    def admin_confirm_sign_up: (
+      ?user_pool_id: String,
+      ?username: String,
+      ?client_metadata: Hash[String, String]
+    ) -> _AdminConfirmSignUpResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminConfirmSignUpResponse
+
+    interface _AdminCreateUserResponse
+      include Smithy::Client::_Response[Types::AdminCreateUserResponse]
+      def user: () -> Types::UserType?
+    end
+    def admin_create_user: (
+      ?user_pool_id: String,
+      ?username: String,
+      ?user_attributes: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?validation_data: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?temporary_password: String,
+      ?force_alias_creation: bool,
+      ?message_action: String,
+      ?desired_delivery_mediums: Array[String],
+      ?client_metadata: Hash[String, String]
+    ) -> _AdminCreateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminCreateUserResponse
+
+    interface _AdminDeleteUserResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def admin_delete_user: (
+      ?user_pool_id: String,
+      ?username: String
+    ) -> _AdminDeleteUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminDeleteUserResponse
+
+    interface _AdminDeleteUserAttributesResponse
+      include Smithy::Client::_Response[Types::AdminDeleteUserAttributesResponse]
+    end
+    def admin_delete_user_attributes: (
+      ?user_pool_id: String,
+      ?username: String,
+      ?user_attribute_names: Array[String]
+    ) -> _AdminDeleteUserAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminDeleteUserAttributesResponse
+
+    interface _AdminDisableProviderForUserResponse
+      include Smithy::Client::_Response[Types::AdminDisableProviderForUserResponse]
+    end
+    def admin_disable_provider_for_user: (
+      ?user_pool_id: String,
+      ?user: {
+        provider_name: String,
+        provider_attribute_name: String,
+        provider_attribute_value: untyped
+      }
+    ) -> _AdminDisableProviderForUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminDisableProviderForUserResponse
+
+    interface _AdminDisableUserResponse
+      include Smithy::Client::_Response[Types::AdminDisableUserResponse]
+    end
+    def admin_disable_user: (
+      ?user_pool_id: String,
+      ?username: String
+    ) -> _AdminDisableUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminDisableUserResponse
+
+    interface _AdminEnableUserResponse
+      include Smithy::Client::_Response[Types::AdminEnableUserResponse]
+    end
+    def admin_enable_user: (
+      ?user_pool_id: String,
+      ?username: String
+    ) -> _AdminEnableUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminEnableUserResponse
+
+    interface _AdminForgetDeviceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def admin_forget_device: (
+      ?user_pool_id: String,
+      ?username: String,
+      ?device_key: String
+    ) -> _AdminForgetDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminForgetDeviceResponse
+
+    interface _AdminGetDeviceResponse
+      include Smithy::Client::_Response[Types::AdminGetDeviceResponse]
+      def device: () -> Types::DeviceType?
+    end
+    def admin_get_device: (
+      ?device_key: String,
+      ?user_pool_id: String,
+      ?username: String
+    ) -> _AdminGetDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminGetDeviceResponse
+
+    interface _AdminGetUserResponse
+      include Smithy::Client::_Response[Types::AdminGetUserResponse]
+      def username: () -> String?
+      def user_attributes: () -> Array[Types::AttributeType]?
+      def user_create_date: () -> Time?
+      def user_last_modified_date: () -> Time?
+      def enabled: () -> bool?
+      def user_status: () -> String?
+      def mfa_options: () -> Array[Types::MFAOptionType]?
+      def preferred_mfa_setting: () -> String?
+      def user_mfa_setting_list: () -> Array[String]?
+    end
+    def admin_get_user: (
+      ?user_pool_id: String,
+      ?username: String
+    ) -> _AdminGetUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminGetUserResponse
+
+    interface _AdminInitiateAuthResponse
+      include Smithy::Client::_Response[Types::AdminInitiateAuthResponse]
+      def challenge_name: () -> String?
+      def session: () -> String?
+      def challenge_parameters: () -> Hash[String, String]?
+      def authentication_result: () -> Types::AuthenticationResultType?
+      def available_challenges: () -> Array[String]?
+    end
+    def admin_initiate_auth: (
+      ?user_pool_id: String,
+      ?client_id: String,
+      ?auth_flow: String,
+      ?auth_parameters: Hash[String, String],
+      ?client_metadata: Hash[String, String],
+      ?analytics_metadata: {
+        analytics_endpoint_id: String
+      },
+      ?context_data: {
+        ip_address: String,
+        server_name: untyped,
+        server_path: untyped,
+        http_headers: Array[
+          {
+            header_name: untyped,
+            header_value: untyped
+          }
+        ],
+        encoded_data: untyped
+      },
+      ?session: String
+    ) -> _AdminInitiateAuthResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminInitiateAuthResponse
+
+    interface _AdminLinkProviderForUserResponse
+      include Smithy::Client::_Response[Types::AdminLinkProviderForUserResponse]
+    end
+    def admin_link_provider_for_user: (
+      ?user_pool_id: String,
+      ?destination_user: {
+        provider_name: String,
+        provider_attribute_name: String,
+        provider_attribute_value: untyped
+      },
+      ?source_user: {
+        provider_name: String,
+        provider_attribute_name: String,
+        provider_attribute_value: untyped
+      }
+    ) -> _AdminLinkProviderForUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminLinkProviderForUserResponse
+
+    interface _AdminListDevicesResponse
+      include Smithy::Client::_Response[Types::AdminListDevicesResponse]
+      def devices: () -> Array[Types::DeviceType]?
+      def pagination_token: () -> String?
+    end
+    def admin_list_devices: (
+      ?user_pool_id: String,
+      ?username: String,
+      ?limit: Integer,
+      ?pagination_token: String
+    ) -> _AdminListDevicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminListDevicesResponse
+
+    interface _AdminListGroupsForUserResponse
+      include Smithy::Client::_Response[Types::AdminListGroupsForUserResponse]
+      def groups: () -> Array[Types::GroupType]?
+      def next_token: () -> String?
+    end
+    def admin_list_groups_for_user: (
+      ?username: String,
+      ?user_pool_id: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _AdminListGroupsForUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminListGroupsForUserResponse
+
+    interface _AdminListUserAuthEventsResponse
+      include Smithy::Client::_Response[Types::AdminListUserAuthEventsResponse]
+      def auth_events: () -> Array[Types::AuthEventType]?
+      def next_token: () -> String?
+    end
+    def admin_list_user_auth_events: (
+      ?user_pool_id: String,
+      ?username: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _AdminListUserAuthEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminListUserAuthEventsResponse
+
+    interface _AdminRemoveUserFromGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def admin_remove_user_from_group: (
+      ?user_pool_id: String,
+      ?username: String,
+      ?group_name: String
+    ) -> _AdminRemoveUserFromGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminRemoveUserFromGroupResponse
+
+    interface _AdminResetUserPasswordResponse
+      include Smithy::Client::_Response[Types::AdminResetUserPasswordResponse]
+    end
+    def admin_reset_user_password: (
+      ?user_pool_id: String,
+      ?username: String,
+      ?client_metadata: Hash[String, String]
+    ) -> _AdminResetUserPasswordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminResetUserPasswordResponse
+
+    interface _AdminRespondToAuthChallengeResponse
+      include Smithy::Client::_Response[Types::AdminRespondToAuthChallengeResponse]
+      def challenge_name: () -> String?
+      def session: () -> String?
+      def challenge_parameters: () -> Hash[String, String]?
+      def authentication_result: () -> Types::AuthenticationResultType?
+    end
+    def admin_respond_to_auth_challenge: (
+      ?user_pool_id: String,
+      ?client_id: String,
+      ?challenge_name: String,
+      ?challenge_responses: Hash[String, String],
+      ?session: String,
+      ?analytics_metadata: {
+        analytics_endpoint_id: String
+      },
+      ?context_data: {
+        ip_address: String,
+        server_name: untyped,
+        server_path: untyped,
+        http_headers: Array[
+          {
+            header_name: untyped,
+            header_value: untyped
+          }
+        ],
+        encoded_data: untyped
+      },
+      ?client_metadata: Hash[String, String]
+    ) -> _AdminRespondToAuthChallengeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminRespondToAuthChallengeResponse
+
+    interface _AdminSetUserMFAPreferenceResponse
+      include Smithy::Client::_Response[Types::AdminSetUserMFAPreferenceResponse]
+    end
+    def admin_set_user_mfa_preference: (
+      ?sms_mfa_settings: {
+        enabled: bool,
+        preferred_mfa: untyped
+      },
+      ?software_token_mfa_settings: {
+        enabled: bool,
+        preferred_mfa: untyped
+      },
+      ?email_mfa_settings: {
+        enabled: bool,
+        preferred_mfa: untyped
+      },
+      ?username: String,
+      ?user_pool_id: String
+    ) -> _AdminSetUserMFAPreferenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminSetUserMFAPreferenceResponse
+
+    interface _AdminSetUserPasswordResponse
+      include Smithy::Client::_Response[Types::AdminSetUserPasswordResponse]
+    end
+    def admin_set_user_password: (
+      ?user_pool_id: String,
+      ?username: String,
+      ?password: String,
+      ?permanent: bool
+    ) -> _AdminSetUserPasswordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminSetUserPasswordResponse
+
+    interface _AdminSetUserSettingsResponse
+      include Smithy::Client::_Response[Types::AdminSetUserSettingsResponse]
+    end
+    def admin_set_user_settings: (
+      ?user_pool_id: String,
+      ?username: String,
+      ?mfa_options: Array[
+        {
+          delivery_medium: String,
+          attribute_name: String
+        }
+      ]
+    ) -> _AdminSetUserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminSetUserSettingsResponse
+
+    interface _AdminUpdateAuthEventFeedbackResponse
+      include Smithy::Client::_Response[Types::AdminUpdateAuthEventFeedbackResponse]
+    end
+    def admin_update_auth_event_feedback: (
+      ?user_pool_id: String,
+      ?username: String,
+      ?event_id: String,
+      ?feedback_value: String
+    ) -> _AdminUpdateAuthEventFeedbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminUpdateAuthEventFeedbackResponse
+
+    interface _AdminUpdateDeviceStatusResponse
+      include Smithy::Client::_Response[Types::AdminUpdateDeviceStatusResponse]
+    end
+    def admin_update_device_status: (
+      ?user_pool_id: String,
+      ?username: String,
+      ?device_key: String,
+      ?device_remembered_status: String
+    ) -> _AdminUpdateDeviceStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminUpdateDeviceStatusResponse
+
+    interface _AdminUpdateUserAttributesResponse
+      include Smithy::Client::_Response[Types::AdminUpdateUserAttributesResponse]
+    end
+    def admin_update_user_attributes: (
+      ?user_pool_id: String,
+      ?username: String,
+      ?user_attributes: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?client_metadata: Hash[String, String]
+    ) -> _AdminUpdateUserAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminUpdateUserAttributesResponse
+
+    interface _AdminUserGlobalSignOutResponse
+      include Smithy::Client::_Response[Types::AdminUserGlobalSignOutResponse]
+    end
+    def admin_user_global_sign_out: (
+      ?user_pool_id: String,
+      ?username: String
+    ) -> _AdminUserGlobalSignOutResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AdminUserGlobalSignOutResponse
+
+    interface _AssociateSoftwareTokenResponse
+      include Smithy::Client::_Response[Types::AssociateSoftwareTokenResponse]
+      def secret_code: () -> String?
+      def session: () -> String?
+    end
+    def associate_software_token: (
+      ?access_token: String,
+      ?session: String
+    ) -> _AssociateSoftwareTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateSoftwareTokenResponse
+
+    interface _ChangePasswordResponse
+      include Smithy::Client::_Response[Types::ChangePasswordResponse]
+    end
+    def change_password: (
+      ?previous_password: String,
+      ?proposed_password: String,
+      ?access_token: String
+    ) -> _ChangePasswordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ChangePasswordResponse
+
+    interface _CompleteWebAuthnRegistrationResponse
+      include Smithy::Client::_Response[Types::CompleteWebAuthnRegistrationResponse]
+    end
+    def complete_web_authn_registration: (
+      ?access_token: String,
+      ?credential: Smithy::Schema::document
+    ) -> _CompleteWebAuthnRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CompleteWebAuthnRegistrationResponse
+
+    interface _ConfirmDeviceResponse
+      include Smithy::Client::_Response[Types::ConfirmDeviceResponse]
+      def user_confirmation_necessary: () -> bool?
+    end
+    def confirm_device: (
+      ?access_token: String,
+      ?device_key: String,
+      ?device_secret_verifier_config: {
+        password_verifier: String,
+        salt: untyped
+      },
+      ?device_name: String
+    ) -> _ConfirmDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConfirmDeviceResponse
+
+    interface _ConfirmForgotPasswordResponse
+      include Smithy::Client::_Response[Types::ConfirmForgotPasswordResponse]
+    end
+    def confirm_forgot_password: (
+      ?client_id: String,
+      ?secret_hash: String,
+      ?username: String,
+      ?confirmation_code: String,
+      ?password: String,
+      ?analytics_metadata: {
+        analytics_endpoint_id: String
+      },
+      ?user_context_data: {
+        ip_address: String,
+        encoded_data: untyped
+      },
+      ?client_metadata: Hash[String, String]
+    ) -> _ConfirmForgotPasswordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConfirmForgotPasswordResponse
+
+    interface _ConfirmSignUpResponse
+      include Smithy::Client::_Response[Types::ConfirmSignUpResponse]
+      def session: () -> String?
+    end
+    def confirm_sign_up: (
+      ?client_id: String,
+      ?secret_hash: String,
+      ?username: String,
+      ?confirmation_code: String,
+      ?force_alias_creation: bool,
+      ?analytics_metadata: {
+        analytics_endpoint_id: String
+      },
+      ?user_context_data: {
+        ip_address: String,
+        encoded_data: untyped
+      },
+      ?client_metadata: Hash[String, String],
+      ?session: String
+    ) -> _ConfirmSignUpResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConfirmSignUpResponse
+
+    interface _CreateGroupResponse
+      include Smithy::Client::_Response[Types::CreateGroupResponse]
+      def group: () -> Types::GroupType?
+    end
+    def create_group: (
+      ?group_name: String,
+      ?user_pool_id: String,
+      ?description: String,
+      ?role_arn: String,
+      ?precedence: Integer
+    ) -> _CreateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGroupResponse
+
+    interface _CreateIdentityProviderResponse
+      include Smithy::Client::_Response[Types::CreateIdentityProviderResponse]
+      def identity_provider: () -> Types::IdentityProviderType?
+    end
+    def create_identity_provider: (
+      ?user_pool_id: String,
+      ?provider_name: String,
+      ?provider_type: String,
+      ?provider_details: Hash[String, String],
+      ?attribute_mapping: Hash[String, String],
+      ?idp_identifiers: Array[String]
+    ) -> _CreateIdentityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIdentityProviderResponse
+
+    interface _CreateManagedLoginBrandingResponse
+      include Smithy::Client::_Response[Types::CreateManagedLoginBrandingResponse]
+      def managed_login_branding: () -> Types::ManagedLoginBrandingType?
+    end
+    def create_managed_login_branding: (
+      ?user_pool_id: String,
+      ?client_id: String,
+      ?use_cognito_provided_values: bool,
+      ?settings: Smithy::Schema::document,
+      ?assets: Array[
+        {
+          category: String,
+          color_mode: String,
+          extension: String,
+          bytes: String,
+          resource_id: String
+        }
+      ]
+    ) -> _CreateManagedLoginBrandingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateManagedLoginBrandingResponse
+
+    interface _CreateResourceServerResponse
+      include Smithy::Client::_Response[Types::CreateResourceServerResponse]
+      def resource_server: () -> Types::ResourceServerType?
+    end
+    def create_resource_server: (
+      ?user_pool_id: String,
+      ?identifier: String,
+      ?name: String,
+      ?scopes: Array[
+        {
+          scope_name: String,
+          scope_description: String
+        }
+      ]
+    ) -> _CreateResourceServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceServerResponse
+
+    interface _CreateUserImportJobResponse
+      include Smithy::Client::_Response[Types::CreateUserImportJobResponse]
+      def user_import_job: () -> Types::UserImportJobType?
+    end
+    def create_user_import_job: (
+      ?job_name: String,
+      ?user_pool_id: String,
+      ?cloud_watch_logs_role_arn: String
+    ) -> _CreateUserImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserImportJobResponse
+
+    interface _CreateUserPoolResponse
+      include Smithy::Client::_Response[Types::CreateUserPoolResponse]
+      def user_pool: () -> Types::UserPoolType?
+    end
+    def create_user_pool: (
+      ?pool_name: String,
+      ?policies: {
+        password_policy: {
+          minimum_length: Integer,
+          require_uppercase: bool,
+          require_lowercase: untyped,
+          require_numbers: untyped,
+          require_symbols: untyped,
+          password_history_size: Integer,
+          temporary_password_validity_days: Integer
+        },
+        sign_in_policy: {
+          allowed_first_auth_factors: Array[String]
+        }
+      },
+      ?deletion_protection: String,
+      ?lambda_config: {
+        pre_sign_up: String,
+        custom_message: untyped,
+        post_confirmation: untyped,
+        pre_authentication: untyped,
+        post_authentication: untyped,
+        define_auth_challenge: untyped,
+        create_auth_challenge: untyped,
+        verify_auth_challenge_response: untyped,
+        pre_token_generation: untyped,
+        user_migration: untyped,
+        pre_token_generation_config: {
+          lambda_version: String,
+          lambda_arn: untyped
+        },
+        custom_sms_sender: {
+          lambda_version: String,
+          lambda_arn: untyped
+        },
+        custom_email_sender: {
+          lambda_version: String,
+          lambda_arn: untyped
+        },
+        kms_key_id: untyped
+      },
+      ?auto_verified_attributes: Array[String],
+      ?alias_attributes: Array[String],
+      ?username_attributes: Array[String],
+      ?sms_verification_message: String,
+      ?email_verification_message: String,
+      ?email_verification_subject: String,
+      ?verification_message_template: {
+        sms_message: String,
+        email_message: String,
+        email_subject: String,
+        email_message_by_link: String,
+        email_subject_by_link: String,
+        default_email_option: String
+      },
+      ?sms_authentication_message: String,
+      ?mfa_configuration: String,
+      ?user_attribute_update_settings: {
+        attributes_require_verification_before_update: Array[String]
+      },
+      ?device_configuration: {
+        challenge_required_on_new_device: bool,
+        device_only_remembered_on_user_prompt: untyped
+      },
+      ?email_configuration: {
+        source_arn: String,
+        reply_to_email_address: String,
+        email_sending_account: String,
+        from: String,
+        configuration_set: String
+      },
+      ?sms_configuration: {
+        sns_caller_arn: String,
+        external_id: String,
+        sns_region: String
+      },
+      ?user_pool_tags: Hash[String, String],
+      ?admin_create_user_config: {
+        allow_admin_create_user_only: bool,
+        unused_account_validity_days: Integer,
+        invite_message_template: {
+          sms_message: String,
+          email_message: String,
+          email_subject: String
+        }
+      },
+      ?schema: Array[
+        {
+          name: String,
+          attribute_data_type: String,
+          developer_only_attribute: bool,
+          mutable: untyped,
+          required: untyped,
+          number_attribute_constraints: {
+            min_value: String,
+            max_value: untyped
+          },
+          string_attribute_constraints: {
+            min_length: untyped,
+            max_length: untyped
+          }
+        }
+      ],
+      ?user_pool_add_ons: {
+        advanced_security_mode: String,
+        advanced_security_additional_flows: {
+          custom_auth_mode: String
+        }
+      },
+      ?username_configuration: {
+        case_sensitive: bool
+      },
+      ?account_recovery_setting: {
+        recovery_mechanisms: Array[
+          {
+            priority: Integer,
+            name: String
+          }
+        ]
+      },
+      ?user_pool_tier: String
+    ) -> _CreateUserPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserPoolResponse
+
+    interface _CreateUserPoolClientResponse
+      include Smithy::Client::_Response[Types::CreateUserPoolClientResponse]
+      def user_pool_client: () -> Types::UserPoolClientType?
+    end
+    def create_user_pool_client: (
+      ?user_pool_id: String,
+      ?client_name: String,
+      ?generate_secret: bool,
+      ?refresh_token_validity: Integer,
+      ?access_token_validity: Integer,
+      ?id_token_validity: Integer,
+      ?token_validity_units: {
+        access_token: String,
+        id_token: untyped,
+        refresh_token: untyped
+      },
+      ?read_attributes: Array[String],
+      ?write_attributes: Array[String],
+      ?explicit_auth_flows: Array[String],
+      ?supported_identity_providers: Array[String],
+      ?callback_ur_ls: Array[String],
+      ?logout_ur_ls: Array[String],
+      ?default_redirect_uri: String,
+      ?allowed_o_auth_flows: Array[String],
+      ?allowed_o_auth_scopes: Array[String],
+      ?allowed_o_auth_flows_user_pool_client: bool,
+      ?analytics_configuration: {
+        application_id: String,
+        application_arn: String,
+        role_arn: untyped,
+        external_id: String,
+        user_data_shared: bool
+      },
+      ?prevent_user_existence_errors: String,
+      ?enable_token_revocation: bool,
+      ?enable_propagate_additional_user_context_data: bool,
+      ?auth_session_validity: Integer,
+      ?refresh_token_rotation: {
+        feature: String,
+        retry_grace_period_seconds: Integer
+      }
+    ) -> _CreateUserPoolClientResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserPoolClientResponse
+
+    interface _CreateUserPoolDomainResponse
+      include Smithy::Client::_Response[Types::CreateUserPoolDomainResponse]
+      def managed_login_version: () -> Integer?
+      def cloud_front_domain: () -> String?
+    end
+    def create_user_pool_domain: (
+      ?domain: String,
+      ?user_pool_id: String,
+      ?managed_login_version: Integer,
+      ?custom_domain_config: {
+        certificate_arn: String
+      }
+    ) -> _CreateUserPoolDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserPoolDomainResponse
+
+    interface _DeleteGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_group: (
+      ?group_name: String,
+      ?user_pool_id: String
+    ) -> _DeleteGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGroupResponse
+
+    interface _DeleteIdentityProviderResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_identity_provider: (
+      ?user_pool_id: String,
+      ?provider_name: String
+    ) -> _DeleteIdentityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIdentityProviderResponse
+
+    interface _DeleteManagedLoginBrandingResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_managed_login_branding: (
+      ?managed_login_branding_id: String,
+      ?user_pool_id: String
+    ) -> _DeleteManagedLoginBrandingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteManagedLoginBrandingResponse
+
+    interface _DeleteResourceServerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_resource_server: (
+      ?user_pool_id: String,
+      ?identifier: String
+    ) -> _DeleteResourceServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourceServerResponse
+
+    interface _DeleteUserResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_user: (
+      ?access_token: String
+    ) -> _DeleteUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserResponse
+
+    interface _DeleteUserAttributesResponse
+      include Smithy::Client::_Response[Types::DeleteUserAttributesResponse]
+    end
+    def delete_user_attributes: (
+      ?user_attribute_names: Array[String],
+      ?access_token: String
+    ) -> _DeleteUserAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserAttributesResponse
+
+    interface _DeleteUserPoolResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_user_pool: (
+      ?user_pool_id: String
+    ) -> _DeleteUserPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserPoolResponse
+
+    interface _DeleteUserPoolClientResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_user_pool_client: (
+      ?user_pool_id: String,
+      ?client_id: String
+    ) -> _DeleteUserPoolClientResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserPoolClientResponse
+
+    interface _DeleteUserPoolDomainResponse
+      include Smithy::Client::_Response[Types::DeleteUserPoolDomainResponse]
+    end
+    def delete_user_pool_domain: (
+      ?domain: String,
+      ?user_pool_id: String
+    ) -> _DeleteUserPoolDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserPoolDomainResponse
+
+    interface _DeleteWebAuthnCredentialResponse
+      include Smithy::Client::_Response[Types::DeleteWebAuthnCredentialResponse]
+    end
+    def delete_web_authn_credential: (
+      ?access_token: String,
+      ?credential_id: String
+    ) -> _DeleteWebAuthnCredentialResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWebAuthnCredentialResponse
+
+    interface _DescribeIdentityProviderResponse
+      include Smithy::Client::_Response[Types::DescribeIdentityProviderResponse]
+      def identity_provider: () -> Types::IdentityProviderType?
+    end
+    def describe_identity_provider: (
+      ?user_pool_id: String,
+      ?provider_name: String
+    ) -> _DescribeIdentityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeIdentityProviderResponse
+
+    interface _DescribeManagedLoginBrandingResponse
+      include Smithy::Client::_Response[Types::DescribeManagedLoginBrandingResponse]
+      def managed_login_branding: () -> Types::ManagedLoginBrandingType?
+    end
+    def describe_managed_login_branding: (
+      ?user_pool_id: String,
+      ?managed_login_branding_id: String,
+      ?return_merged_resources: bool
+    ) -> _DescribeManagedLoginBrandingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeManagedLoginBrandingResponse
+
+    interface _DescribeManagedLoginBrandingByClientResponse
+      include Smithy::Client::_Response[Types::DescribeManagedLoginBrandingByClientResponse]
+      def managed_login_branding: () -> Types::ManagedLoginBrandingType?
+    end
+    def describe_managed_login_branding_by_client: (
+      ?user_pool_id: String,
+      ?client_id: String,
+      ?return_merged_resources: bool
+    ) -> _DescribeManagedLoginBrandingByClientResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeManagedLoginBrandingByClientResponse
+
+    interface _DescribeResourceServerResponse
+      include Smithy::Client::_Response[Types::DescribeResourceServerResponse]
+      def resource_server: () -> Types::ResourceServerType?
+    end
+    def describe_resource_server: (
+      ?user_pool_id: String,
+      ?identifier: String
+    ) -> _DescribeResourceServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeResourceServerResponse
+
+    interface _DescribeRiskConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeRiskConfigurationResponse]
+      def risk_configuration: () -> Types::RiskConfigurationType?
+    end
+    def describe_risk_configuration: (
+      ?user_pool_id: String,
+      ?client_id: String
+    ) -> _DescribeRiskConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRiskConfigurationResponse
+
+    interface _DescribeUserImportJobResponse
+      include Smithy::Client::_Response[Types::DescribeUserImportJobResponse]
+      def user_import_job: () -> Types::UserImportJobType?
+    end
+    def describe_user_import_job: (
+      ?user_pool_id: String,
+      ?job_id: String
+    ) -> _DescribeUserImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUserImportJobResponse
+
+    interface _DescribeUserPoolResponse
+      include Smithy::Client::_Response[Types::DescribeUserPoolResponse]
+      def user_pool: () -> Types::UserPoolType?
+    end
+    def describe_user_pool: (
+      ?user_pool_id: String
+    ) -> _DescribeUserPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUserPoolResponse
+
+    interface _DescribeUserPoolClientResponse
+      include Smithy::Client::_Response[Types::DescribeUserPoolClientResponse]
+      def user_pool_client: () -> Types::UserPoolClientType?
+    end
+    def describe_user_pool_client: (
+      ?user_pool_id: String,
+      ?client_id: String
+    ) -> _DescribeUserPoolClientResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUserPoolClientResponse
+
+    interface _DescribeUserPoolDomainResponse
+      include Smithy::Client::_Response[Types::DescribeUserPoolDomainResponse]
+      def domain_description: () -> Types::DomainDescriptionType?
+    end
+    def describe_user_pool_domain: (
+      ?domain: String
+    ) -> _DescribeUserPoolDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUserPoolDomainResponse
+
+    interface _ForgetDeviceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def forget_device: (
+      ?access_token: String,
+      ?device_key: String
+    ) -> _ForgetDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ForgetDeviceResponse
+
+    interface _ForgotPasswordResponse
+      include Smithy::Client::_Response[Types::ForgotPasswordResponse]
+      def code_delivery_details: () -> Types::CodeDeliveryDetailsType?
+    end
+    def forgot_password: (
+      ?client_id: String,
+      ?secret_hash: String,
+      ?user_context_data: {
+        ip_address: String,
+        encoded_data: untyped
+      },
+      ?username: String,
+      ?analytics_metadata: {
+        analytics_endpoint_id: String
+      },
+      ?client_metadata: Hash[String, String]
+    ) -> _ForgotPasswordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ForgotPasswordResponse
+
+    interface _GetCSVHeaderResponse
+      include Smithy::Client::_Response[Types::GetCSVHeaderResponse]
+      def user_pool_id: () -> String?
+      def csv_header: () -> Array[String]?
+    end
+    def get_csv_header: (
+      ?user_pool_id: String
+    ) -> _GetCSVHeaderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCSVHeaderResponse
+
+    interface _GetDeviceResponse
+      include Smithy::Client::_Response[Types::GetDeviceResponse]
+      def device: () -> Types::DeviceType?
+    end
+    def get_device: (
+      ?device_key: String,
+      ?access_token: String
+    ) -> _GetDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeviceResponse
+
+    interface _GetGroupResponse
+      include Smithy::Client::_Response[Types::GetGroupResponse]
+      def group: () -> Types::GroupType?
+    end
+    def get_group: (
+      ?group_name: String,
+      ?user_pool_id: String
+    ) -> _GetGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetGroupResponse
+
+    interface _GetIdentityProviderByIdentifierResponse
+      include Smithy::Client::_Response[Types::GetIdentityProviderByIdentifierResponse]
+      def identity_provider: () -> Types::IdentityProviderType?
+    end
+    def get_identity_provider_by_identifier: (
+      ?user_pool_id: String,
+      ?idp_identifier: String
+    ) -> _GetIdentityProviderByIdentifierResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIdentityProviderByIdentifierResponse
+
+    interface _GetLogDeliveryConfigurationResponse
+      include Smithy::Client::_Response[Types::GetLogDeliveryConfigurationResponse]
+      def log_delivery_configuration: () -> Types::LogDeliveryConfigurationType?
+    end
+    def get_log_delivery_configuration: (
+      ?user_pool_id: String
+    ) -> _GetLogDeliveryConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLogDeliveryConfigurationResponse
+
+    interface _GetSigningCertificateResponse
+      include Smithy::Client::_Response[Types::GetSigningCertificateResponse]
+      def certificate: () -> String?
+    end
+    def get_signing_certificate: (
+      ?user_pool_id: String
+    ) -> _GetSigningCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSigningCertificateResponse
+
+    interface _GetTokensFromRefreshTokenResponse
+      include Smithy::Client::_Response[Types::GetTokensFromRefreshTokenResponse]
+      def authentication_result: () -> Types::AuthenticationResultType?
+    end
+    def get_tokens_from_refresh_token: (
+      ?refresh_token: String,
+      ?client_id: String,
+      ?client_secret: String,
+      ?device_key: String,
+      ?client_metadata: Hash[String, String]
+    ) -> _GetTokensFromRefreshTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTokensFromRefreshTokenResponse
+
+    interface _GetUICustomizationResponse
+      include Smithy::Client::_Response[Types::GetUICustomizationResponse]
+      def ui_customization: () -> Types::UICustomizationType?
+    end
+    def get_ui_customization: (
+      ?user_pool_id: String,
+      ?client_id: String
+    ) -> _GetUICustomizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUICustomizationResponse
+
+    interface _GetUserResponse
+      include Smithy::Client::_Response[Types::GetUserResponse]
+      def username: () -> String?
+      def user_attributes: () -> Array[Types::AttributeType]?
+      def mfa_options: () -> Array[Types::MFAOptionType]?
+      def preferred_mfa_setting: () -> String?
+      def user_mfa_setting_list: () -> Array[String]?
+    end
+    def get_user: (
+      ?access_token: String
+    ) -> _GetUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserResponse
+
+    interface _GetUserAttributeVerificationCodeResponse
+      include Smithy::Client::_Response[Types::GetUserAttributeVerificationCodeResponse]
+      def code_delivery_details: () -> Types::CodeDeliveryDetailsType?
+    end
+    def get_user_attribute_verification_code: (
+      ?access_token: String,
+      ?attribute_name: String,
+      ?client_metadata: Hash[String, String]
+    ) -> _GetUserAttributeVerificationCodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserAttributeVerificationCodeResponse
+
+    interface _GetUserAuthFactorsResponse
+      include Smithy::Client::_Response[Types::GetUserAuthFactorsResponse]
+      def username: () -> String?
+      def preferred_mfa_setting: () -> String?
+      def user_mfa_setting_list: () -> Array[String]?
+      def configured_user_auth_factors: () -> Array[String]?
+    end
+    def get_user_auth_factors: (
+      ?access_token: String
+    ) -> _GetUserAuthFactorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserAuthFactorsResponse
+
+    interface _GetUserPoolMfaConfigResponse
+      include Smithy::Client::_Response[Types::GetUserPoolMfaConfigResponse]
+      def sms_mfa_configuration: () -> Types::SmsMfaConfigType?
+      def software_token_mfa_configuration: () -> Types::SoftwareTokenMfaConfigType?
+      def email_mfa_configuration: () -> Types::EmailMfaConfigType?
+      def mfa_configuration: () -> String?
+      def web_authn_configuration: () -> Types::WebAuthnConfigurationType?
+    end
+    def get_user_pool_mfa_config: (
+      ?user_pool_id: String
+    ) -> _GetUserPoolMfaConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserPoolMfaConfigResponse
+
+    interface _GlobalSignOutResponse
+      include Smithy::Client::_Response[Types::GlobalSignOutResponse]
+    end
+    def global_sign_out: (
+      ?access_token: String
+    ) -> _GlobalSignOutResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GlobalSignOutResponse
+
+    interface _InitiateAuthResponse
+      include Smithy::Client::_Response[Types::InitiateAuthResponse]
+      def challenge_name: () -> String?
+      def session: () -> String?
+      def challenge_parameters: () -> Hash[String, String]?
+      def authentication_result: () -> Types::AuthenticationResultType?
+      def available_challenges: () -> Array[String]?
+    end
+    def initiate_auth: (
+      ?auth_flow: String,
+      ?auth_parameters: Hash[String, String],
+      ?client_metadata: Hash[String, String],
+      ?client_id: String,
+      ?analytics_metadata: {
+        analytics_endpoint_id: String
+      },
+      ?user_context_data: {
+        ip_address: String,
+        encoded_data: untyped
+      },
+      ?session: String
+    ) -> _InitiateAuthResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InitiateAuthResponse
+
+    interface _ListDevicesResponse
+      include Smithy::Client::_Response[Types::ListDevicesResponse]
+      def devices: () -> Array[Types::DeviceType]?
+      def pagination_token: () -> String?
+    end
+    def list_devices: (
+      ?access_token: String,
+      ?limit: Integer,
+      ?pagination_token: String
+    ) -> _ListDevicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDevicesResponse
+
+    interface _ListGroupsResponse
+      include Smithy::Client::_Response[Types::ListGroupsResponse]
+      def groups: () -> Array[Types::GroupType]?
+      def next_token: () -> String?
+    end
+    def list_groups: (
+      ?user_pool_id: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupsResponse
+
+    interface _ListIdentityProvidersResponse
+      include Smithy::Client::_Response[Types::ListIdentityProvidersResponse]
+      def providers: () -> Array[Types::ProviderDescription]?
+      def next_token: () -> String?
+    end
+    def list_identity_providers: (
+      ?user_pool_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListIdentityProvidersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIdentityProvidersResponse
+
+    interface _ListResourceServersResponse
+      include Smithy::Client::_Response[Types::ListResourceServersResponse]
+      def resource_servers: () -> Array[Types::ResourceServerType]?
+      def next_token: () -> String?
+    end
+    def list_resource_servers: (
+      ?user_pool_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListResourceServersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceServersResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListUserImportJobsResponse
+      include Smithy::Client::_Response[Types::ListUserImportJobsResponse]
+      def user_import_jobs: () -> Array[Types::UserImportJobType]?
+      def pagination_token: () -> String?
+    end
+    def list_user_import_jobs: (
+      ?user_pool_id: String,
+      ?max_results: Integer,
+      ?pagination_token: String
+    ) -> _ListUserImportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUserImportJobsResponse
+
+    interface _ListUserPoolClientsResponse
+      include Smithy::Client::_Response[Types::ListUserPoolClientsResponse]
+      def user_pool_clients: () -> Array[Types::UserPoolClientDescription]?
+      def next_token: () -> String?
+    end
+    def list_user_pool_clients: (
+      ?user_pool_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListUserPoolClientsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUserPoolClientsResponse
+
+    interface _ListUserPoolsResponse
+      include Smithy::Client::_Response[Types::ListUserPoolsResponse]
+      def user_pools: () -> Array[Types::UserPoolDescriptionType]?
+      def next_token: () -> String?
+    end
+    def list_user_pools: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListUserPoolsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUserPoolsResponse
+
+    interface _ListUsersResponse
+      include Smithy::Client::_Response[Types::ListUsersResponse]
+      def users: () -> Array[Types::UserType]?
+      def pagination_token: () -> String?
+    end
+    def list_users: (
+      ?user_pool_id: String,
+      ?attributes_to_get: Array[String],
+      ?limit: Integer,
+      ?pagination_token: String,
+      ?filter: String
+    ) -> _ListUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUsersResponse
+
+    interface _ListUsersInGroupResponse
+      include Smithy::Client::_Response[Types::ListUsersInGroupResponse]
+      def users: () -> Array[Types::UserType]?
+      def next_token: () -> String?
+    end
+    def list_users_in_group: (
+      ?user_pool_id: String,
+      ?group_name: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _ListUsersInGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUsersInGroupResponse
+
+    interface _ListWebAuthnCredentialsResponse
+      include Smithy::Client::_Response[Types::ListWebAuthnCredentialsResponse]
+      def credentials: () -> Array[Types::WebAuthnCredentialDescription]?
+      def next_token: () -> String?
+    end
+    def list_web_authn_credentials: (
+      ?access_token: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListWebAuthnCredentialsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWebAuthnCredentialsResponse
+
+    interface _ResendConfirmationCodeResponse
+      include Smithy::Client::_Response[Types::ResendConfirmationCodeResponse]
+      def code_delivery_details: () -> Types::CodeDeliveryDetailsType?
+    end
+    def resend_confirmation_code: (
+      ?client_id: String,
+      ?secret_hash: String,
+      ?user_context_data: {
+        ip_address: String,
+        encoded_data: untyped
+      },
+      ?username: String,
+      ?analytics_metadata: {
+        analytics_endpoint_id: String
+      },
+      ?client_metadata: Hash[String, String]
+    ) -> _ResendConfirmationCodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResendConfirmationCodeResponse
+
+    interface _RespondToAuthChallengeResponse
+      include Smithy::Client::_Response[Types::RespondToAuthChallengeResponse]
+      def challenge_name: () -> String?
+      def session: () -> String?
+      def challenge_parameters: () -> Hash[String, String]?
+      def authentication_result: () -> Types::AuthenticationResultType?
+    end
+    def respond_to_auth_challenge: (
+      ?client_id: String,
+      ?challenge_name: String,
+      ?session: String,
+      ?challenge_responses: Hash[String, String],
+      ?analytics_metadata: {
+        analytics_endpoint_id: String
+      },
+      ?user_context_data: {
+        ip_address: String,
+        encoded_data: untyped
+      },
+      ?client_metadata: Hash[String, String]
+    ) -> _RespondToAuthChallengeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RespondToAuthChallengeResponse
+
+    interface _RevokeTokenResponse
+      include Smithy::Client::_Response[Types::RevokeTokenResponse]
+    end
+    def revoke_token: (
+      ?token: String,
+      ?client_id: String,
+      ?client_secret: String
+    ) -> _RevokeTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokeTokenResponse
+
+    interface _SetLogDeliveryConfigurationResponse
+      include Smithy::Client::_Response[Types::SetLogDeliveryConfigurationResponse]
+      def log_delivery_configuration: () -> Types::LogDeliveryConfigurationType?
+    end
+    def set_log_delivery_configuration: (
+      ?user_pool_id: String,
+      ?log_configurations: Array[
+        {
+          log_level: String,
+          event_source: String,
+          cloud_watch_logs_configuration: {
+            log_group_arn: String
+          },
+          s3_configuration: {
+            bucket_arn: String
+          },
+          firehose_configuration: {
+            stream_arn: untyped
+          }
+        }
+      ]
+    ) -> _SetLogDeliveryConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetLogDeliveryConfigurationResponse
+
+    interface _SetRiskConfigurationResponse
+      include Smithy::Client::_Response[Types::SetRiskConfigurationResponse]
+      def risk_configuration: () -> Types::RiskConfigurationType?
+    end
+    def set_risk_configuration: (
+      ?user_pool_id: String,
+      ?client_id: String,
+      ?compromised_credentials_risk_configuration: {
+        event_filter: Array[String],
+        actions: {
+          event_action: String
+        }
+      },
+      ?account_takeover_risk_configuration: {
+        notify_configuration: {
+          from: String,
+          reply_to: untyped,
+          source_arn: String,
+          block_email: {
+            subject: String,
+            html_body: String,
+            text_body: untyped
+          },
+          no_action_email: untyped,
+          mfa_email: untyped
+        },
+        actions: {
+          low_action: {
+            notify: bool,
+            event_action: String
+          },
+          medium_action: untyped,
+          high_action: untyped
+        }
+      },
+      ?risk_exception_configuration: {
+        blocked_ip_range_list: Array[String],
+        skipped_ip_range_list: Array[String]
+      }
+    ) -> _SetRiskConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetRiskConfigurationResponse
+
+    interface _SetUICustomizationResponse
+      include Smithy::Client::_Response[Types::SetUICustomizationResponse]
+      def ui_customization: () -> Types::UICustomizationType?
+    end
+    def set_ui_customization: (
+      ?user_pool_id: String,
+      ?client_id: String,
+      ?css: String,
+      ?image_file: String
+    ) -> _SetUICustomizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetUICustomizationResponse
+
+    interface _SetUserMFAPreferenceResponse
+      include Smithy::Client::_Response[Types::SetUserMFAPreferenceResponse]
+    end
+    def set_user_mfa_preference: (
+      ?sms_mfa_settings: {
+        enabled: bool,
+        preferred_mfa: untyped
+      },
+      ?software_token_mfa_settings: {
+        enabled: bool,
+        preferred_mfa: untyped
+      },
+      ?email_mfa_settings: {
+        enabled: bool,
+        preferred_mfa: untyped
+      },
+      ?access_token: String
+    ) -> _SetUserMFAPreferenceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetUserMFAPreferenceResponse
+
+    interface _SetUserPoolMfaConfigResponse
+      include Smithy::Client::_Response[Types::SetUserPoolMfaConfigResponse]
+      def sms_mfa_configuration: () -> Types::SmsMfaConfigType?
+      def software_token_mfa_configuration: () -> Types::SoftwareTokenMfaConfigType?
+      def email_mfa_configuration: () -> Types::EmailMfaConfigType?
+      def mfa_configuration: () -> String?
+      def web_authn_configuration: () -> Types::WebAuthnConfigurationType?
+    end
+    def set_user_pool_mfa_config: (
+      ?user_pool_id: String,
+      ?sms_mfa_configuration: {
+        sms_authentication_message: String,
+        sms_configuration: {
+          sns_caller_arn: String,
+          external_id: String,
+          sns_region: String
+        }
+      },
+      ?software_token_mfa_configuration: {
+        enabled: bool
+      },
+      ?email_mfa_configuration: {
+        message: String,
+        subject: String
+      },
+      ?mfa_configuration: String,
+      ?web_authn_configuration: {
+        relying_party_id: String,
+        user_verification: String
+      }
+    ) -> _SetUserPoolMfaConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetUserPoolMfaConfigResponse
+
+    interface _SetUserSettingsResponse
+      include Smithy::Client::_Response[Types::SetUserSettingsResponse]
+    end
+    def set_user_settings: (
+      ?access_token: String,
+      ?mfa_options: Array[
+        {
+          delivery_medium: String,
+          attribute_name: String
+        }
+      ]
+    ) -> _SetUserSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetUserSettingsResponse
+
+    interface _SignUpResponse
+      include Smithy::Client::_Response[Types::SignUpResponse]
+      def user_confirmed: () -> bool?
+      def code_delivery_details: () -> Types::CodeDeliveryDetailsType?
+      def user_sub: () -> String?
+      def session: () -> String?
+    end
+    def sign_up: (
+      ?client_id: String,
+      ?secret_hash: String,
+      ?username: String,
+      ?password: String,
+      ?user_attributes: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?validation_data: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?analytics_metadata: {
+        analytics_endpoint_id: String
+      },
+      ?user_context_data: {
+        ip_address: String,
+        encoded_data: untyped
+      },
+      ?client_metadata: Hash[String, String]
+    ) -> _SignUpResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SignUpResponse
+
+    interface _StartUserImportJobResponse
+      include Smithy::Client::_Response[Types::StartUserImportJobResponse]
+      def user_import_job: () -> Types::UserImportJobType?
+    end
+    def start_user_import_job: (
+      ?user_pool_id: String,
+      ?job_id: String
+    ) -> _StartUserImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartUserImportJobResponse
+
+    interface _StartWebAuthnRegistrationResponse
+      include Smithy::Client::_Response[Types::StartWebAuthnRegistrationResponse]
+      def credential_creation_options: () -> Smithy::Schema::document?
+    end
+    def start_web_authn_registration: (
+      ?access_token: String
+    ) -> _StartWebAuthnRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartWebAuthnRegistrationResponse
+
+    interface _StopUserImportJobResponse
+      include Smithy::Client::_Response[Types::StopUserImportJobResponse]
+      def user_import_job: () -> Types::UserImportJobType?
+    end
+    def stop_user_import_job: (
+      ?user_pool_id: String,
+      ?job_id: String
+    ) -> _StopUserImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopUserImportJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAuthEventFeedbackResponse
+      include Smithy::Client::_Response[Types::UpdateAuthEventFeedbackResponse]
+    end
+    def update_auth_event_feedback: (
+      ?user_pool_id: String,
+      ?username: String,
+      ?event_id: String,
+      ?feedback_token: String,
+      ?feedback_value: String
+    ) -> _UpdateAuthEventFeedbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAuthEventFeedbackResponse
+
+    interface _UpdateDeviceStatusResponse
+      include Smithy::Client::_Response[Types::UpdateDeviceStatusResponse]
+    end
+    def update_device_status: (
+      ?access_token: String,
+      ?device_key: String,
+      ?device_remembered_status: String
+    ) -> _UpdateDeviceStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDeviceStatusResponse
+
+    interface _UpdateGroupResponse
+      include Smithy::Client::_Response[Types::UpdateGroupResponse]
+      def group: () -> Types::GroupType?
+    end
+    def update_group: (
+      ?group_name: String,
+      ?user_pool_id: String,
+      ?description: String,
+      ?role_arn: String,
+      ?precedence: Integer
+    ) -> _UpdateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGroupResponse
+
+    interface _UpdateIdentityProviderResponse
+      include Smithy::Client::_Response[Types::UpdateIdentityProviderResponse]
+      def identity_provider: () -> Types::IdentityProviderType?
+    end
+    def update_identity_provider: (
+      ?user_pool_id: String,
+      ?provider_name: String,
+      ?provider_details: Hash[String, String],
+      ?attribute_mapping: Hash[String, String],
+      ?idp_identifiers: Array[String]
+    ) -> _UpdateIdentityProviderResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIdentityProviderResponse
+
+    interface _UpdateManagedLoginBrandingResponse
+      include Smithy::Client::_Response[Types::UpdateManagedLoginBrandingResponse]
+      def managed_login_branding: () -> Types::ManagedLoginBrandingType?
+    end
+    def update_managed_login_branding: (
+      ?user_pool_id: String,
+      ?managed_login_branding_id: String,
+      ?use_cognito_provided_values: bool,
+      ?settings: Smithy::Schema::document,
+      ?assets: Array[
+        {
+          category: String,
+          color_mode: String,
+          extension: String,
+          bytes: String,
+          resource_id: String
+        }
+      ]
+    ) -> _UpdateManagedLoginBrandingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateManagedLoginBrandingResponse
+
+    interface _UpdateResourceServerResponse
+      include Smithy::Client::_Response[Types::UpdateResourceServerResponse]
+      def resource_server: () -> Types::ResourceServerType?
+    end
+    def update_resource_server: (
+      ?user_pool_id: String,
+      ?identifier: String,
+      ?name: String,
+      ?scopes: Array[
+        {
+          scope_name: String,
+          scope_description: String
+        }
+      ]
+    ) -> _UpdateResourceServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResourceServerResponse
+
+    interface _UpdateUserAttributesResponse
+      include Smithy::Client::_Response[Types::UpdateUserAttributesResponse]
+      def code_delivery_details_list: () -> Array[Types::CodeDeliveryDetailsType]?
+    end
+    def update_user_attributes: (
+      ?user_attributes: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?access_token: String,
+      ?client_metadata: Hash[String, String]
+    ) -> _UpdateUserAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserAttributesResponse
+
+    interface _UpdateUserPoolResponse
+      include Smithy::Client::_Response[Types::UpdateUserPoolResponse]
+    end
+    def update_user_pool: (
+      ?user_pool_id: String,
+      ?policies: {
+        password_policy: {
+          minimum_length: Integer,
+          require_uppercase: bool,
+          require_lowercase: untyped,
+          require_numbers: untyped,
+          require_symbols: untyped,
+          password_history_size: Integer,
+          temporary_password_validity_days: Integer
+        },
+        sign_in_policy: {
+          allowed_first_auth_factors: Array[String]
+        }
+      },
+      ?deletion_protection: String,
+      ?lambda_config: {
+        pre_sign_up: String,
+        custom_message: untyped,
+        post_confirmation: untyped,
+        pre_authentication: untyped,
+        post_authentication: untyped,
+        define_auth_challenge: untyped,
+        create_auth_challenge: untyped,
+        verify_auth_challenge_response: untyped,
+        pre_token_generation: untyped,
+        user_migration: untyped,
+        pre_token_generation_config: {
+          lambda_version: String,
+          lambda_arn: untyped
+        },
+        custom_sms_sender: {
+          lambda_version: String,
+          lambda_arn: untyped
+        },
+        custom_email_sender: {
+          lambda_version: String,
+          lambda_arn: untyped
+        },
+        kms_key_id: untyped
+      },
+      ?auto_verified_attributes: Array[String],
+      ?sms_verification_message: String,
+      ?email_verification_message: String,
+      ?email_verification_subject: String,
+      ?verification_message_template: {
+        sms_message: String,
+        email_message: String,
+        email_subject: String,
+        email_message_by_link: String,
+        email_subject_by_link: String,
+        default_email_option: String
+      },
+      ?sms_authentication_message: String,
+      ?user_attribute_update_settings: {
+        attributes_require_verification_before_update: Array[String]
+      },
+      ?mfa_configuration: String,
+      ?device_configuration: {
+        challenge_required_on_new_device: bool,
+        device_only_remembered_on_user_prompt: untyped
+      },
+      ?email_configuration: {
+        source_arn: String,
+        reply_to_email_address: String,
+        email_sending_account: String,
+        from: String,
+        configuration_set: String
+      },
+      ?sms_configuration: {
+        sns_caller_arn: String,
+        external_id: String,
+        sns_region: String
+      },
+      ?user_pool_tags: Hash[String, String],
+      ?admin_create_user_config: {
+        allow_admin_create_user_only: bool,
+        unused_account_validity_days: Integer,
+        invite_message_template: {
+          sms_message: String,
+          email_message: String,
+          email_subject: String
+        }
+      },
+      ?user_pool_add_ons: {
+        advanced_security_mode: String,
+        advanced_security_additional_flows: {
+          custom_auth_mode: String
+        }
+      },
+      ?account_recovery_setting: {
+        recovery_mechanisms: Array[
+          {
+            priority: Integer,
+            name: String
+          }
+        ]
+      },
+      ?pool_name: String,
+      ?user_pool_tier: String
+    ) -> _UpdateUserPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserPoolResponse
+
+    interface _UpdateUserPoolClientResponse
+      include Smithy::Client::_Response[Types::UpdateUserPoolClientResponse]
+      def user_pool_client: () -> Types::UserPoolClientType?
+    end
+    def update_user_pool_client: (
+      ?user_pool_id: String,
+      ?client_id: String,
+      ?client_name: String,
+      ?refresh_token_validity: Integer,
+      ?access_token_validity: Integer,
+      ?id_token_validity: Integer,
+      ?token_validity_units: {
+        access_token: String,
+        id_token: untyped,
+        refresh_token: untyped
+      },
+      ?read_attributes: Array[String],
+      ?write_attributes: Array[String],
+      ?explicit_auth_flows: Array[String],
+      ?supported_identity_providers: Array[String],
+      ?callback_ur_ls: Array[String],
+      ?logout_ur_ls: Array[String],
+      ?default_redirect_uri: String,
+      ?allowed_o_auth_flows: Array[String],
+      ?allowed_o_auth_scopes: Array[String],
+      ?allowed_o_auth_flows_user_pool_client: bool,
+      ?analytics_configuration: {
+        application_id: String,
+        application_arn: String,
+        role_arn: untyped,
+        external_id: String,
+        user_data_shared: bool
+      },
+      ?prevent_user_existence_errors: String,
+      ?enable_token_revocation: bool,
+      ?enable_propagate_additional_user_context_data: bool,
+      ?auth_session_validity: Integer,
+      ?refresh_token_rotation: {
+        feature: String,
+        retry_grace_period_seconds: Integer
+      }
+    ) -> _UpdateUserPoolClientResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserPoolClientResponse
+
+    interface _UpdateUserPoolDomainResponse
+      include Smithy::Client::_Response[Types::UpdateUserPoolDomainResponse]
+      def managed_login_version: () -> Integer?
+      def cloud_front_domain: () -> String?
+    end
+    def update_user_pool_domain: (
+      ?domain: String,
+      ?user_pool_id: String,
+      ?managed_login_version: Integer,
+      ?custom_domain_config: {
+        certificate_arn: String
+      }
+    ) -> _UpdateUserPoolDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserPoolDomainResponse
+
+    interface _VerifySoftwareTokenResponse
+      include Smithy::Client::_Response[Types::VerifySoftwareTokenResponse]
+      def status: () -> String?
+      def session: () -> String?
+    end
+    def verify_software_token: (
+      ?access_token: String,
+      ?session: String,
+      ?user_code: String,
+      ?friendly_device_name: String
+    ) -> _VerifySoftwareTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifySoftwareTokenResponse
+
+    interface _VerifyUserAttributeResponse
+      include Smithy::Client::_Response[Types::VerifyUserAttributeResponse]
+    end
+    def verify_user_attribute: (
+      ?access_token: String,
+      ?attribute_name: String,
+      ?code: String
+    ) -> _VerifyUserAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _VerifyUserAttributeResponse
+  end
+end

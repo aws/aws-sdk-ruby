@@ -1,0 +1,760 @@
+module Aws::DataPipeline
+  module Types
+
+    class ActivatePipelineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_id: String,
+        ?parameter_values: Array[Types::ParameterValue],
+        ?start_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_id: String?
+      attr_accessor parameter_values: Array[Types::ParameterValue]?
+      attr_accessor start_timestamp: Time?
+    end
+
+    class ActivatePipelineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AddTagsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class AddTagsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreatePipelineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?unique_id: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor unique_id: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreatePipelineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_id: String?
+    end
+
+    class DeactivatePipelineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_id: String,
+        ?cancel_active: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_id: String?
+      attr_accessor cancel_active: bool?
+    end
+
+    class DeactivatePipelineOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePipelineInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_id: String?
+    end
+
+    class DescribeObjectsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_id: String,
+        ?object_ids: Array[String],
+        ?evaluate_expressions: bool,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_id: String?
+      attr_accessor object_ids: Array[String]?
+      attr_accessor evaluate_expressions: bool?
+      attr_accessor marker: String?
+    end
+
+    class DescribeObjectsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_objects: Array[Types::PipelineObject],
+        ?marker: String,
+        ?has_more_results: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_objects: Array[Types::PipelineObject]?
+      attr_accessor marker: String?
+      attr_accessor has_more_results: bool?
+    end
+
+    class DescribePipelinesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_ids: Array[String]?
+    end
+
+    class DescribePipelinesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_description_list: Array[Types::PipelineDescription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_description_list: Array[Types::PipelineDescription]?
+    end
+
+    class EvaluateExpressionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_id: String,
+        ?object_id: String,
+        ?expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_id: String?
+      attr_accessor object_id: String?
+      attr_accessor expression: String?
+    end
+
+    class EvaluateExpressionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?evaluated_expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor evaluated_expression: String?
+    end
+
+    class Field
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?string_value: String,
+        ?ref_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor string_value: String?
+      attr_accessor ref_value: String?
+    end
+
+    class GetPipelineDefinitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_id: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_id: String?
+      attr_accessor version: String?
+    end
+
+    class GetPipelineDefinitionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_objects: Array[Types::PipelineObject],
+        ?parameter_objects: Array[Types::ParameterObject],
+        ?parameter_values: Array[Types::ParameterValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_objects: Array[Types::PipelineObject]?
+      attr_accessor parameter_objects: Array[Types::ParameterObject]?
+      attr_accessor parameter_values: Array[Types::ParameterValue]?
+    end
+
+    class InstanceIdentity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document: String,
+        ?signature: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document: String?
+      attr_accessor signature: String?
+    end
+
+    class InternalServiceError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListPipelinesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor marker: String?
+    end
+
+    class ListPipelinesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_id_list: Array[Types::PipelineIdName],
+        ?marker: String,
+        ?has_more_results: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_id_list: Array[Types::PipelineIdName]?
+      attr_accessor marker: String?
+      attr_accessor has_more_results: bool?
+    end
+
+    class Operator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module OperatorType
+      Equal: String
+      ReferenceEqual: String
+      LessThanOrEqual: String
+      GreaterThanOrEqual: String
+      Between: String
+    end
+
+    class ParameterAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?string_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor string_value: String?
+    end
+
+    class ParameterObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?attributes: Array[Types::ParameterAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor attributes: Array[Types::ParameterAttribute]?
+    end
+
+    class ParameterValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?string_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor string_value: String?
+    end
+
+    class PipelineDeletedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PipelineDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_id: String,
+        ?name: String,
+        ?fields: Array[Types::Field],
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_id: String?
+      attr_accessor name: String?
+      attr_accessor fields: Array[Types::Field]?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PipelineIdName
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+    end
+
+    class PipelineNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PipelineObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?fields: Array[Types::Field],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor fields: Array[Types::Field]?
+    end
+
+    class PollForTaskInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?worker_group: String,
+        ?hostname: String,
+        ?instance_identity: Types::InstanceIdentity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor worker_group: String?
+      attr_accessor hostname: String?
+      attr_accessor instance_identity: Types::InstanceIdentity?
+    end
+
+    class PollForTaskOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_object: Types::TaskObject,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_object: Types::TaskObject?
+    end
+
+    class PutPipelineDefinitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_id: String,
+        ?pipeline_objects: Array[Types::PipelineObject],
+        ?parameter_objects: Array[Types::ParameterObject],
+        ?parameter_values: Array[Types::ParameterValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_id: String?
+      attr_accessor pipeline_objects: Array[Types::PipelineObject]?
+      attr_accessor parameter_objects: Array[Types::ParameterObject]?
+      attr_accessor parameter_values: Array[Types::ParameterValue]?
+    end
+
+    class PutPipelineDefinitionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?validation_errors: Array[Types::ValidationError],
+        ?validation_warnings: Array[Types::ValidationWarning],
+        ?errored: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor validation_errors: Array[Types::ValidationError]?
+      attr_accessor validation_warnings: Array[Types::ValidationWarning]?
+      attr_accessor errored: bool?
+    end
+
+    class Query
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?selectors: Array[Types::Selector],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor selectors: Array[Types::Selector]?
+    end
+
+    class QueryObjectsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_id: String,
+        ?query: Types::Query,
+        ?sphere: String,
+        ?marker: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_id: String?
+      attr_accessor query: Types::Query?
+      attr_accessor sphere: String?
+      attr_accessor marker: String?
+      attr_accessor limit: Integer?
+    end
+
+    class QueryObjectsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ids: Array[String],
+        ?marker: String,
+        ?has_more_results: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ids: Array[String]?
+      attr_accessor marker: String?
+      attr_accessor has_more_results: bool?
+    end
+
+    class RemoveTagsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_id: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_id: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class RemoveTagsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ReportTaskProgressInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?fields: Array[Types::Field],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor fields: Array[Types::Field]?
+    end
+
+    class ReportTaskProgressOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?canceled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor canceled: bool?
+    end
+
+    class ReportTaskRunnerHeartbeatInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?taskrunner_id: String,
+        ?worker_group: String,
+        ?hostname: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor taskrunner_id: String?
+      attr_accessor worker_group: String?
+      attr_accessor hostname: String?
+    end
+
+    class ReportTaskRunnerHeartbeatOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terminate: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terminate: bool?
+    end
+
+    class Selector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_name: String,
+        ?operator: Types::Operator,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_name: String?
+      attr_accessor operator: Types::Operator?
+    end
+
+    class SetStatusInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_id: String,
+        ?object_ids: Array[String],
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_id: String?
+      attr_accessor object_ids: Array[String]?
+      attr_accessor status: String?
+    end
+
+    class SetTaskStatusInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?task_status: String,
+        ?error_id: String,
+        ?error_message: String,
+        ?error_stack_trace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor task_status: String?
+      attr_accessor error_id: String?
+      attr_accessor error_message: String?
+      attr_accessor error_stack_trace: String?
+    end
+
+    class SetTaskStatusOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TaskNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TaskObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?pipeline_id: String,
+        ?attempt_id: String,
+        ?objects: Hash[String, Types::PipelineObject],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor pipeline_id: String?
+      attr_accessor attempt_id: String?
+      attr_accessor objects: Hash[String, Types::PipelineObject]?
+    end
+
+    module TaskStatus
+      FINISHED: String
+      FAILED: String
+      FALSE: String
+    end
+
+    class ValidatePipelineDefinitionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_id: String,
+        ?pipeline_objects: Array[Types::PipelineObject],
+        ?parameter_objects: Array[Types::ParameterObject],
+        ?parameter_values: Array[Types::ParameterValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_id: String?
+      attr_accessor pipeline_objects: Array[Types::PipelineObject]?
+      attr_accessor parameter_objects: Array[Types::ParameterObject]?
+      attr_accessor parameter_values: Array[Types::ParameterValue]?
+    end
+
+    class ValidatePipelineDefinitionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?validation_errors: Array[Types::ValidationError],
+        ?validation_warnings: Array[Types::ValidationWarning],
+        ?errored: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor validation_errors: Array[Types::ValidationError]?
+      attr_accessor validation_warnings: Array[Types::ValidationWarning]?
+      attr_accessor errored: bool?
+    end
+
+    class ValidationError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?errors: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor errors: Array[String]?
+    end
+
+    class ValidationWarning
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?warnings: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor warnings: Array[String]?
+    end
+  end
+end

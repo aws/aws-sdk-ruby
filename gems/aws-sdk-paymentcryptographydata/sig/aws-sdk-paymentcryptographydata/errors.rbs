@@ -1,0 +1,24 @@
+module Aws::PaymentCryptographyData
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def resource_id: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def field_list: () -> Array[Types::ValidationExceptionField]?
+    end
+    class VerificationFailedException < Smithy::Client::ServiceError
+      def reason: () -> String?
+      def message: () -> String?
+    end
+  end
+end

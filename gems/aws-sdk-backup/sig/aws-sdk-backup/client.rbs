@@ -1,0 +1,1461 @@
+module Aws::Backup
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Backup::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateBackupVaultMpaApprovalTeamResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_backup_vault_mpa_approval_team: (
+      ?backup_vault_name: String,
+      ?mpa_approval_team_arn: String,
+      ?requester_comment: String
+    ) -> _AssociateBackupVaultMpaApprovalTeamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateBackupVaultMpaApprovalTeamResponse
+
+    interface _CancelLegalHoldResponse
+      include Smithy::Client::_Response[Types::CancelLegalHoldOutput]
+    end
+    def cancel_legal_hold: (
+      ?legal_hold_id: String,
+      ?cancel_description: String,
+      ?retain_record_in_days: Integer
+    ) -> _CancelLegalHoldResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelLegalHoldResponse
+
+    interface _CreateBackupPlanResponse
+      include Smithy::Client::_Response[Types::CreateBackupPlanOutput]
+      def backup_plan_id: () -> String?
+      def backup_plan_arn: () -> String?
+      def creation_date: () -> Time?
+      def version_id: () -> String?
+      def advanced_backup_settings: () -> Array[Types::AdvancedBackupSetting]?
+    end
+    def create_backup_plan: (
+      ?backup_plan: {
+        backup_plan_name: String,
+        rules: Array[
+          {
+            rule_name: String,
+            target_backup_vault_name: String,
+            schedule_expression: String,
+            start_window_minutes: Integer,
+            completion_window_minutes: untyped,
+            lifecycle: {
+              move_to_cold_storage_after_days: Integer,
+              delete_after_days: untyped,
+              opt_in_to_archive_for_supported_resources: bool
+            },
+            recovery_point_tags: Hash[String, String],
+            copy_actions: Array[
+              {
+                lifecycle: untyped,
+                destination_backup_vault_arn: String
+              }
+            ],
+            enable_continuous_backup: untyped,
+            schedule_expression_timezone: String,
+            index_actions: Array[
+              {
+                resource_types: Array[String]
+              }
+            ]
+          }
+        ],
+        advanced_backup_settings: Array[
+          {
+            resource_type: String,
+            backup_options: Hash[String, String]
+          }
+        ]
+      },
+      ?backup_plan_tags: Hash[String, String],
+      ?creator_request_id: String
+    ) -> _CreateBackupPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBackupPlanResponse
+
+    interface _CreateBackupSelectionResponse
+      include Smithy::Client::_Response[Types::CreateBackupSelectionOutput]
+      def selection_id: () -> String?
+      def backup_plan_id: () -> String?
+      def creation_date: () -> Time?
+    end
+    def create_backup_selection: (
+      ?backup_plan_id: String,
+      ?backup_selection: {
+        selection_name: String,
+        iam_role_arn: String,
+        resources: Array[String],
+        list_of_tags: Array[
+          {
+            condition_type: String,
+            condition_key: String,
+            condition_value: String
+          }
+        ],
+        not_resources: untyped,
+        conditions: {
+          string_equals: Array[
+            {
+              condition_key: untyped,
+              condition_value: untyped
+            }
+          ],
+          string_not_equals: untyped,
+          string_like: untyped,
+          string_not_like: untyped
+        }
+      },
+      ?creator_request_id: String
+    ) -> _CreateBackupSelectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBackupSelectionResponse
+
+    interface _CreateBackupVaultResponse
+      include Smithy::Client::_Response[Types::CreateBackupVaultOutput]
+      def backup_vault_name: () -> String?
+      def backup_vault_arn: () -> String?
+      def creation_date: () -> Time?
+    end
+    def create_backup_vault: (
+      ?backup_vault_name: String,
+      ?backup_vault_tags: Hash[String, String],
+      ?encryption_key_arn: String,
+      ?creator_request_id: String
+    ) -> _CreateBackupVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBackupVaultResponse
+
+    interface _CreateFrameworkResponse
+      include Smithy::Client::_Response[Types::CreateFrameworkOutput]
+      def framework_name: () -> String?
+      def framework_arn: () -> String?
+    end
+    def create_framework: (
+      ?framework_name: String,
+      ?framework_description: String,
+      ?framework_controls: Array[
+        {
+          control_name: String,
+          control_input_parameters: Array[
+            {
+              parameter_name: String,
+              parameter_value: String
+            }
+          ],
+          control_scope: {
+            compliance_resource_ids: Array[String],
+            compliance_resource_types: Array[String],
+            tags: Hash[String, String]
+          }
+        }
+      ],
+      ?idempotency_token: String,
+      ?framework_tags: Hash[String, String]
+    ) -> _CreateFrameworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFrameworkResponse
+
+    interface _CreateLegalHoldResponse
+      include Smithy::Client::_Response[Types::CreateLegalHoldOutput]
+      def title: () -> String?
+      def status: () -> String?
+      def description: () -> String?
+      def legal_hold_id: () -> String?
+      def legal_hold_arn: () -> String?
+      def creation_date: () -> Time?
+      def recovery_point_selection: () -> Types::RecoveryPointSelection?
+    end
+    def create_legal_hold: (
+      ?title: String,
+      ?description: String,
+      ?idempotency_token: String,
+      ?recovery_point_selection: {
+        vault_names: Array[String],
+        resource_identifiers: Array[String],
+        date_range: {
+          from_date: Time,
+          to_date: untyped
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateLegalHoldResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLegalHoldResponse
+
+    interface _CreateLogicallyAirGappedBackupVaultResponse
+      include Smithy::Client::_Response[Types::CreateLogicallyAirGappedBackupVaultOutput]
+      def backup_vault_name: () -> String?
+      def backup_vault_arn: () -> String?
+      def creation_date: () -> Time?
+      def vault_state: () -> String?
+    end
+    def create_logically_air_gapped_backup_vault: (
+      ?backup_vault_name: String,
+      ?backup_vault_tags: Hash[String, String],
+      ?creator_request_id: String,
+      ?min_retention_days: Integer,
+      ?max_retention_days: Integer
+    ) -> _CreateLogicallyAirGappedBackupVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLogicallyAirGappedBackupVaultResponse
+
+    interface _CreateReportPlanResponse
+      include Smithy::Client::_Response[Types::CreateReportPlanOutput]
+      def report_plan_name: () -> String?
+      def report_plan_arn: () -> String?
+      def creation_time: () -> Time?
+    end
+    def create_report_plan: (
+      ?report_plan_name: String,
+      ?report_plan_description: String,
+      ?report_delivery_channel: {
+        s3_bucket_name: String,
+        s3_key_prefix: untyped,
+        formats: Array[String]
+      },
+      ?report_setting: {
+        report_template: String,
+        framework_arns: Array[String],
+        number_of_frameworks: Integer,
+        accounts: untyped,
+        organization_units: untyped,
+        regions: untyped
+      },
+      ?report_plan_tags: Hash[String, String],
+      ?idempotency_token: String
+    ) -> _CreateReportPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateReportPlanResponse
+
+    interface _CreateRestoreAccessBackupVaultResponse
+      include Smithy::Client::_Response[Types::CreateRestoreAccessBackupVaultOutput]
+      def restore_access_backup_vault_arn: () -> String?
+      def vault_state: () -> String?
+      def restore_access_backup_vault_name: () -> String?
+      def creation_date: () -> Time?
+    end
+    def create_restore_access_backup_vault: (
+      ?source_backup_vault_arn: String,
+      ?backup_vault_name: String,
+      ?backup_vault_tags: Hash[String, String],
+      ?creator_request_id: String,
+      ?requester_comment: String
+    ) -> _CreateRestoreAccessBackupVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRestoreAccessBackupVaultResponse
+
+    interface _CreateRestoreTestingPlanResponse
+      include Smithy::Client::_Response[Types::CreateRestoreTestingPlanOutput]
+      def creation_time: () -> Time?
+      def restore_testing_plan_arn: () -> String?
+      def restore_testing_plan_name: () -> String?
+    end
+    def create_restore_testing_plan: (
+      ?creator_request_id: String,
+      ?restore_testing_plan: {
+        recovery_point_selection: {
+          algorithm: String,
+          exclude_vaults: Array[String],
+          include_vaults: untyped,
+          recovery_point_types: Array[String],
+          selection_window_days: Integer
+        },
+        restore_testing_plan_name: String,
+        schedule_expression: untyped,
+        schedule_expression_timezone: untyped,
+        start_window_hours: untyped
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateRestoreTestingPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRestoreTestingPlanResponse
+
+    interface _CreateRestoreTestingSelectionResponse
+      include Smithy::Client::_Response[Types::CreateRestoreTestingSelectionOutput]
+      def creation_time: () -> Time?
+      def restore_testing_plan_arn: () -> String?
+      def restore_testing_plan_name: () -> String?
+      def restore_testing_selection_name: () -> String?
+    end
+    def create_restore_testing_selection: (
+      ?creator_request_id: String,
+      ?restore_testing_plan_name: String,
+      ?restore_testing_selection: {
+        iam_role_arn: String,
+        protected_resource_arns: Array[String],
+        protected_resource_conditions: {
+          string_equals: Array[
+            {
+              key: untyped,
+              value: untyped
+            }
+          ],
+          string_not_equals: untyped
+        },
+        protected_resource_type: untyped,
+        restore_metadata_overrides: Hash[String, String],
+        restore_testing_selection_name: untyped,
+        validation_window_hours: Integer
+      }
+    ) -> _CreateRestoreTestingSelectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRestoreTestingSelectionResponse
+
+    interface _DeleteBackupPlanResponse
+      include Smithy::Client::_Response[Types::DeleteBackupPlanOutput]
+      def backup_plan_id: () -> String?
+      def backup_plan_arn: () -> String?
+      def deletion_date: () -> Time?
+      def version_id: () -> String?
+    end
+    def delete_backup_plan: (
+      ?backup_plan_id: String
+    ) -> _DeleteBackupPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBackupPlanResponse
+
+    interface _DeleteBackupSelectionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_backup_selection: (
+      ?backup_plan_id: String,
+      ?selection_id: String
+    ) -> _DeleteBackupSelectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBackupSelectionResponse
+
+    interface _DeleteBackupVaultResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_backup_vault: (
+      ?backup_vault_name: String
+    ) -> _DeleteBackupVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBackupVaultResponse
+
+    interface _DeleteBackupVaultAccessPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_backup_vault_access_policy: (
+      ?backup_vault_name: String
+    ) -> _DeleteBackupVaultAccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBackupVaultAccessPolicyResponse
+
+    interface _DeleteBackupVaultLockConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_backup_vault_lock_configuration: (
+      ?backup_vault_name: String
+    ) -> _DeleteBackupVaultLockConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBackupVaultLockConfigurationResponse
+
+    interface _DeleteBackupVaultNotificationsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_backup_vault_notifications: (
+      ?backup_vault_name: String
+    ) -> _DeleteBackupVaultNotificationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBackupVaultNotificationsResponse
+
+    interface _DeleteFrameworkResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_framework: (
+      ?framework_name: String
+    ) -> _DeleteFrameworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFrameworkResponse
+
+    interface _DeleteRecoveryPointResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_recovery_point: (
+      ?backup_vault_name: String,
+      ?recovery_point_arn: String
+    ) -> _DeleteRecoveryPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRecoveryPointResponse
+
+    interface _DeleteReportPlanResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_report_plan: (
+      ?report_plan_name: String
+    ) -> _DeleteReportPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteReportPlanResponse
+
+    interface _DeleteRestoreTestingPlanResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_restore_testing_plan: (
+      ?restore_testing_plan_name: String
+    ) -> _DeleteRestoreTestingPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRestoreTestingPlanResponse
+
+    interface _DeleteRestoreTestingSelectionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_restore_testing_selection: (
+      ?restore_testing_plan_name: String,
+      ?restore_testing_selection_name: String
+    ) -> _DeleteRestoreTestingSelectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRestoreTestingSelectionResponse
+
+    interface _DescribeBackupJobResponse
+      include Smithy::Client::_Response[Types::DescribeBackupJobOutput]
+      def account_id: () -> String?
+      def backup_job_id: () -> String?
+      def backup_vault_name: () -> String?
+      def backup_vault_arn: () -> String?
+      def recovery_point_arn: () -> String?
+      def resource_arn: () -> String?
+      def creation_date: () -> Time?
+      def completion_date: () -> Time?
+      def state: () -> String?
+      def status_message: () -> String?
+      def percent_done: () -> String?
+      def backup_size_in_bytes: () -> Integer?
+      def iam_role_arn: () -> String?
+      def created_by: () -> Types::RecoveryPointCreator?
+      def resource_type: () -> String?
+      def bytes_transferred: () -> Integer?
+      def expected_completion_date: () -> Time?
+      def start_by: () -> Time?
+      def backup_options: () -> Hash[String, String]?
+      def backup_type: () -> String?
+      def parent_job_id: () -> String?
+      def is_parent: () -> bool?
+      def number_of_child_jobs: () -> Integer?
+      def child_jobs_in_state: () -> Hash[String, Integer]?
+      def resource_name: () -> String?
+      def initiation_date: () -> Time?
+      def message_category: () -> String?
+    end
+    def describe_backup_job: (
+      ?backup_job_id: String
+    ) -> _DescribeBackupJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBackupJobResponse
+
+    interface _DescribeBackupVaultResponse
+      include Smithy::Client::_Response[Types::DescribeBackupVaultOutput]
+      def backup_vault_name: () -> String?
+      def backup_vault_arn: () -> String?
+      def vault_type: () -> String?
+      def vault_state: () -> String?
+      def encryption_key_arn: () -> String?
+      def creation_date: () -> Time?
+      def creator_request_id: () -> String?
+      def number_of_recovery_points: () -> Integer?
+      def locked: () -> bool?
+      def min_retention_days: () -> Integer?
+      def max_retention_days: () -> Integer?
+      def lock_date: () -> Time?
+      def source_backup_vault_arn: () -> String?
+      def mpa_approval_team_arn: () -> String?
+      def mpa_session_arn: () -> String?
+      def latest_mpa_approval_team_update: () -> Types::LatestMpaApprovalTeamUpdate?
+    end
+    def describe_backup_vault: (
+      ?backup_vault_name: String,
+      ?backup_vault_account_id: String
+    ) -> _DescribeBackupVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBackupVaultResponse
+
+    interface _DescribeCopyJobResponse
+      include Smithy::Client::_Response[Types::DescribeCopyJobOutput]
+      def copy_job: () -> Types::CopyJob?
+    end
+    def describe_copy_job: (
+      ?copy_job_id: String
+    ) -> _DescribeCopyJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCopyJobResponse
+
+    interface _DescribeFrameworkResponse
+      include Smithy::Client::_Response[Types::DescribeFrameworkOutput]
+      def framework_name: () -> String?
+      def framework_arn: () -> String?
+      def framework_description: () -> String?
+      def framework_controls: () -> Array[Types::FrameworkControl]?
+      def creation_time: () -> Time?
+      def deployment_status: () -> String?
+      def framework_status: () -> String?
+      def idempotency_token: () -> String?
+    end
+    def describe_framework: (
+      ?framework_name: String
+    ) -> _DescribeFrameworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFrameworkResponse
+
+    interface _DescribeGlobalSettingsResponse
+      include Smithy::Client::_Response[Types::DescribeGlobalSettingsOutput]
+      def global_settings: () -> Hash[String, String]?
+      def last_update_time: () -> Time?
+    end
+    def describe_global_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGlobalSettingsResponse
+
+    interface _DescribeProtectedResourceResponse
+      include Smithy::Client::_Response[Types::DescribeProtectedResourceOutput]
+      def resource_arn: () -> String?
+      def resource_type: () -> String?
+      def last_backup_time: () -> Time?
+      def resource_name: () -> String?
+      def last_backup_vault_arn: () -> String?
+      def last_recovery_point_arn: () -> String?
+      def latest_restore_execution_time_minutes: () -> Integer?
+      def latest_restore_job_creation_date: () -> Time?
+      def latest_restore_recovery_point_creation_date: () -> Time?
+    end
+    def describe_protected_resource: (
+      ?resource_arn: String
+    ) -> _DescribeProtectedResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProtectedResourceResponse
+
+    interface _DescribeRecoveryPointResponse
+      include Smithy::Client::_Response[Types::DescribeRecoveryPointOutput]
+      def recovery_point_arn: () -> String?
+      def backup_vault_name: () -> String?
+      def backup_vault_arn: () -> String?
+      def source_backup_vault_arn: () -> String?
+      def resource_arn: () -> String?
+      def resource_type: () -> String?
+      def created_by: () -> Types::RecoveryPointCreator?
+      def iam_role_arn: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def creation_date: () -> Time?
+      def initiation_date: () -> Time?
+      def completion_date: () -> Time?
+      def backup_size_in_bytes: () -> Integer?
+      def calculated_lifecycle: () -> Types::CalculatedLifecycle?
+      def lifecycle: () -> Types::Lifecycle?
+      def encryption_key_arn: () -> String?
+      def is_encrypted: () -> bool?
+      def storage_class: () -> String?
+      def last_restore_time: () -> Time?
+      def parent_recovery_point_arn: () -> String?
+      def composite_member_identifier: () -> String?
+      def is_parent: () -> bool?
+      def resource_name: () -> String?
+      def vault_type: () -> String?
+      def index_status: () -> String?
+      def index_status_message: () -> String?
+    end
+    def describe_recovery_point: (
+      ?backup_vault_name: String,
+      ?recovery_point_arn: String,
+      ?backup_vault_account_id: String
+    ) -> _DescribeRecoveryPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRecoveryPointResponse
+
+    interface _DescribeRegionSettingsResponse
+      include Smithy::Client::_Response[Types::DescribeRegionSettingsOutput]
+      def resource_type_opt_in_preference: () -> Hash[String, bool]?
+      def resource_type_management_preference: () -> Hash[String, bool]?
+    end
+    def describe_region_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRegionSettingsResponse
+
+    interface _DescribeReportJobResponse
+      include Smithy::Client::_Response[Types::DescribeReportJobOutput]
+      def report_job: () -> Types::ReportJob?
+    end
+    def describe_report_job: (
+      ?report_job_id: String
+    ) -> _DescribeReportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReportJobResponse
+
+    interface _DescribeReportPlanResponse
+      include Smithy::Client::_Response[Types::DescribeReportPlanOutput]
+      def report_plan: () -> Types::ReportPlan?
+    end
+    def describe_report_plan: (
+      ?report_plan_name: String
+    ) -> _DescribeReportPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeReportPlanResponse
+
+    interface _DescribeRestoreJobResponse
+      include Smithy::Client::_Response[Types::DescribeRestoreJobOutput]
+      def account_id: () -> String?
+      def restore_job_id: () -> String?
+      def recovery_point_arn: () -> String?
+      def creation_date: () -> Time?
+      def completion_date: () -> Time?
+      def status: () -> String?
+      def status_message: () -> String?
+      def percent_done: () -> String?
+      def backup_size_in_bytes: () -> Integer?
+      def iam_role_arn: () -> String?
+      def expected_completion_time_minutes: () -> Integer?
+      def created_resource_arn: () -> String?
+      def resource_type: () -> String?
+      def recovery_point_creation_date: () -> Time?
+      def created_by: () -> Types::RestoreJobCreator?
+      def validation_status: () -> String?
+      def validation_status_message: () -> String?
+      def deletion_status: () -> String?
+      def deletion_status_message: () -> String?
+    end
+    def describe_restore_job: (
+      ?restore_job_id: String
+    ) -> _DescribeRestoreJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRestoreJobResponse
+
+    interface _DisassociateBackupVaultMpaApprovalTeamResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_backup_vault_mpa_approval_team: (
+      ?backup_vault_name: String,
+      ?requester_comment: String
+    ) -> _DisassociateBackupVaultMpaApprovalTeamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateBackupVaultMpaApprovalTeamResponse
+
+    interface _DisassociateRecoveryPointResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_recovery_point: (
+      ?backup_vault_name: String,
+      ?recovery_point_arn: String
+    ) -> _DisassociateRecoveryPointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateRecoveryPointResponse
+
+    interface _DisassociateRecoveryPointFromParentResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_recovery_point_from_parent: (
+      ?backup_vault_name: String,
+      ?recovery_point_arn: String
+    ) -> _DisassociateRecoveryPointFromParentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateRecoveryPointFromParentResponse
+
+    interface _ExportBackupPlanTemplateResponse
+      include Smithy::Client::_Response[Types::ExportBackupPlanTemplateOutput]
+      def backup_plan_template_json: () -> String?
+    end
+    def export_backup_plan_template: (
+      ?backup_plan_id: String
+    ) -> _ExportBackupPlanTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportBackupPlanTemplateResponse
+
+    interface _GetBackupPlanResponse
+      include Smithy::Client::_Response[Types::GetBackupPlanOutput]
+      def backup_plan: () -> Types::BackupPlan?
+      def backup_plan_id: () -> String?
+      def backup_plan_arn: () -> String?
+      def version_id: () -> String?
+      def creator_request_id: () -> String?
+      def creation_date: () -> Time?
+      def deletion_date: () -> Time?
+      def last_execution_date: () -> Time?
+      def advanced_backup_settings: () -> Array[Types::AdvancedBackupSetting]?
+    end
+    def get_backup_plan: (
+      ?backup_plan_id: String,
+      ?version_id: String
+    ) -> _GetBackupPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBackupPlanResponse
+
+    interface _GetBackupPlanFromJSONResponse
+      include Smithy::Client::_Response[Types::GetBackupPlanFromJSONOutput]
+      def backup_plan: () -> Types::BackupPlan?
+    end
+    def get_backup_plan_from_json: (
+      ?backup_plan_template_json: String
+    ) -> _GetBackupPlanFromJSONResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBackupPlanFromJSONResponse
+
+    interface _GetBackupPlanFromTemplateResponse
+      include Smithy::Client::_Response[Types::GetBackupPlanFromTemplateOutput]
+      def backup_plan_document: () -> Types::BackupPlan?
+    end
+    def get_backup_plan_from_template: (
+      ?backup_plan_template_id: String
+    ) -> _GetBackupPlanFromTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBackupPlanFromTemplateResponse
+
+    interface _GetBackupSelectionResponse
+      include Smithy::Client::_Response[Types::GetBackupSelectionOutput]
+      def backup_selection: () -> Types::BackupSelection?
+      def selection_id: () -> String?
+      def backup_plan_id: () -> String?
+      def creation_date: () -> Time?
+      def creator_request_id: () -> String?
+    end
+    def get_backup_selection: (
+      ?backup_plan_id: String,
+      ?selection_id: String
+    ) -> _GetBackupSelectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBackupSelectionResponse
+
+    interface _GetBackupVaultAccessPolicyResponse
+      include Smithy::Client::_Response[Types::GetBackupVaultAccessPolicyOutput]
+      def backup_vault_name: () -> String?
+      def backup_vault_arn: () -> String?
+      def policy: () -> String?
+    end
+    def get_backup_vault_access_policy: (
+      ?backup_vault_name: String
+    ) -> _GetBackupVaultAccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBackupVaultAccessPolicyResponse
+
+    interface _GetBackupVaultNotificationsResponse
+      include Smithy::Client::_Response[Types::GetBackupVaultNotificationsOutput]
+      def backup_vault_name: () -> String?
+      def backup_vault_arn: () -> String?
+      def sns_topic_arn: () -> String?
+      def backup_vault_events: () -> Array[String]?
+    end
+    def get_backup_vault_notifications: (
+      ?backup_vault_name: String
+    ) -> _GetBackupVaultNotificationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBackupVaultNotificationsResponse
+
+    interface _GetLegalHoldResponse
+      include Smithy::Client::_Response[Types::GetLegalHoldOutput]
+      def title: () -> String?
+      def status: () -> String?
+      def description: () -> String?
+      def cancel_description: () -> String?
+      def legal_hold_id: () -> String?
+      def legal_hold_arn: () -> String?
+      def creation_date: () -> Time?
+      def cancellation_date: () -> Time?
+      def retain_record_until: () -> Time?
+      def recovery_point_selection: () -> Types::RecoveryPointSelection?
+    end
+    def get_legal_hold: (
+      ?legal_hold_id: String
+    ) -> _GetLegalHoldResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLegalHoldResponse
+
+    interface _GetRecoveryPointIndexDetailsResponse
+      include Smithy::Client::_Response[Types::GetRecoveryPointIndexDetailsOutput]
+      def recovery_point_arn: () -> String?
+      def backup_vault_arn: () -> String?
+      def source_resource_arn: () -> String?
+      def index_creation_date: () -> Time?
+      def index_deletion_date: () -> Time?
+      def index_completion_date: () -> Time?
+      def index_status: () -> String?
+      def index_status_message: () -> String?
+      def total_items_indexed: () -> Integer?
+    end
+    def get_recovery_point_index_details: (
+      ?backup_vault_name: String,
+      ?recovery_point_arn: String
+    ) -> _GetRecoveryPointIndexDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecoveryPointIndexDetailsResponse
+
+    interface _GetRecoveryPointRestoreMetadataResponse
+      include Smithy::Client::_Response[Types::GetRecoveryPointRestoreMetadataOutput]
+      def backup_vault_arn: () -> String?
+      def recovery_point_arn: () -> String?
+      def restore_metadata: () -> Hash[String, String]?
+      def resource_type: () -> String?
+    end
+    def get_recovery_point_restore_metadata: (
+      ?backup_vault_name: String,
+      ?recovery_point_arn: String,
+      ?backup_vault_account_id: String
+    ) -> _GetRecoveryPointRestoreMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecoveryPointRestoreMetadataResponse
+
+    interface _GetRestoreJobMetadataResponse
+      include Smithy::Client::_Response[Types::GetRestoreJobMetadataOutput]
+      def restore_job_id: () -> String?
+      def metadata: () -> Hash[String, String]?
+    end
+    def get_restore_job_metadata: (
+      ?restore_job_id: String
+    ) -> _GetRestoreJobMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRestoreJobMetadataResponse
+
+    interface _GetRestoreTestingInferredMetadataResponse
+      include Smithy::Client::_Response[Types::GetRestoreTestingInferredMetadataOutput]
+      def inferred_metadata: () -> Hash[String, String]?
+    end
+    def get_restore_testing_inferred_metadata: (
+      ?backup_vault_account_id: String,
+      ?backup_vault_name: String,
+      ?recovery_point_arn: String
+    ) -> _GetRestoreTestingInferredMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRestoreTestingInferredMetadataResponse
+
+    interface _GetRestoreTestingPlanResponse
+      include Smithy::Client::_Response[Types::GetRestoreTestingPlanOutput]
+      def restore_testing_plan: () -> Types::RestoreTestingPlanForGet?
+    end
+    def get_restore_testing_plan: (
+      ?restore_testing_plan_name: String
+    ) -> _GetRestoreTestingPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRestoreTestingPlanResponse
+
+    interface _GetRestoreTestingSelectionResponse
+      include Smithy::Client::_Response[Types::GetRestoreTestingSelectionOutput]
+      def restore_testing_selection: () -> Types::RestoreTestingSelectionForGet?
+    end
+    def get_restore_testing_selection: (
+      ?restore_testing_plan_name: String,
+      ?restore_testing_selection_name: String
+    ) -> _GetRestoreTestingSelectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRestoreTestingSelectionResponse
+
+    interface _GetSupportedResourceTypesResponse
+      include Smithy::Client::_Response[Types::GetSupportedResourceTypesOutput]
+      def resource_types: () -> Array[String]?
+    end
+    def get_supported_resource_types: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSupportedResourceTypesResponse
+
+    interface _ListBackupJobSummariesResponse
+      include Smithy::Client::_Response[Types::ListBackupJobSummariesOutput]
+      def backup_job_summaries: () -> Array[Types::BackupJobSummary]?
+      def aggregation_period: () -> String?
+      def next_token: () -> String?
+    end
+    def list_backup_job_summaries: (
+      ?account_id: String,
+      ?state: String,
+      ?resource_type: String,
+      ?message_category: String,
+      ?aggregation_period: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBackupJobSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBackupJobSummariesResponse
+
+    interface _ListBackupJobsResponse
+      include Smithy::Client::_Response[Types::ListBackupJobsOutput]
+      def backup_jobs: () -> Array[Types::BackupJob]?
+      def next_token: () -> String?
+    end
+    def list_backup_jobs: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?by_resource_arn: String,
+      ?by_state: String,
+      ?by_backup_vault_name: String,
+      ?by_created_before: Time,
+      ?by_created_after: Time,
+      ?by_resource_type: String,
+      ?by_account_id: String,
+      ?by_complete_after: Time,
+      ?by_complete_before: Time,
+      ?by_parent_job_id: String,
+      ?by_message_category: String
+    ) -> _ListBackupJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBackupJobsResponse
+
+    interface _ListBackupPlanTemplatesResponse
+      include Smithy::Client::_Response[Types::ListBackupPlanTemplatesOutput]
+      def next_token: () -> String?
+      def backup_plan_templates_list: () -> Array[Types::BackupPlanTemplatesListMember]?
+    end
+    def list_backup_plan_templates: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListBackupPlanTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBackupPlanTemplatesResponse
+
+    interface _ListBackupPlanVersionsResponse
+      include Smithy::Client::_Response[Types::ListBackupPlanVersionsOutput]
+      def next_token: () -> String?
+      def backup_plan_versions_list: () -> Array[Types::BackupPlansListMember]?
+    end
+    def list_backup_plan_versions: (
+      ?backup_plan_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListBackupPlanVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBackupPlanVersionsResponse
+
+    interface _ListBackupPlansResponse
+      include Smithy::Client::_Response[Types::ListBackupPlansOutput]
+      def next_token: () -> String?
+      def backup_plans_list: () -> Array[Types::BackupPlansListMember]?
+    end
+    def list_backup_plans: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?include_deleted: bool
+    ) -> _ListBackupPlansResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBackupPlansResponse
+
+    interface _ListBackupSelectionsResponse
+      include Smithy::Client::_Response[Types::ListBackupSelectionsOutput]
+      def next_token: () -> String?
+      def backup_selections_list: () -> Array[Types::BackupSelectionsListMember]?
+    end
+    def list_backup_selections: (
+      ?backup_plan_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListBackupSelectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBackupSelectionsResponse
+
+    interface _ListBackupVaultsResponse
+      include Smithy::Client::_Response[Types::ListBackupVaultsOutput]
+      def backup_vault_list: () -> Array[Types::BackupVaultListMember]?
+      def next_token: () -> String?
+    end
+    def list_backup_vaults: (
+      ?by_vault_type: String,
+      ?by_shared: bool,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListBackupVaultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBackupVaultsResponse
+
+    interface _ListCopyJobSummariesResponse
+      include Smithy::Client::_Response[Types::ListCopyJobSummariesOutput]
+      def copy_job_summaries: () -> Array[Types::CopyJobSummary]?
+      def aggregation_period: () -> String?
+      def next_token: () -> String?
+    end
+    def list_copy_job_summaries: (
+      ?account_id: String,
+      ?state: String,
+      ?resource_type: String,
+      ?message_category: String,
+      ?aggregation_period: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCopyJobSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCopyJobSummariesResponse
+
+    interface _ListCopyJobsResponse
+      include Smithy::Client::_Response[Types::ListCopyJobsOutput]
+      def copy_jobs: () -> Array[Types::CopyJob]?
+      def next_token: () -> String?
+    end
+    def list_copy_jobs: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?by_resource_arn: String,
+      ?by_state: String,
+      ?by_created_before: Time,
+      ?by_created_after: Time,
+      ?by_resource_type: String,
+      ?by_destination_vault_arn: String,
+      ?by_account_id: String,
+      ?by_complete_before: Time,
+      ?by_complete_after: Time,
+      ?by_parent_job_id: String,
+      ?by_message_category: String
+    ) -> _ListCopyJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCopyJobsResponse
+
+    interface _ListFrameworksResponse
+      include Smithy::Client::_Response[Types::ListFrameworksOutput]
+      def frameworks: () -> Array[Types::Framework]?
+      def next_token: () -> String?
+    end
+    def list_frameworks: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFrameworksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFrameworksResponse
+
+    interface _ListIndexedRecoveryPointsResponse
+      include Smithy::Client::_Response[Types::ListIndexedRecoveryPointsOutput]
+      def indexed_recovery_points: () -> Array[Types::IndexedRecoveryPoint]?
+      def next_token: () -> String?
+    end
+    def list_indexed_recovery_points: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?source_resource_arn: String,
+      ?created_before: Time,
+      ?created_after: Time,
+      ?resource_type: String,
+      ?index_status: String
+    ) -> _ListIndexedRecoveryPointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIndexedRecoveryPointsResponse
+
+    interface _ListLegalHoldsResponse
+      include Smithy::Client::_Response[Types::ListLegalHoldsOutput]
+      def next_token: () -> String?
+      def legal_holds: () -> Array[Types::LegalHold]?
+    end
+    def list_legal_holds: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListLegalHoldsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLegalHoldsResponse
+
+    interface _ListProtectedResourcesResponse
+      include Smithy::Client::_Response[Types::ListProtectedResourcesOutput]
+      def results: () -> Array[Types::ProtectedResource]?
+      def next_token: () -> String?
+    end
+    def list_protected_resources: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProtectedResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProtectedResourcesResponse
+
+    interface _ListProtectedResourcesByBackupVaultResponse
+      include Smithy::Client::_Response[Types::ListProtectedResourcesByBackupVaultOutput]
+      def results: () -> Array[Types::ProtectedResource]?
+      def next_token: () -> String?
+    end
+    def list_protected_resources_by_backup_vault: (
+      ?backup_vault_name: String,
+      ?backup_vault_account_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProtectedResourcesByBackupVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProtectedResourcesByBackupVaultResponse
+
+    interface _ListRecoveryPointsByBackupVaultResponse
+      include Smithy::Client::_Response[Types::ListRecoveryPointsByBackupVaultOutput]
+      def next_token: () -> String?
+      def recovery_points: () -> Array[Types::RecoveryPointByBackupVault]?
+    end
+    def list_recovery_points_by_backup_vault: (
+      ?backup_vault_name: String,
+      ?backup_vault_account_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?by_resource_arn: String,
+      ?by_resource_type: String,
+      ?by_backup_plan_id: String,
+      ?by_created_before: Time,
+      ?by_created_after: Time,
+      ?by_parent_recovery_point_arn: String
+    ) -> _ListRecoveryPointsByBackupVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecoveryPointsByBackupVaultResponse
+
+    interface _ListRecoveryPointsByLegalHoldResponse
+      include Smithy::Client::_Response[Types::ListRecoveryPointsByLegalHoldOutput]
+      def recovery_points: () -> Array[Types::RecoveryPointMember]?
+      def next_token: () -> String?
+    end
+    def list_recovery_points_by_legal_hold: (
+      ?legal_hold_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRecoveryPointsByLegalHoldResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecoveryPointsByLegalHoldResponse
+
+    interface _ListRecoveryPointsByResourceResponse
+      include Smithy::Client::_Response[Types::ListRecoveryPointsByResourceOutput]
+      def next_token: () -> String?
+      def recovery_points: () -> Array[Types::RecoveryPointByResource]?
+    end
+    def list_recovery_points_by_resource: (
+      ?resource_arn: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?managed_by_aws_backup_only: bool
+    ) -> _ListRecoveryPointsByResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRecoveryPointsByResourceResponse
+
+    interface _ListReportJobsResponse
+      include Smithy::Client::_Response[Types::ListReportJobsOutput]
+      def report_jobs: () -> Array[Types::ReportJob]?
+      def next_token: () -> String?
+    end
+    def list_report_jobs: (
+      ?by_report_plan_name: String,
+      ?by_creation_before: Time,
+      ?by_creation_after: Time,
+      ?by_status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListReportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReportJobsResponse
+
+    interface _ListReportPlansResponse
+      include Smithy::Client::_Response[Types::ListReportPlansOutput]
+      def report_plans: () -> Array[Types::ReportPlan]?
+      def next_token: () -> String?
+    end
+    def list_report_plans: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListReportPlansResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListReportPlansResponse
+
+    interface _ListRestoreAccessBackupVaultsResponse
+      include Smithy::Client::_Response[Types::ListRestoreAccessBackupVaultsOutput]
+      def next_token: () -> String?
+      def restore_access_backup_vaults: () -> Array[Types::RestoreAccessBackupVaultListMember]?
+    end
+    def list_restore_access_backup_vaults: (
+      ?backup_vault_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRestoreAccessBackupVaultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRestoreAccessBackupVaultsResponse
+
+    interface _ListRestoreJobSummariesResponse
+      include Smithy::Client::_Response[Types::ListRestoreJobSummariesOutput]
+      def restore_job_summaries: () -> Array[Types::RestoreJobSummary]?
+      def aggregation_period: () -> String?
+      def next_token: () -> String?
+    end
+    def list_restore_job_summaries: (
+      ?account_id: String,
+      ?state: String,
+      ?resource_type: String,
+      ?aggregation_period: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRestoreJobSummariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRestoreJobSummariesResponse
+
+    interface _ListRestoreJobsResponse
+      include Smithy::Client::_Response[Types::ListRestoreJobsOutput]
+      def restore_jobs: () -> Array[Types::RestoreJobsListMember]?
+      def next_token: () -> String?
+    end
+    def list_restore_jobs: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?by_account_id: String,
+      ?by_resource_type: String,
+      ?by_created_before: Time,
+      ?by_created_after: Time,
+      ?by_status: String,
+      ?by_complete_before: Time,
+      ?by_complete_after: Time,
+      ?by_restore_testing_plan_arn: String
+    ) -> _ListRestoreJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRestoreJobsResponse
+
+    interface _ListRestoreJobsByProtectedResourceResponse
+      include Smithy::Client::_Response[Types::ListRestoreJobsByProtectedResourceOutput]
+      def restore_jobs: () -> Array[Types::RestoreJobsListMember]?
+      def next_token: () -> String?
+    end
+    def list_restore_jobs_by_protected_resource: (
+      ?resource_arn: String,
+      ?by_status: String,
+      ?by_recovery_point_creation_date_after: Time,
+      ?by_recovery_point_creation_date_before: Time,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRestoreJobsByProtectedResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRestoreJobsByProtectedResourceResponse
+
+    interface _ListRestoreTestingPlansResponse
+      include Smithy::Client::_Response[Types::ListRestoreTestingPlansOutput]
+      def next_token: () -> String?
+      def restore_testing_plans: () -> Array[Types::RestoreTestingPlanForList]?
+    end
+    def list_restore_testing_plans: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRestoreTestingPlansResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRestoreTestingPlansResponse
+
+    interface _ListRestoreTestingSelectionsResponse
+      include Smithy::Client::_Response[Types::ListRestoreTestingSelectionsOutput]
+      def next_token: () -> String?
+      def restore_testing_selections: () -> Array[Types::RestoreTestingSelectionForList]?
+    end
+    def list_restore_testing_selections: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?restore_testing_plan_name: String
+    ) -> _ListRestoreTestingSelectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRestoreTestingSelectionsResponse
+
+    interface _ListTagsResponse
+      include Smithy::Client::_Response[Types::ListTagsOutput]
+      def next_token: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags: (
+      ?resource_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsResponse
+
+    interface _PutBackupVaultAccessPolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_backup_vault_access_policy: (
+      ?backup_vault_name: String,
+      ?policy: String
+    ) -> _PutBackupVaultAccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBackupVaultAccessPolicyResponse
+
+    interface _PutBackupVaultLockConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_backup_vault_lock_configuration: (
+      ?backup_vault_name: String,
+      ?min_retention_days: Integer,
+      ?max_retention_days: Integer,
+      ?changeable_for_days: Integer
+    ) -> _PutBackupVaultLockConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBackupVaultLockConfigurationResponse
+
+    interface _PutBackupVaultNotificationsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_backup_vault_notifications: (
+      ?backup_vault_name: String,
+      ?sns_topic_arn: String,
+      ?backup_vault_events: Array[String]
+    ) -> _PutBackupVaultNotificationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutBackupVaultNotificationsResponse
+
+    interface _PutRestoreValidationResultResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_restore_validation_result: (
+      ?restore_job_id: String,
+      ?validation_status: String,
+      ?validation_status_message: String
+    ) -> _PutRestoreValidationResultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRestoreValidationResultResponse
+
+    interface _RevokeRestoreAccessBackupVaultResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def revoke_restore_access_backup_vault: (
+      ?backup_vault_name: String,
+      ?restore_access_backup_vault_arn: String,
+      ?requester_comment: String
+    ) -> _RevokeRestoreAccessBackupVaultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokeRestoreAccessBackupVaultResponse
+
+    interface _StartBackupJobResponse
+      include Smithy::Client::_Response[Types::StartBackupJobOutput]
+      def backup_job_id: () -> String?
+      def recovery_point_arn: () -> String?
+      def creation_date: () -> Time?
+      def is_parent: () -> bool?
+    end
+    def start_backup_job: (
+      ?backup_vault_name: String,
+      ?resource_arn: String,
+      ?iam_role_arn: String,
+      ?idempotency_token: String,
+      ?start_window_minutes: Integer,
+      ?complete_window_minutes: Integer,
+      ?lifecycle: {
+        move_to_cold_storage_after_days: Integer,
+        delete_after_days: untyped,
+        opt_in_to_archive_for_supported_resources: bool
+      },
+      ?recovery_point_tags: Hash[String, String],
+      ?backup_options: Hash[String, String],
+      ?index: String
+    ) -> _StartBackupJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartBackupJobResponse
+
+    interface _StartCopyJobResponse
+      include Smithy::Client::_Response[Types::StartCopyJobOutput]
+      def copy_job_id: () -> String?
+      def creation_date: () -> Time?
+      def is_parent: () -> bool?
+    end
+    def start_copy_job: (
+      ?recovery_point_arn: String,
+      ?source_backup_vault_name: String,
+      ?destination_backup_vault_arn: String,
+      ?iam_role_arn: String,
+      ?idempotency_token: String,
+      ?lifecycle: {
+        move_to_cold_storage_after_days: Integer,
+        delete_after_days: untyped,
+        opt_in_to_archive_for_supported_resources: bool
+      }
+    ) -> _StartCopyJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCopyJobResponse
+
+    interface _StartReportJobResponse
+      include Smithy::Client::_Response[Types::StartReportJobOutput]
+      def report_job_id: () -> String?
+    end
+    def start_report_job: (
+      ?report_plan_name: String,
+      ?idempotency_token: String
+    ) -> _StartReportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartReportJobResponse
+
+    interface _StartRestoreJobResponse
+      include Smithy::Client::_Response[Types::StartRestoreJobOutput]
+      def restore_job_id: () -> String?
+    end
+    def start_restore_job: (
+      ?recovery_point_arn: String,
+      ?metadata: Hash[String, String],
+      ?iam_role_arn: String,
+      ?idempotency_token: String,
+      ?resource_type: String,
+      ?copy_source_tags_to_restored_resource: bool
+    ) -> _StartRestoreJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRestoreJobResponse
+
+    interface _StopBackupJobResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def stop_backup_job: (
+      ?backup_job_id: String
+    ) -> _StopBackupJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopBackupJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_key_list: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateBackupPlanResponse
+      include Smithy::Client::_Response[Types::UpdateBackupPlanOutput]
+      def backup_plan_id: () -> String?
+      def backup_plan_arn: () -> String?
+      def creation_date: () -> Time?
+      def version_id: () -> String?
+      def advanced_backup_settings: () -> Array[Types::AdvancedBackupSetting]?
+    end
+    def update_backup_plan: (
+      ?backup_plan_id: String,
+      ?backup_plan: {
+        backup_plan_name: String,
+        rules: Array[
+          {
+            rule_name: String,
+            target_backup_vault_name: String,
+            schedule_expression: String,
+            start_window_minutes: Integer,
+            completion_window_minutes: untyped,
+            lifecycle: {
+              move_to_cold_storage_after_days: Integer,
+              delete_after_days: untyped,
+              opt_in_to_archive_for_supported_resources: bool
+            },
+            recovery_point_tags: Hash[String, String],
+            copy_actions: Array[
+              {
+                lifecycle: untyped,
+                destination_backup_vault_arn: String
+              }
+            ],
+            enable_continuous_backup: untyped,
+            schedule_expression_timezone: String,
+            index_actions: Array[
+              {
+                resource_types: Array[String]
+              }
+            ]
+          }
+        ],
+        advanced_backup_settings: Array[
+          {
+            resource_type: String,
+            backup_options: Hash[String, String]
+          }
+        ]
+      }
+    ) -> _UpdateBackupPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBackupPlanResponse
+
+    interface _UpdateFrameworkResponse
+      include Smithy::Client::_Response[Types::UpdateFrameworkOutput]
+      def framework_name: () -> String?
+      def framework_arn: () -> String?
+      def creation_time: () -> Time?
+    end
+    def update_framework: (
+      ?framework_name: String,
+      ?framework_description: String,
+      ?framework_controls: Array[
+        {
+          control_name: String,
+          control_input_parameters: Array[
+            {
+              parameter_name: String,
+              parameter_value: String
+            }
+          ],
+          control_scope: {
+            compliance_resource_ids: Array[String],
+            compliance_resource_types: Array[String],
+            tags: Hash[String, String]
+          }
+        }
+      ],
+      ?idempotency_token: String
+    ) -> _UpdateFrameworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFrameworkResponse
+
+    interface _UpdateGlobalSettingsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_global_settings: (
+      ?global_settings: Hash[String, String]
+    ) -> _UpdateGlobalSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGlobalSettingsResponse
+
+    interface _UpdateRecoveryPointIndexSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateRecoveryPointIndexSettingsOutput]
+      def backup_vault_name: () -> String?
+      def recovery_point_arn: () -> String?
+      def index_status: () -> String?
+      def index: () -> String?
+    end
+    def update_recovery_point_index_settings: (
+      ?backup_vault_name: String,
+      ?recovery_point_arn: String,
+      ?iam_role_arn: String,
+      ?index: String
+    ) -> _UpdateRecoveryPointIndexSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRecoveryPointIndexSettingsResponse
+
+    interface _UpdateRecoveryPointLifecycleResponse
+      include Smithy::Client::_Response[Types::UpdateRecoveryPointLifecycleOutput]
+      def backup_vault_arn: () -> String?
+      def recovery_point_arn: () -> String?
+      def lifecycle: () -> Types::Lifecycle?
+      def calculated_lifecycle: () -> Types::CalculatedLifecycle?
+    end
+    def update_recovery_point_lifecycle: (
+      ?backup_vault_name: String,
+      ?recovery_point_arn: String,
+      ?lifecycle: {
+        move_to_cold_storage_after_days: Integer,
+        delete_after_days: untyped,
+        opt_in_to_archive_for_supported_resources: bool
+      }
+    ) -> _UpdateRecoveryPointLifecycleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRecoveryPointLifecycleResponse
+
+    interface _UpdateRegionSettingsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_region_settings: (
+      ?resource_type_opt_in_preference: Hash[String, bool],
+      ?resource_type_management_preference: Hash[String, bool]
+    ) -> _UpdateRegionSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRegionSettingsResponse
+
+    interface _UpdateReportPlanResponse
+      include Smithy::Client::_Response[Types::UpdateReportPlanOutput]
+      def report_plan_name: () -> String?
+      def report_plan_arn: () -> String?
+      def creation_time: () -> Time?
+    end
+    def update_report_plan: (
+      ?report_plan_name: String,
+      ?report_plan_description: String,
+      ?report_delivery_channel: {
+        s3_bucket_name: String,
+        s3_key_prefix: untyped,
+        formats: Array[String]
+      },
+      ?report_setting: {
+        report_template: String,
+        framework_arns: Array[String],
+        number_of_frameworks: Integer,
+        accounts: untyped,
+        organization_units: untyped,
+        regions: untyped
+      },
+      ?idempotency_token: String
+    ) -> _UpdateReportPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateReportPlanResponse
+
+    interface _UpdateRestoreTestingPlanResponse
+      include Smithy::Client::_Response[Types::UpdateRestoreTestingPlanOutput]
+      def creation_time: () -> Time?
+      def restore_testing_plan_arn: () -> String?
+      def restore_testing_plan_name: () -> String?
+      def update_time: () -> Time?
+    end
+    def update_restore_testing_plan: (
+      ?restore_testing_plan: {
+        recovery_point_selection: {
+          algorithm: String,
+          exclude_vaults: Array[String],
+          include_vaults: untyped,
+          recovery_point_types: Array[String],
+          selection_window_days: Integer
+        },
+        schedule_expression: String,
+        schedule_expression_timezone: untyped,
+        start_window_hours: untyped
+      },
+      ?restore_testing_plan_name: String
+    ) -> _UpdateRestoreTestingPlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRestoreTestingPlanResponse
+
+    interface _UpdateRestoreTestingSelectionResponse
+      include Smithy::Client::_Response[Types::UpdateRestoreTestingSelectionOutput]
+      def creation_time: () -> Time?
+      def restore_testing_plan_arn: () -> String?
+      def restore_testing_plan_name: () -> String?
+      def restore_testing_selection_name: () -> String?
+      def update_time: () -> Time?
+    end
+    def update_restore_testing_selection: (
+      ?restore_testing_plan_name: String,
+      ?restore_testing_selection: {
+        iam_role_arn: String,
+        protected_resource_arns: Array[String],
+        protected_resource_conditions: {
+          string_equals: Array[
+            {
+              key: untyped,
+              value: untyped
+            }
+          ],
+          string_not_equals: untyped
+        },
+        restore_metadata_overrides: Hash[String, String],
+        validation_window_hours: Integer
+      },
+      ?restore_testing_selection_name: String
+    ) -> _UpdateRestoreTestingSelectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRestoreTestingSelectionResponse
+  end
+end

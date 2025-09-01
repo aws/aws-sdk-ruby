@@ -1,0 +1,1810 @@
+module Aws::Inspector
+  module Types
+
+    module AccessDeniedErrorCode
+      ACCESS_DENIED_TO_ASSESSMENT_TARGET: String
+      ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE: String
+      ACCESS_DENIED_TO_ASSESSMENT_RUN: String
+      ACCESS_DENIED_TO_FINDING: String
+      ACCESS_DENIED_TO_RESOURCE_GROUP: String
+      ACCESS_DENIED_TO_RULES_PACKAGE: String
+      ACCESS_DENIED_TO_SNS_TOPIC: String
+      ACCESS_DENIED_TO_IAM_ROLE: String
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+        ?can_retry: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+      attr_accessor can_retry: bool?
+    end
+
+    class AddAttributesToFindingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?finding_arns: Array[String],
+        ?attributes: Array[Types::Attribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor finding_arns: Array[String]?
+      attr_accessor attributes: Array[Types::Attribute]?
+    end
+
+    class AddAttributesToFindingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_items: Hash[String, Types::FailedItemDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_items: Hash[String, Types::FailedItemDetails]?
+    end
+
+    class AgentAlreadyRunningAssessment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_id: String,
+        ?assessment_run_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_id: String?
+      attr_accessor assessment_run_arn: String?
+    end
+
+    class AgentFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_healths: Array[String],
+        ?agent_health_codes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_healths: Array[String]?
+      attr_accessor agent_health_codes: Array[String]?
+    end
+
+    module AgentHealth
+      HEALTHY: String
+      UNHEALTHY: String
+      UNKNOWN: String
+    end
+
+    module AgentHealthCode
+      IDLE: String
+      RUNNING: String
+      SHUTDOWN: String
+      UNHEALTHY: String
+      THROTTLED: String
+      UNKNOWN: String
+    end
+
+    class AgentPreview
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hostname: String,
+        ?agent_id: String,
+        ?auto_scaling_group: String,
+        ?agent_health: String,
+        ?agent_version: String,
+        ?operating_system: String,
+        ?kernel_version: String,
+        ?ipv4_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hostname: String?
+      attr_accessor agent_id: String?
+      attr_accessor auto_scaling_group: String?
+      attr_accessor agent_health: String?
+      attr_accessor agent_version: String?
+      attr_accessor operating_system: String?
+      attr_accessor kernel_version: String?
+      attr_accessor ipv4_address: String?
+    end
+
+    class AgentsAlreadyRunningAssessmentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?agents: Array[Types::AgentAlreadyRunningAssessment],
+        ?agents_truncated: bool,
+        ?can_retry: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor agents: Array[Types::AgentAlreadyRunningAssessment]?
+      attr_accessor agents_truncated: bool?
+      attr_accessor can_retry: bool?
+    end
+
+    class AssessmentRun
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?assessment_template_arn: String,
+        ?state: String,
+        ?duration_in_seconds: Integer,
+        ?rules_package_arns: Array[String],
+        ?user_attributes_for_findings: Array[Types::Attribute],
+        ?created_at: Time,
+        ?started_at: Time,
+        ?completed_at: Time,
+        ?state_changed_at: Time,
+        ?data_collected: bool,
+        ?state_changes: Array[Types::AssessmentRunStateChange],
+        ?notifications: Array[Types::AssessmentRunNotification],
+        ?finding_counts: Hash[String, Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor assessment_template_arn: String?
+      attr_accessor state: String?
+      attr_accessor duration_in_seconds: Integer?
+      attr_accessor rules_package_arns: Array[String]?
+      attr_accessor user_attributes_for_findings: Array[Types::Attribute]?
+      attr_accessor created_at: Time?
+      attr_accessor started_at: Time?
+      attr_accessor completed_at: Time?
+      attr_accessor state_changed_at: Time?
+      attr_accessor data_collected: bool?
+      attr_accessor state_changes: Array[Types::AssessmentRunStateChange]?
+      attr_accessor notifications: Array[Types::AssessmentRunNotification]?
+      attr_accessor finding_counts: Hash[String, Integer]?
+    end
+
+    class AssessmentRunAgent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_id: String,
+        ?assessment_run_arn: String,
+        ?agent_health: String,
+        ?agent_health_code: String,
+        ?agent_health_details: String,
+        ?auto_scaling_group: String,
+        ?telemetry_metadata: Array[Types::TelemetryMetadata],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_id: String?
+      attr_accessor assessment_run_arn: String?
+      attr_accessor agent_health: String?
+      attr_accessor agent_health_code: String?
+      attr_accessor agent_health_details: String?
+      attr_accessor auto_scaling_group: String?
+      attr_accessor telemetry_metadata: Array[Types::TelemetryMetadata]?
+    end
+
+    class AssessmentRunFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name_pattern: String,
+        ?states: Array[String],
+        ?duration_range: Types::DurationRange,
+        ?rules_package_arns: Array[String],
+        ?start_time_range: Types::TimestampRange,
+        ?completion_time_range: Types::TimestampRange,
+        ?state_change_time_range: Types::TimestampRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name_pattern: String?
+      attr_accessor states: Array[String]?
+      attr_accessor duration_range: Types::DurationRange?
+      attr_accessor rules_package_arns: Array[String]?
+      attr_accessor start_time_range: Types::TimestampRange?
+      attr_accessor completion_time_range: Types::TimestampRange?
+      attr_accessor state_change_time_range: Types::TimestampRange?
+    end
+
+    class AssessmentRunInProgressException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?assessment_run_arns: Array[String],
+        ?assessment_run_arns_truncated: bool,
+        ?can_retry: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor assessment_run_arns: Array[String]?
+      attr_accessor assessment_run_arns_truncated: bool?
+      attr_accessor can_retry: bool?
+    end
+
+    class AssessmentRunNotification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date: Time,
+        ?event: String,
+        ?message: String,
+        ?error: bool,
+        ?sns_topic_arn: String,
+        ?sns_publish_status_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date: Time?
+      attr_accessor event: String?
+      attr_accessor message: String?
+      attr_accessor error: bool?
+      attr_accessor sns_topic_arn: String?
+      attr_accessor sns_publish_status_code: String?
+    end
+
+    module AssessmentRunNotificationSnsStatusCode
+      SUCCESS: String
+      TOPIC_DOES_NOT_EXIST: String
+      ACCESS_DENIED: String
+      INTERNAL_ERROR: String
+    end
+
+    module AssessmentRunState
+      CREATED: String
+      START_DATA_COLLECTION_PENDING: String
+      START_DATA_COLLECTION_IN_PROGRESS: String
+      COLLECTING_DATA: String
+      STOP_DATA_COLLECTION_PENDING: String
+      DATA_COLLECTED: String
+      START_EVALUATING_RULES_PENDING: String
+      EVALUATING_RULES: String
+      FAILED: String
+      ERROR: String
+      COMPLETED: String
+      COMPLETED_WITH_ERRORS: String
+      CANCELED: String
+    end
+
+    class AssessmentRunStateChange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_changed_at: Time,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_changed_at: Time?
+      attr_accessor state: String?
+    end
+
+    class AssessmentTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?resource_group_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor resource_group_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class AssessmentTargetFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_target_name_pattern: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_target_name_pattern: String?
+    end
+
+    class AssessmentTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?assessment_target_arn: String,
+        ?duration_in_seconds: Integer,
+        ?rules_package_arns: Array[String],
+        ?user_attributes_for_findings: Array[Types::Attribute],
+        ?last_assessment_run_arn: String,
+        ?assessment_run_count: Integer,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor assessment_target_arn: String?
+      attr_accessor duration_in_seconds: Integer?
+      attr_accessor rules_package_arns: Array[String]?
+      attr_accessor user_attributes_for_findings: Array[Types::Attribute]?
+      attr_accessor last_assessment_run_arn: String?
+      attr_accessor assessment_run_count: Integer?
+      attr_accessor created_at: Time?
+    end
+
+    class AssessmentTemplateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name_pattern: String,
+        ?duration_range: Types::DurationRange,
+        ?rules_package_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name_pattern: String?
+      attr_accessor duration_range: Types::DurationRange?
+      attr_accessor rules_package_arns: Array[String]?
+    end
+
+    class AssetAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_version: Integer,
+        ?agent_id: String,
+        ?auto_scaling_group: String,
+        ?ami_id: String,
+        ?hostname: String,
+        ?ipv4_addresses: Array[String],
+        ?tags: Array[Types::Tag],
+        ?network_interfaces: Array[Types::NetworkInterface],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_version: Integer?
+      attr_accessor agent_id: String?
+      attr_accessor auto_scaling_group: String?
+      attr_accessor ami_id: String?
+      attr_accessor hostname: String?
+      attr_accessor ipv4_addresses: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor network_interfaces: Array[Types::NetworkInterface]?
+    end
+
+    module AssetType
+      EC2_INSTANCE: String
+    end
+
+    class Attribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class CreateAssessmentTargetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_target_name: String,
+        ?resource_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_target_name: String?
+      attr_accessor resource_group_arn: String?
+    end
+
+    class CreateAssessmentTargetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_target_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_target_arn: String?
+    end
+
+    class CreateAssessmentTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_target_arn: String,
+        ?assessment_template_name: String,
+        ?duration_in_seconds: Integer,
+        ?rules_package_arns: Array[String],
+        ?user_attributes_for_findings: Array[Types::Attribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_target_arn: String?
+      attr_accessor assessment_template_name: String?
+      attr_accessor duration_in_seconds: Integer?
+      attr_accessor rules_package_arns: Array[String]?
+      attr_accessor user_attributes_for_findings: Array[Types::Attribute]?
+    end
+
+    class CreateAssessmentTemplateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_template_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_template_arn: String?
+    end
+
+    class CreateExclusionsPreviewRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_template_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_template_arn: String?
+    end
+
+    class CreateExclusionsPreviewResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?preview_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor preview_token: String?
+    end
+
+    class CreateResourceGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_tags: Array[Types::ResourceGroupTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_tags: Array[Types::ResourceGroupTag]?
+    end
+
+    class CreateResourceGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_arn: String?
+    end
+
+    class DeleteAssessmentRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_run_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_run_arn: String?
+    end
+
+    class DeleteAssessmentTargetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_target_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_target_arn: String?
+    end
+
+    class DeleteAssessmentTemplateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_template_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_template_arn: String?
+    end
+
+    class DescribeAssessmentRunsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_run_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_run_arns: Array[String]?
+    end
+
+    class DescribeAssessmentRunsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_runs: Array[Types::AssessmentRun],
+        ?failed_items: Hash[String, Types::FailedItemDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_runs: Array[Types::AssessmentRun]?
+      attr_accessor failed_items: Hash[String, Types::FailedItemDetails]?
+    end
+
+    class DescribeAssessmentTargetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_target_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_target_arns: Array[String]?
+    end
+
+    class DescribeAssessmentTargetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_targets: Array[Types::AssessmentTarget],
+        ?failed_items: Hash[String, Types::FailedItemDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_targets: Array[Types::AssessmentTarget]?
+      attr_accessor failed_items: Hash[String, Types::FailedItemDetails]?
+    end
+
+    class DescribeAssessmentTemplatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_template_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_template_arns: Array[String]?
+    end
+
+    class DescribeAssessmentTemplatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_templates: Array[Types::AssessmentTemplate],
+        ?failed_items: Hash[String, Types::FailedItemDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_templates: Array[Types::AssessmentTemplate]?
+      attr_accessor failed_items: Hash[String, Types::FailedItemDetails]?
+    end
+
+    class DescribeCrossAccountAccessRoleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?valid: bool,
+        ?registered_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor valid: bool?
+      attr_accessor registered_at: Time?
+    end
+
+    class DescribeExclusionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exclusion_arns: Array[String],
+        ?locale: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exclusion_arns: Array[String]?
+      attr_accessor locale: String?
+    end
+
+    class DescribeExclusionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exclusions: Hash[String, Types::Exclusion],
+        ?failed_items: Hash[String, Types::FailedItemDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exclusions: Hash[String, Types::Exclusion]?
+      attr_accessor failed_items: Hash[String, Types::FailedItemDetails]?
+    end
+
+    class DescribeFindingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?finding_arns: Array[String],
+        ?locale: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor finding_arns: Array[String]?
+      attr_accessor locale: String?
+    end
+
+    class DescribeFindingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?findings: Array[Types::Finding],
+        ?failed_items: Hash[String, Types::FailedItemDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor findings: Array[Types::Finding]?
+      attr_accessor failed_items: Hash[String, Types::FailedItemDetails]?
+    end
+
+    class DescribeResourceGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_arns: Array[String]?
+    end
+
+    class DescribeResourceGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_groups: Array[Types::ResourceGroup],
+        ?failed_items: Hash[String, Types::FailedItemDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_groups: Array[Types::ResourceGroup]?
+      attr_accessor failed_items: Hash[String, Types::FailedItemDetails]?
+    end
+
+    class DescribeRulesPackagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules_package_arns: Array[String],
+        ?locale: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules_package_arns: Array[String]?
+      attr_accessor locale: String?
+    end
+
+    class DescribeRulesPackagesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules_packages: Array[Types::RulesPackage],
+        ?failed_items: Hash[String, Types::FailedItemDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules_packages: Array[Types::RulesPackage]?
+      attr_accessor failed_items: Hash[String, Types::FailedItemDetails]?
+    end
+
+    class DurationRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_seconds: Integer,
+        ?max_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_seconds: Integer?
+      attr_accessor max_seconds: Integer?
+    end
+
+    class EventSubscription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event: String,
+        ?subscribed_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event: String?
+      attr_accessor subscribed_at: Time?
+    end
+
+    class Exclusion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?title: String,
+        ?description: String,
+        ?recommendation: String,
+        ?scopes: Array[Types::Scope],
+        ?attributes: Array[Types::Attribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor recommendation: String?
+      attr_accessor scopes: Array[Types::Scope]?
+      attr_accessor attributes: Array[Types::Attribute]?
+    end
+
+    class ExclusionPreview
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?description: String,
+        ?recommendation: String,
+        ?scopes: Array[Types::Scope],
+        ?attributes: Array[Types::Attribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor recommendation: String?
+      attr_accessor scopes: Array[Types::Scope]?
+      attr_accessor attributes: Array[Types::Attribute]?
+    end
+
+    class FailedItemDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failure_code: String,
+        ?retryable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failure_code: String?
+      attr_accessor retryable: bool?
+    end
+
+    module FailedItemErrorCode
+      INVALID_ARN: String
+      DUPLICATE_ARN: String
+      ITEM_DOES_NOT_EXIST: String
+      ACCESS_DENIED: String
+      LIMIT_EXCEEDED: String
+      INTERNAL_ERROR: String
+    end
+
+    class Finding
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?schema_version: Integer,
+        ?service: String,
+        ?service_attributes: Types::InspectorServiceAttributes,
+        ?asset_type: String,
+        ?asset_attributes: Types::AssetAttributes,
+        ?id: String,
+        ?title: String,
+        ?description: String,
+        ?recommendation: String,
+        ?severity: String,
+        ?numeric_severity: Float,
+        ?confidence: Integer,
+        ?indicator_of_compromise: bool,
+        ?attributes: Array[Types::Attribute],
+        ?user_attributes: Array[Types::Attribute],
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor schema_version: Integer?
+      attr_accessor service: String?
+      attr_accessor service_attributes: Types::InspectorServiceAttributes?
+      attr_accessor asset_type: String?
+      attr_accessor asset_attributes: Types::AssetAttributes?
+      attr_accessor id: String?
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor recommendation: String?
+      attr_accessor severity: String?
+      attr_accessor numeric_severity: Float?
+      attr_accessor confidence: Integer?
+      attr_accessor indicator_of_compromise: bool?
+      attr_accessor attributes: Array[Types::Attribute]?
+      attr_accessor user_attributes: Array[Types::Attribute]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class FindingFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_ids: Array[String],
+        ?auto_scaling_groups: Array[String],
+        ?rule_names: Array[String],
+        ?severities: Array[String],
+        ?rules_package_arns: Array[String],
+        ?attributes: Array[Types::Attribute],
+        ?user_attributes: Array[Types::Attribute],
+        ?creation_time_range: Types::TimestampRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_ids: Array[String]?
+      attr_accessor auto_scaling_groups: Array[String]?
+      attr_accessor rule_names: Array[String]?
+      attr_accessor severities: Array[String]?
+      attr_accessor rules_package_arns: Array[String]?
+      attr_accessor attributes: Array[Types::Attribute]?
+      attr_accessor user_attributes: Array[Types::Attribute]?
+      attr_accessor creation_time_range: Types::TimestampRange?
+    end
+
+    class GetAssessmentReportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_run_arn: String,
+        ?report_file_format: String,
+        ?report_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_run_arn: String?
+      attr_accessor report_file_format: String?
+      attr_accessor report_type: String?
+    end
+
+    class GetAssessmentReportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor url: String?
+    end
+
+    class GetExclusionsPreviewRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_template_arn: String,
+        ?preview_token: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?locale: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_template_arn: String?
+      attr_accessor preview_token: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor locale: String?
+    end
+
+    class GetExclusionsPreviewResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?preview_status: String,
+        ?exclusion_previews: Array[Types::ExclusionPreview],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor preview_status: String?
+      attr_accessor exclusion_previews: Array[Types::ExclusionPreview]?
+      attr_accessor next_token: String?
+    end
+
+    class GetTelemetryMetadataRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_run_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_run_arn: String?
+    end
+
+    class GetTelemetryMetadataResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?telemetry_metadata: Array[Types::TelemetryMetadata],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor telemetry_metadata: Array[Types::TelemetryMetadata]?
+    end
+
+    module InspectorEvent
+      ASSESSMENT_RUN_STARTED: String
+      ASSESSMENT_RUN_COMPLETED: String
+      ASSESSMENT_RUN_STATE_CHANGED: String
+      FINDING_REPORTED: String
+      OTHER: String
+    end
+
+    class InspectorServiceAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_version: Integer,
+        ?assessment_run_arn: String,
+        ?rules_package_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_version: Integer?
+      attr_accessor assessment_run_arn: String?
+      attr_accessor rules_package_arn: String?
+    end
+
+    class InternalException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?can_retry: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor can_retry: bool?
+    end
+
+    module InvalidCrossAccountRoleErrorCode
+      ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP: String
+      ROLE_DOES_NOT_HAVE_CORRECT_POLICY: String
+    end
+
+    class InvalidCrossAccountRoleException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+        ?can_retry: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+      attr_accessor can_retry: bool?
+    end
+
+    module InvalidInputErrorCode
+      INVALID_ASSESSMENT_TARGET_ARN: String
+      INVALID_ASSESSMENT_TEMPLATE_ARN: String
+      INVALID_ASSESSMENT_RUN_ARN: String
+      INVALID_FINDING_ARN: String
+      INVALID_RESOURCE_GROUP_ARN: String
+      INVALID_RULES_PACKAGE_ARN: String
+      INVALID_RESOURCE_ARN: String
+      INVALID_SNS_TOPIC_ARN: String
+      INVALID_IAM_ROLE_ARN: String
+      INVALID_ASSESSMENT_TARGET_NAME: String
+      INVALID_ASSESSMENT_TARGET_NAME_PATTERN: String
+      INVALID_ASSESSMENT_TEMPLATE_NAME: String
+      INVALID_ASSESSMENT_TEMPLATE_NAME_PATTERN: String
+      INVALID_ASSESSMENT_TEMPLATE_DURATION: String
+      INVALID_ASSESSMENT_TEMPLATE_DURATION_RANGE: String
+      INVALID_ASSESSMENT_RUN_DURATION_RANGE: String
+      INVALID_ASSESSMENT_RUN_START_TIME_RANGE: String
+      INVALID_ASSESSMENT_RUN_COMPLETION_TIME_RANGE: String
+      INVALID_ASSESSMENT_RUN_STATE_CHANGE_TIME_RANGE: String
+      INVALID_ASSESSMENT_RUN_STATE: String
+      INVALID_TAG: String
+      INVALID_TAG_KEY: String
+      INVALID_TAG_VALUE: String
+      INVALID_RESOURCE_GROUP_TAG_KEY: String
+      INVALID_RESOURCE_GROUP_TAG_VALUE: String
+      INVALID_ATTRIBUTE: String
+      INVALID_USER_ATTRIBUTE: String
+      INVALID_USER_ATTRIBUTE_KEY: String
+      INVALID_USER_ATTRIBUTE_VALUE: String
+      INVALID_PAGINATION_TOKEN: String
+      INVALID_MAX_RESULTS: String
+      INVALID_AGENT_ID: String
+      INVALID_AUTO_SCALING_GROUP: String
+      INVALID_RULE_NAME: String
+      INVALID_SEVERITY: String
+      INVALID_LOCALE: String
+      INVALID_EVENT: String
+      ASSESSMENT_TARGET_NAME_ALREADY_TAKEN: String
+      ASSESSMENT_TEMPLATE_NAME_ALREADY_TAKEN: String
+      INVALID_NUMBER_OF_ASSESSMENT_TARGET_ARNS: String
+      INVALID_NUMBER_OF_ASSESSMENT_TEMPLATE_ARNS: String
+      INVALID_NUMBER_OF_ASSESSMENT_RUN_ARNS: String
+      INVALID_NUMBER_OF_FINDING_ARNS: String
+      INVALID_NUMBER_OF_RESOURCE_GROUP_ARNS: String
+      INVALID_NUMBER_OF_RULES_PACKAGE_ARNS: String
+      INVALID_NUMBER_OF_ASSESSMENT_RUN_STATES: String
+      INVALID_NUMBER_OF_TAGS: String
+      INVALID_NUMBER_OF_RESOURCE_GROUP_TAGS: String
+      INVALID_NUMBER_OF_ATTRIBUTES: String
+      INVALID_NUMBER_OF_USER_ATTRIBUTES: String
+      INVALID_NUMBER_OF_AGENT_IDS: String
+      INVALID_NUMBER_OF_AUTO_SCALING_GROUPS: String
+      INVALID_NUMBER_OF_RULE_NAMES: String
+      INVALID_NUMBER_OF_SEVERITIES: String
+    end
+
+    class InvalidInputException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+        ?can_retry: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+      attr_accessor can_retry: bool?
+    end
+
+    module LimitExceededErrorCode
+      ASSESSMENT_TARGET_LIMIT_EXCEEDED: String
+      ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED: String
+      ASSESSMENT_RUN_LIMIT_EXCEEDED: String
+      RESOURCE_GROUP_LIMIT_EXCEEDED: String
+      EVENT_SUBSCRIPTION_LIMIT_EXCEEDED: String
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+        ?can_retry: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+      attr_accessor can_retry: bool?
+    end
+
+    class ListAssessmentRunAgentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_run_arn: String,
+        ?filter: Types::AgentFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_run_arn: String?
+      attr_accessor filter: Types::AgentFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAssessmentRunAgentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_run_agents: Array[Types::AssessmentRunAgent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_run_agents: Array[Types::AssessmentRunAgent]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssessmentRunsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_template_arns: Array[String],
+        ?filter: Types::AssessmentRunFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_template_arns: Array[String]?
+      attr_accessor filter: Types::AssessmentRunFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAssessmentRunsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_run_arns: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_run_arns: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssessmentTargetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::AssessmentTargetFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::AssessmentTargetFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAssessmentTargetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_target_arns: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_target_arns: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssessmentTemplatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_target_arns: Array[String],
+        ?filter: Types::AssessmentTemplateFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_target_arns: Array[String]?
+      attr_accessor filter: Types::AssessmentTemplateFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAssessmentTemplatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_template_arns: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_template_arns: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEventSubscriptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEventSubscriptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriptions: Array[Types::Subscription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriptions: Array[Types::Subscription]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExclusionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_run_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_run_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListExclusionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?exclusion_arns: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor exclusion_arns: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFindingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_run_arns: Array[String],
+        ?filter: Types::FindingFilter,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_run_arns: Array[String]?
+      attr_accessor filter: Types::FindingFilter?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFindingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?finding_arns: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor finding_arns: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRulesPackagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRulesPackagesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules_package_arns: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules_package_arns: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module Locale
+      EN_US: String
+    end
+
+    class NetworkInterface
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_interface_id: String,
+        ?subnet_id: String,
+        ?vpc_id: String,
+        ?private_dns_name: String,
+        ?private_ip_address: String,
+        ?private_ip_addresses: Array[Types::PrivateIp],
+        ?public_dns_name: String,
+        ?public_ip: String,
+        ?ipv6_addresses: Array[String],
+        ?security_groups: Array[Types::SecurityGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_interface_id: String?
+      attr_accessor subnet_id: String?
+      attr_accessor vpc_id: String?
+      attr_accessor private_dns_name: String?
+      attr_accessor private_ip_address: String?
+      attr_accessor private_ip_addresses: Array[Types::PrivateIp]?
+      attr_accessor public_dns_name: String?
+      attr_accessor public_ip: String?
+      attr_accessor ipv6_addresses: Array[String]?
+      attr_accessor security_groups: Array[Types::SecurityGroup]?
+    end
+
+    module NoSuchEntityErrorCode
+      ASSESSMENT_TARGET_DOES_NOT_EXIST: String
+      ASSESSMENT_TEMPLATE_DOES_NOT_EXIST: String
+      ASSESSMENT_RUN_DOES_NOT_EXIST: String
+      FINDING_DOES_NOT_EXIST: String
+      RESOURCE_GROUP_DOES_NOT_EXIST: String
+      RULES_PACKAGE_DOES_NOT_EXIST: String
+      SNS_TOPIC_DOES_NOT_EXIST: String
+      IAM_ROLE_DOES_NOT_EXIST: String
+    end
+
+    class NoSuchEntityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?error_code: String,
+        ?can_retry: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor error_code: String?
+      attr_accessor can_retry: bool?
+    end
+
+    class PreviewAgentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?preview_agents_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor preview_agents_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class PreviewAgentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_previews: Array[Types::AgentPreview],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_previews: Array[Types::AgentPreview]?
+      attr_accessor next_token: String?
+    end
+
+    class PreviewGenerationInProgressException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module PreviewStatus
+      WORK_IN_PROGRESS: String
+      COMPLETED: String
+    end
+
+    class PrivateIp
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?private_dns_name: String,
+        ?private_ip_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor private_dns_name: String?
+      attr_accessor private_ip_address: String?
+    end
+
+    class RegisterCrossAccountAccessRoleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+    end
+
+    class RemoveAttributesFromFindingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?finding_arns: Array[String],
+        ?attribute_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor finding_arns: Array[String]?
+      attr_accessor attribute_keys: Array[String]?
+    end
+
+    class RemoveAttributesFromFindingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_items: Hash[String, Types::FailedItemDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_items: Hash[String, Types::FailedItemDetails]?
+    end
+
+    module ReportFileFormat
+      HTML: String
+      PDF: String
+    end
+
+    module ReportStatus
+      WORK_IN_PROGRESS: String
+      FAILED: String
+      COMPLETED: String
+    end
+
+    module ReportType
+      FINDING: String
+      FULL: String
+    end
+
+    class ResourceGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?tags: Array[Types::ResourceGroupTag],
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor tags: Array[Types::ResourceGroupTag]?
+      attr_accessor created_at: Time?
+    end
+
+    class ResourceGroupTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class RulesPackage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?version: String,
+        ?provider: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor version: String?
+      attr_accessor provider: String?
+      attr_accessor description: String?
+    end
+
+    class Scope
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    module ScopeType
+      INSTANCE_ID: String
+      RULES_PACKAGE_ARN: String
+    end
+
+    class SecurityGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor group_id: String?
+    end
+
+    class ServiceTemporarilyUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?can_retry: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor can_retry: bool?
+    end
+
+    class SetTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module Severity
+      LOW: String
+      MEDIUM: String
+      HIGH: String
+      INFORMATIONAL: String
+      UNDEFINED: String
+    end
+
+    class StartAssessmentRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_template_arn: String,
+        ?assessment_run_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_template_arn: String?
+      attr_accessor assessment_run_name: String?
+    end
+
+    class StartAssessmentRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_run_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_run_arn: String?
+    end
+
+    module StopAction
+      START_EVALUATION: String
+      SKIP_EVALUATION: String
+    end
+
+    class StopAssessmentRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_run_arn: String,
+        ?stop_action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_run_arn: String?
+      attr_accessor stop_action: String?
+    end
+
+    class SubscribeToEventRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?event: String,
+        ?topic_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor event: String?
+      attr_accessor topic_arn: String?
+    end
+
+    class Subscription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?topic_arn: String,
+        ?event_subscriptions: Array[Types::EventSubscription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor topic_arn: String?
+      attr_accessor event_subscriptions: Array[Types::EventSubscription]?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TelemetryMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_type: String,
+        ?count: Integer,
+        ?data_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_type: String?
+      attr_accessor count: Integer?
+      attr_accessor data_size: Integer?
+    end
+
+    class TimestampRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?begin_date: Time,
+        ?end_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor begin_date: Time?
+      attr_accessor end_date: Time?
+    end
+
+    class UnsubscribeFromEventRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?event: String,
+        ?topic_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor event: String?
+      attr_accessor topic_arn: String?
+    end
+
+    class UnsupportedFeatureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?can_retry: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor can_retry: bool?
+    end
+
+    class UpdateAssessmentTargetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assessment_target_arn: String,
+        ?assessment_target_name: String,
+        ?resource_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assessment_target_arn: String?
+      attr_accessor assessment_target_name: String?
+      attr_accessor resource_group_arn: String?
+    end
+  end
+end

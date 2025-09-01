@@ -1,0 +1,1039 @@
+module Aws::SecretsManager
+  module Types
+
+    class APIErrorType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+        ?error_code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+      attr_accessor error_code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchGetSecretValueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id_list: Array[String],
+        ?filters: Array[Types::Filter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id_list: Array[String]?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class BatchGetSecretValueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_values: Array[Types::SecretValueEntry],
+        ?next_token: String,
+        ?errors: Array[Types::APIErrorType],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_values: Array[Types::SecretValueEntry]?
+      attr_accessor next_token: String?
+      attr_accessor errors: Array[Types::APIErrorType]?
+    end
+
+    class CancelRotateSecretRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+    end
+
+    class CancelRotateSecretResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor version_id: String?
+    end
+
+    class CreateSecretRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?client_request_token: String,
+        ?description: String,
+        ?kms_key_id: String,
+        ?secret_binary: String,
+        ?secret_string: String,
+        ?tags: Array[Types::Tag],
+        ?add_replica_regions: Array[Types::ReplicaRegionType],
+        ?force_overwrite_replica_secret: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor client_request_token: String?
+      attr_accessor description: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor secret_binary: String?
+      attr_accessor secret_string: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor add_replica_regions: Array[Types::ReplicaRegionType]?
+      attr_accessor force_overwrite_replica_secret: bool?
+    end
+
+    class CreateSecretResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?version_id: String,
+        ?replication_status: Array[Types::ReplicationStatusType],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor version_id: String?
+      attr_accessor replication_status: Array[Types::ReplicationStatusType]?
+    end
+
+    class DecryptionFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+    end
+
+    class DeleteResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteSecretRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+        ?recovery_window_in_days: Integer,
+        ?force_delete_without_recovery: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+      attr_accessor recovery_window_in_days: Integer?
+      attr_accessor force_delete_without_recovery: bool?
+    end
+
+    class DeleteSecretResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?deletion_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor deletion_date: Time?
+    end
+
+    class DescribeSecretRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+    end
+
+    class DescribeSecretResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?kms_key_id: String,
+        ?rotation_enabled: bool,
+        ?rotation_lambda_arn: String,
+        ?rotation_rules: Types::RotationRulesType,
+        ?last_rotated_date: Time,
+        ?last_changed_date: Time,
+        ?last_accessed_date: Time,
+        ?deleted_date: Time,
+        ?next_rotation_date: Time,
+        ?tags: Array[Types::Tag],
+        ?version_ids_to_stages: Hash[String, Array[String]],
+        ?owning_service: String,
+        ?created_date: Time,
+        ?primary_region: String,
+        ?replication_status: Array[Types::ReplicationStatusType],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor rotation_enabled: bool?
+      attr_accessor rotation_lambda_arn: String?
+      attr_accessor rotation_rules: Types::RotationRulesType?
+      attr_accessor last_rotated_date: Time?
+      attr_accessor last_changed_date: Time?
+      attr_accessor last_accessed_date: Time?
+      attr_accessor deleted_date: Time?
+      attr_accessor next_rotation_date: Time?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor version_ids_to_stages: Hash[String, Array[String]]?
+      attr_accessor owning_service: String?
+      attr_accessor created_date: Time?
+      attr_accessor primary_region: String?
+      attr_accessor replication_status: Array[Types::ReplicationStatusType]?
+    end
+
+    class EncryptionFailure
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module FilterNameStringType
+      description: String
+      name: String
+      tag_key: String
+      tag_value: String
+      primary_region: String
+      owning_service: String
+      all: String
+    end
+
+    class GetRandomPasswordRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?password_length: Integer,
+        ?exclude_characters: String,
+        ?exclude_numbers: bool,
+        ?exclude_punctuation: bool,
+        ?exclude_uppercase: bool,
+        ?exclude_lowercase: bool,
+        ?include_space: bool,
+        ?require_each_included_type: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor password_length: Integer?
+      attr_accessor exclude_characters: String?
+      attr_accessor exclude_numbers: bool?
+      attr_accessor exclude_punctuation: bool?
+      attr_accessor exclude_uppercase: bool?
+      attr_accessor exclude_lowercase: bool?
+      attr_accessor include_space: bool?
+      attr_accessor require_each_included_type: bool?
+    end
+
+    class GetRandomPasswordResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?random_password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor random_password: String?
+    end
+
+    class GetResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+    end
+
+    class GetResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?resource_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor resource_policy: String?
+    end
+
+    class GetSecretValueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+        ?version_id: String,
+        ?version_stage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+      attr_accessor version_id: String?
+      attr_accessor version_stage: String?
+    end
+
+    class GetSecretValueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?version_id: String,
+        ?secret_binary: String,
+        ?secret_string: String,
+        ?version_stages: Array[String],
+        ?created_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor version_id: String?
+      attr_accessor secret_binary: String?
+      attr_accessor secret_string: String?
+      attr_accessor version_stages: Array[String]?
+      attr_accessor created_date: Time?
+    end
+
+    class InternalServiceError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListSecretVersionIdsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?include_deprecated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor include_deprecated: bool?
+    end
+
+    class ListSecretVersionIdsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?versions: Array[Types::SecretVersionsListEntry],
+        ?next_token: String,
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor versions: Array[Types::SecretVersionsListEntry]?
+      attr_accessor next_token: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    class ListSecretsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include_planned_deletion: bool,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::Filter],
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_planned_deletion: bool?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor sort_order: String?
+    end
+
+    class ListSecretsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_list: Array[Types::SecretListEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_list: Array[Types::SecretListEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class MalformedPolicyDocumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PreconditionNotMetException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PublicPolicyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+        ?resource_policy: String,
+        ?block_public_policy: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+      attr_accessor resource_policy: String?
+      attr_accessor block_public_policy: bool?
+    end
+
+    class PutResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    class PutSecretValueRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+        ?client_request_token: String,
+        ?secret_binary: String,
+        ?secret_string: String,
+        ?version_stages: Array[String],
+        ?rotation_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+      attr_accessor client_request_token: String?
+      attr_accessor secret_binary: String?
+      attr_accessor secret_string: String?
+      attr_accessor version_stages: Array[String]?
+      attr_accessor rotation_token: String?
+    end
+
+    class PutSecretValueResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?version_id: String,
+        ?version_stages: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor version_id: String?
+      attr_accessor version_stages: Array[String]?
+    end
+
+    class RemoveRegionsFromReplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+        ?remove_replica_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+      attr_accessor remove_replica_regions: Array[String]?
+    end
+
+    class RemoveRegionsFromReplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?replication_status: Array[Types::ReplicationStatusType],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor replication_status: Array[Types::ReplicationStatusType]?
+    end
+
+    class ReplicaRegionType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor kms_key_id: String?
+    end
+
+    class ReplicateSecretToRegionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+        ?add_replica_regions: Array[Types::ReplicaRegionType],
+        ?force_overwrite_replica_secret: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+      attr_accessor add_replica_regions: Array[Types::ReplicaRegionType]?
+      attr_accessor force_overwrite_replica_secret: bool?
+    end
+
+    class ReplicateSecretToRegionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?replication_status: Array[Types::ReplicationStatusType],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor replication_status: Array[Types::ReplicationStatusType]?
+    end
+
+    class ReplicationStatusType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?kms_key_id: String,
+        ?status: String,
+        ?status_message: String,
+        ?last_accessed_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor last_accessed_date: Time?
+    end
+
+    class ResourceExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RestoreSecretRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+    end
+
+    class RestoreSecretResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    class RotateSecretRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+        ?client_request_token: String,
+        ?rotation_lambda_arn: String,
+        ?rotation_rules: Types::RotationRulesType,
+        ?rotate_immediately: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+      attr_accessor client_request_token: String?
+      attr_accessor rotation_lambda_arn: String?
+      attr_accessor rotation_rules: Types::RotationRulesType?
+      attr_accessor rotate_immediately: bool?
+    end
+
+    class RotateSecretResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor version_id: String?
+    end
+
+    class RotationRulesType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?automatically_after_days: Integer,
+        ?duration: String,
+        ?schedule_expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor automatically_after_days: Integer?
+      attr_accessor duration: String?
+      attr_accessor schedule_expression: String?
+    end
+
+    class SecretListEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?kms_key_id: String,
+        ?rotation_enabled: bool,
+        ?rotation_lambda_arn: String,
+        ?rotation_rules: Types::RotationRulesType,
+        ?last_rotated_date: Time,
+        ?last_changed_date: Time,
+        ?last_accessed_date: Time,
+        ?deleted_date: Time,
+        ?next_rotation_date: Time,
+        ?tags: Array[Types::Tag],
+        ?secret_versions_to_stages: Hash[String, Array[String]],
+        ?owning_service: String,
+        ?created_date: Time,
+        ?primary_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor rotation_enabled: bool?
+      attr_accessor rotation_lambda_arn: String?
+      attr_accessor rotation_rules: Types::RotationRulesType?
+      attr_accessor last_rotated_date: Time?
+      attr_accessor last_changed_date: Time?
+      attr_accessor last_accessed_date: Time?
+      attr_accessor deleted_date: Time?
+      attr_accessor next_rotation_date: Time?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor secret_versions_to_stages: Hash[String, Array[String]]?
+      attr_accessor owning_service: String?
+      attr_accessor created_date: Time?
+      attr_accessor primary_region: String?
+    end
+
+    class SecretValueEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?version_id: String,
+        ?secret_binary: String,
+        ?secret_string: String,
+        ?version_stages: Array[String],
+        ?created_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor version_id: String?
+      attr_accessor secret_binary: String?
+      attr_accessor secret_string: String?
+      attr_accessor version_stages: Array[String]?
+      attr_accessor created_date: Time?
+    end
+
+    class SecretVersionsListEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_id: String,
+        ?version_stages: Array[String],
+        ?last_accessed_date: Time,
+        ?created_date: Time,
+        ?kms_key_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_id: String?
+      attr_accessor version_stages: Array[String]?
+      attr_accessor last_accessed_date: Time?
+      attr_accessor created_date: Time?
+      attr_accessor kms_key_ids: Array[String]?
+    end
+
+    module SortOrderType
+      asc: String
+      desc: String
+    end
+
+    module StatusType
+      InSync: String
+      Failed: String
+      InProgress: String
+    end
+
+    class StopReplicationToReplicaRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+    end
+
+    class StopReplicationToReplicaResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateSecretRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+        ?client_request_token: String,
+        ?description: String,
+        ?kms_key_id: String,
+        ?secret_binary: String,
+        ?secret_string: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+      attr_accessor client_request_token: String?
+      attr_accessor description: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor secret_binary: String?
+      attr_accessor secret_string: String?
+    end
+
+    class UpdateSecretResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor version_id: String?
+    end
+
+    class UpdateSecretVersionStageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+        ?version_stage: String,
+        ?remove_from_version_id: String,
+        ?move_to_version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+      attr_accessor version_stage: String?
+      attr_accessor remove_from_version_id: String?
+      attr_accessor move_to_version_id: String?
+    end
+
+    class UpdateSecretVersionStageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    class ValidateResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_id: String,
+        ?resource_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_id: String?
+      attr_accessor resource_policy: String?
+    end
+
+    class ValidateResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_validation_passed: bool,
+        ?validation_errors: Array[Types::ValidationErrorsEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_validation_passed: bool?
+      attr_accessor validation_errors: Array[Types::ValidationErrorsEntry]?
+    end
+
+    class ValidationErrorsEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?check_name: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor check_name: String?
+      attr_accessor error_message: String?
+    end
+  end
+end

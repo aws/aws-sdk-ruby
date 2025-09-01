@@ -1,0 +1,521 @@
+module Aws::OpenSearchServerless
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::OpenSearchServerless::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchGetCollectionResponse
+      include Smithy::Client::_Response[Types::BatchGetCollectionOutput]
+      def collection_details: () -> Array[Types::CollectionDetail]?
+      def collection_error_details: () -> Array[Types::CollectionErrorDetail]?
+    end
+    def batch_get_collection: (
+      ?ids: Array[String],
+      ?names: Array[String]
+    ) -> _BatchGetCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetCollectionResponse
+
+    interface _BatchGetEffectiveLifecyclePolicyResponse
+      include Smithy::Client::_Response[Types::BatchGetEffectiveLifecyclePolicyResponse]
+      def effective_lifecycle_policy_details: () -> Array[Types::EffectiveLifecyclePolicyDetail]?
+      def effective_lifecycle_policy_error_details: () -> Array[Types::EffectiveLifecyclePolicyErrorDetail]?
+    end
+    def batch_get_effective_lifecycle_policy: (
+      ?resource_identifiers: Array[
+        {
+          type: String,
+          resource: String
+        }
+      ]
+    ) -> _BatchGetEffectiveLifecyclePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetEffectiveLifecyclePolicyResponse
+
+    interface _BatchGetLifecyclePolicyResponse
+      include Smithy::Client::_Response[Types::BatchGetLifecyclePolicyResponse]
+      def lifecycle_policy_details: () -> Array[Types::LifecyclePolicyDetail]?
+      def lifecycle_policy_error_details: () -> Array[Types::LifecyclePolicyErrorDetail]?
+    end
+    def batch_get_lifecycle_policy: (
+      ?identifiers: Array[
+        {
+          type: String,
+          name: String
+        }
+      ]
+    ) -> _BatchGetLifecyclePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetLifecyclePolicyResponse
+
+    interface _BatchGetVpcEndpointResponse
+      include Smithy::Client::_Response[Types::BatchGetVpcEndpointOutput]
+      def vpc_endpoint_details: () -> Array[Types::VpcEndpointDetail]?
+      def vpc_endpoint_error_details: () -> Array[Types::VpcEndpointErrorDetail]?
+    end
+    def batch_get_vpc_endpoint: (
+      ?ids: Array[String]
+    ) -> _BatchGetVpcEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetVpcEndpointResponse
+
+    interface _CreateAccessPolicyResponse
+      include Smithy::Client::_Response[Types::CreateAccessPolicyOutput]
+      def access_policy_detail: () -> Types::AccessPolicyDetail?
+    end
+    def create_access_policy: (
+      ?type: String,
+      ?name: String,
+      ?description: String,
+      ?policy: String,
+      ?client_token: String
+    ) -> _CreateAccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccessPolicyResponse
+
+    interface _CreateCollectionResponse
+      include Smithy::Client::_Response[Types::CreateCollectionOutput]
+      def create_collection_detail: () -> Types::CreateCollectionDetail?
+    end
+    def create_collection: (
+      ?name: String,
+      ?type: String,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?standby_replicas: String,
+      ?client_token: String
+    ) -> _CreateCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCollectionResponse
+
+    interface _CreateIndexResponse
+      include Smithy::Client::_Response[Types::CreateIndexResponse]
+    end
+    def create_index: (
+      ?id: String,
+      ?index_name: String,
+      ?index_schema: Smithy::Schema::document
+    ) -> _CreateIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIndexResponse
+
+    interface _CreateLifecyclePolicyResponse
+      include Smithy::Client::_Response[Types::CreateLifecyclePolicyResponse]
+      def lifecycle_policy_detail: () -> Types::LifecyclePolicyDetail?
+    end
+    def create_lifecycle_policy: (
+      ?type: String,
+      ?name: String,
+      ?description: String,
+      ?policy: String,
+      ?client_token: String
+    ) -> _CreateLifecyclePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLifecyclePolicyResponse
+
+    interface _CreateSecurityConfigResponse
+      include Smithy::Client::_Response[Types::CreateSecurityConfigOutput]
+      def security_config_detail: () -> Types::SecurityConfigDetail?
+    end
+    def create_security_config: (
+      ?type: String,
+      ?name: String,
+      ?description: String,
+      ?saml_options: {
+        metadata: String,
+        user_attribute: String,
+        group_attribute: String,
+        open_search_serverless_entity_id: String,
+        session_timeout: Integer
+      },
+      ?iam_identity_center_options: {
+        instance_arn: String,
+        user_attribute: String,
+        group_attribute: String
+      },
+      ?iam_federation_options: {
+        group_attribute: String,
+        user_attribute: String
+      },
+      ?client_token: String
+    ) -> _CreateSecurityConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSecurityConfigResponse
+
+    interface _CreateSecurityPolicyResponse
+      include Smithy::Client::_Response[Types::CreateSecurityPolicyOutput]
+      def security_policy_detail: () -> Types::SecurityPolicyDetail?
+    end
+    def create_security_policy: (
+      ?type: String,
+      ?name: String,
+      ?description: String,
+      ?policy: String,
+      ?client_token: String
+    ) -> _CreateSecurityPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSecurityPolicyResponse
+
+    interface _CreateVpcEndpointResponse
+      include Smithy::Client::_Response[Types::CreateVpcEndpointOutput]
+      def create_vpc_endpoint_detail: () -> Types::CreateVpcEndpointDetail?
+    end
+    def create_vpc_endpoint: (
+      ?name: String,
+      ?vpc_id: String,
+      ?subnet_ids: Array[String],
+      ?security_group_ids: Array[String],
+      ?client_token: String
+    ) -> _CreateVpcEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpcEndpointResponse
+
+    interface _DeleteAccessPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteAccessPolicyOutput]
+    end
+    def delete_access_policy: (
+      ?type: String,
+      ?name: String,
+      ?client_token: String
+    ) -> _DeleteAccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessPolicyResponse
+
+    interface _DeleteCollectionResponse
+      include Smithy::Client::_Response[Types::DeleteCollectionOutput]
+      def delete_collection_detail: () -> Types::DeleteCollectionDetail?
+    end
+    def delete_collection: (
+      ?id: String,
+      ?client_token: String
+    ) -> _DeleteCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCollectionResponse
+
+    interface _DeleteIndexResponse
+      include Smithy::Client::_Response[Types::DeleteIndexResponse]
+    end
+    def delete_index: (
+      ?id: String,
+      ?index_name: String
+    ) -> _DeleteIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIndexResponse
+
+    interface _DeleteLifecyclePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteLifecyclePolicyResponse]
+    end
+    def delete_lifecycle_policy: (
+      ?type: String,
+      ?name: String,
+      ?client_token: String
+    ) -> _DeleteLifecyclePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLifecyclePolicyResponse
+
+    interface _DeleteSecurityConfigResponse
+      include Smithy::Client::_Response[Types::DeleteSecurityConfigOutput]
+    end
+    def delete_security_config: (
+      ?id: String,
+      ?client_token: String
+    ) -> _DeleteSecurityConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSecurityConfigResponse
+
+    interface _DeleteSecurityPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteSecurityPolicyOutput]
+    end
+    def delete_security_policy: (
+      ?type: String,
+      ?name: String,
+      ?client_token: String
+    ) -> _DeleteSecurityPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSecurityPolicyResponse
+
+    interface _DeleteVpcEndpointResponse
+      include Smithy::Client::_Response[Types::DeleteVpcEndpointOutput]
+      def delete_vpc_endpoint_detail: () -> Types::DeleteVpcEndpointDetail?
+    end
+    def delete_vpc_endpoint: (
+      ?id: String,
+      ?client_token: String
+    ) -> _DeleteVpcEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVpcEndpointResponse
+
+    interface _GetAccessPolicyResponse
+      include Smithy::Client::_Response[Types::GetAccessPolicyOutput]
+      def access_policy_detail: () -> Types::AccessPolicyDetail?
+    end
+    def get_access_policy: (
+      ?type: String,
+      ?name: String
+    ) -> _GetAccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessPolicyResponse
+
+    interface _GetAccountSettingsResponse
+      include Smithy::Client::_Response[Types::GetAccountSettingsOutput]
+      def account_settings_detail: () -> Types::AccountSettingsDetail?
+    end
+    def get_account_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountSettingsResponse
+
+    interface _GetIndexResponse
+      include Smithy::Client::_Response[Types::GetIndexResponse]
+      def index_schema: () -> Smithy::Schema::document?
+    end
+    def get_index: (
+      ?id: String,
+      ?index_name: String
+    ) -> _GetIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIndexResponse
+
+    interface _GetPoliciesStatsResponse
+      include Smithy::Client::_Response[Types::GetPoliciesStatsOutput]
+      def access_policy_stats: () -> Types::AccessPolicyStats?
+      def security_policy_stats: () -> Types::SecurityPolicyStats?
+      def security_config_stats: () -> Types::SecurityConfigStats?
+      def lifecycle_policy_stats: () -> Types::LifecyclePolicyStats?
+      def total_policy_count: () -> Integer?
+    end
+    def get_policies_stats: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPoliciesStatsResponse
+
+    interface _GetSecurityConfigResponse
+      include Smithy::Client::_Response[Types::GetSecurityConfigOutput]
+      def security_config_detail: () -> Types::SecurityConfigDetail?
+    end
+    def get_security_config: (
+      ?id: String
+    ) -> _GetSecurityConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSecurityConfigResponse
+
+    interface _GetSecurityPolicyResponse
+      include Smithy::Client::_Response[Types::GetSecurityPolicyOutput]
+      def security_policy_detail: () -> Types::SecurityPolicyDetail?
+    end
+    def get_security_policy: (
+      ?type: String,
+      ?name: String
+    ) -> _GetSecurityPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSecurityPolicyResponse
+
+    interface _ListAccessPoliciesResponse
+      include Smithy::Client::_Response[Types::ListAccessPoliciesOutput]
+      def access_policy_summaries: () -> Array[Types::AccessPolicySummary]?
+      def next_token: () -> String?
+    end
+    def list_access_policies: (
+      ?type: String,
+      ?resource: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAccessPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessPoliciesResponse
+
+    interface _ListCollectionsResponse
+      include Smithy::Client::_Response[Types::ListCollectionsOutput]
+      def collection_summaries: () -> Array[Types::CollectionSummary]?
+      def next_token: () -> String?
+    end
+    def list_collections: (
+      ?collection_filters: {
+        name: String,
+        status: String
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCollectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCollectionsResponse
+
+    interface _ListLifecyclePoliciesResponse
+      include Smithy::Client::_Response[Types::ListLifecyclePoliciesResponse]
+      def lifecycle_policy_summaries: () -> Array[Types::LifecyclePolicySummary]?
+      def next_token: () -> String?
+    end
+    def list_lifecycle_policies: (
+      ?type: String,
+      ?resources: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListLifecyclePoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLifecyclePoliciesResponse
+
+    interface _ListSecurityConfigsResponse
+      include Smithy::Client::_Response[Types::ListSecurityConfigsOutput]
+      def security_config_summaries: () -> Array[Types::SecurityConfigSummary]?
+      def next_token: () -> String?
+    end
+    def list_security_configs: (
+      ?type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSecurityConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSecurityConfigsResponse
+
+    interface _ListSecurityPoliciesResponse
+      include Smithy::Client::_Response[Types::ListSecurityPoliciesOutput]
+      def security_policy_summaries: () -> Array[Types::SecurityPolicySummary]?
+      def next_token: () -> String?
+    end
+    def list_security_policies: (
+      ?type: String,
+      ?resource: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSecurityPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSecurityPoliciesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListVpcEndpointsResponse
+      include Smithy::Client::_Response[Types::ListVpcEndpointsOutput]
+      def vpc_endpoint_summaries: () -> Array[Types::VpcEndpointSummary]?
+      def next_token: () -> String?
+    end
+    def list_vpc_endpoints: (
+      ?vpc_endpoint_filters: {
+        status: String
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListVpcEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVpcEndpointsResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAccessPolicyResponse
+      include Smithy::Client::_Response[Types::UpdateAccessPolicyOutput]
+      def access_policy_detail: () -> Types::AccessPolicyDetail?
+    end
+    def update_access_policy: (
+      ?type: String,
+      ?name: String,
+      ?policy_version: String,
+      ?description: String,
+      ?policy: String,
+      ?client_token: String
+    ) -> _UpdateAccessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccessPolicyResponse
+
+    interface _UpdateAccountSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateAccountSettingsOutput]
+      def account_settings_detail: () -> Types::AccountSettingsDetail?
+    end
+    def update_account_settings: (
+      ?capacity_limits: {
+        max_indexing_capacity_in_ocu: Integer,
+        max_search_capacity_in_ocu: Integer
+      }
+    ) -> _UpdateAccountSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccountSettingsResponse
+
+    interface _UpdateCollectionResponse
+      include Smithy::Client::_Response[Types::UpdateCollectionOutput]
+      def update_collection_detail: () -> Types::UpdateCollectionDetail?
+    end
+    def update_collection: (
+      ?id: String,
+      ?description: String,
+      ?client_token: String
+    ) -> _UpdateCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCollectionResponse
+
+    interface _UpdateIndexResponse
+      include Smithy::Client::_Response[Types::UpdateIndexResponse]
+    end
+    def update_index: (
+      ?id: String,
+      ?index_name: String,
+      ?index_schema: Smithy::Schema::document
+    ) -> _UpdateIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateIndexResponse
+
+    interface _UpdateLifecyclePolicyResponse
+      include Smithy::Client::_Response[Types::UpdateLifecyclePolicyResponse]
+      def lifecycle_policy_detail: () -> Types::LifecyclePolicyDetail?
+    end
+    def update_lifecycle_policy: (
+      ?type: String,
+      ?name: String,
+      ?policy_version: String,
+      ?description: String,
+      ?policy: String,
+      ?client_token: String
+    ) -> _UpdateLifecyclePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLifecyclePolicyResponse
+
+    interface _UpdateSecurityConfigResponse
+      include Smithy::Client::_Response[Types::UpdateSecurityConfigOutput]
+      def security_config_detail: () -> Types::SecurityConfigDetail?
+    end
+    def update_security_config: (
+      ?id: String,
+      ?config_version: String,
+      ?description: String,
+      ?saml_options: {
+        metadata: String,
+        user_attribute: String,
+        group_attribute: String,
+        open_search_serverless_entity_id: String,
+        session_timeout: Integer
+      },
+      ?iam_identity_center_options_updates: {
+        user_attribute: String,
+        group_attribute: String
+      },
+      ?iam_federation_options: {
+        group_attribute: String,
+        user_attribute: String
+      },
+      ?client_token: String
+    ) -> _UpdateSecurityConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSecurityConfigResponse
+
+    interface _UpdateSecurityPolicyResponse
+      include Smithy::Client::_Response[Types::UpdateSecurityPolicyOutput]
+      def security_policy_detail: () -> Types::SecurityPolicyDetail?
+    end
+    def update_security_policy: (
+      ?type: String,
+      ?name: String,
+      ?policy_version: String,
+      ?description: String,
+      ?policy: String,
+      ?client_token: String
+    ) -> _UpdateSecurityPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSecurityPolicyResponse
+
+    interface _UpdateVpcEndpointResponse
+      include Smithy::Client::_Response[Types::UpdateVpcEndpointOutput]
+      def update_vpc_endpoint_detail: () -> Types::UpdateVpcEndpointDetail?
+    end
+    def update_vpc_endpoint: (
+      ?id: String,
+      ?add_subnet_ids: Array[String],
+      ?remove_subnet_ids: Array[String],
+      ?add_security_group_ids: Array[String],
+      ?remove_security_group_ids: Array[String],
+      ?client_token: String
+    ) -> _UpdateVpcEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVpcEndpointResponse
+  end
+end

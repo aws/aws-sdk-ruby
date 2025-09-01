@@ -1,0 +1,2261 @@
+module Aws::Codeartifact
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AllowPublish
+      ALLOW: String
+      BLOCK: String
+    end
+
+    module AllowUpstream
+      ALLOW: String
+      BLOCK: String
+    end
+
+    class AssetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?size: Integer,
+        ?hashes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor size: Integer?
+      attr_accessor hashes: Hash[String, String]?
+    end
+
+    class AssociateExternalConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?external_connection: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor external_connection: String?
+    end
+
+    class AssociateExternalConnectionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository: Types::RepositoryDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository: Types::RepositoryDescription?
+    end
+
+    class AssociatedPackage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+        ?association_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor association_type: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CopyPackageVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?source_repository: String,
+        ?destination_repository: String,
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+        ?versions: Array[String],
+        ?version_revisions: Hash[String, String],
+        ?allow_overwrite: bool,
+        ?include_from_upstream: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor source_repository: String?
+      attr_accessor destination_repository: String?
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor versions: Array[String]?
+      attr_accessor version_revisions: Hash[String, String]?
+      attr_accessor allow_overwrite: bool?
+      attr_accessor include_from_upstream: bool?
+    end
+
+    class CopyPackageVersionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful_versions: Hash[String, Types::SuccessfulPackageVersionInfo],
+        ?failed_versions: Hash[String, Types::PackageVersionError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful_versions: Hash[String, Types::SuccessfulPackageVersionInfo]?
+      attr_accessor failed_versions: Hash[String, Types::PackageVersionError]?
+    end
+
+    class CreateDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?encryption_key: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor encryption_key: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateDomainResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: Types::DomainDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: Types::DomainDescription?
+    end
+
+    class CreatePackageGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?package_group: String,
+        ?contact_info: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor package_group: String?
+      attr_accessor contact_info: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreatePackageGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_group: Types::PackageGroupDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_group: Types::PackageGroupDescription?
+    end
+
+    class CreateRepositoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?description: String,
+        ?upstreams: Array[Types::UpstreamRepository],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor description: String?
+      attr_accessor upstreams: Array[Types::UpstreamRepository]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateRepositoryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository: Types::RepositoryDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository: Types::RepositoryDescription?
+    end
+
+    class DeleteDomainPermissionsPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?policy_revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor policy_revision: String?
+    end
+
+    class DeleteDomainPermissionsPolicyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: Types::ResourcePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: Types::ResourcePolicy?
+    end
+
+    class DeleteDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+    end
+
+    class DeleteDomainResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: Types::DomainDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: Types::DomainDescription?
+    end
+
+    class DeletePackageGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?package_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor package_group: String?
+    end
+
+    class DeletePackageGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_group: Types::PackageGroupDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_group: Types::PackageGroupDescription?
+    end
+
+    class DeletePackageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+    end
+
+    class DeletePackageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deleted_package: Types::PackageSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deleted_package: Types::PackageSummary?
+    end
+
+    class DeletePackageVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+        ?versions: Array[String],
+        ?expected_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor versions: Array[String]?
+      attr_accessor expected_status: String?
+    end
+
+    class DeletePackageVersionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful_versions: Hash[String, Types::SuccessfulPackageVersionInfo],
+        ?failed_versions: Hash[String, Types::PackageVersionError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful_versions: Hash[String, Types::SuccessfulPackageVersionInfo]?
+      attr_accessor failed_versions: Hash[String, Types::PackageVersionError]?
+    end
+
+    class DeleteRepositoryPermissionsPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?policy_revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor policy_revision: String?
+    end
+
+    class DeleteRepositoryPermissionsPolicyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: Types::ResourcePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: Types::ResourcePolicy?
+    end
+
+    class DeleteRepositoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+    end
+
+    class DeleteRepositoryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository: Types::RepositoryDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository: Types::RepositoryDescription?
+    end
+
+    class DescribeDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+    end
+
+    class DescribeDomainResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: Types::DomainDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: Types::DomainDescription?
+    end
+
+    class DescribePackageGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?package_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor package_group: String?
+    end
+
+    class DescribePackageGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_group: Types::PackageGroupDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_group: Types::PackageGroupDescription?
+    end
+
+    class DescribePackageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+    end
+
+    class DescribePackageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package: Types::PackageDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package: Types::PackageDescription?
+    end
+
+    class DescribePackageVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+        ?package_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor package_version: String?
+    end
+
+    class DescribePackageVersionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_version: Types::PackageVersionDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_version: Types::PackageVersionDescription?
+    end
+
+    class DescribeRepositoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+    end
+
+    class DescribeRepositoryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository: Types::RepositoryDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository: Types::RepositoryDescription?
+    end
+
+    class DisassociateExternalConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?external_connection: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor external_connection: String?
+    end
+
+    class DisassociateExternalConnectionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository: Types::RepositoryDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository: Types::RepositoryDescription?
+    end
+
+    class DisposePackageVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+        ?versions: Array[String],
+        ?version_revisions: Hash[String, String],
+        ?expected_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor versions: Array[String]?
+      attr_accessor version_revisions: Hash[String, String]?
+      attr_accessor expected_status: String?
+    end
+
+    class DisposePackageVersionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful_versions: Hash[String, Types::SuccessfulPackageVersionInfo],
+        ?failed_versions: Hash[String, Types::PackageVersionError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful_versions: Hash[String, Types::SuccessfulPackageVersionInfo]?
+      attr_accessor failed_versions: Hash[String, Types::PackageVersionError]?
+    end
+
+    class DomainDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?owner: String,
+        ?arn: String,
+        ?status: String,
+        ?created_time: Time,
+        ?encryption_key: String,
+        ?repository_count: Integer,
+        ?asset_size_bytes: Integer,
+        ?s3_bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor owner: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor created_time: Time?
+      attr_accessor encryption_key: String?
+      attr_accessor repository_count: Integer?
+      attr_accessor asset_size_bytes: Integer?
+      attr_accessor s3_bucket_arn: String?
+    end
+
+    class DomainEntryPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?external_connection_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor external_connection_name: String?
+    end
+
+    module DomainStatus
+      ACTIVE: String
+      DELETED: String
+    end
+
+    class DomainSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?owner: String,
+        ?arn: String,
+        ?status: String,
+        ?created_time: Time,
+        ?encryption_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor owner: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor created_time: Time?
+      attr_accessor encryption_key: String?
+    end
+
+    module EndpointType
+      DUALSTACK: String
+      IPV4: String
+    end
+
+    module ExternalConnectionStatus
+      AVAILABLE: String
+    end
+
+    class GetAssociatedPackageGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+    end
+
+    class GetAssociatedPackageGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_group: Types::PackageGroupDescription,
+        ?association_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_group: Types::PackageGroupDescription?
+      attr_accessor association_type: String?
+    end
+
+    class GetAuthorizationTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?duration_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor duration_seconds: Integer?
+    end
+
+    class GetAuthorizationTokenResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorization_token: String,
+        ?expiration: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization_token: String?
+      attr_accessor expiration: Time?
+    end
+
+    class GetDomainPermissionsPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+    end
+
+    class GetDomainPermissionsPolicyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: Types::ResourcePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: Types::ResourcePolicy?
+    end
+
+    class GetPackageVersionAssetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+        ?package_version: String,
+        ?asset: String,
+        ?package_version_revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor package_version: String?
+      attr_accessor asset: String?
+      attr_accessor package_version_revision: String?
+    end
+
+    class GetPackageVersionAssetResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset: String,
+        ?asset_name: String,
+        ?package_version: String,
+        ?package_version_revision: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset: String?
+      attr_accessor asset_name: String?
+      attr_accessor package_version: String?
+      attr_accessor package_version_revision: String?
+    end
+
+    class GetPackageVersionReadmeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+        ?package_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor package_version: String?
+    end
+
+    class GetPackageVersionReadmeResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+        ?version: String,
+        ?version_revision: String,
+        ?readme: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor version: String?
+      attr_accessor version_revision: String?
+      attr_accessor readme: String?
+    end
+
+    class GetRepositoryEndpointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?format: String,
+        ?endpoint_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor format: String?
+      attr_accessor endpoint_type: String?
+    end
+
+    class GetRepositoryEndpointResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_endpoint: String?
+    end
+
+    class GetRepositoryPermissionsPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+    end
+
+    class GetRepositoryPermissionsPolicyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: Types::ResourcePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: Types::ResourcePolicy?
+    end
+
+    module HashAlgorithm
+      MD5: String
+      SHA1: String
+      SHA256: String
+      SHA512: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LicenseInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor url: String?
+    end
+
+    class ListAllowedRepositoriesForGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?package_group: String,
+        ?origin_restriction_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor package_group: String?
+      attr_accessor origin_restriction_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAllowedRepositoriesForGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_repositories: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_repositories: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAssociatedPackagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?package_group: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?preview: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor package_group: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor preview: bool?
+    end
+
+    class ListAssociatedPackagesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?packages: Array[Types::AssociatedPackage],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor packages: Array[Types::AssociatedPackage]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDomainsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDomainsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domains: Array[Types::DomainSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domains: Array[Types::DomainSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPackageGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor prefix: String?
+    end
+
+    class ListPackageGroupsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_groups: Array[Types::PackageGroupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_groups: Array[Types::PackageGroupSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPackageVersionAssetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+        ?package_version: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor package_version: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPackageVersionAssetsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+        ?version: String,
+        ?version_revision: String,
+        ?next_token: String,
+        ?assets: Array[Types::AssetSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor version: String?
+      attr_accessor version_revision: String?
+      attr_accessor next_token: String?
+      attr_accessor assets: Array[Types::AssetSummary]?
+    end
+
+    class ListPackageVersionDependenciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+        ?package_version: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor package_version: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListPackageVersionDependenciesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+        ?version: String,
+        ?version_revision: String,
+        ?next_token: String,
+        ?dependencies: Array[Types::PackageDependency],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor version: String?
+      attr_accessor version_revision: String?
+      attr_accessor next_token: String?
+      attr_accessor dependencies: Array[Types::PackageDependency]?
+    end
+
+    class ListPackageVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+        ?status: String,
+        ?sort_by: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?origin_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor status: String?
+      attr_accessor sort_by: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor origin_type: String?
+    end
+
+    class ListPackageVersionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_display_version: String,
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+        ?versions: Array[Types::PackageVersionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_display_version: String?
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor versions: Array[Types::PackageVersionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPackagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?format: String,
+        ?namespace: String,
+        ?package_prefix: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?publish: String,
+        ?upstream: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package_prefix: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor publish: String?
+      attr_accessor upstream: String?
+    end
+
+    class ListPackagesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?packages: Array[Types::PackageSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor packages: Array[Types::PackageSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRepositoriesInDomainRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?administrator_account: String,
+        ?repository_prefix: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor administrator_account: String?
+      attr_accessor repository_prefix: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRepositoriesInDomainResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repositories: Array[Types::RepositorySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repositories: Array[Types::RepositorySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRepositoriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_prefix: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_prefix: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRepositoriesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repositories: Array[Types::RepositorySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repositories: Array[Types::RepositorySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSubPackageGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?package_group: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor package_group: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSubPackageGroupsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_groups: Array[Types::PackageGroupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_groups: Array[Types::PackageGroupSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PackageDependency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: String,
+        ?package: String,
+        ?dependency_type: String,
+        ?version_requirement: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor dependency_type: String?
+      attr_accessor version_requirement: String?
+    end
+
+    class PackageDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?namespace: String,
+        ?name: String,
+        ?origin_configuration: Types::PackageOriginConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+      attr_accessor origin_configuration: Types::PackageOriginConfiguration?
+    end
+
+    module PackageFormat
+      NPM: String
+      PYPI: String
+      MAVEN: String
+      NUGET: String
+      GENERIC: String
+      RUBY: String
+      SWIFT: String
+      CARGO: String
+    end
+
+    class PackageGroupAllowedRepository
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?origin_restriction_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor origin_restriction_type: String?
+    end
+
+    module PackageGroupAllowedRepositoryUpdateType
+      ADDED: String
+      REMOVED: String
+    end
+
+    module PackageGroupAssociationType
+      STRONG: String
+      WEAK: String
+    end
+
+    class PackageGroupDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?pattern: String,
+        ?domain_name: String,
+        ?domain_owner: String,
+        ?created_time: Time,
+        ?contact_info: String,
+        ?description: String,
+        ?origin_configuration: Types::PackageGroupOriginConfiguration,
+        ?parent: Types::PackageGroupReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor pattern: String?
+      attr_accessor domain_name: String?
+      attr_accessor domain_owner: String?
+      attr_accessor created_time: Time?
+      attr_accessor contact_info: String?
+      attr_accessor description: String?
+      attr_accessor origin_configuration: Types::PackageGroupOriginConfiguration?
+      attr_accessor parent: Types::PackageGroupReference?
+    end
+
+    class PackageGroupOriginConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restrictions: Hash[String, Types::PackageGroupOriginRestriction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restrictions: Hash[String, Types::PackageGroupOriginRestriction]?
+    end
+
+    class PackageGroupOriginRestriction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?effective_mode: String,
+        ?inherited_from: Types::PackageGroupReference,
+        ?repositories_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor effective_mode: String?
+      attr_accessor inherited_from: Types::PackageGroupReference?
+      attr_accessor repositories_count: Integer?
+    end
+
+    module PackageGroupOriginRestrictionMode
+      ALLOW: String
+      ALLOW_SPECIFIC_REPOSITORIES: String
+      BLOCK: String
+      INHERIT: String
+    end
+
+    module PackageGroupOriginRestrictionType
+      EXTERNAL_UPSTREAM: String
+      INTERNAL_UPSTREAM: String
+      PUBLISH: String
+    end
+
+    class PackageGroupReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?pattern: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor pattern: String?
+    end
+
+    class PackageGroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?pattern: String,
+        ?domain_name: String,
+        ?domain_owner: String,
+        ?created_time: Time,
+        ?contact_info: String,
+        ?description: String,
+        ?origin_configuration: Types::PackageGroupOriginConfiguration,
+        ?parent: Types::PackageGroupReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor pattern: String?
+      attr_accessor domain_name: String?
+      attr_accessor domain_owner: String?
+      attr_accessor created_time: Time?
+      attr_accessor contact_info: String?
+      attr_accessor description: String?
+      attr_accessor origin_configuration: Types::PackageGroupOriginConfiguration?
+      attr_accessor parent: Types::PackageGroupReference?
+    end
+
+    class PackageOriginConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restrictions: Types::PackageOriginRestrictions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restrictions: Types::PackageOriginRestrictions?
+    end
+
+    class PackageOriginRestrictions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?publish: String,
+        ?upstream: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor publish: String?
+      attr_accessor upstream: String?
+    end
+
+    class PackageSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+        ?origin_configuration: Types::PackageOriginConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor origin_configuration: Types::PackageOriginConfiguration?
+    end
+
+    class PackageVersionDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?namespace: String,
+        ?package_name: String,
+        ?display_name: String,
+        ?version: String,
+        ?summary: String,
+        ?home_page: String,
+        ?source_code_repository: String,
+        ?published_time: Time,
+        ?licenses: Array[Types::LicenseInfo],
+        ?revision: String,
+        ?status: String,
+        ?origin: Types::PackageVersionOrigin,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package_name: String?
+      attr_accessor display_name: String?
+      attr_accessor version: String?
+      attr_accessor summary: String?
+      attr_accessor home_page: String?
+      attr_accessor source_code_repository: String?
+      attr_accessor published_time: Time?
+      attr_accessor licenses: Array[Types::LicenseInfo]?
+      attr_accessor revision: String?
+      attr_accessor status: String?
+      attr_accessor origin: Types::PackageVersionOrigin?
+    end
+
+    class PackageVersionError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    module PackageVersionErrorCode
+      ALREADY_EXISTS: String
+      MISMATCHED_REVISION: String
+      MISMATCHED_STATUS: String
+      NOT_ALLOWED: String
+      NOT_FOUND: String
+      SKIPPED: String
+    end
+
+    class PackageVersionOrigin
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_entry_point: Types::DomainEntryPoint,
+        ?origin_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_entry_point: Types::DomainEntryPoint?
+      attr_accessor origin_type: String?
+    end
+
+    module PackageVersionOriginType
+      INTERNAL: String
+      EXTERNAL: String
+      UNKNOWN: String
+    end
+
+    module PackageVersionSortType
+      PUBLISHED_TIME: String
+    end
+
+    module PackageVersionStatus
+      PUBLISHED: String
+      UNFINISHED: String
+      UNLISTED: String
+      ARCHIVED: String
+      DISPOSED: String
+      DELETED: String
+    end
+
+    class PackageVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+        ?revision: String,
+        ?status: String,
+        ?origin: Types::PackageVersionOrigin,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+      attr_accessor revision: String?
+      attr_accessor status: String?
+      attr_accessor origin: Types::PackageVersionOrigin?
+    end
+
+    class PublishPackageVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+        ?package_version: String,
+        ?asset_content: String,
+        ?asset_name: String,
+        ?asset_sha256: String,
+        ?unfinished: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor package_version: String?
+      attr_accessor asset_content: String?
+      attr_accessor asset_name: String?
+      attr_accessor asset_sha256: String?
+      attr_accessor unfinished: bool?
+    end
+
+    class PublishPackageVersionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+        ?version: String,
+        ?version_revision: String,
+        ?status: String,
+        ?asset: Types::AssetSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor version: String?
+      attr_accessor version_revision: String?
+      attr_accessor status: String?
+      attr_accessor asset: Types::AssetSummary?
+    end
+
+    class PutDomainPermissionsPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?policy_revision: String,
+        ?policy_document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor policy_revision: String?
+      attr_accessor policy_document: String?
+    end
+
+    class PutDomainPermissionsPolicyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: Types::ResourcePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: Types::ResourcePolicy?
+    end
+
+    class PutPackageOriginConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+        ?restrictions: Types::PackageOriginRestrictions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor restrictions: Types::PackageOriginRestrictions?
+    end
+
+    class PutPackageOriginConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?origin_configuration: Types::PackageOriginConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor origin_configuration: Types::PackageOriginConfiguration?
+    end
+
+    class PutRepositoryPermissionsPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?policy_revision: String,
+        ?policy_document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor policy_revision: String?
+      attr_accessor policy_document: String?
+    end
+
+    class PutRepositoryPermissionsPolicyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: Types::ResourcePolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: Types::ResourcePolicy?
+    end
+
+    class RepositoryDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?administrator_account: String,
+        ?domain_name: String,
+        ?domain_owner: String,
+        ?arn: String,
+        ?description: String,
+        ?upstreams: Array[Types::UpstreamRepositoryInfo],
+        ?external_connections: Array[Types::RepositoryExternalConnectionInfo],
+        ?created_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor administrator_account: String?
+      attr_accessor domain_name: String?
+      attr_accessor domain_owner: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor upstreams: Array[Types::UpstreamRepositoryInfo]?
+      attr_accessor external_connections: Array[Types::RepositoryExternalConnectionInfo]?
+      attr_accessor created_time: Time?
+    end
+
+    class RepositoryExternalConnectionInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?external_connection_name: String,
+        ?package_format: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor external_connection_name: String?
+      attr_accessor package_format: String?
+      attr_accessor status: String?
+    end
+
+    class RepositorySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?administrator_account: String,
+        ?domain_name: String,
+        ?domain_owner: String,
+        ?arn: String,
+        ?description: String,
+        ?created_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor administrator_account: String?
+      attr_accessor domain_name: String?
+      attr_accessor domain_owner: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor created_time: Time?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ResourcePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?revision: String,
+        ?document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor revision: String?
+      attr_accessor document: String?
+    end
+
+    module ResourceType
+      DOMAIN: String
+      REPOSITORY: String
+      PACKAGE: String
+      PACKAGE_VERSION: String
+      ASSET: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class SuccessfulPackageVersionInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision: String?
+      attr_accessor status: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdatePackageGroupOriginConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?package_group: String,
+        ?restrictions: Hash[String, String],
+        ?add_allowed_repositories: Array[Types::PackageGroupAllowedRepository],
+        ?remove_allowed_repositories: Array[Types::PackageGroupAllowedRepository],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor package_group: String?
+      attr_accessor restrictions: Hash[String, String]?
+      attr_accessor add_allowed_repositories: Array[Types::PackageGroupAllowedRepository]?
+      attr_accessor remove_allowed_repositories: Array[Types::PackageGroupAllowedRepository]?
+    end
+
+    class UpdatePackageGroupOriginConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_group: Types::PackageGroupDescription,
+        ?allowed_repository_updates: Hash[String, Hash[String, Array[String]]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_group: Types::PackageGroupDescription?
+      attr_accessor allowed_repository_updates: Hash[String, Hash[String, Array[String]]]?
+    end
+
+    class UpdatePackageGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?package_group: String,
+        ?contact_info: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor package_group: String?
+      attr_accessor contact_info: String?
+      attr_accessor description: String?
+    end
+
+    class UpdatePackageGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?package_group: Types::PackageGroupDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor package_group: Types::PackageGroupDescription?
+    end
+
+    class UpdatePackageVersionsStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?format: String,
+        ?namespace: String,
+        ?package: String,
+        ?versions: Array[String],
+        ?version_revisions: Hash[String, String],
+        ?expected_status: String,
+        ?target_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor format: String?
+      attr_accessor namespace: String?
+      attr_accessor package: String?
+      attr_accessor versions: Array[String]?
+      attr_accessor version_revisions: Hash[String, String]?
+      attr_accessor expected_status: String?
+      attr_accessor target_status: String?
+    end
+
+    class UpdatePackageVersionsStatusResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successful_versions: Hash[String, Types::SuccessfulPackageVersionInfo],
+        ?failed_versions: Hash[String, Types::PackageVersionError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successful_versions: Hash[String, Types::SuccessfulPackageVersionInfo]?
+      attr_accessor failed_versions: Hash[String, Types::PackageVersionError]?
+    end
+
+    class UpdateRepositoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain: String,
+        ?domain_owner: String,
+        ?repository: String,
+        ?description: String,
+        ?upstreams: Array[Types::UpstreamRepository],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain: String?
+      attr_accessor domain_owner: String?
+      attr_accessor repository: String?
+      attr_accessor description: String?
+      attr_accessor upstreams: Array[Types::UpstreamRepository]?
+    end
+
+    class UpdateRepositoryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository: Types::RepositoryDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository: Types::RepositoryDescription?
+    end
+
+    class UpstreamRepository
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+    end
+
+    class UpstreamRepositoryInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ValidationExceptionReason
+      CANNOT_PARSE: String
+      ENCRYPTION_KEY_ERROR: String
+      FIELD_VALIDATION_FAILED: String
+      UNKNOWN_OPERATION: String
+      OTHER: String
+    end
+  end
+end

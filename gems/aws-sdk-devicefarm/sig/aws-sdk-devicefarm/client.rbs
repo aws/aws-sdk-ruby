@@ -1,0 +1,935 @@
+module Aws::DeviceFarm
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::DeviceFarm::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateDevicePoolResponse
+      include Smithy::Client::_Response[Types::CreateDevicePoolResult]
+      def device_pool: () -> Types::DevicePool?
+    end
+    def create_device_pool: (
+      ?project_arn: String,
+      ?name: String,
+      ?description: String,
+      ?rules: Array[
+        {
+          attribute: String,
+          operator: String,
+          value: String
+        }
+      ],
+      ?max_devices: Integer
+    ) -> _CreateDevicePoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDevicePoolResponse
+
+    interface _CreateInstanceProfileResponse
+      include Smithy::Client::_Response[Types::CreateInstanceProfileResult]
+      def instance_profile: () -> Types::InstanceProfile?
+    end
+    def create_instance_profile: (
+      ?name: String,
+      ?description: String,
+      ?package_cleanup: bool,
+      ?exclude_app_packages_from_cleanup: Array[String],
+      ?reboot_after_use: bool
+    ) -> _CreateInstanceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInstanceProfileResponse
+
+    interface _CreateNetworkProfileResponse
+      include Smithy::Client::_Response[Types::CreateNetworkProfileResult]
+      def network_profile: () -> Types::NetworkProfile?
+    end
+    def create_network_profile: (
+      ?project_arn: String,
+      ?name: String,
+      ?description: String,
+      ?type: String,
+      ?uplink_bandwidth_bits: Integer,
+      ?downlink_bandwidth_bits: Integer,
+      ?uplink_delay_ms: Integer,
+      ?downlink_delay_ms: Integer,
+      ?uplink_jitter_ms: Integer,
+      ?downlink_jitter_ms: Integer,
+      ?uplink_loss_percent: Integer,
+      ?downlink_loss_percent: Integer
+    ) -> _CreateNetworkProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNetworkProfileResponse
+
+    interface _CreateProjectResponse
+      include Smithy::Client::_Response[Types::CreateProjectResult]
+      def project: () -> Types::Project?
+    end
+    def create_project: (
+      ?name: String,
+      ?default_job_timeout_minutes: Integer,
+      ?vpc_config: {
+        security_group_ids: Array[String],
+        subnet_ids: Array[String],
+        vpc_id: String
+      }
+    ) -> _CreateProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProjectResponse
+
+    interface _CreateRemoteAccessSessionResponse
+      include Smithy::Client::_Response[Types::CreateRemoteAccessSessionResult]
+      def remote_access_session: () -> Types::RemoteAccessSession?
+    end
+    def create_remote_access_session: (
+      ?project_arn: String,
+      ?device_arn: String,
+      ?instance_arn: String,
+      ?ssh_public_key: String,
+      ?remote_debug_enabled: bool,
+      ?remote_record_enabled: bool,
+      ?remote_record_app_arn: String,
+      ?name: String,
+      ?client_id: String,
+      ?configuration: {
+        billing_method: String,
+        vpce_configuration_arns: Array[String],
+        device_proxy: {
+          host: String,
+          port: Integer
+        }
+      },
+      ?interaction_mode: String,
+      ?skip_app_resign: bool
+    ) -> _CreateRemoteAccessSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRemoteAccessSessionResponse
+
+    interface _CreateTestGridProjectResponse
+      include Smithy::Client::_Response[Types::CreateTestGridProjectResult]
+      def test_grid_project: () -> Types::TestGridProject?
+    end
+    def create_test_grid_project: (
+      ?name: String,
+      ?description: String,
+      ?vpc_config: {
+        security_group_ids: Array[String],
+        subnet_ids: Array[String],
+        vpc_id: String
+      }
+    ) -> _CreateTestGridProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTestGridProjectResponse
+
+    interface _CreateTestGridUrlResponse
+      include Smithy::Client::_Response[Types::CreateTestGridUrlResult]
+      def url: () -> String?
+      def expires: () -> Time?
+    end
+    def create_test_grid_url: (
+      ?project_arn: String,
+      ?expires_in_seconds: Integer
+    ) -> _CreateTestGridUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTestGridUrlResponse
+
+    interface _CreateUploadResponse
+      include Smithy::Client::_Response[Types::CreateUploadResult]
+      def upload: () -> Types::Upload?
+    end
+    def create_upload: (
+      ?project_arn: String,
+      ?name: String,
+      ?type: String,
+      ?content_type: String
+    ) -> _CreateUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUploadResponse
+
+    interface _CreateVPCEConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateVPCEConfigurationResult]
+      def vpce_configuration: () -> Types::VPCEConfiguration?
+    end
+    def create_vpce_configuration: (
+      ?vpce_configuration_name: String,
+      ?vpce_service_name: String,
+      ?service_dns_name: String,
+      ?vpce_configuration_description: String
+    ) -> _CreateVPCEConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVPCEConfigurationResponse
+
+    interface _DeleteDevicePoolResponse
+      include Smithy::Client::_Response[Types::DeleteDevicePoolResult]
+    end
+    def delete_device_pool: (
+      ?arn: String
+    ) -> _DeleteDevicePoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDevicePoolResponse
+
+    interface _DeleteInstanceProfileResponse
+      include Smithy::Client::_Response[Types::DeleteInstanceProfileResult]
+    end
+    def delete_instance_profile: (
+      ?arn: String
+    ) -> _DeleteInstanceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInstanceProfileResponse
+
+    interface _DeleteNetworkProfileResponse
+      include Smithy::Client::_Response[Types::DeleteNetworkProfileResult]
+    end
+    def delete_network_profile: (
+      ?arn: String
+    ) -> _DeleteNetworkProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNetworkProfileResponse
+
+    interface _DeleteProjectResponse
+      include Smithy::Client::_Response[Types::DeleteProjectResult]
+    end
+    def delete_project: (
+      ?arn: String
+    ) -> _DeleteProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProjectResponse
+
+    interface _DeleteRemoteAccessSessionResponse
+      include Smithy::Client::_Response[Types::DeleteRemoteAccessSessionResult]
+    end
+    def delete_remote_access_session: (
+      ?arn: String
+    ) -> _DeleteRemoteAccessSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRemoteAccessSessionResponse
+
+    interface _DeleteRunResponse
+      include Smithy::Client::_Response[Types::DeleteRunResult]
+    end
+    def delete_run: (
+      ?arn: String
+    ) -> _DeleteRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRunResponse
+
+    interface _DeleteTestGridProjectResponse
+      include Smithy::Client::_Response[Types::DeleteTestGridProjectResult]
+    end
+    def delete_test_grid_project: (
+      ?project_arn: String
+    ) -> _DeleteTestGridProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTestGridProjectResponse
+
+    interface _DeleteUploadResponse
+      include Smithy::Client::_Response[Types::DeleteUploadResult]
+    end
+    def delete_upload: (
+      ?arn: String
+    ) -> _DeleteUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUploadResponse
+
+    interface _DeleteVPCEConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteVPCEConfigurationResult]
+    end
+    def delete_vpce_configuration: (
+      ?arn: String
+    ) -> _DeleteVPCEConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVPCEConfigurationResponse
+
+    interface _GetAccountSettingsResponse
+      include Smithy::Client::_Response[Types::GetAccountSettingsResult]
+      def account_settings: () -> Types::AccountSettings?
+    end
+    def get_account_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountSettingsResponse
+
+    interface _GetDeviceResponse
+      include Smithy::Client::_Response[Types::GetDeviceResult]
+      def device: () -> Types::Device?
+    end
+    def get_device: (
+      ?arn: String
+    ) -> _GetDeviceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeviceResponse
+
+    interface _GetDeviceInstanceResponse
+      include Smithy::Client::_Response[Types::GetDeviceInstanceResult]
+      def device_instance: () -> Types::DeviceInstance?
+    end
+    def get_device_instance: (
+      ?arn: String
+    ) -> _GetDeviceInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeviceInstanceResponse
+
+    interface _GetDevicePoolResponse
+      include Smithy::Client::_Response[Types::GetDevicePoolResult]
+      def device_pool: () -> Types::DevicePool?
+    end
+    def get_device_pool: (
+      ?arn: String
+    ) -> _GetDevicePoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDevicePoolResponse
+
+    interface _GetDevicePoolCompatibilityResponse
+      include Smithy::Client::_Response[Types::GetDevicePoolCompatibilityResult]
+      def compatible_devices: () -> Array[Types::DevicePoolCompatibilityResult]?
+      def incompatible_devices: () -> Array[Types::DevicePoolCompatibilityResult]?
+    end
+    def get_device_pool_compatibility: (
+      ?device_pool_arn: String,
+      ?app_arn: String,
+      ?test_type: String,
+      ?test: {
+        type: String,
+        test_package_arn: String,
+        test_spec_arn: untyped,
+        filter: String,
+        parameters: Hash[String, String]
+      },
+      ?configuration: {
+        extra_data_package_arn: String,
+        network_profile_arn: untyped,
+        locale: String,
+        location: {
+          latitude: Float,
+          longitude: untyped
+        },
+        vpce_configuration_arns: Array[String],
+        device_proxy: {
+          host: String,
+          port: Integer
+        },
+        customer_artifact_paths: {
+          ios_paths: Array[String],
+          android_paths: Array[String],
+          device_host_paths: Array[String]
+        },
+        radios: {
+          wifi: bool,
+          bluetooth: untyped,
+          nfc: untyped,
+          gps: untyped
+        },
+        auxiliary_apps: untyped,
+        billing_method: String
+      },
+      ?project_arn: String
+    ) -> _GetDevicePoolCompatibilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDevicePoolCompatibilityResponse
+
+    interface _GetInstanceProfileResponse
+      include Smithy::Client::_Response[Types::GetInstanceProfileResult]
+      def instance_profile: () -> Types::InstanceProfile?
+    end
+    def get_instance_profile: (
+      ?arn: String
+    ) -> _GetInstanceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInstanceProfileResponse
+
+    interface _GetJobResponse
+      include Smithy::Client::_Response[Types::GetJobResult]
+      def job: () -> Types::Job?
+    end
+    def get_job: (
+      ?arn: String
+    ) -> _GetJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJobResponse
+
+    interface _GetNetworkProfileResponse
+      include Smithy::Client::_Response[Types::GetNetworkProfileResult]
+      def network_profile: () -> Types::NetworkProfile?
+    end
+    def get_network_profile: (
+      ?arn: String
+    ) -> _GetNetworkProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNetworkProfileResponse
+
+    interface _GetOfferingStatusResponse
+      include Smithy::Client::_Response[Types::GetOfferingStatusResult]
+      def current: () -> Hash[String, Types::OfferingStatus]?
+      def next_period: () -> Hash[String, Types::OfferingStatus]?
+      def next_token: () -> String?
+    end
+    def get_offering_status: (
+      ?next_token: String
+    ) -> _GetOfferingStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOfferingStatusResponse
+
+    interface _GetProjectResponse
+      include Smithy::Client::_Response[Types::GetProjectResult]
+      def project: () -> Types::Project?
+    end
+    def get_project: (
+      ?arn: String
+    ) -> _GetProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProjectResponse
+
+    interface _GetRemoteAccessSessionResponse
+      include Smithy::Client::_Response[Types::GetRemoteAccessSessionResult]
+      def remote_access_session: () -> Types::RemoteAccessSession?
+    end
+    def get_remote_access_session: (
+      ?arn: String
+    ) -> _GetRemoteAccessSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRemoteAccessSessionResponse
+
+    interface _GetRunResponse
+      include Smithy::Client::_Response[Types::GetRunResult]
+      def run: () -> Types::Run?
+    end
+    def get_run: (
+      ?arn: String
+    ) -> _GetRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRunResponse
+
+    interface _GetSuiteResponse
+      include Smithy::Client::_Response[Types::GetSuiteResult]
+      def suite: () -> Types::Suite?
+    end
+    def get_suite: (
+      ?arn: String
+    ) -> _GetSuiteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSuiteResponse
+
+    interface _GetTestResponse
+      include Smithy::Client::_Response[Types::GetTestResult]
+      def test: () -> Types::Test?
+    end
+    def get_test: (
+      ?arn: String
+    ) -> _GetTestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTestResponse
+
+    interface _GetTestGridProjectResponse
+      include Smithy::Client::_Response[Types::GetTestGridProjectResult]
+      def test_grid_project: () -> Types::TestGridProject?
+    end
+    def get_test_grid_project: (
+      ?project_arn: String
+    ) -> _GetTestGridProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTestGridProjectResponse
+
+    interface _GetTestGridSessionResponse
+      include Smithy::Client::_Response[Types::GetTestGridSessionResult]
+      def test_grid_session: () -> Types::TestGridSession?
+    end
+    def get_test_grid_session: (
+      ?project_arn: String,
+      ?session_id: String,
+      ?session_arn: String
+    ) -> _GetTestGridSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTestGridSessionResponse
+
+    interface _GetUploadResponse
+      include Smithy::Client::_Response[Types::GetUploadResult]
+      def upload: () -> Types::Upload?
+    end
+    def get_upload: (
+      ?arn: String
+    ) -> _GetUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUploadResponse
+
+    interface _GetVPCEConfigurationResponse
+      include Smithy::Client::_Response[Types::GetVPCEConfigurationResult]
+      def vpce_configuration: () -> Types::VPCEConfiguration?
+    end
+    def get_vpce_configuration: (
+      ?arn: String
+    ) -> _GetVPCEConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVPCEConfigurationResponse
+
+    interface _InstallToRemoteAccessSessionResponse
+      include Smithy::Client::_Response[Types::InstallToRemoteAccessSessionResult]
+      def app_upload: () -> Types::Upload?
+    end
+    def install_to_remote_access_session: (
+      ?remote_access_session_arn: String,
+      ?app_arn: String
+    ) -> _InstallToRemoteAccessSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InstallToRemoteAccessSessionResponse
+
+    interface _ListArtifactsResponse
+      include Smithy::Client::_Response[Types::ListArtifactsResult]
+      def artifacts: () -> Array[Types::Artifact]?
+      def next_token: () -> String?
+    end
+    def list_artifacts: (
+      ?arn: String,
+      ?type: String,
+      ?next_token: String
+    ) -> _ListArtifactsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListArtifactsResponse
+
+    interface _ListDeviceInstancesResponse
+      include Smithy::Client::_Response[Types::ListDeviceInstancesResult]
+      def device_instances: () -> Array[Types::DeviceInstance]?
+      def next_token: () -> String?
+    end
+    def list_device_instances: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDeviceInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeviceInstancesResponse
+
+    interface _ListDevicePoolsResponse
+      include Smithy::Client::_Response[Types::ListDevicePoolsResult]
+      def device_pools: () -> Array[Types::DevicePool]?
+      def next_token: () -> String?
+    end
+    def list_device_pools: (
+      ?arn: String,
+      ?type: String,
+      ?next_token: String
+    ) -> _ListDevicePoolsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDevicePoolsResponse
+
+    interface _ListDevicesResponse
+      include Smithy::Client::_Response[Types::ListDevicesResult]
+      def devices: () -> Array[Types::Device]?
+      def next_token: () -> String?
+    end
+    def list_devices: (
+      ?arn: String,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          attribute: String,
+          operator: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListDevicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDevicesResponse
+
+    interface _ListInstanceProfilesResponse
+      include Smithy::Client::_Response[Types::ListInstanceProfilesResult]
+      def instance_profiles: () -> Array[Types::InstanceProfile]?
+      def next_token: () -> String?
+    end
+    def list_instance_profiles: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListInstanceProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInstanceProfilesResponse
+
+    interface _ListJobsResponse
+      include Smithy::Client::_Response[Types::ListJobsResult]
+      def jobs: () -> Array[Types::Job]?
+      def next_token: () -> String?
+    end
+    def list_jobs: (
+      ?arn: String,
+      ?next_token: String
+    ) -> _ListJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobsResponse
+
+    interface _ListNetworkProfilesResponse
+      include Smithy::Client::_Response[Types::ListNetworkProfilesResult]
+      def network_profiles: () -> Array[Types::NetworkProfile]?
+      def next_token: () -> String?
+    end
+    def list_network_profiles: (
+      ?arn: String,
+      ?type: String,
+      ?next_token: String
+    ) -> _ListNetworkProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNetworkProfilesResponse
+
+    interface _ListOfferingPromotionsResponse
+      include Smithy::Client::_Response[Types::ListOfferingPromotionsResult]
+      def offering_promotions: () -> Array[Types::OfferingPromotion]?
+      def next_token: () -> String?
+    end
+    def list_offering_promotions: (
+      ?next_token: String
+    ) -> _ListOfferingPromotionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOfferingPromotionsResponse
+
+    interface _ListOfferingTransactionsResponse
+      include Smithy::Client::_Response[Types::ListOfferingTransactionsResult]
+      def offering_transactions: () -> Array[Types::OfferingTransaction]?
+      def next_token: () -> String?
+    end
+    def list_offering_transactions: (
+      ?next_token: String
+    ) -> _ListOfferingTransactionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOfferingTransactionsResponse
+
+    interface _ListOfferingsResponse
+      include Smithy::Client::_Response[Types::ListOfferingsResult]
+      def offerings: () -> Array[Types::Offering]?
+      def next_token: () -> String?
+    end
+    def list_offerings: (
+      ?next_token: String
+    ) -> _ListOfferingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOfferingsResponse
+
+    interface _ListProjectsResponse
+      include Smithy::Client::_Response[Types::ListProjectsResult]
+      def projects: () -> Array[Types::Project]?
+      def next_token: () -> String?
+    end
+    def list_projects: (
+      ?arn: String,
+      ?next_token: String
+    ) -> _ListProjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProjectsResponse
+
+    interface _ListRemoteAccessSessionsResponse
+      include Smithy::Client::_Response[Types::ListRemoteAccessSessionsResult]
+      def remote_access_sessions: () -> Array[Types::RemoteAccessSession]?
+      def next_token: () -> String?
+    end
+    def list_remote_access_sessions: (
+      ?arn: String,
+      ?next_token: String
+    ) -> _ListRemoteAccessSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRemoteAccessSessionsResponse
+
+    interface _ListRunsResponse
+      include Smithy::Client::_Response[Types::ListRunsResult]
+      def runs: () -> Array[Types::Run]?
+      def next_token: () -> String?
+    end
+    def list_runs: (
+      ?arn: String,
+      ?next_token: String
+    ) -> _ListRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRunsResponse
+
+    interface _ListSamplesResponse
+      include Smithy::Client::_Response[Types::ListSamplesResult]
+      def samples: () -> Array[Types::Sample]?
+      def next_token: () -> String?
+    end
+    def list_samples: (
+      ?arn: String,
+      ?next_token: String
+    ) -> _ListSamplesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSamplesResponse
+
+    interface _ListSuitesResponse
+      include Smithy::Client::_Response[Types::ListSuitesResult]
+      def suites: () -> Array[Types::Suite]?
+      def next_token: () -> String?
+    end
+    def list_suites: (
+      ?arn: String,
+      ?next_token: String
+    ) -> _ListSuitesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSuitesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTestGridProjectsResponse
+      include Smithy::Client::_Response[Types::ListTestGridProjectsResult]
+      def test_grid_projects: () -> Array[Types::TestGridProject]?
+      def next_token: () -> String?
+    end
+    def list_test_grid_projects: (
+      ?max_result: Integer,
+      ?next_token: String
+    ) -> _ListTestGridProjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestGridProjectsResponse
+
+    interface _ListTestGridSessionActionsResponse
+      include Smithy::Client::_Response[Types::ListTestGridSessionActionsResult]
+      def actions: () -> Array[Types::TestGridSessionAction]?
+      def next_token: () -> String?
+    end
+    def list_test_grid_session_actions: (
+      ?session_arn: String,
+      ?max_result: Integer,
+      ?next_token: String
+    ) -> _ListTestGridSessionActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestGridSessionActionsResponse
+
+    interface _ListTestGridSessionArtifactsResponse
+      include Smithy::Client::_Response[Types::ListTestGridSessionArtifactsResult]
+      def artifacts: () -> Array[Types::TestGridSessionArtifact]?
+      def next_token: () -> String?
+    end
+    def list_test_grid_session_artifacts: (
+      ?session_arn: String,
+      ?type: String,
+      ?max_result: Integer,
+      ?next_token: String
+    ) -> _ListTestGridSessionArtifactsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestGridSessionArtifactsResponse
+
+    interface _ListTestGridSessionsResponse
+      include Smithy::Client::_Response[Types::ListTestGridSessionsResult]
+      def test_grid_sessions: () -> Array[Types::TestGridSession]?
+      def next_token: () -> String?
+    end
+    def list_test_grid_sessions: (
+      ?project_arn: String,
+      ?status: String,
+      ?creation_time_after: Time,
+      ?creation_time_before: Time,
+      ?end_time_after: Time,
+      ?end_time_before: Time,
+      ?max_result: Integer,
+      ?next_token: String
+    ) -> _ListTestGridSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestGridSessionsResponse
+
+    interface _ListTestsResponse
+      include Smithy::Client::_Response[Types::ListTestsResult]
+      def tests: () -> Array[Types::Test]?
+      def next_token: () -> String?
+    end
+    def list_tests: (
+      ?arn: String,
+      ?next_token: String
+    ) -> _ListTestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTestsResponse
+
+    interface _ListUniqueProblemsResponse
+      include Smithy::Client::_Response[Types::ListUniqueProblemsResult]
+      def unique_problems: () -> Hash[String, Array[Types::UniqueProblem]]?
+      def next_token: () -> String?
+    end
+    def list_unique_problems: (
+      ?arn: String,
+      ?next_token: String
+    ) -> _ListUniqueProblemsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUniqueProblemsResponse
+
+    interface _ListUploadsResponse
+      include Smithy::Client::_Response[Types::ListUploadsResult]
+      def uploads: () -> Array[Types::Upload]?
+      def next_token: () -> String?
+    end
+    def list_uploads: (
+      ?arn: String,
+      ?type: String,
+      ?next_token: String
+    ) -> _ListUploadsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUploadsResponse
+
+    interface _ListVPCEConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListVPCEConfigurationsResult]
+      def vpce_configurations: () -> Array[Types::VPCEConfiguration]?
+      def next_token: () -> String?
+    end
+    def list_vpce_configurations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListVPCEConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVPCEConfigurationsResponse
+
+    interface _PurchaseOfferingResponse
+      include Smithy::Client::_Response[Types::PurchaseOfferingResult]
+      def offering_transaction: () -> Types::OfferingTransaction?
+    end
+    def purchase_offering: (
+      ?offering_id: String,
+      ?quantity: Integer,
+      ?offering_promotion_id: String
+    ) -> _PurchaseOfferingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PurchaseOfferingResponse
+
+    interface _RenewOfferingResponse
+      include Smithy::Client::_Response[Types::RenewOfferingResult]
+      def offering_transaction: () -> Types::OfferingTransaction?
+    end
+    def renew_offering: (
+      ?offering_id: String,
+      ?quantity: Integer
+    ) -> _RenewOfferingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RenewOfferingResponse
+
+    interface _ScheduleRunResponse
+      include Smithy::Client::_Response[Types::ScheduleRunResult]
+      def run: () -> Types::Run?
+    end
+    def schedule_run: (
+      ?project_arn: String,
+      ?app_arn: String,
+      ?device_pool_arn: String,
+      ?device_selection_configuration: {
+        filters: Array[
+          {
+            attribute: String,
+            operator: String,
+            values: Array[String]
+          }
+        ],
+        max_devices: Integer
+      },
+      ?name: String,
+      ?test: {
+        type: String,
+        test_package_arn: String,
+        test_spec_arn: untyped,
+        filter: String,
+        parameters: Hash[String, String]
+      },
+      ?configuration: {
+        extra_data_package_arn: String,
+        network_profile_arn: untyped,
+        locale: String,
+        location: {
+          latitude: Float,
+          longitude: untyped
+        },
+        vpce_configuration_arns: Array[String],
+        device_proxy: {
+          host: String,
+          port: Integer
+        },
+        customer_artifact_paths: {
+          ios_paths: Array[String],
+          android_paths: Array[String],
+          device_host_paths: Array[String]
+        },
+        radios: {
+          wifi: bool,
+          bluetooth: untyped,
+          nfc: untyped,
+          gps: untyped
+        },
+        auxiliary_apps: untyped,
+        billing_method: String
+      },
+      ?execution_configuration: {
+        job_timeout_minutes: Integer,
+        accounts_cleanup: bool,
+        app_packages_cleanup: bool,
+        video_capture: bool,
+        skip_app_resign: bool
+      }
+    ) -> _ScheduleRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ScheduleRunResponse
+
+    interface _StopJobResponse
+      include Smithy::Client::_Response[Types::StopJobResult]
+      def job: () -> Types::Job?
+    end
+    def stop_job: (
+      ?arn: String
+    ) -> _StopJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopJobResponse
+
+    interface _StopRemoteAccessSessionResponse
+      include Smithy::Client::_Response[Types::StopRemoteAccessSessionResult]
+      def remote_access_session: () -> Types::RemoteAccessSession?
+    end
+    def stop_remote_access_session: (
+      ?arn: String
+    ) -> _StopRemoteAccessSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopRemoteAccessSessionResponse
+
+    interface _StopRunResponse
+      include Smithy::Client::_Response[Types::StopRunResult]
+      def run: () -> Types::Run?
+    end
+    def stop_run: (
+      ?arn: String
+    ) -> _StopRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopRunResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDeviceInstanceResponse
+      include Smithy::Client::_Response[Types::UpdateDeviceInstanceResult]
+      def device_instance: () -> Types::DeviceInstance?
+    end
+    def update_device_instance: (
+      ?arn: String,
+      ?profile_arn: String,
+      ?labels: Array[String]
+    ) -> _UpdateDeviceInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDeviceInstanceResponse
+
+    interface _UpdateDevicePoolResponse
+      include Smithy::Client::_Response[Types::UpdateDevicePoolResult]
+      def device_pool: () -> Types::DevicePool?
+    end
+    def update_device_pool: (
+      ?arn: String,
+      ?name: String,
+      ?description: String,
+      ?rules: Array[
+        {
+          attribute: String,
+          operator: String,
+          value: String
+        }
+      ],
+      ?max_devices: Integer,
+      ?clear_max_devices: bool
+    ) -> _UpdateDevicePoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDevicePoolResponse
+
+    interface _UpdateInstanceProfileResponse
+      include Smithy::Client::_Response[Types::UpdateInstanceProfileResult]
+      def instance_profile: () -> Types::InstanceProfile?
+    end
+    def update_instance_profile: (
+      ?arn: String,
+      ?name: String,
+      ?description: String,
+      ?package_cleanup: bool,
+      ?exclude_app_packages_from_cleanup: Array[String],
+      ?reboot_after_use: bool
+    ) -> _UpdateInstanceProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInstanceProfileResponse
+
+    interface _UpdateNetworkProfileResponse
+      include Smithy::Client::_Response[Types::UpdateNetworkProfileResult]
+      def network_profile: () -> Types::NetworkProfile?
+    end
+    def update_network_profile: (
+      ?arn: String,
+      ?name: String,
+      ?description: String,
+      ?type: String,
+      ?uplink_bandwidth_bits: Integer,
+      ?downlink_bandwidth_bits: Integer,
+      ?uplink_delay_ms: Integer,
+      ?downlink_delay_ms: Integer,
+      ?uplink_jitter_ms: Integer,
+      ?downlink_jitter_ms: Integer,
+      ?uplink_loss_percent: Integer,
+      ?downlink_loss_percent: Integer
+    ) -> _UpdateNetworkProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNetworkProfileResponse
+
+    interface _UpdateProjectResponse
+      include Smithy::Client::_Response[Types::UpdateProjectResult]
+      def project: () -> Types::Project?
+    end
+    def update_project: (
+      ?arn: String,
+      ?name: String,
+      ?default_job_timeout_minutes: Integer,
+      ?vpc_config: {
+        security_group_ids: Array[String],
+        subnet_ids: Array[String],
+        vpc_id: String
+      }
+    ) -> _UpdateProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProjectResponse
+
+    interface _UpdateTestGridProjectResponse
+      include Smithy::Client::_Response[Types::UpdateTestGridProjectResult]
+      def test_grid_project: () -> Types::TestGridProject?
+    end
+    def update_test_grid_project: (
+      ?project_arn: String,
+      ?name: String,
+      ?description: String,
+      ?vpc_config: {
+        security_group_ids: Array[String],
+        subnet_ids: Array[String],
+        vpc_id: String
+      }
+    ) -> _UpdateTestGridProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTestGridProjectResponse
+
+    interface _UpdateUploadResponse
+      include Smithy::Client::_Response[Types::UpdateUploadResult]
+      def upload: () -> Types::Upload?
+    end
+    def update_upload: (
+      ?arn: String,
+      ?name: String,
+      ?content_type: String,
+      ?edit_content: bool
+    ) -> _UpdateUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUploadResponse
+
+    interface _UpdateVPCEConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateVPCEConfigurationResult]
+      def vpce_configuration: () -> Types::VPCEConfiguration?
+    end
+    def update_vpce_configuration: (
+      ?arn: String,
+      ?vpce_configuration_name: String,
+      ?vpce_service_name: String,
+      ?service_dns_name: String,
+      ?vpce_configuration_description: String
+    ) -> _UpdateVPCEConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVPCEConfigurationResponse
+  end
+end

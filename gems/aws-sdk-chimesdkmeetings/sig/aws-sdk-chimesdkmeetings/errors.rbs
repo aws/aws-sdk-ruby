@@ -1,0 +1,67 @@
+module Aws::ChimeSDKMeetings
+  module Errors
+    class BadRequestException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class ForbiddenException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+      def resource_name: () -> String?
+    end
+    class ServiceFailureException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+      def retry_after_seconds: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+      def resource_name: () -> String?
+    end
+    class UnauthorizedException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+    class UnprocessableEntityException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def message: () -> String?
+      def request_id: () -> String?
+    end
+  end
+end

@@ -1,0 +1,313 @@
+module Aws::CodeGuruProfiler
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CodeGuruProfiler::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddNotificationChannelsResponse
+      include Smithy::Client::_Response[Types::AddNotificationChannelsOutput]
+      def notification_configuration: () -> Types::NotificationConfiguration?
+    end
+    def add_notification_channels: (
+      ?profiling_group_name: String,
+      ?channels: Array[
+        {
+          id: String,
+          uri: String,
+          event_publishers: Array[String]
+        }
+      ]
+    ) -> _AddNotificationChannelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddNotificationChannelsResponse
+
+    interface _BatchGetFrameMetricDataResponse
+      include Smithy::Client::_Response[Types::BatchGetFrameMetricDataOutput]
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def resolution: () -> String?
+      def end_times: () -> Array[Types::TimestampStructure]?
+      def unprocessed_end_times: () -> Hash[String, Array[Types::TimestampStructure]]?
+      def frame_metric_data: () -> Array[Types::FrameMetricDatum]?
+    end
+    def batch_get_frame_metric_data: (
+      ?profiling_group_name: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?period: String,
+      ?target_resolution: String,
+      ?frame_metrics: Array[
+        {
+          frame_name: String,
+          type: String,
+          thread_states: Array[String]
+        }
+      ]
+    ) -> _BatchGetFrameMetricDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetFrameMetricDataResponse
+
+    interface _ConfigureAgentResponse
+      include Smithy::Client::_Response[Types::ConfigureAgentOutput]
+      def configuration: () -> Types::AgentConfiguration?
+    end
+    def configure_agent: (
+      ?profiling_group_name: String,
+      ?fleet_instance_id: String,
+      ?metadata: Hash[String, String]
+    ) -> _ConfigureAgentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConfigureAgentResponse
+
+    interface _CreateProfilingGroupResponse
+      include Smithy::Client::_Response[Types::CreateProfilingGroupOutput]
+      def profiling_group: () -> Types::ProfilingGroupDescription?
+    end
+    def create_profiling_group: (
+      ?profiling_group_name: String,
+      ?compute_platform: String,
+      ?client_token: String,
+      ?agent_orchestration_config: {
+        profiling_enabled: bool
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateProfilingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProfilingGroupResponse
+
+    interface _DeleteProfilingGroupResponse
+      include Smithy::Client::_Response[Types::DeleteProfilingGroupOutput]
+    end
+    def delete_profiling_group: (
+      ?profiling_group_name: String
+    ) -> _DeleteProfilingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProfilingGroupResponse
+
+    interface _DescribeProfilingGroupResponse
+      include Smithy::Client::_Response[Types::DescribeProfilingGroupOutput]
+      def profiling_group: () -> Types::ProfilingGroupDescription?
+    end
+    def describe_profiling_group: (
+      ?profiling_group_name: String
+    ) -> _DescribeProfilingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeProfilingGroupResponse
+
+    interface _GetFindingsReportAccountSummaryResponse
+      include Smithy::Client::_Response[Types::GetFindingsReportAccountSummaryOutput]
+      def report_summaries: () -> Array[Types::FindingsReportSummary]?
+      def next_token: () -> String?
+    end
+    def get_findings_report_account_summary: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?daily_reports_only: bool
+    ) -> _GetFindingsReportAccountSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFindingsReportAccountSummaryResponse
+
+    interface _GetNotificationConfigurationResponse
+      include Smithy::Client::_Response[Types::GetNotificationConfigurationOutput]
+      def notification_configuration: () -> Types::NotificationConfiguration?
+    end
+    def get_notification_configuration: (
+      ?profiling_group_name: String
+    ) -> _GetNotificationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNotificationConfigurationResponse
+
+    interface _GetPolicyResponse
+      include Smithy::Client::_Response[Types::GetPolicyOutput]
+      def policy: () -> String?
+      def revision_id: () -> String?
+    end
+    def get_policy: (
+      ?profiling_group_name: String
+    ) -> _GetPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyResponse
+
+    interface _GetProfileResponse
+      include Smithy::Client::_Response[Types::GetProfileOutput]
+      def profile: () -> String?
+      def content_type: () -> String?
+      def content_encoding: () -> String?
+    end
+    def get_profile: (
+      ?profiling_group_name: String,
+      ?start_time: Time,
+      ?period: String,
+      ?end_time: Time,
+      ?max_depth: Integer,
+      ?accept: String
+    ) -> _GetProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProfileResponse
+
+    interface _GetRecommendationsResponse
+      include Smithy::Client::_Response[Types::GetRecommendationsOutput]
+      def profiling_group_name: () -> String?
+      def profile_start_time: () -> Time?
+      def profile_end_time: () -> Time?
+      def recommendations: () -> Array[Types::Recommendation]?
+      def anomalies: () -> Array[Types::Anomaly]?
+    end
+    def get_recommendations: (
+      ?profiling_group_name: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?locale: String
+    ) -> _GetRecommendationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRecommendationsResponse
+
+    interface _ListFindingsReportsResponse
+      include Smithy::Client::_Response[Types::ListFindingsReportsOutput]
+      def findings_report_summaries: () -> Array[Types::FindingsReportSummary]?
+      def next_token: () -> String?
+    end
+    def list_findings_reports: (
+      ?profiling_group_name: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?daily_reports_only: bool
+    ) -> _ListFindingsReportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFindingsReportsResponse
+
+    interface _ListProfileTimesResponse
+      include Smithy::Client::_Response[Types::ListProfileTimesOutput]
+      def profile_times: () -> Array[Types::ProfileTime]?
+      def next_token: () -> String?
+    end
+    def list_profile_times: (
+      ?profiling_group_name: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?period: String,
+      ?order_by: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListProfileTimesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProfileTimesResponse
+
+    interface _ListProfilingGroupsResponse
+      include Smithy::Client::_Response[Types::ListProfilingGroupsOutput]
+      def profiling_group_names: () -> Array[String]?
+      def profiling_groups: () -> Array[Types::ProfilingGroupDescription]?
+      def next_token: () -> String?
+    end
+    def list_profiling_groups: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?include_description: bool
+    ) -> _ListProfilingGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProfilingGroupsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PostAgentProfileResponse
+      include Smithy::Client::_Response[Types::PostAgentProfileOutput]
+    end
+    def post_agent_profile: (
+      ?profiling_group_name: String,
+      ?agent_profile: String,
+      ?profile_token: String,
+      ?content_type: String
+    ) -> _PostAgentProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PostAgentProfileResponse
+
+    interface _PutPermissionResponse
+      include Smithy::Client::_Response[Types::PutPermissionOutput]
+      def policy: () -> String?
+      def revision_id: () -> String?
+    end
+    def put_permission: (
+      ?profiling_group_name: String,
+      ?action_group: String,
+      ?principals: Array[String],
+      ?revision_id: String
+    ) -> _PutPermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutPermissionResponse
+
+    interface _RemoveNotificationChannelResponse
+      include Smithy::Client::_Response[Types::RemoveNotificationChannelOutput]
+      def notification_configuration: () -> Types::NotificationConfiguration?
+    end
+    def remove_notification_channel: (
+      ?profiling_group_name: String,
+      ?channel_id: String
+    ) -> _RemoveNotificationChannelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveNotificationChannelResponse
+
+    interface _RemovePermissionResponse
+      include Smithy::Client::_Response[Types::RemovePermissionOutput]
+      def policy: () -> String?
+      def revision_id: () -> String?
+    end
+    def remove_permission: (
+      ?profiling_group_name: String,
+      ?action_group: String,
+      ?revision_id: String
+    ) -> _RemovePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemovePermissionResponse
+
+    interface _SubmitFeedbackResponse
+      include Smithy::Client::_Response[Types::SubmitFeedbackOutput]
+    end
+    def submit_feedback: (
+      ?profiling_group_name: String,
+      ?anomaly_instance_id: String,
+      ?type: String,
+      ?comment: String
+    ) -> _SubmitFeedbackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SubmitFeedbackResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateProfilingGroupResponse
+      include Smithy::Client::_Response[Types::UpdateProfilingGroupOutput]
+      def profiling_group: () -> Types::ProfilingGroupDescription?
+    end
+    def update_profiling_group: (
+      ?profiling_group_name: String,
+      ?agent_orchestration_config: {
+        profiling_enabled: bool
+      }
+    ) -> _UpdateProfilingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProfilingGroupResponse
+  end
+end

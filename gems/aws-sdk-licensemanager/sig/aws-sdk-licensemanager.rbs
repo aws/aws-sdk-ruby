@@ -1,0 +1,5 @@
+  module Aws
+    module LicenseManager
+      VERSION: String
+    end
+  end

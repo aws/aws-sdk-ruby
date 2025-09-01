@@ -1,0 +1,4409 @@
+module Aws::WorkSpaces
+  module Types
+
+    module AGAModeForDirectoryEnum
+      ENABLED_AUTO: String
+      DISABLED: String
+    end
+
+    module AGAModeForWorkSpaceEnum
+      ENABLED_AUTO: String
+      DISABLED: String
+      INHERITED: String
+    end
+
+    module AGAPreferredProtocolForDirectory
+      TCP: String
+      NONE: String
+    end
+
+    module AGAPreferredProtocolForWorkSpace
+      TCP: String
+      NONE: String
+      INHERITED: String
+    end
+
+    class AcceptAccountLinkInvitationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?link_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor link_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class AcceptAccountLinkInvitationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_link: Types::AccountLink,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_link: Types::AccountLink?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccessEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_endpoint_type: String,
+        ?vpc_endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_endpoint_type: String?
+      attr_accessor vpc_endpoint_id: String?
+    end
+
+    class AccessEndpointConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_endpoints: Array[Types::AccessEndpoint],
+        ?internet_fallback_protocols: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_endpoints: Array[Types::AccessEndpoint]?
+      attr_accessor internet_fallback_protocols: Array[String]?
+    end
+
+    module AccessEndpointType
+      STREAMING_WSP: String
+    end
+
+    module AccessPropertyValue
+      ALLOW: String
+      DENY: String
+    end
+
+    class AccountLink
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_link_id: String,
+        ?account_link_status: String,
+        ?source_account_id: String,
+        ?target_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_link_id: String?
+      attr_accessor account_link_status: String?
+      attr_accessor source_account_id: String?
+      attr_accessor target_account_id: String?
+    end
+
+    module AccountLinkStatusEnum
+      LINKED: String
+      LINKING_FAILED: String
+      LINK_NOT_FOUND: String
+      PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT: String
+      REJECTED: String
+    end
+
+    class AccountModification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?modification_state: String,
+        ?dedicated_tenancy_support: String,
+        ?dedicated_tenancy_management_cidr_range: String,
+        ?start_time: Time,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor modification_state: String?
+      attr_accessor dedicated_tenancy_support: String?
+      attr_accessor dedicated_tenancy_management_cidr_range: String?
+      attr_accessor start_time: Time?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class ActiveDirectoryConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?service_account_secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor service_account_secret_arn: String?
+    end
+
+    module Application
+      Microsoft_Office_2016: String
+      Microsoft_Office_2019: String
+    end
+
+    module ApplicationAssociatedResourceType
+      WORKSPACE: String
+      BUNDLE: String
+      IMAGE: String
+    end
+
+    class ApplicationNotSupportedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ApplicationResourceAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?associated_resource_id: String,
+        ?associated_resource_type: String,
+        ?created: Time,
+        ?last_updated_time: Time,
+        ?state: String,
+        ?state_reason: Types::AssociationStateReason,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor associated_resource_id: String?
+      attr_accessor associated_resource_type: String?
+      attr_accessor created: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor state: String?
+      attr_accessor state_reason: Types::AssociationStateReason?
+    end
+
+    class ApplicationSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?settings_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor settings_group: String?
+    end
+
+    class ApplicationSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?settings_group: String,
+        ?s3_bucket_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor settings_group: String?
+      attr_accessor s3_bucket_name: String?
+    end
+
+    module ApplicationSettingsStatusEnum
+      DISABLED: String
+      ENABLED: String
+    end
+
+    class AssociateConnectionAliasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_id: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_id: String?
+      attr_accessor resource_id: String?
+    end
+
+    class AssociateConnectionAliasResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_identifier: String?
+    end
+
+    class AssociateIpGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor group_ids: Array[String]?
+    end
+
+    class AssociateIpGroupsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateWorkspaceApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor application_id: String?
+    end
+
+    class AssociateWorkspaceApplicationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association: Types::WorkspaceResourceAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association: Types::WorkspaceResourceAssociation?
+    end
+
+    module AssociationErrorCode
+      INSUFFICIENT_DISKSPACE: String
+      INSUFFICIENT_MEMORY: String
+      UNSUPPORTED_OPERATING_SYSTEM: String
+      INTERNAL_SERVER_ERROR: String
+      WORKSPACE_UNREACHABLE: String
+    end
+
+    module AssociationState
+      PENDING_INSTALL: String
+      PENDING_INSTALL_DEPLOYMENT: String
+      PENDING_UNINSTALL: String
+      PENDING_UNINSTALL_DEPLOYMENT: String
+      INSTALLING: String
+      UNINSTALLING: String
+      ERROR: String
+      COMPLETED: String
+      REMOVED: String
+    end
+
+    class AssociationStateReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    module AssociationStatus
+      NOT_ASSOCIATED: String
+      ASSOCIATED_WITH_OWNER_ACCOUNT: String
+      ASSOCIATED_WITH_SHARED_ACCOUNT: String
+      PENDING_ASSOCIATION: String
+      PENDING_DISASSOCIATION: String
+    end
+
+    module AuthenticationType
+      SAML: String
+    end
+
+    class AuthorizeIpRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+        ?user_rules: Array[Types::IpRuleItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+      attr_accessor user_rules: Array[Types::IpRuleItem]?
+    end
+
+    class AuthorizeIpRulesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module BundleAssociatedResourceType
+      APPLICATION: String
+    end
+
+    class BundleResourceAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associated_resource_id: String,
+        ?associated_resource_type: String,
+        ?bundle_id: String,
+        ?created: Time,
+        ?last_updated_time: Time,
+        ?state: String,
+        ?state_reason: Types::AssociationStateReason,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associated_resource_id: String?
+      attr_accessor associated_resource_type: String?
+      attr_accessor bundle_id: String?
+      attr_accessor created: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor state: String?
+      attr_accessor state_reason: Types::AssociationStateReason?
+    end
+
+    module BundleType
+      REGULAR: String
+      STANDBY: String
+    end
+
+    class Capacity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?desired_user_sessions: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor desired_user_sessions: Integer?
+    end
+
+    class CapacityStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?available_user_sessions: Integer,
+        ?desired_user_sessions: Integer,
+        ?actual_user_sessions: Integer,
+        ?active_user_sessions: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor available_user_sessions: Integer?
+      attr_accessor desired_user_sessions: Integer?
+      attr_accessor actual_user_sessions: Integer?
+      attr_accessor active_user_sessions: Integer?
+    end
+
+    class CertificateBasedAuthProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?certificate_authority_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor certificate_authority_arn: String?
+    end
+
+    module CertificateBasedAuthStatusEnum
+      DISABLED: String
+      ENABLED: String
+    end
+
+    module ClientDeviceType
+      DEVICE_TYPE_WINDOWS: String
+      DEVICE_TYPE_OSX: String
+      DEVICE_TYPE_ANDROID: String
+      DEVICE_TYPE_IOS: String
+      DEVICE_TYPE_LINUX: String
+      DEVICE_TYPE_WEB: String
+    end
+
+    class ClientProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reconnect_enabled: String,
+        ?log_upload_enabled: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reconnect_enabled: String?
+      attr_accessor log_upload_enabled: String?
+    end
+
+    class ClientPropertiesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?client_properties: Types::ClientProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor client_properties: Types::ClientProperties?
+    end
+
+    module Compute
+      VALUE: String
+      STANDARD: String
+      PERFORMANCE: String
+      POWER: String
+      GRAPHICS: String
+      POWERPRO: String
+      GENERALPURPOSE_4XLARGE: String
+      GENERALPURPOSE_8XLARGE: String
+      GRAPHICSPRO: String
+      GRAPHICS_G4DN: String
+      GRAPHICSPRO_G4DN: String
+    end
+
+    class ComputeNotCompatibleException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ComputeType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConnectClientAddIn
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?add_in_id: String,
+        ?resource_id: String,
+        ?name: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor add_in_id: String?
+      attr_accessor resource_id: String?
+      attr_accessor name: String?
+      attr_accessor url: String?
+    end
+
+    class ConnectionAlias
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_string: String,
+        ?alias_id: String,
+        ?state: String,
+        ?owner_account_id: String,
+        ?associations: Array[Types::ConnectionAliasAssociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_string: String?
+      attr_accessor alias_id: String?
+      attr_accessor state: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor associations: Array[Types::ConnectionAliasAssociation]?
+    end
+
+    class ConnectionAliasAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association_status: String,
+        ?associated_account_id: String,
+        ?resource_id: String,
+        ?connection_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association_status: String?
+      attr_accessor associated_account_id: String?
+      attr_accessor resource_id: String?
+      attr_accessor connection_identifier: String?
+    end
+
+    class ConnectionAliasPermission
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shared_account_id: String,
+        ?allow_association: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shared_account_id: String?
+      attr_accessor allow_association: bool?
+    end
+
+    module ConnectionAliasState
+      CREATING: String
+      CREATED: String
+      DELETING: String
+    end
+
+    module ConnectionState
+      CONNECTED: String
+      DISCONNECTED: String
+      UNKNOWN: String
+    end
+
+    class CopyWorkspaceImageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?source_image_id: String,
+        ?source_region: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor source_image_id: String?
+      attr_accessor source_region: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CopyWorkspaceImageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_id: String?
+    end
+
+    class CreateAccountLinkInvitationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_account_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_account_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateAccountLinkInvitationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_link: Types::AccountLink,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_link: Types::AccountLink?
+    end
+
+    class CreateConnectClientAddInRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?name: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor name: String?
+      attr_accessor url: String?
+    end
+
+    class CreateConnectClientAddInResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?add_in_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor add_in_id: String?
+    end
+
+    class CreateConnectionAliasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_string: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_string: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateConnectionAliasResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_id: String?
+    end
+
+    class CreateIpGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+        ?group_desc: String,
+        ?user_rules: Array[Types::IpRuleItem],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+      attr_accessor group_desc: String?
+      attr_accessor user_rules: Array[Types::IpRuleItem]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateIpGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+    end
+
+    class CreateStandbyWorkspacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?primary_region: String,
+        ?standby_workspaces: Array[Types::StandbyWorkspace],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primary_region: String?
+      attr_accessor standby_workspaces: Array[Types::StandbyWorkspace]?
+    end
+
+    class CreateStandbyWorkspacesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_standby_requests: Array[Types::FailedCreateStandbyWorkspacesRequest],
+        ?pending_standby_requests: Array[Types::PendingCreateStandbyWorkspacesRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_standby_requests: Array[Types::FailedCreateStandbyWorkspacesRequest]?
+      attr_accessor pending_standby_requests: Array[Types::PendingCreateStandbyWorkspacesRequest]?
+    end
+
+    class CreateTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateTagsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateUpdatedWorkspaceImageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?source_image_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor source_image_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateUpdatedWorkspaceImageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_id: String?
+    end
+
+    class CreateWorkspaceBundleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bundle_name: String,
+        ?bundle_description: String,
+        ?image_id: String,
+        ?compute_type: Types::ComputeType,
+        ?user_storage: Types::UserStorage,
+        ?root_storage: Types::RootStorage,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bundle_name: String?
+      attr_accessor bundle_description: String?
+      attr_accessor image_id: String?
+      attr_accessor compute_type: Types::ComputeType?
+      attr_accessor user_storage: Types::UserStorage?
+      attr_accessor root_storage: Types::RootStorage?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateWorkspaceBundleResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_bundle: Types::WorkspaceBundle,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_bundle: Types::WorkspaceBundle?
+    end
+
+    class CreateWorkspaceImageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?workspace_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor workspace_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateWorkspaceImageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_id: String,
+        ?name: String,
+        ?description: String,
+        ?operating_system: Types::OperatingSystem,
+        ?state: String,
+        ?required_tenancy: String,
+        ?created: Time,
+        ?owner_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor operating_system: Types::OperatingSystem?
+      attr_accessor state: String?
+      attr_accessor required_tenancy: String?
+      attr_accessor created: Time?
+      attr_accessor owner_account_id: String?
+    end
+
+    class CreateWorkspacesPoolRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_name: String,
+        ?description: String,
+        ?bundle_id: String,
+        ?directory_id: String,
+        ?capacity: Types::Capacity,
+        ?tags: Array[Types::Tag],
+        ?application_settings: Types::ApplicationSettingsRequest,
+        ?timeout_settings: Types::TimeoutSettings,
+        ?running_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_name: String?
+      attr_accessor description: String?
+      attr_accessor bundle_id: String?
+      attr_accessor directory_id: String?
+      attr_accessor capacity: Types::Capacity?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor application_settings: Types::ApplicationSettingsRequest?
+      attr_accessor timeout_settings: Types::TimeoutSettings?
+      attr_accessor running_mode: String?
+    end
+
+    class CreateWorkspacesPoolResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspaces_pool: Types::WorkspacesPool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspaces_pool: Types::WorkspacesPool?
+    end
+
+    class CreateWorkspacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspaces: Array[Types::WorkspaceRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspaces: Array[Types::WorkspaceRequest]?
+    end
+
+    class CreateWorkspacesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_requests: Array[Types::FailedCreateWorkspaceRequest],
+        ?pending_requests: Array[Types::Workspace],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_requests: Array[Types::FailedCreateWorkspaceRequest]?
+      attr_accessor pending_requests: Array[Types::Workspace]?
+    end
+
+    module DataReplication
+      NO_REPLICATION: String
+      PRIMARY_AS_SOURCE: String
+    end
+
+    class DataReplicationSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_replication: String,
+        ?recovery_snapshot_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_replication: String?
+      attr_accessor recovery_snapshot_time: Time?
+    end
+
+    module DedicatedTenancyAccountType
+      SOURCE_ACCOUNT: String
+      TARGET_ACCOUNT: String
+    end
+
+    module DedicatedTenancyModificationStateEnum
+      PENDING: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    module DedicatedTenancySupportEnum
+      ENABLED: String
+    end
+
+    module DedicatedTenancySupportResultEnum
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class DefaultClientBrandingAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logo_url: String,
+        ?support_email: String,
+        ?support_link: String,
+        ?forgot_password_link: String,
+        ?login_message: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logo_url: String?
+      attr_accessor support_email: String?
+      attr_accessor support_link: String?
+      attr_accessor forgot_password_link: String?
+      attr_accessor login_message: Hash[String, String]?
+    end
+
+    class DefaultImportClientBrandingAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logo: String,
+        ?support_email: String,
+        ?support_link: String,
+        ?forgot_password_link: String,
+        ?login_message: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logo: String?
+      attr_accessor support_email: String?
+      attr_accessor support_link: String?
+      attr_accessor forgot_password_link: String?
+      attr_accessor login_message: Hash[String, String]?
+    end
+
+    class DefaultWorkspaceCreationProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_internet_access: bool,
+        ?default_ou: String,
+        ?custom_security_group_id: String,
+        ?user_enabled_as_local_administrator: bool,
+        ?enable_maintenance_mode: bool,
+        ?instance_iam_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_internet_access: bool?
+      attr_accessor default_ou: String?
+      attr_accessor custom_security_group_id: String?
+      attr_accessor user_enabled_as_local_administrator: bool?
+      attr_accessor enable_maintenance_mode: bool?
+      attr_accessor instance_iam_role_arn: String?
+    end
+
+    module DeletableCertificateBasedAuthProperty
+      CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN: String
+    end
+
+    module DeletableSamlProperty
+      SAML_PROPERTIES_USER_ACCESS_URL: String
+      SAML_PROPERTIES_RELAY_STATE_PARAMETER_NAME: String
+    end
+
+    class DeleteAccountLinkInvitationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?link_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor link_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteAccountLinkInvitationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_link: Types::AccountLink,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_link: Types::AccountLink?
+    end
+
+    class DeleteClientBrandingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?platforms: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor platforms: Array[String]?
+    end
+
+    class DeleteClientBrandingResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteConnectClientAddInRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?add_in_id: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor add_in_id: String?
+      attr_accessor resource_id: String?
+    end
+
+    class DeleteConnectClientAddInResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteConnectionAliasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_id: String?
+    end
+
+    class DeleteConnectionAliasResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteIpGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+    end
+
+    class DeleteIpGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class DeleteTagsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteWorkspaceBundleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bundle_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bundle_id: String?
+    end
+
+    class DeleteWorkspaceBundleResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteWorkspaceImageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_id: String?
+    end
+
+    class DeleteWorkspaceImageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeployWorkspaceApplicationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?force: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor force: bool?
+    end
+
+    class DeployWorkspaceApplicationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment: Types::WorkSpaceApplicationDeployment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment: Types::WorkSpaceApplicationDeployment?
+    end
+
+    class DeregisterWorkspaceDirectoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+    end
+
+    class DeregisterWorkspaceDirectoryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeAccountModificationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAccountModificationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_modifications: Array[Types::AccountModification],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_modifications: Array[Types::AccountModification]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeAccountResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dedicated_tenancy_support: String,
+        ?dedicated_tenancy_management_cidr_range: String,
+        ?dedicated_tenancy_account_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dedicated_tenancy_support: String?
+      attr_accessor dedicated_tenancy_management_cidr_range: String?
+      attr_accessor dedicated_tenancy_account_type: String?
+    end
+
+    class DescribeApplicationAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?application_id: String,
+        ?associated_resource_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor application_id: String?
+      attr_accessor associated_resource_types: Array[String]?
+    end
+
+    class DescribeApplicationAssociationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associations: Array[Types::ApplicationResourceAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associations: Array[Types::ApplicationResourceAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeApplicationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_ids: Array[String],
+        ?compute_type_names: Array[String],
+        ?license_type: String,
+        ?operating_system_names: Array[String],
+        ?owner: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_ids: Array[String]?
+      attr_accessor compute_type_names: Array[String]?
+      attr_accessor license_type: String?
+      attr_accessor operating_system_names: Array[String]?
+      attr_accessor owner: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeApplicationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?applications: Array[Types::WorkSpaceApplication],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor applications: Array[Types::WorkSpaceApplication]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeBundleAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bundle_id: String,
+        ?associated_resource_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bundle_id: String?
+      attr_accessor associated_resource_types: Array[String]?
+    end
+
+    class DescribeBundleAssociationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associations: Array[Types::BundleResourceAssociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associations: Array[Types::BundleResourceAssociation]?
+    end
+
+    class DescribeClientBrandingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+    end
+
+    class DescribeClientBrandingResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_type_windows: Types::DefaultClientBrandingAttributes,
+        ?device_type_osx: Types::DefaultClientBrandingAttributes,
+        ?device_type_android: Types::DefaultClientBrandingAttributes,
+        ?device_type_ios: Types::IosClientBrandingAttributes,
+        ?device_type_linux: Types::DefaultClientBrandingAttributes,
+        ?device_type_web: Types::DefaultClientBrandingAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_type_windows: Types::DefaultClientBrandingAttributes?
+      attr_accessor device_type_osx: Types::DefaultClientBrandingAttributes?
+      attr_accessor device_type_android: Types::DefaultClientBrandingAttributes?
+      attr_accessor device_type_ios: Types::IosClientBrandingAttributes?
+      attr_accessor device_type_linux: Types::DefaultClientBrandingAttributes?
+      attr_accessor device_type_web: Types::DefaultClientBrandingAttributes?
+    end
+
+    class DescribeClientPropertiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_ids: Array[String]?
+    end
+
+    class DescribeClientPropertiesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_properties_list: Array[Types::ClientPropertiesResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_properties_list: Array[Types::ClientPropertiesResult]?
+    end
+
+    class DescribeConnectClientAddInsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeConnectClientAddInsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?add_ins: Array[Types::ConnectClientAddIn],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor add_ins: Array[Types::ConnectClientAddIn]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConnectionAliasPermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeConnectionAliasPermissionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_id: String,
+        ?connection_alias_permissions: Array[Types::ConnectionAliasPermission],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_id: String?
+      attr_accessor connection_alias_permissions: Array[Types::ConnectionAliasPermission]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConnectionAliasesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_ids: Array[String],
+        ?resource_id: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_ids: Array[String]?
+      attr_accessor resource_id: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConnectionAliasesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_aliases: Array[Types::ConnectionAlias],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_aliases: Array[Types::ConnectionAlias]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeImageAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_id: String,
+        ?associated_resource_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_id: String?
+      attr_accessor associated_resource_types: Array[String]?
+    end
+
+    class DescribeImageAssociationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associations: Array[Types::ImageResourceAssociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associations: Array[Types::ImageResourceAssociation]?
+    end
+
+    class DescribeIpGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_ids: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_ids: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeIpGroupsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result: Array[Types::WorkspacesIpGroup],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: Array[Types::WorkspacesIpGroup]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+    end
+
+    class DescribeTagsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_list: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_list: Array[Types::Tag]?
+    end
+
+    class DescribeWorkspaceAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?associated_resource_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor associated_resource_types: Array[String]?
+    end
+
+    class DescribeWorkspaceAssociationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associations: Array[Types::WorkspaceResourceAssociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associations: Array[Types::WorkspaceResourceAssociation]?
+    end
+
+    class DescribeWorkspaceBundlesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bundle_ids: Array[String],
+        ?owner: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bundle_ids: Array[String]?
+      attr_accessor owner: String?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeWorkspaceBundlesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bundles: Array[Types::WorkspaceBundle],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bundles: Array[Types::WorkspaceBundle]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeWorkspaceDirectoriesFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module DescribeWorkspaceDirectoriesFilterName
+      USER_IDENTITY_TYPE: String
+      WORKSPACE_TYPE: String
+    end
+
+    class DescribeWorkspaceDirectoriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_ids: Array[String],
+        ?workspace_directory_names: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::DescribeWorkspaceDirectoriesFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_ids: Array[String]?
+      attr_accessor workspace_directory_names: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::DescribeWorkspaceDirectoriesFilter]?
+    end
+
+    class DescribeWorkspaceDirectoriesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directories: Array[Types::WorkspaceDirectory],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directories: Array[Types::WorkspaceDirectory]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeWorkspaceImagePermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeWorkspaceImagePermissionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_id: String,
+        ?image_permissions: Array[Types::ImagePermission],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_id: String?
+      attr_accessor image_permissions: Array[Types::ImagePermission]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeWorkspaceImagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_ids: Array[String],
+        ?image_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_ids: Array[String]?
+      attr_accessor image_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeWorkspaceImagesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?images: Array[Types::WorkspaceImage],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor images: Array[Types::WorkspaceImage]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeWorkspaceSnapshotsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+    end
+
+    class DescribeWorkspaceSnapshotsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rebuild_snapshots: Array[Types::Snapshot],
+        ?restore_snapshots: Array[Types::Snapshot],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rebuild_snapshots: Array[Types::Snapshot]?
+      attr_accessor restore_snapshots: Array[Types::Snapshot]?
+    end
+
+    class DescribeWorkspacesConnectionStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeWorkspacesConnectionStatusResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspaces_connection_status: Array[Types::WorkspaceConnectionStatus],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspaces_connection_status: Array[Types::WorkspaceConnectionStatus]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeWorkspacesPoolSessionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_id: String,
+        ?user_id: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_id: String?
+      attr_accessor user_id: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeWorkspacesPoolSessionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sessions: Array[Types::WorkspacesPoolSession],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sessions: Array[Types::WorkspacesPoolSession]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeWorkspacesPoolsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+        ?operator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+      attr_accessor operator: String?
+    end
+
+    module DescribeWorkspacesPoolsFilterName
+      POOLNAME: String
+    end
+
+    module DescribeWorkspacesPoolsFilterOperator
+      EQUALS: String
+      NOTEQUALS: String
+      CONTAINS: String
+      NOTCONTAINS: String
+    end
+
+    class DescribeWorkspacesPoolsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_ids: Array[String],
+        ?filters: Array[Types::DescribeWorkspacesPoolsFilter],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_ids: Array[String]?
+      attr_accessor filters: Array[Types::DescribeWorkspacesPoolsFilter]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeWorkspacesPoolsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspaces_pools: Array[Types::WorkspacesPool],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspaces_pools: Array[Types::WorkspacesPool]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeWorkspacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_ids: Array[String],
+        ?directory_id: String,
+        ?user_name: String,
+        ?bundle_id: String,
+        ?limit: Integer,
+        ?next_token: String,
+        ?workspace_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_ids: Array[String]?
+      attr_accessor directory_id: String?
+      attr_accessor user_name: String?
+      attr_accessor bundle_id: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+      attr_accessor workspace_name: String?
+    end
+
+    class DescribeWorkspacesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspaces: Array[Types::Workspace],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspaces: Array[Types::Workspace]?
+      attr_accessor next_token: String?
+    end
+
+    class DisassociateConnectionAliasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_id: String?
+    end
+
+    class DisassociateConnectionAliasResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateIpGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor group_ids: Array[String]?
+    end
+
+    class DisassociateIpGroupsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateWorkspaceApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor application_id: String?
+    end
+
+    class DisassociateWorkspaceApplicationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?association: Types::WorkspaceResourceAssociation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor association: Types::WorkspaceResourceAssociation?
+    end
+
+    module EndpointEncryptionMode
+      STANDARD_TLS: String
+      FIPS_VALIDATED: String
+    end
+
+    class ErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class FailedCreateStandbyWorkspacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?standby_workspace_request: Types::StandbyWorkspace,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor standby_workspace_request: Types::StandbyWorkspace?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class FailedCreateWorkspaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_request: Types::WorkspaceRequest,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_request: Types::WorkspaceRequest?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class FailedWorkspaceChangeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class GetAccountLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?link_id: String,
+        ?linked_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor link_id: String?
+      attr_accessor linked_account_id: String?
+    end
+
+    class GetAccountLinkResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_link: Types::AccountLink,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_link: Types::AccountLink?
+    end
+
+    class GlobalAcceleratorForDirectory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?preferred_protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor preferred_protocol: String?
+    end
+
+    class GlobalAcceleratorForWorkSpace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?preferred_protocol: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor preferred_protocol: String?
+    end
+
+    class IDCConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor application_arn: String?
+    end
+
+    module ImageAssociatedResourceType
+      APPLICATION: String
+    end
+
+    class ImagePermission
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shared_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shared_account_id: String?
+    end
+
+    class ImageResourceAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associated_resource_id: String,
+        ?associated_resource_type: String,
+        ?created: Time,
+        ?last_updated_time: Time,
+        ?image_id: String,
+        ?state: String,
+        ?state_reason: Types::AssociationStateReason,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associated_resource_id: String?
+      attr_accessor associated_resource_type: String?
+      attr_accessor created: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor image_id: String?
+      attr_accessor state: String?
+      attr_accessor state_reason: Types::AssociationStateReason?
+    end
+
+    module ImageType
+      OWNED: String
+      SHARED: String
+    end
+
+    class ImportClientBrandingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?device_type_windows: Types::DefaultImportClientBrandingAttributes,
+        ?device_type_osx: Types::DefaultImportClientBrandingAttributes,
+        ?device_type_android: Types::DefaultImportClientBrandingAttributes,
+        ?device_type_ios: Types::IosImportClientBrandingAttributes,
+        ?device_type_linux: Types::DefaultImportClientBrandingAttributes,
+        ?device_type_web: Types::DefaultImportClientBrandingAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor device_type_windows: Types::DefaultImportClientBrandingAttributes?
+      attr_accessor device_type_osx: Types::DefaultImportClientBrandingAttributes?
+      attr_accessor device_type_android: Types::DefaultImportClientBrandingAttributes?
+      attr_accessor device_type_ios: Types::IosImportClientBrandingAttributes?
+      attr_accessor device_type_linux: Types::DefaultImportClientBrandingAttributes?
+      attr_accessor device_type_web: Types::DefaultImportClientBrandingAttributes?
+    end
+
+    class ImportClientBrandingResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_type_windows: Types::DefaultClientBrandingAttributes,
+        ?device_type_osx: Types::DefaultClientBrandingAttributes,
+        ?device_type_android: Types::DefaultClientBrandingAttributes,
+        ?device_type_ios: Types::IosClientBrandingAttributes,
+        ?device_type_linux: Types::DefaultClientBrandingAttributes,
+        ?device_type_web: Types::DefaultClientBrandingAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_type_windows: Types::DefaultClientBrandingAttributes?
+      attr_accessor device_type_osx: Types::DefaultClientBrandingAttributes?
+      attr_accessor device_type_android: Types::DefaultClientBrandingAttributes?
+      attr_accessor device_type_ios: Types::IosClientBrandingAttributes?
+      attr_accessor device_type_linux: Types::DefaultClientBrandingAttributes?
+      attr_accessor device_type_web: Types::DefaultClientBrandingAttributes?
+    end
+
+    class ImportWorkspaceImageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_image_id: String,
+        ?ingestion_process: String,
+        ?image_name: String,
+        ?image_description: String,
+        ?tags: Array[Types::Tag],
+        ?applications: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_image_id: String?
+      attr_accessor ingestion_process: String?
+      attr_accessor image_name: String?
+      attr_accessor image_description: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor applications: Array[String]?
+    end
+
+    class ImportWorkspaceImageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_id: String?
+    end
+
+    class IncompatibleApplicationsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module InternetFallbackProtocol
+      PCOIP: String
+    end
+
+    class InvalidParameterCombinationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterValuesException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidResourceStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IosClientBrandingAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logo_url: String,
+        ?logo2x_url: String,
+        ?logo3x_url: String,
+        ?support_email: String,
+        ?support_link: String,
+        ?forgot_password_link: String,
+        ?login_message: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logo_url: String?
+      attr_accessor logo2x_url: String?
+      attr_accessor logo3x_url: String?
+      attr_accessor support_email: String?
+      attr_accessor support_link: String?
+      attr_accessor forgot_password_link: String?
+      attr_accessor login_message: Hash[String, String]?
+    end
+
+    class IosImportClientBrandingAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logo: String,
+        ?logo2x: String,
+        ?logo3x: String,
+        ?support_email: String,
+        ?support_link: String,
+        ?forgot_password_link: String,
+        ?login_message: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logo: String?
+      attr_accessor logo2x: String?
+      attr_accessor logo3x: String?
+      attr_accessor support_email: String?
+      attr_accessor support_link: String?
+      attr_accessor forgot_password_link: String?
+      attr_accessor login_message: Hash[String, String]?
+    end
+
+    class IpRuleItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_rule: String,
+        ?rule_desc: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_rule: String?
+      attr_accessor rule_desc: String?
+    end
+
+    class ListAccountLinksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?link_status_filter: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor link_status_filter: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAccountLinksResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_links: Array[Types::AccountLink],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_links: Array[Types::AccountLink]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAvailableManagementCidrRangesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?management_cidr_range_constraint: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor management_cidr_range_constraint: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAvailableManagementCidrRangesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?management_cidr_ranges: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor management_cidr_ranges: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    module LogUploadEnum
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class MicrosoftEntraConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenant_id: String,
+        ?application_config_secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenant_id: String?
+      attr_accessor application_config_secret_arn: String?
+    end
+
+    class MigrateWorkspaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_workspace_id: String,
+        ?bundle_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_workspace_id: String?
+      attr_accessor bundle_id: String?
+    end
+
+    class MigrateWorkspaceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_workspace_id: String,
+        ?target_workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_workspace_id: String?
+      attr_accessor target_workspace_id: String?
+    end
+
+    module ModificationResourceEnum
+      ROOT_VOLUME: String
+      USER_VOLUME: String
+      COMPUTE_TYPE: String
+    end
+
+    class ModificationState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: String?
+      attr_accessor state: String?
+    end
+
+    module ModificationStateEnum
+      UPDATE_INITIATED: String
+      UPDATE_IN_PROGRESS: String
+    end
+
+    class ModifyAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dedicated_tenancy_support: String,
+        ?dedicated_tenancy_management_cidr_range: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dedicated_tenancy_support: String?
+      attr_accessor dedicated_tenancy_management_cidr_range: String?
+    end
+
+    class ModifyAccountResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ModifyCertificateBasedAuthPropertiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?certificate_based_auth_properties: Types::CertificateBasedAuthProperties,
+        ?properties_to_delete: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor certificate_based_auth_properties: Types::CertificateBasedAuthProperties?
+      attr_accessor properties_to_delete: Array[String]?
+    end
+
+    class ModifyCertificateBasedAuthPropertiesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ModifyClientPropertiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?client_properties: Types::ClientProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor client_properties: Types::ClientProperties?
+    end
+
+    class ModifyClientPropertiesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ModifyEndpointEncryptionModeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?endpoint_encryption_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor endpoint_encryption_mode: String?
+    end
+
+    class ModifyEndpointEncryptionModeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ModifySamlPropertiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?saml_properties: Types::SamlProperties,
+        ?properties_to_delete: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor saml_properties: Types::SamlProperties?
+      attr_accessor properties_to_delete: Array[String]?
+    end
+
+    class ModifySamlPropertiesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ModifySelfservicePermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?selfservice_permissions: Types::SelfservicePermissions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor selfservice_permissions: Types::SelfservicePermissions?
+    end
+
+    class ModifySelfservicePermissionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ModifyStreamingPropertiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?streaming_properties: Types::StreamingProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor streaming_properties: Types::StreamingProperties?
+    end
+
+    class ModifyStreamingPropertiesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ModifyWorkspaceAccessPropertiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?workspace_access_properties: Types::WorkspaceAccessProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor workspace_access_properties: Types::WorkspaceAccessProperties?
+    end
+
+    class ModifyWorkspaceAccessPropertiesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ModifyWorkspaceCreationPropertiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?workspace_creation_properties: Types::WorkspaceCreationProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor workspace_creation_properties: Types::WorkspaceCreationProperties?
+    end
+
+    class ModifyWorkspaceCreationPropertiesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ModifyWorkspacePropertiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?workspace_properties: Types::WorkspaceProperties,
+        ?data_replication: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor workspace_properties: Types::WorkspaceProperties?
+      attr_accessor data_replication: String?
+    end
+
+    class ModifyWorkspacePropertiesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ModifyWorkspaceStateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?workspace_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor workspace_state: String?
+    end
+
+    class ModifyWorkspaceStateResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class NetworkAccessConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?eni_private_ip_address: String,
+        ?eni_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor eni_private_ip_address: String?
+      attr_accessor eni_id: String?
+    end
+
+    class OperatingSystem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    module OperatingSystemName
+      AMAZON_LINUX_2: String
+      UBUNTU_18_04: String
+      UBUNTU_20_04: String
+      UBUNTU_22_04: String
+      UNKNOWN: String
+      WINDOWS_10: String
+      WINDOWS_11: String
+      WINDOWS_7: String
+      WINDOWS_SERVER_2016: String
+      WINDOWS_SERVER_2019: String
+      WINDOWS_SERVER_2022: String
+      RHEL_8: String
+      ROCKY_8: String
+    end
+
+    class OperatingSystemNotCompatibleException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module OperatingSystemType
+      WINDOWS: String
+      LINUX: String
+    end
+
+    class OperationInProgressException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OperationNotSupportedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    class PendingCreateStandbyWorkspacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_name: String,
+        ?directory_id: String,
+        ?state: String,
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_name: String?
+      attr_accessor directory_id: String?
+      attr_accessor state: String?
+      attr_accessor workspace_id: String?
+    end
+
+    module PoolsRunningMode
+      AUTO_STOP: String
+      ALWAYS_ON: String
+    end
+
+    module Protocol
+      PCOIP: String
+      WSP: String
+    end
+
+    class RebootRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+    end
+
+    class RebootWorkspacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reboot_workspace_requests: Array[Types::RebootRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reboot_workspace_requests: Array[Types::RebootRequest]?
+    end
+
+    class RebootWorkspacesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_requests: Array[Types::FailedWorkspaceChangeRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_requests: Array[Types::FailedWorkspaceChangeRequest]?
+    end
+
+    class RebuildRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+    end
+
+    class RebuildWorkspacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rebuild_workspace_requests: Array[Types::RebuildRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rebuild_workspace_requests: Array[Types::RebuildRequest]?
+    end
+
+    class RebuildWorkspacesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_requests: Array[Types::FailedWorkspaceChangeRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_requests: Array[Types::FailedWorkspaceChangeRequest]?
+    end
+
+    module ReconnectEnum
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class RegisterWorkspaceDirectoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?subnet_ids: Array[String],
+        ?enable_self_service: bool,
+        ?tenancy: String,
+        ?tags: Array[Types::Tag],
+        ?workspace_directory_name: String,
+        ?workspace_directory_description: String,
+        ?user_identity_type: String,
+        ?idc_instance_arn: String,
+        ?microsoft_entra_config: Types::MicrosoftEntraConfig,
+        ?workspace_type: String,
+        ?active_directory_config: Types::ActiveDirectoryConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor enable_self_service: bool?
+      attr_accessor tenancy: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor workspace_directory_name: String?
+      attr_accessor workspace_directory_description: String?
+      attr_accessor user_identity_type: String?
+      attr_accessor idc_instance_arn: String?
+      attr_accessor microsoft_entra_config: Types::MicrosoftEntraConfig?
+      attr_accessor workspace_type: String?
+      attr_accessor active_directory_config: Types::ActiveDirectoryConfig?
+    end
+
+    class RegisterWorkspaceDirectoryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor state: String?
+    end
+
+    class RejectAccountLinkInvitationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?link_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor link_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class RejectAccountLinkInvitationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_link: Types::AccountLink,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_link: Types::AccountLink?
+    end
+
+    class RelatedWorkspaceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?region: String,
+        ?state: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor region: String?
+      attr_accessor state: String?
+      attr_accessor type: String?
+    end
+
+    class ResourceAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceAssociatedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceCreationFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+    end
+
+    class ResourceLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+    end
+
+    class ResourceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+    end
+
+    class RestoreWorkspaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+    end
+
+    class RestoreWorkspaceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RevokeIpRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+        ?user_rules: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+      attr_accessor user_rules: Array[String]?
+    end
+
+    class RevokeIpRulesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RootStorage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity: String?
+    end
+
+    module RunningMode
+      AUTO_STOP: String
+      ALWAYS_ON: String
+      MANUAL: String
+    end
+
+    class SamlProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?user_access_url: String,
+        ?relay_state_parameter_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor user_access_url: String?
+      attr_accessor relay_state_parameter_name: String?
+    end
+
+    module SamlStatusEnum
+      DISABLED: String
+      ENABLED: String
+      ENABLED_WITH_DIRECTORY_LOGIN_FALLBACK: String
+    end
+
+    class SelfservicePermissions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restart_workspace: String,
+        ?increase_volume_size: String,
+        ?change_compute_type: String,
+        ?switch_running_mode: String,
+        ?rebuild_workspace: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restart_workspace: String?
+      attr_accessor increase_volume_size: String?
+      attr_accessor change_compute_type: String?
+      attr_accessor switch_running_mode: String?
+      attr_accessor rebuild_workspace: String?
+    end
+
+    module SessionConnectionState
+      CONNECTED: String
+      NOT_CONNECTED: String
+    end
+
+    class Snapshot
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snapshot_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snapshot_time: Time?
+    end
+
+    class StandbyWorkspace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?primary_workspace_id: String,
+        ?volume_encryption_key: String,
+        ?directory_id: String,
+        ?tags: Array[Types::Tag],
+        ?data_replication: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primary_workspace_id: String?
+      attr_accessor volume_encryption_key: String?
+      attr_accessor directory_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor data_replication: String?
+    end
+
+    module StandbyWorkspaceRelationshipType
+      PRIMARY: String
+      STANDBY: String
+    end
+
+    class StandbyWorkspacesProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?standby_workspace_id: String,
+        ?data_replication: String,
+        ?recovery_snapshot_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor standby_workspace_id: String?
+      attr_accessor data_replication: String?
+      attr_accessor recovery_snapshot_time: Time?
+    end
+
+    class StartRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+    end
+
+    class StartWorkspacesPoolRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_id: String?
+    end
+
+    class StartWorkspacesPoolResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StartWorkspacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_workspace_requests: Array[Types::StartRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_workspace_requests: Array[Types::StartRequest]?
+    end
+
+    class StartWorkspacesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_requests: Array[Types::FailedWorkspaceChangeRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_requests: Array[Types::FailedWorkspaceChangeRequest]?
+    end
+
+    class StopRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+    end
+
+    class StopWorkspacesPoolRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_id: String?
+    end
+
+    class StopWorkspacesPoolResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopWorkspacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stop_workspace_requests: Array[Types::StopRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stop_workspace_requests: Array[Types::StopRequest]?
+    end
+
+    class StopWorkspacesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_requests: Array[Types::FailedWorkspaceChangeRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_requests: Array[Types::FailedWorkspaceChangeRequest]?
+    end
+
+    class StorageConnector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_type: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_type: String?
+      attr_accessor status: String?
+    end
+
+    module StorageConnectorStatusEnum
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module StorageConnectorTypeEnum
+      HOME_FOLDER: String
+    end
+
+    module StreamingExperiencePreferredProtocolEnum
+      TCP: String
+      UDP: String
+    end
+
+    class StreamingProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?streaming_experience_preferred_protocol: String,
+        ?user_settings: Array[Types::UserSetting],
+        ?storage_connectors: Array[Types::StorageConnector],
+        ?global_accelerator: Types::GlobalAcceleratorForDirectory,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor streaming_experience_preferred_protocol: String?
+      attr_accessor user_settings: Array[Types::UserSetting]?
+      attr_accessor storage_connectors: Array[Types::StorageConnector]?
+      attr_accessor global_accelerator: Types::GlobalAcceleratorForDirectory?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    module TargetWorkspaceState
+      AVAILABLE: String
+      ADMIN_MAINTENANCE: String
+    end
+
+    module Tenancy
+      DEDICATED: String
+      SHARED: String
+    end
+
+    class TerminateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+    end
+
+    class TerminateWorkspacesPoolRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_id: String?
+    end
+
+    class TerminateWorkspacesPoolResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TerminateWorkspacesPoolSessionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor session_id: String?
+    end
+
+    class TerminateWorkspacesPoolSessionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TerminateWorkspacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terminate_workspace_requests: Array[Types::TerminateRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terminate_workspace_requests: Array[Types::TerminateRequest]?
+    end
+
+    class TerminateWorkspacesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_requests: Array[Types::FailedWorkspaceChangeRequest],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_requests: Array[Types::FailedWorkspaceChangeRequest]?
+    end
+
+    class TimeoutSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?disconnect_timeout_in_seconds: Integer,
+        ?idle_disconnect_timeout_in_seconds: Integer,
+        ?max_user_duration_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor disconnect_timeout_in_seconds: Integer?
+      attr_accessor idle_disconnect_timeout_in_seconds: Integer?
+      attr_accessor max_user_duration_in_seconds: Integer?
+    end
+
+    class UnsupportedNetworkConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnsupportedWorkspaceConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateConnectClientAddInRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?add_in_id: String,
+        ?resource_id: String,
+        ?name: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor add_in_id: String?
+      attr_accessor resource_id: String?
+      attr_accessor name: String?
+      attr_accessor url: String?
+    end
+
+    class UpdateConnectClientAddInResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateConnectionAliasPermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_id: String,
+        ?connection_alias_permission: Types::ConnectionAliasPermission,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_id: String?
+      attr_accessor connection_alias_permission: Types::ConnectionAliasPermission?
+    end
+
+    class UpdateConnectionAliasPermissionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_available: bool,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_available: bool?
+      attr_accessor description: String?
+    end
+
+    class UpdateRulesOfIpGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+        ?user_rules: Array[Types::IpRuleItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+      attr_accessor user_rules: Array[Types::IpRuleItem]?
+    end
+
+    class UpdateRulesOfIpGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateWorkspaceBundleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bundle_id: String,
+        ?image_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bundle_id: String?
+      attr_accessor image_id: String?
+    end
+
+    class UpdateWorkspaceBundleResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateWorkspaceImagePermissionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_id: String,
+        ?allow_copy_image: bool,
+        ?shared_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_id: String?
+      attr_accessor allow_copy_image: bool?
+      attr_accessor shared_account_id: String?
+    end
+
+    class UpdateWorkspaceImagePermissionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateWorkspacesPoolRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_id: String,
+        ?description: String,
+        ?bundle_id: String,
+        ?directory_id: String,
+        ?capacity: Types::Capacity,
+        ?application_settings: Types::ApplicationSettingsRequest,
+        ?timeout_settings: Types::TimeoutSettings,
+        ?running_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_id: String?
+      attr_accessor description: String?
+      attr_accessor bundle_id: String?
+      attr_accessor directory_id: String?
+      attr_accessor capacity: Types::Capacity?
+      attr_accessor application_settings: Types::ApplicationSettingsRequest?
+      attr_accessor timeout_settings: Types::TimeoutSettings?
+      attr_accessor running_mode: String?
+    end
+
+    class UpdateWorkspacesPoolResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspaces_pool: Types::WorkspacesPool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspaces_pool: Types::WorkspacesPool?
+    end
+
+    module UserIdentityType
+      CUSTOMER_MANAGED: String
+      AWS_DIRECTORY_SERVICE: String
+      AWS_IAM_IDENTITY_CENTER: String
+    end
+
+    class UserSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?permission: String,
+        ?maximum_length: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor permission: String?
+      attr_accessor maximum_length: Integer?
+    end
+
+    module UserSettingActionEnum
+      CLIPBOARD_COPY_FROM_LOCAL_DEVICE: String
+      CLIPBOARD_COPY_TO_LOCAL_DEVICE: String
+      PRINTING_TO_LOCAL_DEVICE: String
+      SMART_CARD: String
+    end
+
+    module UserSettingPermissionEnum
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class UserStorage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WorkSpaceApplication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?created: Time,
+        ?description: String,
+        ?license_type: String,
+        ?name: String,
+        ?owner: String,
+        ?state: String,
+        ?supported_compute_type_names: Array[String],
+        ?supported_operating_system_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor created: Time?
+      attr_accessor description: String?
+      attr_accessor license_type: String?
+      attr_accessor name: String?
+      attr_accessor owner: String?
+      attr_accessor state: String?
+      attr_accessor supported_compute_type_names: Array[String]?
+      attr_accessor supported_operating_system_names: Array[String]?
+    end
+
+    class WorkSpaceApplicationDeployment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associations: Array[Types::WorkspaceResourceAssociation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associations: Array[Types::WorkspaceResourceAssociation]?
+    end
+
+    module WorkSpaceApplicationLicenseType
+      LICENSED: String
+      UNLICENSED: String
+    end
+
+    module WorkSpaceApplicationState
+      PENDING: String
+      ERROR: String
+      AVAILABLE: String
+      UNINSTALL_ONLY: String
+    end
+
+    module WorkSpaceAssociatedResourceType
+      APPLICATION: String
+    end
+
+    class Workspace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?directory_id: String,
+        ?user_name: String,
+        ?ip_address: String,
+        ?state: String,
+        ?bundle_id: String,
+        ?subnet_id: String,
+        ?error_message: String,
+        ?error_code: String,
+        ?computer_name: String,
+        ?volume_encryption_key: String,
+        ?user_volume_encryption_enabled: bool,
+        ?root_volume_encryption_enabled: bool,
+        ?workspace_name: String,
+        ?workspace_properties: Types::WorkspaceProperties,
+        ?modification_states: Array[Types::ModificationState],
+        ?related_workspaces: Array[Types::RelatedWorkspaceProperties],
+        ?data_replication_settings: Types::DataReplicationSettings,
+        ?standby_workspaces_properties: Array[Types::StandbyWorkspacesProperties],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor directory_id: String?
+      attr_accessor user_name: String?
+      attr_accessor ip_address: String?
+      attr_accessor state: String?
+      attr_accessor bundle_id: String?
+      attr_accessor subnet_id: String?
+      attr_accessor error_message: String?
+      attr_accessor error_code: String?
+      attr_accessor computer_name: String?
+      attr_accessor volume_encryption_key: String?
+      attr_accessor user_volume_encryption_enabled: bool?
+      attr_accessor root_volume_encryption_enabled: bool?
+      attr_accessor workspace_name: String?
+      attr_accessor workspace_properties: Types::WorkspaceProperties?
+      attr_accessor modification_states: Array[Types::ModificationState]?
+      attr_accessor related_workspaces: Array[Types::RelatedWorkspaceProperties]?
+      attr_accessor data_replication_settings: Types::DataReplicationSettings?
+      attr_accessor standby_workspaces_properties: Array[Types::StandbyWorkspacesProperties]?
+    end
+
+    class WorkspaceAccessProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_type_windows: String,
+        ?device_type_osx: String,
+        ?device_type_web: String,
+        ?device_type_ios: String,
+        ?device_type_android: String,
+        ?device_type_chrome_os: String,
+        ?device_type_zero_client: String,
+        ?device_type_linux: String,
+        ?device_type_work_spaces_thin_client: String,
+        ?access_endpoint_config: Types::AccessEndpointConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_type_windows: String?
+      attr_accessor device_type_osx: String?
+      attr_accessor device_type_web: String?
+      attr_accessor device_type_ios: String?
+      attr_accessor device_type_android: String?
+      attr_accessor device_type_chrome_os: String?
+      attr_accessor device_type_zero_client: String?
+      attr_accessor device_type_linux: String?
+      attr_accessor device_type_work_spaces_thin_client: String?
+      attr_accessor access_endpoint_config: Types::AccessEndpointConfig?
+    end
+
+    class WorkspaceBundle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bundle_id: String,
+        ?name: String,
+        ?owner: String,
+        ?description: String,
+        ?image_id: String,
+        ?root_storage: Types::RootStorage,
+        ?user_storage: Types::UserStorage,
+        ?compute_type: Types::ComputeType,
+        ?last_updated_time: Time,
+        ?creation_time: Time,
+        ?state: String,
+        ?bundle_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bundle_id: String?
+      attr_accessor name: String?
+      attr_accessor owner: String?
+      attr_accessor description: String?
+      attr_accessor image_id: String?
+      attr_accessor root_storage: Types::RootStorage?
+      attr_accessor user_storage: Types::UserStorage?
+      attr_accessor compute_type: Types::ComputeType?
+      attr_accessor last_updated_time: Time?
+      attr_accessor creation_time: Time?
+      attr_accessor state: String?
+      attr_accessor bundle_type: String?
+    end
+
+    module WorkspaceBundleState
+      AVAILABLE: String
+      PENDING: String
+      ERROR: String
+    end
+
+    class WorkspaceConnectionStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workspace_id: String,
+        ?connection_state: String,
+        ?connection_state_check_timestamp: Time,
+        ?last_known_user_connection_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workspace_id: String?
+      attr_accessor connection_state: String?
+      attr_accessor connection_state_check_timestamp: Time?
+      attr_accessor last_known_user_connection_timestamp: Time?
+    end
+
+    class WorkspaceCreationProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_internet_access: bool,
+        ?default_ou: String,
+        ?custom_security_group_id: String,
+        ?user_enabled_as_local_administrator: bool,
+        ?enable_maintenance_mode: bool,
+        ?instance_iam_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_internet_access: bool?
+      attr_accessor default_ou: String?
+      attr_accessor custom_security_group_id: String?
+      attr_accessor user_enabled_as_local_administrator: bool?
+      attr_accessor enable_maintenance_mode: bool?
+      attr_accessor instance_iam_role_arn: String?
+    end
+
+    class WorkspaceDirectory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?alias: String,
+        ?directory_name: String,
+        ?registration_code: String,
+        ?subnet_ids: Array[String],
+        ?dns_ip_addresses: Array[String],
+        ?customer_user_name: String,
+        ?iam_role_id: String,
+        ?directory_type: String,
+        ?workspace_security_group_id: String,
+        ?state: String,
+        ?workspace_creation_properties: Types::DefaultWorkspaceCreationProperties,
+        ?ip_group_ids: Array[String],
+        ?workspace_access_properties: Types::WorkspaceAccessProperties,
+        ?tenancy: String,
+        ?selfservice_permissions: Types::SelfservicePermissions,
+        ?saml_properties: Types::SamlProperties,
+        ?certificate_based_auth_properties: Types::CertificateBasedAuthProperties,
+        ?endpoint_encryption_mode: String,
+        ?microsoft_entra_config: Types::MicrosoftEntraConfig,
+        ?workspace_directory_name: String,
+        ?workspace_directory_description: String,
+        ?user_identity_type: String,
+        ?workspace_type: String,
+        ?idc_config: Types::IDCConfig,
+        ?active_directory_config: Types::ActiveDirectoryConfig,
+        ?streaming_properties: Types::StreamingProperties,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor alias: String?
+      attr_accessor directory_name: String?
+      attr_accessor registration_code: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor dns_ip_addresses: Array[String]?
+      attr_accessor customer_user_name: String?
+      attr_accessor iam_role_id: String?
+      attr_accessor directory_type: String?
+      attr_accessor workspace_security_group_id: String?
+      attr_accessor state: String?
+      attr_accessor workspace_creation_properties: Types::DefaultWorkspaceCreationProperties?
+      attr_accessor ip_group_ids: Array[String]?
+      attr_accessor workspace_access_properties: Types::WorkspaceAccessProperties?
+      attr_accessor tenancy: String?
+      attr_accessor selfservice_permissions: Types::SelfservicePermissions?
+      attr_accessor saml_properties: Types::SamlProperties?
+      attr_accessor certificate_based_auth_properties: Types::CertificateBasedAuthProperties?
+      attr_accessor endpoint_encryption_mode: String?
+      attr_accessor microsoft_entra_config: Types::MicrosoftEntraConfig?
+      attr_accessor workspace_directory_name: String?
+      attr_accessor workspace_directory_description: String?
+      attr_accessor user_identity_type: String?
+      attr_accessor workspace_type: String?
+      attr_accessor idc_config: Types::IDCConfig?
+      attr_accessor active_directory_config: Types::ActiveDirectoryConfig?
+      attr_accessor streaming_properties: Types::StreamingProperties?
+      attr_accessor error_message: String?
+    end
+
+    module WorkspaceDirectoryState
+      REGISTERING: String
+      REGISTERED: String
+      DEREGISTERING: String
+      DEREGISTERED: String
+      ERROR: String
+    end
+
+    module WorkspaceDirectoryType
+      SIMPLE_AD: String
+      AD_CONNECTOR: String
+      CUSTOMER_MANAGED: String
+      AWS_IAM_IDENTITY_CENTER: String
+    end
+
+    class WorkspaceImage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_id: String,
+        ?name: String,
+        ?description: String,
+        ?operating_system: Types::OperatingSystem,
+        ?state: String,
+        ?required_tenancy: String,
+        ?error_code: String,
+        ?error_message: String,
+        ?created: Time,
+        ?owner_account_id: String,
+        ?updates: Types::UpdateResult,
+        ?error_details: Array[Types::ErrorDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor operating_system: Types::OperatingSystem?
+      attr_accessor state: String?
+      attr_accessor required_tenancy: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+      attr_accessor created: Time?
+      attr_accessor owner_account_id: String?
+      attr_accessor updates: Types::UpdateResult?
+      attr_accessor error_details: Array[Types::ErrorDetails]?
+    end
+
+    module WorkspaceImageErrorDetailCode
+      OUTDATED_POWERSHELL_VERSION: String
+      OFFICE_INSTALLED: String
+      PCOIP_AGENT_INSTALLED: String
+      WINDOWS_UPDATES_ENABLED: String
+      AUTO_MOUNT_DISABLED: String
+      WORKSPACES_BYOL_ACCOUNT_NOT_FOUND: String
+      WORKSPACES_BYOL_ACCOUNT_DISABLED: String
+      DHCP_DISABLED: String
+      DISK_FREE_SPACE: String
+      ADDITIONAL_DRIVES_ATTACHED: String
+      OS_NOT_SUPPORTED: String
+      DOMAIN_JOINED: String
+      AZURE_DOMAIN_JOINED: String
+      FIREWALL_ENABLED: String
+      VMWARE_TOOLS_INSTALLED: String
+      DISK_SIZE_EXCEEDED: String
+      INCOMPATIBLE_PARTITIONING: String
+      PENDING_REBOOT: String
+      AUTO_LOGON_ENABLED: String
+      REALTIME_UNIVERSAL_DISABLED: String
+      MULTIPLE_BOOT_PARTITION: String
+      SIXTY_FOUR_BIT_OS: String
+      ZERO_REARM_COUNT: String
+      IN_PLACE_UPGRADE: String
+      ANTI_VIRUS_INSTALLED: String
+      UEFI_NOT_SUPPORTED: String
+      UNKNOWN_ERROR: String
+      APPX_PACKAGES_INSTALLED: String
+      RESERVED_STORAGE_IN_USE: String
+      ADDITIONAL_DRIVES_PRESENT: String
+      WINDOWS_UPDATES_REQUIRED: String
+      SYSPREP_FILE_MISSING: String
+      USER_PROFILE_MISSING: String
+      INSUFFICIENT_DISK_SPACE: String
+      ENVIRONMENT_VARIABLES_PATH_MISSING_ENTRIES: String
+      DOMAIN_ACCOUNT_SERVICES_FOUND: String
+      INVALID_IP: String
+      REMOTE_DESKTOP_SERVICES_DISABLED: String
+      WINDOWS_MODULES_INSTALLER_DISABLED: String
+      AMAZON_SSM_AGENT_ENABLED: String
+      UNSUPPORTED_SECURITY_PROTOCOL: String
+      MULTIPLE_USER_PROFILES: String
+      STAGED_APPX_PACKAGE: String
+      UNSUPPORTED_OS_UPGRADE: String
+      INSUFFICIENT_REARM_COUNT: String
+      INCOMPATIBLE_PROTOCOL: String
+      INCOMPATIBLE_MEMORY_INTEGRITY: String
+      RESTRICTED_DRIVE_LETTER: String
+    end
+
+    module WorkspaceImageIngestionProcess
+      BYOL_REGULAR: String
+      BYOL_GRAPHICS: String
+      BYOL_GRAPHICSPRO: String
+      BYOL_GRAPHICS_G4DN: String
+      BYOL_REGULAR_WSP: String
+      BYOL_GRAPHICS_G4DN_WSP: String
+      BYOL_REGULAR_BYOP: String
+      BYOL_GRAPHICS_G4DN_BYOP: String
+    end
+
+    module WorkspaceImageRequiredTenancy
+      DEFAULT: String
+      DEDICATED: String
+    end
+
+    module WorkspaceImageState
+      AVAILABLE: String
+      PENDING: String
+      ERROR: String
+    end
+
+    class WorkspaceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?running_mode: String,
+        ?running_mode_auto_stop_timeout_in_minutes: Integer,
+        ?root_volume_size_gib: Integer,
+        ?user_volume_size_gib: Integer,
+        ?compute_type_name: String,
+        ?protocols: Array[String],
+        ?operating_system_name: String,
+        ?global_accelerator: Types::GlobalAcceleratorForWorkSpace,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor running_mode: String?
+      attr_accessor running_mode_auto_stop_timeout_in_minutes: Integer?
+      attr_accessor root_volume_size_gib: Integer?
+      attr_accessor user_volume_size_gib: Integer?
+      attr_accessor compute_type_name: String?
+      attr_accessor protocols: Array[String]?
+      attr_accessor operating_system_name: String?
+      attr_accessor global_accelerator: Types::GlobalAcceleratorForWorkSpace?
+    end
+
+    class WorkspaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?user_name: String,
+        ?bundle_id: String,
+        ?volume_encryption_key: String,
+        ?user_volume_encryption_enabled: bool,
+        ?root_volume_encryption_enabled: bool,
+        ?workspace_properties: Types::WorkspaceProperties,
+        ?tags: Array[Types::Tag],
+        ?workspace_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor user_name: String?
+      attr_accessor bundle_id: String?
+      attr_accessor volume_encryption_key: String?
+      attr_accessor user_volume_encryption_enabled: bool?
+      attr_accessor root_volume_encryption_enabled: bool?
+      attr_accessor workspace_properties: Types::WorkspaceProperties?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor workspace_name: String?
+    end
+
+    class WorkspaceResourceAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associated_resource_id: String,
+        ?associated_resource_type: String,
+        ?created: Time,
+        ?last_updated_time: Time,
+        ?state: String,
+        ?state_reason: Types::AssociationStateReason,
+        ?workspace_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associated_resource_id: String?
+      attr_accessor associated_resource_type: String?
+      attr_accessor created: Time?
+      attr_accessor last_updated_time: Time?
+      attr_accessor state: String?
+      attr_accessor state_reason: Types::AssociationStateReason?
+      attr_accessor workspace_id: String?
+    end
+
+    module WorkspaceState
+      PENDING: String
+      AVAILABLE: String
+      IMPAIRED: String
+      UNHEALTHY: String
+      REBOOTING: String
+      STARTING: String
+      REBUILDING: String
+      RESTORING: String
+      MAINTENANCE: String
+      ADMIN_MAINTENANCE: String
+      TERMINATING: String
+      TERMINATED: String
+      SUSPENDED: String
+      UPDATING: String
+      STOPPING: String
+      STOPPED: String
+      ERROR: String
+    end
+
+    module WorkspaceType
+      PERSONAL: String
+      POOLS: String
+    end
+
+    class WorkspacesDefaultRoleNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WorkspacesIpGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_id: String,
+        ?group_name: String,
+        ?group_desc: String,
+        ?user_rules: Array[Types::IpRuleItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_id: String?
+      attr_accessor group_name: String?
+      attr_accessor group_desc: String?
+      attr_accessor user_rules: Array[Types::IpRuleItem]?
+    end
+
+    class WorkspacesPool
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pool_id: String,
+        ?pool_arn: String,
+        ?capacity_status: Types::CapacityStatus,
+        ?pool_name: String,
+        ?description: String,
+        ?state: String,
+        ?created_at: Time,
+        ?bundle_id: String,
+        ?directory_id: String,
+        ?errors: Array[Types::WorkspacesPoolError],
+        ?application_settings: Types::ApplicationSettingsResponse,
+        ?timeout_settings: Types::TimeoutSettings,
+        ?running_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pool_id: String?
+      attr_accessor pool_arn: String?
+      attr_accessor capacity_status: Types::CapacityStatus?
+      attr_accessor pool_name: String?
+      attr_accessor description: String?
+      attr_accessor state: String?
+      attr_accessor created_at: Time?
+      attr_accessor bundle_id: String?
+      attr_accessor directory_id: String?
+      attr_accessor errors: Array[Types::WorkspacesPoolError]?
+      attr_accessor application_settings: Types::ApplicationSettingsResponse?
+      attr_accessor timeout_settings: Types::TimeoutSettings?
+      attr_accessor running_mode: String?
+    end
+
+    class WorkspacesPoolError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    module WorkspacesPoolErrorCode
+      IAM_SERVICE_ROLE_IS_MISSING: String
+      IAM_SERVICE_ROLE_MISSING_ENI_DESCRIBE_ACTION: String
+      IAM_SERVICE_ROLE_MISSING_ENI_CREATE_ACTION: String
+      IAM_SERVICE_ROLE_MISSING_ENI_DELETE_ACTION: String
+      NETWORK_INTERFACE_LIMIT_EXCEEDED: String
+      INTERNAL_SERVICE_ERROR: String
+      MACHINE_ROLE_IS_MISSING: String
+      STS_DISABLED_IN_REGION: String
+      SUBNET_HAS_INSUFFICIENT_IP_ADDRESSES: String
+      IAM_SERVICE_ROLE_MISSING_DESCRIBE_SUBNET_ACTION: String
+      SUBNET_NOT_FOUND: String
+      IMAGE_NOT_FOUND: String
+      INVALID_SUBNET_CONFIGURATION: String
+      SECURITY_GROUPS_NOT_FOUND: String
+      IGW_NOT_ATTACHED: String
+      IAM_SERVICE_ROLE_MISSING_DESCRIBE_SECURITY_GROUPS_ACTION: String
+      WORKSPACES_POOL_STOPPED: String
+      WORKSPACES_POOL_INSTANCE_PROVISIONING_FAILURE: String
+      DOMAIN_JOIN_ERROR_FILE_NOT_FOUND: String
+      DOMAIN_JOIN_ERROR_ACCESS_DENIED: String
+      DOMAIN_JOIN_ERROR_LOGON_FAILURE: String
+      DOMAIN_JOIN_ERROR_INVALID_PARAMETER: String
+      DOMAIN_JOIN_ERROR_MORE_DATA: String
+      DOMAIN_JOIN_ERROR_NO_SUCH_DOMAIN: String
+      DOMAIN_JOIN_ERROR_NOT_SUPPORTED: String
+      DOMAIN_JOIN_NERR_INVALID_WORKGROUP_NAME: String
+      DOMAIN_JOIN_NERR_WORKSTATION_NOT_STARTED: String
+      DOMAIN_JOIN_ERROR_DS_MACHINE_ACCOUNT_QUOTA_EXCEEDED: String
+      DOMAIN_JOIN_NERR_PASSWORD_EXPIRED: String
+      DOMAIN_JOIN_INTERNAL_SERVICE_ERROR: String
+      DOMAIN_JOIN_ERROR_SECRET_ACTION_PERMISSION_IS_MISSING: String
+      DOMAIN_JOIN_ERROR_SECRET_DECRYPTION_FAILURE: String
+      DOMAIN_JOIN_ERROR_SECRET_STATE_INVALID: String
+      DOMAIN_JOIN_ERROR_SECRET_NOT_FOUND: String
+      DOMAIN_JOIN_ERROR_SECRET_VALUE_KEY_NOT_FOUND: String
+      DOMAIN_JOIN_ERROR_SECRET_INVALID: String
+      BUNDLE_NOT_FOUND: String
+      DIRECTORY_NOT_FOUND: String
+      INSUFFICIENT_PERMISSIONS_ERROR: String
+      DEFAULT_OU_IS_MISSING: String
+    end
+
+    class WorkspacesPoolSession
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_type: String,
+        ?connection_state: String,
+        ?session_id: String,
+        ?instance_id: String,
+        ?pool_id: String,
+        ?expiration_time: Time,
+        ?network_access_configuration: Types::NetworkAccessConfiguration,
+        ?start_time: Time,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_type: String?
+      attr_accessor connection_state: String?
+      attr_accessor session_id: String?
+      attr_accessor instance_id: String?
+      attr_accessor pool_id: String?
+      attr_accessor expiration_time: Time?
+      attr_accessor network_access_configuration: Types::NetworkAccessConfiguration?
+      attr_accessor start_time: Time?
+      attr_accessor user_id: String?
+    end
+
+    module WorkspacesPoolState
+      CREATING: String
+      DELETING: String
+      RUNNING: String
+      STARTING: String
+      STOPPED: String
+      STOPPING: String
+      UPDATING: String
+    end
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module IoTSecureTunneling
+      VERSION: String
+    end
+  end

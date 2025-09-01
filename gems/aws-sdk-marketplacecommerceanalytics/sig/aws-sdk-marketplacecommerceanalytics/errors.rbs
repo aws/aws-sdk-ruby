@@ -1,0 +1,7 @@
+module Aws::MarketplaceCommerceAnalytics
+  module Errors
+    class MarketplaceCommerceAnalyticsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

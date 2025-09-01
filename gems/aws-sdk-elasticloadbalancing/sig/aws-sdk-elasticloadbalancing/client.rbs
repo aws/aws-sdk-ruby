@@ -1,0 +1,386 @@
+module Aws::ElasticLoadBalancing
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ElasticLoadBalancing::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddTagsResponse
+      include Smithy::Client::_Response[Types::AddTagsOutput]
+    end
+    def add_tags: (
+      ?load_balancer_names: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _AddTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsResponse
+
+    interface _ApplySecurityGroupsToLoadBalancerResponse
+      include Smithy::Client::_Response[Types::ApplySecurityGroupsToLoadBalancerOutput]
+      def security_groups: () -> Array[String]?
+    end
+    def apply_security_groups_to_load_balancer: (
+      ?load_balancer_name: String,
+      ?security_groups: Array[String]
+    ) -> _ApplySecurityGroupsToLoadBalancerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ApplySecurityGroupsToLoadBalancerResponse
+
+    interface _AttachLoadBalancerToSubnetsResponse
+      include Smithy::Client::_Response[Types::AttachLoadBalancerToSubnetsOutput]
+      def subnets: () -> Array[String]?
+    end
+    def attach_load_balancer_to_subnets: (
+      ?load_balancer_name: String,
+      ?subnets: Array[String]
+    ) -> _AttachLoadBalancerToSubnetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachLoadBalancerToSubnetsResponse
+
+    interface _ConfigureHealthCheckResponse
+      include Smithy::Client::_Response[Types::ConfigureHealthCheckOutput]
+      def health_check: () -> Types::HealthCheck?
+    end
+    def configure_health_check: (
+      ?load_balancer_name: String,
+      ?health_check: {
+        target: String,
+        interval: Integer,
+        timeout: Integer,
+        unhealthy_threshold: Integer,
+        healthy_threshold: Integer
+      }
+    ) -> _ConfigureHealthCheckResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ConfigureHealthCheckResponse
+
+    interface _CreateAppCookieStickinessPolicyResponse
+      include Smithy::Client::_Response[Types::CreateAppCookieStickinessPolicyOutput]
+    end
+    def create_app_cookie_stickiness_policy: (
+      ?load_balancer_name: String,
+      ?policy_name: String,
+      ?cookie_name: String
+    ) -> _CreateAppCookieStickinessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAppCookieStickinessPolicyResponse
+
+    interface _CreateLBCookieStickinessPolicyResponse
+      include Smithy::Client::_Response[Types::CreateLBCookieStickinessPolicyOutput]
+    end
+    def create_lb_cookie_stickiness_policy: (
+      ?load_balancer_name: String,
+      ?policy_name: String,
+      ?cookie_expiration_period: Integer
+    ) -> _CreateLBCookieStickinessPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLBCookieStickinessPolicyResponse
+
+    interface _CreateLoadBalancerResponse
+      include Smithy::Client::_Response[Types::CreateAccessPointOutput]
+      def dns_name: () -> String?
+    end
+    def create_load_balancer: (
+      ?load_balancer_name: String,
+      ?listeners: Array[
+        {
+          protocol: String,
+          load_balancer_port: Integer,
+          instance_protocol: untyped,
+          instance_port: Integer,
+          ssl_certificate_id: String
+        }
+      ],
+      ?availability_zones: Array[String],
+      ?subnets: Array[String],
+      ?security_groups: Array[String],
+      ?scheme: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateLoadBalancerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLoadBalancerResponse
+
+    interface _CreateLoadBalancerListenersResponse
+      include Smithy::Client::_Response[Types::CreateLoadBalancerListenerOutput]
+    end
+    def create_load_balancer_listeners: (
+      ?load_balancer_name: String,
+      ?listeners: Array[
+        {
+          protocol: String,
+          load_balancer_port: Integer,
+          instance_protocol: untyped,
+          instance_port: Integer,
+          ssl_certificate_id: String
+        }
+      ]
+    ) -> _CreateLoadBalancerListenersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLoadBalancerListenersResponse
+
+    interface _CreateLoadBalancerPolicyResponse
+      include Smithy::Client::_Response[Types::CreateLoadBalancerPolicyOutput]
+    end
+    def create_load_balancer_policy: (
+      ?load_balancer_name: String,
+      ?policy_name: String,
+      ?policy_type_name: String,
+      ?policy_attributes: Array[
+        {
+          attribute_name: String,
+          attribute_value: String
+        }
+      ]
+    ) -> _CreateLoadBalancerPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLoadBalancerPolicyResponse
+
+    interface _DeleteLoadBalancerResponse
+      include Smithy::Client::_Response[Types::DeleteAccessPointOutput]
+    end
+    def delete_load_balancer: (
+      ?load_balancer_name: String
+    ) -> _DeleteLoadBalancerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLoadBalancerResponse
+
+    interface _DeleteLoadBalancerListenersResponse
+      include Smithy::Client::_Response[Types::DeleteLoadBalancerListenerOutput]
+    end
+    def delete_load_balancer_listeners: (
+      ?load_balancer_name: String,
+      ?load_balancer_ports: Array[Integer]
+    ) -> _DeleteLoadBalancerListenersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLoadBalancerListenersResponse
+
+    interface _DeleteLoadBalancerPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteLoadBalancerPolicyOutput]
+    end
+    def delete_load_balancer_policy: (
+      ?load_balancer_name: String,
+      ?policy_name: String
+    ) -> _DeleteLoadBalancerPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLoadBalancerPolicyResponse
+
+    interface _DeregisterInstancesFromLoadBalancerResponse
+      include Smithy::Client::_Response[Types::DeregisterEndPointsOutput]
+      def instances: () -> Array[Types::Instance]?
+    end
+    def deregister_instances_from_load_balancer: (
+      ?load_balancer_name: String,
+      ?instances: Array[
+        {
+          instance_id: String
+        }
+      ]
+    ) -> _DeregisterInstancesFromLoadBalancerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterInstancesFromLoadBalancerResponse
+
+    interface _DescribeAccountLimitsResponse
+      include Smithy::Client::_Response[Types::DescribeAccountLimitsOutput]
+      def limits: () -> Array[Types::Limit]?
+      def next_marker: () -> String?
+    end
+    def describe_account_limits: (
+      ?marker: String,
+      ?page_size: Integer
+    ) -> _DescribeAccountLimitsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountLimitsResponse
+
+    interface _DescribeInstanceHealthResponse
+      include Smithy::Client::_Response[Types::DescribeEndPointStateOutput]
+      def instance_states: () -> Array[Types::InstanceState]?
+    end
+    def describe_instance_health: (
+      ?load_balancer_name: String,
+      ?instances: Array[
+        {
+          instance_id: String
+        }
+      ]
+    ) -> _DescribeInstanceHealthResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstanceHealthResponse
+
+    interface _DescribeLoadBalancerAttributesResponse
+      include Smithy::Client::_Response[Types::DescribeLoadBalancerAttributesOutput]
+      def load_balancer_attributes: () -> Types::LoadBalancerAttributes?
+    end
+    def describe_load_balancer_attributes: (
+      ?load_balancer_name: String
+    ) -> _DescribeLoadBalancerAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLoadBalancerAttributesResponse
+
+    interface _DescribeLoadBalancerPoliciesResponse
+      include Smithy::Client::_Response[Types::DescribeLoadBalancerPoliciesOutput]
+      def policy_descriptions: () -> Array[Types::PolicyDescription]?
+    end
+    def describe_load_balancer_policies: (
+      ?load_balancer_name: String,
+      ?policy_names: Array[String]
+    ) -> _DescribeLoadBalancerPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLoadBalancerPoliciesResponse
+
+    interface _DescribeLoadBalancerPolicyTypesResponse
+      include Smithy::Client::_Response[Types::DescribeLoadBalancerPolicyTypesOutput]
+      def policy_type_descriptions: () -> Array[Types::PolicyTypeDescription]?
+    end
+    def describe_load_balancer_policy_types: (
+      ?policy_type_names: Array[String]
+    ) -> _DescribeLoadBalancerPolicyTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLoadBalancerPolicyTypesResponse
+
+    interface _DescribeLoadBalancersResponse
+      include Smithy::Client::_Response[Types::DescribeAccessPointsOutput]
+      def load_balancer_descriptions: () -> Array[Types::LoadBalancerDescription]?
+      def next_marker: () -> String?
+    end
+    def describe_load_balancers: (
+      ?load_balancer_names: Array[String],
+      ?marker: String,
+      ?page_size: Integer
+    ) -> _DescribeLoadBalancersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLoadBalancersResponse
+
+    interface _DescribeTagsResponse
+      include Smithy::Client::_Response[Types::DescribeTagsOutput]
+      def tag_descriptions: () -> Array[Types::TagDescription]?
+    end
+    def describe_tags: (
+      ?load_balancer_names: Array[String]
+    ) -> _DescribeTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTagsResponse
+
+    interface _DetachLoadBalancerFromSubnetsResponse
+      include Smithy::Client::_Response[Types::DetachLoadBalancerFromSubnetsOutput]
+      def subnets: () -> Array[String]?
+    end
+    def detach_load_balancer_from_subnets: (
+      ?load_balancer_name: String,
+      ?subnets: Array[String]
+    ) -> _DetachLoadBalancerFromSubnetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachLoadBalancerFromSubnetsResponse
+
+    interface _DisableAvailabilityZonesForLoadBalancerResponse
+      include Smithy::Client::_Response[Types::RemoveAvailabilityZonesOutput]
+      def availability_zones: () -> Array[String]?
+    end
+    def disable_availability_zones_for_load_balancer: (
+      ?load_balancer_name: String,
+      ?availability_zones: Array[String]
+    ) -> _DisableAvailabilityZonesForLoadBalancerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableAvailabilityZonesForLoadBalancerResponse
+
+    interface _EnableAvailabilityZonesForLoadBalancerResponse
+      include Smithy::Client::_Response[Types::AddAvailabilityZonesOutput]
+      def availability_zones: () -> Array[String]?
+    end
+    def enable_availability_zones_for_load_balancer: (
+      ?load_balancer_name: String,
+      ?availability_zones: Array[String]
+    ) -> _EnableAvailabilityZonesForLoadBalancerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableAvailabilityZonesForLoadBalancerResponse
+
+    interface _ModifyLoadBalancerAttributesResponse
+      include Smithy::Client::_Response[Types::ModifyLoadBalancerAttributesOutput]
+      def load_balancer_name: () -> String?
+      def load_balancer_attributes: () -> Types::LoadBalancerAttributes?
+    end
+    def modify_load_balancer_attributes: (
+      ?load_balancer_name: String,
+      ?load_balancer_attributes: {
+        cross_zone_load_balancing: {
+          enabled: bool
+        },
+        access_log: {
+          enabled: bool,
+          s3_bucket_name: String,
+          emit_interval: Integer,
+          s3_bucket_prefix: String
+        },
+        connection_draining: {
+          enabled: bool,
+          timeout: Integer
+        },
+        connection_settings: {
+          idle_timeout: Integer
+        },
+        additional_attributes: Array[
+          {
+            key: String,
+            value: String
+          }
+        ]
+      }
+    ) -> _ModifyLoadBalancerAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyLoadBalancerAttributesResponse
+
+    interface _RegisterInstancesWithLoadBalancerResponse
+      include Smithy::Client::_Response[Types::RegisterEndPointsOutput]
+      def instances: () -> Array[Types::Instance]?
+    end
+    def register_instances_with_load_balancer: (
+      ?load_balancer_name: String,
+      ?instances: Array[
+        {
+          instance_id: String
+        }
+      ]
+    ) -> _RegisterInstancesWithLoadBalancerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterInstancesWithLoadBalancerResponse
+
+    interface _RemoveTagsResponse
+      include Smithy::Client::_Response[Types::RemoveTagsOutput]
+    end
+    def remove_tags: (
+      ?load_balancer_names: Array[String],
+      ?tags: Array[
+        {
+          key: String
+        }
+      ]
+    ) -> _RemoveTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTagsResponse
+
+    interface _SetLoadBalancerListenerSSLCertificateResponse
+      include Smithy::Client::_Response[Types::SetLoadBalancerListenerSSLCertificateOutput]
+    end
+    def set_load_balancer_listener_ssl_certificate: (
+      ?load_balancer_name: String,
+      ?load_balancer_port: Integer,
+      ?ssl_certificate_id: String
+    ) -> _SetLoadBalancerListenerSSLCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetLoadBalancerListenerSSLCertificateResponse
+
+    interface _SetLoadBalancerPoliciesForBackendServerResponse
+      include Smithy::Client::_Response[Types::SetLoadBalancerPoliciesForBackendServerOutput]
+    end
+    def set_load_balancer_policies_for_backend_server: (
+      ?load_balancer_name: String,
+      ?instance_port: Integer,
+      ?policy_names: Array[String]
+    ) -> _SetLoadBalancerPoliciesForBackendServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetLoadBalancerPoliciesForBackendServerResponse
+
+    interface _SetLoadBalancerPoliciesOfListenerResponse
+      include Smithy::Client::_Response[Types::SetLoadBalancerPoliciesOfListenerOutput]
+    end
+    def set_load_balancer_policies_of_listener: (
+      ?load_balancer_name: String,
+      ?load_balancer_port: Integer,
+      ?policy_names: Array[String]
+    ) -> _SetLoadBalancerPoliciesOfListenerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetLoadBalancerPoliciesOfListenerResponse
+  end
+end

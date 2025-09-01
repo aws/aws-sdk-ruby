@@ -1,0 +1,62 @@
+module Aws::SSOOIDC
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def error: () -> String?
+      def error_description: () -> String?
+    end
+    class AuthorizationPendingException < Smithy::Client::ServiceError
+      def error: () -> String?
+      def error_description: () -> String?
+    end
+    class ExpiredTokenException < Smithy::Client::ServiceError
+      def error: () -> String?
+      def error_description: () -> String?
+    end
+    class InternalServerException < Smithy::Client::ServiceError
+      def error: () -> String?
+      def error_description: () -> String?
+    end
+    class InvalidClientException < Smithy::Client::ServiceError
+      def error: () -> String?
+      def error_description: () -> String?
+    end
+    class InvalidClientMetadataException < Smithy::Client::ServiceError
+      def error: () -> String?
+      def error_description: () -> String?
+    end
+    class InvalidGrantException < Smithy::Client::ServiceError
+      def error: () -> String?
+      def error_description: () -> String?
+    end
+    class InvalidRedirectUriException < Smithy::Client::ServiceError
+      def error: () -> String?
+      def error_description: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def error: () -> String?
+      def error_description: () -> String?
+    end
+    class InvalidRequestRegionException < Smithy::Client::ServiceError
+      def error: () -> String?
+      def error_description: () -> String?
+      def endpoint: () -> String?
+      def region: () -> String?
+    end
+    class InvalidScopeException < Smithy::Client::ServiceError
+      def error: () -> String?
+      def error_description: () -> String?
+    end
+    class SlowDownException < Smithy::Client::ServiceError
+      def error: () -> String?
+      def error_description: () -> String?
+    end
+    class UnauthorizedClientException < Smithy::Client::ServiceError
+      def error: () -> String?
+      def error_description: () -> String?
+    end
+    class UnsupportedGrantTypeException < Smithy::Client::ServiceError
+      def error: () -> String?
+      def error_description: () -> String?
+    end
+  end
+end

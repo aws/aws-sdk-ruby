@@ -1,0 +1,5 @@
+  module Aws
+    module LicenseManagerLinuxSubscriptions
+      VERSION: String
+    end
+  end

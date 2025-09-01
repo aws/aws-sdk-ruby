@@ -1,0 +1,464 @@
+module Aws::Inspector
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Inspector::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddAttributesToFindingsResponse
+      include Smithy::Client::_Response[Types::AddAttributesToFindingsResponse]
+      def failed_items: () -> Hash[String, Types::FailedItemDetails]?
+    end
+    def add_attributes_to_findings: (
+      ?finding_arns: Array[String],
+      ?attributes: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _AddAttributesToFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddAttributesToFindingsResponse
+
+    interface _CreateAssessmentTargetResponse
+      include Smithy::Client::_Response[Types::CreateAssessmentTargetResponse]
+      def assessment_target_arn: () -> String?
+    end
+    def create_assessment_target: (
+      ?assessment_target_name: String,
+      ?resource_group_arn: String
+    ) -> _CreateAssessmentTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssessmentTargetResponse
+
+    interface _CreateAssessmentTemplateResponse
+      include Smithy::Client::_Response[Types::CreateAssessmentTemplateResponse]
+      def assessment_template_arn: () -> String?
+    end
+    def create_assessment_template: (
+      ?assessment_target_arn: String,
+      ?assessment_template_name: String,
+      ?duration_in_seconds: Integer,
+      ?rules_package_arns: Array[String],
+      ?user_attributes_for_findings: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateAssessmentTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAssessmentTemplateResponse
+
+    interface _CreateExclusionsPreviewResponse
+      include Smithy::Client::_Response[Types::CreateExclusionsPreviewResponse]
+      def preview_token: () -> String?
+    end
+    def create_exclusions_preview: (
+      ?assessment_template_arn: String
+    ) -> _CreateExclusionsPreviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateExclusionsPreviewResponse
+
+    interface _CreateResourceGroupResponse
+      include Smithy::Client::_Response[Types::CreateResourceGroupResponse]
+      def resource_group_arn: () -> String?
+    end
+    def create_resource_group: (
+      ?resource_group_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateResourceGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceGroupResponse
+
+    interface _DeleteAssessmentRunResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_assessment_run: (
+      ?assessment_run_arn: String
+    ) -> _DeleteAssessmentRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssessmentRunResponse
+
+    interface _DeleteAssessmentTargetResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_assessment_target: (
+      ?assessment_target_arn: String
+    ) -> _DeleteAssessmentTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssessmentTargetResponse
+
+    interface _DeleteAssessmentTemplateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_assessment_template: (
+      ?assessment_template_arn: String
+    ) -> _DeleteAssessmentTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAssessmentTemplateResponse
+
+    interface _DescribeAssessmentRunsResponse
+      include Smithy::Client::_Response[Types::DescribeAssessmentRunsResponse]
+      def assessment_runs: () -> Array[Types::AssessmentRun]?
+      def failed_items: () -> Hash[String, Types::FailedItemDetails]?
+    end
+    def describe_assessment_runs: (
+      ?assessment_run_arns: Array[String]
+    ) -> _DescribeAssessmentRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAssessmentRunsResponse
+
+    interface _DescribeAssessmentTargetsResponse
+      include Smithy::Client::_Response[Types::DescribeAssessmentTargetsResponse]
+      def assessment_targets: () -> Array[Types::AssessmentTarget]?
+      def failed_items: () -> Hash[String, Types::FailedItemDetails]?
+    end
+    def describe_assessment_targets: (
+      ?assessment_target_arns: Array[String]
+    ) -> _DescribeAssessmentTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAssessmentTargetsResponse
+
+    interface _DescribeAssessmentTemplatesResponse
+      include Smithy::Client::_Response[Types::DescribeAssessmentTemplatesResponse]
+      def assessment_templates: () -> Array[Types::AssessmentTemplate]?
+      def failed_items: () -> Hash[String, Types::FailedItemDetails]?
+    end
+    def describe_assessment_templates: (
+      ?assessment_template_arns: Array[String]
+    ) -> _DescribeAssessmentTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAssessmentTemplatesResponse
+
+    interface _DescribeCrossAccountAccessRoleResponse
+      include Smithy::Client::_Response[Types::DescribeCrossAccountAccessRoleResponse]
+      def role_arn: () -> String?
+      def valid: () -> bool?
+      def registered_at: () -> Time?
+    end
+    def describe_cross_account_access_role: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeCrossAccountAccessRoleResponse
+
+    interface _DescribeExclusionsResponse
+      include Smithy::Client::_Response[Types::DescribeExclusionsResponse]
+      def exclusions: () -> Hash[String, Types::Exclusion]?
+      def failed_items: () -> Hash[String, Types::FailedItemDetails]?
+    end
+    def describe_exclusions: (
+      ?exclusion_arns: Array[String],
+      ?locale: String
+    ) -> _DescribeExclusionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeExclusionsResponse
+
+    interface _DescribeFindingsResponse
+      include Smithy::Client::_Response[Types::DescribeFindingsResponse]
+      def findings: () -> Array[Types::Finding]?
+      def failed_items: () -> Hash[String, Types::FailedItemDetails]?
+    end
+    def describe_findings: (
+      ?finding_arns: Array[String],
+      ?locale: String
+    ) -> _DescribeFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFindingsResponse
+
+    interface _DescribeResourceGroupsResponse
+      include Smithy::Client::_Response[Types::DescribeResourceGroupsResponse]
+      def resource_groups: () -> Array[Types::ResourceGroup]?
+      def failed_items: () -> Hash[String, Types::FailedItemDetails]?
+    end
+    def describe_resource_groups: (
+      ?resource_group_arns: Array[String]
+    ) -> _DescribeResourceGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeResourceGroupsResponse
+
+    interface _DescribeRulesPackagesResponse
+      include Smithy::Client::_Response[Types::DescribeRulesPackagesResponse]
+      def rules_packages: () -> Array[Types::RulesPackage]?
+      def failed_items: () -> Hash[String, Types::FailedItemDetails]?
+    end
+    def describe_rules_packages: (
+      ?rules_package_arns: Array[String],
+      ?locale: String
+    ) -> _DescribeRulesPackagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRulesPackagesResponse
+
+    interface _GetAssessmentReportResponse
+      include Smithy::Client::_Response[Types::GetAssessmentReportResponse]
+      def status: () -> String?
+      def url: () -> String?
+    end
+    def get_assessment_report: (
+      ?assessment_run_arn: String,
+      ?report_file_format: String,
+      ?report_type: String
+    ) -> _GetAssessmentReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAssessmentReportResponse
+
+    interface _GetExclusionsPreviewResponse
+      include Smithy::Client::_Response[Types::GetExclusionsPreviewResponse]
+      def preview_status: () -> String?
+      def exclusion_previews: () -> Array[Types::ExclusionPreview]?
+      def next_token: () -> String?
+    end
+    def get_exclusions_preview: (
+      ?assessment_template_arn: String,
+      ?preview_token: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?locale: String
+    ) -> _GetExclusionsPreviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExclusionsPreviewResponse
+
+    interface _GetTelemetryMetadataResponse
+      include Smithy::Client::_Response[Types::GetTelemetryMetadataResponse]
+      def telemetry_metadata: () -> Array[Types::TelemetryMetadata]?
+    end
+    def get_telemetry_metadata: (
+      ?assessment_run_arn: String
+    ) -> _GetTelemetryMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTelemetryMetadataResponse
+
+    interface _ListAssessmentRunAgentsResponse
+      include Smithy::Client::_Response[Types::ListAssessmentRunAgentsResponse]
+      def assessment_run_agents: () -> Array[Types::AssessmentRunAgent]?
+      def next_token: () -> String?
+    end
+    def list_assessment_run_agents: (
+      ?assessment_run_arn: String,
+      ?filter: {
+        agent_healths: Array[String],
+        agent_health_codes: Array[String]
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssessmentRunAgentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssessmentRunAgentsResponse
+
+    interface _ListAssessmentRunsResponse
+      include Smithy::Client::_Response[Types::ListAssessmentRunsResponse]
+      def assessment_run_arns: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_assessment_runs: (
+      ?assessment_template_arns: Array[String],
+      ?filter: {
+        name_pattern: String,
+        states: Array[String],
+        duration_range: {
+          min_seconds: Integer,
+          max_seconds: untyped
+        },
+        rules_package_arns: Array[String],
+        start_time_range: {
+          begin_date: Time,
+          end_date: untyped
+        },
+        completion_time_range: untyped,
+        state_change_time_range: untyped
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssessmentRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssessmentRunsResponse
+
+    interface _ListAssessmentTargetsResponse
+      include Smithy::Client::_Response[Types::ListAssessmentTargetsResponse]
+      def assessment_target_arns: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_assessment_targets: (
+      ?filter: {
+        assessment_target_name_pattern: String
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssessmentTargetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssessmentTargetsResponse
+
+    interface _ListAssessmentTemplatesResponse
+      include Smithy::Client::_Response[Types::ListAssessmentTemplatesResponse]
+      def assessment_template_arns: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_assessment_templates: (
+      ?assessment_target_arns: Array[String],
+      ?filter: {
+        name_pattern: String,
+        duration_range: {
+          min_seconds: Integer,
+          max_seconds: untyped
+        },
+        rules_package_arns: Array[String]
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAssessmentTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssessmentTemplatesResponse
+
+    interface _ListEventSubscriptionsResponse
+      include Smithy::Client::_Response[Types::ListEventSubscriptionsResponse]
+      def subscriptions: () -> Array[Types::Subscription]?
+      def next_token: () -> String?
+    end
+    def list_event_subscriptions: (
+      ?resource_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEventSubscriptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventSubscriptionsResponse
+
+    interface _ListExclusionsResponse
+      include Smithy::Client::_Response[Types::ListExclusionsResponse]
+      def exclusion_arns: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_exclusions: (
+      ?assessment_run_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListExclusionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListExclusionsResponse
+
+    interface _ListFindingsResponse
+      include Smithy::Client::_Response[Types::ListFindingsResponse]
+      def finding_arns: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_findings: (
+      ?assessment_run_arns: Array[String],
+      ?filter: {
+        agent_ids: Array[String],
+        auto_scaling_groups: Array[String],
+        rule_names: Array[String],
+        severities: Array[String],
+        rules_package_arns: Array[String],
+        attributes: Array[
+          {
+            key: String,
+            value: String
+          }
+        ],
+        user_attributes: untyped,
+        creation_time_range: {
+          begin_date: Time,
+          end_date: untyped
+        }
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFindingsResponse
+
+    interface _ListRulesPackagesResponse
+      include Smithy::Client::_Response[Types::ListRulesPackagesResponse]
+      def rules_package_arns: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_rules_packages: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRulesPackagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRulesPackagesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PreviewAgentsResponse
+      include Smithy::Client::_Response[Types::PreviewAgentsResponse]
+      def agent_previews: () -> Array[Types::AgentPreview]?
+      def next_token: () -> String?
+    end
+    def preview_agents: (
+      ?preview_agents_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _PreviewAgentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PreviewAgentsResponse
+
+    interface _RegisterCrossAccountAccessRoleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def register_cross_account_access_role: (
+      ?role_arn: String
+    ) -> _RegisterCrossAccountAccessRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterCrossAccountAccessRoleResponse
+
+    interface _RemoveAttributesFromFindingsResponse
+      include Smithy::Client::_Response[Types::RemoveAttributesFromFindingsResponse]
+      def failed_items: () -> Hash[String, Types::FailedItemDetails]?
+    end
+    def remove_attributes_from_findings: (
+      ?finding_arns: Array[String],
+      ?attribute_keys: Array[String]
+    ) -> _RemoveAttributesFromFindingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveAttributesFromFindingsResponse
+
+    interface _SetTagsForResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_tags_for_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _SetTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetTagsForResourceResponse
+
+    interface _StartAssessmentRunResponse
+      include Smithy::Client::_Response[Types::StartAssessmentRunResponse]
+      def assessment_run_arn: () -> String?
+    end
+    def start_assessment_run: (
+      ?assessment_template_arn: String,
+      ?assessment_run_name: String
+    ) -> _StartAssessmentRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAssessmentRunResponse
+
+    interface _StopAssessmentRunResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def stop_assessment_run: (
+      ?assessment_run_arn: String,
+      ?stop_action: String
+    ) -> _StopAssessmentRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopAssessmentRunResponse
+
+    interface _SubscribeToEventResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def subscribe_to_event: (
+      ?resource_arn: String,
+      ?event: String,
+      ?topic_arn: String
+    ) -> _SubscribeToEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SubscribeToEventResponse
+
+    interface _UnsubscribeFromEventResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def unsubscribe_from_event: (
+      ?resource_arn: String,
+      ?event: String,
+      ?topic_arn: String
+    ) -> _UnsubscribeFromEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UnsubscribeFromEventResponse
+
+    interface _UpdateAssessmentTargetResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_assessment_target: (
+      ?assessment_target_arn: String,
+      ?assessment_target_name: String,
+      ?resource_group_arn: String
+    ) -> _UpdateAssessmentTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAssessmentTargetResponse
+  end
+end

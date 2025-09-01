@@ -1,0 +1,5 @@
+module Aws::Resiliencehub
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

@@ -1,0 +1,73 @@
+module Aws::Forecastquery
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Forecastquery::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _QueryForecastResponse
+      include Smithy::Client::_Response[Types::QueryForecastResponse]
+      def forecast: () -> Types::Forecast?
+    end
+    def query_forecast: (
+      ?forecast_arn: String,
+      ?start_date: String,
+      ?end_date: String,
+      ?filters: Hash[String, String],
+      ?next_token: String
+    ) -> _QueryForecastResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _QueryForecastResponse
+
+    interface _QueryWhatIfForecastResponse
+      include Smithy::Client::_Response[Types::QueryWhatIfForecastResponse]
+      def forecast: () -> Types::Forecast?
+    end
+    def query_what_if_forecast: (
+      ?what_if_forecast_arn: String,
+      ?start_date: String,
+      ?end_date: String,
+      ?filters: Hash[String, String],
+      ?next_token: String
+    ) -> _QueryWhatIfForecastResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _QueryWhatIfForecastResponse
+  end
+end

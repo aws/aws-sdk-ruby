@@ -1,0 +1,561 @@
+module Aws::Odb
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Odb::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptMarketplaceRegistrationResponse
+      include Smithy::Client::_Response[Types::AcceptMarketplaceRegistrationOutput]
+    end
+    def accept_marketplace_registration: (
+      ?marketplace_registration_token: String
+    ) -> _AcceptMarketplaceRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptMarketplaceRegistrationResponse
+
+    interface _CreateCloudAutonomousVmClusterResponse
+      include Smithy::Client::_Response[Types::CreateCloudAutonomousVmClusterOutput]
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def cloud_autonomous_vm_cluster_id: () -> String?
+    end
+    def create_cloud_autonomous_vm_cluster: (
+      ?cloud_exadata_infrastructure_id: String,
+      ?odb_network_id: String,
+      ?display_name: String,
+      ?client_token: String,
+      ?autonomous_data_storage_size_in_t_bs: Float,
+      ?cpu_core_count_per_node: Integer,
+      ?db_servers: Array[String],
+      ?description: String,
+      ?is_mtls_enabled_vm_cluster: bool,
+      ?license_model: String,
+      ?maintenance_window: {
+        custom_action_timeout_in_mins: Integer,
+        days_of_week: Array[
+          {
+            name: String
+          }
+        ],
+        hours_of_day: Array[Integer],
+        is_custom_action_timeout_enabled: bool,
+        lead_time_in_weeks: untyped,
+        months: Array[
+          {
+            name: String
+          }
+        ],
+        patching_mode: String,
+        preference: String,
+        skip_ru: untyped,
+        weeks_of_month: Array[Integer]
+      },
+      ?memory_per_oracle_compute_unit_in_g_bs: Integer,
+      ?scan_listener_port_non_tls: Integer,
+      ?scan_listener_port_tls: Integer,
+      ?tags: Hash[String, String],
+      ?time_zone: String,
+      ?total_container_databases: Integer
+    ) -> _CreateCloudAutonomousVmClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCloudAutonomousVmClusterResponse
+
+    interface _CreateCloudExadataInfrastructureResponse
+      include Smithy::Client::_Response[Types::CreateCloudExadataInfrastructureOutput]
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def cloud_exadata_infrastructure_id: () -> String?
+    end
+    def create_cloud_exadata_infrastructure: (
+      ?display_name: String,
+      ?shape: String,
+      ?availability_zone: String,
+      ?availability_zone_id: String,
+      ?tags: Hash[String, String],
+      ?compute_count: Integer,
+      ?customer_contacts_to_send_to_oci: Array[
+        {
+          email: String
+        }
+      ],
+      ?maintenance_window: {
+        custom_action_timeout_in_mins: Integer,
+        days_of_week: Array[
+          {
+            name: String
+          }
+        ],
+        hours_of_day: Array[Integer],
+        is_custom_action_timeout_enabled: bool,
+        lead_time_in_weeks: untyped,
+        months: Array[
+          {
+            name: String
+          }
+        ],
+        patching_mode: String,
+        preference: String,
+        skip_ru: untyped,
+        weeks_of_month: Array[Integer]
+      },
+      ?storage_count: Integer,
+      ?client_token: String,
+      ?database_server_type: String,
+      ?storage_server_type: String
+    ) -> _CreateCloudExadataInfrastructureResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCloudExadataInfrastructureResponse
+
+    interface _CreateCloudVmClusterResponse
+      include Smithy::Client::_Response[Types::CreateCloudVmClusterOutput]
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def cloud_vm_cluster_id: () -> String?
+    end
+    def create_cloud_vm_cluster: (
+      ?cloud_exadata_infrastructure_id: String,
+      ?cpu_core_count: Integer,
+      ?display_name: String,
+      ?gi_version: String,
+      ?hostname: String,
+      ?ssh_public_keys: Array[String],
+      ?odb_network_id: String,
+      ?cluster_name: String,
+      ?data_collection_options: {
+        is_diagnostics_events_enabled: bool,
+        is_health_monitoring_enabled: untyped,
+        is_incident_logs_enabled: untyped
+      },
+      ?data_storage_size_in_t_bs: Float,
+      ?db_node_storage_size_in_g_bs: Integer,
+      ?db_servers: Array[String],
+      ?tags: Hash[String, String],
+      ?is_local_backup_enabled: bool,
+      ?is_sparse_diskgroup_enabled: bool,
+      ?license_model: String,
+      ?memory_size_in_g_bs: Integer,
+      ?system_version: String,
+      ?time_zone: String,
+      ?client_token: String,
+      ?scan_listener_port_tcp: Integer
+    ) -> _CreateCloudVmClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCloudVmClusterResponse
+
+    interface _CreateOdbNetworkResponse
+      include Smithy::Client::_Response[Types::CreateOdbNetworkOutput]
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def odb_network_id: () -> String?
+    end
+    def create_odb_network: (
+      ?display_name: String,
+      ?availability_zone: String,
+      ?availability_zone_id: String,
+      ?client_subnet_cidr: String,
+      ?backup_subnet_cidr: String,
+      ?custom_domain_name: String,
+      ?default_dns_prefix: String,
+      ?client_token: String,
+      ?s3_access: String,
+      ?zero_etl_access: String,
+      ?s3_policy_document: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateOdbNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOdbNetworkResponse
+
+    interface _CreateOdbPeeringConnectionResponse
+      include Smithy::Client::_Response[Types::CreateOdbPeeringConnectionOutput]
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def odb_peering_connection_id: () -> String?
+    end
+    def create_odb_peering_connection: (
+      ?odb_network_id: String,
+      ?peer_network_id: String,
+      ?display_name: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateOdbPeeringConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOdbPeeringConnectionResponse
+
+    interface _DeleteCloudAutonomousVmClusterResponse
+      include Smithy::Client::_Response[Types::DeleteCloudAutonomousVmClusterOutput]
+    end
+    def delete_cloud_autonomous_vm_cluster: (
+      ?cloud_autonomous_vm_cluster_id: String
+    ) -> _DeleteCloudAutonomousVmClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCloudAutonomousVmClusterResponse
+
+    interface _DeleteCloudExadataInfrastructureResponse
+      include Smithy::Client::_Response[Types::DeleteCloudExadataInfrastructureOutput]
+    end
+    def delete_cloud_exadata_infrastructure: (
+      ?cloud_exadata_infrastructure_id: String
+    ) -> _DeleteCloudExadataInfrastructureResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCloudExadataInfrastructureResponse
+
+    interface _DeleteCloudVmClusterResponse
+      include Smithy::Client::_Response[Types::DeleteCloudVmClusterOutput]
+    end
+    def delete_cloud_vm_cluster: (
+      ?cloud_vm_cluster_id: String
+    ) -> _DeleteCloudVmClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCloudVmClusterResponse
+
+    interface _DeleteOdbNetworkResponse
+      include Smithy::Client::_Response[Types::DeleteOdbNetworkOutput]
+    end
+    def delete_odb_network: (
+      ?odb_network_id: String,
+      ?delete_associated_resources: bool
+    ) -> _DeleteOdbNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOdbNetworkResponse
+
+    interface _DeleteOdbPeeringConnectionResponse
+      include Smithy::Client::_Response[Types::DeleteOdbPeeringConnectionOutput]
+    end
+    def delete_odb_peering_connection: (
+      ?odb_peering_connection_id: String
+    ) -> _DeleteOdbPeeringConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOdbPeeringConnectionResponse
+
+    interface _GetCloudAutonomousVmClusterResponse
+      include Smithy::Client::_Response[Types::GetCloudAutonomousVmClusterOutput]
+      def cloud_autonomous_vm_cluster: () -> Types::CloudAutonomousVmCluster?
+    end
+    def get_cloud_autonomous_vm_cluster: (
+      ?cloud_autonomous_vm_cluster_id: String
+    ) -> _GetCloudAutonomousVmClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCloudAutonomousVmClusterResponse
+
+    interface _GetCloudExadataInfrastructureResponse
+      include Smithy::Client::_Response[Types::GetCloudExadataInfrastructureOutput]
+      def cloud_exadata_infrastructure: () -> Types::CloudExadataInfrastructure?
+    end
+    def get_cloud_exadata_infrastructure: (
+      ?cloud_exadata_infrastructure_id: String
+    ) -> _GetCloudExadataInfrastructureResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCloudExadataInfrastructureResponse
+
+    interface _GetCloudExadataInfrastructureUnallocatedResourcesResponse
+      include Smithy::Client::_Response[Types::GetCloudExadataInfrastructureUnallocatedResourcesOutput]
+      def cloud_exadata_infrastructure_unallocated_resources: () -> Types::CloudExadataInfrastructureUnallocatedResources?
+    end
+    def get_cloud_exadata_infrastructure_unallocated_resources: (
+      ?cloud_exadata_infrastructure_id: String,
+      ?db_servers: Array[String]
+    ) -> _GetCloudExadataInfrastructureUnallocatedResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCloudExadataInfrastructureUnallocatedResourcesResponse
+
+    interface _GetCloudVmClusterResponse
+      include Smithy::Client::_Response[Types::GetCloudVmClusterOutput]
+      def cloud_vm_cluster: () -> Types::CloudVmCluster?
+    end
+    def get_cloud_vm_cluster: (
+      ?cloud_vm_cluster_id: String
+    ) -> _GetCloudVmClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCloudVmClusterResponse
+
+    interface _GetDbNodeResponse
+      include Smithy::Client::_Response[Types::GetDbNodeOutput]
+      def db_node: () -> Types::DbNode?
+    end
+    def get_db_node: (
+      ?cloud_vm_cluster_id: String,
+      ?db_node_id: String
+    ) -> _GetDbNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDbNodeResponse
+
+    interface _GetDbServerResponse
+      include Smithy::Client::_Response[Types::GetDbServerOutput]
+      def db_server: () -> Types::DbServer?
+    end
+    def get_db_server: (
+      ?cloud_exadata_infrastructure_id: String,
+      ?db_server_id: String
+    ) -> _GetDbServerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDbServerResponse
+
+    interface _GetOciOnboardingStatusResponse
+      include Smithy::Client::_Response[Types::GetOciOnboardingStatusOutput]
+      def status: () -> String?
+      def existing_tenancy_activation_link: () -> String?
+      def new_tenancy_activation_link: () -> String?
+    end
+    def get_oci_onboarding_status: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOciOnboardingStatusResponse
+
+    interface _GetOdbNetworkResponse
+      include Smithy::Client::_Response[Types::GetOdbNetworkOutput]
+      def odb_network: () -> Types::OdbNetwork?
+    end
+    def get_odb_network: (
+      ?odb_network_id: String
+    ) -> _GetOdbNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOdbNetworkResponse
+
+    interface _GetOdbPeeringConnectionResponse
+      include Smithy::Client::_Response[Types::GetOdbPeeringConnectionOutput]
+      def odb_peering_connection: () -> Types::OdbPeeringConnection?
+    end
+    def get_odb_peering_connection: (
+      ?odb_peering_connection_id: String
+    ) -> _GetOdbPeeringConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOdbPeeringConnectionResponse
+
+    interface _InitializeServiceResponse
+      include Smithy::Client::_Response[Types::InitializeServiceOutput]
+    end
+    def initialize_service: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InitializeServiceResponse
+
+    interface _ListAutonomousVirtualMachinesResponse
+      include Smithy::Client::_Response[Types::ListAutonomousVirtualMachinesOutput]
+      def next_token: () -> String?
+      def autonomous_virtual_machines: () -> Array[Types::AutonomousVirtualMachineSummary]?
+    end
+    def list_autonomous_virtual_machines: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?cloud_autonomous_vm_cluster_id: String
+    ) -> _ListAutonomousVirtualMachinesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAutonomousVirtualMachinesResponse
+
+    interface _ListCloudAutonomousVmClustersResponse
+      include Smithy::Client::_Response[Types::ListCloudAutonomousVmClustersOutput]
+      def next_token: () -> String?
+      def cloud_autonomous_vm_clusters: () -> Array[Types::CloudAutonomousVmClusterSummary]?
+    end
+    def list_cloud_autonomous_vm_clusters: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?cloud_exadata_infrastructure_id: String
+    ) -> _ListCloudAutonomousVmClustersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCloudAutonomousVmClustersResponse
+
+    interface _ListCloudExadataInfrastructuresResponse
+      include Smithy::Client::_Response[Types::ListCloudExadataInfrastructuresOutput]
+      def next_token: () -> String?
+      def cloud_exadata_infrastructures: () -> Array[Types::CloudExadataInfrastructureSummary]?
+    end
+    def list_cloud_exadata_infrastructures: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCloudExadataInfrastructuresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCloudExadataInfrastructuresResponse
+
+    interface _ListCloudVmClustersResponse
+      include Smithy::Client::_Response[Types::ListCloudVmClustersOutput]
+      def next_token: () -> String?
+      def cloud_vm_clusters: () -> Array[Types::CloudVmClusterSummary]?
+    end
+    def list_cloud_vm_clusters: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?cloud_exadata_infrastructure_id: String
+    ) -> _ListCloudVmClustersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCloudVmClustersResponse
+
+    interface _ListDbNodesResponse
+      include Smithy::Client::_Response[Types::ListDbNodesOutput]
+      def next_token: () -> String?
+      def db_nodes: () -> Array[Types::DbNodeSummary]?
+    end
+    def list_db_nodes: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?cloud_vm_cluster_id: String
+    ) -> _ListDbNodesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDbNodesResponse
+
+    interface _ListDbServersResponse
+      include Smithy::Client::_Response[Types::ListDbServersOutput]
+      def next_token: () -> String?
+      def db_servers: () -> Array[Types::DbServerSummary]?
+    end
+    def list_db_servers: (
+      ?cloud_exadata_infrastructure_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDbServersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDbServersResponse
+
+    interface _ListDbSystemShapesResponse
+      include Smithy::Client::_Response[Types::ListDbSystemShapesOutput]
+      def next_token: () -> String?
+      def db_system_shapes: () -> Array[Types::DbSystemShapeSummary]?
+    end
+    def list_db_system_shapes: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?availability_zone: String,
+      ?availability_zone_id: String
+    ) -> _ListDbSystemShapesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDbSystemShapesResponse
+
+    interface _ListGiVersionsResponse
+      include Smithy::Client::_Response[Types::ListGiVersionsOutput]
+      def next_token: () -> String?
+      def gi_versions: () -> Array[Types::GiVersionSummary]?
+    end
+    def list_gi_versions: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?shape: String
+    ) -> _ListGiVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGiVersionsResponse
+
+    interface _ListOdbNetworksResponse
+      include Smithy::Client::_Response[Types::ListOdbNetworksOutput]
+      def next_token: () -> String?
+      def odb_networks: () -> Array[Types::OdbNetworkSummary]?
+    end
+    def list_odb_networks: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListOdbNetworksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOdbNetworksResponse
+
+    interface _ListOdbPeeringConnectionsResponse
+      include Smithy::Client::_Response[Types::ListOdbPeeringConnectionsOutput]
+      def next_token: () -> String?
+      def odb_peering_connections: () -> Array[Types::OdbPeeringConnectionSummary]?
+    end
+    def list_odb_peering_connections: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?odb_network_id: String
+    ) -> _ListOdbPeeringConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOdbPeeringConnectionsResponse
+
+    interface _ListSystemVersionsResponse
+      include Smithy::Client::_Response[Types::ListSystemVersionsOutput]
+      def next_token: () -> String?
+      def system_versions: () -> Array[Types::SystemVersionSummary]?
+    end
+    def list_system_versions: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?gi_version: String,
+      ?shape: String
+    ) -> _ListSystemVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSystemVersionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RebootDbNodeResponse
+      include Smithy::Client::_Response[Types::RebootDbNodeOutput]
+      def db_node_id: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+    end
+    def reboot_db_node: (
+      ?cloud_vm_cluster_id: String,
+      ?db_node_id: String
+    ) -> _RebootDbNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RebootDbNodeResponse
+
+    interface _StartDbNodeResponse
+      include Smithy::Client::_Response[Types::StartDbNodeOutput]
+      def db_node_id: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+    end
+    def start_db_node: (
+      ?cloud_vm_cluster_id: String,
+      ?db_node_id: String
+    ) -> _StartDbNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDbNodeResponse
+
+    interface _StopDbNodeResponse
+      include Smithy::Client::_Response[Types::StopDbNodeOutput]
+      def db_node_id: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+    end
+    def stop_db_node: (
+      ?cloud_vm_cluster_id: String,
+      ?db_node_id: String
+    ) -> _StopDbNodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopDbNodeResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateCloudExadataInfrastructureResponse
+      include Smithy::Client::_Response[Types::UpdateCloudExadataInfrastructureOutput]
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def cloud_exadata_infrastructure_id: () -> String?
+    end
+    def update_cloud_exadata_infrastructure: (
+      ?cloud_exadata_infrastructure_id: String,
+      ?maintenance_window: {
+        custom_action_timeout_in_mins: Integer,
+        days_of_week: Array[
+          {
+            name: String
+          }
+        ],
+        hours_of_day: Array[Integer],
+        is_custom_action_timeout_enabled: bool,
+        lead_time_in_weeks: untyped,
+        months: Array[
+          {
+            name: String
+          }
+        ],
+        patching_mode: String,
+        preference: String,
+        skip_ru: untyped,
+        weeks_of_month: Array[Integer]
+      }
+    ) -> _UpdateCloudExadataInfrastructureResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCloudExadataInfrastructureResponse
+
+    interface _UpdateOdbNetworkResponse
+      include Smithy::Client::_Response[Types::UpdateOdbNetworkOutput]
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def odb_network_id: () -> String?
+    end
+    def update_odb_network: (
+      ?odb_network_id: String,
+      ?display_name: String,
+      ?peered_cidrs_to_be_added: Array[String],
+      ?peered_cidrs_to_be_removed: Array[String],
+      ?s3_access: String,
+      ?zero_etl_access: String,
+      ?s3_policy_document: String
+    ) -> _UpdateOdbNetworkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOdbNetworkResponse
+  end
+end

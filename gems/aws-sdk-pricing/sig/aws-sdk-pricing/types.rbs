@@ -1,0 +1,310 @@
+module Aws::Pricing
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AttributeValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+    end
+
+    class DescribeServicesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?format_version: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor format_version: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeServicesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?services: Array[Types::Service],
+        ?format_version: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor services: Array[Types::Service]?
+      attr_accessor format_version: String?
+      attr_accessor next_token: String?
+    end
+
+    class ExpiredNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?field: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor field: String?
+      attr_accessor value: String?
+    end
+
+    module FilterType
+      TERM_MATCH: String
+      EQUALS: String
+      CONTAINS: String
+      ANY_OF: String
+      NONE_OF: String
+    end
+
+    class GetAttributeValuesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?attribute_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor attribute_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetAttributeValuesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_values: Array[Types::AttributeValue],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_values: Array[Types::AttributeValue]?
+      attr_accessor next_token: String?
+    end
+
+    class GetPriceListFileUrlRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?price_list_arn: String,
+        ?file_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor price_list_arn: String?
+      attr_accessor file_format: String?
+    end
+
+    class GetPriceListFileUrlResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+    end
+
+    class GetProductsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?filters: Array[Types::Filter],
+        ?format_version: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor filters: Array[Types::Filter]?
+      attr_accessor format_version: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetProductsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format_version: String,
+        ?price_list: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format_version: String?
+      attr_accessor price_list: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class InternalErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListPriceListsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?effective_date: Time,
+        ?region_code: String,
+        ?currency_code: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor effective_date: Time?
+      attr_accessor region_code: String?
+      attr_accessor currency_code: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPriceListsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?price_lists: Array[Types::PriceList],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor price_lists: Array[Types::PriceList]?
+      attr_accessor next_token: String?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PriceList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?price_list_arn: String,
+        ?region_code: String,
+        ?currency_code: String,
+        ?file_formats: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor price_list_arn: String?
+      attr_accessor region_code: String?
+      attr_accessor currency_code: String?
+      attr_accessor file_formats: Array[String]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Service
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_code: String,
+        ?attribute_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_code: String?
+      attr_accessor attribute_names: Array[String]?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

@@ -1,0 +1,447 @@
+module Aws::Chatbot
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Chatbot::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateToConfigurationResponse
+      include Smithy::Client::_Response[Types::AssociateToConfigurationResult]
+    end
+    def associate_to_configuration: (
+      ?resource: String,
+      ?chat_configuration: String
+    ) -> _AssociateToConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateToConfigurationResponse
+
+    interface _CreateChimeWebhookConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateChimeWebhookConfigurationResult]
+      def webhook_configuration: () -> Types::ChimeWebhookConfiguration?
+    end
+    def create_chime_webhook_configuration: (
+      ?webhook_description: String,
+      ?webhook_url: String,
+      ?sns_topic_arns: Array[String],
+      ?iam_role_arn: String,
+      ?configuration_name: String,
+      ?logging_level: String,
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ]
+    ) -> _CreateChimeWebhookConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateChimeWebhookConfigurationResponse
+
+    interface _CreateCustomActionResponse
+      include Smithy::Client::_Response[Types::CreateCustomActionResult]
+      def custom_action_arn: () -> String?
+    end
+    def create_custom_action: (
+      ?definition: {
+        command_text: String
+      },
+      ?alias_name: String,
+      ?attachments: Array[
+        {
+          notification_type: String,
+          button_text: String,
+          criteria: Array[
+            {
+              operator: String,
+              variable_name: String,
+              value: untyped
+            }
+          ],
+          variables: Hash[String, String]
+        }
+      ],
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ],
+      ?client_token: String,
+      ?action_name: String
+    ) -> _CreateCustomActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCustomActionResponse
+
+    interface _CreateMicrosoftTeamsChannelConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateTeamsChannelConfigurationResult]
+      def channel_configuration: () -> Types::TeamsChannelConfiguration?
+    end
+    def create_microsoft_teams_channel_configuration: (
+      ?channel_id: String,
+      ?channel_name: String,
+      ?team_id: String,
+      ?team_name: String,
+      ?tenant_id: String,
+      ?sns_topic_arns: Array[String],
+      ?iam_role_arn: String,
+      ?configuration_name: String,
+      ?logging_level: String,
+      ?guardrail_policy_arns: Array[String],
+      ?user_authorization_required: bool,
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ]
+    ) -> _CreateMicrosoftTeamsChannelConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMicrosoftTeamsChannelConfigurationResponse
+
+    interface _CreateSlackChannelConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateSlackChannelConfigurationResult]
+      def channel_configuration: () -> Types::SlackChannelConfiguration?
+    end
+    def create_slack_channel_configuration: (
+      ?slack_team_id: String,
+      ?slack_channel_id: String,
+      ?slack_channel_name: String,
+      ?sns_topic_arns: Array[String],
+      ?iam_role_arn: String,
+      ?configuration_name: String,
+      ?logging_level: String,
+      ?guardrail_policy_arns: Array[String],
+      ?user_authorization_required: bool,
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ]
+    ) -> _CreateSlackChannelConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSlackChannelConfigurationResponse
+
+    interface _DeleteChimeWebhookConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteChimeWebhookConfigurationResult]
+    end
+    def delete_chime_webhook_configuration: (
+      ?chat_configuration_arn: String
+    ) -> _DeleteChimeWebhookConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteChimeWebhookConfigurationResponse
+
+    interface _DeleteCustomActionResponse
+      include Smithy::Client::_Response[Types::DeleteCustomActionResult]
+    end
+    def delete_custom_action: (
+      ?custom_action_arn: String
+    ) -> _DeleteCustomActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCustomActionResponse
+
+    interface _DeleteMicrosoftTeamsChannelConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteTeamsChannelConfigurationResult]
+    end
+    def delete_microsoft_teams_channel_configuration: (
+      ?chat_configuration_arn: String
+    ) -> _DeleteMicrosoftTeamsChannelConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMicrosoftTeamsChannelConfigurationResponse
+
+    interface _DeleteMicrosoftTeamsConfiguredTeamResponse
+      include Smithy::Client::_Response[Types::DeleteTeamsConfiguredTeamResult]
+    end
+    def delete_microsoft_teams_configured_team: (
+      ?team_id: String
+    ) -> _DeleteMicrosoftTeamsConfiguredTeamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMicrosoftTeamsConfiguredTeamResponse
+
+    interface _DeleteMicrosoftTeamsUserIdentityResponse
+      include Smithy::Client::_Response[Types::DeleteMicrosoftTeamsUserIdentityResult]
+    end
+    def delete_microsoft_teams_user_identity: (
+      ?chat_configuration_arn: String,
+      ?user_id: String
+    ) -> _DeleteMicrosoftTeamsUserIdentityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMicrosoftTeamsUserIdentityResponse
+
+    interface _DeleteSlackChannelConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteSlackChannelConfigurationResult]
+    end
+    def delete_slack_channel_configuration: (
+      ?chat_configuration_arn: String
+    ) -> _DeleteSlackChannelConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSlackChannelConfigurationResponse
+
+    interface _DeleteSlackUserIdentityResponse
+      include Smithy::Client::_Response[Types::DeleteSlackUserIdentityResult]
+    end
+    def delete_slack_user_identity: (
+      ?chat_configuration_arn: String,
+      ?slack_team_id: String,
+      ?slack_user_id: String
+    ) -> _DeleteSlackUserIdentityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSlackUserIdentityResponse
+
+    interface _DeleteSlackWorkspaceAuthorizationResponse
+      include Smithy::Client::_Response[Types::DeleteSlackWorkspaceAuthorizationResult]
+    end
+    def delete_slack_workspace_authorization: (
+      ?slack_team_id: String
+    ) -> _DeleteSlackWorkspaceAuthorizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSlackWorkspaceAuthorizationResponse
+
+    interface _DescribeChimeWebhookConfigurationsResponse
+      include Smithy::Client::_Response[Types::DescribeChimeWebhookConfigurationsResult]
+      def next_token: () -> String?
+      def webhook_configurations: () -> Array[Types::ChimeWebhookConfiguration]?
+    end
+    def describe_chime_webhook_configurations: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?chat_configuration_arn: String
+    ) -> _DescribeChimeWebhookConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeChimeWebhookConfigurationsResponse
+
+    interface _DescribeSlackChannelConfigurationsResponse
+      include Smithy::Client::_Response[Types::DescribeSlackChannelConfigurationsResult]
+      def next_token: () -> String?
+      def slack_channel_configurations: () -> Array[Types::SlackChannelConfiguration]?
+    end
+    def describe_slack_channel_configurations: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?chat_configuration_arn: String
+    ) -> _DescribeSlackChannelConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSlackChannelConfigurationsResponse
+
+    interface _DescribeSlackUserIdentitiesResponse
+      include Smithy::Client::_Response[Types::DescribeSlackUserIdentitiesResult]
+      def slack_user_identities: () -> Array[Types::SlackUserIdentity]?
+      def next_token: () -> String?
+    end
+    def describe_slack_user_identities: (
+      ?chat_configuration_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeSlackUserIdentitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSlackUserIdentitiesResponse
+
+    interface _DescribeSlackWorkspacesResponse
+      include Smithy::Client::_Response[Types::DescribeSlackWorkspacesResult]
+      def slack_workspaces: () -> Array[Types::SlackWorkspace]?
+      def next_token: () -> String?
+    end
+    def describe_slack_workspaces: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeSlackWorkspacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSlackWorkspacesResponse
+
+    interface _DisassociateFromConfigurationResponse
+      include Smithy::Client::_Response[Types::DisassociateFromConfigurationResult]
+    end
+    def disassociate_from_configuration: (
+      ?resource: String,
+      ?chat_configuration: String
+    ) -> _DisassociateFromConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateFromConfigurationResponse
+
+    interface _GetAccountPreferencesResponse
+      include Smithy::Client::_Response[Types::GetAccountPreferencesResult]
+      def account_preferences: () -> Types::AccountPreferences?
+    end
+    def get_account_preferences: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountPreferencesResponse
+
+    interface _GetCustomActionResponse
+      include Smithy::Client::_Response[Types::GetCustomActionResult]
+      def custom_action: () -> Types::CustomAction?
+    end
+    def get_custom_action: (
+      ?custom_action_arn: String
+    ) -> _GetCustomActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCustomActionResponse
+
+    interface _GetMicrosoftTeamsChannelConfigurationResponse
+      include Smithy::Client::_Response[Types::GetTeamsChannelConfigurationResult]
+      def channel_configuration: () -> Types::TeamsChannelConfiguration?
+    end
+    def get_microsoft_teams_channel_configuration: (
+      ?chat_configuration_arn: String
+    ) -> _GetMicrosoftTeamsChannelConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMicrosoftTeamsChannelConfigurationResponse
+
+    interface _ListAssociationsResponse
+      include Smithy::Client::_Response[Types::ListAssociationsResult]
+      def associations: () -> Array[Types::AssociationListing]?
+      def next_token: () -> String?
+    end
+    def list_associations: (
+      ?chat_configuration: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssociationsResponse
+
+    interface _ListCustomActionsResponse
+      include Smithy::Client::_Response[Types::ListCustomActionsResult]
+      def custom_actions: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_custom_actions: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListCustomActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCustomActionsResponse
+
+    interface _ListMicrosoftTeamsChannelConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListTeamsChannelConfigurationsResult]
+      def next_token: () -> String?
+      def team_channel_configurations: () -> Array[Types::TeamsChannelConfiguration]?
+    end
+    def list_microsoft_teams_channel_configurations: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?team_id: String
+    ) -> _ListMicrosoftTeamsChannelConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMicrosoftTeamsChannelConfigurationsResponse
+
+    interface _ListMicrosoftTeamsConfiguredTeamsResponse
+      include Smithy::Client::_Response[Types::ListMicrosoftTeamsConfiguredTeamsResult]
+      def configured_teams: () -> Array[Types::ConfiguredTeam]?
+      def next_token: () -> String?
+    end
+    def list_microsoft_teams_configured_teams: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListMicrosoftTeamsConfiguredTeamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMicrosoftTeamsConfiguredTeamsResponse
+
+    interface _ListMicrosoftTeamsUserIdentitiesResponse
+      include Smithy::Client::_Response[Types::ListMicrosoftTeamsUserIdentitiesResult]
+      def teams_user_identities: () -> Array[Types::TeamsUserIdentity]?
+      def next_token: () -> String?
+    end
+    def list_microsoft_teams_user_identities: (
+      ?chat_configuration_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMicrosoftTeamsUserIdentitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMicrosoftTeamsUserIdentitiesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          tag_key: String,
+          tag_value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAccountPreferencesResponse
+      include Smithy::Client::_Response[Types::UpdateAccountPreferencesResult]
+      def account_preferences: () -> Types::AccountPreferences?
+    end
+    def update_account_preferences: (
+      ?user_authorization_required: bool,
+      ?training_data_collection_enabled: bool
+    ) -> _UpdateAccountPreferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccountPreferencesResponse
+
+    interface _UpdateChimeWebhookConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateChimeWebhookConfigurationResult]
+      def webhook_configuration: () -> Types::ChimeWebhookConfiguration?
+    end
+    def update_chime_webhook_configuration: (
+      ?chat_configuration_arn: String,
+      ?webhook_description: String,
+      ?webhook_url: String,
+      ?sns_topic_arns: Array[String],
+      ?iam_role_arn: String,
+      ?logging_level: String
+    ) -> _UpdateChimeWebhookConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateChimeWebhookConfigurationResponse
+
+    interface _UpdateCustomActionResponse
+      include Smithy::Client::_Response[Types::UpdateCustomActionResult]
+      def custom_action_arn: () -> String?
+    end
+    def update_custom_action: (
+      ?custom_action_arn: String,
+      ?definition: {
+        command_text: String
+      },
+      ?alias_name: String,
+      ?attachments: Array[
+        {
+          notification_type: String,
+          button_text: String,
+          criteria: Array[
+            {
+              operator: String,
+              variable_name: String,
+              value: untyped
+            }
+          ],
+          variables: Hash[String, String]
+        }
+      ]
+    ) -> _UpdateCustomActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCustomActionResponse
+
+    interface _UpdateMicrosoftTeamsChannelConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateTeamsChannelConfigurationResult]
+      def channel_configuration: () -> Types::TeamsChannelConfiguration?
+    end
+    def update_microsoft_teams_channel_configuration: (
+      ?chat_configuration_arn: String,
+      ?channel_id: String,
+      ?channel_name: String,
+      ?sns_topic_arns: Array[String],
+      ?iam_role_arn: String,
+      ?logging_level: String,
+      ?guardrail_policy_arns: Array[String],
+      ?user_authorization_required: bool
+    ) -> _UpdateMicrosoftTeamsChannelConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMicrosoftTeamsChannelConfigurationResponse
+
+    interface _UpdateSlackChannelConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateSlackChannelConfigurationResult]
+      def channel_configuration: () -> Types::SlackChannelConfiguration?
+    end
+    def update_slack_channel_configuration: (
+      ?chat_configuration_arn: String,
+      ?slack_channel_id: String,
+      ?slack_channel_name: String,
+      ?sns_topic_arns: Array[String],
+      ?iam_role_arn: String,
+      ?logging_level: String,
+      ?guardrail_policy_arns: Array[String],
+      ?user_authorization_required: bool
+    ) -> _UpdateSlackChannelConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSlackChannelConfigurationResponse
+  end
+end

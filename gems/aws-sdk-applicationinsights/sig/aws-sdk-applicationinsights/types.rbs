@@ -1,0 +1,1448 @@
+module Aws::ApplicationInsights
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AddWorkloadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?component_name: String,
+        ?workload_configuration: Types::WorkloadConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor component_name: String?
+      attr_accessor workload_configuration: Types::WorkloadConfiguration?
+    end
+
+    class AddWorkloadResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?workload_configuration: Types::WorkloadConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor workload_configuration: Types::WorkloadConfiguration?
+    end
+
+    class ApplicationComponent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_name: String,
+        ?component_remarks: String,
+        ?resource_type: String,
+        ?os_type: String,
+        ?tier: String,
+        ?monitor: bool,
+        ?detected_workload: Hash[String, Hash[String, String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_name: String?
+      attr_accessor component_remarks: String?
+      attr_accessor resource_type: String?
+      attr_accessor os_type: String?
+      attr_accessor tier: String?
+      attr_accessor monitor: bool?
+      attr_accessor detected_workload: Hash[String, Hash[String, String]]?
+    end
+
+    class ApplicationInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?resource_group_name: String,
+        ?life_cycle: String,
+        ?ops_item_sns_topic_arn: String,
+        ?sns_notification_arn: String,
+        ?ops_center_enabled: bool,
+        ?cwe_monitor_enabled: bool,
+        ?remarks: String,
+        ?auto_config_enabled: bool,
+        ?discovery_type: String,
+        ?attach_missing_permission: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor resource_group_name: String?
+      attr_accessor life_cycle: String?
+      attr_accessor ops_item_sns_topic_arn: String?
+      attr_accessor sns_notification_arn: String?
+      attr_accessor ops_center_enabled: bool?
+      attr_accessor cwe_monitor_enabled: bool?
+      attr_accessor remarks: String?
+      attr_accessor auto_config_enabled: bool?
+      attr_accessor discovery_type: String?
+      attr_accessor attach_missing_permission: bool?
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module CloudWatchEventSource
+      EC2: String
+      CODE_DEPLOY: String
+      HEALTH: String
+      RDS: String
+    end
+
+    class ConfigurationEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?account_id: String,
+        ?monitored_resource_arn: String,
+        ?event_status: String,
+        ?event_resource_type: String,
+        ?event_time: Time,
+        ?event_detail: String,
+        ?event_resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor account_id: String?
+      attr_accessor monitored_resource_arn: String?
+      attr_accessor event_status: String?
+      attr_accessor event_resource_type: String?
+      attr_accessor event_time: Time?
+      attr_accessor event_detail: String?
+      attr_accessor event_resource_name: String?
+    end
+
+    module ConfigurationEventResourceType
+      CLOUDWATCH_ALARM: String
+      CLOUDWATCH_LOG: String
+      CLOUDFORMATION: String
+      SSM_ASSOCIATION: String
+    end
+
+    module ConfigurationEventStatus
+      INFO: String
+      WARN: String
+      ERROR: String
+    end
+
+    class CreateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?ops_center_enabled: bool,
+        ?cwe_monitor_enabled: bool,
+        ?ops_item_sns_topic_arn: String,
+        ?sns_notification_arn: String,
+        ?tags: Array[Types::Tag],
+        ?auto_config_enabled: bool,
+        ?auto_create: bool,
+        ?grouping_type: String,
+        ?attach_missing_permission: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor ops_center_enabled: bool?
+      attr_accessor cwe_monitor_enabled: bool?
+      attr_accessor ops_item_sns_topic_arn: String?
+      attr_accessor sns_notification_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor auto_config_enabled: bool?
+      attr_accessor auto_create: bool?
+      attr_accessor grouping_type: String?
+      attr_accessor attach_missing_permission: bool?
+    end
+
+    class CreateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_info: Types::ApplicationInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_info: Types::ApplicationInfo?
+    end
+
+    class CreateComponentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?component_name: String,
+        ?resource_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor component_name: String?
+      attr_accessor resource_list: Array[String]?
+    end
+
+    class CreateComponentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateLogPatternRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?pattern_set_name: String,
+        ?pattern_name: String,
+        ?pattern: String,
+        ?rank: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor pattern_set_name: String?
+      attr_accessor pattern_name: String?
+      attr_accessor pattern: String?
+      attr_accessor rank: Integer?
+    end
+
+    class CreateLogPatternResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_pattern: Types::LogPattern,
+        ?resource_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_pattern: Types::LogPattern?
+      attr_accessor resource_group_name: String?
+    end
+
+    class DeleteApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+    end
+
+    class DeleteApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteComponentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?component_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor component_name: String?
+    end
+
+    class DeleteComponentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLogPatternRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?pattern_set_name: String,
+        ?pattern_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor pattern_set_name: String?
+      attr_accessor pattern_name: String?
+    end
+
+    class DeleteLogPatternResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor account_id: String?
+    end
+
+    class DescribeApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_info: Types::ApplicationInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_info: Types::ApplicationInfo?
+    end
+
+    class DescribeComponentConfigurationRecommendationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?component_name: String,
+        ?tier: String,
+        ?workload_name: String,
+        ?recommendation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor component_name: String?
+      attr_accessor tier: String?
+      attr_accessor workload_name: String?
+      attr_accessor recommendation_type: String?
+    end
+
+    class DescribeComponentConfigurationRecommendationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_configuration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_configuration: String?
+    end
+
+    class DescribeComponentConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?component_name: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor component_name: String?
+      attr_accessor account_id: String?
+    end
+
+    class DescribeComponentConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor: bool,
+        ?tier: String,
+        ?component_configuration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor: bool?
+      attr_accessor tier: String?
+      attr_accessor component_configuration: String?
+    end
+
+    class DescribeComponentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?component_name: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor component_name: String?
+      attr_accessor account_id: String?
+    end
+
+    class DescribeComponentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_component: Types::ApplicationComponent,
+        ?resource_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_component: Types::ApplicationComponent?
+      attr_accessor resource_list: Array[String]?
+    end
+
+    class DescribeLogPatternRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?pattern_set_name: String,
+        ?pattern_name: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor pattern_set_name: String?
+      attr_accessor pattern_name: String?
+      attr_accessor account_id: String?
+    end
+
+    class DescribeLogPatternResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?account_id: String,
+        ?log_pattern: Types::LogPattern,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor account_id: String?
+      attr_accessor log_pattern: Types::LogPattern?
+    end
+
+    class DescribeObservationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?observation_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor observation_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class DescribeObservationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?observation: Types::Observation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor observation: Types::Observation?
+    end
+
+    class DescribeProblemObservationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?problem_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor problem_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class DescribeProblemObservationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?related_observations: Types::RelatedObservations,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor related_observations: Types::RelatedObservations?
+    end
+
+    class DescribeProblemRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?problem_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor problem_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class DescribeProblemResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?problem: Types::Problem,
+        ?sns_notification_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor problem: Types::Problem?
+      attr_accessor sns_notification_arn: String?
+    end
+
+    class DescribeWorkloadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?component_name: String,
+        ?workload_id: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor component_name: String?
+      attr_accessor workload_id: String?
+      attr_accessor account_id: String?
+    end
+
+    class DescribeWorkloadResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?workload_remarks: String,
+        ?workload_configuration: Types::WorkloadConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor workload_remarks: String?
+      attr_accessor workload_configuration: Types::WorkloadConfiguration?
+    end
+
+    module DiscoveryType
+      RESOURCE_GROUP_BASED: String
+      ACCOUNT_BASED: String
+    end
+
+    module FeedbackKey
+      INSIGHTS_FEEDBACK: String
+    end
+
+    module FeedbackValue
+      NOT_SPECIFIED: String
+      USEFUL: String
+      NOT_USEFUL: String
+    end
+
+    module GroupingType
+      ACCOUNT_BASED: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListApplicationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor account_id: String?
+    end
+
+    class ListApplicationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_info_list: Array[Types::ApplicationInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_info_list: Array[Types::ApplicationInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class ListComponentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor account_id: String?
+    end
+
+    class ListComponentsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_component_list: Array[Types::ApplicationComponent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_component_list: Array[Types::ApplicationComponent]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConfigurationHistoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?event_status: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor event_status: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor account_id: String?
+    end
+
+    class ListConfigurationHistoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_list: Array[Types::ConfigurationEvent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_list: Array[Types::ConfigurationEvent]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLogPatternSetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor account_id: String?
+    end
+
+    class ListLogPatternSetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?account_id: String,
+        ?log_pattern_sets: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor account_id: String?
+      attr_accessor log_pattern_sets: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLogPatternsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?pattern_set_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor pattern_set_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor account_id: String?
+    end
+
+    class ListLogPatternsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?account_id: String,
+        ?log_patterns: Array[Types::LogPattern],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor account_id: String?
+      attr_accessor log_patterns: Array[Types::LogPattern]?
+      attr_accessor next_token: String?
+    end
+
+    class ListProblemsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?resource_group_name: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?component_name: String,
+        ?visibility: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor resource_group_name: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor component_name: String?
+      attr_accessor visibility: String?
+    end
+
+    class ListProblemsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?problem_list: Array[Types::Problem],
+        ?next_token: String,
+        ?resource_group_name: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor problem_list: Array[Types::Problem]?
+      attr_accessor next_token: String?
+      attr_accessor resource_group_name: String?
+      attr_accessor account_id: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListWorkloadsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?component_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor component_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor account_id: String?
+    end
+
+    class ListWorkloadsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_list: Array[Types::Workload],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_list: Array[Types::Workload]?
+      attr_accessor next_token: String?
+    end
+
+    module LogFilter
+      ERROR: String
+      WARN: String
+      INFO: String
+    end
+
+    class LogPattern
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pattern_set_name: String,
+        ?pattern_name: String,
+        ?pattern: String,
+        ?rank: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pattern_set_name: String?
+      attr_accessor pattern_name: String?
+      attr_accessor pattern: String?
+      attr_accessor rank: Integer?
+    end
+
+    class Observation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?source_type: String,
+        ?source_arn: String,
+        ?log_group: String,
+        ?line_time: Time,
+        ?log_text: String,
+        ?log_filter: String,
+        ?metric_namespace: String,
+        ?metric_name: String,
+        ?unit: String,
+        ?value: Float,
+        ?cloud_watch_event_id: String,
+        ?cloud_watch_event_source: String,
+        ?cloud_watch_event_detail_type: String,
+        ?health_event_arn: String,
+        ?health_service: String,
+        ?health_event_type_code: String,
+        ?health_event_type_category: String,
+        ?health_event_description: String,
+        ?code_deploy_deployment_id: String,
+        ?code_deploy_deployment_group: String,
+        ?code_deploy_state: String,
+        ?code_deploy_application: String,
+        ?code_deploy_instance_group_id: String,
+        ?ec2_state: String,
+        ?rds_event_categories: String,
+        ?rds_event_message: String,
+        ?s3_event_name: String,
+        ?states_execution_arn: String,
+        ?states_arn: String,
+        ?states_status: String,
+        ?states_input: String,
+        ?ebs_event: String,
+        ?ebs_result: String,
+        ?ebs_cause: String,
+        ?ebs_request_id: String,
+        ?x_ray_fault_percent: Integer,
+        ?x_ray_throttle_percent: Integer,
+        ?x_ray_error_percent: Integer,
+        ?x_ray_request_count: Integer,
+        ?x_ray_request_average_latency: Integer,
+        ?x_ray_node_name: String,
+        ?x_ray_node_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor source_type: String?
+      attr_accessor source_arn: String?
+      attr_accessor log_group: String?
+      attr_accessor line_time: Time?
+      attr_accessor log_text: String?
+      attr_accessor log_filter: String?
+      attr_accessor metric_namespace: String?
+      attr_accessor metric_name: String?
+      attr_accessor unit: String?
+      attr_accessor value: Float?
+      attr_accessor cloud_watch_event_id: String?
+      attr_accessor cloud_watch_event_source: String?
+      attr_accessor cloud_watch_event_detail_type: String?
+      attr_accessor health_event_arn: String?
+      attr_accessor health_service: String?
+      attr_accessor health_event_type_code: String?
+      attr_accessor health_event_type_category: String?
+      attr_accessor health_event_description: String?
+      attr_accessor code_deploy_deployment_id: String?
+      attr_accessor code_deploy_deployment_group: String?
+      attr_accessor code_deploy_state: String?
+      attr_accessor code_deploy_application: String?
+      attr_accessor code_deploy_instance_group_id: String?
+      attr_accessor ec2_state: String?
+      attr_accessor rds_event_categories: String?
+      attr_accessor rds_event_message: String?
+      attr_accessor s3_event_name: String?
+      attr_accessor states_execution_arn: String?
+      attr_accessor states_arn: String?
+      attr_accessor states_status: String?
+      attr_accessor states_input: String?
+      attr_accessor ebs_event: String?
+      attr_accessor ebs_result: String?
+      attr_accessor ebs_cause: String?
+      attr_accessor ebs_request_id: String?
+      attr_accessor x_ray_fault_percent: Integer?
+      attr_accessor x_ray_throttle_percent: Integer?
+      attr_accessor x_ray_error_percent: Integer?
+      attr_accessor x_ray_request_count: Integer?
+      attr_accessor x_ray_request_average_latency: Integer?
+      attr_accessor x_ray_node_name: String?
+      attr_accessor x_ray_node_type: String?
+    end
+
+    module OsType
+      WINDOWS: String
+      LINUX: String
+    end
+
+    class Problem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?title: String,
+        ?short_name: String,
+        ?insights: String,
+        ?status: String,
+        ?affected_resource: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?severity_level: String,
+        ?account_id: String,
+        ?resource_group_name: String,
+        ?feedback: Hash[String, String],
+        ?recurring_count: Integer,
+        ?last_recurrence_time: Time,
+        ?visibility: String,
+        ?resolution_method: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor title: String?
+      attr_accessor short_name: String?
+      attr_accessor insights: String?
+      attr_accessor status: String?
+      attr_accessor affected_resource: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor severity_level: String?
+      attr_accessor account_id: String?
+      attr_accessor resource_group_name: String?
+      attr_accessor feedback: Hash[String, String]?
+      attr_accessor recurring_count: Integer?
+      attr_accessor last_recurrence_time: Time?
+      attr_accessor visibility: String?
+      attr_accessor resolution_method: String?
+    end
+
+    module RecommendationType
+      INFRA_ONLY: String
+      WORKLOAD_ONLY: String
+      ALL: String
+    end
+
+    class RelatedObservations
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?observation_list: Array[Types::Observation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor observation_list: Array[Types::Observation]?
+    end
+
+    class RemoveWorkloadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?component_name: String,
+        ?workload_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor component_name: String?
+      attr_accessor workload_id: String?
+    end
+
+    class RemoveWorkloadResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module ResolutionMethod
+      MANUAL: String
+      AUTOMATIC: String
+      UNRESOLVED: String
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SeverityLevel
+      Informative: String
+      Low: String
+      Medium: String
+      High: String
+    end
+
+    module Status
+      IGNORE: String
+      RESOLVED: String
+      PENDING: String
+      RECURRING: String
+      RECOVERING: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TagsAlreadyExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Tier
+      CUSTOM: String
+      DEFAULT: String
+      DOT_NET_CORE: String
+      DOT_NET_WORKER: String
+      DOT_NET_WEB_TIER: String
+      DOT_NET_WEB: String
+      SQL_SERVER: String
+      SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP: String
+      MYSQL: String
+      POSTGRESQL: String
+      JAVA_JMX: String
+      ORACLE: String
+      SAP_HANA_MULTI_NODE: String
+      SAP_HANA_SINGLE_NODE: String
+      SAP_HANA_HIGH_AVAILABILITY: String
+      SAP_ASE_SINGLE_NODE: String
+      SAP_ASE_HIGH_AVAILABILITY: String
+      SQL_SERVER_FAILOVER_CLUSTER_INSTANCE: String
+      SHAREPOINT: String
+      ACTIVE_DIRECTORY: String
+      SAP_NETWEAVER_STANDARD: String
+      SAP_NETWEAVER_DISTRIBUTED: String
+      SAP_NETWEAVER_HIGH_AVAILABILITY: String
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?ops_center_enabled: bool,
+        ?cwe_monitor_enabled: bool,
+        ?ops_item_sns_topic_arn: String,
+        ?sns_notification_arn: String,
+        ?remove_sns_topic: bool,
+        ?auto_config_enabled: bool,
+        ?attach_missing_permission: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor ops_center_enabled: bool?
+      attr_accessor cwe_monitor_enabled: bool?
+      attr_accessor ops_item_sns_topic_arn: String?
+      attr_accessor sns_notification_arn: String?
+      attr_accessor remove_sns_topic: bool?
+      attr_accessor auto_config_enabled: bool?
+      attr_accessor attach_missing_permission: bool?
+    end
+
+    class UpdateApplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_info: Types::ApplicationInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_info: Types::ApplicationInfo?
+    end
+
+    class UpdateComponentConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?component_name: String,
+        ?monitor: bool,
+        ?tier: String,
+        ?component_configuration: String,
+        ?auto_config_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor component_name: String?
+      attr_accessor monitor: bool?
+      attr_accessor tier: String?
+      attr_accessor component_configuration: String?
+      attr_accessor auto_config_enabled: bool?
+    end
+
+    class UpdateComponentConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateComponentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?component_name: String,
+        ?new_component_name: String,
+        ?resource_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor component_name: String?
+      attr_accessor new_component_name: String?
+      attr_accessor resource_list: Array[String]?
+    end
+
+    class UpdateComponentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLogPatternRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?pattern_set_name: String,
+        ?pattern_name: String,
+        ?pattern: String,
+        ?rank: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor pattern_set_name: String?
+      attr_accessor pattern_name: String?
+      attr_accessor pattern: String?
+      attr_accessor rank: Integer?
+    end
+
+    class UpdateLogPatternResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?log_pattern: Types::LogPattern,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor log_pattern: Types::LogPattern?
+    end
+
+    class UpdateProblemRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?problem_id: String,
+        ?update_status: String,
+        ?visibility: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor problem_id: String?
+      attr_accessor update_status: String?
+      attr_accessor visibility: String?
+    end
+
+    class UpdateProblemResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module UpdateStatus
+      RESOLVED: String
+    end
+
+    class UpdateWorkloadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_group_name: String,
+        ?component_name: String,
+        ?workload_id: String,
+        ?workload_configuration: Types::WorkloadConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_group_name: String?
+      attr_accessor component_name: String?
+      attr_accessor workload_id: String?
+      attr_accessor workload_configuration: Types::WorkloadConfiguration?
+    end
+
+    class UpdateWorkloadResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?workload_configuration: Types::WorkloadConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor workload_configuration: Types::WorkloadConfiguration?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Visibility
+      IGNORED: String
+      VISIBLE: String
+    end
+
+    class Workload
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_id: String,
+        ?component_name: String,
+        ?workload_name: String,
+        ?tier: String,
+        ?workload_remarks: String,
+        ?missing_workload_config: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_id: String?
+      attr_accessor component_name: String?
+      attr_accessor workload_name: String?
+      attr_accessor tier: String?
+      attr_accessor workload_remarks: String?
+      attr_accessor missing_workload_config: bool?
+    end
+
+    class WorkloadConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workload_name: String,
+        ?tier: String,
+        ?configuration: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workload_name: String?
+      attr_accessor tier: String?
+      attr_accessor configuration: String?
+    end
+  end
+end

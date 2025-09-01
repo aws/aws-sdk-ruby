@@ -1,0 +1,5 @@
+  module Aws
+    module BedrockAgentCoreControl
+      VERSION: String
+    end
+  end

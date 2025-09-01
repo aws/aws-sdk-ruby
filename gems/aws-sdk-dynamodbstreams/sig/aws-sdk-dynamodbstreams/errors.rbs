@@ -1,0 +1,19 @@
+module Aws::DynamoDBStreams
+  module Errors
+    class ExpiredIteratorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TrimmedDataAccessException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

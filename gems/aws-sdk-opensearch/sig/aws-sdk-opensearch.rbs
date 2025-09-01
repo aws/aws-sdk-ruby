@@ -1,0 +1,5 @@
+  module Aws
+    module OpenSearch
+      VERSION: String
+    end
+  end

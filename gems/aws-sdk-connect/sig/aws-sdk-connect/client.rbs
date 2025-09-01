@@ -1,0 +1,4911 @@
+module Aws::Connect
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Connect::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _ActivateEvaluationFormResponse
+      include Smithy::Client::_Response[Types::ActivateEvaluationFormResponse]
+      def evaluation_form_id: () -> String?
+      def evaluation_form_arn: () -> String?
+      def evaluation_form_version: () -> Integer?
+    end
+    def activate_evaluation_form: (
+      ?instance_id: String,
+      ?evaluation_form_id: String,
+      ?evaluation_form_version: Integer
+    ) -> _ActivateEvaluationFormResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ActivateEvaluationFormResponse
+
+    interface _AssociateAnalyticsDataSetResponse
+      include Smithy::Client::_Response[Types::AssociateAnalyticsDataSetResponse]
+      def data_set_id: () -> String?
+      def target_account_id: () -> String?
+      def resource_share_id: () -> String?
+      def resource_share_arn: () -> String?
+    end
+    def associate_analytics_data_set: (
+      ?instance_id: String,
+      ?data_set_id: String,
+      ?target_account_id: String
+    ) -> _AssociateAnalyticsDataSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateAnalyticsDataSetResponse
+
+    interface _AssociateApprovedOriginResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_approved_origin: (
+      ?instance_id: String,
+      ?origin: String,
+      ?client_token: String
+    ) -> _AssociateApprovedOriginResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateApprovedOriginResponse
+
+    interface _AssociateBotResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_bot: (
+      ?instance_id: String,
+      ?lex_bot: {
+        name: String,
+        lex_region: String
+      },
+      ?lex_v2_bot: {
+        alias_arn: String
+      },
+      ?client_token: String
+    ) -> _AssociateBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateBotResponse
+
+    interface _AssociateDefaultVocabularyResponse
+      include Smithy::Client::_Response[Types::AssociateDefaultVocabularyResponse]
+    end
+    def associate_default_vocabulary: (
+      ?instance_id: String,
+      ?language_code: String,
+      ?vocabulary_id: String
+    ) -> _AssociateDefaultVocabularyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateDefaultVocabularyResponse
+
+    interface _AssociateFlowResponse
+      include Smithy::Client::_Response[Types::AssociateFlowResponse]
+    end
+    def associate_flow: (
+      ?instance_id: String,
+      ?resource_id: String,
+      ?flow_id: String,
+      ?resource_type: String
+    ) -> _AssociateFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateFlowResponse
+
+    interface _AssociateInstanceStorageConfigResponse
+      include Smithy::Client::_Response[Types::AssociateInstanceStorageConfigResponse]
+      def association_id: () -> String?
+    end
+    def associate_instance_storage_config: (
+      ?instance_id: String,
+      ?resource_type: String,
+      ?storage_config: {
+        association_id: String,
+        storage_type: String,
+        s3_config: {
+          bucket_name: String,
+          bucket_prefix: String,
+          encryption_config: {
+            encryption_type: String,
+            key_id: String
+          }
+        },
+        kinesis_video_stream_config: {
+          prefix: untyped,
+          retention_period_hours: Integer,
+          encryption_config: untyped
+        },
+        kinesis_stream_config: {
+          stream_arn: String
+        },
+        kinesis_firehose_config: {
+          firehose_arn: untyped
+        }
+      },
+      ?client_token: String
+    ) -> _AssociateInstanceStorageConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateInstanceStorageConfigResponse
+
+    interface _AssociateLambdaFunctionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_lambda_function: (
+      ?instance_id: String,
+      ?function_arn: String,
+      ?client_token: String
+    ) -> _AssociateLambdaFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateLambdaFunctionResponse
+
+    interface _AssociateLexBotResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_lex_bot: (
+      ?instance_id: String,
+      ?lex_bot: {
+        name: String,
+        lex_region: String
+      },
+      ?client_token: String
+    ) -> _AssociateLexBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateLexBotResponse
+
+    interface _AssociatePhoneNumberContactFlowResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_phone_number_contact_flow: (
+      ?phone_number_id: String,
+      ?instance_id: String,
+      ?contact_flow_id: String
+    ) -> _AssociatePhoneNumberContactFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociatePhoneNumberContactFlowResponse
+
+    interface _AssociateQueueQuickConnectsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_queue_quick_connects: (
+      ?instance_id: String,
+      ?queue_id: String,
+      ?quick_connect_ids: Array[String]
+    ) -> _AssociateQueueQuickConnectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateQueueQuickConnectsResponse
+
+    interface _AssociateRoutingProfileQueuesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_routing_profile_queues: (
+      ?instance_id: String,
+      ?routing_profile_id: String,
+      ?queue_configs: Array[
+        {
+          queue_reference: {
+            queue_id: String,
+            channel: String
+          },
+          priority: Integer,
+          delay: Integer
+        }
+      ]
+    ) -> _AssociateRoutingProfileQueuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateRoutingProfileQueuesResponse
+
+    interface _AssociateSecurityKeyResponse
+      include Smithy::Client::_Response[Types::AssociateSecurityKeyResponse]
+      def association_id: () -> String?
+    end
+    def associate_security_key: (
+      ?instance_id: String,
+      ?key: String,
+      ?client_token: String
+    ) -> _AssociateSecurityKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateSecurityKeyResponse
+
+    interface _AssociateTrafficDistributionGroupUserResponse
+      include Smithy::Client::_Response[Types::AssociateTrafficDistributionGroupUserResponse]
+    end
+    def associate_traffic_distribution_group_user: (
+      ?traffic_distribution_group_id: String,
+      ?user_id: String,
+      ?instance_id: String
+    ) -> _AssociateTrafficDistributionGroupUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateTrafficDistributionGroupUserResponse
+
+    interface _AssociateUserProficienciesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def associate_user_proficiencies: (
+      ?instance_id: String,
+      ?user_id: String,
+      ?user_proficiencies: Array[
+        {
+          attribute_name: String,
+          attribute_value: String,
+          level: Float
+        }
+      ]
+    ) -> _AssociateUserProficienciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateUserProficienciesResponse
+
+    interface _BatchAssociateAnalyticsDataSetResponse
+      include Smithy::Client::_Response[Types::BatchAssociateAnalyticsDataSetResponse]
+      def created: () -> Array[Types::AnalyticsDataAssociationResult]?
+      def errors: () -> Array[Types::ErrorResult]?
+    end
+    def batch_associate_analytics_data_set: (
+      ?instance_id: String,
+      ?data_set_ids: Array[String],
+      ?target_account_id: String
+    ) -> _BatchAssociateAnalyticsDataSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchAssociateAnalyticsDataSetResponse
+
+    interface _BatchDisassociateAnalyticsDataSetResponse
+      include Smithy::Client::_Response[Types::BatchDisassociateAnalyticsDataSetResponse]
+      def deleted: () -> Array[String]?
+      def errors: () -> Array[Types::ErrorResult]?
+    end
+    def batch_disassociate_analytics_data_set: (
+      ?instance_id: String,
+      ?data_set_ids: Array[String],
+      ?target_account_id: String
+    ) -> _BatchDisassociateAnalyticsDataSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDisassociateAnalyticsDataSetResponse
+
+    interface _BatchGetAttachedFileMetadataResponse
+      include Smithy::Client::_Response[Types::BatchGetAttachedFileMetadataResponse]
+      def files: () -> Array[Types::AttachedFile]?
+      def errors: () -> Array[Types::AttachedFileError]?
+    end
+    def batch_get_attached_file_metadata: (
+      ?file_ids: Array[String],
+      ?instance_id: String,
+      ?associated_resource_arn: String
+    ) -> _BatchGetAttachedFileMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetAttachedFileMetadataResponse
+
+    interface _BatchGetFlowAssociationResponse
+      include Smithy::Client::_Response[Types::BatchGetFlowAssociationResponse]
+      def flow_association_summary_list: () -> Array[Types::FlowAssociationSummary]?
+    end
+    def batch_get_flow_association: (
+      ?instance_id: String,
+      ?resource_ids: Array[String],
+      ?resource_type: String
+    ) -> _BatchGetFlowAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetFlowAssociationResponse
+
+    interface _BatchPutContactResponse
+      include Smithy::Client::_Response[Types::BatchPutContactResponse]
+      def successful_request_list: () -> Array[Types::SuccessfulRequest]?
+      def failed_request_list: () -> Array[Types::FailedRequest]?
+    end
+    def batch_put_contact: (
+      ?client_token: String,
+      ?instance_id: String,
+      ?contact_data_request_list: Array[
+        {
+          system_endpoint: {
+            type: String,
+            address: String
+          },
+          customer_endpoint: untyped,
+          request_identifier: String,
+          queue_id: String,
+          attributes: Hash[String, String],
+          campaign: {
+            campaign_id: String
+          }
+        }
+      ]
+    ) -> _BatchPutContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchPutContactResponse
+
+    interface _ClaimPhoneNumberResponse
+      include Smithy::Client::_Response[Types::ClaimPhoneNumberResponse]
+      def phone_number_id: () -> String?
+      def phone_number_arn: () -> String?
+    end
+    def claim_phone_number: (
+      ?target_arn: String,
+      ?instance_id: String,
+      ?phone_number: String,
+      ?phone_number_description: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _ClaimPhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ClaimPhoneNumberResponse
+
+    interface _CompleteAttachedFileUploadResponse
+      include Smithy::Client::_Response[Types::CompleteAttachedFileUploadResponse]
+    end
+    def complete_attached_file_upload: (
+      ?instance_id: String,
+      ?file_id: String,
+      ?associated_resource_arn: String
+    ) -> _CompleteAttachedFileUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CompleteAttachedFileUploadResponse
+
+    interface _CreateAgentStatusResponse
+      include Smithy::Client::_Response[Types::CreateAgentStatusResponse]
+      def agent_status_arn: () -> String?
+      def agent_status_id: () -> String?
+    end
+    def create_agent_status: (
+      ?instance_id: String,
+      ?name: String,
+      ?description: String,
+      ?state: String,
+      ?display_order: Integer,
+      ?tags: Hash[String, String]
+    ) -> _CreateAgentStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAgentStatusResponse
+
+    interface _CreateContactResponse
+      include Smithy::Client::_Response[Types::CreateContactResponse]
+      def contact_id: () -> String?
+      def contact_arn: () -> String?
+    end
+    def create_contact: (
+      ?instance_id: String,
+      ?client_token: String,
+      ?related_contact_id: String,
+      ?attributes: Hash[String, String],
+      ?references: Hash[String,
+        {
+          value: String,
+          type: String,
+          status: String,
+          arn: String,
+          status_reason: String
+        }
+      ],
+      ?channel: String,
+      ?initiation_method: String,
+      ?expiry_duration_in_minutes: Integer,
+      ?user_info: {
+        user_id: String
+      },
+      ?initiate_as: String,
+      ?name: String,
+      ?description: String,
+      ?segment_attributes: Hash[String,
+        {
+          value_string: String,
+          value_map: Hash[String,
+            {
+              value_string: untyped,
+              value_map: untyped,
+              value_integer: Integer
+            }
+          ],
+          value_integer: untyped
+        }
+      ],
+      ?previous_contact_id: String
+    ) -> _CreateContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContactResponse
+
+    interface _CreateContactFlowResponse
+      include Smithy::Client::_Response[Types::CreateContactFlowResponse]
+      def contact_flow_id: () -> String?
+      def contact_flow_arn: () -> String?
+      def flow_content_sha256: () -> String?
+    end
+    def create_contact_flow: (
+      ?instance_id: String,
+      ?name: String,
+      ?type: String,
+      ?description: String,
+      ?content: String,
+      ?status: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateContactFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContactFlowResponse
+
+    interface _CreateContactFlowModuleResponse
+      include Smithy::Client::_Response[Types::CreateContactFlowModuleResponse]
+      def id: () -> String?
+      def arn: () -> String?
+    end
+    def create_contact_flow_module: (
+      ?instance_id: String,
+      ?name: String,
+      ?description: String,
+      ?content: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateContactFlowModuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContactFlowModuleResponse
+
+    interface _CreateContactFlowVersionResponse
+      include Smithy::Client::_Response[Types::CreateContactFlowVersionResponse]
+      def contact_flow_arn: () -> String?
+      def version: () -> Integer?
+    end
+    def create_contact_flow_version: (
+      ?instance_id: String,
+      ?description: String,
+      ?contact_flow_id: String,
+      ?flow_content_sha256: String,
+      ?contact_flow_version: Integer,
+      ?last_modified_time: Time,
+      ?last_modified_region: String
+    ) -> _CreateContactFlowVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContactFlowVersionResponse
+
+    interface _CreateEmailAddressResponse
+      include Smithy::Client::_Response[Types::CreateEmailAddressResponse]
+      def email_address_id: () -> String?
+      def email_address_arn: () -> String?
+    end
+    def create_email_address: (
+      ?description: String,
+      ?instance_id: String,
+      ?email_address: String,
+      ?display_name: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateEmailAddressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEmailAddressResponse
+
+    interface _CreateEvaluationFormResponse
+      include Smithy::Client::_Response[Types::CreateEvaluationFormResponse]
+      def evaluation_form_id: () -> String?
+      def evaluation_form_arn: () -> String?
+    end
+    def create_evaluation_form: (
+      ?instance_id: String,
+      ?title: String,
+      ?description: String,
+      ?items: Array[
+        {
+          section: {
+            title: String,
+            ref_id: String,
+            instructions: String,
+            items: untyped,
+            weight: Float
+          },
+          question: {
+            title: String,
+            instructions: untyped,
+            ref_id: untyped,
+            not_applicable_enabled: bool,
+            question_type: String,
+            question_type_properties: {
+              numeric: {
+                min_value: Integer,
+                max_value: untyped,
+                options: Array[
+                  {
+                    min_value: untyped,
+                    max_value: untyped,
+                    score: Integer,
+                    automatic_fail: untyped
+                  }
+                ],
+                automation: {
+                  property_value: {
+                    label: String
+                  }
+                }
+              },
+              single_select: {
+                options: Array[
+                  {
+                    ref_id: untyped,
+                    text: String,
+                    score: untyped,
+                    automatic_fail: untyped
+                  }
+                ],
+                display_as: String,
+                automation: {
+                  options: Array[
+                    {
+                      rule_category: {
+                        category: String,
+                        condition: String,
+                        option_ref_id: untyped
+                      }
+                    }
+                  ],
+                  default_option_ref_id: untyped
+                }
+              }
+            },
+            weight: untyped
+          }
+        }
+      ],
+      ?scoring_strategy: {
+        mode: String,
+        status: String
+      },
+      ?client_token: String
+    ) -> _CreateEvaluationFormResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEvaluationFormResponse
+
+    interface _CreateHoursOfOperationResponse
+      include Smithy::Client::_Response[Types::CreateHoursOfOperationResponse]
+      def hours_of_operation_id: () -> String?
+      def hours_of_operation_arn: () -> String?
+    end
+    def create_hours_of_operation: (
+      ?instance_id: String,
+      ?name: String,
+      ?description: String,
+      ?time_zone: String,
+      ?config: Array[
+        {
+          day: String,
+          start_time: {
+            hours: Integer,
+            minutes: Integer
+          },
+          end_time: untyped
+        }
+      ],
+      ?tags: Hash[String, String]
+    ) -> _CreateHoursOfOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateHoursOfOperationResponse
+
+    interface _CreateHoursOfOperationOverrideResponse
+      include Smithy::Client::_Response[Types::CreateHoursOfOperationOverrideResponse]
+      def hours_of_operation_override_id: () -> String?
+    end
+    def create_hours_of_operation_override: (
+      ?instance_id: String,
+      ?hours_of_operation_id: String,
+      ?name: String,
+      ?description: String,
+      ?config: Array[
+        {
+          day: String,
+          start_time: {
+            hours: Integer,
+            minutes: Integer
+          },
+          end_time: untyped
+        }
+      ],
+      ?effective_from: String,
+      ?effective_till: String
+    ) -> _CreateHoursOfOperationOverrideResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateHoursOfOperationOverrideResponse
+
+    interface _CreateInstanceResponse
+      include Smithy::Client::_Response[Types::CreateInstanceResponse]
+      def id: () -> String?
+      def arn: () -> String?
+    end
+    def create_instance: (
+      ?client_token: String,
+      ?identity_management_type: String,
+      ?instance_alias: String,
+      ?directory_id: String,
+      ?inbound_calls_enabled: bool,
+      ?outbound_calls_enabled: bool,
+      ?tags: Hash[String, String]
+    ) -> _CreateInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInstanceResponse
+
+    interface _CreateIntegrationAssociationResponse
+      include Smithy::Client::_Response[Types::CreateIntegrationAssociationResponse]
+      def integration_association_id: () -> String?
+      def integration_association_arn: () -> String?
+    end
+    def create_integration_association: (
+      ?instance_id: String,
+      ?integration_type: String,
+      ?integration_arn: String,
+      ?source_application_url: String,
+      ?source_application_name: String,
+      ?source_type: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateIntegrationAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIntegrationAssociationResponse
+
+    interface _CreateParticipantResponse
+      include Smithy::Client::_Response[Types::CreateParticipantResponse]
+      def participant_credentials: () -> Types::ParticipantTokenCredentials?
+      def participant_id: () -> String?
+    end
+    def create_participant: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?client_token: String,
+      ?participant_details: {
+        participant_role: String,
+        display_name: String
+      }
+    ) -> _CreateParticipantResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateParticipantResponse
+
+    interface _CreatePersistentContactAssociationResponse
+      include Smithy::Client::_Response[Types::CreatePersistentContactAssociationResponse]
+      def continued_from_contact_id: () -> String?
+    end
+    def create_persistent_contact_association: (
+      ?instance_id: String,
+      ?initial_contact_id: String,
+      ?rehydration_type: String,
+      ?source_contact_id: String,
+      ?client_token: String
+    ) -> _CreatePersistentContactAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePersistentContactAssociationResponse
+
+    interface _CreatePredefinedAttributeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_predefined_attribute: (
+      ?instance_id: String,
+      ?name: String,
+      ?values: {
+        string_list: Array[String]
+      }
+    ) -> _CreatePredefinedAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePredefinedAttributeResponse
+
+    interface _CreatePromptResponse
+      include Smithy::Client::_Response[Types::CreatePromptResponse]
+      def prompt_arn: () -> String?
+      def prompt_id: () -> String?
+    end
+    def create_prompt: (
+      ?instance_id: String,
+      ?name: String,
+      ?description: String,
+      ?s3_uri: String,
+      ?tags: Hash[String, String]
+    ) -> _CreatePromptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePromptResponse
+
+    interface _CreatePushNotificationRegistrationResponse
+      include Smithy::Client::_Response[Types::CreatePushNotificationRegistrationResponse]
+      def registration_id: () -> String?
+    end
+    def create_push_notification_registration: (
+      ?instance_id: String,
+      ?client_token: String,
+      ?pinpoint_app_arn: String,
+      ?device_token: String,
+      ?device_type: String,
+      ?contact_configuration: {
+        contact_id: String,
+        participant_role: String,
+        include_raw_message: bool
+      }
+    ) -> _CreatePushNotificationRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePushNotificationRegistrationResponse
+
+    interface _CreateQueueResponse
+      include Smithy::Client::_Response[Types::CreateQueueResponse]
+      def queue_arn: () -> String?
+      def queue_id: () -> String?
+    end
+    def create_queue: (
+      ?instance_id: String,
+      ?name: String,
+      ?description: String,
+      ?outbound_caller_config: {
+        outbound_caller_id_name: String,
+        outbound_caller_id_number_id: String,
+        outbound_flow_id: String
+      },
+      ?outbound_email_config: {
+        outbound_email_address_id: String
+      },
+      ?hours_of_operation_id: String,
+      ?max_contacts: Integer,
+      ?quick_connect_ids: Array[String],
+      ?tags: Hash[String, String]
+    ) -> _CreateQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQueueResponse
+
+    interface _CreateQuickConnectResponse
+      include Smithy::Client::_Response[Types::CreateQuickConnectResponse]
+      def quick_connect_arn: () -> String?
+      def quick_connect_id: () -> String?
+    end
+    def create_quick_connect: (
+      ?instance_id: String,
+      ?name: String,
+      ?description: String,
+      ?quick_connect_config: {
+        quick_connect_type: String,
+        user_config: {
+          user_id: String,
+          contact_flow_id: String
+        },
+        queue_config: {
+          queue_id: String,
+          contact_flow_id: untyped
+        },
+        phone_config: {
+          phone_number: String
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateQuickConnectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateQuickConnectResponse
+
+    interface _CreateRoutingProfileResponse
+      include Smithy::Client::_Response[Types::CreateRoutingProfileResponse]
+      def routing_profile_arn: () -> String?
+      def routing_profile_id: () -> String?
+    end
+    def create_routing_profile: (
+      ?instance_id: String,
+      ?name: String,
+      ?description: String,
+      ?default_outbound_queue_id: String,
+      ?queue_configs: Array[
+        {
+          queue_reference: {
+            queue_id: String,
+            channel: String
+          },
+          priority: Integer,
+          delay: Integer
+        }
+      ],
+      ?media_concurrencies: Array[
+        {
+          channel: String,
+          concurrency: Integer,
+          cross_channel_behavior: {
+            behavior_type: String
+          }
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?agent_availability_timer: String
+    ) -> _CreateRoutingProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRoutingProfileResponse
+
+    interface _CreateRuleResponse
+      include Smithy::Client::_Response[Types::CreateRuleResponse]
+      def rule_arn: () -> String?
+      def rule_id: () -> String?
+    end
+    def create_rule: (
+      ?instance_id: String,
+      ?name: String,
+      ?trigger_event_source: {
+        event_source_name: String,
+        integration_association_id: String
+      },
+      ?function: String,
+      ?actions: Array[
+        {
+          action_type: String,
+          task_action: {
+            name: String,
+            description: String,
+            contact_flow_id: String,
+            references: Hash[String,
+              {
+                value: String,
+                type: String,
+                status: String,
+                arn: String,
+                status_reason: String
+              }
+            ]
+          },
+          event_bridge_action: {
+            name: String
+          },
+          assign_contact_category_action: {
+          },
+          send_notification_action: {
+            delivery_method: String,
+            subject: String,
+            content: String,
+            content_type: String,
+            recipient: {
+              user_tags: Hash[String, String],
+              user_ids: Array[String]
+            }
+          },
+          create_case_action: {
+            fields: Array[
+              {
+                id: String,
+                value: {
+                  boolean_value: bool,
+                  double_value: Float,
+                  empty_value: {
+                  },
+                  string_value: String
+                }
+              }
+            ],
+            template_id: String
+          },
+          update_case_action: {
+            fields: untyped
+          },
+          assign_sla_action: {
+            sla_assignment_type: String,
+            case_sla_configuration: {
+              name: String,
+              type: String,
+              field_id: untyped,
+              target_field_values: Array[
+                {
+                  boolean_value: untyped,
+                  double_value: untyped,
+                  empty_value: untyped,
+                  string_value: untyped
+                }
+              ],
+              target_sla_minutes: Integer
+            }
+          },
+          end_associated_tasks_action: {
+          },
+          submit_auto_evaluation_action: {
+            evaluation_form_id: String
+          }
+        }
+      ],
+      ?publish_status: String,
+      ?client_token: String
+    ) -> _CreateRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRuleResponse
+
+    interface _CreateSecurityProfileResponse
+      include Smithy::Client::_Response[Types::CreateSecurityProfileResponse]
+      def security_profile_id: () -> String?
+      def security_profile_arn: () -> String?
+    end
+    def create_security_profile: (
+      ?security_profile_name: String,
+      ?description: String,
+      ?permissions: Array[String],
+      ?instance_id: String,
+      ?tags: Hash[String, String],
+      ?allowed_access_control_tags: Hash[String, String],
+      ?tag_restricted_resources: Array[String],
+      ?applications: Array[
+        {
+          namespace: String,
+          application_permissions: Array[String]
+        }
+      ],
+      ?hierarchy_restricted_resources: Array[String],
+      ?allowed_access_control_hierarchy_group_id: String
+    ) -> _CreateSecurityProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSecurityProfileResponse
+
+    interface _CreateTaskTemplateResponse
+      include Smithy::Client::_Response[Types::CreateTaskTemplateResponse]
+      def id: () -> String?
+      def arn: () -> String?
+    end
+    def create_task_template: (
+      ?instance_id: String,
+      ?name: String,
+      ?description: String,
+      ?contact_flow_id: String,
+      ?self_assign_flow_id: String,
+      ?constraints: {
+        required_fields: Array[
+          {
+            id: {
+              name: String
+            }
+          }
+        ],
+        read_only_fields: Array[
+          {
+            id: untyped
+          }
+        ],
+        invisible_fields: Array[
+          {
+            id: untyped
+          }
+        ]
+      },
+      ?defaults: {
+        default_field_values: Array[
+          {
+            id: {
+              name: String
+            },
+            default_value: String
+          }
+        ]
+      },
+      ?status: String,
+      ?fields: Array[
+        {
+          id: {
+            name: String
+          },
+          description: String,
+          type: String,
+          single_select_options: Array[String]
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateTaskTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTaskTemplateResponse
+
+    interface _CreateTrafficDistributionGroupResponse
+      include Smithy::Client::_Response[Types::CreateTrafficDistributionGroupResponse]
+      def id: () -> String?
+      def arn: () -> String?
+    end
+    def create_traffic_distribution_group: (
+      ?name: String,
+      ?description: String,
+      ?instance_id: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateTrafficDistributionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrafficDistributionGroupResponse
+
+    interface _CreateUseCaseResponse
+      include Smithy::Client::_Response[Types::CreateUseCaseResponse]
+      def use_case_id: () -> String?
+      def use_case_arn: () -> String?
+    end
+    def create_use_case: (
+      ?instance_id: String,
+      ?integration_association_id: String,
+      ?use_case_type: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateUseCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUseCaseResponse
+
+    interface _CreateUserResponse
+      include Smithy::Client::_Response[Types::CreateUserResponse]
+      def user_id: () -> String?
+      def user_arn: () -> String?
+    end
+    def create_user: (
+      ?username: String,
+      ?password: String,
+      ?identity_info: {
+        first_name: String,
+        last_name: String,
+        email: String,
+        secondary_email: untyped,
+        mobile: String
+      },
+      ?phone_config: {
+        phone_type: String,
+        auto_accept: bool,
+        after_contact_work_time_limit: Integer,
+        desk_phone_number: String
+      },
+      ?directory_user_id: String,
+      ?security_profile_ids: Array[String],
+      ?routing_profile_id: String,
+      ?hierarchy_group_id: String,
+      ?instance_id: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserResponse
+
+    interface _CreateUserHierarchyGroupResponse
+      include Smithy::Client::_Response[Types::CreateUserHierarchyGroupResponse]
+      def hierarchy_group_id: () -> String?
+      def hierarchy_group_arn: () -> String?
+    end
+    def create_user_hierarchy_group: (
+      ?name: String,
+      ?parent_group_id: String,
+      ?instance_id: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateUserHierarchyGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserHierarchyGroupResponse
+
+    interface _CreateViewResponse
+      include Smithy::Client::_Response[Types::CreateViewResponse]
+      def view: () -> Types::View?
+    end
+    def create_view: (
+      ?instance_id: String,
+      ?client_token: String,
+      ?status: String,
+      ?content: {
+        template: String,
+        actions: Array[String]
+      },
+      ?description: String,
+      ?name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateViewResponse
+
+    interface _CreateViewVersionResponse
+      include Smithy::Client::_Response[Types::CreateViewVersionResponse]
+      def view: () -> Types::View?
+    end
+    def create_view_version: (
+      ?instance_id: String,
+      ?view_id: String,
+      ?version_description: String,
+      ?view_content_sha256: String
+    ) -> _CreateViewVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateViewVersionResponse
+
+    interface _CreateVocabularyResponse
+      include Smithy::Client::_Response[Types::CreateVocabularyResponse]
+      def vocabulary_arn: () -> String?
+      def vocabulary_id: () -> String?
+      def state: () -> String?
+    end
+    def create_vocabulary: (
+      ?client_token: String,
+      ?instance_id: String,
+      ?vocabulary_name: String,
+      ?language_code: String,
+      ?content: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateVocabularyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVocabularyResponse
+
+    interface _DeactivateEvaluationFormResponse
+      include Smithy::Client::_Response[Types::DeactivateEvaluationFormResponse]
+      def evaluation_form_id: () -> String?
+      def evaluation_form_arn: () -> String?
+      def evaluation_form_version: () -> Integer?
+    end
+    def deactivate_evaluation_form: (
+      ?instance_id: String,
+      ?evaluation_form_id: String,
+      ?evaluation_form_version: Integer
+    ) -> _DeactivateEvaluationFormResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeactivateEvaluationFormResponse
+
+    interface _DeleteAttachedFileResponse
+      include Smithy::Client::_Response[Types::DeleteAttachedFileResponse]
+    end
+    def delete_attached_file: (
+      ?instance_id: String,
+      ?file_id: String,
+      ?associated_resource_arn: String
+    ) -> _DeleteAttachedFileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAttachedFileResponse
+
+    interface _DeleteContactEvaluationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_contact_evaluation: (
+      ?instance_id: String,
+      ?evaluation_id: String
+    ) -> _DeleteContactEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContactEvaluationResponse
+
+    interface _DeleteContactFlowResponse
+      include Smithy::Client::_Response[Types::DeleteContactFlowResponse]
+    end
+    def delete_contact_flow: (
+      ?instance_id: String,
+      ?contact_flow_id: String
+    ) -> _DeleteContactFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContactFlowResponse
+
+    interface _DeleteContactFlowModuleResponse
+      include Smithy::Client::_Response[Types::DeleteContactFlowModuleResponse]
+    end
+    def delete_contact_flow_module: (
+      ?instance_id: String,
+      ?contact_flow_module_id: String
+    ) -> _DeleteContactFlowModuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContactFlowModuleResponse
+
+    interface _DeleteContactFlowVersionResponse
+      include Smithy::Client::_Response[Types::DeleteContactFlowVersionResponse]
+    end
+    def delete_contact_flow_version: (
+      ?instance_id: String,
+      ?contact_flow_id: String,
+      ?contact_flow_version: Integer
+    ) -> _DeleteContactFlowVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContactFlowVersionResponse
+
+    interface _DeleteEmailAddressResponse
+      include Smithy::Client::_Response[Types::DeleteEmailAddressResponse]
+    end
+    def delete_email_address: (
+      ?instance_id: String,
+      ?email_address_id: String
+    ) -> _DeleteEmailAddressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEmailAddressResponse
+
+    interface _DeleteEvaluationFormResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_evaluation_form: (
+      ?instance_id: String,
+      ?evaluation_form_id: String,
+      ?evaluation_form_version: Integer
+    ) -> _DeleteEvaluationFormResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEvaluationFormResponse
+
+    interface _DeleteHoursOfOperationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_hours_of_operation: (
+      ?instance_id: String,
+      ?hours_of_operation_id: String
+    ) -> _DeleteHoursOfOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteHoursOfOperationResponse
+
+    interface _DeleteHoursOfOperationOverrideResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_hours_of_operation_override: (
+      ?instance_id: String,
+      ?hours_of_operation_id: String,
+      ?hours_of_operation_override_id: String
+    ) -> _DeleteHoursOfOperationOverrideResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteHoursOfOperationOverrideResponse
+
+    interface _DeleteInstanceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_instance: (
+      ?instance_id: String,
+      ?client_token: String
+    ) -> _DeleteInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInstanceResponse
+
+    interface _DeleteIntegrationAssociationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_integration_association: (
+      ?instance_id: String,
+      ?integration_association_id: String
+    ) -> _DeleteIntegrationAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIntegrationAssociationResponse
+
+    interface _DeletePredefinedAttributeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_predefined_attribute: (
+      ?instance_id: String,
+      ?name: String
+    ) -> _DeletePredefinedAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePredefinedAttributeResponse
+
+    interface _DeletePromptResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_prompt: (
+      ?instance_id: String,
+      ?prompt_id: String
+    ) -> _DeletePromptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePromptResponse
+
+    interface _DeletePushNotificationRegistrationResponse
+      include Smithy::Client::_Response[Types::DeletePushNotificationRegistrationResponse]
+    end
+    def delete_push_notification_registration: (
+      ?instance_id: String,
+      ?registration_id: String,
+      ?contact_id: String
+    ) -> _DeletePushNotificationRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePushNotificationRegistrationResponse
+
+    interface _DeleteQueueResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_queue: (
+      ?instance_id: String,
+      ?queue_id: String
+    ) -> _DeleteQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQueueResponse
+
+    interface _DeleteQuickConnectResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_quick_connect: (
+      ?instance_id: String,
+      ?quick_connect_id: String
+    ) -> _DeleteQuickConnectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteQuickConnectResponse
+
+    interface _DeleteRoutingProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_routing_profile: (
+      ?instance_id: String,
+      ?routing_profile_id: String
+    ) -> _DeleteRoutingProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRoutingProfileResponse
+
+    interface _DeleteRuleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_rule: (
+      ?instance_id: String,
+      ?rule_id: String
+    ) -> _DeleteRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRuleResponse
+
+    interface _DeleteSecurityProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_security_profile: (
+      ?instance_id: String,
+      ?security_profile_id: String
+    ) -> _DeleteSecurityProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSecurityProfileResponse
+
+    interface _DeleteTaskTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteTaskTemplateResponse]
+    end
+    def delete_task_template: (
+      ?instance_id: String,
+      ?task_template_id: String
+    ) -> _DeleteTaskTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTaskTemplateResponse
+
+    interface _DeleteTrafficDistributionGroupResponse
+      include Smithy::Client::_Response[Types::DeleteTrafficDistributionGroupResponse]
+    end
+    def delete_traffic_distribution_group: (
+      ?traffic_distribution_group_id: String
+    ) -> _DeleteTrafficDistributionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTrafficDistributionGroupResponse
+
+    interface _DeleteUseCaseResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_use_case: (
+      ?instance_id: String,
+      ?integration_association_id: String,
+      ?use_case_id: String
+    ) -> _DeleteUseCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUseCaseResponse
+
+    interface _DeleteUserResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_user: (
+      ?instance_id: String,
+      ?user_id: String
+    ) -> _DeleteUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserResponse
+
+    interface _DeleteUserHierarchyGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_user_hierarchy_group: (
+      ?hierarchy_group_id: String,
+      ?instance_id: String
+    ) -> _DeleteUserHierarchyGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserHierarchyGroupResponse
+
+    interface _DeleteViewResponse
+      include Smithy::Client::_Response[Types::DeleteViewResponse]
+    end
+    def delete_view: (
+      ?instance_id: String,
+      ?view_id: String
+    ) -> _DeleteViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteViewResponse
+
+    interface _DeleteViewVersionResponse
+      include Smithy::Client::_Response[Types::DeleteViewVersionResponse]
+    end
+    def delete_view_version: (
+      ?instance_id: String,
+      ?view_id: String,
+      ?view_version: Integer
+    ) -> _DeleteViewVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteViewVersionResponse
+
+    interface _DeleteVocabularyResponse
+      include Smithy::Client::_Response[Types::DeleteVocabularyResponse]
+      def vocabulary_arn: () -> String?
+      def vocabulary_id: () -> String?
+      def state: () -> String?
+    end
+    def delete_vocabulary: (
+      ?instance_id: String,
+      ?vocabulary_id: String
+    ) -> _DeleteVocabularyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVocabularyResponse
+
+    interface _DescribeAgentStatusResponse
+      include Smithy::Client::_Response[Types::DescribeAgentStatusResponse]
+      def agent_status: () -> Types::AgentStatus?
+    end
+    def describe_agent_status: (
+      ?instance_id: String,
+      ?agent_status_id: String
+    ) -> _DescribeAgentStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAgentStatusResponse
+
+    interface _DescribeAuthenticationProfileResponse
+      include Smithy::Client::_Response[Types::DescribeAuthenticationProfileResponse]
+      def authentication_profile: () -> Types::AuthenticationProfile?
+    end
+    def describe_authentication_profile: (
+      ?authentication_profile_id: String,
+      ?instance_id: String
+    ) -> _DescribeAuthenticationProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAuthenticationProfileResponse
+
+    interface _DescribeContactResponse
+      include Smithy::Client::_Response[Types::DescribeContactResponse]
+      def contact: () -> Types::Contact?
+    end
+    def describe_contact: (
+      ?instance_id: String,
+      ?contact_id: String
+    ) -> _DescribeContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeContactResponse
+
+    interface _DescribeContactEvaluationResponse
+      include Smithy::Client::_Response[Types::DescribeContactEvaluationResponse]
+      def evaluation: () -> Types::Evaluation?
+      def evaluation_form: () -> Types::EvaluationFormContent?
+    end
+    def describe_contact_evaluation: (
+      ?instance_id: String,
+      ?evaluation_id: String
+    ) -> _DescribeContactEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeContactEvaluationResponse
+
+    interface _DescribeContactFlowResponse
+      include Smithy::Client::_Response[Types::DescribeContactFlowResponse]
+      def contact_flow: () -> Types::ContactFlow?
+    end
+    def describe_contact_flow: (
+      ?instance_id: String,
+      ?contact_flow_id: String
+    ) -> _DescribeContactFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeContactFlowResponse
+
+    interface _DescribeContactFlowModuleResponse
+      include Smithy::Client::_Response[Types::DescribeContactFlowModuleResponse]
+      def contact_flow_module: () -> Types::ContactFlowModule?
+    end
+    def describe_contact_flow_module: (
+      ?instance_id: String,
+      ?contact_flow_module_id: String
+    ) -> _DescribeContactFlowModuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeContactFlowModuleResponse
+
+    interface _DescribeEmailAddressResponse
+      include Smithy::Client::_Response[Types::DescribeEmailAddressResponse]
+      def email_address_id: () -> String?
+      def email_address_arn: () -> String?
+      def email_address: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+      def create_timestamp: () -> String?
+      def modified_timestamp: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def describe_email_address: (
+      ?instance_id: String,
+      ?email_address_id: String
+    ) -> _DescribeEmailAddressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEmailAddressResponse
+
+    interface _DescribeEvaluationFormResponse
+      include Smithy::Client::_Response[Types::DescribeEvaluationFormResponse]
+      def evaluation_form: () -> Types::EvaluationForm?
+    end
+    def describe_evaluation_form: (
+      ?instance_id: String,
+      ?evaluation_form_id: String,
+      ?evaluation_form_version: Integer
+    ) -> _DescribeEvaluationFormResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEvaluationFormResponse
+
+    interface _DescribeHoursOfOperationResponse
+      include Smithy::Client::_Response[Types::DescribeHoursOfOperationResponse]
+      def hours_of_operation: () -> Types::HoursOfOperation?
+    end
+    def describe_hours_of_operation: (
+      ?instance_id: String,
+      ?hours_of_operation_id: String
+    ) -> _DescribeHoursOfOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeHoursOfOperationResponse
+
+    interface _DescribeHoursOfOperationOverrideResponse
+      include Smithy::Client::_Response[Types::DescribeHoursOfOperationOverrideResponse]
+      def hours_of_operation_override: () -> Types::HoursOfOperationOverride?
+    end
+    def describe_hours_of_operation_override: (
+      ?instance_id: String,
+      ?hours_of_operation_id: String,
+      ?hours_of_operation_override_id: String
+    ) -> _DescribeHoursOfOperationOverrideResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeHoursOfOperationOverrideResponse
+
+    interface _DescribeInstanceResponse
+      include Smithy::Client::_Response[Types::DescribeInstanceResponse]
+      def instance: () -> Types::Instance?
+      def replication_configuration: () -> Types::ReplicationConfiguration?
+    end
+    def describe_instance: (
+      ?instance_id: String
+    ) -> _DescribeInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstanceResponse
+
+    interface _DescribeInstanceAttributeResponse
+      include Smithy::Client::_Response[Types::DescribeInstanceAttributeResponse]
+      def attribute: () -> Types::Attribute?
+    end
+    def describe_instance_attribute: (
+      ?instance_id: String,
+      ?attribute_type: String
+    ) -> _DescribeInstanceAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstanceAttributeResponse
+
+    interface _DescribeInstanceStorageConfigResponse
+      include Smithy::Client::_Response[Types::DescribeInstanceStorageConfigResponse]
+      def storage_config: () -> Types::InstanceStorageConfig?
+    end
+    def describe_instance_storage_config: (
+      ?instance_id: String,
+      ?association_id: String,
+      ?resource_type: String
+    ) -> _DescribeInstanceStorageConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstanceStorageConfigResponse
+
+    interface _DescribePhoneNumberResponse
+      include Smithy::Client::_Response[Types::DescribePhoneNumberResponse]
+      def claimed_phone_number_summary: () -> Types::ClaimedPhoneNumberSummary?
+    end
+    def describe_phone_number: (
+      ?phone_number_id: String
+    ) -> _DescribePhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePhoneNumberResponse
+
+    interface _DescribePredefinedAttributeResponse
+      include Smithy::Client::_Response[Types::DescribePredefinedAttributeResponse]
+      def predefined_attribute: () -> Types::PredefinedAttribute?
+    end
+    def describe_predefined_attribute: (
+      ?instance_id: String,
+      ?name: String
+    ) -> _DescribePredefinedAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePredefinedAttributeResponse
+
+    interface _DescribePromptResponse
+      include Smithy::Client::_Response[Types::DescribePromptResponse]
+      def prompt: () -> Types::Prompt?
+    end
+    def describe_prompt: (
+      ?instance_id: String,
+      ?prompt_id: String
+    ) -> _DescribePromptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePromptResponse
+
+    interface _DescribeQueueResponse
+      include Smithy::Client::_Response[Types::DescribeQueueResponse]
+      def queue: () -> Types::Queue?
+    end
+    def describe_queue: (
+      ?instance_id: String,
+      ?queue_id: String
+    ) -> _DescribeQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeQueueResponse
+
+    interface _DescribeQuickConnectResponse
+      include Smithy::Client::_Response[Types::DescribeQuickConnectResponse]
+      def quick_connect: () -> Types::QuickConnect?
+    end
+    def describe_quick_connect: (
+      ?instance_id: String,
+      ?quick_connect_id: String
+    ) -> _DescribeQuickConnectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeQuickConnectResponse
+
+    interface _DescribeRoutingProfileResponse
+      include Smithy::Client::_Response[Types::DescribeRoutingProfileResponse]
+      def routing_profile: () -> Types::RoutingProfile?
+    end
+    def describe_routing_profile: (
+      ?instance_id: String,
+      ?routing_profile_id: String
+    ) -> _DescribeRoutingProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRoutingProfileResponse
+
+    interface _DescribeRuleResponse
+      include Smithy::Client::_Response[Types::DescribeRuleResponse]
+      def rule: () -> Types::Rule?
+    end
+    def describe_rule: (
+      ?instance_id: String,
+      ?rule_id: String
+    ) -> _DescribeRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRuleResponse
+
+    interface _DescribeSecurityProfileResponse
+      include Smithy::Client::_Response[Types::DescribeSecurityProfileResponse]
+      def security_profile: () -> Types::SecurityProfile?
+    end
+    def describe_security_profile: (
+      ?security_profile_id: String,
+      ?instance_id: String
+    ) -> _DescribeSecurityProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeSecurityProfileResponse
+
+    interface _DescribeTrafficDistributionGroupResponse
+      include Smithy::Client::_Response[Types::DescribeTrafficDistributionGroupResponse]
+      def traffic_distribution_group: () -> Types::TrafficDistributionGroup?
+    end
+    def describe_traffic_distribution_group: (
+      ?traffic_distribution_group_id: String
+    ) -> _DescribeTrafficDistributionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTrafficDistributionGroupResponse
+
+    interface _DescribeUserResponse
+      include Smithy::Client::_Response[Types::DescribeUserResponse]
+      def user: () -> Types::User?
+    end
+    def describe_user: (
+      ?user_id: String,
+      ?instance_id: String
+    ) -> _DescribeUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUserResponse
+
+    interface _DescribeUserHierarchyGroupResponse
+      include Smithy::Client::_Response[Types::DescribeUserHierarchyGroupResponse]
+      def hierarchy_group: () -> Types::HierarchyGroup?
+    end
+    def describe_user_hierarchy_group: (
+      ?hierarchy_group_id: String,
+      ?instance_id: String
+    ) -> _DescribeUserHierarchyGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUserHierarchyGroupResponse
+
+    interface _DescribeUserHierarchyStructureResponse
+      include Smithy::Client::_Response[Types::DescribeUserHierarchyStructureResponse]
+      def hierarchy_structure: () -> Types::HierarchyStructure?
+    end
+    def describe_user_hierarchy_structure: (
+      ?instance_id: String
+    ) -> _DescribeUserHierarchyStructureResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUserHierarchyStructureResponse
+
+    interface _DescribeViewResponse
+      include Smithy::Client::_Response[Types::DescribeViewResponse]
+      def view: () -> Types::View?
+    end
+    def describe_view: (
+      ?instance_id: String,
+      ?view_id: String
+    ) -> _DescribeViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeViewResponse
+
+    interface _DescribeVocabularyResponse
+      include Smithy::Client::_Response[Types::DescribeVocabularyResponse]
+      def vocabulary: () -> Types::Vocabulary?
+    end
+    def describe_vocabulary: (
+      ?instance_id: String,
+      ?vocabulary_id: String
+    ) -> _DescribeVocabularyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVocabularyResponse
+
+    interface _DisassociateAnalyticsDataSetResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_analytics_data_set: (
+      ?instance_id: String,
+      ?data_set_id: String,
+      ?target_account_id: String
+    ) -> _DisassociateAnalyticsDataSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateAnalyticsDataSetResponse
+
+    interface _DisassociateApprovedOriginResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_approved_origin: (
+      ?instance_id: String,
+      ?origin: String,
+      ?client_token: String
+    ) -> _DisassociateApprovedOriginResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateApprovedOriginResponse
+
+    interface _DisassociateBotResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_bot: (
+      ?instance_id: String,
+      ?lex_bot: {
+        name: String,
+        lex_region: String
+      },
+      ?lex_v2_bot: {
+        alias_arn: String
+      },
+      ?client_token: String
+    ) -> _DisassociateBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateBotResponse
+
+    interface _DisassociateFlowResponse
+      include Smithy::Client::_Response[Types::DisassociateFlowResponse]
+    end
+    def disassociate_flow: (
+      ?instance_id: String,
+      ?resource_id: String,
+      ?resource_type: String
+    ) -> _DisassociateFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateFlowResponse
+
+    interface _DisassociateInstanceStorageConfigResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_instance_storage_config: (
+      ?instance_id: String,
+      ?association_id: String,
+      ?resource_type: String,
+      ?client_token: String
+    ) -> _DisassociateInstanceStorageConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateInstanceStorageConfigResponse
+
+    interface _DisassociateLambdaFunctionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_lambda_function: (
+      ?instance_id: String,
+      ?function_arn: String,
+      ?client_token: String
+    ) -> _DisassociateLambdaFunctionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateLambdaFunctionResponse
+
+    interface _DisassociateLexBotResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_lex_bot: (
+      ?instance_id: String,
+      ?bot_name: String,
+      ?lex_region: String,
+      ?client_token: String
+    ) -> _DisassociateLexBotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateLexBotResponse
+
+    interface _DisassociatePhoneNumberContactFlowResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_phone_number_contact_flow: (
+      ?phone_number_id: String,
+      ?instance_id: String
+    ) -> _DisassociatePhoneNumberContactFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociatePhoneNumberContactFlowResponse
+
+    interface _DisassociateQueueQuickConnectsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_queue_quick_connects: (
+      ?instance_id: String,
+      ?queue_id: String,
+      ?quick_connect_ids: Array[String]
+    ) -> _DisassociateQueueQuickConnectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateQueueQuickConnectsResponse
+
+    interface _DisassociateRoutingProfileQueuesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_routing_profile_queues: (
+      ?instance_id: String,
+      ?routing_profile_id: String,
+      ?queue_references: Array[
+        {
+          queue_id: String,
+          channel: String
+        }
+      ]
+    ) -> _DisassociateRoutingProfileQueuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateRoutingProfileQueuesResponse
+
+    interface _DisassociateSecurityKeyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_security_key: (
+      ?instance_id: String,
+      ?association_id: String,
+      ?client_token: String
+    ) -> _DisassociateSecurityKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateSecurityKeyResponse
+
+    interface _DisassociateTrafficDistributionGroupUserResponse
+      include Smithy::Client::_Response[Types::DisassociateTrafficDistributionGroupUserResponse]
+    end
+    def disassociate_traffic_distribution_group_user: (
+      ?traffic_distribution_group_id: String,
+      ?user_id: String,
+      ?instance_id: String
+    ) -> _DisassociateTrafficDistributionGroupUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateTrafficDistributionGroupUserResponse
+
+    interface _DisassociateUserProficienciesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disassociate_user_proficiencies: (
+      ?instance_id: String,
+      ?user_id: String,
+      ?user_proficiencies: Array[
+        {
+          attribute_name: String,
+          attribute_value: String
+        }
+      ]
+    ) -> _DisassociateUserProficienciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateUserProficienciesResponse
+
+    interface _DismissUserContactResponse
+      include Smithy::Client::_Response[Types::DismissUserContactResponse]
+    end
+    def dismiss_user_contact: (
+      ?user_id: String,
+      ?instance_id: String,
+      ?contact_id: String
+    ) -> _DismissUserContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DismissUserContactResponse
+
+    interface _GetAttachedFileResponse
+      include Smithy::Client::_Response[Types::GetAttachedFileResponse]
+      def file_arn: () -> String?
+      def file_id: () -> String?
+      def creation_time: () -> String?
+      def file_status: () -> String?
+      def file_name: () -> String?
+      def file_size_in_bytes: () -> Integer?
+      def associated_resource_arn: () -> String?
+      def file_use_case_type: () -> String?
+      def created_by: () -> Types::CreatedByInfo?
+      def download_url_metadata: () -> Types::DownloadUrlMetadata?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_attached_file: (
+      ?instance_id: String,
+      ?file_id: String,
+      ?url_expiry_in_seconds: Integer,
+      ?associated_resource_arn: String
+    ) -> _GetAttachedFileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAttachedFileResponse
+
+    interface _GetContactAttributesResponse
+      include Smithy::Client::_Response[Types::GetContactAttributesResponse]
+      def attributes: () -> Hash[String, String]?
+    end
+    def get_contact_attributes: (
+      ?instance_id: String,
+      ?initial_contact_id: String
+    ) -> _GetContactAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContactAttributesResponse
+
+    interface _GetContactMetricsResponse
+      include Smithy::Client::_Response[Types::GetContactMetricsResponse]
+      def metric_results: () -> Array[Types::ContactMetricResult]?
+      def id: () -> String?
+      def arn: () -> String?
+    end
+    def get_contact_metrics: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?metrics: Array[
+        {
+          name: String
+        }
+      ]
+    ) -> _GetContactMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContactMetricsResponse
+
+    interface _GetCurrentMetricDataResponse
+      include Smithy::Client::_Response[Types::GetCurrentMetricDataResponse]
+      def next_token: () -> String?
+      def metric_results: () -> Array[Types::CurrentMetricResult]?
+      def data_snapshot_time: () -> Time?
+      def approximate_total_count: () -> Integer?
+    end
+    def get_current_metric_data: (
+      ?instance_id: String,
+      ?filters: {
+        queues: Array[String],
+        channels: Array[String],
+        routing_profiles: Array[String],
+        routing_step_expressions: Array[String]
+      },
+      ?groupings: Array[String],
+      ?current_metrics: Array[
+        {
+          name: String,
+          unit: String
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?sort_criteria: Array[
+        {
+          sort_by_metric: String,
+          sort_order: String
+        }
+      ]
+    ) -> _GetCurrentMetricDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCurrentMetricDataResponse
+
+    interface _GetCurrentUserDataResponse
+      include Smithy::Client::_Response[Types::GetCurrentUserDataResponse]
+      def next_token: () -> String?
+      def user_data_list: () -> Array[Types::UserData]?
+      def approximate_total_count: () -> Integer?
+    end
+    def get_current_user_data: (
+      ?instance_id: String,
+      ?filters: {
+        queues: Array[String],
+        contact_filter: {
+          contact_states: Array[String]
+        },
+        routing_profiles: Array[String],
+        agents: Array[String],
+        user_hierarchy_groups: Array[String]
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetCurrentUserDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCurrentUserDataResponse
+
+    interface _GetEffectiveHoursOfOperationsResponse
+      include Smithy::Client::_Response[Types::GetEffectiveHoursOfOperationsResponse]
+      def effective_hours_of_operation_list: () -> Array[Types::EffectiveHoursOfOperations]?
+      def time_zone: () -> String?
+    end
+    def get_effective_hours_of_operations: (
+      ?instance_id: String,
+      ?hours_of_operation_id: String,
+      ?from_date: String,
+      ?to_date: String
+    ) -> _GetEffectiveHoursOfOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEffectiveHoursOfOperationsResponse
+
+    interface _GetFederationTokenResponse
+      include Smithy::Client::_Response[Types::GetFederationTokenResponse]
+      def credentials: () -> Types::Credentials?
+      def sign_in_url: () -> String?
+      def user_arn: () -> String?
+      def user_id: () -> String?
+    end
+    def get_federation_token: (
+      ?instance_id: String
+    ) -> _GetFederationTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFederationTokenResponse
+
+    interface _GetFlowAssociationResponse
+      include Smithy::Client::_Response[Types::GetFlowAssociationResponse]
+      def resource_id: () -> String?
+      def flow_id: () -> String?
+      def resource_type: () -> String?
+    end
+    def get_flow_association: (
+      ?instance_id: String,
+      ?resource_id: String,
+      ?resource_type: String
+    ) -> _GetFlowAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFlowAssociationResponse
+
+    interface _GetMetricDataResponse
+      include Smithy::Client::_Response[Types::GetMetricDataResponse]
+      def next_token: () -> String?
+      def metric_results: () -> Array[Types::HistoricalMetricResult]?
+    end
+    def get_metric_data: (
+      ?instance_id: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?filters: {
+        queues: Array[String],
+        channels: Array[String],
+        routing_profiles: Array[String],
+        routing_step_expressions: Array[String]
+      },
+      ?groupings: Array[String],
+      ?historical_metrics: Array[
+        {
+          name: String,
+          threshold: {
+            comparison: String,
+            threshold_value: Float
+          },
+          statistic: String,
+          unit: String
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetMetricDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMetricDataResponse
+
+    interface _GetMetricDataV2Response
+      include Smithy::Client::_Response[Types::GetMetricDataV2Response]
+      def next_token: () -> String?
+      def metric_results: () -> Array[Types::MetricResultV2]?
+    end
+    def get_metric_data_v2: (
+      ?resource_arn: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?interval: {
+        time_zone: String,
+        interval_period: String
+      },
+      ?filters: Array[
+        {
+          filter_key: String,
+          filter_values: Array[String]
+        }
+      ],
+      ?groupings: Array[String],
+      ?metrics: Array[
+        {
+          name: String,
+          threshold: Array[
+            {
+              comparison: String,
+              threshold_value: Float
+            }
+          ],
+          metric_filters: Array[
+            {
+              metric_filter_key: String,
+              metric_filter_values: Array[String],
+              negate: bool
+            }
+          ]
+        }
+      ],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetMetricDataV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMetricDataV2Response
+
+    interface _GetPromptFileResponse
+      include Smithy::Client::_Response[Types::GetPromptFileResponse]
+      def prompt_presigned_url: () -> String?
+      def last_modified_time: () -> Time?
+      def last_modified_region: () -> String?
+    end
+    def get_prompt_file: (
+      ?instance_id: String,
+      ?prompt_id: String
+    ) -> _GetPromptFileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPromptFileResponse
+
+    interface _GetTaskTemplateResponse
+      include Smithy::Client::_Response[Types::GetTaskTemplateResponse]
+      def instance_id: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def contact_flow_id: () -> String?
+      def self_assign_flow_id: () -> String?
+      def constraints: () -> Types::TaskTemplateConstraints?
+      def defaults: () -> Types::TaskTemplateDefaults?
+      def fields: () -> Array[Types::TaskTemplateField]?
+      def status: () -> String?
+      def last_modified_time: () -> Time?
+      def created_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_task_template: (
+      ?instance_id: String,
+      ?task_template_id: String,
+      ?snapshot_version: String
+    ) -> _GetTaskTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTaskTemplateResponse
+
+    interface _GetTrafficDistributionResponse
+      include Smithy::Client::_Response[Types::GetTrafficDistributionResponse]
+      def telephony_config: () -> Types::TelephonyConfig?
+      def id: () -> String?
+      def arn: () -> String?
+      def sign_in_config: () -> Types::SignInConfig?
+      def agent_config: () -> Types::AgentConfig?
+    end
+    def get_traffic_distribution: (
+      ?id: String
+    ) -> _GetTrafficDistributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTrafficDistributionResponse
+
+    interface _ImportPhoneNumberResponse
+      include Smithy::Client::_Response[Types::ImportPhoneNumberResponse]
+      def phone_number_id: () -> String?
+      def phone_number_arn: () -> String?
+    end
+    def import_phone_number: (
+      ?instance_id: String,
+      ?source_phone_number_arn: String,
+      ?phone_number_description: String,
+      ?tags: Hash[String, String],
+      ?client_token: String
+    ) -> _ImportPhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportPhoneNumberResponse
+
+    interface _ListAgentStatusesResponse
+      include Smithy::Client::_Response[Types::ListAgentStatusResponse]
+      def next_token: () -> String?
+      def agent_status_summary_list: () -> Array[Types::AgentStatusSummary]?
+    end
+    def list_agent_statuses: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?agent_status_types: Array[String]
+    ) -> _ListAgentStatusesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentStatusesResponse
+
+    interface _ListAnalyticsDataAssociationsResponse
+      include Smithy::Client::_Response[Types::ListAnalyticsDataAssociationsResponse]
+      def results: () -> Array[Types::AnalyticsDataAssociationResult]?
+      def next_token: () -> String?
+    end
+    def list_analytics_data_associations: (
+      ?instance_id: String,
+      ?data_set_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAnalyticsDataAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnalyticsDataAssociationsResponse
+
+    interface _ListAnalyticsDataLakeDataSetsResponse
+      include Smithy::Client::_Response[Types::ListAnalyticsDataLakeDataSetsResponse]
+      def results: () -> Array[Types::AnalyticsDataSetsResult]?
+      def next_token: () -> String?
+    end
+    def list_analytics_data_lake_data_sets: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAnalyticsDataLakeDataSetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnalyticsDataLakeDataSetsResponse
+
+    interface _ListApprovedOriginsResponse
+      include Smithy::Client::_Response[Types::ListApprovedOriginsResponse]
+      def origins: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_approved_origins: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListApprovedOriginsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApprovedOriginsResponse
+
+    interface _ListAssociatedContactsResponse
+      include Smithy::Client::_Response[Types::ListAssociatedContactsResponse]
+      def contact_summary_list: () -> Array[Types::AssociatedContactSummary]?
+      def next_token: () -> String?
+    end
+    def list_associated_contacts: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAssociatedContactsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAssociatedContactsResponse
+
+    interface _ListAuthenticationProfilesResponse
+      include Smithy::Client::_Response[Types::ListAuthenticationProfilesResponse]
+      def authentication_profile_summary_list: () -> Array[Types::AuthenticationProfileSummary]?
+      def next_token: () -> String?
+    end
+    def list_authentication_profiles: (
+      ?instance_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAuthenticationProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAuthenticationProfilesResponse
+
+    interface _ListBotsResponse
+      include Smithy::Client::_Response[Types::ListBotsResponse]
+      def lex_bots: () -> Array[Types::LexBotConfig]?
+      def next_token: () -> String?
+    end
+    def list_bots: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?lex_version: String
+    ) -> _ListBotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBotsResponse
+
+    interface _ListContactEvaluationsResponse
+      include Smithy::Client::_Response[Types::ListContactEvaluationsResponse]
+      def evaluation_summary_list: () -> Array[Types::EvaluationSummary]?
+      def next_token: () -> String?
+    end
+    def list_contact_evaluations: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?next_token: String
+    ) -> _ListContactEvaluationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContactEvaluationsResponse
+
+    interface _ListContactFlowModulesResponse
+      include Smithy::Client::_Response[Types::ListContactFlowModulesResponse]
+      def contact_flow_modules_summary_list: () -> Array[Types::ContactFlowModuleSummary]?
+      def next_token: () -> String?
+    end
+    def list_contact_flow_modules: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?contact_flow_module_state: String
+    ) -> _ListContactFlowModulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContactFlowModulesResponse
+
+    interface _ListContactFlowVersionsResponse
+      include Smithy::Client::_Response[Types::ListContactFlowVersionsResponse]
+      def contact_flow_version_summary_list: () -> Array[Types::ContactFlowVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_contact_flow_versions: (
+      ?instance_id: String,
+      ?contact_flow_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListContactFlowVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContactFlowVersionsResponse
+
+    interface _ListContactFlowsResponse
+      include Smithy::Client::_Response[Types::ListContactFlowsResponse]
+      def contact_flow_summary_list: () -> Array[Types::ContactFlowSummary]?
+      def next_token: () -> String?
+    end
+    def list_contact_flows: (
+      ?instance_id: String,
+      ?contact_flow_types: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListContactFlowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContactFlowsResponse
+
+    interface _ListContactReferencesResponse
+      include Smithy::Client::_Response[Types::ListContactReferencesResponse]
+      def reference_summary_list: () -> Array[Types::ReferenceSummary]?
+      def next_token: () -> String?
+    end
+    def list_contact_references: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?reference_types: Array[String],
+      ?next_token: String
+    ) -> _ListContactReferencesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListContactReferencesResponse
+
+    interface _ListDefaultVocabulariesResponse
+      include Smithy::Client::_Response[Types::ListDefaultVocabulariesResponse]
+      def default_vocabulary_list: () -> Array[Types::DefaultVocabulary]?
+      def next_token: () -> String?
+    end
+    def list_default_vocabularies: (
+      ?instance_id: String,
+      ?language_code: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDefaultVocabulariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDefaultVocabulariesResponse
+
+    interface _ListEvaluationFormVersionsResponse
+      include Smithy::Client::_Response[Types::ListEvaluationFormVersionsResponse]
+      def evaluation_form_version_summary_list: () -> Array[Types::EvaluationFormVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_evaluation_form_versions: (
+      ?instance_id: String,
+      ?evaluation_form_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEvaluationFormVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEvaluationFormVersionsResponse
+
+    interface _ListEvaluationFormsResponse
+      include Smithy::Client::_Response[Types::ListEvaluationFormsResponse]
+      def evaluation_form_summary_list: () -> Array[Types::EvaluationFormSummary]?
+      def next_token: () -> String?
+    end
+    def list_evaluation_forms: (
+      ?instance_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListEvaluationFormsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEvaluationFormsResponse
+
+    interface _ListFlowAssociationsResponse
+      include Smithy::Client::_Response[Types::ListFlowAssociationsResponse]
+      def flow_association_summary_list: () -> Array[Types::FlowAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_flow_associations: (
+      ?instance_id: String,
+      ?resource_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFlowAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFlowAssociationsResponse
+
+    interface _ListHoursOfOperationOverridesResponse
+      include Smithy::Client::_Response[Types::ListHoursOfOperationOverridesResponse]
+      def next_token: () -> String?
+      def hours_of_operation_override_list: () -> Array[Types::HoursOfOperationOverride]?
+      def last_modified_region: () -> String?
+      def last_modified_time: () -> Time?
+    end
+    def list_hours_of_operation_overrides: (
+      ?instance_id: String,
+      ?hours_of_operation_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListHoursOfOperationOverridesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHoursOfOperationOverridesResponse
+
+    interface _ListHoursOfOperationsResponse
+      include Smithy::Client::_Response[Types::ListHoursOfOperationsResponse]
+      def hours_of_operation_summary_list: () -> Array[Types::HoursOfOperationSummary]?
+      def next_token: () -> String?
+    end
+    def list_hours_of_operations: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListHoursOfOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHoursOfOperationsResponse
+
+    interface _ListInstanceAttributesResponse
+      include Smithy::Client::_Response[Types::ListInstanceAttributesResponse]
+      def attributes: () -> Array[Types::Attribute]?
+      def next_token: () -> String?
+    end
+    def list_instance_attributes: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListInstanceAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInstanceAttributesResponse
+
+    interface _ListInstanceStorageConfigsResponse
+      include Smithy::Client::_Response[Types::ListInstanceStorageConfigsResponse]
+      def storage_configs: () -> Array[Types::InstanceStorageConfig]?
+      def next_token: () -> String?
+    end
+    def list_instance_storage_configs: (
+      ?instance_id: String,
+      ?resource_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListInstanceStorageConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInstanceStorageConfigsResponse
+
+    interface _ListInstancesResponse
+      include Smithy::Client::_Response[Types::ListInstancesResponse]
+      def instance_summary_list: () -> Array[Types::InstanceSummary]?
+      def next_token: () -> String?
+    end
+    def list_instances: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListInstancesResponse
+
+    interface _ListIntegrationAssociationsResponse
+      include Smithy::Client::_Response[Types::ListIntegrationAssociationsResponse]
+      def integration_association_summary_list: () -> Array[Types::IntegrationAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_integration_associations: (
+      ?instance_id: String,
+      ?integration_type: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?integration_arn: String
+    ) -> _ListIntegrationAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIntegrationAssociationsResponse
+
+    interface _ListLambdaFunctionsResponse
+      include Smithy::Client::_Response[Types::ListLambdaFunctionsResponse]
+      def lambda_functions: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_lambda_functions: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListLambdaFunctionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLambdaFunctionsResponse
+
+    interface _ListLexBotsResponse
+      include Smithy::Client::_Response[Types::ListLexBotsResponse]
+      def lex_bots: () -> Array[Types::LexBot]?
+      def next_token: () -> String?
+    end
+    def list_lex_bots: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListLexBotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLexBotsResponse
+
+    interface _ListPhoneNumbersResponse
+      include Smithy::Client::_Response[Types::ListPhoneNumbersResponse]
+      def phone_number_summary_list: () -> Array[Types::PhoneNumberSummary]?
+      def next_token: () -> String?
+    end
+    def list_phone_numbers: (
+      ?instance_id: String,
+      ?phone_number_types: Array[String],
+      ?phone_number_country_codes: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPhoneNumbersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPhoneNumbersResponse
+
+    interface _ListPhoneNumbersV2Response
+      include Smithy::Client::_Response[Types::ListPhoneNumbersV2Response]
+      def next_token: () -> String?
+      def list_phone_numbers_summary_list: () -> Array[Types::ListPhoneNumbersSummary]?
+    end
+    def list_phone_numbers_v2: (
+      ?target_arn: String,
+      ?instance_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?phone_number_country_codes: Array[String],
+      ?phone_number_types: Array[String],
+      ?phone_number_prefix: String
+    ) -> _ListPhoneNumbersV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPhoneNumbersV2Response
+
+    interface _ListPredefinedAttributesResponse
+      include Smithy::Client::_Response[Types::ListPredefinedAttributesResponse]
+      def next_token: () -> String?
+      def predefined_attribute_summary_list: () -> Array[Types::PredefinedAttributeSummary]?
+    end
+    def list_predefined_attributes: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPredefinedAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPredefinedAttributesResponse
+
+    interface _ListPromptsResponse
+      include Smithy::Client::_Response[Types::ListPromptsResponse]
+      def prompt_summary_list: () -> Array[Types::PromptSummary]?
+      def next_token: () -> String?
+    end
+    def list_prompts: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPromptsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPromptsResponse
+
+    interface _ListQueueQuickConnectsResponse
+      include Smithy::Client::_Response[Types::ListQueueQuickConnectsResponse]
+      def next_token: () -> String?
+      def quick_connect_summary_list: () -> Array[Types::QuickConnectSummary]?
+      def last_modified_time: () -> Time?
+      def last_modified_region: () -> String?
+    end
+    def list_queue_quick_connects: (
+      ?instance_id: String,
+      ?queue_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListQueueQuickConnectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueueQuickConnectsResponse
+
+    interface _ListQueuesResponse
+      include Smithy::Client::_Response[Types::ListQueuesResponse]
+      def queue_summary_list: () -> Array[Types::QueueSummary]?
+      def next_token: () -> String?
+    end
+    def list_queues: (
+      ?instance_id: String,
+      ?queue_types: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListQueuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQueuesResponse
+
+    interface _ListQuickConnectsResponse
+      include Smithy::Client::_Response[Types::ListQuickConnectsResponse]
+      def quick_connect_summary_list: () -> Array[Types::QuickConnectSummary]?
+      def next_token: () -> String?
+    end
+    def list_quick_connects: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?quick_connect_types: Array[String]
+    ) -> _ListQuickConnectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListQuickConnectsResponse
+
+    interface _ListRealtimeContactAnalysisSegmentsV2Response
+      include Smithy::Client::_Response[Types::ListRealtimeContactAnalysisSegmentsV2Response]
+      def channel: () -> String?
+      def status: () -> String?
+      def segments: () -> Array[Types::RealtimeContactAnalysisSegment]?
+      def next_token: () -> String?
+    end
+    def list_realtime_contact_analysis_segments_v2: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?output_type: String,
+      ?segment_types: Array[String]
+    ) -> _ListRealtimeContactAnalysisSegmentsV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRealtimeContactAnalysisSegmentsV2Response
+
+    interface _ListRoutingProfileQueuesResponse
+      include Smithy::Client::_Response[Types::ListRoutingProfileQueuesResponse]
+      def next_token: () -> String?
+      def routing_profile_queue_config_summary_list: () -> Array[Types::RoutingProfileQueueConfigSummary]?
+      def last_modified_time: () -> Time?
+      def last_modified_region: () -> String?
+    end
+    def list_routing_profile_queues: (
+      ?instance_id: String,
+      ?routing_profile_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRoutingProfileQueuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRoutingProfileQueuesResponse
+
+    interface _ListRoutingProfilesResponse
+      include Smithy::Client::_Response[Types::ListRoutingProfilesResponse]
+      def routing_profile_summary_list: () -> Array[Types::RoutingProfileSummary]?
+      def next_token: () -> String?
+    end
+    def list_routing_profiles: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListRoutingProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRoutingProfilesResponse
+
+    interface _ListRulesResponse
+      include Smithy::Client::_Response[Types::ListRulesResponse]
+      def rule_summary_list: () -> Array[Types::RuleSummary]?
+      def next_token: () -> String?
+    end
+    def list_rules: (
+      ?instance_id: String,
+      ?publish_status: String,
+      ?event_source_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRulesResponse
+
+    interface _ListSecurityKeysResponse
+      include Smithy::Client::_Response[Types::ListSecurityKeysResponse]
+      def security_keys: () -> Array[Types::SecurityKey]?
+      def next_token: () -> String?
+    end
+    def list_security_keys: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSecurityKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSecurityKeysResponse
+
+    interface _ListSecurityProfileApplicationsResponse
+      include Smithy::Client::_Response[Types::ListSecurityProfileApplicationsResponse]
+      def applications: () -> Array[Types::Application]?
+      def next_token: () -> String?
+      def last_modified_time: () -> Time?
+      def last_modified_region: () -> String?
+    end
+    def list_security_profile_applications: (
+      ?security_profile_id: String,
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSecurityProfileApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSecurityProfileApplicationsResponse
+
+    interface _ListSecurityProfilePermissionsResponse
+      include Smithy::Client::_Response[Types::ListSecurityProfilePermissionsResponse]
+      def permissions: () -> Array[String]?
+      def next_token: () -> String?
+      def last_modified_time: () -> Time?
+      def last_modified_region: () -> String?
+    end
+    def list_security_profile_permissions: (
+      ?security_profile_id: String,
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSecurityProfilePermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSecurityProfilePermissionsResponse
+
+    interface _ListSecurityProfilesResponse
+      include Smithy::Client::_Response[Types::ListSecurityProfilesResponse]
+      def security_profile_summary_list: () -> Array[Types::SecurityProfileSummary]?
+      def next_token: () -> String?
+    end
+    def list_security_profiles: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSecurityProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSecurityProfilesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTaskTemplatesResponse
+      include Smithy::Client::_Response[Types::ListTaskTemplatesResponse]
+      def task_templates: () -> Array[Types::TaskTemplateMetadata]?
+      def next_token: () -> String?
+    end
+    def list_task_templates: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?status: String,
+      ?name: String
+    ) -> _ListTaskTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTaskTemplatesResponse
+
+    interface _ListTrafficDistributionGroupUsersResponse
+      include Smithy::Client::_Response[Types::ListTrafficDistributionGroupUsersResponse]
+      def next_token: () -> String?
+      def traffic_distribution_group_user_summary_list: () -> Array[Types::TrafficDistributionGroupUserSummary]?
+    end
+    def list_traffic_distribution_group_users: (
+      ?traffic_distribution_group_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTrafficDistributionGroupUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrafficDistributionGroupUsersResponse
+
+    interface _ListTrafficDistributionGroupsResponse
+      include Smithy::Client::_Response[Types::ListTrafficDistributionGroupsResponse]
+      def next_token: () -> String?
+      def traffic_distribution_group_summary_list: () -> Array[Types::TrafficDistributionGroupSummary]?
+    end
+    def list_traffic_distribution_groups: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?instance_id: String
+    ) -> _ListTrafficDistributionGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrafficDistributionGroupsResponse
+
+    interface _ListUseCasesResponse
+      include Smithy::Client::_Response[Types::ListUseCasesResponse]
+      def use_case_summary_list: () -> Array[Types::UseCase]?
+      def next_token: () -> String?
+    end
+    def list_use_cases: (
+      ?instance_id: String,
+      ?integration_association_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListUseCasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUseCasesResponse
+
+    interface _ListUserHierarchyGroupsResponse
+      include Smithy::Client::_Response[Types::ListUserHierarchyGroupsResponse]
+      def user_hierarchy_group_summary_list: () -> Array[Types::HierarchyGroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_user_hierarchy_groups: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListUserHierarchyGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUserHierarchyGroupsResponse
+
+    interface _ListUserProficienciesResponse
+      include Smithy::Client::_Response[Types::ListUserProficienciesResponse]
+      def next_token: () -> String?
+      def user_proficiency_list: () -> Array[Types::UserProficiency]?
+      def last_modified_time: () -> Time?
+      def last_modified_region: () -> String?
+    end
+    def list_user_proficiencies: (
+      ?instance_id: String,
+      ?user_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListUserProficienciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUserProficienciesResponse
+
+    interface _ListUsersResponse
+      include Smithy::Client::_Response[Types::ListUsersResponse]
+      def user_summary_list: () -> Array[Types::UserSummary]?
+      def next_token: () -> String?
+    end
+    def list_users: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUsersResponse
+
+    interface _ListViewVersionsResponse
+      include Smithy::Client::_Response[Types::ListViewVersionsResponse]
+      def view_version_summary_list: () -> Array[Types::ViewVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_view_versions: (
+      ?instance_id: String,
+      ?view_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListViewVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListViewVersionsResponse
+
+    interface _ListViewsResponse
+      include Smithy::Client::_Response[Types::ListViewsResponse]
+      def views_summary_list: () -> Array[Types::ViewSummary]?
+      def next_token: () -> String?
+    end
+    def list_views: (
+      ?instance_id: String,
+      ?type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListViewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListViewsResponse
+
+    interface _MonitorContactResponse
+      include Smithy::Client::_Response[Types::MonitorContactResponse]
+      def contact_id: () -> String?
+      def contact_arn: () -> String?
+    end
+    def monitor_contact: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?user_id: String,
+      ?allowed_monitor_capabilities: Array[String],
+      ?client_token: String
+    ) -> _MonitorContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _MonitorContactResponse
+
+    interface _PauseContactResponse
+      include Smithy::Client::_Response[Types::PauseContactResponse]
+    end
+    def pause_contact: (
+      ?contact_id: String,
+      ?instance_id: String,
+      ?contact_flow_id: String
+    ) -> _PauseContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PauseContactResponse
+
+    interface _PutUserStatusResponse
+      include Smithy::Client::_Response[Types::PutUserStatusResponse]
+    end
+    def put_user_status: (
+      ?user_id: String,
+      ?instance_id: String,
+      ?agent_status_id: String
+    ) -> _PutUserStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutUserStatusResponse
+
+    interface _ReleasePhoneNumberResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def release_phone_number: (
+      ?phone_number_id: String,
+      ?client_token: String
+    ) -> _ReleasePhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReleasePhoneNumberResponse
+
+    interface _ReplicateInstanceResponse
+      include Smithy::Client::_Response[Types::ReplicateInstanceResponse]
+      def id: () -> String?
+      def arn: () -> String?
+    end
+    def replicate_instance: (
+      ?instance_id: String,
+      ?replica_region: String,
+      ?client_token: String,
+      ?replica_alias: String
+    ) -> _ReplicateInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReplicateInstanceResponse
+
+    interface _ResumeContactResponse
+      include Smithy::Client::_Response[Types::ResumeContactResponse]
+    end
+    def resume_contact: (
+      ?contact_id: String,
+      ?instance_id: String,
+      ?contact_flow_id: String
+    ) -> _ResumeContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResumeContactResponse
+
+    interface _ResumeContactRecordingResponse
+      include Smithy::Client::_Response[Types::ResumeContactRecordingResponse]
+    end
+    def resume_contact_recording: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?initial_contact_id: String,
+      ?contact_recording_type: String
+    ) -> _ResumeContactRecordingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResumeContactRecordingResponse
+
+    interface _SearchAgentStatusesResponse
+      include Smithy::Client::_Response[Types::SearchAgentStatusesResponse]
+      def agent_statuses: () -> Array[Types::AgentStatus]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_agent_statuses: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_filter: {
+        attribute_filter: {
+          or_conditions: Array[
+            {
+              tag_conditions: Array[
+                {
+                  tag_key: String,
+                  tag_value: untyped
+                }
+              ]
+            }
+          ],
+          and_condition: {
+            tag_conditions: untyped
+          },
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      },
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            }
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped
+      }
+    ) -> _SearchAgentStatusesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchAgentStatusesResponse
+
+    interface _SearchAvailablePhoneNumbersResponse
+      include Smithy::Client::_Response[Types::SearchAvailablePhoneNumbersResponse]
+      def next_token: () -> String?
+      def available_numbers_list: () -> Array[Types::AvailableNumberSummary]?
+    end
+    def search_available_phone_numbers: (
+      ?target_arn: String,
+      ?instance_id: String,
+      ?phone_number_country_code: String,
+      ?phone_number_type: String,
+      ?phone_number_prefix: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _SearchAvailablePhoneNumbersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchAvailablePhoneNumbersResponse
+
+    interface _SearchContactFlowModulesResponse
+      include Smithy::Client::_Response[Types::SearchContactFlowModulesResponse]
+      def contact_flow_modules: () -> Array[Types::ContactFlowModule]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_contact_flow_modules: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_filter: {
+        tag_filter: {
+          or_conditions: Array[
+            Array[
+              {
+                tag_key: String,
+                tag_value: untyped
+              }
+            ]
+          ],
+          and_conditions: Array[
+            {
+              tag_key: untyped,
+              tag_value: untyped
+            }
+          ],
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      },
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            },
+            state_condition: String,
+            status_condition: String
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped,
+        state_condition: untyped,
+        status_condition: untyped
+      }
+    ) -> _SearchContactFlowModulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchContactFlowModulesResponse
+
+    interface _SearchContactFlowsResponse
+      include Smithy::Client::_Response[Types::SearchContactFlowsResponse]
+      def contact_flows: () -> Array[Types::ContactFlow]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_contact_flows: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_filter: {
+        tag_filter: {
+          or_conditions: Array[
+            Array[
+              {
+                tag_key: String,
+                tag_value: untyped
+              }
+            ]
+          ],
+          and_conditions: Array[
+            {
+              tag_key: untyped,
+              tag_value: untyped
+            }
+          ],
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      },
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            },
+            type_condition: String,
+            state_condition: String,
+            status_condition: String
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped,
+        type_condition: untyped,
+        state_condition: untyped,
+        status_condition: untyped
+      }
+    ) -> _SearchContactFlowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchContactFlowsResponse
+
+    interface _SearchContactsResponse
+      include Smithy::Client::_Response[Types::SearchContactsResponse]
+      def contacts: () -> Array[Types::ContactSearchSummary]?
+      def next_token: () -> String?
+      def total_count: () -> Integer?
+    end
+    def search_contacts: (
+      ?instance_id: String,
+      ?time_range: {
+        type: String,
+        start_time: Time,
+        end_time: untyped
+      },
+      ?search_criteria: {
+        agent_ids: Array[String],
+        agent_hierarchy_groups: {
+          l1_ids: Array[String],
+          l2_ids: untyped,
+          l3_ids: untyped,
+          l4_ids: untyped,
+          l5_ids: untyped
+        },
+        channels: Array[String],
+        contact_analysis: {
+          transcript: {
+            criteria: Array[
+              {
+                participant_role: String,
+                search_text: Array[String],
+                match_type: String
+              }
+            ],
+            match_type: untyped
+          }
+        },
+        initiation_methods: Array[String],
+        queue_ids: Array[String],
+        searchable_contact_attributes: {
+          criteria: Array[
+            {
+              key: String,
+              values: Array[String]
+            }
+          ],
+          match_type: untyped
+        },
+        searchable_segment_attributes: {
+          criteria: Array[
+            {
+              key: String,
+              values: Array[String]
+            }
+          ],
+          match_type: untyped
+        }
+      },
+      ?max_results: Integer,
+      ?next_token: String,
+      ?sort: {
+        field_name: String,
+        order: String
+      }
+    ) -> _SearchContactsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchContactsResponse
+
+    interface _SearchEmailAddressesResponse
+      include Smithy::Client::_Response[Types::SearchEmailAddressesResponse]
+      def next_token: () -> String?
+      def email_addresses: () -> Array[Types::EmailAddressMetadata]?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_email_addresses: (
+      ?instance_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            }
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped
+      },
+      ?search_filter: {
+        tag_filter: {
+          or_conditions: Array[
+            Array[
+              {
+                tag_key: String,
+                tag_value: untyped
+              }
+            ]
+          ],
+          and_conditions: Array[
+            {
+              tag_key: untyped,
+              tag_value: untyped
+            }
+          ],
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      }
+    ) -> _SearchEmailAddressesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchEmailAddressesResponse
+
+    interface _SearchHoursOfOperationOverridesResponse
+      include Smithy::Client::_Response[Types::SearchHoursOfOperationOverridesResponse]
+      def hours_of_operation_overrides: () -> Array[Types::HoursOfOperationOverride]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_hours_of_operation_overrides: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_filter: {
+        tag_filter: {
+          or_conditions: Array[
+            Array[
+              {
+                tag_key: String,
+                tag_value: untyped
+              }
+            ]
+          ],
+          and_conditions: Array[
+            {
+              tag_key: untyped,
+              tag_value: untyped
+            }
+          ],
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      },
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            },
+            date_condition: {
+              field_name: untyped,
+              value: String,
+              comparison_type: String
+            }
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped,
+        date_condition: untyped
+      }
+    ) -> _SearchHoursOfOperationOverridesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchHoursOfOperationOverridesResponse
+
+    interface _SearchHoursOfOperationsResponse
+      include Smithy::Client::_Response[Types::SearchHoursOfOperationsResponse]
+      def hours_of_operations: () -> Array[Types::HoursOfOperation]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_hours_of_operations: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_filter: {
+        tag_filter: {
+          or_conditions: Array[
+            Array[
+              {
+                tag_key: String,
+                tag_value: untyped
+              }
+            ]
+          ],
+          and_conditions: Array[
+            {
+              tag_key: untyped,
+              tag_value: untyped
+            }
+          ],
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      },
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            }
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped
+      }
+    ) -> _SearchHoursOfOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchHoursOfOperationsResponse
+
+    interface _SearchPredefinedAttributesResponse
+      include Smithy::Client::_Response[Types::SearchPredefinedAttributesResponse]
+      def predefined_attributes: () -> Array[Types::PredefinedAttribute]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_predefined_attributes: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            }
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped
+      }
+    ) -> _SearchPredefinedAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchPredefinedAttributesResponse
+
+    interface _SearchPromptsResponse
+      include Smithy::Client::_Response[Types::SearchPromptsResponse]
+      def prompts: () -> Array[Types::Prompt]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_prompts: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_filter: {
+        tag_filter: {
+          or_conditions: Array[
+            Array[
+              {
+                tag_key: String,
+                tag_value: untyped
+              }
+            ]
+          ],
+          and_conditions: Array[
+            {
+              tag_key: untyped,
+              tag_value: untyped
+            }
+          ],
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      },
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            }
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped
+      }
+    ) -> _SearchPromptsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchPromptsResponse
+
+    interface _SearchQueuesResponse
+      include Smithy::Client::_Response[Types::SearchQueuesResponse]
+      def queues: () -> Array[Types::Queue]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_queues: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_filter: {
+        tag_filter: {
+          or_conditions: Array[
+            Array[
+              {
+                tag_key: String,
+                tag_value: untyped
+              }
+            ]
+          ],
+          and_conditions: Array[
+            {
+              tag_key: untyped,
+              tag_value: untyped
+            }
+          ],
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      },
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            },
+            queue_type_condition: String
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped,
+        queue_type_condition: untyped
+      }
+    ) -> _SearchQueuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchQueuesResponse
+
+    interface _SearchQuickConnectsResponse
+      include Smithy::Client::_Response[Types::SearchQuickConnectsResponse]
+      def quick_connects: () -> Array[Types::QuickConnect]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_quick_connects: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_filter: {
+        tag_filter: {
+          or_conditions: Array[
+            Array[
+              {
+                tag_key: String,
+                tag_value: untyped
+              }
+            ]
+          ],
+          and_conditions: Array[
+            {
+              tag_key: untyped,
+              tag_value: untyped
+            }
+          ],
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      },
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            }
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped
+      }
+    ) -> _SearchQuickConnectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchQuickConnectsResponse
+
+    interface _SearchResourceTagsResponse
+      include Smithy::Client::_Response[Types::SearchResourceTagsResponse]
+      def tags: () -> Array[Types::TagSet]?
+      def next_token: () -> String?
+    end
+    def search_resource_tags: (
+      ?instance_id: String,
+      ?resource_types: Array[String],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_criteria: {
+        tag_search_condition: {
+          tag_key: String,
+          tag_value: String,
+          tag_key_comparison_type: String,
+          tag_value_comparison_type: untyped
+        }
+      }
+    ) -> _SearchResourceTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchResourceTagsResponse
+
+    interface _SearchRoutingProfilesResponse
+      include Smithy::Client::_Response[Types::SearchRoutingProfilesResponse]
+      def routing_profiles: () -> Array[Types::RoutingProfile]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_routing_profiles: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_filter: {
+        tag_filter: {
+          or_conditions: Array[
+            Array[
+              {
+                tag_key: String,
+                tag_value: untyped
+              }
+            ]
+          ],
+          and_conditions: Array[
+            {
+              tag_key: untyped,
+              tag_value: untyped
+            }
+          ],
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      },
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            }
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped
+      }
+    ) -> _SearchRoutingProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchRoutingProfilesResponse
+
+    interface _SearchSecurityProfilesResponse
+      include Smithy::Client::_Response[Types::SearchSecurityProfilesResponse]
+      def security_profiles: () -> Array[Types::SecurityProfileSearchSummary]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_security_profiles: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            }
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped
+      },
+      ?search_filter: {
+        tag_filter: {
+          or_conditions: Array[
+            Array[
+              {
+                tag_key: String,
+                tag_value: untyped
+              }
+            ]
+          ],
+          and_conditions: Array[
+            {
+              tag_key: untyped,
+              tag_value: untyped
+            }
+          ],
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      }
+    ) -> _SearchSecurityProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchSecurityProfilesResponse
+
+    interface _SearchUserHierarchyGroupsResponse
+      include Smithy::Client::_Response[Types::SearchUserHierarchyGroupsResponse]
+      def user_hierarchy_groups: () -> Array[Types::HierarchyGroup]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_user_hierarchy_groups: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_filter: {
+        attribute_filter: {
+          or_conditions: Array[
+            {
+              tag_conditions: Array[
+                {
+                  tag_key: String,
+                  tag_value: untyped
+                }
+              ]
+            }
+          ],
+          and_condition: {
+            tag_conditions: untyped
+          },
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        }
+      },
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            }
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped
+      }
+    ) -> _SearchUserHierarchyGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchUserHierarchyGroupsResponse
+
+    interface _SearchUsersResponse
+      include Smithy::Client::_Response[Types::SearchUsersResponse]
+      def users: () -> Array[Types::UserSearchSummary]?
+      def next_token: () -> String?
+      def approximate_total_count: () -> Integer?
+    end
+    def search_users: (
+      ?instance_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?search_filter: {
+        tag_filter: {
+          or_conditions: Array[
+            Array[
+              {
+                tag_key: String,
+                tag_value: untyped
+              }
+            ]
+          ],
+          and_conditions: Array[
+            {
+              tag_key: untyped,
+              tag_value: untyped
+            }
+          ],
+          tag_condition: {
+            tag_key: untyped,
+            tag_value: untyped
+          }
+        },
+        user_attribute_filter: {
+          or_conditions: Array[
+            {
+              tag_conditions: untyped,
+              hierarchy_group_condition: {
+                value: untyped,
+                hierarchy_group_match_type: String
+              }
+            }
+          ],
+          and_condition: {
+            tag_conditions: untyped,
+            hierarchy_group_condition: untyped
+          },
+          tag_condition: untyped,
+          hierarchy_group_condition: untyped
+        }
+      },
+      ?search_criteria: {
+        or_conditions: Array[
+          {
+            or_conditions: untyped,
+            and_conditions: untyped,
+            string_condition: {
+              field_name: String,
+              value: untyped,
+              comparison_type: String
+            },
+            list_condition: {
+              target_list_type: String,
+              conditions: Array[
+                {
+                  string_condition: untyped,
+                  number_condition: {
+                    field_name: untyped,
+                    min_value: Integer,
+                    max_value: untyped,
+                    comparison_type: String
+                  }
+                }
+              ]
+            },
+            hierarchy_group_condition: {
+              value: untyped,
+              hierarchy_group_match_type: String
+            }
+          }
+        ],
+        and_conditions: untyped,
+        string_condition: untyped,
+        list_condition: untyped,
+        hierarchy_group_condition: untyped
+      }
+    ) -> _SearchUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchUsersResponse
+
+    interface _SearchVocabulariesResponse
+      include Smithy::Client::_Response[Types::SearchVocabulariesResponse]
+      def vocabulary_summary_list: () -> Array[Types::VocabularySummary]?
+      def next_token: () -> String?
+    end
+    def search_vocabularies: (
+      ?instance_id: String,
+      ?max_results: Integer,
+      ?next_token: String,
+      ?state: String,
+      ?name_starts_with: String,
+      ?language_code: String
+    ) -> _SearchVocabulariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchVocabulariesResponse
+
+    interface _SendChatIntegrationEventResponse
+      include Smithy::Client::_Response[Types::SendChatIntegrationEventResponse]
+      def initial_contact_id: () -> String?
+      def new_chat_created: () -> bool?
+    end
+    def send_chat_integration_event: (
+      ?source_id: String,
+      ?destination_id: String,
+      ?subtype: String,
+      ?event: {
+        type: String,
+        content_type: String,
+        content: String
+      },
+      ?new_session_details: {
+        supported_messaging_content_types: Array[String],
+        participant_details: {
+          display_name: String
+        },
+        attributes: Hash[String, String],
+        streaming_configuration: {
+          streaming_endpoint_arn: String
+        }
+      }
+    ) -> _SendChatIntegrationEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendChatIntegrationEventResponse
+
+    interface _SendOutboundEmailResponse
+      include Smithy::Client::_Response[Types::SendOutboundEmailResponse]
+    end
+    def send_outbound_email: (
+      ?instance_id: String,
+      ?from_email_address: {
+        email_address: String,
+        display_name: String
+      },
+      ?destination_email_address: {
+        email_address: String,
+        display_name: String
+      },
+      ?additional_recipients: {
+        cc_email_addresses: Array[
+          {
+            email_address: String,
+            display_name: String
+          }
+        ]
+      },
+      ?email_message: {
+        message_source_type: String,
+        templated_message_config: {
+          knowledge_base_id: String,
+          message_template_id: String,
+          template_attributes: {
+            custom_attributes: Hash[String, String],
+            customer_profile_attributes: String
+          }
+        },
+        raw_message: {
+          subject: String,
+          body: String,
+          content_type: String
+        }
+      },
+      ?traffic_type: String,
+      ?source_campaign: {
+        campaign_id: String,
+        outbound_request_id: String
+      },
+      ?client_token: String
+    ) -> _SendOutboundEmailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendOutboundEmailResponse
+
+    interface _StartAttachedFileUploadResponse
+      include Smithy::Client::_Response[Types::StartAttachedFileUploadResponse]
+      def file_arn: () -> String?
+      def file_id: () -> String?
+      def creation_time: () -> String?
+      def file_status: () -> String?
+      def created_by: () -> Types::CreatedByInfo?
+      def upload_url_metadata: () -> Types::UploadUrlMetadata?
+    end
+    def start_attached_file_upload: (
+      ?client_token: String,
+      ?instance_id: String,
+      ?file_name: String,
+      ?file_size_in_bytes: Integer,
+      ?url_expiry_in_seconds: Integer,
+      ?file_use_case_type: String,
+      ?associated_resource_arn: String,
+      ?created_by: {
+        connect_user_arn: String,
+        aws_identity_arn: untyped
+      },
+      ?tags: Hash[String, String]
+    ) -> _StartAttachedFileUploadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAttachedFileUploadResponse
+
+    interface _StartChatContactResponse
+      include Smithy::Client::_Response[Types::StartChatContactResponse]
+      def contact_id: () -> String?
+      def participant_id: () -> String?
+      def participant_token: () -> String?
+      def continued_from_contact_id: () -> String?
+    end
+    def start_chat_contact: (
+      ?instance_id: String,
+      ?contact_flow_id: String,
+      ?attributes: Hash[String, String],
+      ?participant_details: {
+        display_name: String
+      },
+      ?initial_message: {
+        content_type: String,
+        content: String
+      },
+      ?client_token: String,
+      ?chat_duration_in_minutes: Integer,
+      ?supported_messaging_content_types: Array[String],
+      ?persistent_chat: {
+        rehydration_type: String,
+        source_contact_id: String
+      },
+      ?related_contact_id: String,
+      ?segment_attributes: Hash[String,
+        {
+          value_string: String,
+          value_map: Hash[String,
+            {
+              value_string: untyped,
+              value_map: untyped,
+              value_integer: Integer
+            }
+          ],
+          value_integer: untyped
+        }
+      ],
+      ?customer_id: String
+    ) -> _StartChatContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartChatContactResponse
+
+    interface _StartContactEvaluationResponse
+      include Smithy::Client::_Response[Types::StartContactEvaluationResponse]
+      def evaluation_id: () -> String?
+      def evaluation_arn: () -> String?
+    end
+    def start_contact_evaluation: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?evaluation_form_id: String,
+      ?client_token: String
+    ) -> _StartContactEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartContactEvaluationResponse
+
+    interface _StartContactRecordingResponse
+      include Smithy::Client::_Response[Types::StartContactRecordingResponse]
+    end
+    def start_contact_recording: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?initial_contact_id: String,
+      ?voice_recording_configuration: {
+        voice_recording_track: String,
+        ivr_recording_track: String
+      }
+    ) -> _StartContactRecordingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartContactRecordingResponse
+
+    interface _StartContactStreamingResponse
+      include Smithy::Client::_Response[Types::StartContactStreamingResponse]
+      def streaming_id: () -> String?
+    end
+    def start_contact_streaming: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?chat_streaming_configuration: {
+        streaming_endpoint_arn: String
+      },
+      ?client_token: String
+    ) -> _StartContactStreamingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartContactStreamingResponse
+
+    interface _StartEmailContactResponse
+      include Smithy::Client::_Response[Types::StartEmailContactResponse]
+      def contact_id: () -> String?
+    end
+    def start_email_contact: (
+      ?instance_id: String,
+      ?from_email_address: {
+        email_address: String,
+        display_name: String
+      },
+      ?destination_email_address: String,
+      ?description: String,
+      ?references: Hash[String,
+        {
+          value: String,
+          type: String,
+          status: String,
+          arn: String,
+          status_reason: String
+        }
+      ],
+      ?name: String,
+      ?email_message: {
+        message_source_type: String,
+        raw_message: {
+          subject: String,
+          body: String,
+          content_type: String,
+          headers: Hash[String, String]
+        }
+      },
+      ?additional_recipients: {
+        to_addresses: Array[
+          {
+            email_address: String,
+            display_name: String
+          }
+        ],
+        cc_addresses: untyped
+      },
+      ?attachments: Array[
+        {
+          file_name: String,
+          s3_url: String
+        }
+      ],
+      ?contact_flow_id: String,
+      ?related_contact_id: String,
+      ?attributes: Hash[String, String],
+      ?segment_attributes: Hash[String,
+        {
+          value_string: String,
+          value_map: Hash[String,
+            {
+              value_string: untyped,
+              value_map: untyped,
+              value_integer: Integer
+            }
+          ],
+          value_integer: untyped
+        }
+      ],
+      ?client_token: String
+    ) -> _StartEmailContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartEmailContactResponse
+
+    interface _StartOutboundChatContactResponse
+      include Smithy::Client::_Response[Types::StartOutboundChatContactResponse]
+      def contact_id: () -> String?
+    end
+    def start_outbound_chat_contact: (
+      ?source_endpoint: {
+        type: String,
+        address: String
+      },
+      ?destination_endpoint: {
+        type: String,
+        address: String
+      },
+      ?instance_id: String,
+      ?segment_attributes: Hash[String,
+        {
+          value_string: String,
+          value_map: Hash[String,
+            {
+              value_string: untyped,
+              value_map: untyped,
+              value_integer: Integer
+            }
+          ],
+          value_integer: untyped
+        }
+      ],
+      ?attributes: Hash[String, String],
+      ?contact_flow_id: String,
+      ?chat_duration_in_minutes: Integer,
+      ?participant_details: {
+        display_name: String
+      },
+      ?initial_system_message: {
+        content_type: String,
+        content: String
+      },
+      ?related_contact_id: String,
+      ?supported_messaging_content_types: Array[String],
+      ?client_token: String
+    ) -> _StartOutboundChatContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartOutboundChatContactResponse
+
+    interface _StartOutboundEmailContactResponse
+      include Smithy::Client::_Response[Types::StartOutboundEmailContactResponse]
+      def contact_id: () -> String?
+    end
+    def start_outbound_email_contact: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?from_email_address: {
+        email_address: String,
+        display_name: String
+      },
+      ?destination_email_address: {
+        email_address: String,
+        display_name: String
+      },
+      ?additional_recipients: {
+        cc_email_addresses: Array[
+          {
+            email_address: String,
+            display_name: String
+          }
+        ]
+      },
+      ?email_message: {
+        message_source_type: String,
+        templated_message_config: {
+          knowledge_base_id: String,
+          message_template_id: String,
+          template_attributes: {
+            custom_attributes: Hash[String, String],
+            customer_profile_attributes: String
+          }
+        },
+        raw_message: {
+          subject: String,
+          body: String,
+          content_type: String
+        }
+      },
+      ?client_token: String
+    ) -> _StartOutboundEmailContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartOutboundEmailContactResponse
+
+    interface _StartOutboundVoiceContactResponse
+      include Smithy::Client::_Response[Types::StartOutboundVoiceContactResponse]
+      def contact_id: () -> String?
+    end
+    def start_outbound_voice_contact: (
+      ?name: String,
+      ?description: String,
+      ?references: Hash[String,
+        {
+          value: String,
+          type: String,
+          status: String,
+          arn: String,
+          status_reason: String
+        }
+      ],
+      ?related_contact_id: String,
+      ?destination_phone_number: String,
+      ?contact_flow_id: String,
+      ?instance_id: String,
+      ?client_token: String,
+      ?source_phone_number: String,
+      ?queue_id: String,
+      ?attributes: Hash[String, String],
+      ?answer_machine_detection_config: {
+        enable_answer_machine_detection: bool,
+        await_answer_machine_prompt: untyped
+      },
+      ?campaign_id: String,
+      ?traffic_type: String
+    ) -> _StartOutboundVoiceContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartOutboundVoiceContactResponse
+
+    interface _StartScreenSharingResponse
+      include Smithy::Client::_Response[Types::StartScreenSharingResponse]
+    end
+    def start_screen_sharing: (
+      ?client_token: String,
+      ?instance_id: String,
+      ?contact_id: String
+    ) -> _StartScreenSharingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartScreenSharingResponse
+
+    interface _StartTaskContactResponse
+      include Smithy::Client::_Response[Types::StartTaskContactResponse]
+      def contact_id: () -> String?
+    end
+    def start_task_contact: (
+      ?instance_id: String,
+      ?previous_contact_id: String,
+      ?contact_flow_id: String,
+      ?attributes: Hash[String, String],
+      ?name: String,
+      ?references: Hash[String,
+        {
+          value: String,
+          type: String,
+          status: String,
+          arn: String,
+          status_reason: String
+        }
+      ],
+      ?description: String,
+      ?client_token: String,
+      ?scheduled_time: Time,
+      ?task_template_id: String,
+      ?quick_connect_id: String,
+      ?related_contact_id: String,
+      ?segment_attributes: Hash[String,
+        {
+          value_string: String,
+          value_map: Hash[String,
+            {
+              value_string: untyped,
+              value_map: untyped,
+              value_integer: Integer
+            }
+          ],
+          value_integer: untyped
+        }
+      ]
+    ) -> _StartTaskContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTaskContactResponse
+
+    interface _StartWebRTCContactResponse
+      include Smithy::Client::_Response[Types::StartWebRTCContactResponse]
+      def connection_data: () -> Types::ConnectionData?
+      def contact_id: () -> String?
+      def participant_id: () -> String?
+      def participant_token: () -> String?
+    end
+    def start_web_rtc_contact: (
+      ?attributes: Hash[String, String],
+      ?client_token: String,
+      ?contact_flow_id: String,
+      ?instance_id: String,
+      ?allowed_capabilities: {
+        customer: {
+          video: String,
+          screen_share: String
+        },
+        agent: untyped
+      },
+      ?participant_details: {
+        display_name: String
+      },
+      ?related_contact_id: String,
+      ?references: Hash[String,
+        {
+          value: String,
+          type: String,
+          status: String,
+          arn: String,
+          status_reason: String
+        }
+      ],
+      ?description: String
+    ) -> _StartWebRTCContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartWebRTCContactResponse
+
+    interface _StopContactResponse
+      include Smithy::Client::_Response[Types::StopContactResponse]
+    end
+    def stop_contact: (
+      ?contact_id: String,
+      ?instance_id: String,
+      ?disconnect_reason: {
+        code: String
+      }
+    ) -> _StopContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopContactResponse
+
+    interface _StopContactRecordingResponse
+      include Smithy::Client::_Response[Types::StopContactRecordingResponse]
+    end
+    def stop_contact_recording: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?initial_contact_id: String,
+      ?contact_recording_type: String
+    ) -> _StopContactRecordingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopContactRecordingResponse
+
+    interface _StopContactStreamingResponse
+      include Smithy::Client::_Response[Types::StopContactStreamingResponse]
+    end
+    def stop_contact_streaming: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?streaming_id: String
+    ) -> _StopContactStreamingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopContactStreamingResponse
+
+    interface _SubmitContactEvaluationResponse
+      include Smithy::Client::_Response[Types::SubmitContactEvaluationResponse]
+      def evaluation_id: () -> String?
+      def evaluation_arn: () -> String?
+    end
+    def submit_contact_evaluation: (
+      ?instance_id: String,
+      ?evaluation_id: String,
+      ?answers: Hash[String,
+        {
+          value: {
+            string_value: String,
+            numeric_value: Float,
+            not_applicable: bool
+          }
+        }
+      ],
+      ?notes: Hash[String,
+        {
+          value: String
+        }
+      ]
+    ) -> _SubmitContactEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SubmitContactEvaluationResponse
+
+    interface _SuspendContactRecordingResponse
+      include Smithy::Client::_Response[Types::SuspendContactRecordingResponse]
+    end
+    def suspend_contact_recording: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?initial_contact_id: String,
+      ?contact_recording_type: String
+    ) -> _SuspendContactRecordingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SuspendContactRecordingResponse
+
+    interface _TagContactResponse
+      include Smithy::Client::_Response[Types::TagContactResponse]
+    end
+    def tag_contact: (
+      ?contact_id: String,
+      ?instance_id: String,
+      ?tags: Hash[String, String]
+    ) -> _TagContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagContactResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TransferContactResponse
+      include Smithy::Client::_Response[Types::TransferContactResponse]
+      def contact_id: () -> String?
+      def contact_arn: () -> String?
+    end
+    def transfer_contact: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?queue_id: String,
+      ?user_id: String,
+      ?contact_flow_id: String,
+      ?client_token: String
+    ) -> _TransferContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TransferContactResponse
+
+    interface _UntagContactResponse
+      include Smithy::Client::_Response[Types::UntagContactResponse]
+    end
+    def untag_contact: (
+      ?contact_id: String,
+      ?instance_id: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagContactResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAgentStatusResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_agent_status: (
+      ?instance_id: String,
+      ?agent_status_id: String,
+      ?name: String,
+      ?description: String,
+      ?state: String,
+      ?display_order: Integer,
+      ?reset_order_number: bool
+    ) -> _UpdateAgentStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgentStatusResponse
+
+    interface _UpdateAuthenticationProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_authentication_profile: (
+      ?authentication_profile_id: String,
+      ?instance_id: String,
+      ?name: String,
+      ?description: String,
+      ?allowed_ips: Array[String],
+      ?blocked_ips: Array[String],
+      ?periodic_session_duration: Integer
+    ) -> _UpdateAuthenticationProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAuthenticationProfileResponse
+
+    interface _UpdateContactResponse
+      include Smithy::Client::_Response[Types::UpdateContactResponse]
+    end
+    def update_contact: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?name: String,
+      ?description: String,
+      ?references: Hash[String,
+        {
+          value: String,
+          type: String,
+          status: String,
+          arn: String,
+          status_reason: String
+        }
+      ],
+      ?segment_attributes: Hash[String,
+        {
+          value_string: String,
+          value_map: Hash[String,
+            {
+              value_string: untyped,
+              value_map: untyped,
+              value_integer: Integer
+            }
+          ],
+          value_integer: untyped
+        }
+      ],
+      ?queue_info: {
+        id: String
+      },
+      ?user_info: {
+        user_id: String
+      },
+      ?customer_endpoint: {
+        type: String,
+        address: String
+      },
+      ?system_endpoint: {
+        type: String,
+        address: String
+      }
+    ) -> _UpdateContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactResponse
+
+    interface _UpdateContactAttributesResponse
+      include Smithy::Client::_Response[Types::UpdateContactAttributesResponse]
+    end
+    def update_contact_attributes: (
+      ?initial_contact_id: String,
+      ?instance_id: String,
+      ?attributes: Hash[String, String]
+    ) -> _UpdateContactAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactAttributesResponse
+
+    interface _UpdateContactEvaluationResponse
+      include Smithy::Client::_Response[Types::UpdateContactEvaluationResponse]
+      def evaluation_id: () -> String?
+      def evaluation_arn: () -> String?
+    end
+    def update_contact_evaluation: (
+      ?instance_id: String,
+      ?evaluation_id: String,
+      ?answers: Hash[String,
+        {
+          value: {
+            string_value: String,
+            numeric_value: Float,
+            not_applicable: bool
+          }
+        }
+      ],
+      ?notes: Hash[String,
+        {
+          value: String
+        }
+      ]
+    ) -> _UpdateContactEvaluationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactEvaluationResponse
+
+    interface _UpdateContactFlowContentResponse
+      include Smithy::Client::_Response[Types::UpdateContactFlowContentResponse]
+    end
+    def update_contact_flow_content: (
+      ?instance_id: String,
+      ?contact_flow_id: String,
+      ?content: String
+    ) -> _UpdateContactFlowContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactFlowContentResponse
+
+    interface _UpdateContactFlowMetadataResponse
+      include Smithy::Client::_Response[Types::UpdateContactFlowMetadataResponse]
+    end
+    def update_contact_flow_metadata: (
+      ?instance_id: String,
+      ?contact_flow_id: String,
+      ?name: String,
+      ?description: String,
+      ?contact_flow_state: String
+    ) -> _UpdateContactFlowMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactFlowMetadataResponse
+
+    interface _UpdateContactFlowModuleContentResponse
+      include Smithy::Client::_Response[Types::UpdateContactFlowModuleContentResponse]
+    end
+    def update_contact_flow_module_content: (
+      ?instance_id: String,
+      ?contact_flow_module_id: String,
+      ?content: String
+    ) -> _UpdateContactFlowModuleContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactFlowModuleContentResponse
+
+    interface _UpdateContactFlowModuleMetadataResponse
+      include Smithy::Client::_Response[Types::UpdateContactFlowModuleMetadataResponse]
+    end
+    def update_contact_flow_module_metadata: (
+      ?instance_id: String,
+      ?contact_flow_module_id: String,
+      ?name: String,
+      ?description: String,
+      ?state: String
+    ) -> _UpdateContactFlowModuleMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactFlowModuleMetadataResponse
+
+    interface _UpdateContactFlowNameResponse
+      include Smithy::Client::_Response[Types::UpdateContactFlowNameResponse]
+    end
+    def update_contact_flow_name: (
+      ?instance_id: String,
+      ?contact_flow_id: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateContactFlowNameResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactFlowNameResponse
+
+    interface _UpdateContactRoutingDataResponse
+      include Smithy::Client::_Response[Types::UpdateContactRoutingDataResponse]
+    end
+    def update_contact_routing_data: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?queue_time_adjustment_seconds: Integer,
+      ?queue_priority: Integer,
+      ?routing_criteria: {
+        steps: Array[
+          {
+            expiry: {
+              duration_in_seconds: Integer
+            },
+            expression: {
+              attribute_condition: {
+                name: String,
+                value: String,
+                proficiency_level: Float,
+                range: {
+                  min_proficiency_level: untyped,
+                  max_proficiency_level: untyped
+                },
+                match_criteria: {
+                  agents_criteria: {
+                    agent_ids: Array[String]
+                  }
+                },
+                comparison_operator: String
+              },
+              and_expression: Array[
+                {
+                  attribute_condition: untyped,
+                  and_expression: untyped,
+                  or_expression: untyped,
+                  not_attribute_condition: untyped
+                }
+              ],
+              or_expression: untyped,
+              not_attribute_condition: untyped
+            }
+          }
+        ]
+      }
+    ) -> _UpdateContactRoutingDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactRoutingDataResponse
+
+    interface _UpdateContactScheduleResponse
+      include Smithy::Client::_Response[Types::UpdateContactScheduleResponse]
+    end
+    def update_contact_schedule: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?scheduled_time: Time
+    ) -> _UpdateContactScheduleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContactScheduleResponse
+
+    interface _UpdateEmailAddressMetadataResponse
+      include Smithy::Client::_Response[Types::UpdateEmailAddressMetadataResponse]
+      def email_address_id: () -> String?
+      def email_address_arn: () -> String?
+    end
+    def update_email_address_metadata: (
+      ?instance_id: String,
+      ?email_address_id: String,
+      ?description: String,
+      ?display_name: String,
+      ?client_token: String
+    ) -> _UpdateEmailAddressMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEmailAddressMetadataResponse
+
+    interface _UpdateEvaluationFormResponse
+      include Smithy::Client::_Response[Types::UpdateEvaluationFormResponse]
+      def evaluation_form_id: () -> String?
+      def evaluation_form_arn: () -> String?
+      def evaluation_form_version: () -> Integer?
+    end
+    def update_evaluation_form: (
+      ?instance_id: String,
+      ?evaluation_form_id: String,
+      ?evaluation_form_version: Integer,
+      ?create_new_version: bool,
+      ?title: String,
+      ?description: String,
+      ?items: Array[
+        {
+          section: {
+            title: String,
+            ref_id: String,
+            instructions: String,
+            items: untyped,
+            weight: Float
+          },
+          question: {
+            title: String,
+            instructions: untyped,
+            ref_id: untyped,
+            not_applicable_enabled: bool,
+            question_type: String,
+            question_type_properties: {
+              numeric: {
+                min_value: Integer,
+                max_value: untyped,
+                options: Array[
+                  {
+                    min_value: untyped,
+                    max_value: untyped,
+                    score: Integer,
+                    automatic_fail: untyped
+                  }
+                ],
+                automation: {
+                  property_value: {
+                    label: String
+                  }
+                }
+              },
+              single_select: {
+                options: Array[
+                  {
+                    ref_id: untyped,
+                    text: String,
+                    score: untyped,
+                    automatic_fail: untyped
+                  }
+                ],
+                display_as: String,
+                automation: {
+                  options: Array[
+                    {
+                      rule_category: {
+                        category: String,
+                        condition: String,
+                        option_ref_id: untyped
+                      }
+                    }
+                  ],
+                  default_option_ref_id: untyped
+                }
+              }
+            },
+            weight: untyped
+          }
+        }
+      ],
+      ?scoring_strategy: {
+        mode: String,
+        status: String
+      },
+      ?client_token: String
+    ) -> _UpdateEvaluationFormResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEvaluationFormResponse
+
+    interface _UpdateHoursOfOperationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_hours_of_operation: (
+      ?instance_id: String,
+      ?hours_of_operation_id: String,
+      ?name: String,
+      ?description: String,
+      ?time_zone: String,
+      ?config: Array[
+        {
+          day: String,
+          start_time: {
+            hours: Integer,
+            minutes: Integer
+          },
+          end_time: untyped
+        }
+      ]
+    ) -> _UpdateHoursOfOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateHoursOfOperationResponse
+
+    interface _UpdateHoursOfOperationOverrideResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_hours_of_operation_override: (
+      ?instance_id: String,
+      ?hours_of_operation_id: String,
+      ?hours_of_operation_override_id: String,
+      ?name: String,
+      ?description: String,
+      ?config: Array[
+        {
+          day: String,
+          start_time: {
+            hours: Integer,
+            minutes: Integer
+          },
+          end_time: untyped
+        }
+      ],
+      ?effective_from: String,
+      ?effective_till: String
+    ) -> _UpdateHoursOfOperationOverrideResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateHoursOfOperationOverrideResponse
+
+    interface _UpdateInstanceAttributeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_instance_attribute: (
+      ?instance_id: String,
+      ?attribute_type: String,
+      ?value: String,
+      ?client_token: String
+    ) -> _UpdateInstanceAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInstanceAttributeResponse
+
+    interface _UpdateInstanceStorageConfigResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_instance_storage_config: (
+      ?instance_id: String,
+      ?association_id: String,
+      ?resource_type: String,
+      ?storage_config: {
+        association_id: String,
+        storage_type: String,
+        s3_config: {
+          bucket_name: String,
+          bucket_prefix: String,
+          encryption_config: {
+            encryption_type: String,
+            key_id: String
+          }
+        },
+        kinesis_video_stream_config: {
+          prefix: untyped,
+          retention_period_hours: Integer,
+          encryption_config: untyped
+        },
+        kinesis_stream_config: {
+          stream_arn: String
+        },
+        kinesis_firehose_config: {
+          firehose_arn: untyped
+        }
+      },
+      ?client_token: String
+    ) -> _UpdateInstanceStorageConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInstanceStorageConfigResponse
+
+    interface _UpdateParticipantAuthenticationResponse
+      include Smithy::Client::_Response[Types::UpdateParticipantAuthenticationResponse]
+    end
+    def update_participant_authentication: (
+      ?state: String,
+      ?instance_id: String,
+      ?code: String,
+      ?error: String,
+      ?error_description: String
+    ) -> _UpdateParticipantAuthenticationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateParticipantAuthenticationResponse
+
+    interface _UpdateParticipantRoleConfigResponse
+      include Smithy::Client::_Response[Types::UpdateParticipantRoleConfigResponse]
+    end
+    def update_participant_role_config: (
+      ?instance_id: String,
+      ?contact_id: String,
+      ?channel_configuration: {
+        chat: {
+          participant_timer_config_list: Array[
+            {
+              participant_role: String,
+              timer_type: String,
+              timer_value: {
+                participant_timer_action: String,
+                participant_timer_duration_in_minutes: Integer
+              }
+            }
+          ]
+        }
+      }
+    ) -> _UpdateParticipantRoleConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateParticipantRoleConfigResponse
+
+    interface _UpdatePhoneNumberResponse
+      include Smithy::Client::_Response[Types::UpdatePhoneNumberResponse]
+      def phone_number_id: () -> String?
+      def phone_number_arn: () -> String?
+    end
+    def update_phone_number: (
+      ?phone_number_id: String,
+      ?target_arn: String,
+      ?instance_id: String,
+      ?client_token: String
+    ) -> _UpdatePhoneNumberResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePhoneNumberResponse
+
+    interface _UpdatePhoneNumberMetadataResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_phone_number_metadata: (
+      ?phone_number_id: String,
+      ?phone_number_description: String,
+      ?client_token: String
+    ) -> _UpdatePhoneNumberMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePhoneNumberMetadataResponse
+
+    interface _UpdatePredefinedAttributeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_predefined_attribute: (
+      ?instance_id: String,
+      ?name: String,
+      ?values: {
+        string_list: Array[String]
+      }
+    ) -> _UpdatePredefinedAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePredefinedAttributeResponse
+
+    interface _UpdatePromptResponse
+      include Smithy::Client::_Response[Types::UpdatePromptResponse]
+      def prompt_arn: () -> String?
+      def prompt_id: () -> String?
+    end
+    def update_prompt: (
+      ?instance_id: String,
+      ?prompt_id: String,
+      ?name: String,
+      ?description: String,
+      ?s3_uri: String
+    ) -> _UpdatePromptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePromptResponse
+
+    interface _UpdateQueueHoursOfOperationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_queue_hours_of_operation: (
+      ?instance_id: String,
+      ?queue_id: String,
+      ?hours_of_operation_id: String
+    ) -> _UpdateQueueHoursOfOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQueueHoursOfOperationResponse
+
+    interface _UpdateQueueMaxContactsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_queue_max_contacts: (
+      ?instance_id: String,
+      ?queue_id: String,
+      ?max_contacts: Integer
+    ) -> _UpdateQueueMaxContactsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQueueMaxContactsResponse
+
+    interface _UpdateQueueNameResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_queue_name: (
+      ?instance_id: String,
+      ?queue_id: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateQueueNameResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQueueNameResponse
+
+    interface _UpdateQueueOutboundCallerConfigResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_queue_outbound_caller_config: (
+      ?instance_id: String,
+      ?queue_id: String,
+      ?outbound_caller_config: {
+        outbound_caller_id_name: String,
+        outbound_caller_id_number_id: String,
+        outbound_flow_id: String
+      }
+    ) -> _UpdateQueueOutboundCallerConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQueueOutboundCallerConfigResponse
+
+    interface _UpdateQueueOutboundEmailConfigResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_queue_outbound_email_config: (
+      ?instance_id: String,
+      ?queue_id: String,
+      ?outbound_email_config: {
+        outbound_email_address_id: String
+      }
+    ) -> _UpdateQueueOutboundEmailConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQueueOutboundEmailConfigResponse
+
+    interface _UpdateQueueStatusResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_queue_status: (
+      ?instance_id: String,
+      ?queue_id: String,
+      ?status: String
+    ) -> _UpdateQueueStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQueueStatusResponse
+
+    interface _UpdateQuickConnectConfigResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_quick_connect_config: (
+      ?instance_id: String,
+      ?quick_connect_id: String,
+      ?quick_connect_config: {
+        quick_connect_type: String,
+        user_config: {
+          user_id: String,
+          contact_flow_id: String
+        },
+        queue_config: {
+          queue_id: String,
+          contact_flow_id: untyped
+        },
+        phone_config: {
+          phone_number: String
+        }
+      }
+    ) -> _UpdateQuickConnectConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQuickConnectConfigResponse
+
+    interface _UpdateQuickConnectNameResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_quick_connect_name: (
+      ?instance_id: String,
+      ?quick_connect_id: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateQuickConnectNameResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateQuickConnectNameResponse
+
+    interface _UpdateRoutingProfileAgentAvailabilityTimerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_routing_profile_agent_availability_timer: (
+      ?instance_id: String,
+      ?routing_profile_id: String,
+      ?agent_availability_timer: String
+    ) -> _UpdateRoutingProfileAgentAvailabilityTimerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRoutingProfileAgentAvailabilityTimerResponse
+
+    interface _UpdateRoutingProfileConcurrencyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_routing_profile_concurrency: (
+      ?instance_id: String,
+      ?routing_profile_id: String,
+      ?media_concurrencies: Array[
+        {
+          channel: String,
+          concurrency: Integer,
+          cross_channel_behavior: {
+            behavior_type: String
+          }
+        }
+      ]
+    ) -> _UpdateRoutingProfileConcurrencyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRoutingProfileConcurrencyResponse
+
+    interface _UpdateRoutingProfileDefaultOutboundQueueResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_routing_profile_default_outbound_queue: (
+      ?instance_id: String,
+      ?routing_profile_id: String,
+      ?default_outbound_queue_id: String
+    ) -> _UpdateRoutingProfileDefaultOutboundQueueResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRoutingProfileDefaultOutboundQueueResponse
+
+    interface _UpdateRoutingProfileNameResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_routing_profile_name: (
+      ?instance_id: String,
+      ?routing_profile_id: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateRoutingProfileNameResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRoutingProfileNameResponse
+
+    interface _UpdateRoutingProfileQueuesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_routing_profile_queues: (
+      ?instance_id: String,
+      ?routing_profile_id: String,
+      ?queue_configs: Array[
+        {
+          queue_reference: {
+            queue_id: String,
+            channel: String
+          },
+          priority: Integer,
+          delay: Integer
+        }
+      ]
+    ) -> _UpdateRoutingProfileQueuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRoutingProfileQueuesResponse
+
+    interface _UpdateRuleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_rule: (
+      ?rule_id: String,
+      ?instance_id: String,
+      ?name: String,
+      ?function: String,
+      ?actions: Array[
+        {
+          action_type: String,
+          task_action: {
+            name: String,
+            description: String,
+            contact_flow_id: String,
+            references: Hash[String,
+              {
+                value: String,
+                type: String,
+                status: String,
+                arn: String,
+                status_reason: String
+              }
+            ]
+          },
+          event_bridge_action: {
+            name: String
+          },
+          assign_contact_category_action: {
+          },
+          send_notification_action: {
+            delivery_method: String,
+            subject: String,
+            content: String,
+            content_type: String,
+            recipient: {
+              user_tags: Hash[String, String],
+              user_ids: Array[String]
+            }
+          },
+          create_case_action: {
+            fields: Array[
+              {
+                id: String,
+                value: {
+                  boolean_value: bool,
+                  double_value: Float,
+                  empty_value: {
+                  },
+                  string_value: String
+                }
+              }
+            ],
+            template_id: String
+          },
+          update_case_action: {
+            fields: untyped
+          },
+          assign_sla_action: {
+            sla_assignment_type: String,
+            case_sla_configuration: {
+              name: String,
+              type: String,
+              field_id: untyped,
+              target_field_values: Array[
+                {
+                  boolean_value: untyped,
+                  double_value: untyped,
+                  empty_value: untyped,
+                  string_value: untyped
+                }
+              ],
+              target_sla_minutes: Integer
+            }
+          },
+          end_associated_tasks_action: {
+          },
+          submit_auto_evaluation_action: {
+            evaluation_form_id: String
+          }
+        }
+      ],
+      ?publish_status: String
+    ) -> _UpdateRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRuleResponse
+
+    interface _UpdateSecurityProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_security_profile: (
+      ?description: String,
+      ?permissions: Array[String],
+      ?security_profile_id: String,
+      ?instance_id: String,
+      ?allowed_access_control_tags: Hash[String, String],
+      ?tag_restricted_resources: Array[String],
+      ?applications: Array[
+        {
+          namespace: String,
+          application_permissions: Array[String]
+        }
+      ],
+      ?hierarchy_restricted_resources: Array[String],
+      ?allowed_access_control_hierarchy_group_id: String
+    ) -> _UpdateSecurityProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSecurityProfileResponse
+
+    interface _UpdateTaskTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateTaskTemplateResponse]
+      def instance_id: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def contact_flow_id: () -> String?
+      def self_assign_flow_id: () -> String?
+      def constraints: () -> Types::TaskTemplateConstraints?
+      def defaults: () -> Types::TaskTemplateDefaults?
+      def fields: () -> Array[Types::TaskTemplateField]?
+      def status: () -> String?
+      def last_modified_time: () -> Time?
+      def created_time: () -> Time?
+    end
+    def update_task_template: (
+      ?task_template_id: String,
+      ?instance_id: String,
+      ?name: String,
+      ?description: String,
+      ?contact_flow_id: String,
+      ?self_assign_flow_id: String,
+      ?constraints: {
+        required_fields: Array[
+          {
+            id: {
+              name: String
+            }
+          }
+        ],
+        read_only_fields: Array[
+          {
+            id: untyped
+          }
+        ],
+        invisible_fields: Array[
+          {
+            id: untyped
+          }
+        ]
+      },
+      ?defaults: {
+        default_field_values: Array[
+          {
+            id: {
+              name: String
+            },
+            default_value: String
+          }
+        ]
+      },
+      ?status: String,
+      ?fields: Array[
+        {
+          id: {
+            name: String
+          },
+          description: String,
+          type: String,
+          single_select_options: Array[String]
+        }
+      ]
+    ) -> _UpdateTaskTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTaskTemplateResponse
+
+    interface _UpdateTrafficDistributionResponse
+      include Smithy::Client::_Response[Types::UpdateTrafficDistributionResponse]
+    end
+    def update_traffic_distribution: (
+      ?id: String,
+      ?telephony_config: {
+        distributions: Array[
+          {
+            region: String,
+            percentage: Integer
+          }
+        ]
+      },
+      ?sign_in_config: {
+        distributions: Array[
+          {
+            region: String,
+            enabled: bool
+          }
+        ]
+      },
+      ?agent_config: {
+        distributions: Array[
+          {
+            region: String,
+            percentage: Integer
+          }
+        ]
+      }
+    ) -> _UpdateTrafficDistributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTrafficDistributionResponse
+
+    interface _UpdateUserHierarchyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_user_hierarchy: (
+      ?hierarchy_group_id: String,
+      ?user_id: String,
+      ?instance_id: String
+    ) -> _UpdateUserHierarchyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserHierarchyResponse
+
+    interface _UpdateUserHierarchyGroupNameResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_user_hierarchy_group_name: (
+      ?name: String,
+      ?hierarchy_group_id: String,
+      ?instance_id: String
+    ) -> _UpdateUserHierarchyGroupNameResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserHierarchyGroupNameResponse
+
+    interface _UpdateUserHierarchyStructureResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_user_hierarchy_structure: (
+      ?hierarchy_structure: {
+        level_one: {
+          name: String
+        },
+        level_two: untyped,
+        level_three: untyped,
+        level_four: untyped,
+        level_five: untyped
+      },
+      ?instance_id: String
+    ) -> _UpdateUserHierarchyStructureResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserHierarchyStructureResponse
+
+    interface _UpdateUserIdentityInfoResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_user_identity_info: (
+      ?identity_info: {
+        first_name: String,
+        last_name: String,
+        email: String,
+        secondary_email: untyped,
+        mobile: String
+      },
+      ?user_id: String,
+      ?instance_id: String
+    ) -> _UpdateUserIdentityInfoResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserIdentityInfoResponse
+
+    interface _UpdateUserPhoneConfigResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_user_phone_config: (
+      ?phone_config: {
+        phone_type: String,
+        auto_accept: bool,
+        after_contact_work_time_limit: Integer,
+        desk_phone_number: String
+      },
+      ?user_id: String,
+      ?instance_id: String
+    ) -> _UpdateUserPhoneConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserPhoneConfigResponse
+
+    interface _UpdateUserProficienciesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_user_proficiencies: (
+      ?instance_id: String,
+      ?user_id: String,
+      ?user_proficiencies: Array[
+        {
+          attribute_name: String,
+          attribute_value: String,
+          level: Float
+        }
+      ]
+    ) -> _UpdateUserProficienciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserProficienciesResponse
+
+    interface _UpdateUserRoutingProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_user_routing_profile: (
+      ?routing_profile_id: String,
+      ?user_id: String,
+      ?instance_id: String
+    ) -> _UpdateUserRoutingProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserRoutingProfileResponse
+
+    interface _UpdateUserSecurityProfilesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_user_security_profiles: (
+      ?security_profile_ids: Array[String],
+      ?user_id: String,
+      ?instance_id: String
+    ) -> _UpdateUserSecurityProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserSecurityProfilesResponse
+
+    interface _UpdateViewContentResponse
+      include Smithy::Client::_Response[Types::UpdateViewContentResponse]
+      def view: () -> Types::View?
+    end
+    def update_view_content: (
+      ?instance_id: String,
+      ?view_id: String,
+      ?status: String,
+      ?content: {
+        template: String,
+        actions: Array[String]
+      }
+    ) -> _UpdateViewContentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateViewContentResponse
+
+    interface _UpdateViewMetadataResponse
+      include Smithy::Client::_Response[Types::UpdateViewMetadataResponse]
+    end
+    def update_view_metadata: (
+      ?instance_id: String,
+      ?view_id: String,
+      ?name: String,
+      ?description: String
+    ) -> _UpdateViewMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateViewMetadataResponse
+  end
+end

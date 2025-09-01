@@ -1,0 +1,917 @@
+module Aws::ACM
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AddTagsToCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CertificateDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+        ?domain_name: String,
+        ?subject_alternative_names: Array[String],
+        ?managed_by: String,
+        ?domain_validation_options: Array[Types::DomainValidation],
+        ?serial: String,
+        ?subject: String,
+        ?issuer: String,
+        ?created_at: Time,
+        ?issued_at: Time,
+        ?imported_at: Time,
+        ?status: String,
+        ?revoked_at: Time,
+        ?revocation_reason: String,
+        ?not_before: Time,
+        ?not_after: Time,
+        ?key_algorithm: String,
+        ?signature_algorithm: String,
+        ?in_use_by: Array[String],
+        ?failure_reason: String,
+        ?type: String,
+        ?renewal_summary: Types::RenewalSummary,
+        ?key_usages: Array[Types::KeyUsage],
+        ?extended_key_usages: Array[Types::ExtendedKeyUsage],
+        ?certificate_authority_arn: String,
+        ?renewal_eligibility: String,
+        ?options: Types::CertificateOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+      attr_accessor domain_name: String?
+      attr_accessor subject_alternative_names: Array[String]?
+      attr_accessor managed_by: String?
+      attr_accessor domain_validation_options: Array[Types::DomainValidation]?
+      attr_accessor serial: String?
+      attr_accessor subject: String?
+      attr_accessor issuer: String?
+      attr_accessor created_at: Time?
+      attr_accessor issued_at: Time?
+      attr_accessor imported_at: Time?
+      attr_accessor status: String?
+      attr_accessor revoked_at: Time?
+      attr_accessor revocation_reason: String?
+      attr_accessor not_before: Time?
+      attr_accessor not_after: Time?
+      attr_accessor key_algorithm: String?
+      attr_accessor signature_algorithm: String?
+      attr_accessor in_use_by: Array[String]?
+      attr_accessor failure_reason: String?
+      attr_accessor type: String?
+      attr_accessor renewal_summary: Types::RenewalSummary?
+      attr_accessor key_usages: Array[Types::KeyUsage]?
+      attr_accessor extended_key_usages: Array[Types::ExtendedKeyUsage]?
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor renewal_eligibility: String?
+      attr_accessor options: Types::CertificateOptions?
+    end
+
+    module CertificateExport
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module CertificateManagedBy
+      CLOUDFRONT: String
+    end
+
+    class CertificateOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_transparency_logging_preference: String,
+        ?export: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_transparency_logging_preference: String?
+      attr_accessor export: String?
+    end
+
+    module CertificateStatus
+      PENDING_VALIDATION: String
+      ISSUED: String
+      INACTIVE: String
+      EXPIRED: String
+      VALIDATION_TIMED_OUT: String
+      REVOKED: String
+      FAILED: String
+    end
+
+    class CertificateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+        ?domain_name: String,
+        ?subject_alternative_name_summaries: Array[String],
+        ?has_additional_subject_alternative_names: bool,
+        ?status: String,
+        ?type: String,
+        ?key_algorithm: String,
+        ?key_usages: Array[String],
+        ?extended_key_usages: Array[String],
+        ?export_option: String,
+        ?in_use: bool,
+        ?exported: bool,
+        ?renewal_eligibility: String,
+        ?not_before: Time,
+        ?not_after: Time,
+        ?created_at: Time,
+        ?issued_at: Time,
+        ?imported_at: Time,
+        ?revoked_at: Time,
+        ?managed_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+      attr_accessor domain_name: String?
+      attr_accessor subject_alternative_name_summaries: Array[String]?
+      attr_accessor has_additional_subject_alternative_names: bool?
+      attr_accessor status: String?
+      attr_accessor type: String?
+      attr_accessor key_algorithm: String?
+      attr_accessor key_usages: Array[String]?
+      attr_accessor extended_key_usages: Array[String]?
+      attr_accessor export_option: String?
+      attr_accessor in_use: bool?
+      attr_accessor exported: bool?
+      attr_accessor renewal_eligibility: String?
+      attr_accessor not_before: Time?
+      attr_accessor not_after: Time?
+      attr_accessor created_at: Time?
+      attr_accessor issued_at: Time?
+      attr_accessor imported_at: Time?
+      attr_accessor revoked_at: Time?
+      attr_accessor managed_by: String?
+    end
+
+    module CertificateTransparencyLoggingPreference
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module CertificateType
+      IMPORTED: String
+      AMAZON_ISSUED: String
+      PRIVATE: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeleteCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+    end
+
+    class DescribeCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+    end
+
+    class DescribeCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate: Types::CertificateDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate: Types::CertificateDetail?
+    end
+
+    module DomainStatus
+      PENDING_VALIDATION: String
+      SUCCESS: String
+      FAILED: String
+    end
+
+    class DomainValidation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?validation_emails: Array[String],
+        ?validation_domain: String,
+        ?validation_status: String,
+        ?resource_record: Types::ResourceRecord,
+        ?http_redirect: Types::HttpRedirect,
+        ?validation_method: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor validation_emails: Array[String]?
+      attr_accessor validation_domain: String?
+      attr_accessor validation_status: String?
+      attr_accessor resource_record: Types::ResourceRecord?
+      attr_accessor http_redirect: Types::HttpRedirect?
+      attr_accessor validation_method: String?
+    end
+
+    class DomainValidationOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?validation_domain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor validation_domain: String?
+    end
+
+    class ExpiryEventsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?days_before_expiry: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor days_before_expiry: Integer?
+    end
+
+    class ExportCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+        ?passphrase: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+      attr_accessor passphrase: String?
+    end
+
+    class ExportCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate: String,
+        ?certificate_chain: String,
+        ?private_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate: String?
+      attr_accessor certificate_chain: String?
+      attr_accessor private_key: String?
+    end
+
+    class ExtendedKeyUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?oid: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor oid: String?
+    end
+
+    module ExtendedKeyUsageName
+      TLS_WEB_SERVER_AUTHENTICATION: String
+      TLS_WEB_CLIENT_AUTHENTICATION: String
+      CODE_SIGNING: String
+      EMAIL_PROTECTION: String
+      TIME_STAMPING: String
+      OCSP_SIGNING: String
+      IPSEC_END_SYSTEM: String
+      IPSEC_TUNNEL: String
+      IPSEC_USER: String
+      ANY: String
+      NONE: String
+      CUSTOM: String
+    end
+
+    module FailureReason
+      NO_AVAILABLE_CONTACTS: String
+      ADDITIONAL_VERIFICATION_REQUIRED: String
+      DOMAIN_NOT_ALLOWED: String
+      INVALID_PUBLIC_DOMAIN: String
+      DOMAIN_VALIDATION_DENIED: String
+      CAA_ERROR: String
+      PCA_LIMIT_EXCEEDED: String
+      PCA_INVALID_ARN: String
+      PCA_INVALID_STATE: String
+      PCA_REQUEST_FAILED: String
+      PCA_NAME_CONSTRAINTS_VALIDATION: String
+      PCA_RESOURCE_NOT_FOUND: String
+      PCA_INVALID_ARGS: String
+      PCA_INVALID_DURATION: String
+      PCA_ACCESS_DENIED: String
+      SLR_NOT_FOUND: String
+      OTHER: String
+    end
+
+    class Filters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?extended_key_usage: Array[String],
+        ?key_usage: Array[String],
+        ?key_types: Array[String],
+        ?export_option: String,
+        ?managed_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor extended_key_usage: Array[String]?
+      attr_accessor key_usage: Array[String]?
+      attr_accessor key_types: Array[String]?
+      attr_accessor export_option: String?
+      attr_accessor managed_by: String?
+    end
+
+    class GetAccountConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expiry_events: Types::ExpiryEventsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expiry_events: Types::ExpiryEventsConfiguration?
+    end
+
+    class GetCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+    end
+
+    class GetCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate: String,
+        ?certificate_chain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate: String?
+      attr_accessor certificate_chain: String?
+    end
+
+    class HttpRedirect
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?redirect_from: String,
+        ?redirect_to: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor redirect_from: String?
+      attr_accessor redirect_to: String?
+    end
+
+    class ImportCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+        ?certificate: String,
+        ?private_key: String,
+        ?certificate_chain: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+      attr_accessor certificate: String?
+      attr_accessor private_key: String?
+      attr_accessor certificate_chain: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ImportCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+    end
+
+    class InvalidArgsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidArnException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDomainValidationOptionsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTagException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module KeyAlgorithm
+      RSA_1024: String
+      RSA_2048: String
+      RSA_3072: String
+      RSA_4096: String
+      EC_prime256v1: String
+      EC_secp384r1: String
+      EC_secp521r1: String
+    end
+
+    class KeyUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    module KeyUsageName
+      DIGITAL_SIGNATURE: String
+      NON_REPUDATION: String
+      KEY_ENCIPHERMENT: String
+      DATA_ENCIPHERMENT: String
+      KEY_AGREEMENT: String
+      CERTIFICATE_SIGNING: String
+      CRL_SIGNING: String
+      ENCHIPER_ONLY: String
+      DECIPHER_ONLY: String
+      ANY: String
+      CUSTOM: String
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListCertificatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_statuses: Array[String],
+        ?includes: Types::Filters,
+        ?next_token: String,
+        ?max_items: Integer,
+        ?sort_by: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_statuses: Array[String]?
+      attr_accessor includes: Types::Filters?
+      attr_accessor next_token: String?
+      attr_accessor max_items: Integer?
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+    end
+
+    class ListCertificatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?certificate_summary_list: Array[Types::CertificateSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor certificate_summary_list: Array[Types::CertificateSummary]?
+    end
+
+    class ListTagsForCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+    end
+
+    class ListTagsForCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutAccountConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expiry_events: Types::ExpiryEventsConfiguration,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expiry_events: Types::ExpiryEventsConfiguration?
+      attr_accessor idempotency_token: String?
+    end
+
+    module RecordType
+      CNAME: String
+    end
+
+    class RemoveTagsFromCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class RenewCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+    end
+
+    module RenewalEligibility
+      ELIGIBLE: String
+      INELIGIBLE: String
+    end
+
+    module RenewalStatus
+      PENDING_AUTO_RENEWAL: String
+      PENDING_VALIDATION: String
+      SUCCESS: String
+      FAILED: String
+    end
+
+    class RenewalSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?renewal_status: String,
+        ?domain_validation_options: Array[Types::DomainValidation],
+        ?renewal_status_reason: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor renewal_status: String?
+      attr_accessor domain_validation_options: Array[Types::DomainValidation]?
+      attr_accessor renewal_status_reason: String?
+      attr_accessor updated_at: Time?
+    end
+
+    class RequestCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?validation_method: String,
+        ?subject_alternative_names: Array[String],
+        ?idempotency_token: String,
+        ?domain_validation_options: Array[Types::DomainValidationOption],
+        ?options: Types::CertificateOptions,
+        ?certificate_authority_arn: String,
+        ?tags: Array[Types::Tag],
+        ?key_algorithm: String,
+        ?managed_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor validation_method: String?
+      attr_accessor subject_alternative_names: Array[String]?
+      attr_accessor idempotency_token: String?
+      attr_accessor domain_validation_options: Array[Types::DomainValidationOption]?
+      attr_accessor options: Types::CertificateOptions?
+      attr_accessor certificate_authority_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor key_algorithm: String?
+      attr_accessor managed_by: String?
+    end
+
+    class RequestCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+    end
+
+    class RequestInProgressException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResendValidationEmailRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+        ?domain: String,
+        ?validation_domain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+      attr_accessor domain: String?
+      attr_accessor validation_domain: String?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor value: String?
+    end
+
+    module RevocationReason
+      UNSPECIFIED: String
+      KEY_COMPROMISE: String
+      CA_COMPROMISE: String
+      AFFILIATION_CHANGED: String
+      SUPERCEDED: String
+      SUPERSEDED: String
+      CESSATION_OF_OPERATION: String
+      CERTIFICATE_HOLD: String
+      REMOVE_FROM_CRL: String
+      PRIVILEGE_WITHDRAWN: String
+      A_A_COMPROMISE: String
+    end
+
+    class RevokeCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+        ?revocation_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+      attr_accessor revocation_reason: String?
+    end
+
+    class RevokeCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+    end
+
+    module SortBy
+      CREATED_AT: String
+    end
+
+    module SortOrder
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagPolicyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateCertificateOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_arn: String,
+        ?options: Types::CertificateOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_arn: String?
+      attr_accessor options: Types::CertificateOptions?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ValidationMethod
+      EMAIL: String
+      DNS: String
+      HTTP: String
+    end
+  end
+end

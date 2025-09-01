@@ -1,0 +1,1250 @@
+module Aws::NetworkFirewall
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::NetworkFirewall::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptNetworkFirewallTransitGatewayAttachmentResponse
+      include Smithy::Client::_Response[Types::AcceptNetworkFirewallTransitGatewayAttachmentResponse]
+      def transit_gateway_attachment_id: () -> String?
+      def transit_gateway_attachment_status: () -> String?
+    end
+    def accept_network_firewall_transit_gateway_attachment: (
+      ?transit_gateway_attachment_id: String
+    ) -> _AcceptNetworkFirewallTransitGatewayAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptNetworkFirewallTransitGatewayAttachmentResponse
+
+    interface _AssociateAvailabilityZonesResponse
+      include Smithy::Client::_Response[Types::AssociateAvailabilityZonesResponse]
+      def firewall_arn: () -> String?
+      def firewall_name: () -> String?
+      def availability_zone_mappings: () -> Array[Types::AvailabilityZoneMapping]?
+      def update_token: () -> String?
+    end
+    def associate_availability_zones: (
+      ?update_token: String,
+      ?firewall_arn: String,
+      ?firewall_name: String,
+      ?availability_zone_mappings: Array[
+        {
+          availability_zone: String
+        }
+      ]
+    ) -> _AssociateAvailabilityZonesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateAvailabilityZonesResponse
+
+    interface _AssociateFirewallPolicyResponse
+      include Smithy::Client::_Response[Types::AssociateFirewallPolicyResponse]
+      def firewall_arn: () -> String?
+      def firewall_name: () -> String?
+      def firewall_policy_arn: () -> String?
+      def update_token: () -> String?
+    end
+    def associate_firewall_policy: (
+      ?update_token: String,
+      ?firewall_arn: String,
+      ?firewall_name: String,
+      ?firewall_policy_arn: String
+    ) -> _AssociateFirewallPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateFirewallPolicyResponse
+
+    interface _AssociateSubnetsResponse
+      include Smithy::Client::_Response[Types::AssociateSubnetsResponse]
+      def firewall_arn: () -> String?
+      def firewall_name: () -> String?
+      def subnet_mappings: () -> Array[Types::SubnetMapping]?
+      def update_token: () -> String?
+    end
+    def associate_subnets: (
+      ?update_token: String,
+      ?firewall_arn: String,
+      ?firewall_name: String,
+      ?subnet_mappings: Array[
+        {
+          subnet_id: String,
+          ip_address_type: String
+        }
+      ]
+    ) -> _AssociateSubnetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateSubnetsResponse
+
+    interface _CreateFirewallResponse
+      include Smithy::Client::_Response[Types::CreateFirewallResponse]
+      def firewall: () -> Types::Firewall?
+      def firewall_status: () -> Types::FirewallStatus?
+    end
+    def create_firewall: (
+      ?firewall_name: String,
+      ?firewall_policy_arn: String,
+      ?vpc_id: String,
+      ?subnet_mappings: Array[
+        {
+          subnet_id: String,
+          ip_address_type: String
+        }
+      ],
+      ?delete_protection: bool,
+      ?subnet_change_protection: bool,
+      ?firewall_policy_change_protection: bool,
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?encryption_configuration: {
+        key_id: String,
+        type: String
+      },
+      ?enabled_analysis_types: Array[String],
+      ?transit_gateway_id: String,
+      ?availability_zone_mappings: Array[
+        {
+          availability_zone: String
+        }
+      ],
+      ?availability_zone_change_protection: bool
+    ) -> _CreateFirewallResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFirewallResponse
+
+    interface _CreateFirewallPolicyResponse
+      include Smithy::Client::_Response[Types::CreateFirewallPolicyResponse]
+      def update_token: () -> String?
+      def firewall_policy_response: () -> Types::FirewallPolicyResponse?
+    end
+    def create_firewall_policy: (
+      ?firewall_policy_name: String,
+      ?firewall_policy: {
+        stateless_rule_group_references: Array[
+          {
+            resource_arn: String,
+            priority: Integer
+          }
+        ],
+        stateless_default_actions: Array[String],
+        stateless_fragment_default_actions: untyped,
+        stateless_custom_actions: Array[
+          {
+            action_name: String,
+            action_definition: {
+              publish_metric_action: {
+                dimensions: Array[
+                  {
+                    value: String
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        stateful_rule_group_references: Array[
+          {
+            resource_arn: untyped,
+            priority: untyped,
+            override: {
+              action: String
+            },
+            deep_threat_inspection: bool
+          }
+        ],
+        stateful_default_actions: Array[String],
+        stateful_engine_options: {
+          rule_order: String,
+          stream_exception_policy: String,
+          flow_timeouts: {
+            tcp_idle_timeout_seconds: Integer
+          }
+        },
+        tls_inspection_configuration_arn: untyped,
+        policy_variables: {
+          rule_variables: Hash[String,
+            {
+              definition: Array[String]
+            }
+          ]
+        }
+      },
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?dry_run: bool,
+      ?encryption_configuration: {
+        key_id: String,
+        type: String
+      }
+    ) -> _CreateFirewallPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFirewallPolicyResponse
+
+    interface _CreateRuleGroupResponse
+      include Smithy::Client::_Response[Types::CreateRuleGroupResponse]
+      def update_token: () -> String?
+      def rule_group_response: () -> Types::RuleGroupResponse?
+    end
+    def create_rule_group: (
+      ?rule_group_name: String,
+      ?rule_group: {
+        rule_variables: {
+          ip_sets: Hash[String,
+            {
+              definition: Array[String]
+            }
+          ],
+          port_sets: Hash[String,
+            {
+              definition: untyped
+            }
+          ]
+        },
+        reference_sets: {
+          ip_set_references: Hash[String,
+            {
+              reference_arn: String
+            }
+          ]
+        },
+        rules_source: {
+          rules_string: String,
+          rules_source_list: {
+            targets: Array[String],
+            target_types: Array[String],
+            generated_rules_type: String
+          },
+          stateful_rules: Array[
+            {
+              action: String,
+              header: {
+                protocol: String,
+                source: String,
+                source_port: String,
+                direction: String,
+                destination: String,
+                destination_port: untyped
+              },
+              rule_options: Array[
+                {
+                  keyword: String,
+                  settings: Array[String]
+                }
+              ]
+            }
+          ],
+          stateless_rules_and_custom_actions: {
+            stateless_rules: Array[
+              {
+                rule_definition: {
+                  match_attributes: {
+                    sources: Array[
+                      {
+                        address_definition: String
+                      }
+                    ],
+                    destinations: untyped,
+                    source_ports: Array[
+                      {
+                        from_port: Integer,
+                        to_port: untyped
+                      }
+                    ],
+                    destination_ports: untyped,
+                    protocols: Array[Integer],
+                    tcp_flags: Array[
+                      {
+                        flags: Array[String],
+                        masks: untyped
+                      }
+                    ]
+                  },
+                  actions: Array[String]
+                },
+                priority: Integer
+              }
+            ],
+            custom_actions: Array[
+              {
+                action_name: String,
+                action_definition: {
+                  publish_metric_action: {
+                    dimensions: Array[
+                      {
+                        value: String
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        },
+        stateful_rule_options: {
+          rule_order: String
+        }
+      },
+      ?rules: String,
+      ?type: String,
+      ?description: String,
+      ?capacity: Integer,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?dry_run: bool,
+      ?encryption_configuration: {
+        key_id: String,
+        type: String
+      },
+      ?source_metadata: {
+        source_arn: String,
+        source_update_token: String
+      },
+      ?analyze_rule_group: bool,
+      ?summary_configuration: {
+        rule_options: Array[String]
+      }
+    ) -> _CreateRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRuleGroupResponse
+
+    interface _CreateTLSInspectionConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateTLSInspectionConfigurationResponse]
+      def update_token: () -> String?
+      def tls_inspection_configuration_response: () -> Types::TLSInspectionConfigurationResponse?
+    end
+    def create_tls_inspection_configuration: (
+      ?tls_inspection_configuration_name: String,
+      ?tls_inspection_configuration: {
+        server_certificate_configurations: Array[
+          {
+            server_certificates: Array[
+              {
+                resource_arn: String
+              }
+            ],
+            scopes: Array[
+              {
+                sources: Array[
+                  {
+                    address_definition: String
+                  }
+                ],
+                destinations: untyped,
+                source_ports: Array[
+                  {
+                    from_port: Integer,
+                    to_port: untyped
+                  }
+                ],
+                destination_ports: untyped,
+                protocols: Array[Integer]
+              }
+            ],
+            certificate_authority_arn: untyped,
+            check_certificate_revocation_status: {
+              revoked_status_action: String,
+              unknown_status_action: untyped
+            }
+          }
+        ]
+      },
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?encryption_configuration: {
+        key_id: String,
+        type: String
+      }
+    ) -> _CreateTLSInspectionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTLSInspectionConfigurationResponse
+
+    interface _CreateVpcEndpointAssociationResponse
+      include Smithy::Client::_Response[Types::CreateVpcEndpointAssociationResponse]
+      def vpc_endpoint_association: () -> Types::VpcEndpointAssociation?
+      def vpc_endpoint_association_status: () -> Types::VpcEndpointAssociationStatus?
+    end
+    def create_vpc_endpoint_association: (
+      ?firewall_arn: String,
+      ?vpc_id: String,
+      ?subnet_mapping: {
+        subnet_id: String,
+        ip_address_type: String
+      },
+      ?description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateVpcEndpointAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVpcEndpointAssociationResponse
+
+    interface _DeleteFirewallResponse
+      include Smithy::Client::_Response[Types::DeleteFirewallResponse]
+      def firewall: () -> Types::Firewall?
+      def firewall_status: () -> Types::FirewallStatus?
+    end
+    def delete_firewall: (
+      ?firewall_name: String,
+      ?firewall_arn: String
+    ) -> _DeleteFirewallResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFirewallResponse
+
+    interface _DeleteFirewallPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteFirewallPolicyResponse]
+      def firewall_policy_response: () -> Types::FirewallPolicyResponse?
+    end
+    def delete_firewall_policy: (
+      ?firewall_policy_name: String,
+      ?firewall_policy_arn: String
+    ) -> _DeleteFirewallPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFirewallPolicyResponse
+
+    interface _DeleteNetworkFirewallTransitGatewayAttachmentResponse
+      include Smithy::Client::_Response[Types::DeleteNetworkFirewallTransitGatewayAttachmentResponse]
+      def transit_gateway_attachment_id: () -> String?
+      def transit_gateway_attachment_status: () -> String?
+    end
+    def delete_network_firewall_transit_gateway_attachment: (
+      ?transit_gateway_attachment_id: String
+    ) -> _DeleteNetworkFirewallTransitGatewayAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNetworkFirewallTransitGatewayAttachmentResponse
+
+    interface _DeleteResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DeleteResourcePolicyResponse]
+    end
+    def delete_resource_policy: (
+      ?resource_arn: String
+    ) -> _DeleteResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourcePolicyResponse
+
+    interface _DeleteRuleGroupResponse
+      include Smithy::Client::_Response[Types::DeleteRuleGroupResponse]
+      def rule_group_response: () -> Types::RuleGroupResponse?
+    end
+    def delete_rule_group: (
+      ?rule_group_name: String,
+      ?rule_group_arn: String,
+      ?type: String
+    ) -> _DeleteRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRuleGroupResponse
+
+    interface _DeleteTLSInspectionConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteTLSInspectionConfigurationResponse]
+      def tls_inspection_configuration_response: () -> Types::TLSInspectionConfigurationResponse?
+    end
+    def delete_tls_inspection_configuration: (
+      ?tls_inspection_configuration_arn: String,
+      ?tls_inspection_configuration_name: String
+    ) -> _DeleteTLSInspectionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTLSInspectionConfigurationResponse
+
+    interface _DeleteVpcEndpointAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteVpcEndpointAssociationResponse]
+      def vpc_endpoint_association: () -> Types::VpcEndpointAssociation?
+      def vpc_endpoint_association_status: () -> Types::VpcEndpointAssociationStatus?
+    end
+    def delete_vpc_endpoint_association: (
+      ?vpc_endpoint_association_arn: String
+    ) -> _DeleteVpcEndpointAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVpcEndpointAssociationResponse
+
+    interface _DescribeFirewallResponse
+      include Smithy::Client::_Response[Types::DescribeFirewallResponse]
+      def update_token: () -> String?
+      def firewall: () -> Types::Firewall?
+      def firewall_status: () -> Types::FirewallStatus?
+    end
+    def describe_firewall: (
+      ?firewall_name: String,
+      ?firewall_arn: String
+    ) -> _DescribeFirewallResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFirewallResponse
+
+    interface _DescribeFirewallMetadataResponse
+      include Smithy::Client::_Response[Types::DescribeFirewallMetadataResponse]
+      def firewall_arn: () -> String?
+      def firewall_policy_arn: () -> String?
+      def description: () -> String?
+      def status: () -> String?
+      def supported_availability_zones: () -> Hash[String, Types::AvailabilityZoneMetadata]?
+      def transit_gateway_attachment_id: () -> String?
+    end
+    def describe_firewall_metadata: (
+      ?firewall_arn: String
+    ) -> _DescribeFirewallMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFirewallMetadataResponse
+
+    interface _DescribeFirewallPolicyResponse
+      include Smithy::Client::_Response[Types::DescribeFirewallPolicyResponse]
+      def update_token: () -> String?
+      def firewall_policy_response: () -> Types::FirewallPolicyResponse?
+      def firewall_policy: () -> Types::FirewallPolicy?
+    end
+    def describe_firewall_policy: (
+      ?firewall_policy_name: String,
+      ?firewall_policy_arn: String
+    ) -> _DescribeFirewallPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFirewallPolicyResponse
+
+    interface _DescribeFlowOperationResponse
+      include Smithy::Client::_Response[Types::DescribeFlowOperationResponse]
+      def firewall_arn: () -> String?
+      def availability_zone: () -> String?
+      def vpc_endpoint_association_arn: () -> String?
+      def vpc_endpoint_id: () -> String?
+      def flow_operation_id: () -> String?
+      def flow_operation_type: () -> String?
+      def flow_operation_status: () -> String?
+      def status_message: () -> String?
+      def flow_request_timestamp: () -> Time?
+      def flow_operation: () -> Types::FlowOperation?
+    end
+    def describe_flow_operation: (
+      ?firewall_arn: String,
+      ?availability_zone: String,
+      ?vpc_endpoint_association_arn: String,
+      ?vpc_endpoint_id: String,
+      ?flow_operation_id: String
+    ) -> _DescribeFlowOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeFlowOperationResponse
+
+    interface _DescribeLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeLoggingConfigurationResponse]
+      def firewall_arn: () -> String?
+      def logging_configuration: () -> Types::LoggingConfiguration?
+      def enable_monitoring_dashboard: () -> bool?
+    end
+    def describe_logging_configuration: (
+      ?firewall_arn: String,
+      ?firewall_name: String
+    ) -> _DescribeLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLoggingConfigurationResponse
+
+    interface _DescribeResourcePolicyResponse
+      include Smithy::Client::_Response[Types::DescribeResourcePolicyResponse]
+      def policy: () -> String?
+    end
+    def describe_resource_policy: (
+      ?resource_arn: String
+    ) -> _DescribeResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeResourcePolicyResponse
+
+    interface _DescribeRuleGroupResponse
+      include Smithy::Client::_Response[Types::DescribeRuleGroupResponse]
+      def update_token: () -> String?
+      def rule_group: () -> Types::RuleGroup?
+      def rule_group_response: () -> Types::RuleGroupResponse?
+    end
+    def describe_rule_group: (
+      ?rule_group_name: String,
+      ?rule_group_arn: String,
+      ?type: String,
+      ?analyze_rule_group: bool
+    ) -> _DescribeRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRuleGroupResponse
+
+    interface _DescribeRuleGroupMetadataResponse
+      include Smithy::Client::_Response[Types::DescribeRuleGroupMetadataResponse]
+      def rule_group_arn: () -> String?
+      def rule_group_name: () -> String?
+      def description: () -> String?
+      def type: () -> String?
+      def capacity: () -> Integer?
+      def stateful_rule_options: () -> Types::StatefulRuleOptions?
+      def last_modified_time: () -> Time?
+    end
+    def describe_rule_group_metadata: (
+      ?rule_group_name: String,
+      ?rule_group_arn: String,
+      ?type: String
+    ) -> _DescribeRuleGroupMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRuleGroupMetadataResponse
+
+    interface _DescribeRuleGroupSummaryResponse
+      include Smithy::Client::_Response[Types::DescribeRuleGroupSummaryResponse]
+      def rule_group_name: () -> String?
+      def description: () -> String?
+      def summary: () -> Types::Summary?
+    end
+    def describe_rule_group_summary: (
+      ?rule_group_name: String,
+      ?rule_group_arn: String,
+      ?type: String
+    ) -> _DescribeRuleGroupSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeRuleGroupSummaryResponse
+
+    interface _DescribeTLSInspectionConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeTLSInspectionConfigurationResponse]
+      def update_token: () -> String?
+      def tls_inspection_configuration: () -> Types::TLSInspectionConfiguration?
+      def tls_inspection_configuration_response: () -> Types::TLSInspectionConfigurationResponse?
+    end
+    def describe_tls_inspection_configuration: (
+      ?tls_inspection_configuration_arn: String,
+      ?tls_inspection_configuration_name: String
+    ) -> _DescribeTLSInspectionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTLSInspectionConfigurationResponse
+
+    interface _DescribeVpcEndpointAssociationResponse
+      include Smithy::Client::_Response[Types::DescribeVpcEndpointAssociationResponse]
+      def vpc_endpoint_association: () -> Types::VpcEndpointAssociation?
+      def vpc_endpoint_association_status: () -> Types::VpcEndpointAssociationStatus?
+    end
+    def describe_vpc_endpoint_association: (
+      ?vpc_endpoint_association_arn: String
+    ) -> _DescribeVpcEndpointAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeVpcEndpointAssociationResponse
+
+    interface _DisassociateAvailabilityZonesResponse
+      include Smithy::Client::_Response[Types::DisassociateAvailabilityZonesResponse]
+      def firewall_arn: () -> String?
+      def firewall_name: () -> String?
+      def availability_zone_mappings: () -> Array[Types::AvailabilityZoneMapping]?
+      def update_token: () -> String?
+    end
+    def disassociate_availability_zones: (
+      ?update_token: String,
+      ?firewall_arn: String,
+      ?firewall_name: String,
+      ?availability_zone_mappings: Array[
+        {
+          availability_zone: String
+        }
+      ]
+    ) -> _DisassociateAvailabilityZonesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateAvailabilityZonesResponse
+
+    interface _DisassociateSubnetsResponse
+      include Smithy::Client::_Response[Types::DisassociateSubnetsResponse]
+      def firewall_arn: () -> String?
+      def firewall_name: () -> String?
+      def subnet_mappings: () -> Array[Types::SubnetMapping]?
+      def update_token: () -> String?
+    end
+    def disassociate_subnets: (
+      ?update_token: String,
+      ?firewall_arn: String,
+      ?firewall_name: String,
+      ?subnet_ids: Array[String]
+    ) -> _DisassociateSubnetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateSubnetsResponse
+
+    interface _GetAnalysisReportResultsResponse
+      include Smithy::Client::_Response[Types::GetAnalysisReportResultsResponse]
+      def status: () -> String?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+      def report_time: () -> Time?
+      def analysis_type: () -> String?
+      def next_token: () -> String?
+      def analysis_report_results: () -> Array[Types::AnalysisTypeReportResult]?
+    end
+    def get_analysis_report_results: (
+      ?firewall_name: String,
+      ?analysis_report_id: String,
+      ?firewall_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetAnalysisReportResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAnalysisReportResultsResponse
+
+    interface _ListAnalysisReportsResponse
+      include Smithy::Client::_Response[Types::ListAnalysisReportsResponse]
+      def analysis_reports: () -> Array[Types::AnalysisReport]?
+      def next_token: () -> String?
+    end
+    def list_analysis_reports: (
+      ?firewall_name: String,
+      ?firewall_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAnalysisReportsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnalysisReportsResponse
+
+    interface _ListFirewallPoliciesResponse
+      include Smithy::Client::_Response[Types::ListFirewallPoliciesResponse]
+      def next_token: () -> String?
+      def firewall_policies: () -> Array[Types::FirewallPolicyMetadata]?
+    end
+    def list_firewall_policies: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFirewallPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFirewallPoliciesResponse
+
+    interface _ListFirewallsResponse
+      include Smithy::Client::_Response[Types::ListFirewallsResponse]
+      def next_token: () -> String?
+      def firewalls: () -> Array[Types::FirewallMetadata]?
+    end
+    def list_firewalls: (
+      ?next_token: String,
+      ?vpc_ids: Array[String],
+      ?max_results: Integer
+    ) -> _ListFirewallsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFirewallsResponse
+
+    interface _ListFlowOperationResultsResponse
+      include Smithy::Client::_Response[Types::ListFlowOperationResultsResponse]
+      def firewall_arn: () -> String?
+      def availability_zone: () -> String?
+      def vpc_endpoint_association_arn: () -> String?
+      def vpc_endpoint_id: () -> String?
+      def flow_operation_id: () -> String?
+      def flow_operation_status: () -> String?
+      def status_message: () -> String?
+      def flow_request_timestamp: () -> Time?
+      def flows: () -> Array[Types::Flow]?
+      def next_token: () -> String?
+    end
+    def list_flow_operation_results: (
+      ?firewall_arn: String,
+      ?flow_operation_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?availability_zone: String,
+      ?vpc_endpoint_id: String,
+      ?vpc_endpoint_association_arn: String
+    ) -> _ListFlowOperationResultsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFlowOperationResultsResponse
+
+    interface _ListFlowOperationsResponse
+      include Smithy::Client::_Response[Types::ListFlowOperationsResponse]
+      def flow_operations: () -> Array[Types::FlowOperationMetadata]?
+      def next_token: () -> String?
+    end
+    def list_flow_operations: (
+      ?firewall_arn: String,
+      ?availability_zone: String,
+      ?vpc_endpoint_association_arn: String,
+      ?vpc_endpoint_id: String,
+      ?flow_operation_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFlowOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFlowOperationsResponse
+
+    interface _ListRuleGroupsResponse
+      include Smithy::Client::_Response[Types::ListRuleGroupsResponse]
+      def next_token: () -> String?
+      def rule_groups: () -> Array[Types::RuleGroupMetadata]?
+    end
+    def list_rule_groups: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?scope: String,
+      ?managed_type: String,
+      ?type: String
+    ) -> _ListRuleGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRuleGroupsResponse
+
+    interface _ListTLSInspectionConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListTLSInspectionConfigurationsResponse]
+      def next_token: () -> String?
+      def tls_inspection_configurations: () -> Array[Types::TLSInspectionConfigurationMetadata]?
+    end
+    def list_tls_inspection_configurations: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTLSInspectionConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTLSInspectionConfigurationsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def next_token: () -> String?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListVpcEndpointAssociationsResponse
+      include Smithy::Client::_Response[Types::ListVpcEndpointAssociationsResponse]
+      def next_token: () -> String?
+      def vpc_endpoint_associations: () -> Array[Types::VpcEndpointAssociationMetadata]?
+    end
+    def list_vpc_endpoint_associations: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?firewall_arn: String
+    ) -> _ListVpcEndpointAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVpcEndpointAssociationsResponse
+
+    interface _PutResourcePolicyResponse
+      include Smithy::Client::_Response[Types::PutResourcePolicyResponse]
+    end
+    def put_resource_policy: (
+      ?resource_arn: String,
+      ?policy: String
+    ) -> _PutResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourcePolicyResponse
+
+    interface _RejectNetworkFirewallTransitGatewayAttachmentResponse
+      include Smithy::Client::_Response[Types::RejectNetworkFirewallTransitGatewayAttachmentResponse]
+      def transit_gateway_attachment_id: () -> String?
+      def transit_gateway_attachment_status: () -> String?
+    end
+    def reject_network_firewall_transit_gateway_attachment: (
+      ?transit_gateway_attachment_id: String
+    ) -> _RejectNetworkFirewallTransitGatewayAttachmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectNetworkFirewallTransitGatewayAttachmentResponse
+
+    interface _StartAnalysisReportResponse
+      include Smithy::Client::_Response[Types::StartAnalysisReportResponse]
+      def analysis_report_id: () -> String?
+    end
+    def start_analysis_report: (
+      ?firewall_name: String,
+      ?firewall_arn: String,
+      ?analysis_type: String
+    ) -> _StartAnalysisReportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartAnalysisReportResponse
+
+    interface _StartFlowCaptureResponse
+      include Smithy::Client::_Response[Types::StartFlowCaptureResponse]
+      def firewall_arn: () -> String?
+      def flow_operation_id: () -> String?
+      def flow_operation_status: () -> String?
+    end
+    def start_flow_capture: (
+      ?firewall_arn: String,
+      ?availability_zone: String,
+      ?vpc_endpoint_association_arn: String,
+      ?vpc_endpoint_id: String,
+      ?minimum_flow_age_in_seconds: Integer,
+      ?flow_filters: Array[
+        {
+          source_address: {
+            address_definition: String
+          },
+          destination_address: untyped,
+          source_port: String,
+          destination_port: untyped,
+          protocols: Array[String]
+        }
+      ]
+    ) -> _StartFlowCaptureResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartFlowCaptureResponse
+
+    interface _StartFlowFlushResponse
+      include Smithy::Client::_Response[Types::StartFlowFlushResponse]
+      def firewall_arn: () -> String?
+      def flow_operation_id: () -> String?
+      def flow_operation_status: () -> String?
+    end
+    def start_flow_flush: (
+      ?firewall_arn: String,
+      ?availability_zone: String,
+      ?vpc_endpoint_association_arn: String,
+      ?vpc_endpoint_id: String,
+      ?minimum_flow_age_in_seconds: Integer,
+      ?flow_filters: Array[
+        {
+          source_address: {
+            address_definition: String
+          },
+          destination_address: untyped,
+          source_port: String,
+          destination_port: untyped,
+          protocols: Array[String]
+        }
+      ]
+    ) -> _StartFlowFlushResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartFlowFlushResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAvailabilityZoneChangeProtectionResponse
+      include Smithy::Client::_Response[Types::UpdateAvailabilityZoneChangeProtectionResponse]
+      def update_token: () -> String?
+      def firewall_arn: () -> String?
+      def firewall_name: () -> String?
+      def availability_zone_change_protection: () -> bool?
+    end
+    def update_availability_zone_change_protection: (
+      ?update_token: String,
+      ?firewall_arn: String,
+      ?firewall_name: String,
+      ?availability_zone_change_protection: bool
+    ) -> _UpdateAvailabilityZoneChangeProtectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAvailabilityZoneChangeProtectionResponse
+
+    interface _UpdateFirewallAnalysisSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateFirewallAnalysisSettingsResponse]
+      def enabled_analysis_types: () -> Array[String]?
+      def firewall_arn: () -> String?
+      def firewall_name: () -> String?
+      def update_token: () -> String?
+    end
+    def update_firewall_analysis_settings: (
+      ?enabled_analysis_types: Array[String],
+      ?firewall_arn: String,
+      ?firewall_name: String,
+      ?update_token: String
+    ) -> _UpdateFirewallAnalysisSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFirewallAnalysisSettingsResponse
+
+    interface _UpdateFirewallDeleteProtectionResponse
+      include Smithy::Client::_Response[Types::UpdateFirewallDeleteProtectionResponse]
+      def firewall_arn: () -> String?
+      def firewall_name: () -> String?
+      def delete_protection: () -> bool?
+      def update_token: () -> String?
+    end
+    def update_firewall_delete_protection: (
+      ?update_token: String,
+      ?firewall_arn: String,
+      ?firewall_name: String,
+      ?delete_protection: bool
+    ) -> _UpdateFirewallDeleteProtectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFirewallDeleteProtectionResponse
+
+    interface _UpdateFirewallDescriptionResponse
+      include Smithy::Client::_Response[Types::UpdateFirewallDescriptionResponse]
+      def firewall_arn: () -> String?
+      def firewall_name: () -> String?
+      def description: () -> String?
+      def update_token: () -> String?
+    end
+    def update_firewall_description: (
+      ?update_token: String,
+      ?firewall_arn: String,
+      ?firewall_name: String,
+      ?description: String
+    ) -> _UpdateFirewallDescriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFirewallDescriptionResponse
+
+    interface _UpdateFirewallEncryptionConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateFirewallEncryptionConfigurationResponse]
+      def firewall_arn: () -> String?
+      def firewall_name: () -> String?
+      def update_token: () -> String?
+      def encryption_configuration: () -> Types::EncryptionConfiguration?
+    end
+    def update_firewall_encryption_configuration: (
+      ?update_token: String,
+      ?firewall_arn: String,
+      ?firewall_name: String,
+      ?encryption_configuration: {
+        key_id: String,
+        type: String
+      }
+    ) -> _UpdateFirewallEncryptionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFirewallEncryptionConfigurationResponse
+
+    interface _UpdateFirewallPolicyResponse
+      include Smithy::Client::_Response[Types::UpdateFirewallPolicyResponse]
+      def update_token: () -> String?
+      def firewall_policy_response: () -> Types::FirewallPolicyResponse?
+    end
+    def update_firewall_policy: (
+      ?update_token: String,
+      ?firewall_policy_arn: String,
+      ?firewall_policy_name: String,
+      ?firewall_policy: {
+        stateless_rule_group_references: Array[
+          {
+            resource_arn: String,
+            priority: Integer
+          }
+        ],
+        stateless_default_actions: Array[String],
+        stateless_fragment_default_actions: untyped,
+        stateless_custom_actions: Array[
+          {
+            action_name: String,
+            action_definition: {
+              publish_metric_action: {
+                dimensions: Array[
+                  {
+                    value: String
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        stateful_rule_group_references: Array[
+          {
+            resource_arn: untyped,
+            priority: untyped,
+            override: {
+              action: String
+            },
+            deep_threat_inspection: bool
+          }
+        ],
+        stateful_default_actions: Array[String],
+        stateful_engine_options: {
+          rule_order: String,
+          stream_exception_policy: String,
+          flow_timeouts: {
+            tcp_idle_timeout_seconds: Integer
+          }
+        },
+        tls_inspection_configuration_arn: untyped,
+        policy_variables: {
+          rule_variables: Hash[String,
+            {
+              definition: Array[String]
+            }
+          ]
+        }
+      },
+      ?description: String,
+      ?dry_run: bool,
+      ?encryption_configuration: {
+        key_id: String,
+        type: String
+      }
+    ) -> _UpdateFirewallPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFirewallPolicyResponse
+
+    interface _UpdateFirewallPolicyChangeProtectionResponse
+      include Smithy::Client::_Response[Types::UpdateFirewallPolicyChangeProtectionResponse]
+      def update_token: () -> String?
+      def firewall_arn: () -> String?
+      def firewall_name: () -> String?
+      def firewall_policy_change_protection: () -> bool?
+    end
+    def update_firewall_policy_change_protection: (
+      ?update_token: String,
+      ?firewall_arn: String,
+      ?firewall_name: String,
+      ?firewall_policy_change_protection: bool
+    ) -> _UpdateFirewallPolicyChangeProtectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFirewallPolicyChangeProtectionResponse
+
+    interface _UpdateLoggingConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateLoggingConfigurationResponse]
+      def firewall_arn: () -> String?
+      def firewall_name: () -> String?
+      def logging_configuration: () -> Types::LoggingConfiguration?
+      def enable_monitoring_dashboard: () -> bool?
+    end
+    def update_logging_configuration: (
+      ?firewall_arn: String,
+      ?firewall_name: String,
+      ?logging_configuration: {
+        log_destination_configs: Array[
+          {
+            log_type: String,
+            log_destination_type: String,
+            log_destination: Hash[String, String]
+          }
+        ]
+      },
+      ?enable_monitoring_dashboard: bool
+    ) -> _UpdateLoggingConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLoggingConfigurationResponse
+
+    interface _UpdateRuleGroupResponse
+      include Smithy::Client::_Response[Types::UpdateRuleGroupResponse]
+      def update_token: () -> String?
+      def rule_group_response: () -> Types::RuleGroupResponse?
+    end
+    def update_rule_group: (
+      ?update_token: String,
+      ?rule_group_arn: String,
+      ?rule_group_name: String,
+      ?rule_group: {
+        rule_variables: {
+          ip_sets: Hash[String,
+            {
+              definition: Array[String]
+            }
+          ],
+          port_sets: Hash[String,
+            {
+              definition: untyped
+            }
+          ]
+        },
+        reference_sets: {
+          ip_set_references: Hash[String,
+            {
+              reference_arn: String
+            }
+          ]
+        },
+        rules_source: {
+          rules_string: String,
+          rules_source_list: {
+            targets: Array[String],
+            target_types: Array[String],
+            generated_rules_type: String
+          },
+          stateful_rules: Array[
+            {
+              action: String,
+              header: {
+                protocol: String,
+                source: String,
+                source_port: String,
+                direction: String,
+                destination: String,
+                destination_port: untyped
+              },
+              rule_options: Array[
+                {
+                  keyword: String,
+                  settings: Array[String]
+                }
+              ]
+            }
+          ],
+          stateless_rules_and_custom_actions: {
+            stateless_rules: Array[
+              {
+                rule_definition: {
+                  match_attributes: {
+                    sources: Array[
+                      {
+                        address_definition: String
+                      }
+                    ],
+                    destinations: untyped,
+                    source_ports: Array[
+                      {
+                        from_port: Integer,
+                        to_port: untyped
+                      }
+                    ],
+                    destination_ports: untyped,
+                    protocols: Array[Integer],
+                    tcp_flags: Array[
+                      {
+                        flags: Array[String],
+                        masks: untyped
+                      }
+                    ]
+                  },
+                  actions: Array[String]
+                },
+                priority: Integer
+              }
+            ],
+            custom_actions: Array[
+              {
+                action_name: String,
+                action_definition: {
+                  publish_metric_action: {
+                    dimensions: Array[
+                      {
+                        value: String
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        },
+        stateful_rule_options: {
+          rule_order: String
+        }
+      },
+      ?rules: String,
+      ?type: String,
+      ?description: String,
+      ?dry_run: bool,
+      ?encryption_configuration: {
+        key_id: String,
+        type: String
+      },
+      ?source_metadata: {
+        source_arn: String,
+        source_update_token: String
+      },
+      ?analyze_rule_group: bool,
+      ?summary_configuration: {
+        rule_options: Array[String]
+      }
+    ) -> _UpdateRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRuleGroupResponse
+
+    interface _UpdateSubnetChangeProtectionResponse
+      include Smithy::Client::_Response[Types::UpdateSubnetChangeProtectionResponse]
+      def update_token: () -> String?
+      def firewall_arn: () -> String?
+      def firewall_name: () -> String?
+      def subnet_change_protection: () -> bool?
+    end
+    def update_subnet_change_protection: (
+      ?update_token: String,
+      ?firewall_arn: String,
+      ?firewall_name: String,
+      ?subnet_change_protection: bool
+    ) -> _UpdateSubnetChangeProtectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSubnetChangeProtectionResponse
+
+    interface _UpdateTLSInspectionConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateTLSInspectionConfigurationResponse]
+      def update_token: () -> String?
+      def tls_inspection_configuration_response: () -> Types::TLSInspectionConfigurationResponse?
+    end
+    def update_tls_inspection_configuration: (
+      ?tls_inspection_configuration_arn: String,
+      ?tls_inspection_configuration_name: String,
+      ?tls_inspection_configuration: {
+        server_certificate_configurations: Array[
+          {
+            server_certificates: Array[
+              {
+                resource_arn: String
+              }
+            ],
+            scopes: Array[
+              {
+                sources: Array[
+                  {
+                    address_definition: String
+                  }
+                ],
+                destinations: untyped,
+                source_ports: Array[
+                  {
+                    from_port: Integer,
+                    to_port: untyped
+                  }
+                ],
+                destination_ports: untyped,
+                protocols: Array[Integer]
+              }
+            ],
+            certificate_authority_arn: untyped,
+            check_certificate_revocation_status: {
+              revoked_status_action: String,
+              unknown_status_action: untyped
+            }
+          }
+        ]
+      },
+      ?description: String,
+      ?encryption_configuration: {
+        key_id: String,
+        type: String
+      },
+      ?update_token: String
+    ) -> _UpdateTLSInspectionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTLSInspectionConfigurationResponse
+  end
+end

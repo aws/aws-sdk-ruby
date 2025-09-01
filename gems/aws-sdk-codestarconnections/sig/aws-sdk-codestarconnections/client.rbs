@@ -1,0 +1,352 @@
+module Aws::CodeStarconnections
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CodeStarconnections::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateConnectionResponse
+      include Smithy::Client::_Response[Types::CreateConnectionOutput]
+      def connection_arn: () -> String?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def create_connection: (
+      ?provider_type: String,
+      ?connection_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?host_arn: String
+    ) -> _CreateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectionResponse
+
+    interface _CreateHostResponse
+      include Smithy::Client::_Response[Types::CreateHostOutput]
+      def host_arn: () -> String?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def create_host: (
+      ?name: String,
+      ?provider_type: String,
+      ?provider_endpoint: String,
+      ?vpc_configuration: {
+        vpc_id: String,
+        subnet_ids: Array[String],
+        security_group_ids: Array[String],
+        tls_certificate: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateHostResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateHostResponse
+
+    interface _CreateRepositoryLinkResponse
+      include Smithy::Client::_Response[Types::CreateRepositoryLinkOutput]
+      def repository_link_info: () -> Types::RepositoryLinkInfo?
+    end
+    def create_repository_link: (
+      ?connection_arn: String,
+      ?owner_id: String,
+      ?repository_name: String,
+      ?encryption_key_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateRepositoryLinkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRepositoryLinkResponse
+
+    interface _CreateSyncConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateSyncConfigurationOutput]
+      def sync_configuration: () -> Types::SyncConfiguration?
+    end
+    def create_sync_configuration: (
+      ?branch: String,
+      ?config_file: String,
+      ?repository_link_id: String,
+      ?resource_name: String,
+      ?role_arn: String,
+      ?sync_type: String,
+      ?publish_deployment_status: String,
+      ?trigger_resource_update_on: String
+    ) -> _CreateSyncConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSyncConfigurationResponse
+
+    interface _DeleteConnectionResponse
+      include Smithy::Client::_Response[Types::DeleteConnectionOutput]
+    end
+    def delete_connection: (
+      ?connection_arn: String
+    ) -> _DeleteConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectionResponse
+
+    interface _DeleteHostResponse
+      include Smithy::Client::_Response[Types::DeleteHostOutput]
+    end
+    def delete_host: (
+      ?host_arn: String
+    ) -> _DeleteHostResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteHostResponse
+
+    interface _DeleteRepositoryLinkResponse
+      include Smithy::Client::_Response[Types::DeleteRepositoryLinkOutput]
+    end
+    def delete_repository_link: (
+      ?repository_link_id: String
+    ) -> _DeleteRepositoryLinkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRepositoryLinkResponse
+
+    interface _DeleteSyncConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteSyncConfigurationOutput]
+    end
+    def delete_sync_configuration: (
+      ?sync_type: String,
+      ?resource_name: String
+    ) -> _DeleteSyncConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSyncConfigurationResponse
+
+    interface _GetConnectionResponse
+      include Smithy::Client::_Response[Types::GetConnectionOutput]
+      def connection: () -> Types::Connection?
+    end
+    def get_connection: (
+      ?connection_arn: String
+    ) -> _GetConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectionResponse
+
+    interface _GetHostResponse
+      include Smithy::Client::_Response[Types::GetHostOutput]
+      def name: () -> String?
+      def status: () -> String?
+      def provider_type: () -> String?
+      def provider_endpoint: () -> String?
+      def vpc_configuration: () -> Types::VpcConfiguration?
+    end
+    def get_host: (
+      ?host_arn: String
+    ) -> _GetHostResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetHostResponse
+
+    interface _GetRepositoryLinkResponse
+      include Smithy::Client::_Response[Types::GetRepositoryLinkOutput]
+      def repository_link_info: () -> Types::RepositoryLinkInfo?
+    end
+    def get_repository_link: (
+      ?repository_link_id: String
+    ) -> _GetRepositoryLinkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRepositoryLinkResponse
+
+    interface _GetRepositorySyncStatusResponse
+      include Smithy::Client::_Response[Types::GetRepositorySyncStatusOutput]
+      def latest_sync: () -> Types::RepositorySyncAttempt?
+    end
+    def get_repository_sync_status: (
+      ?branch: String,
+      ?repository_link_id: String,
+      ?sync_type: String
+    ) -> _GetRepositorySyncStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRepositorySyncStatusResponse
+
+    interface _GetResourceSyncStatusResponse
+      include Smithy::Client::_Response[Types::GetResourceSyncStatusOutput]
+      def desired_state: () -> Types::Revision?
+      def latest_successful_sync: () -> Types::ResourceSyncAttempt?
+      def latest_sync: () -> Types::ResourceSyncAttempt?
+    end
+    def get_resource_sync_status: (
+      ?resource_name: String,
+      ?sync_type: String
+    ) -> _GetResourceSyncStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourceSyncStatusResponse
+
+    interface _GetSyncBlockerSummaryResponse
+      include Smithy::Client::_Response[Types::GetSyncBlockerSummaryOutput]
+      def sync_blocker_summary: () -> Types::SyncBlockerSummary?
+    end
+    def get_sync_blocker_summary: (
+      ?sync_type: String,
+      ?resource_name: String
+    ) -> _GetSyncBlockerSummaryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSyncBlockerSummaryResponse
+
+    interface _GetSyncConfigurationResponse
+      include Smithy::Client::_Response[Types::GetSyncConfigurationOutput]
+      def sync_configuration: () -> Types::SyncConfiguration?
+    end
+    def get_sync_configuration: (
+      ?sync_type: String,
+      ?resource_name: String
+    ) -> _GetSyncConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSyncConfigurationResponse
+
+    interface _ListConnectionsResponse
+      include Smithy::Client::_Response[Types::ListConnectionsOutput]
+      def connections: () -> Array[Types::Connection]?
+      def next_token: () -> String?
+    end
+    def list_connections: (
+      ?provider_type_filter: String,
+      ?host_arn_filter: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectionsResponse
+
+    interface _ListHostsResponse
+      include Smithy::Client::_Response[Types::ListHostsOutput]
+      def hosts: () -> Array[Types::Host]?
+      def next_token: () -> String?
+    end
+    def list_hosts: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListHostsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListHostsResponse
+
+    interface _ListRepositoryLinksResponse
+      include Smithy::Client::_Response[Types::ListRepositoryLinksOutput]
+      def repository_links: () -> Array[Types::RepositoryLinkInfo]?
+      def next_token: () -> String?
+    end
+    def list_repository_links: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRepositoryLinksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRepositoryLinksResponse
+
+    interface _ListRepositorySyncDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListRepositorySyncDefinitionsOutput]
+      def repository_sync_definitions: () -> Array[Types::RepositorySyncDefinition]?
+      def next_token: () -> String?
+    end
+    def list_repository_sync_definitions: (
+      ?repository_link_id: String,
+      ?sync_type: String
+    ) -> _ListRepositorySyncDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRepositorySyncDefinitionsResponse
+
+    interface _ListSyncConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListSyncConfigurationsOutput]
+      def sync_configurations: () -> Array[Types::SyncConfiguration]?
+      def next_token: () -> String?
+    end
+    def list_sync_configurations: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?repository_link_id: String,
+      ?sync_type: String
+    ) -> _ListSyncConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSyncConfigurationsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateHostResponse
+      include Smithy::Client::_Response[Types::UpdateHostOutput]
+    end
+    def update_host: (
+      ?host_arn: String,
+      ?provider_endpoint: String,
+      ?vpc_configuration: {
+        vpc_id: String,
+        subnet_ids: Array[String],
+        security_group_ids: Array[String],
+        tls_certificate: String
+      }
+    ) -> _UpdateHostResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateHostResponse
+
+    interface _UpdateRepositoryLinkResponse
+      include Smithy::Client::_Response[Types::UpdateRepositoryLinkOutput]
+      def repository_link_info: () -> Types::RepositoryLinkInfo?
+    end
+    def update_repository_link: (
+      ?connection_arn: String,
+      ?encryption_key_arn: String,
+      ?repository_link_id: String
+    ) -> _UpdateRepositoryLinkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRepositoryLinkResponse
+
+    interface _UpdateSyncBlockerResponse
+      include Smithy::Client::_Response[Types::UpdateSyncBlockerOutput]
+      def resource_name: () -> String?
+      def parent_resource_name: () -> String?
+      def sync_blocker: () -> Types::SyncBlocker?
+    end
+    def update_sync_blocker: (
+      ?id: String,
+      ?sync_type: String,
+      ?resource_name: String,
+      ?resolved_reason: String
+    ) -> _UpdateSyncBlockerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSyncBlockerResponse
+
+    interface _UpdateSyncConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateSyncConfigurationOutput]
+      def sync_configuration: () -> Types::SyncConfiguration?
+    end
+    def update_sync_configuration: (
+      ?branch: String,
+      ?config_file: String,
+      ?repository_link_id: String,
+      ?resource_name: String,
+      ?role_arn: String,
+      ?sync_type: String,
+      ?publish_deployment_status: String,
+      ?trigger_resource_update_on: String
+    ) -> _UpdateSyncConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSyncConfigurationResponse
+  end
+end

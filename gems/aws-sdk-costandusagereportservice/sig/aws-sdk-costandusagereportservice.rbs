@@ -1,0 +1,5 @@
+  module Aws
+    module CostandUsageReportService
+      VERSION: String
+    end
+  end

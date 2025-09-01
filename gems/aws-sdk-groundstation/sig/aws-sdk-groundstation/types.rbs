@@ -1,0 +1,2018 @@
+module Aws::GroundStation
+  module Types
+
+    class AgentDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_version: String,
+        ?instance_id: String,
+        ?instance_type: String,
+        ?reserved_cpu_cores: Array[Integer],
+        ?agent_cpu_cores: Array[Integer],
+        ?component_versions: Array[Types::ComponentVersion],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_version: String?
+      attr_accessor instance_id: String?
+      attr_accessor instance_type: String?
+      attr_accessor reserved_cpu_cores: Array[Integer]?
+      attr_accessor agent_cpu_cores: Array[Integer]?
+      attr_accessor component_versions: Array[Types::ComponentVersion]?
+    end
+
+    module AgentStatus
+      SUCCESS: String
+      FAILED: String
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class AggregateStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?signature_map: Hash[String, bool],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor signature_map: Hash[String, bool]?
+    end
+
+    module AngleUnits
+      DEGREE_ANGLE: String
+      RADIAN: String
+    end
+
+    class AntennaDemodDecodeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?output_node: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor output_node: String?
+    end
+
+    class AntennaDownlinkConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?spectrum_config: Types::SpectrumConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spectrum_config: Types::SpectrumConfig?
+    end
+
+    class AntennaDownlinkDemodDecodeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?spectrum_config: Types::SpectrumConfig,
+        ?demodulation_config: Types::DemodulationConfig,
+        ?decode_config: Types::DecodeConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spectrum_config: Types::SpectrumConfig?
+      attr_accessor demodulation_config: Types::DemodulationConfig?
+      attr_accessor decode_config: Types::DecodeConfig?
+    end
+
+    class AntennaUplinkConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transmit_disabled: bool,
+        ?spectrum_config: Types::UplinkSpectrumConfig,
+        ?target_eirp: Types::Eirp,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transmit_disabled: bool?
+      attr_accessor spectrum_config: Types::UplinkSpectrumConfig?
+      attr_accessor target_eirp: Types::Eirp?
+    end
+
+    module AuditResults
+      HEALTHY: String
+      UNHEALTHY: String
+    end
+
+    class AwsGroundStationAgentEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?egress_address: Types::ConnectionDetails,
+        ?ingress_address: Types::RangedConnectionDetails,
+        ?agent_status: String,
+        ?audit_results: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor egress_address: Types::ConnectionDetails?
+      attr_accessor ingress_address: Types::RangedConnectionDetails?
+      attr_accessor agent_status: String?
+      attr_accessor audit_results: String?
+    end
+
+    module BandwidthUnits
+      GHZ: String
+      MHZ: String
+      KHZ: String
+    end
+
+    class CancelContactInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_id: String?
+    end
+
+    class CancelContactOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_id: String?
+    end
+
+    module CapabilityHealth
+      HEALTHY: String
+      UNHEALTHY: String
+    end
+
+    module CapabilityHealthReason
+      NO_REGISTERED_AGENT: String
+      INVALID_IP_OWNERSHIP: String
+      NOT_AUTHORIZED_TO_CREATE_SLR: String
+      UNVERIFIED_IP_OWNERSHIP: String
+      INITIALIZING_DATAPLANE: String
+      DATAPLANE_FAILURE: String
+      HEALTHY: String
+    end
+
+    class ComponentStatusData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_type: String,
+        ?capability_arn: String,
+        ?status: String,
+        ?bytes_sent: Integer,
+        ?bytes_received: Integer,
+        ?packets_dropped: Integer,
+        ?dataflow_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_type: String?
+      attr_accessor capability_arn: String?
+      attr_accessor status: String?
+      attr_accessor bytes_sent: Integer?
+      attr_accessor bytes_received: Integer?
+      attr_accessor packets_dropped: Integer?
+      attr_accessor dataflow_id: String?
+    end
+
+    class ComponentVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_type: String,
+        ?versions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_type: String?
+      attr_accessor versions: Array[String]?
+    end
+
+    module ConfigCapabilityType
+      ANTENNA_DOWNLINK: String
+      ANTENNA_DOWNLINK_DEMOD_DECODE: String
+      TRACKING: String
+      DATAFLOW_ENDPOINT: String
+      ANTENNA_UPLINK: String
+      UPLINK_ECHO: String
+      S3_RECORDING: String
+    end
+
+    class ConfigDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?endpoint_details: Types::EndpointDetails,
+        ?antenna_demod_decode_details: Types::AntennaDemodDecodeDetails,
+        ?s3_recording_details: Types::S3RecordingDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_details: Types::EndpointDetails?
+      attr_accessor antenna_demod_decode_details: Types::AntennaDemodDecodeDetails?
+      attr_accessor s3_recording_details: Types::S3RecordingDetails?
+
+      class EndpointDetails < ConfigDetails
+      end
+      class AntennaDemodDecodeDetails < ConfigDetails
+      end
+      class S3RecordingDetails < ConfigDetails
+      end
+      class Unknown < ConfigDetails
+      end
+    end
+
+    class ConfigListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_id: String,
+        ?config_type: String,
+        ?config_arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_id: String?
+      attr_accessor config_type: String?
+      attr_accessor config_arn: String?
+      attr_accessor name: String?
+    end
+
+    class ConfigTypeData
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?antenna_downlink_config: Types::AntennaDownlinkConfig,
+        ?tracking_config: Types::TrackingConfig,
+        ?dataflow_endpoint_config: Types::DataflowEndpointConfig,
+        ?antenna_downlink_demod_decode_config: Types::AntennaDownlinkDemodDecodeConfig,
+        ?antenna_uplink_config: Types::AntennaUplinkConfig,
+        ?uplink_echo_config: Types::UplinkEchoConfig,
+        ?s3_recording_config: Types::S3RecordingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor antenna_downlink_config: Types::AntennaDownlinkConfig?
+      attr_accessor tracking_config: Types::TrackingConfig?
+      attr_accessor dataflow_endpoint_config: Types::DataflowEndpointConfig?
+      attr_accessor antenna_downlink_demod_decode_config: Types::AntennaDownlinkDemodDecodeConfig?
+      attr_accessor antenna_uplink_config: Types::AntennaUplinkConfig?
+      attr_accessor uplink_echo_config: Types::UplinkEchoConfig?
+      attr_accessor s3_recording_config: Types::S3RecordingConfig?
+
+      class AntennaDownlinkConfig < ConfigTypeData
+      end
+      class TrackingConfig < ConfigTypeData
+      end
+      class DataflowEndpointConfig < ConfigTypeData
+      end
+      class AntennaDownlinkDemodDecodeConfig < ConfigTypeData
+      end
+      class AntennaUplinkConfig < ConfigTypeData
+      end
+      class UplinkEchoConfig < ConfigTypeData
+      end
+      class S3RecordingConfig < ConfigTypeData
+      end
+      class Unknown < ConfigTypeData
+      end
+    end
+
+    class ConnectionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?socket_address: Types::SocketAddress,
+        ?mtu: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor socket_address: Types::SocketAddress?
+      attr_accessor mtu: Integer?
+    end
+
+    class ContactData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_id: String,
+        ?mission_profile_arn: String,
+        ?satellite_arn: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?pre_pass_start_time: Time,
+        ?post_pass_end_time: Time,
+        ?ground_station: String,
+        ?contact_status: String,
+        ?error_message: String,
+        ?maximum_elevation: Types::Elevation,
+        ?region: String,
+        ?tags: Hash[String, String],
+        ?visibility_start_time: Time,
+        ?visibility_end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_id: String?
+      attr_accessor mission_profile_arn: String?
+      attr_accessor satellite_arn: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor pre_pass_start_time: Time?
+      attr_accessor post_pass_end_time: Time?
+      attr_accessor ground_station: String?
+      attr_accessor contact_status: String?
+      attr_accessor error_message: String?
+      attr_accessor maximum_elevation: Types::Elevation?
+      attr_accessor region: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor visibility_start_time: Time?
+      attr_accessor visibility_end_time: Time?
+    end
+
+    module ContactStatus
+      SCHEDULING: String
+      FAILED_TO_SCHEDULE: String
+      SCHEDULED: String
+      CANCELLED: String
+      AWS_CANCELLED: String
+      PREPASS: String
+      PASS: String
+      POSTPASS: String
+      COMPLETED: String
+      FAILED: String
+      AVAILABLE: String
+      CANCELLING: String
+      AWS_FAILED: String
+    end
+
+    class CreateConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?config_data: Types::ConfigTypeData,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor config_data: Types::ConfigTypeData?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateConfigOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_id: String,
+        ?config_type: String,
+        ?config_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_id: String?
+      attr_accessor config_type: String?
+      attr_accessor config_arn: String?
+    end
+
+    class CreateDataflowEndpointGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_details: Array[Types::EndpointDetails],
+        ?tags: Hash[String, String],
+        ?contact_pre_pass_duration_seconds: Integer,
+        ?contact_post_pass_duration_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_details: Array[Types::EndpointDetails]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor contact_pre_pass_duration_seconds: Integer?
+      attr_accessor contact_post_pass_duration_seconds: Integer?
+    end
+
+    class CreateDataflowEndpointGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataflow_endpoint_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataflow_endpoint_group_id: String?
+    end
+
+    class CreateEphemerisInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?satellite_id: String,
+        ?enabled: bool,
+        ?priority: Integer,
+        ?expiration_time: Time,
+        ?name: String,
+        ?kms_key_arn: String,
+        ?ephemeris: Types::EphemerisData,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor satellite_id: String?
+      attr_accessor enabled: bool?
+      attr_accessor priority: Integer?
+      attr_accessor expiration_time: Time?
+      attr_accessor name: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor ephemeris: Types::EphemerisData?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateEphemerisOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ephemeris_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ephemeris_id: String?
+    end
+
+    class CreateMissionProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?contact_pre_pass_duration_seconds: Integer,
+        ?contact_post_pass_duration_seconds: Integer,
+        ?minimum_viable_contact_duration_seconds: Integer,
+        ?dataflow_edges: Array[Array[String]],
+        ?tracking_config_arn: String,
+        ?tags: Hash[String, String],
+        ?streams_kms_key: Types::KmsKey,
+        ?streams_kms_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor contact_pre_pass_duration_seconds: Integer?
+      attr_accessor contact_post_pass_duration_seconds: Integer?
+      attr_accessor minimum_viable_contact_duration_seconds: Integer?
+      attr_accessor dataflow_edges: Array[Array[String]]?
+      attr_accessor tracking_config_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor streams_kms_key: Types::KmsKey?
+      attr_accessor streams_kms_role: String?
+    end
+
+    class CreateMissionProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mission_profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mission_profile_id: String?
+    end
+
+    module Criticality
+      REQUIRED: String
+      PREFERRED: String
+      REMOVED: String
+    end
+
+    class DataflowDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: Types::Source,
+        ?destination: Types::Destination,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: Types::Source?
+      attr_accessor destination: Types::Destination?
+      attr_accessor error_message: String?
+    end
+
+    class DataflowEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?address: Types::SocketAddress,
+        ?status: String,
+        ?mtu: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor address: Types::SocketAddress?
+      attr_accessor status: String?
+      attr_accessor mtu: Integer?
+    end
+
+    class DataflowEndpointConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataflow_endpoint_name: String,
+        ?dataflow_endpoint_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataflow_endpoint_name: String?
+      attr_accessor dataflow_endpoint_region: String?
+    end
+
+    class DataflowEndpointListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataflow_endpoint_group_id: String,
+        ?dataflow_endpoint_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataflow_endpoint_group_id: String?
+      attr_accessor dataflow_endpoint_group_arn: String?
+    end
+
+    class DecodeConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unvalidated_json: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unvalidated_json: String?
+    end
+
+    class DeleteConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_id: String,
+        ?config_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_id: String?
+      attr_accessor config_type: String?
+    end
+
+    class DeleteConfigOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_id: String,
+        ?config_type: String,
+        ?config_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_id: String?
+      attr_accessor config_type: String?
+      attr_accessor config_arn: String?
+    end
+
+    class DeleteDataflowEndpointGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataflow_endpoint_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataflow_endpoint_group_id: String?
+    end
+
+    class DeleteDataflowEndpointGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataflow_endpoint_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataflow_endpoint_group_id: String?
+    end
+
+    class DeleteEphemerisInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ephemeris_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ephemeris_id: String?
+    end
+
+    class DeleteEphemerisOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ephemeris_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ephemeris_id: String?
+    end
+
+    class DeleteMissionProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mission_profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mission_profile_id: String?
+    end
+
+    class DeleteMissionProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mission_profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mission_profile_id: String?
+    end
+
+    class DemodulationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unvalidated_json: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unvalidated_json: String?
+    end
+
+    class DependencyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?parameter_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor parameter_name: String?
+    end
+
+    class DescribeContactInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_id: String?
+    end
+
+    class DescribeContactOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_id: String,
+        ?mission_profile_arn: String,
+        ?satellite_arn: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?pre_pass_start_time: Time,
+        ?post_pass_end_time: Time,
+        ?ground_station: String,
+        ?contact_status: String,
+        ?error_message: String,
+        ?maximum_elevation: Types::Elevation,
+        ?tags: Hash[String, String],
+        ?region: String,
+        ?dataflow_list: Array[Types::DataflowDetail],
+        ?visibility_start_time: Time,
+        ?visibility_end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_id: String?
+      attr_accessor mission_profile_arn: String?
+      attr_accessor satellite_arn: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor pre_pass_start_time: Time?
+      attr_accessor post_pass_end_time: Time?
+      attr_accessor ground_station: String?
+      attr_accessor contact_status: String?
+      attr_accessor error_message: String?
+      attr_accessor maximum_elevation: Types::Elevation?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor region: String?
+      attr_accessor dataflow_list: Array[Types::DataflowDetail]?
+      attr_accessor visibility_start_time: Time?
+      attr_accessor visibility_end_time: Time?
+    end
+
+    class DescribeEphemerisInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ephemeris_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ephemeris_id: String?
+    end
+
+    class DescribeEphemerisOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ephemeris_id: String,
+        ?satellite_id: String,
+        ?status: String,
+        ?priority: Integer,
+        ?creation_time: Time,
+        ?enabled: bool,
+        ?name: String,
+        ?tags: Hash[String, String],
+        ?supplied_data: Types::EphemerisTypeDescription,
+        ?invalid_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ephemeris_id: String?
+      attr_accessor satellite_id: String?
+      attr_accessor status: String?
+      attr_accessor priority: Integer?
+      attr_accessor creation_time: Time?
+      attr_accessor enabled: bool?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor supplied_data: Types::EphemerisTypeDescription?
+      attr_accessor invalid_reason: String?
+    end
+
+    class Destination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_type: String,
+        ?config_id: String,
+        ?config_details: Types::ConfigDetails,
+        ?dataflow_destination_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_type: String?
+      attr_accessor config_id: String?
+      attr_accessor config_details: Types::ConfigDetails?
+      attr_accessor dataflow_destination_region: String?
+    end
+
+    class DiscoveryData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?public_ip_addresses: Array[String],
+        ?private_ip_addresses: Array[String],
+        ?capability_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor public_ip_addresses: Array[String]?
+      attr_accessor private_ip_addresses: Array[String]?
+      attr_accessor capability_arns: Array[String]?
+    end
+
+    class Eirp
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Float,
+        ?units: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Float?
+      attr_accessor units: String?
+    end
+
+    module EirpUnits
+      DBW: String
+    end
+
+    class Elevation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Float,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Float?
+      attr_accessor unit: String?
+    end
+
+    class EndpointDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_details: Types::SecurityDetails,
+        ?endpoint: Types::DataflowEndpoint,
+        ?aws_ground_station_agent_endpoint: Types::AwsGroundStationAgentEndpoint,
+        ?health_status: String,
+        ?health_reasons: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_details: Types::SecurityDetails?
+      attr_accessor endpoint: Types::DataflowEndpoint?
+      attr_accessor aws_ground_station_agent_endpoint: Types::AwsGroundStationAgentEndpoint?
+      attr_accessor health_status: String?
+      attr_accessor health_reasons: Array[String]?
+    end
+
+    module EndpointStatus
+      created: String
+      creating: String
+      deleted: String
+      deleting: String
+      failed: String
+    end
+
+    class EphemerisData
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?tle: Types::TLEEphemeris,
+        ?oem: Types::OEMEphemeris,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tle: Types::TLEEphemeris?
+      attr_accessor oem: Types::OEMEphemeris?
+
+      class Tle < EphemerisData
+      end
+      class Oem < EphemerisData
+      end
+      class Unknown < EphemerisData
+      end
+    end
+
+    class EphemerisDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_s3_object: Types::S3Object,
+        ?ephemeris_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_s3_object: Types::S3Object?
+      attr_accessor ephemeris_data: String?
+    end
+
+    module EphemerisInvalidReason
+      METADATA_INVALID: String
+      TIME_RANGE_INVALID: String
+      TRAJECTORY_INVALID: String
+      KMS_KEY_INVALID: String
+      VALIDATION_ERROR: String
+    end
+
+    class EphemerisItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ephemeris_id: String,
+        ?status: String,
+        ?priority: Integer,
+        ?enabled: bool,
+        ?creation_time: Time,
+        ?name: String,
+        ?source_s3_object: Types::S3Object,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ephemeris_id: String?
+      attr_accessor status: String?
+      attr_accessor priority: Integer?
+      attr_accessor enabled: bool?
+      attr_accessor creation_time: Time?
+      attr_accessor name: String?
+      attr_accessor source_s3_object: Types::S3Object?
+    end
+
+    class EphemerisMetaData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?ephemeris_id: String,
+        ?epoch: Time,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor ephemeris_id: String?
+      attr_accessor epoch: Time?
+      attr_accessor name: String?
+    end
+
+    module EphemerisSource
+      CUSTOMER_PROVIDED: String
+      SPACE_TRACK: String
+    end
+
+    module EphemerisStatus
+      VALIDATING: String
+      INVALID: String
+      ERROR: String
+      ENABLED: String
+      DISABLED: String
+      EXPIRED: String
+    end
+
+    class EphemerisTypeDescription
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?tle: Types::EphemerisDescription,
+        ?oem: Types::EphemerisDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tle: Types::EphemerisDescription?
+      attr_accessor oem: Types::EphemerisDescription?
+
+      class Tle < EphemerisTypeDescription
+      end
+      class Oem < EphemerisTypeDescription
+      end
+      class Unknown < EphemerisTypeDescription
+      end
+    end
+
+    class Frequency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Float,
+        ?units: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Float?
+      attr_accessor units: String?
+    end
+
+    class FrequencyBandwidth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Float,
+        ?units: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Float?
+      attr_accessor units: String?
+    end
+
+    module FrequencyUnits
+      GHZ: String
+      MHZ: String
+      KHZ: String
+    end
+
+    class GetAgentConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_id: String?
+    end
+
+    class GetAgentConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_id: String,
+        ?tasking_document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_id: String?
+      attr_accessor tasking_document: String?
+    end
+
+    class GetConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_id: String,
+        ?config_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_id: String?
+      attr_accessor config_type: String?
+    end
+
+    class GetConfigOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_id: String,
+        ?config_arn: String,
+        ?name: String,
+        ?config_type: String,
+        ?config_data: Types::ConfigTypeData,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_id: String?
+      attr_accessor config_arn: String?
+      attr_accessor name: String?
+      attr_accessor config_type: String?
+      attr_accessor config_data: Types::ConfigTypeData?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetDataflowEndpointGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataflow_endpoint_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataflow_endpoint_group_id: String?
+    end
+
+    class GetDataflowEndpointGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataflow_endpoint_group_id: String,
+        ?dataflow_endpoint_group_arn: String,
+        ?endpoints_details: Array[Types::EndpointDetails],
+        ?tags: Hash[String, String],
+        ?contact_pre_pass_duration_seconds: Integer,
+        ?contact_post_pass_duration_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataflow_endpoint_group_id: String?
+      attr_accessor dataflow_endpoint_group_arn: String?
+      attr_accessor endpoints_details: Array[Types::EndpointDetails]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor contact_pre_pass_duration_seconds: Integer?
+      attr_accessor contact_post_pass_duration_seconds: Integer?
+    end
+
+    class GetMinuteUsageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?month: Integer,
+        ?year: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor month: Integer?
+      attr_accessor year: Integer?
+    end
+
+    class GetMinuteUsageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_reserved_minutes_customer: bool,
+        ?total_reserved_minute_allocation: Integer,
+        ?upcoming_minutes_scheduled: Integer,
+        ?total_scheduled_minutes: Integer,
+        ?estimated_minutes_remaining: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_reserved_minutes_customer: bool?
+      attr_accessor total_reserved_minute_allocation: Integer?
+      attr_accessor upcoming_minutes_scheduled: Integer?
+      attr_accessor total_scheduled_minutes: Integer?
+      attr_accessor estimated_minutes_remaining: Integer?
+    end
+
+    class GetMissionProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mission_profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mission_profile_id: String?
+    end
+
+    class GetMissionProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mission_profile_id: String,
+        ?mission_profile_arn: String,
+        ?name: String,
+        ?region: String,
+        ?contact_pre_pass_duration_seconds: Integer,
+        ?contact_post_pass_duration_seconds: Integer,
+        ?minimum_viable_contact_duration_seconds: Integer,
+        ?dataflow_edges: Array[Array[String]],
+        ?tracking_config_arn: String,
+        ?tags: Hash[String, String],
+        ?streams_kms_key: Types::KmsKey,
+        ?streams_kms_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mission_profile_id: String?
+      attr_accessor mission_profile_arn: String?
+      attr_accessor name: String?
+      attr_accessor region: String?
+      attr_accessor contact_pre_pass_duration_seconds: Integer?
+      attr_accessor contact_post_pass_duration_seconds: Integer?
+      attr_accessor minimum_viable_contact_duration_seconds: Integer?
+      attr_accessor dataflow_edges: Array[Array[String]]?
+      attr_accessor tracking_config_arn: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor streams_kms_key: Types::KmsKey?
+      attr_accessor streams_kms_role: String?
+    end
+
+    class GetSatelliteInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?satellite_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor satellite_id: String?
+    end
+
+    class GetSatelliteOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?satellite_id: String,
+        ?satellite_arn: String,
+        ?norad_satellite_id: Integer,
+        ?ground_stations: Array[String],
+        ?current_ephemeris: Types::EphemerisMetaData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor satellite_id: String?
+      attr_accessor satellite_arn: String?
+      attr_accessor norad_satellite_id: Integer?
+      attr_accessor ground_stations: Array[String]?
+      attr_accessor current_ephemeris: Types::EphemerisMetaData?
+    end
+
+    class GroundStationData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ground_station_id: String,
+        ?ground_station_name: String,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ground_station_id: String?
+      attr_accessor ground_station_name: String?
+      attr_accessor region: String?
+    end
+
+    class IntegerRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minimum: Integer,
+        ?maximum: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minimum: Integer?
+      attr_accessor maximum: Integer?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?parameter_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor parameter_name: String?
+    end
+
+    class KmsKey
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?kms_key_arn: String,
+        ?kms_alias_arn: String,
+        ?kms_alias_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_arn: String?
+      attr_accessor kms_alias_arn: String?
+      attr_accessor kms_alias_name: String?
+
+      class KmsKeyArn < KmsKey
+      end
+      class KmsAliasArn < KmsKey
+      end
+      class KmsAliasName < KmsKey
+      end
+      class Unknown < KmsKey
+      end
+    end
+
+    class ListConfigsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListConfigsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?config_list: Array[Types::ConfigListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor config_list: Array[Types::ConfigListItem]?
+    end
+
+    class ListContactsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?status_list: Array[String],
+        ?start_time: Time,
+        ?end_time: Time,
+        ?ground_station: String,
+        ?satellite_arn: String,
+        ?mission_profile_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor status_list: Array[String]?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor ground_station: String?
+      attr_accessor satellite_arn: String?
+      attr_accessor mission_profile_arn: String?
+    end
+
+    class ListContactsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?contact_list: Array[Types::ContactData],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor contact_list: Array[Types::ContactData]?
+    end
+
+    class ListDataflowEndpointGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataflowEndpointGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?dataflow_endpoint_group_list: Array[Types::DataflowEndpointListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor dataflow_endpoint_group_list: Array[Types::DataflowEndpointListItem]?
+    end
+
+    class ListEphemeridesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?satellite_id: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?status_list: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor satellite_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor status_list: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListEphemeridesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?ephemerides: Array[Types::EphemerisItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor ephemerides: Array[Types::EphemerisItem]?
+    end
+
+    class ListGroundStationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?satellite_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor satellite_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListGroundStationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?ground_station_list: Array[Types::GroundStationData],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor ground_station_list: Array[Types::GroundStationData]?
+    end
+
+    class ListMissionProfilesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListMissionProfilesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?mission_profile_list: Array[Types::MissionProfileListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor mission_profile_list: Array[Types::MissionProfileListItem]?
+    end
+
+    class ListSatellitesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSatellitesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?satellites: Array[Types::SatelliteListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor satellites: Array[Types::SatelliteListItem]?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class MissionProfileListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mission_profile_id: String,
+        ?mission_profile_arn: String,
+        ?region: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mission_profile_id: String?
+      attr_accessor mission_profile_arn: String?
+      attr_accessor region: String?
+      attr_accessor name: String?
+    end
+
+    class OEMEphemeris
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_object: Types::S3Object,
+        ?oem_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_object: Types::S3Object?
+      attr_accessor oem_data: String?
+    end
+
+    module Polarization
+      RIGHT_HAND: String
+      LEFT_HAND: String
+      NONE: String
+    end
+
+    class RangedConnectionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?socket_address: Types::RangedSocketAddress,
+        ?mtu: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor socket_address: Types::RangedSocketAddress?
+      attr_accessor mtu: Integer?
+    end
+
+    class RangedSocketAddress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?port_range: Types::IntegerRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor port_range: Types::IntegerRange?
+    end
+
+    class RegisterAgentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?discovery_data: Types::DiscoveryData,
+        ?agent_details: Types::AgentDetails,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor discovery_data: Types::DiscoveryData?
+      attr_accessor agent_details: Types::AgentDetails?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class RegisterAgentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_id: String?
+    end
+
+    class ReserveContactInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mission_profile_arn: String,
+        ?satellite_arn: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?ground_station: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mission_profile_arn: String?
+      attr_accessor satellite_arn: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor ground_station: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ReserveContactOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_id: String?
+    end
+
+    class ResourceLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?parameter_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor parameter_name: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class S3Object
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor version: String?
+    end
+
+    class S3RecordingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_arn: String,
+        ?role_arn: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor prefix: String?
+    end
+
+    class S3RecordingDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_arn: String,
+        ?key_template: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_arn: String?
+      attr_accessor key_template: String?
+    end
+
+    class SatelliteListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?satellite_id: String,
+        ?satellite_arn: String,
+        ?norad_satellite_id: Integer,
+        ?ground_stations: Array[String],
+        ?current_ephemeris: Types::EphemerisMetaData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor satellite_id: String?
+      attr_accessor satellite_arn: String?
+      attr_accessor norad_satellite_id: Integer?
+      attr_accessor ground_stations: Array[String]?
+      attr_accessor current_ephemeris: Types::EphemerisMetaData?
+    end
+
+    class SecurityDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor role_arn: String?
+    end
+
+    class SocketAddress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor port: Integer?
+    end
+
+    class Source
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_type: String,
+        ?config_id: String,
+        ?config_details: Types::ConfigDetails,
+        ?dataflow_source_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_type: String?
+      attr_accessor config_id: String?
+      attr_accessor config_details: Types::ConfigDetails?
+      attr_accessor dataflow_source_region: String?
+    end
+
+    class SpectrumConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?center_frequency: Types::Frequency,
+        ?bandwidth: Types::FrequencyBandwidth,
+        ?polarization: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor center_frequency: Types::Frequency?
+      attr_accessor bandwidth: Types::FrequencyBandwidth?
+      attr_accessor polarization: String?
+    end
+
+    class TLEData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tle_line1: String,
+        ?tle_line2: String,
+        ?valid_time_range: Types::TimeRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tle_line1: String?
+      attr_accessor tle_line2: String?
+      attr_accessor valid_time_range: Types::TimeRange?
+    end
+
+    class TLEEphemeris
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_object: Types::S3Object,
+        ?tle_data: Array[Types::TLEData],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_object: Types::S3Object?
+      attr_accessor tle_data: Array[Types::TLEData]?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class TrackingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?autotrack: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor autotrack: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAgentStatusInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_id: String,
+        ?task_id: String,
+        ?aggregate_status: Types::AggregateStatus,
+        ?component_statuses: Array[Types::ComponentStatusData],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_id: String?
+      attr_accessor task_id: String?
+      attr_accessor aggregate_status: Types::AggregateStatus?
+      attr_accessor component_statuses: Array[Types::ComponentStatusData]?
+    end
+
+    class UpdateAgentStatusOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agent_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agent_id: String?
+    end
+
+    class UpdateConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_id: String,
+        ?name: String,
+        ?config_type: String,
+        ?config_data: Types::ConfigTypeData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_id: String?
+      attr_accessor name: String?
+      attr_accessor config_type: String?
+      attr_accessor config_data: Types::ConfigTypeData?
+    end
+
+    class UpdateConfigOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_id: String,
+        ?config_type: String,
+        ?config_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_id: String?
+      attr_accessor config_type: String?
+      attr_accessor config_arn: String?
+    end
+
+    class UpdateEphemerisInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ephemeris_id: String,
+        ?enabled: bool,
+        ?name: String,
+        ?priority: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ephemeris_id: String?
+      attr_accessor enabled: bool?
+      attr_accessor name: String?
+      attr_accessor priority: Integer?
+    end
+
+    class UpdateEphemerisOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ephemeris_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ephemeris_id: String?
+    end
+
+    class UpdateMissionProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mission_profile_id: String,
+        ?name: String,
+        ?contact_pre_pass_duration_seconds: Integer,
+        ?contact_post_pass_duration_seconds: Integer,
+        ?minimum_viable_contact_duration_seconds: Integer,
+        ?dataflow_edges: Array[Array[String]],
+        ?tracking_config_arn: String,
+        ?streams_kms_key: Types::KmsKey,
+        ?streams_kms_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mission_profile_id: String?
+      attr_accessor name: String?
+      attr_accessor contact_pre_pass_duration_seconds: Integer?
+      attr_accessor contact_post_pass_duration_seconds: Integer?
+      attr_accessor minimum_viable_contact_duration_seconds: Integer?
+      attr_accessor dataflow_edges: Array[Array[String]]?
+      attr_accessor tracking_config_arn: String?
+      attr_accessor streams_kms_key: Types::KmsKey?
+      attr_accessor streams_kms_role: String?
+    end
+
+    class UpdateMissionProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mission_profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mission_profile_id: String?
+    end
+
+    class UplinkEchoConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?antenna_uplink_config_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor antenna_uplink_config_arn: String?
+    end
+
+    class UplinkSpectrumConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?center_frequency: Types::Frequency,
+        ?polarization: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor center_frequency: Types::Frequency?
+      attr_accessor polarization: String?
+    end
+  end
+end

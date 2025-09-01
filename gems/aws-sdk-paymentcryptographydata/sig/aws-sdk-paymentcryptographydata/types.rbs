@@ -1,0 +1,1677 @@
+module Aws::PaymentCryptographyData
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AmexAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?major_key_derivation_mode: String,
+        ?primary_account_number: String,
+        ?pan_sequence_number: String,
+        ?application_transaction_counter: String,
+        ?authorization_request_key_identifier: String,
+        ?current_pin_attributes: Types::CurrentPinAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor major_key_derivation_mode: String?
+      attr_accessor primary_account_number: String?
+      attr_accessor pan_sequence_number: String?
+      attr_accessor application_transaction_counter: String?
+      attr_accessor authorization_request_key_identifier: String?
+      attr_accessor current_pin_attributes: Types::CurrentPinAttributes?
+    end
+
+    class AmexCardSecurityCodeVersion1
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?card_expiry_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor card_expiry_date: String?
+    end
+
+    class AmexCardSecurityCodeVersion2
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?card_expiry_date: String,
+        ?service_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor card_expiry_date: String?
+      attr_accessor service_code: String?
+    end
+
+    class AsymmetricEncryptionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?padding_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor padding_type: String?
+    end
+
+    class CardGenerationAttributes
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?amex_card_security_code_version1: Types::AmexCardSecurityCodeVersion1,
+        ?amex_card_security_code_version2: Types::AmexCardSecurityCodeVersion2,
+        ?card_verification_value1: Types::CardVerificationValue1,
+        ?card_verification_value2: Types::CardVerificationValue2,
+        ?card_holder_verification_value: Types::CardHolderVerificationValue,
+        ?dynamic_card_verification_code: Types::DynamicCardVerificationCode,
+        ?dynamic_card_verification_value: Types::DynamicCardVerificationValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amex_card_security_code_version1: Types::AmexCardSecurityCodeVersion1?
+      attr_accessor amex_card_security_code_version2: Types::AmexCardSecurityCodeVersion2?
+      attr_accessor card_verification_value1: Types::CardVerificationValue1?
+      attr_accessor card_verification_value2: Types::CardVerificationValue2?
+      attr_accessor card_holder_verification_value: Types::CardHolderVerificationValue?
+      attr_accessor dynamic_card_verification_code: Types::DynamicCardVerificationCode?
+      attr_accessor dynamic_card_verification_value: Types::DynamicCardVerificationValue?
+
+      class AmexCardSecurityCodeVersion1 < CardGenerationAttributes
+      end
+      class AmexCardSecurityCodeVersion2 < CardGenerationAttributes
+      end
+      class CardVerificationValue1 < CardGenerationAttributes
+      end
+      class CardVerificationValue2 < CardGenerationAttributes
+      end
+      class CardHolderVerificationValue < CardGenerationAttributes
+      end
+      class DynamicCardVerificationCode < CardGenerationAttributes
+      end
+      class DynamicCardVerificationValue < CardGenerationAttributes
+      end
+      class Unknown < CardGenerationAttributes
+      end
+    end
+
+    class CardHolderVerificationValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unpredictable_number: String,
+        ?pan_sequence_number: String,
+        ?application_transaction_counter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unpredictable_number: String?
+      attr_accessor pan_sequence_number: String?
+      attr_accessor application_transaction_counter: String?
+    end
+
+    class CardVerificationAttributes
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?amex_card_security_code_version1: Types::AmexCardSecurityCodeVersion1,
+        ?amex_card_security_code_version2: Types::AmexCardSecurityCodeVersion2,
+        ?card_verification_value1: Types::CardVerificationValue1,
+        ?card_verification_value2: Types::CardVerificationValue2,
+        ?card_holder_verification_value: Types::CardHolderVerificationValue,
+        ?dynamic_card_verification_code: Types::DynamicCardVerificationCode,
+        ?dynamic_card_verification_value: Types::DynamicCardVerificationValue,
+        ?discover_dynamic_card_verification_code: Types::DiscoverDynamicCardVerificationCode,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amex_card_security_code_version1: Types::AmexCardSecurityCodeVersion1?
+      attr_accessor amex_card_security_code_version2: Types::AmexCardSecurityCodeVersion2?
+      attr_accessor card_verification_value1: Types::CardVerificationValue1?
+      attr_accessor card_verification_value2: Types::CardVerificationValue2?
+      attr_accessor card_holder_verification_value: Types::CardHolderVerificationValue?
+      attr_accessor dynamic_card_verification_code: Types::DynamicCardVerificationCode?
+      attr_accessor dynamic_card_verification_value: Types::DynamicCardVerificationValue?
+      attr_accessor discover_dynamic_card_verification_code: Types::DiscoverDynamicCardVerificationCode?
+
+      class AmexCardSecurityCodeVersion1 < CardVerificationAttributes
+      end
+      class AmexCardSecurityCodeVersion2 < CardVerificationAttributes
+      end
+      class CardVerificationValue1 < CardVerificationAttributes
+      end
+      class CardVerificationValue2 < CardVerificationAttributes
+      end
+      class CardHolderVerificationValue < CardVerificationAttributes
+      end
+      class DynamicCardVerificationCode < CardVerificationAttributes
+      end
+      class DynamicCardVerificationValue < CardVerificationAttributes
+      end
+      class DiscoverDynamicCardVerificationCode < CardVerificationAttributes
+      end
+      class Unknown < CardVerificationAttributes
+      end
+    end
+
+    class CardVerificationValue1
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?card_expiry_date: String,
+        ?service_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor card_expiry_date: String?
+      attr_accessor service_code: String?
+    end
+
+    class CardVerificationValue2
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?card_expiry_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor card_expiry_date: String?
+    end
+
+    class CryptogramAuthResponse
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?arpc_method1: Types::CryptogramVerificationArpcMethod1,
+        ?arpc_method2: Types::CryptogramVerificationArpcMethod2,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arpc_method1: Types::CryptogramVerificationArpcMethod1?
+      attr_accessor arpc_method2: Types::CryptogramVerificationArpcMethod2?
+
+      class ArpcMethod1 < CryptogramAuthResponse
+      end
+      class ArpcMethod2 < CryptogramAuthResponse
+      end
+      class Unknown < CryptogramAuthResponse
+      end
+    end
+
+    class CryptogramVerificationArpcMethod1
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auth_response_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auth_response_code: String?
+    end
+
+    class CryptogramVerificationArpcMethod2
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?card_status_update: String,
+        ?proprietary_authentication_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor card_status_update: String?
+      attr_accessor proprietary_authentication_data: String?
+    end
+
+    class CurrentPinAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?current_pin_pek_identifier: String,
+        ?current_encrypted_pin_block: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor current_pin_pek_identifier: String?
+      attr_accessor current_encrypted_pin_block: String?
+    end
+
+    class DecryptDataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_identifier: String,
+        ?cipher_text: String,
+        ?decryption_attributes: Types::EncryptionDecryptionAttributes,
+        ?wrapped_key: Types::WrappedKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_identifier: String?
+      attr_accessor cipher_text: String?
+      attr_accessor decryption_attributes: Types::EncryptionDecryptionAttributes?
+      attr_accessor wrapped_key: Types::WrappedKey?
+    end
+
+    class DecryptDataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_arn: String,
+        ?key_check_value: String,
+        ?plain_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_arn: String?
+      attr_accessor key_check_value: String?
+      attr_accessor plain_text: String?
+    end
+
+    class DerivationMethodAttributes
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?emv_common: Types::EmvCommonAttributes,
+        ?amex: Types::AmexAttributes,
+        ?visa: Types::VisaAttributes,
+        ?emv2000: Types::Emv2000Attributes,
+        ?mastercard: Types::MasterCardAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor emv_common: Types::EmvCommonAttributes?
+      attr_accessor amex: Types::AmexAttributes?
+      attr_accessor visa: Types::VisaAttributes?
+      attr_accessor emv2000: Types::Emv2000Attributes?
+      attr_accessor mastercard: Types::MasterCardAttributes?
+
+      class EmvCommon < DerivationMethodAttributes
+      end
+      class Amex < DerivationMethodAttributes
+      end
+      class Visa < DerivationMethodAttributes
+      end
+      class Emv2000 < DerivationMethodAttributes
+      end
+      class Mastercard < DerivationMethodAttributes
+      end
+      class Unknown < DerivationMethodAttributes
+      end
+    end
+
+    class DiscoverDynamicCardVerificationCode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?card_expiry_date: String,
+        ?unpredictable_number: String,
+        ?application_transaction_counter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor card_expiry_date: String?
+      attr_accessor unpredictable_number: String?
+      attr_accessor application_transaction_counter: String?
+    end
+
+    class DukptAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_serial_number: String,
+        ?dukpt_derivation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_serial_number: String?
+      attr_accessor dukpt_derivation_type: String?
+    end
+
+    class DukptDerivationAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_serial_number: String,
+        ?dukpt_key_derivation_type: String,
+        ?dukpt_key_variant: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_serial_number: String?
+      attr_accessor dukpt_key_derivation_type: String?
+      attr_accessor dukpt_key_variant: String?
+    end
+
+    module DukptDerivationType
+      TDES_2KEY: String
+      TDES_3KEY: String
+      AES_128: String
+      AES_192: String
+      AES_256: String
+    end
+
+    class DukptEncryptionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_serial_number: String,
+        ?mode: String,
+        ?dukpt_key_derivation_type: String,
+        ?dukpt_key_variant: String,
+        ?initialization_vector: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_serial_number: String?
+      attr_accessor mode: String?
+      attr_accessor dukpt_key_derivation_type: String?
+      attr_accessor dukpt_key_variant: String?
+      attr_accessor initialization_vector: String?
+    end
+
+    module DukptEncryptionMode
+      ECB: String
+      CBC: String
+    end
+
+    module DukptKeyVariant
+      BIDIRECTIONAL: String
+      REQUEST: String
+      RESPONSE: String
+    end
+
+    class DynamicCardVerificationCode
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unpredictable_number: String,
+        ?pan_sequence_number: String,
+        ?application_transaction_counter: String,
+        ?track_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unpredictable_number: String?
+      attr_accessor pan_sequence_number: String?
+      attr_accessor application_transaction_counter: String?
+      attr_accessor track_data: String?
+    end
+
+    class DynamicCardVerificationValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pan_sequence_number: String,
+        ?card_expiry_date: String,
+        ?service_code: String,
+        ?application_transaction_counter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pan_sequence_number: String?
+      attr_accessor card_expiry_date: String?
+      attr_accessor service_code: String?
+      attr_accessor application_transaction_counter: String?
+    end
+
+    class EcdhDerivationAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority_public_key_identifier: String,
+        ?public_key_certificate: String,
+        ?key_algorithm: String,
+        ?key_derivation_function: String,
+        ?key_derivation_hash_algorithm: String,
+        ?shared_information: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority_public_key_identifier: String?
+      attr_accessor public_key_certificate: String?
+      attr_accessor key_algorithm: String?
+      attr_accessor key_derivation_function: String?
+      attr_accessor key_derivation_hash_algorithm: String?
+      attr_accessor shared_information: String?
+    end
+
+    class Emv2000Attributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?major_key_derivation_mode: String,
+        ?primary_account_number: String,
+        ?pan_sequence_number: String,
+        ?application_transaction_counter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor major_key_derivation_mode: String?
+      attr_accessor primary_account_number: String?
+      attr_accessor pan_sequence_number: String?
+      attr_accessor application_transaction_counter: String?
+    end
+
+    class EmvCommonAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?major_key_derivation_mode: String,
+        ?primary_account_number: String,
+        ?pan_sequence_number: String,
+        ?application_cryptogram: String,
+        ?mode: String,
+        ?pin_block_padding_type: String,
+        ?pin_block_length_position: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor major_key_derivation_mode: String?
+      attr_accessor primary_account_number: String?
+      attr_accessor pan_sequence_number: String?
+      attr_accessor application_cryptogram: String?
+      attr_accessor mode: String?
+      attr_accessor pin_block_padding_type: String?
+      attr_accessor pin_block_length_position: String?
+    end
+
+    class EmvEncryptionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?major_key_derivation_mode: String,
+        ?primary_account_number: String,
+        ?pan_sequence_number: String,
+        ?session_derivation_data: String,
+        ?mode: String,
+        ?initialization_vector: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor major_key_derivation_mode: String?
+      attr_accessor primary_account_number: String?
+      attr_accessor pan_sequence_number: String?
+      attr_accessor session_derivation_data: String?
+      attr_accessor mode: String?
+      attr_accessor initialization_vector: String?
+    end
+
+    module EmvEncryptionMode
+      ECB: String
+      CBC: String
+    end
+
+    module EmvMajorKeyDerivationMode
+      EMV_OPTION_A: String
+      EMV_OPTION_B: String
+    end
+
+    class EncryptDataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_identifier: String,
+        ?plain_text: String,
+        ?encryption_attributes: Types::EncryptionDecryptionAttributes,
+        ?wrapped_key: Types::WrappedKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_identifier: String?
+      attr_accessor plain_text: String?
+      attr_accessor encryption_attributes: Types::EncryptionDecryptionAttributes?
+      attr_accessor wrapped_key: Types::WrappedKey?
+    end
+
+    class EncryptDataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_arn: String,
+        ?key_check_value: String,
+        ?cipher_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_arn: String?
+      attr_accessor key_check_value: String?
+      attr_accessor cipher_text: String?
+    end
+
+    class EncryptionDecryptionAttributes
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?symmetric: Types::SymmetricEncryptionAttributes,
+        ?asymmetric: Types::AsymmetricEncryptionAttributes,
+        ?dukpt: Types::DukptEncryptionAttributes,
+        ?emv: Types::EmvEncryptionAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor symmetric: Types::SymmetricEncryptionAttributes?
+      attr_accessor asymmetric: Types::AsymmetricEncryptionAttributes?
+      attr_accessor dukpt: Types::DukptEncryptionAttributes?
+      attr_accessor emv: Types::EmvEncryptionAttributes?
+
+      class Symmetric < EncryptionDecryptionAttributes
+      end
+      class Asymmetric < EncryptionDecryptionAttributes
+      end
+      class Dukpt < EncryptionDecryptionAttributes
+      end
+      class Emv < EncryptionDecryptionAttributes
+      end
+      class Unknown < EncryptionDecryptionAttributes
+      end
+    end
+
+    module EncryptionMode
+      ECB: String
+      CBC: String
+      CFB: String
+      CFB1: String
+      CFB8: String
+      CFB64: String
+      CFB128: String
+      OFB: String
+    end
+
+    class GenerateCardValidationDataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_identifier: String,
+        ?primary_account_number: String,
+        ?generation_attributes: Types::CardGenerationAttributes,
+        ?validation_data_length: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_identifier: String?
+      attr_accessor primary_account_number: String?
+      attr_accessor generation_attributes: Types::CardGenerationAttributes?
+      attr_accessor validation_data_length: Integer?
+    end
+
+    class GenerateCardValidationDataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_arn: String,
+        ?key_check_value: String,
+        ?validation_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_arn: String?
+      attr_accessor key_check_value: String?
+      attr_accessor validation_data: String?
+    end
+
+    class GenerateMacEmvPinChangeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?new_pin_pek_identifier: String,
+        ?new_encrypted_pin_block: String,
+        ?pin_block_format: String,
+        ?secure_messaging_integrity_key_identifier: String,
+        ?secure_messaging_confidentiality_key_identifier: String,
+        ?message_data: String,
+        ?derivation_method_attributes: Types::DerivationMethodAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor new_pin_pek_identifier: String?
+      attr_accessor new_encrypted_pin_block: String?
+      attr_accessor pin_block_format: String?
+      attr_accessor secure_messaging_integrity_key_identifier: String?
+      attr_accessor secure_messaging_confidentiality_key_identifier: String?
+      attr_accessor message_data: String?
+      attr_accessor derivation_method_attributes: Types::DerivationMethodAttributes?
+    end
+
+    class GenerateMacEmvPinChangeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?new_pin_pek_arn: String,
+        ?secure_messaging_integrity_key_arn: String,
+        ?secure_messaging_confidentiality_key_arn: String,
+        ?mac: String,
+        ?encrypted_pin_block: String,
+        ?new_pin_pek_key_check_value: String,
+        ?secure_messaging_integrity_key_check_value: String,
+        ?secure_messaging_confidentiality_key_check_value: String,
+        ?visa_amex_derivation_outputs: Types::VisaAmexDerivationOutputs,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor new_pin_pek_arn: String?
+      attr_accessor secure_messaging_integrity_key_arn: String?
+      attr_accessor secure_messaging_confidentiality_key_arn: String?
+      attr_accessor mac: String?
+      attr_accessor encrypted_pin_block: String?
+      attr_accessor new_pin_pek_key_check_value: String?
+      attr_accessor secure_messaging_integrity_key_check_value: String?
+      attr_accessor secure_messaging_confidentiality_key_check_value: String?
+      attr_accessor visa_amex_derivation_outputs: Types::VisaAmexDerivationOutputs?
+    end
+
+    class GenerateMacInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_identifier: String,
+        ?message_data: String,
+        ?generation_attributes: Types::MacAttributes,
+        ?mac_length: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_identifier: String?
+      attr_accessor message_data: String?
+      attr_accessor generation_attributes: Types::MacAttributes?
+      attr_accessor mac_length: Integer?
+    end
+
+    class GenerateMacOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_arn: String,
+        ?key_check_value: String,
+        ?mac: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_arn: String?
+      attr_accessor key_check_value: String?
+      attr_accessor mac: String?
+    end
+
+    class GeneratePinDataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?generation_key_identifier: String,
+        ?encryption_key_identifier: String,
+        ?generation_attributes: Types::PinGenerationAttributes,
+        ?pin_data_length: Integer,
+        ?primary_account_number: String,
+        ?pin_block_format: String,
+        ?encryption_wrapped_key: Types::WrappedKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor generation_key_identifier: String?
+      attr_accessor encryption_key_identifier: String?
+      attr_accessor generation_attributes: Types::PinGenerationAttributes?
+      attr_accessor pin_data_length: Integer?
+      attr_accessor primary_account_number: String?
+      attr_accessor pin_block_format: String?
+      attr_accessor encryption_wrapped_key: Types::WrappedKey?
+    end
+
+    class GeneratePinDataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?generation_key_arn: String,
+        ?generation_key_check_value: String,
+        ?encryption_key_arn: String,
+        ?encryption_key_check_value: String,
+        ?encrypted_pin_block: String,
+        ?pin_data: Types::PinData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor generation_key_arn: String?
+      attr_accessor generation_key_check_value: String?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor encryption_key_check_value: String?
+      attr_accessor encrypted_pin_block: String?
+      attr_accessor pin_data: Types::PinData?
+    end
+
+    class Ibm3624NaturalPin
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?decimalization_table: String,
+        ?pin_validation_data_pad_character: String,
+        ?pin_validation_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor decimalization_table: String?
+      attr_accessor pin_validation_data_pad_character: String?
+      attr_accessor pin_validation_data: String?
+    end
+
+    class Ibm3624PinFromOffset
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?decimalization_table: String,
+        ?pin_validation_data_pad_character: String,
+        ?pin_validation_data: String,
+        ?pin_offset: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor decimalization_table: String?
+      attr_accessor pin_validation_data_pad_character: String?
+      attr_accessor pin_validation_data: String?
+      attr_accessor pin_offset: String?
+    end
+
+    class Ibm3624PinOffset
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encrypted_pin_block: String,
+        ?decimalization_table: String,
+        ?pin_validation_data_pad_character: String,
+        ?pin_validation_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encrypted_pin_block: String?
+      attr_accessor decimalization_table: String?
+      attr_accessor pin_validation_data_pad_character: String?
+      attr_accessor pin_validation_data: String?
+    end
+
+    class Ibm3624PinVerification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?decimalization_table: String,
+        ?pin_validation_data_pad_character: String,
+        ?pin_validation_data: String,
+        ?pin_offset: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor decimalization_table: String?
+      attr_accessor pin_validation_data_pad_character: String?
+      attr_accessor pin_validation_data: String?
+      attr_accessor pin_offset: String?
+    end
+
+    class Ibm3624RandomPin
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?decimalization_table: String,
+        ?pin_validation_data_pad_character: String,
+        ?pin_validation_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor decimalization_table: String?
+      attr_accessor pin_validation_data_pad_character: String?
+      attr_accessor pin_validation_data: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module KeyDerivationFunction
+      NIST_SP800: String
+      ANSI_X963: String
+    end
+
+    module KeyDerivationHashAlgorithm
+      SHA_256: String
+      SHA_384: String
+      SHA_512: String
+    end
+
+    module MacAlgorithm
+      ISO9797_ALGORITHM1: String
+      ISO9797_ALGORITHM3: String
+      CMAC: String
+      HMAC: String
+      HMAC_SHA224: String
+      HMAC_SHA256: String
+      HMAC_SHA384: String
+      HMAC_SHA512: String
+    end
+
+    class MacAlgorithmDukpt
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_serial_number: String,
+        ?dukpt_key_variant: String,
+        ?dukpt_derivation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_serial_number: String?
+      attr_accessor dukpt_key_variant: String?
+      attr_accessor dukpt_derivation_type: String?
+    end
+
+    class MacAlgorithmEmv
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?major_key_derivation_mode: String,
+        ?primary_account_number: String,
+        ?pan_sequence_number: String,
+        ?session_key_derivation_mode: String,
+        ?session_key_derivation_value: Types::SessionKeyDerivationValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor major_key_derivation_mode: String?
+      attr_accessor primary_account_number: String?
+      attr_accessor pan_sequence_number: String?
+      attr_accessor session_key_derivation_mode: String?
+      attr_accessor session_key_derivation_value: Types::SessionKeyDerivationValue?
+    end
+
+    class MacAttributes
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?algorithm: String,
+        ?emv_mac: Types::MacAlgorithmEmv,
+        ?dukpt_iso9797_algorithm1: Types::MacAlgorithmDukpt,
+        ?dukpt_iso9797_algorithm3: Types::MacAlgorithmDukpt,
+        ?dukpt_cmac: Types::MacAlgorithmDukpt,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor algorithm: String?
+      attr_accessor emv_mac: Types::MacAlgorithmEmv?
+      attr_accessor dukpt_iso9797_algorithm1: Types::MacAlgorithmDukpt?
+      attr_accessor dukpt_iso9797_algorithm3: Types::MacAlgorithmDukpt?
+      attr_accessor dukpt_cmac: Types::MacAlgorithmDukpt?
+
+      class Algorithm < MacAttributes
+      end
+      class EmvMac < MacAttributes
+      end
+      class DukptIso9797Algorithm1 < MacAttributes
+      end
+      class DukptIso9797Algorithm3 < MacAttributes
+      end
+      class DukptCmac < MacAttributes
+      end
+      class Unknown < MacAttributes
+      end
+    end
+
+    module MajorKeyDerivationMode
+      EMV_OPTION_A: String
+      EMV_OPTION_B: String
+    end
+
+    class MasterCardAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?major_key_derivation_mode: String,
+        ?primary_account_number: String,
+        ?pan_sequence_number: String,
+        ?application_cryptogram: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor major_key_derivation_mode: String?
+      attr_accessor primary_account_number: String?
+      attr_accessor pan_sequence_number: String?
+      attr_accessor application_cryptogram: String?
+    end
+
+    module PaddingType
+      PKCS1: String
+      OAEP_SHA1: String
+      OAEP_SHA256: String
+      OAEP_SHA512: String
+    end
+
+    module PinBlockFormatForEmvPinChange
+      ISO_FORMAT_0: String
+      ISO_FORMAT_1: String
+      ISO_FORMAT_3: String
+    end
+
+    module PinBlockFormatForPinData
+      ISO_FORMAT_0: String
+      ISO_FORMAT_3: String
+      ISO_FORMAT_4: String
+    end
+
+    module PinBlockLengthPosition
+      NONE: String
+      FRONT_OF_PIN_BLOCK: String
+    end
+
+    module PinBlockPaddingType
+      NO_PADDING: String
+      ISO_IEC_7816_4: String
+    end
+
+    class PinData
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?pin_offset: String,
+        ?verification_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pin_offset: String?
+      attr_accessor verification_value: String?
+
+      class PinOffset < PinData
+      end
+      class VerificationValue < PinData
+      end
+      class Unknown < PinData
+      end
+    end
+
+    class PinGenerationAttributes
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?visa_pin: Types::VisaPin,
+        ?visa_pin_verification_value: Types::VisaPinVerificationValue,
+        ?ibm3624_pin_offset: Types::Ibm3624PinOffset,
+        ?ibm3624_natural_pin: Types::Ibm3624NaturalPin,
+        ?ibm3624_random_pin: Types::Ibm3624RandomPin,
+        ?ibm3624_pin_from_offset: Types::Ibm3624PinFromOffset,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor visa_pin: Types::VisaPin?
+      attr_accessor visa_pin_verification_value: Types::VisaPinVerificationValue?
+      attr_accessor ibm3624_pin_offset: Types::Ibm3624PinOffset?
+      attr_accessor ibm3624_natural_pin: Types::Ibm3624NaturalPin?
+      attr_accessor ibm3624_random_pin: Types::Ibm3624RandomPin?
+      attr_accessor ibm3624_pin_from_offset: Types::Ibm3624PinFromOffset?
+
+      class VisaPin < PinGenerationAttributes
+      end
+      class VisaPinVerificationValue < PinGenerationAttributes
+      end
+      class Ibm3624PinOffset < PinGenerationAttributes
+      end
+      class Ibm3624NaturalPin < PinGenerationAttributes
+      end
+      class Ibm3624RandomPin < PinGenerationAttributes
+      end
+      class Ibm3624PinFromOffset < PinGenerationAttributes
+      end
+      class Unknown < PinGenerationAttributes
+      end
+    end
+
+    class PinVerificationAttributes
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?visa_pin: Types::VisaPinVerification,
+        ?ibm3624_pin: Types::Ibm3624PinVerification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor visa_pin: Types::VisaPinVerification?
+      attr_accessor ibm3624_pin: Types::Ibm3624PinVerification?
+
+      class VisaPin < PinVerificationAttributes
+      end
+      class Ibm3624Pin < PinVerificationAttributes
+      end
+      class Unknown < PinVerificationAttributes
+      end
+    end
+
+    class ReEncryptDataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?incoming_key_identifier: String,
+        ?outgoing_key_identifier: String,
+        ?cipher_text: String,
+        ?incoming_encryption_attributes: Types::ReEncryptionAttributes,
+        ?outgoing_encryption_attributes: Types::ReEncryptionAttributes,
+        ?incoming_wrapped_key: Types::WrappedKey,
+        ?outgoing_wrapped_key: Types::WrappedKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor incoming_key_identifier: String?
+      attr_accessor outgoing_key_identifier: String?
+      attr_accessor cipher_text: String?
+      attr_accessor incoming_encryption_attributes: Types::ReEncryptionAttributes?
+      attr_accessor outgoing_encryption_attributes: Types::ReEncryptionAttributes?
+      attr_accessor incoming_wrapped_key: Types::WrappedKey?
+      attr_accessor outgoing_wrapped_key: Types::WrappedKey?
+    end
+
+    class ReEncryptDataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_arn: String,
+        ?key_check_value: String,
+        ?cipher_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_arn: String?
+      attr_accessor key_check_value: String?
+      attr_accessor cipher_text: String?
+    end
+
+    class ReEncryptionAttributes
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?symmetric: Types::SymmetricEncryptionAttributes,
+        ?dukpt: Types::DukptEncryptionAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor symmetric: Types::SymmetricEncryptionAttributes?
+      attr_accessor dukpt: Types::DukptEncryptionAttributes?
+
+      class Symmetric < ReEncryptionAttributes
+      end
+      class Dukpt < ReEncryptionAttributes
+      end
+      class Unknown < ReEncryptionAttributes
+      end
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+    end
+
+    class SessionKeyAmex
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?primary_account_number: String,
+        ?pan_sequence_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primary_account_number: String?
+      attr_accessor pan_sequence_number: String?
+    end
+
+    class SessionKeyDerivation
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?emv_common: Types::SessionKeyEmvCommon,
+        ?mastercard: Types::SessionKeyMastercard,
+        ?emv2000: Types::SessionKeyEmv2000,
+        ?amex: Types::SessionKeyAmex,
+        ?visa: Types::SessionKeyVisa,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor emv_common: Types::SessionKeyEmvCommon?
+      attr_accessor mastercard: Types::SessionKeyMastercard?
+      attr_accessor emv2000: Types::SessionKeyEmv2000?
+      attr_accessor amex: Types::SessionKeyAmex?
+      attr_accessor visa: Types::SessionKeyVisa?
+
+      class EmvCommon < SessionKeyDerivation
+      end
+      class Mastercard < SessionKeyDerivation
+      end
+      class Emv2000 < SessionKeyDerivation
+      end
+      class Amex < SessionKeyDerivation
+      end
+      class Visa < SessionKeyDerivation
+      end
+      class Unknown < SessionKeyDerivation
+      end
+    end
+
+    module SessionKeyDerivationMode
+      EMV_COMMON_SESSION_KEY: String
+      EMV2000: String
+      AMEX: String
+      MASTERCARD_SESSION_KEY: String
+      VISA: String
+    end
+
+    class SessionKeyDerivationValue
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?application_cryptogram: String,
+        ?application_transaction_counter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_cryptogram: String?
+      attr_accessor application_transaction_counter: String?
+
+      class ApplicationCryptogram < SessionKeyDerivationValue
+      end
+      class ApplicationTransactionCounter < SessionKeyDerivationValue
+      end
+      class Unknown < SessionKeyDerivationValue
+      end
+    end
+
+    class SessionKeyEmv2000
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?primary_account_number: String,
+        ?pan_sequence_number: String,
+        ?application_transaction_counter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primary_account_number: String?
+      attr_accessor pan_sequence_number: String?
+      attr_accessor application_transaction_counter: String?
+    end
+
+    class SessionKeyEmvCommon
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?primary_account_number: String,
+        ?pan_sequence_number: String,
+        ?application_transaction_counter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primary_account_number: String?
+      attr_accessor pan_sequence_number: String?
+      attr_accessor application_transaction_counter: String?
+    end
+
+    class SessionKeyMastercard
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?primary_account_number: String,
+        ?pan_sequence_number: String,
+        ?application_transaction_counter: String,
+        ?unpredictable_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primary_account_number: String?
+      attr_accessor pan_sequence_number: String?
+      attr_accessor application_transaction_counter: String?
+      attr_accessor unpredictable_number: String?
+    end
+
+    class SessionKeyVisa
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?primary_account_number: String,
+        ?pan_sequence_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primary_account_number: String?
+      attr_accessor pan_sequence_number: String?
+    end
+
+    class SymmetricEncryptionAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mode: String,
+        ?initialization_vector: String,
+        ?padding_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mode: String?
+      attr_accessor initialization_vector: String?
+      attr_accessor padding_type: String?
+    end
+
+    module SymmetricKeyAlgorithm
+      TDES_2KEY: String
+      TDES_3KEY: String
+      AES_128: String
+      AES_192: String
+      AES_256: String
+      HMAC_SHA256: String
+      HMAC_SHA384: String
+      HMAC_SHA512: String
+      HMAC_SHA224: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TranslatePinDataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?incoming_key_identifier: String,
+        ?outgoing_key_identifier: String,
+        ?incoming_translation_attributes: Types::TranslationIsoFormats,
+        ?outgoing_translation_attributes: Types::TranslationIsoFormats,
+        ?encrypted_pin_block: String,
+        ?incoming_dukpt_attributes: Types::DukptDerivationAttributes,
+        ?outgoing_dukpt_attributes: Types::DukptDerivationAttributes,
+        ?incoming_wrapped_key: Types::WrappedKey,
+        ?outgoing_wrapped_key: Types::WrappedKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor incoming_key_identifier: String?
+      attr_accessor outgoing_key_identifier: String?
+      attr_accessor incoming_translation_attributes: Types::TranslationIsoFormats?
+      attr_accessor outgoing_translation_attributes: Types::TranslationIsoFormats?
+      attr_accessor encrypted_pin_block: String?
+      attr_accessor incoming_dukpt_attributes: Types::DukptDerivationAttributes?
+      attr_accessor outgoing_dukpt_attributes: Types::DukptDerivationAttributes?
+      attr_accessor incoming_wrapped_key: Types::WrappedKey?
+      attr_accessor outgoing_wrapped_key: Types::WrappedKey?
+    end
+
+    class TranslatePinDataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pin_block: String,
+        ?key_arn: String,
+        ?key_check_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pin_block: String?
+      attr_accessor key_arn: String?
+      attr_accessor key_check_value: String?
+    end
+
+    class TranslationIsoFormats
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?iso_format0: Types::TranslationPinDataIsoFormat034,
+        ?iso_format1: Types::TranslationPinDataIsoFormat1,
+        ?iso_format3: Types::TranslationPinDataIsoFormat034,
+        ?iso_format4: Types::TranslationPinDataIsoFormat034,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iso_format0: Types::TranslationPinDataIsoFormat034?
+      attr_accessor iso_format1: Types::TranslationPinDataIsoFormat1?
+      attr_accessor iso_format3: Types::TranslationPinDataIsoFormat034?
+      attr_accessor iso_format4: Types::TranslationPinDataIsoFormat034?
+
+      class IsoFormat0 < TranslationIsoFormats
+      end
+      class IsoFormat1 < TranslationIsoFormats
+      end
+      class IsoFormat3 < TranslationIsoFormats
+      end
+      class IsoFormat4 < TranslationIsoFormats
+      end
+      class Unknown < TranslationIsoFormats
+      end
+    end
+
+    class TranslationPinDataIsoFormat034
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?primary_account_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primary_account_number: String?
+    end
+
+    class TranslationPinDataIsoFormat1
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor message: String?
+    end
+
+    class VerificationFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor message: String?
+    end
+
+    class VerifyAuthRequestCryptogramInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_identifier: String,
+        ?transaction_data: String,
+        ?auth_request_cryptogram: String,
+        ?major_key_derivation_mode: String,
+        ?session_key_derivation_attributes: Types::SessionKeyDerivation,
+        ?auth_response_attributes: Types::CryptogramAuthResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_identifier: String?
+      attr_accessor transaction_data: String?
+      attr_accessor auth_request_cryptogram: String?
+      attr_accessor major_key_derivation_mode: String?
+      attr_accessor session_key_derivation_attributes: Types::SessionKeyDerivation?
+      attr_accessor auth_response_attributes: Types::CryptogramAuthResponse?
+    end
+
+    class VerifyAuthRequestCryptogramOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_arn: String,
+        ?key_check_value: String,
+        ?auth_response_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_arn: String?
+      attr_accessor key_check_value: String?
+      attr_accessor auth_response_value: String?
+    end
+
+    class VerifyCardValidationDataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_identifier: String,
+        ?primary_account_number: String,
+        ?verification_attributes: Types::CardVerificationAttributes,
+        ?validation_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_identifier: String?
+      attr_accessor primary_account_number: String?
+      attr_accessor verification_attributes: Types::CardVerificationAttributes?
+      attr_accessor validation_data: String?
+    end
+
+    class VerifyCardValidationDataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_arn: String,
+        ?key_check_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_arn: String?
+      attr_accessor key_check_value: String?
+    end
+
+    class VerifyMacInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_identifier: String,
+        ?message_data: String,
+        ?mac: String,
+        ?verification_attributes: Types::MacAttributes,
+        ?mac_length: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_identifier: String?
+      attr_accessor message_data: String?
+      attr_accessor mac: String?
+      attr_accessor verification_attributes: Types::MacAttributes?
+      attr_accessor mac_length: Integer?
+    end
+
+    class VerifyMacOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_arn: String,
+        ?key_check_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_arn: String?
+      attr_accessor key_check_value: String?
+    end
+
+    class VerifyPinDataInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?verification_key_identifier: String,
+        ?encryption_key_identifier: String,
+        ?verification_attributes: Types::PinVerificationAttributes,
+        ?encrypted_pin_block: String,
+        ?primary_account_number: String,
+        ?pin_block_format: String,
+        ?pin_data_length: Integer,
+        ?dukpt_attributes: Types::DukptAttributes,
+        ?encryption_wrapped_key: Types::WrappedKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor verification_key_identifier: String?
+      attr_accessor encryption_key_identifier: String?
+      attr_accessor verification_attributes: Types::PinVerificationAttributes?
+      attr_accessor encrypted_pin_block: String?
+      attr_accessor primary_account_number: String?
+      attr_accessor pin_block_format: String?
+      attr_accessor pin_data_length: Integer?
+      attr_accessor dukpt_attributes: Types::DukptAttributes?
+      attr_accessor encryption_wrapped_key: Types::WrappedKey?
+    end
+
+    class VerifyPinDataOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?verification_key_arn: String,
+        ?verification_key_check_value: String,
+        ?encryption_key_arn: String,
+        ?encryption_key_check_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor verification_key_arn: String?
+      attr_accessor verification_key_check_value: String?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor encryption_key_check_value: String?
+    end
+
+    class VisaAmexDerivationOutputs
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorization_request_key_arn: String,
+        ?authorization_request_key_check_value: String,
+        ?current_pin_pek_arn: String,
+        ?current_pin_pek_key_check_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization_request_key_arn: String?
+      attr_accessor authorization_request_key_check_value: String?
+      attr_accessor current_pin_pek_arn: String?
+      attr_accessor current_pin_pek_key_check_value: String?
+    end
+
+    class VisaAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?major_key_derivation_mode: String,
+        ?primary_account_number: String,
+        ?pan_sequence_number: String,
+        ?application_transaction_counter: String,
+        ?authorization_request_key_identifier: String,
+        ?current_pin_attributes: Types::CurrentPinAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor major_key_derivation_mode: String?
+      attr_accessor primary_account_number: String?
+      attr_accessor pan_sequence_number: String?
+      attr_accessor application_transaction_counter: String?
+      attr_accessor authorization_request_key_identifier: String?
+      attr_accessor current_pin_attributes: Types::CurrentPinAttributes?
+    end
+
+    class VisaPin
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pin_verification_key_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pin_verification_key_index: Integer?
+    end
+
+    class VisaPinVerification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pin_verification_key_index: Integer,
+        ?verification_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pin_verification_key_index: Integer?
+      attr_accessor verification_value: String?
+    end
+
+    class VisaPinVerificationValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encrypted_pin_block: String,
+        ?pin_verification_key_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encrypted_pin_block: String?
+      attr_accessor pin_verification_key_index: Integer?
+    end
+
+    class WrappedKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wrapped_key_material: Types::WrappedKeyMaterial,
+        ?key_check_value_algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wrapped_key_material: Types::WrappedKeyMaterial?
+      attr_accessor key_check_value_algorithm: String?
+    end
+
+    class WrappedKeyMaterial
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?tr31_key_block: String,
+        ?diffie_hellman_symmetric_key: Types::EcdhDerivationAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tr31_key_block: String?
+      attr_accessor diffie_hellman_symmetric_key: Types::EcdhDerivationAttributes?
+
+      class Tr31KeyBlock < WrappedKeyMaterial
+      end
+      class DiffieHellmanSymmetricKey < WrappedKeyMaterial
+      end
+      class Unknown < WrappedKeyMaterial
+      end
+    end
+  end
+end

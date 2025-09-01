@@ -1,0 +1,22 @@
+module Aws::MediaPackageVod
+  module Errors
+    class ForbiddenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServerErrorException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnprocessableEntityException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

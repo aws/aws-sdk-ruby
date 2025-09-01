@@ -1,0 +1,1198 @@
+module Aws::WorkSpaces
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::WorkSpaces::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptAccountLinkInvitationResponse
+      include Smithy::Client::_Response[Types::AcceptAccountLinkInvitationResult]
+      def account_link: () -> Types::AccountLink?
+    end
+    def accept_account_link_invitation: (
+      ?link_id: String,
+      ?client_token: String
+    ) -> _AcceptAccountLinkInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptAccountLinkInvitationResponse
+
+    interface _AssociateConnectionAliasResponse
+      include Smithy::Client::_Response[Types::AssociateConnectionAliasResult]
+      def connection_identifier: () -> String?
+    end
+    def associate_connection_alias: (
+      ?alias_id: String,
+      ?resource_id: String
+    ) -> _AssociateConnectionAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateConnectionAliasResponse
+
+    interface _AssociateIpGroupsResponse
+      include Smithy::Client::_Response[Types::AssociateIpGroupsResult]
+    end
+    def associate_ip_groups: (
+      ?directory_id: String,
+      ?group_ids: Array[String]
+    ) -> _AssociateIpGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateIpGroupsResponse
+
+    interface _AssociateWorkspaceApplicationResponse
+      include Smithy::Client::_Response[Types::AssociateWorkspaceApplicationResult]
+      def association: () -> Types::WorkspaceResourceAssociation?
+    end
+    def associate_workspace_application: (
+      ?workspace_id: String,
+      ?application_id: String
+    ) -> _AssociateWorkspaceApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateWorkspaceApplicationResponse
+
+    interface _AuthorizeIpRulesResponse
+      include Smithy::Client::_Response[Types::AuthorizeIpRulesResult]
+    end
+    def authorize_ip_rules: (
+      ?group_id: String,
+      ?user_rules: Array[
+        {
+          ip_rule: String,
+          rule_desc: String
+        }
+      ]
+    ) -> _AuthorizeIpRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AuthorizeIpRulesResponse
+
+    interface _CopyWorkspaceImageResponse
+      include Smithy::Client::_Response[Types::CopyWorkspaceImageResult]
+      def image_id: () -> String?
+    end
+    def copy_workspace_image: (
+      ?name: String,
+      ?description: String,
+      ?source_image_id: String,
+      ?source_region: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CopyWorkspaceImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyWorkspaceImageResponse
+
+    interface _CreateAccountLinkInvitationResponse
+      include Smithy::Client::_Response[Types::CreateAccountLinkInvitationResult]
+      def account_link: () -> Types::AccountLink?
+    end
+    def create_account_link_invitation: (
+      ?target_account_id: String,
+      ?client_token: String
+    ) -> _CreateAccountLinkInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAccountLinkInvitationResponse
+
+    interface _CreateConnectClientAddInResponse
+      include Smithy::Client::_Response[Types::CreateConnectClientAddInResult]
+      def add_in_id: () -> String?
+    end
+    def create_connect_client_add_in: (
+      ?resource_id: String,
+      ?name: String,
+      ?url: String
+    ) -> _CreateConnectClientAddInResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectClientAddInResponse
+
+    interface _CreateConnectionAliasResponse
+      include Smithy::Client::_Response[Types::CreateConnectionAliasResult]
+      def alias_id: () -> String?
+    end
+    def create_connection_alias: (
+      ?connection_string: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateConnectionAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectionAliasResponse
+
+    interface _CreateIpGroupResponse
+      include Smithy::Client::_Response[Types::CreateIpGroupResult]
+      def group_id: () -> String?
+    end
+    def create_ip_group: (
+      ?group_name: String,
+      ?group_desc: String,
+      ?user_rules: Array[
+        {
+          ip_rule: String,
+          rule_desc: String
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateIpGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIpGroupResponse
+
+    interface _CreateStandbyWorkspacesResponse
+      include Smithy::Client::_Response[Types::CreateStandbyWorkspacesResult]
+      def failed_standby_requests: () -> Array[Types::FailedCreateStandbyWorkspacesRequest]?
+      def pending_standby_requests: () -> Array[Types::PendingCreateStandbyWorkspacesRequest]?
+    end
+    def create_standby_workspaces: (
+      ?primary_region: String,
+      ?standby_workspaces: Array[
+        {
+          primary_workspace_id: String,
+          volume_encryption_key: String,
+          directory_id: String,
+          tags: Array[
+            {
+              key: String,
+              value: String
+            }
+          ],
+          data_replication: String
+        }
+      ]
+    ) -> _CreateStandbyWorkspacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStandbyWorkspacesResponse
+
+    interface _CreateTagsResponse
+      include Smithy::Client::_Response[Types::CreateTagsResult]
+    end
+    def create_tags: (
+      ?resource_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTagsResponse
+
+    interface _CreateUpdatedWorkspaceImageResponse
+      include Smithy::Client::_Response[Types::CreateUpdatedWorkspaceImageResult]
+      def image_id: () -> String?
+    end
+    def create_updated_workspace_image: (
+      ?name: String,
+      ?description: String,
+      ?source_image_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateUpdatedWorkspaceImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUpdatedWorkspaceImageResponse
+
+    interface _CreateWorkspaceBundleResponse
+      include Smithy::Client::_Response[Types::CreateWorkspaceBundleResult]
+      def workspace_bundle: () -> Types::WorkspaceBundle?
+    end
+    def create_workspace_bundle: (
+      ?bundle_name: String,
+      ?bundle_description: String,
+      ?image_id: String,
+      ?compute_type: {
+        name: String
+      },
+      ?user_storage: {
+        capacity: String
+      },
+      ?root_storage: {
+        capacity: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateWorkspaceBundleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkspaceBundleResponse
+
+    interface _CreateWorkspaceImageResponse
+      include Smithy::Client::_Response[Types::CreateWorkspaceImageResult]
+      def image_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def operating_system: () -> Types::OperatingSystem?
+      def state: () -> String?
+      def required_tenancy: () -> String?
+      def created: () -> Time?
+      def owner_account_id: () -> String?
+    end
+    def create_workspace_image: (
+      ?name: String,
+      ?description: String,
+      ?workspace_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateWorkspaceImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkspaceImageResponse
+
+    interface _CreateWorkspacesResponse
+      include Smithy::Client::_Response[Types::CreateWorkspacesResult]
+      def failed_requests: () -> Array[Types::FailedCreateWorkspaceRequest]?
+      def pending_requests: () -> Array[Types::Workspace]?
+    end
+    def create_workspaces: (
+      ?workspaces: Array[
+        {
+          directory_id: String,
+          user_name: String,
+          bundle_id: String,
+          volume_encryption_key: String,
+          user_volume_encryption_enabled: bool,
+          root_volume_encryption_enabled: untyped,
+          workspace_properties: {
+            running_mode: String,
+            running_mode_auto_stop_timeout_in_minutes: Integer,
+            root_volume_size_gib: Integer,
+            user_volume_size_gib: Integer,
+            compute_type_name: String,
+            protocols: Array[String],
+            operating_system_name: String,
+            global_accelerator: {
+              mode: String,
+              preferred_protocol: String
+            }
+          },
+          tags: Array[
+            {
+              key: String,
+              value: String
+            }
+          ],
+          workspace_name: String
+        }
+      ]
+    ) -> _CreateWorkspacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkspacesResponse
+
+    interface _CreateWorkspacesPoolResponse
+      include Smithy::Client::_Response[Types::CreateWorkspacesPoolResult]
+      def workspaces_pool: () -> Types::WorkspacesPool?
+    end
+    def create_workspaces_pool: (
+      ?pool_name: String,
+      ?description: String,
+      ?bundle_id: String,
+      ?directory_id: String,
+      ?capacity: {
+        desired_user_sessions: Integer
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?application_settings: {
+        status: String,
+        settings_group: String
+      },
+      ?timeout_settings: {
+        disconnect_timeout_in_seconds: Integer,
+        idle_disconnect_timeout_in_seconds: Integer,
+        max_user_duration_in_seconds: Integer
+      },
+      ?running_mode: String
+    ) -> _CreateWorkspacesPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWorkspacesPoolResponse
+
+    interface _DeleteAccountLinkInvitationResponse
+      include Smithy::Client::_Response[Types::DeleteAccountLinkInvitationResult]
+      def account_link: () -> Types::AccountLink?
+    end
+    def delete_account_link_invitation: (
+      ?link_id: String,
+      ?client_token: String
+    ) -> _DeleteAccountLinkInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccountLinkInvitationResponse
+
+    interface _DeleteClientBrandingResponse
+      include Smithy::Client::_Response[Types::DeleteClientBrandingResult]
+    end
+    def delete_client_branding: (
+      ?resource_id: String,
+      ?platforms: Array[String]
+    ) -> _DeleteClientBrandingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteClientBrandingResponse
+
+    interface _DeleteConnectClientAddInResponse
+      include Smithy::Client::_Response[Types::DeleteConnectClientAddInResult]
+    end
+    def delete_connect_client_add_in: (
+      ?add_in_id: String,
+      ?resource_id: String
+    ) -> _DeleteConnectClientAddInResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectClientAddInResponse
+
+    interface _DeleteConnectionAliasResponse
+      include Smithy::Client::_Response[Types::DeleteConnectionAliasResult]
+    end
+    def delete_connection_alias: (
+      ?alias_id: String
+    ) -> _DeleteConnectionAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectionAliasResponse
+
+    interface _DeleteIpGroupResponse
+      include Smithy::Client::_Response[Types::DeleteIpGroupResult]
+    end
+    def delete_ip_group: (
+      ?group_id: String
+    ) -> _DeleteIpGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIpGroupResponse
+
+    interface _DeleteTagsResponse
+      include Smithy::Client::_Response[Types::DeleteTagsResult]
+    end
+    def delete_tags: (
+      ?resource_id: String,
+      ?tag_keys: Array[String]
+    ) -> _DeleteTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTagsResponse
+
+    interface _DeleteWorkspaceBundleResponse
+      include Smithy::Client::_Response[Types::DeleteWorkspaceBundleResult]
+    end
+    def delete_workspace_bundle: (
+      ?bundle_id: String
+    ) -> _DeleteWorkspaceBundleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkspaceBundleResponse
+
+    interface _DeleteWorkspaceImageResponse
+      include Smithy::Client::_Response[Types::DeleteWorkspaceImageResult]
+    end
+    def delete_workspace_image: (
+      ?image_id: String
+    ) -> _DeleteWorkspaceImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkspaceImageResponse
+
+    interface _DeployWorkspaceApplicationsResponse
+      include Smithy::Client::_Response[Types::DeployWorkspaceApplicationsResult]
+      def deployment: () -> Types::WorkSpaceApplicationDeployment?
+    end
+    def deploy_workspace_applications: (
+      ?workspace_id: String,
+      ?force: bool
+    ) -> _DeployWorkspaceApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeployWorkspaceApplicationsResponse
+
+    interface _DeregisterWorkspaceDirectoryResponse
+      include Smithy::Client::_Response[Types::DeregisterWorkspaceDirectoryResult]
+    end
+    def deregister_workspace_directory: (
+      ?directory_id: String
+    ) -> _DeregisterWorkspaceDirectoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterWorkspaceDirectoryResponse
+
+    interface _DescribeAccountResponse
+      include Smithy::Client::_Response[Types::DescribeAccountResult]
+      def dedicated_tenancy_support: () -> String?
+      def dedicated_tenancy_management_cidr_range: () -> String?
+      def dedicated_tenancy_account_type: () -> String?
+    end
+    def describe_account: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountResponse
+
+    interface _DescribeAccountModificationsResponse
+      include Smithy::Client::_Response[Types::DescribeAccountModificationsResult]
+      def account_modifications: () -> Array[Types::AccountModification]?
+      def next_token: () -> String?
+    end
+    def describe_account_modifications: (
+      ?next_token: String
+    ) -> _DescribeAccountModificationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountModificationsResponse
+
+    interface _DescribeApplicationAssociationsResponse
+      include Smithy::Client::_Response[Types::DescribeApplicationAssociationsResult]
+      def associations: () -> Array[Types::ApplicationResourceAssociation]?
+      def next_token: () -> String?
+    end
+    def describe_application_associations: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?application_id: String,
+      ?associated_resource_types: Array[String]
+    ) -> _DescribeApplicationAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeApplicationAssociationsResponse
+
+    interface _DescribeApplicationsResponse
+      include Smithy::Client::_Response[Types::DescribeApplicationsResult]
+      def applications: () -> Array[Types::WorkSpaceApplication]?
+      def next_token: () -> String?
+    end
+    def describe_applications: (
+      ?application_ids: Array[String],
+      ?compute_type_names: Array[String],
+      ?license_type: String,
+      ?operating_system_names: Array[String],
+      ?owner: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _DescribeApplicationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeApplicationsResponse
+
+    interface _DescribeBundleAssociationsResponse
+      include Smithy::Client::_Response[Types::DescribeBundleAssociationsResult]
+      def associations: () -> Array[Types::BundleResourceAssociation]?
+    end
+    def describe_bundle_associations: (
+      ?bundle_id: String,
+      ?associated_resource_types: Array[String]
+    ) -> _DescribeBundleAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeBundleAssociationsResponse
+
+    interface _DescribeClientBrandingResponse
+      include Smithy::Client::_Response[Types::DescribeClientBrandingResult]
+      def device_type_windows: () -> Types::DefaultClientBrandingAttributes?
+      def device_type_osx: () -> Types::DefaultClientBrandingAttributes?
+      def device_type_android: () -> Types::DefaultClientBrandingAttributes?
+      def device_type_ios: () -> Types::IosClientBrandingAttributes?
+      def device_type_linux: () -> Types::DefaultClientBrandingAttributes?
+      def device_type_web: () -> Types::DefaultClientBrandingAttributes?
+    end
+    def describe_client_branding: (
+      ?resource_id: String
+    ) -> _DescribeClientBrandingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeClientBrandingResponse
+
+    interface _DescribeClientPropertiesResponse
+      include Smithy::Client::_Response[Types::DescribeClientPropertiesResult]
+      def client_properties_list: () -> Array[Types::ClientPropertiesResult]?
+    end
+    def describe_client_properties: (
+      ?resource_ids: Array[String]
+    ) -> _DescribeClientPropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeClientPropertiesResponse
+
+    interface _DescribeConnectClientAddInsResponse
+      include Smithy::Client::_Response[Types::DescribeConnectClientAddInsResult]
+      def add_ins: () -> Array[Types::ConnectClientAddIn]?
+      def next_token: () -> String?
+    end
+    def describe_connect_client_add_ins: (
+      ?resource_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeConnectClientAddInsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConnectClientAddInsResponse
+
+    interface _DescribeConnectionAliasPermissionsResponse
+      include Smithy::Client::_Response[Types::DescribeConnectionAliasPermissionsResult]
+      def alias_id: () -> String?
+      def connection_alias_permissions: () -> Array[Types::ConnectionAliasPermission]?
+      def next_token: () -> String?
+    end
+    def describe_connection_alias_permissions: (
+      ?alias_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeConnectionAliasPermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConnectionAliasPermissionsResponse
+
+    interface _DescribeConnectionAliasesResponse
+      include Smithy::Client::_Response[Types::DescribeConnectionAliasesResult]
+      def connection_aliases: () -> Array[Types::ConnectionAlias]?
+      def next_token: () -> String?
+    end
+    def describe_connection_aliases: (
+      ?alias_ids: Array[String],
+      ?resource_id: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeConnectionAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeConnectionAliasesResponse
+
+    interface _DescribeImageAssociationsResponse
+      include Smithy::Client::_Response[Types::DescribeImageAssociationsResult]
+      def associations: () -> Array[Types::ImageResourceAssociation]?
+    end
+    def describe_image_associations: (
+      ?image_id: String,
+      ?associated_resource_types: Array[String]
+    ) -> _DescribeImageAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeImageAssociationsResponse
+
+    interface _DescribeIpGroupsResponse
+      include Smithy::Client::_Response[Types::DescribeIpGroupsResult]
+      def result: () -> Array[Types::WorkspacesIpGroup]?
+      def next_token: () -> String?
+    end
+    def describe_ip_groups: (
+      ?group_ids: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeIpGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeIpGroupsResponse
+
+    interface _DescribeTagsResponse
+      include Smithy::Client::_Response[Types::DescribeTagsResult]
+      def tag_list: () -> Array[Types::Tag]?
+    end
+    def describe_tags: (
+      ?resource_id: String
+    ) -> _DescribeTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTagsResponse
+
+    interface _DescribeWorkspaceAssociationsResponse
+      include Smithy::Client::_Response[Types::DescribeWorkspaceAssociationsResult]
+      def associations: () -> Array[Types::WorkspaceResourceAssociation]?
+    end
+    def describe_workspace_associations: (
+      ?workspace_id: String,
+      ?associated_resource_types: Array[String]
+    ) -> _DescribeWorkspaceAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkspaceAssociationsResponse
+
+    interface _DescribeWorkspaceBundlesResponse
+      include Smithy::Client::_Response[Types::DescribeWorkspaceBundlesResult]
+      def bundles: () -> Array[Types::WorkspaceBundle]?
+      def next_token: () -> String?
+    end
+    def describe_workspace_bundles: (
+      ?bundle_ids: Array[String],
+      ?owner: String,
+      ?next_token: String
+    ) -> _DescribeWorkspaceBundlesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkspaceBundlesResponse
+
+    interface _DescribeWorkspaceDirectoriesResponse
+      include Smithy::Client::_Response[Types::DescribeWorkspaceDirectoriesResult]
+      def directories: () -> Array[Types::WorkspaceDirectory]?
+      def next_token: () -> String?
+    end
+    def describe_workspace_directories: (
+      ?directory_ids: Array[String],
+      ?workspace_directory_names: Array[String],
+      ?limit: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _DescribeWorkspaceDirectoriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkspaceDirectoriesResponse
+
+    interface _DescribeWorkspaceImagePermissionsResponse
+      include Smithy::Client::_Response[Types::DescribeWorkspaceImagePermissionsResult]
+      def image_id: () -> String?
+      def image_permissions: () -> Array[Types::ImagePermission]?
+      def next_token: () -> String?
+    end
+    def describe_workspace_image_permissions: (
+      ?image_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeWorkspaceImagePermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkspaceImagePermissionsResponse
+
+    interface _DescribeWorkspaceImagesResponse
+      include Smithy::Client::_Response[Types::DescribeWorkspaceImagesResult]
+      def images: () -> Array[Types::WorkspaceImage]?
+      def next_token: () -> String?
+    end
+    def describe_workspace_images: (
+      ?image_ids: Array[String],
+      ?image_type: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeWorkspaceImagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkspaceImagesResponse
+
+    interface _DescribeWorkspaceSnapshotsResponse
+      include Smithy::Client::_Response[Types::DescribeWorkspaceSnapshotsResult]
+      def rebuild_snapshots: () -> Array[Types::Snapshot]?
+      def restore_snapshots: () -> Array[Types::Snapshot]?
+    end
+    def describe_workspace_snapshots: (
+      ?workspace_id: String
+    ) -> _DescribeWorkspaceSnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkspaceSnapshotsResponse
+
+    interface _DescribeWorkspacesResponse
+      include Smithy::Client::_Response[Types::DescribeWorkspacesResult]
+      def workspaces: () -> Array[Types::Workspace]?
+      def next_token: () -> String?
+    end
+    def describe_workspaces: (
+      ?workspace_ids: Array[String],
+      ?directory_id: String,
+      ?user_name: String,
+      ?bundle_id: String,
+      ?limit: Integer,
+      ?next_token: String,
+      ?workspace_name: String
+    ) -> _DescribeWorkspacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkspacesResponse
+
+    interface _DescribeWorkspacesConnectionStatusResponse
+      include Smithy::Client::_Response[Types::DescribeWorkspacesConnectionStatusResult]
+      def workspaces_connection_status: () -> Array[Types::WorkspaceConnectionStatus]?
+      def next_token: () -> String?
+    end
+    def describe_workspaces_connection_status: (
+      ?workspace_ids: Array[String],
+      ?next_token: String
+    ) -> _DescribeWorkspacesConnectionStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkspacesConnectionStatusResponse
+
+    interface _DescribeWorkspacesPoolSessionsResponse
+      include Smithy::Client::_Response[Types::DescribeWorkspacesPoolSessionsResult]
+      def sessions: () -> Array[Types::WorkspacesPoolSession]?
+      def next_token: () -> String?
+    end
+    def describe_workspaces_pool_sessions: (
+      ?pool_id: String,
+      ?user_id: String,
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeWorkspacesPoolSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkspacesPoolSessionsResponse
+
+    interface _DescribeWorkspacesPoolsResponse
+      include Smithy::Client::_Response[Types::DescribeWorkspacesPoolsResult]
+      def workspaces_pools: () -> Array[Types::WorkspacesPool]?
+      def next_token: () -> String?
+    end
+    def describe_workspaces_pools: (
+      ?pool_ids: Array[String],
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String],
+          operator: String
+        }
+      ],
+      ?limit: Integer,
+      ?next_token: String
+    ) -> _DescribeWorkspacesPoolsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWorkspacesPoolsResponse
+
+    interface _DisassociateConnectionAliasResponse
+      include Smithy::Client::_Response[Types::DisassociateConnectionAliasResult]
+    end
+    def disassociate_connection_alias: (
+      ?alias_id: String
+    ) -> _DisassociateConnectionAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateConnectionAliasResponse
+
+    interface _DisassociateIpGroupsResponse
+      include Smithy::Client::_Response[Types::DisassociateIpGroupsResult]
+    end
+    def disassociate_ip_groups: (
+      ?directory_id: String,
+      ?group_ids: Array[String]
+    ) -> _DisassociateIpGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateIpGroupsResponse
+
+    interface _DisassociateWorkspaceApplicationResponse
+      include Smithy::Client::_Response[Types::DisassociateWorkspaceApplicationResult]
+      def association: () -> Types::WorkspaceResourceAssociation?
+    end
+    def disassociate_workspace_application: (
+      ?workspace_id: String,
+      ?application_id: String
+    ) -> _DisassociateWorkspaceApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateWorkspaceApplicationResponse
+
+    interface _GetAccountLinkResponse
+      include Smithy::Client::_Response[Types::GetAccountLinkResult]
+      def account_link: () -> Types::AccountLink?
+    end
+    def get_account_link: (
+      ?link_id: String,
+      ?linked_account_id: String
+    ) -> _GetAccountLinkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountLinkResponse
+
+    interface _ImportClientBrandingResponse
+      include Smithy::Client::_Response[Types::ImportClientBrandingResult]
+      def device_type_windows: () -> Types::DefaultClientBrandingAttributes?
+      def device_type_osx: () -> Types::DefaultClientBrandingAttributes?
+      def device_type_android: () -> Types::DefaultClientBrandingAttributes?
+      def device_type_ios: () -> Types::IosClientBrandingAttributes?
+      def device_type_linux: () -> Types::DefaultClientBrandingAttributes?
+      def device_type_web: () -> Types::DefaultClientBrandingAttributes?
+    end
+    def import_client_branding: (
+      ?resource_id: String,
+      ?device_type_windows: {
+        logo: String,
+        support_email: String,
+        support_link: String,
+        forgot_password_link: untyped,
+        login_message: Hash[String, String]
+      },
+      ?device_type_osx: {
+        logo: String,
+        support_email: String,
+        support_link: String,
+        forgot_password_link: untyped,
+        login_message: Hash[String, String]
+      },
+      ?device_type_android: {
+        logo: String,
+        support_email: String,
+        support_link: String,
+        forgot_password_link: untyped,
+        login_message: Hash[String, String]
+      },
+      ?device_type_ios: {
+        logo: String,
+        logo2x: String,
+        logo3x: String,
+        support_email: String,
+        support_link: String,
+        forgot_password_link: untyped,
+        login_message: Hash[String, String]
+      },
+      ?device_type_linux: {
+        logo: String,
+        support_email: String,
+        support_link: String,
+        forgot_password_link: untyped,
+        login_message: Hash[String, String]
+      },
+      ?device_type_web: {
+        logo: String,
+        support_email: String,
+        support_link: String,
+        forgot_password_link: untyped,
+        login_message: Hash[String, String]
+      }
+    ) -> _ImportClientBrandingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportClientBrandingResponse
+
+    interface _ImportWorkspaceImageResponse
+      include Smithy::Client::_Response[Types::ImportWorkspaceImageResult]
+      def image_id: () -> String?
+    end
+    def import_workspace_image: (
+      ?ec2_image_id: String,
+      ?ingestion_process: String,
+      ?image_name: String,
+      ?image_description: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?applications: Array[String]
+    ) -> _ImportWorkspaceImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportWorkspaceImageResponse
+
+    interface _ListAccountLinksResponse
+      include Smithy::Client::_Response[Types::ListAccountLinksResult]
+      def account_links: () -> Array[Types::AccountLink]?
+      def next_token: () -> String?
+    end
+    def list_account_links: (
+      ?link_status_filter: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAccountLinksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccountLinksResponse
+
+    interface _ListAvailableManagementCidrRangesResponse
+      include Smithy::Client::_Response[Types::ListAvailableManagementCidrRangesResult]
+      def management_cidr_ranges: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_available_management_cidr_ranges: (
+      ?management_cidr_range_constraint: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAvailableManagementCidrRangesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAvailableManagementCidrRangesResponse
+
+    interface _MigrateWorkspaceResponse
+      include Smithy::Client::_Response[Types::MigrateWorkspaceResult]
+      def source_workspace_id: () -> String?
+      def target_workspace_id: () -> String?
+    end
+    def migrate_workspace: (
+      ?source_workspace_id: String,
+      ?bundle_id: String
+    ) -> _MigrateWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _MigrateWorkspaceResponse
+
+    interface _ModifyAccountResponse
+      include Smithy::Client::_Response[Types::ModifyAccountResult]
+    end
+    def modify_account: (
+      ?dedicated_tenancy_support: String,
+      ?dedicated_tenancy_management_cidr_range: String
+    ) -> _ModifyAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyAccountResponse
+
+    interface _ModifyCertificateBasedAuthPropertiesResponse
+      include Smithy::Client::_Response[Types::ModifyCertificateBasedAuthPropertiesResult]
+    end
+    def modify_certificate_based_auth_properties: (
+      ?resource_id: String,
+      ?certificate_based_auth_properties: {
+        status: String,
+        certificate_authority_arn: String
+      },
+      ?properties_to_delete: Array[String]
+    ) -> _ModifyCertificateBasedAuthPropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyCertificateBasedAuthPropertiesResponse
+
+    interface _ModifyClientPropertiesResponse
+      include Smithy::Client::_Response[Types::ModifyClientPropertiesResult]
+    end
+    def modify_client_properties: (
+      ?resource_id: String,
+      ?client_properties: {
+        reconnect_enabled: String,
+        log_upload_enabled: String
+      }
+    ) -> _ModifyClientPropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyClientPropertiesResponse
+
+    interface _ModifyEndpointEncryptionModeResponse
+      include Smithy::Client::_Response[Types::ModifyEndpointEncryptionModeResponse]
+    end
+    def modify_endpoint_encryption_mode: (
+      ?directory_id: String,
+      ?endpoint_encryption_mode: String
+    ) -> _ModifyEndpointEncryptionModeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyEndpointEncryptionModeResponse
+
+    interface _ModifySamlPropertiesResponse
+      include Smithy::Client::_Response[Types::ModifySamlPropertiesResult]
+    end
+    def modify_saml_properties: (
+      ?resource_id: String,
+      ?saml_properties: {
+        status: String,
+        user_access_url: String,
+        relay_state_parameter_name: String
+      },
+      ?properties_to_delete: Array[String]
+    ) -> _ModifySamlPropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifySamlPropertiesResponse
+
+    interface _ModifySelfservicePermissionsResponse
+      include Smithy::Client::_Response[Types::ModifySelfservicePermissionsResult]
+    end
+    def modify_selfservice_permissions: (
+      ?resource_id: String,
+      ?selfservice_permissions: {
+        restart_workspace: String,
+        increase_volume_size: untyped,
+        change_compute_type: untyped,
+        switch_running_mode: untyped,
+        rebuild_workspace: untyped
+      }
+    ) -> _ModifySelfservicePermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifySelfservicePermissionsResponse
+
+    interface _ModifyStreamingPropertiesResponse
+      include Smithy::Client::_Response[Types::ModifyStreamingPropertiesResult]
+    end
+    def modify_streaming_properties: (
+      ?resource_id: String,
+      ?streaming_properties: {
+        streaming_experience_preferred_protocol: String,
+        user_settings: Array[
+          {
+            action: String,
+            permission: String,
+            maximum_length: Integer
+          }
+        ],
+        storage_connectors: Array[
+          {
+            connector_type: String,
+            status: String
+          }
+        ],
+        global_accelerator: {
+          mode: String,
+          preferred_protocol: String
+        }
+      }
+    ) -> _ModifyStreamingPropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyStreamingPropertiesResponse
+
+    interface _ModifyWorkspaceAccessPropertiesResponse
+      include Smithy::Client::_Response[Types::ModifyWorkspaceAccessPropertiesResult]
+    end
+    def modify_workspace_access_properties: (
+      ?resource_id: String,
+      ?workspace_access_properties: {
+        device_type_windows: String,
+        device_type_osx: untyped,
+        device_type_web: untyped,
+        device_type_ios: untyped,
+        device_type_android: untyped,
+        device_type_chrome_os: untyped,
+        device_type_zero_client: untyped,
+        device_type_linux: untyped,
+        device_type_work_spaces_thin_client: untyped,
+        access_endpoint_config: {
+          access_endpoints: Array[
+            {
+              access_endpoint_type: String,
+              vpc_endpoint_id: String
+            }
+          ],
+          internet_fallback_protocols: Array[String]
+        }
+      }
+    ) -> _ModifyWorkspaceAccessPropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyWorkspaceAccessPropertiesResponse
+
+    interface _ModifyWorkspaceCreationPropertiesResponse
+      include Smithy::Client::_Response[Types::ModifyWorkspaceCreationPropertiesResult]
+    end
+    def modify_workspace_creation_properties: (
+      ?resource_id: String,
+      ?workspace_creation_properties: {
+        enable_internet_access: bool,
+        default_ou: String,
+        custom_security_group_id: String,
+        user_enabled_as_local_administrator: untyped,
+        enable_maintenance_mode: untyped,
+        instance_iam_role_arn: String
+      }
+    ) -> _ModifyWorkspaceCreationPropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyWorkspaceCreationPropertiesResponse
+
+    interface _ModifyWorkspacePropertiesResponse
+      include Smithy::Client::_Response[Types::ModifyWorkspacePropertiesResult]
+    end
+    def modify_workspace_properties: (
+      ?workspace_id: String,
+      ?workspace_properties: {
+        running_mode: String,
+        running_mode_auto_stop_timeout_in_minutes: Integer,
+        root_volume_size_gib: Integer,
+        user_volume_size_gib: Integer,
+        compute_type_name: String,
+        protocols: Array[String],
+        operating_system_name: String,
+        global_accelerator: {
+          mode: String,
+          preferred_protocol: String
+        }
+      },
+      ?data_replication: String
+    ) -> _ModifyWorkspacePropertiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyWorkspacePropertiesResponse
+
+    interface _ModifyWorkspaceStateResponse
+      include Smithy::Client::_Response[Types::ModifyWorkspaceStateResult]
+    end
+    def modify_workspace_state: (
+      ?workspace_id: String,
+      ?workspace_state: String
+    ) -> _ModifyWorkspaceStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyWorkspaceStateResponse
+
+    interface _RebootWorkspacesResponse
+      include Smithy::Client::_Response[Types::RebootWorkspacesResult]
+      def failed_requests: () -> Array[Types::FailedWorkspaceChangeRequest]?
+    end
+    def reboot_workspaces: (
+      ?reboot_workspace_requests: Array[
+        {
+          workspace_id: String
+        }
+      ]
+    ) -> _RebootWorkspacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RebootWorkspacesResponse
+
+    interface _RebuildWorkspacesResponse
+      include Smithy::Client::_Response[Types::RebuildWorkspacesResult]
+      def failed_requests: () -> Array[Types::FailedWorkspaceChangeRequest]?
+    end
+    def rebuild_workspaces: (
+      ?rebuild_workspace_requests: Array[
+        {
+          workspace_id: String
+        }
+      ]
+    ) -> _RebuildWorkspacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RebuildWorkspacesResponse
+
+    interface _RegisterWorkspaceDirectoryResponse
+      include Smithy::Client::_Response[Types::RegisterWorkspaceDirectoryResult]
+      def directory_id: () -> String?
+      def state: () -> String?
+    end
+    def register_workspace_directory: (
+      ?directory_id: String,
+      ?subnet_ids: Array[String],
+      ?enable_self_service: bool,
+      ?tenancy: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?workspace_directory_name: String,
+      ?workspace_directory_description: String,
+      ?user_identity_type: String,
+      ?idc_instance_arn: String,
+      ?microsoft_entra_config: {
+        tenant_id: String,
+        application_config_secret_arn: String
+      },
+      ?workspace_type: String,
+      ?active_directory_config: {
+        domain_name: String,
+        service_account_secret_arn: String
+      }
+    ) -> _RegisterWorkspaceDirectoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterWorkspaceDirectoryResponse
+
+    interface _RejectAccountLinkInvitationResponse
+      include Smithy::Client::_Response[Types::RejectAccountLinkInvitationResult]
+      def account_link: () -> Types::AccountLink?
+    end
+    def reject_account_link_invitation: (
+      ?link_id: String,
+      ?client_token: String
+    ) -> _RejectAccountLinkInvitationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectAccountLinkInvitationResponse
+
+    interface _RestoreWorkspaceResponse
+      include Smithy::Client::_Response[Types::RestoreWorkspaceResult]
+    end
+    def restore_workspace: (
+      ?workspace_id: String
+    ) -> _RestoreWorkspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreWorkspaceResponse
+
+    interface _RevokeIpRulesResponse
+      include Smithy::Client::_Response[Types::RevokeIpRulesResult]
+    end
+    def revoke_ip_rules: (
+      ?group_id: String,
+      ?user_rules: Array[String]
+    ) -> _RevokeIpRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RevokeIpRulesResponse
+
+    interface _StartWorkspacesResponse
+      include Smithy::Client::_Response[Types::StartWorkspacesResult]
+      def failed_requests: () -> Array[Types::FailedWorkspaceChangeRequest]?
+    end
+    def start_workspaces: (
+      ?start_workspace_requests: Array[
+        {
+          workspace_id: String
+        }
+      ]
+    ) -> _StartWorkspacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartWorkspacesResponse
+
+    interface _StartWorkspacesPoolResponse
+      include Smithy::Client::_Response[Types::StartWorkspacesPoolResult]
+    end
+    def start_workspaces_pool: (
+      ?pool_id: String
+    ) -> _StartWorkspacesPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartWorkspacesPoolResponse
+
+    interface _StopWorkspacesResponse
+      include Smithy::Client::_Response[Types::StopWorkspacesResult]
+      def failed_requests: () -> Array[Types::FailedWorkspaceChangeRequest]?
+    end
+    def stop_workspaces: (
+      ?stop_workspace_requests: Array[
+        {
+          workspace_id: String
+        }
+      ]
+    ) -> _StopWorkspacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopWorkspacesResponse
+
+    interface _StopWorkspacesPoolResponse
+      include Smithy::Client::_Response[Types::StopWorkspacesPoolResult]
+    end
+    def stop_workspaces_pool: (
+      ?pool_id: String
+    ) -> _StopWorkspacesPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopWorkspacesPoolResponse
+
+    interface _TerminateWorkspacesResponse
+      include Smithy::Client::_Response[Types::TerminateWorkspacesResult]
+      def failed_requests: () -> Array[Types::FailedWorkspaceChangeRequest]?
+    end
+    def terminate_workspaces: (
+      ?terminate_workspace_requests: Array[
+        {
+          workspace_id: String
+        }
+      ]
+    ) -> _TerminateWorkspacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateWorkspacesResponse
+
+    interface _TerminateWorkspacesPoolResponse
+      include Smithy::Client::_Response[Types::TerminateWorkspacesPoolResult]
+    end
+    def terminate_workspaces_pool: (
+      ?pool_id: String
+    ) -> _TerminateWorkspacesPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateWorkspacesPoolResponse
+
+    interface _TerminateWorkspacesPoolSessionResponse
+      include Smithy::Client::_Response[Types::TerminateWorkspacesPoolSessionResult]
+    end
+    def terminate_workspaces_pool_session: (
+      ?session_id: String
+    ) -> _TerminateWorkspacesPoolSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateWorkspacesPoolSessionResponse
+
+    interface _UpdateConnectClientAddInResponse
+      include Smithy::Client::_Response[Types::UpdateConnectClientAddInResult]
+    end
+    def update_connect_client_add_in: (
+      ?add_in_id: String,
+      ?resource_id: String,
+      ?name: String,
+      ?url: String
+    ) -> _UpdateConnectClientAddInResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectClientAddInResponse
+
+    interface _UpdateConnectionAliasPermissionResponse
+      include Smithy::Client::_Response[Types::UpdateConnectionAliasPermissionResult]
+    end
+    def update_connection_alias_permission: (
+      ?alias_id: String,
+      ?connection_alias_permission: {
+        shared_account_id: String,
+        allow_association: bool
+      }
+    ) -> _UpdateConnectionAliasPermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectionAliasPermissionResponse
+
+    interface _UpdateRulesOfIpGroupResponse
+      include Smithy::Client::_Response[Types::UpdateRulesOfIpGroupResult]
+    end
+    def update_rules_of_ip_group: (
+      ?group_id: String,
+      ?user_rules: Array[
+        {
+          ip_rule: String,
+          rule_desc: String
+        }
+      ]
+    ) -> _UpdateRulesOfIpGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRulesOfIpGroupResponse
+
+    interface _UpdateWorkspaceBundleResponse
+      include Smithy::Client::_Response[Types::UpdateWorkspaceBundleResult]
+    end
+    def update_workspace_bundle: (
+      ?bundle_id: String,
+      ?image_id: String
+    ) -> _UpdateWorkspaceBundleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkspaceBundleResponse
+
+    interface _UpdateWorkspaceImagePermissionResponse
+      include Smithy::Client::_Response[Types::UpdateWorkspaceImagePermissionResult]
+    end
+    def update_workspace_image_permission: (
+      ?image_id: String,
+      ?allow_copy_image: bool,
+      ?shared_account_id: String
+    ) -> _UpdateWorkspaceImagePermissionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkspaceImagePermissionResponse
+
+    interface _UpdateWorkspacesPoolResponse
+      include Smithy::Client::_Response[Types::UpdateWorkspacesPoolResult]
+      def workspaces_pool: () -> Types::WorkspacesPool?
+    end
+    def update_workspaces_pool: (
+      ?pool_id: String,
+      ?description: String,
+      ?bundle_id: String,
+      ?directory_id: String,
+      ?capacity: {
+        desired_user_sessions: Integer
+      },
+      ?application_settings: {
+        status: String,
+        settings_group: String
+      },
+      ?timeout_settings: {
+        disconnect_timeout_in_seconds: Integer,
+        idle_disconnect_timeout_in_seconds: Integer,
+        max_user_duration_in_seconds: Integer
+      },
+      ?running_mode: String
+    ) -> _UpdateWorkspacesPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWorkspacesPoolResponse
+  end
+end

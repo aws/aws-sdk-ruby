@@ -1,0 +1,16 @@
+module Aws::WorkMailMessageFlow
+  module Errors
+    class InvalidContentLocation < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MessageFrozen < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MessageRejected < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

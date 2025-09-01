@@ -1,0 +1,1164 @@
+module Aws::WorkMail
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::WorkMail::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateDelegateToResourceResponse
+      include Smithy::Client::_Response[Types::AssociateDelegateToResourceResponse]
+    end
+    def associate_delegate_to_resource: (
+      ?organization_id: String,
+      ?resource_id: String,
+      ?entity_id: String
+    ) -> _AssociateDelegateToResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateDelegateToResourceResponse
+
+    interface _AssociateMemberToGroupResponse
+      include Smithy::Client::_Response[Types::AssociateMemberToGroupResponse]
+    end
+    def associate_member_to_group: (
+      ?organization_id: String,
+      ?group_id: String,
+      ?member_id: String
+    ) -> _AssociateMemberToGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateMemberToGroupResponse
+
+    interface _AssumeImpersonationRoleResponse
+      include Smithy::Client::_Response[Types::AssumeImpersonationRoleResponse]
+      def token: () -> String?
+      def expires_in: () -> Integer?
+    end
+    def assume_impersonation_role: (
+      ?organization_id: String,
+      ?impersonation_role_id: String
+    ) -> _AssumeImpersonationRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssumeImpersonationRoleResponse
+
+    interface _CancelMailboxExportJobResponse
+      include Smithy::Client::_Response[Types::CancelMailboxExportJobResponse]
+    end
+    def cancel_mailbox_export_job: (
+      ?client_token: String,
+      ?job_id: String,
+      ?organization_id: String
+    ) -> _CancelMailboxExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelMailboxExportJobResponse
+
+    interface _CreateAliasResponse
+      include Smithy::Client::_Response[Types::CreateAliasResponse]
+    end
+    def create_alias: (
+      ?organization_id: String,
+      ?entity_id: String,
+      ?alias: String
+    ) -> _CreateAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAliasResponse
+
+    interface _CreateAvailabilityConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateAvailabilityConfigurationResponse]
+    end
+    def create_availability_configuration: (
+      ?client_token: String,
+      ?organization_id: String,
+      ?domain_name: String,
+      ?ews_provider: {
+        ews_endpoint: String,
+        ews_username: String,
+        ews_password: String
+      },
+      ?lambda_provider: {
+        lambda_arn: String
+      }
+    ) -> _CreateAvailabilityConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAvailabilityConfigurationResponse
+
+    interface _CreateGroupResponse
+      include Smithy::Client::_Response[Types::CreateGroupResponse]
+      def group_id: () -> String?
+    end
+    def create_group: (
+      ?organization_id: String,
+      ?name: String,
+      ?hidden_from_global_address_list: bool
+    ) -> _CreateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGroupResponse
+
+    interface _CreateIdentityCenterApplicationResponse
+      include Smithy::Client::_Response[Types::CreateIdentityCenterApplicationResponse]
+      def application_arn: () -> String?
+    end
+    def create_identity_center_application: (
+      ?name: String,
+      ?instance_arn: String,
+      ?client_token: String
+    ) -> _CreateIdentityCenterApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIdentityCenterApplicationResponse
+
+    interface _CreateImpersonationRoleResponse
+      include Smithy::Client::_Response[Types::CreateImpersonationRoleResponse]
+      def impersonation_role_id: () -> String?
+    end
+    def create_impersonation_role: (
+      ?client_token: String,
+      ?organization_id: String,
+      ?name: String,
+      ?type: String,
+      ?description: String,
+      ?rules: Array[
+        {
+          impersonation_rule_id: String,
+          name: String,
+          description: String,
+          effect: String,
+          target_users: Array[String],
+          not_target_users: untyped
+        }
+      ]
+    ) -> _CreateImpersonationRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateImpersonationRoleResponse
+
+    interface _CreateMobileDeviceAccessRuleResponse
+      include Smithy::Client::_Response[Types::CreateMobileDeviceAccessRuleResponse]
+      def mobile_device_access_rule_id: () -> String?
+    end
+    def create_mobile_device_access_rule: (
+      ?organization_id: String,
+      ?client_token: String,
+      ?name: String,
+      ?description: String,
+      ?effect: String,
+      ?device_types: Array[String],
+      ?not_device_types: Array[String],
+      ?device_models: Array[String],
+      ?not_device_models: Array[String],
+      ?device_operating_systems: Array[String],
+      ?not_device_operating_systems: Array[String],
+      ?device_user_agents: Array[String],
+      ?not_device_user_agents: Array[String]
+    ) -> _CreateMobileDeviceAccessRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMobileDeviceAccessRuleResponse
+
+    interface _CreateOrganizationResponse
+      include Smithy::Client::_Response[Types::CreateOrganizationResponse]
+      def organization_id: () -> String?
+    end
+    def create_organization: (
+      ?directory_id: String,
+      ?alias: String,
+      ?client_token: String,
+      ?domains: Array[
+        {
+          domain_name: String,
+          hosted_zone_id: String
+        }
+      ],
+      ?kms_key_arn: String,
+      ?enable_interoperability: bool
+    ) -> _CreateOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOrganizationResponse
+
+    interface _CreateResourceResponse
+      include Smithy::Client::_Response[Types::CreateResourceResponse]
+      def resource_id: () -> String?
+    end
+    def create_resource: (
+      ?organization_id: String,
+      ?name: String,
+      ?type: String,
+      ?description: String,
+      ?hidden_from_global_address_list: bool
+    ) -> _CreateResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResourceResponse
+
+    interface _CreateUserResponse
+      include Smithy::Client::_Response[Types::CreateUserResponse]
+      def user_id: () -> String?
+    end
+    def create_user: (
+      ?organization_id: String,
+      ?name: String,
+      ?display_name: String,
+      ?password: String,
+      ?role: String,
+      ?first_name: String,
+      ?last_name: String,
+      ?hidden_from_global_address_list: bool,
+      ?identity_provider_user_id: String
+    ) -> _CreateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserResponse
+
+    interface _DeleteAccessControlRuleResponse
+      include Smithy::Client::_Response[Types::DeleteAccessControlRuleResponse]
+    end
+    def delete_access_control_rule: (
+      ?organization_id: String,
+      ?name: String
+    ) -> _DeleteAccessControlRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAccessControlRuleResponse
+
+    interface _DeleteAliasResponse
+      include Smithy::Client::_Response[Types::DeleteAliasResponse]
+    end
+    def delete_alias: (
+      ?organization_id: String,
+      ?entity_id: String,
+      ?alias: String
+    ) -> _DeleteAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAliasResponse
+
+    interface _DeleteAvailabilityConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteAvailabilityConfigurationResponse]
+    end
+    def delete_availability_configuration: (
+      ?organization_id: String,
+      ?domain_name: String
+    ) -> _DeleteAvailabilityConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAvailabilityConfigurationResponse
+
+    interface _DeleteEmailMonitoringConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteEmailMonitoringConfigurationResponse]
+    end
+    def delete_email_monitoring_configuration: (
+      ?organization_id: String
+    ) -> _DeleteEmailMonitoringConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEmailMonitoringConfigurationResponse
+
+    interface _DeleteGroupResponse
+      include Smithy::Client::_Response[Types::DeleteGroupResponse]
+    end
+    def delete_group: (
+      ?organization_id: String,
+      ?group_id: String
+    ) -> _DeleteGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGroupResponse
+
+    interface _DeleteIdentityCenterApplicationResponse
+      include Smithy::Client::_Response[Types::DeleteIdentityCenterApplicationResponse]
+    end
+    def delete_identity_center_application: (
+      ?application_arn: String
+    ) -> _DeleteIdentityCenterApplicationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIdentityCenterApplicationResponse
+
+    interface _DeleteIdentityProviderConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteIdentityProviderConfigurationResponse]
+    end
+    def delete_identity_provider_configuration: (
+      ?organization_id: String
+    ) -> _DeleteIdentityProviderConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIdentityProviderConfigurationResponse
+
+    interface _DeleteImpersonationRoleResponse
+      include Smithy::Client::_Response[Types::DeleteImpersonationRoleResponse]
+    end
+    def delete_impersonation_role: (
+      ?organization_id: String,
+      ?impersonation_role_id: String
+    ) -> _DeleteImpersonationRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteImpersonationRoleResponse
+
+    interface _DeleteMailboxPermissionsResponse
+      include Smithy::Client::_Response[Types::DeleteMailboxPermissionsResponse]
+    end
+    def delete_mailbox_permissions: (
+      ?organization_id: String,
+      ?entity_id: String,
+      ?grantee_id: String
+    ) -> _DeleteMailboxPermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMailboxPermissionsResponse
+
+    interface _DeleteMobileDeviceAccessOverrideResponse
+      include Smithy::Client::_Response[Types::DeleteMobileDeviceAccessOverrideResponse]
+    end
+    def delete_mobile_device_access_override: (
+      ?organization_id: String,
+      ?user_id: String,
+      ?device_id: String
+    ) -> _DeleteMobileDeviceAccessOverrideResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMobileDeviceAccessOverrideResponse
+
+    interface _DeleteMobileDeviceAccessRuleResponse
+      include Smithy::Client::_Response[Types::DeleteMobileDeviceAccessRuleResponse]
+    end
+    def delete_mobile_device_access_rule: (
+      ?organization_id: String,
+      ?mobile_device_access_rule_id: String
+    ) -> _DeleteMobileDeviceAccessRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMobileDeviceAccessRuleResponse
+
+    interface _DeleteOrganizationResponse
+      include Smithy::Client::_Response[Types::DeleteOrganizationResponse]
+      def organization_id: () -> String?
+      def state: () -> String?
+    end
+    def delete_organization: (
+      ?client_token: String,
+      ?organization_id: String,
+      ?delete_directory: bool,
+      ?force_delete: bool,
+      ?delete_identity_center_application: bool
+    ) -> _DeleteOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOrganizationResponse
+
+    interface _DeletePersonalAccessTokenResponse
+      include Smithy::Client::_Response[Types::DeletePersonalAccessTokenResponse]
+    end
+    def delete_personal_access_token: (
+      ?organization_id: String,
+      ?personal_access_token_id: String
+    ) -> _DeletePersonalAccessTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePersonalAccessTokenResponse
+
+    interface _DeleteResourceResponse
+      include Smithy::Client::_Response[Types::DeleteResourceResponse]
+    end
+    def delete_resource: (
+      ?organization_id: String,
+      ?resource_id: String
+    ) -> _DeleteResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResourceResponse
+
+    interface _DeleteRetentionPolicyResponse
+      include Smithy::Client::_Response[Types::DeleteRetentionPolicyResponse]
+    end
+    def delete_retention_policy: (
+      ?organization_id: String,
+      ?id: String
+    ) -> _DeleteRetentionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRetentionPolicyResponse
+
+    interface _DeleteUserResponse
+      include Smithy::Client::_Response[Types::DeleteUserResponse]
+    end
+    def delete_user: (
+      ?organization_id: String,
+      ?user_id: String
+    ) -> _DeleteUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteUserResponse
+
+    interface _DeregisterFromWorkMailResponse
+      include Smithy::Client::_Response[Types::DeregisterFromWorkMailResponse]
+    end
+    def deregister_from_work_mail: (
+      ?organization_id: String,
+      ?entity_id: String
+    ) -> _DeregisterFromWorkMailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterFromWorkMailResponse
+
+    interface _DeregisterMailDomainResponse
+      include Smithy::Client::_Response[Types::DeregisterMailDomainResponse]
+    end
+    def deregister_mail_domain: (
+      ?organization_id: String,
+      ?domain_name: String
+    ) -> _DeregisterMailDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeregisterMailDomainResponse
+
+    interface _DescribeEmailMonitoringConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeEmailMonitoringConfigurationResponse]
+      def role_arn: () -> String?
+      def log_group_arn: () -> String?
+    end
+    def describe_email_monitoring_configuration: (
+      ?organization_id: String
+    ) -> _DescribeEmailMonitoringConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEmailMonitoringConfigurationResponse
+
+    interface _DescribeEntityResponse
+      include Smithy::Client::_Response[Types::DescribeEntityResponse]
+      def entity_id: () -> String?
+      def name: () -> String?
+      def type: () -> String?
+    end
+    def describe_entity: (
+      ?organization_id: String,
+      ?email: String
+    ) -> _DescribeEntityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEntityResponse
+
+    interface _DescribeGroupResponse
+      include Smithy::Client::_Response[Types::DescribeGroupResponse]
+      def group_id: () -> String?
+      def name: () -> String?
+      def email: () -> String?
+      def state: () -> String?
+      def enabled_date: () -> Time?
+      def disabled_date: () -> Time?
+      def hidden_from_global_address_list: () -> bool?
+    end
+    def describe_group: (
+      ?organization_id: String,
+      ?group_id: String
+    ) -> _DescribeGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeGroupResponse
+
+    interface _DescribeIdentityProviderConfigurationResponse
+      include Smithy::Client::_Response[Types::DescribeIdentityProviderConfigurationResponse]
+      def authentication_mode: () -> String?
+      def identity_center_configuration: () -> Types::IdentityCenterConfiguration?
+      def personal_access_token_configuration: () -> Types::PersonalAccessTokenConfiguration?
+    end
+    def describe_identity_provider_configuration: (
+      ?organization_id: String
+    ) -> _DescribeIdentityProviderConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeIdentityProviderConfigurationResponse
+
+    interface _DescribeInboundDmarcSettingsResponse
+      include Smithy::Client::_Response[Types::DescribeInboundDmarcSettingsResponse]
+      def enforced: () -> bool?
+    end
+    def describe_inbound_dmarc_settings: (
+      ?organization_id: String
+    ) -> _DescribeInboundDmarcSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInboundDmarcSettingsResponse
+
+    interface _DescribeMailboxExportJobResponse
+      include Smithy::Client::_Response[Types::DescribeMailboxExportJobResponse]
+      def entity_id: () -> String?
+      def description: () -> String?
+      def role_arn: () -> String?
+      def kms_key_arn: () -> String?
+      def s3_bucket_name: () -> String?
+      def s3_prefix: () -> String?
+      def s3_path: () -> String?
+      def estimated_progress: () -> Integer?
+      def state: () -> String?
+      def error_info: () -> String?
+      def start_time: () -> Time?
+      def end_time: () -> Time?
+    end
+    def describe_mailbox_export_job: (
+      ?job_id: String,
+      ?organization_id: String
+    ) -> _DescribeMailboxExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMailboxExportJobResponse
+
+    interface _DescribeOrganizationResponse
+      include Smithy::Client::_Response[Types::DescribeOrganizationResponse]
+      def organization_id: () -> String?
+      def alias: () -> String?
+      def state: () -> String?
+      def directory_id: () -> String?
+      def directory_type: () -> String?
+      def default_mail_domain: () -> String?
+      def completed_date: () -> Time?
+      def error_message: () -> String?
+      def arn: () -> String?
+      def migration_admin: () -> String?
+      def interoperability_enabled: () -> bool?
+    end
+    def describe_organization: (
+      ?organization_id: String
+    ) -> _DescribeOrganizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeOrganizationResponse
+
+    interface _DescribeResourceResponse
+      include Smithy::Client::_Response[Types::DescribeResourceResponse]
+      def resource_id: () -> String?
+      def email: () -> String?
+      def name: () -> String?
+      def type: () -> String?
+      def booking_options: () -> Types::BookingOptions?
+      def state: () -> String?
+      def enabled_date: () -> Time?
+      def disabled_date: () -> Time?
+      def description: () -> String?
+      def hidden_from_global_address_list: () -> bool?
+    end
+    def describe_resource: (
+      ?organization_id: String,
+      ?resource_id: String
+    ) -> _DescribeResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeResourceResponse
+
+    interface _DescribeUserResponse
+      include Smithy::Client::_Response[Types::DescribeUserResponse]
+      def user_id: () -> String?
+      def name: () -> String?
+      def email: () -> String?
+      def display_name: () -> String?
+      def state: () -> String?
+      def user_role: () -> String?
+      def enabled_date: () -> Time?
+      def disabled_date: () -> Time?
+      def mailbox_provisioned_date: () -> Time?
+      def mailbox_deprovisioned_date: () -> Time?
+      def first_name: () -> String?
+      def last_name: () -> String?
+      def hidden_from_global_address_list: () -> bool?
+      def initials: () -> String?
+      def telephone: () -> String?
+      def street: () -> String?
+      def job_title: () -> String?
+      def city: () -> String?
+      def company: () -> String?
+      def zip_code: () -> String?
+      def department: () -> String?
+      def country: () -> String?
+      def office: () -> String?
+      def identity_provider_user_id: () -> String?
+      def identity_provider_identity_store_id: () -> String?
+    end
+    def describe_user: (
+      ?organization_id: String,
+      ?user_id: String
+    ) -> _DescribeUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeUserResponse
+
+    interface _DisassociateDelegateFromResourceResponse
+      include Smithy::Client::_Response[Types::DisassociateDelegateFromResourceResponse]
+    end
+    def disassociate_delegate_from_resource: (
+      ?organization_id: String,
+      ?resource_id: String,
+      ?entity_id: String
+    ) -> _DisassociateDelegateFromResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateDelegateFromResourceResponse
+
+    interface _DisassociateMemberFromGroupResponse
+      include Smithy::Client::_Response[Types::DisassociateMemberFromGroupResponse]
+    end
+    def disassociate_member_from_group: (
+      ?organization_id: String,
+      ?group_id: String,
+      ?member_id: String
+    ) -> _DisassociateMemberFromGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateMemberFromGroupResponse
+
+    interface _GetAccessControlEffectResponse
+      include Smithy::Client::_Response[Types::GetAccessControlEffectResponse]
+      def effect: () -> String?
+      def matched_rules: () -> Array[String]?
+    end
+    def get_access_control_effect: (
+      ?organization_id: String,
+      ?ip_address: String,
+      ?action: String,
+      ?user_id: String,
+      ?impersonation_role_id: String
+    ) -> _GetAccessControlEffectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccessControlEffectResponse
+
+    interface _GetDefaultRetentionPolicyResponse
+      include Smithy::Client::_Response[Types::GetDefaultRetentionPolicyResponse]
+      def id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def folder_configurations: () -> Array[Types::FolderConfiguration]?
+    end
+    def get_default_retention_policy: (
+      ?organization_id: String
+    ) -> _GetDefaultRetentionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDefaultRetentionPolicyResponse
+
+    interface _GetImpersonationRoleResponse
+      include Smithy::Client::_Response[Types::GetImpersonationRoleResponse]
+      def impersonation_role_id: () -> String?
+      def name: () -> String?
+      def type: () -> String?
+      def description: () -> String?
+      def rules: () -> Array[Types::ImpersonationRule]?
+      def date_created: () -> Time?
+      def date_modified: () -> Time?
+    end
+    def get_impersonation_role: (
+      ?organization_id: String,
+      ?impersonation_role_id: String
+    ) -> _GetImpersonationRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetImpersonationRoleResponse
+
+    interface _GetImpersonationRoleEffectResponse
+      include Smithy::Client::_Response[Types::GetImpersonationRoleEffectResponse]
+      def type: () -> String?
+      def effect: () -> String?
+      def matched_rules: () -> Array[Types::ImpersonationMatchedRule]?
+    end
+    def get_impersonation_role_effect: (
+      ?organization_id: String,
+      ?impersonation_role_id: String,
+      ?target_user: String
+    ) -> _GetImpersonationRoleEffectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetImpersonationRoleEffectResponse
+
+    interface _GetMailDomainResponse
+      include Smithy::Client::_Response[Types::GetMailDomainResponse]
+      def records: () -> Array[Types::DnsRecord]?
+      def is_test_domain: () -> bool?
+      def is_default: () -> bool?
+      def ownership_verification_status: () -> String?
+      def dkim_verification_status: () -> String?
+    end
+    def get_mail_domain: (
+      ?organization_id: String,
+      ?domain_name: String
+    ) -> _GetMailDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMailDomainResponse
+
+    interface _GetMailboxDetailsResponse
+      include Smithy::Client::_Response[Types::GetMailboxDetailsResponse]
+      def mailbox_quota: () -> Integer?
+      def mailbox_size: () -> Float?
+    end
+    def get_mailbox_details: (
+      ?organization_id: String,
+      ?user_id: String
+    ) -> _GetMailboxDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMailboxDetailsResponse
+
+    interface _GetMobileDeviceAccessEffectResponse
+      include Smithy::Client::_Response[Types::GetMobileDeviceAccessEffectResponse]
+      def effect: () -> String?
+      def matched_rules: () -> Array[Types::MobileDeviceAccessMatchedRule]?
+    end
+    def get_mobile_device_access_effect: (
+      ?organization_id: String,
+      ?device_type: String,
+      ?device_model: String,
+      ?device_operating_system: String,
+      ?device_user_agent: String
+    ) -> _GetMobileDeviceAccessEffectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMobileDeviceAccessEffectResponse
+
+    interface _GetMobileDeviceAccessOverrideResponse
+      include Smithy::Client::_Response[Types::GetMobileDeviceAccessOverrideResponse]
+      def user_id: () -> String?
+      def device_id: () -> String?
+      def effect: () -> String?
+      def description: () -> String?
+      def date_created: () -> Time?
+      def date_modified: () -> Time?
+    end
+    def get_mobile_device_access_override: (
+      ?organization_id: String,
+      ?user_id: String,
+      ?device_id: String
+    ) -> _GetMobileDeviceAccessOverrideResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMobileDeviceAccessOverrideResponse
+
+    interface _GetPersonalAccessTokenMetadataResponse
+      include Smithy::Client::_Response[Types::GetPersonalAccessTokenMetadataResponse]
+      def personal_access_token_id: () -> String?
+      def user_id: () -> String?
+      def name: () -> String?
+      def date_created: () -> Time?
+      def date_last_used: () -> Time?
+      def expires_time: () -> Time?
+      def scopes: () -> Array[String]?
+    end
+    def get_personal_access_token_metadata: (
+      ?organization_id: String,
+      ?personal_access_token_id: String
+    ) -> _GetPersonalAccessTokenMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPersonalAccessTokenMetadataResponse
+
+    interface _ListAccessControlRulesResponse
+      include Smithy::Client::_Response[Types::ListAccessControlRulesResponse]
+      def rules: () -> Array[Types::AccessControlRule]?
+    end
+    def list_access_control_rules: (
+      ?organization_id: String
+    ) -> _ListAccessControlRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccessControlRulesResponse
+
+    interface _ListAliasesResponse
+      include Smithy::Client::_Response[Types::ListAliasesResponse]
+      def aliases: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_aliases: (
+      ?organization_id: String,
+      ?entity_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAliasesResponse
+
+    interface _ListAvailabilityConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListAvailabilityConfigurationsResponse]
+      def availability_configurations: () -> Array[Types::AvailabilityConfiguration]?
+      def next_token: () -> String?
+    end
+    def list_availability_configurations: (
+      ?organization_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAvailabilityConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAvailabilityConfigurationsResponse
+
+    interface _ListGroupMembersResponse
+      include Smithy::Client::_Response[Types::ListGroupMembersResponse]
+      def members: () -> Array[Types::Member]?
+      def next_token: () -> String?
+    end
+    def list_group_members: (
+      ?organization_id: String,
+      ?group_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListGroupMembersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupMembersResponse
+
+    interface _ListGroupsResponse
+      include Smithy::Client::_Response[Types::ListGroupsResponse]
+      def groups: () -> Array[Types::Group]?
+      def next_token: () -> String?
+    end
+    def list_groups: (
+      ?organization_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: {
+        name_prefix: String,
+        primary_email_prefix: untyped,
+        state: String
+      }
+    ) -> _ListGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupsResponse
+
+    interface _ListGroupsForEntityResponse
+      include Smithy::Client::_Response[Types::ListGroupsForEntityResponse]
+      def groups: () -> Array[Types::GroupIdentifier]?
+      def next_token: () -> String?
+    end
+    def list_groups_for_entity: (
+      ?organization_id: String,
+      ?entity_id: String,
+      ?filters: {
+        group_name_prefix: String
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListGroupsForEntityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListGroupsForEntityResponse
+
+    interface _ListImpersonationRolesResponse
+      include Smithy::Client::_Response[Types::ListImpersonationRolesResponse]
+      def roles: () -> Array[Types::ImpersonationRole]?
+      def next_token: () -> String?
+    end
+    def list_impersonation_roles: (
+      ?organization_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListImpersonationRolesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListImpersonationRolesResponse
+
+    interface _ListMailDomainsResponse
+      include Smithy::Client::_Response[Types::ListMailDomainsResponse]
+      def mail_domains: () -> Array[Types::MailDomainSummary]?
+      def next_token: () -> String?
+    end
+    def list_mail_domains: (
+      ?organization_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListMailDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMailDomainsResponse
+
+    interface _ListMailboxExportJobsResponse
+      include Smithy::Client::_Response[Types::ListMailboxExportJobsResponse]
+      def jobs: () -> Array[Types::MailboxExportJob]?
+      def next_token: () -> String?
+    end
+    def list_mailbox_export_jobs: (
+      ?organization_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMailboxExportJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMailboxExportJobsResponse
+
+    interface _ListMailboxPermissionsResponse
+      include Smithy::Client::_Response[Types::ListMailboxPermissionsResponse]
+      def permissions: () -> Array[Types::Permission]?
+      def next_token: () -> String?
+    end
+    def list_mailbox_permissions: (
+      ?organization_id: String,
+      ?entity_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMailboxPermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMailboxPermissionsResponse
+
+    interface _ListMobileDeviceAccessOverridesResponse
+      include Smithy::Client::_Response[Types::ListMobileDeviceAccessOverridesResponse]
+      def overrides: () -> Array[Types::MobileDeviceAccessOverride]?
+      def next_token: () -> String?
+    end
+    def list_mobile_device_access_overrides: (
+      ?organization_id: String,
+      ?user_id: String,
+      ?device_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMobileDeviceAccessOverridesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMobileDeviceAccessOverridesResponse
+
+    interface _ListMobileDeviceAccessRulesResponse
+      include Smithy::Client::_Response[Types::ListMobileDeviceAccessRulesResponse]
+      def rules: () -> Array[Types::MobileDeviceAccessRule]?
+    end
+    def list_mobile_device_access_rules: (
+      ?organization_id: String
+    ) -> _ListMobileDeviceAccessRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMobileDeviceAccessRulesResponse
+
+    interface _ListOrganizationsResponse
+      include Smithy::Client::_Response[Types::ListOrganizationsResponse]
+      def organization_summaries: () -> Array[Types::OrganizationSummary]?
+      def next_token: () -> String?
+    end
+    def list_organizations: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListOrganizationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOrganizationsResponse
+
+    interface _ListPersonalAccessTokensResponse
+      include Smithy::Client::_Response[Types::ListPersonalAccessTokensResponse]
+      def next_token: () -> String?
+      def personal_access_token_summaries: () -> Array[Types::PersonalAccessTokenSummary]?
+    end
+    def list_personal_access_tokens: (
+      ?organization_id: String,
+      ?user_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPersonalAccessTokensResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPersonalAccessTokensResponse
+
+    interface _ListResourceDelegatesResponse
+      include Smithy::Client::_Response[Types::ListResourceDelegatesResponse]
+      def delegates: () -> Array[Types::Delegate]?
+      def next_token: () -> String?
+    end
+    def list_resource_delegates: (
+      ?organization_id: String,
+      ?resource_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListResourceDelegatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceDelegatesResponse
+
+    interface _ListResourcesResponse
+      include Smithy::Client::_Response[Types::ListResourcesResponse]
+      def resources: () -> Array[Types::Resource]?
+      def next_token: () -> String?
+    end
+    def list_resources: (
+      ?organization_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: {
+        name_prefix: String,
+        primary_email_prefix: untyped,
+        state: String
+      }
+    ) -> _ListResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourcesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListUsersResponse
+      include Smithy::Client::_Response[Types::ListUsersResponse]
+      def users: () -> Array[Types::User]?
+      def next_token: () -> String?
+    end
+    def list_users: (
+      ?organization_id: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?filters: {
+        username_prefix: String,
+        display_name_prefix: String,
+        primary_email_prefix: untyped,
+        state: String,
+        identity_provider_user_id_prefix: String
+      }
+    ) -> _ListUsersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUsersResponse
+
+    interface _PutAccessControlRuleResponse
+      include Smithy::Client::_Response[Types::PutAccessControlRuleResponse]
+    end
+    def put_access_control_rule: (
+      ?name: String,
+      ?effect: String,
+      ?description: String,
+      ?ip_ranges: Array[String],
+      ?not_ip_ranges: Array[String],
+      ?actions: Array[String],
+      ?not_actions: Array[String],
+      ?user_ids: Array[String],
+      ?not_user_ids: Array[String],
+      ?organization_id: String,
+      ?impersonation_role_ids: Array[String],
+      ?not_impersonation_role_ids: Array[String]
+    ) -> _PutAccessControlRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAccessControlRuleResponse
+
+    interface _PutEmailMonitoringConfigurationResponse
+      include Smithy::Client::_Response[Types::PutEmailMonitoringConfigurationResponse]
+    end
+    def put_email_monitoring_configuration: (
+      ?organization_id: String,
+      ?role_arn: String,
+      ?log_group_arn: String
+    ) -> _PutEmailMonitoringConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutEmailMonitoringConfigurationResponse
+
+    interface _PutIdentityProviderConfigurationResponse
+      include Smithy::Client::_Response[Types::PutIdentityProviderConfigurationResponse]
+    end
+    def put_identity_provider_configuration: (
+      ?organization_id: String,
+      ?authentication_mode: String,
+      ?identity_center_configuration: {
+        instance_arn: String,
+        application_arn: String
+      },
+      ?personal_access_token_configuration: {
+        status: String,
+        lifetime_in_days: Integer
+      }
+    ) -> _PutIdentityProviderConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutIdentityProviderConfigurationResponse
+
+    interface _PutInboundDmarcSettingsResponse
+      include Smithy::Client::_Response[Types::PutInboundDmarcSettingsResponse]
+    end
+    def put_inbound_dmarc_settings: (
+      ?organization_id: String,
+      ?enforced: bool
+    ) -> _PutInboundDmarcSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutInboundDmarcSettingsResponse
+
+    interface _PutMailboxPermissionsResponse
+      include Smithy::Client::_Response[Types::PutMailboxPermissionsResponse]
+    end
+    def put_mailbox_permissions: (
+      ?organization_id: String,
+      ?entity_id: String,
+      ?grantee_id: String,
+      ?permission_values: Array[String]
+    ) -> _PutMailboxPermissionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutMailboxPermissionsResponse
+
+    interface _PutMobileDeviceAccessOverrideResponse
+      include Smithy::Client::_Response[Types::PutMobileDeviceAccessOverrideResponse]
+    end
+    def put_mobile_device_access_override: (
+      ?organization_id: String,
+      ?user_id: String,
+      ?device_id: String,
+      ?effect: String,
+      ?description: String
+    ) -> _PutMobileDeviceAccessOverrideResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutMobileDeviceAccessOverrideResponse
+
+    interface _PutRetentionPolicyResponse
+      include Smithy::Client::_Response[Types::PutRetentionPolicyResponse]
+    end
+    def put_retention_policy: (
+      ?organization_id: String,
+      ?id: String,
+      ?name: String,
+      ?description: String,
+      ?folder_configurations: Array[
+        {
+          name: String,
+          action: String,
+          period: Integer
+        }
+      ]
+    ) -> _PutRetentionPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutRetentionPolicyResponse
+
+    interface _RegisterMailDomainResponse
+      include Smithy::Client::_Response[Types::RegisterMailDomainResponse]
+    end
+    def register_mail_domain: (
+      ?client_token: String,
+      ?organization_id: String,
+      ?domain_name: String
+    ) -> _RegisterMailDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterMailDomainResponse
+
+    interface _RegisterToWorkMailResponse
+      include Smithy::Client::_Response[Types::RegisterToWorkMailResponse]
+    end
+    def register_to_work_mail: (
+      ?organization_id: String,
+      ?entity_id: String,
+      ?email: String
+    ) -> _RegisterToWorkMailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterToWorkMailResponse
+
+    interface _ResetPasswordResponse
+      include Smithy::Client::_Response[Types::ResetPasswordResponse]
+    end
+    def reset_password: (
+      ?organization_id: String,
+      ?user_id: String,
+      ?password: String
+    ) -> _ResetPasswordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetPasswordResponse
+
+    interface _StartMailboxExportJobResponse
+      include Smithy::Client::_Response[Types::StartMailboxExportJobResponse]
+      def job_id: () -> String?
+    end
+    def start_mailbox_export_job: (
+      ?client_token: String,
+      ?organization_id: String,
+      ?entity_id: String,
+      ?description: String,
+      ?role_arn: String,
+      ?kms_key_arn: String,
+      ?s3_bucket_name: String,
+      ?s3_prefix: String
+    ) -> _StartMailboxExportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMailboxExportJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TestAvailabilityConfigurationResponse
+      include Smithy::Client::_Response[Types::TestAvailabilityConfigurationResponse]
+      def test_passed: () -> bool?
+      def failure_reason: () -> String?
+    end
+    def test_availability_configuration: (
+      ?organization_id: String,
+      ?domain_name: String,
+      ?ews_provider: {
+        ews_endpoint: String,
+        ews_username: String,
+        ews_password: String
+      },
+      ?lambda_provider: {
+        lambda_arn: String
+      }
+    ) -> _TestAvailabilityConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestAvailabilityConfigurationResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAvailabilityConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateAvailabilityConfigurationResponse]
+    end
+    def update_availability_configuration: (
+      ?organization_id: String,
+      ?domain_name: String,
+      ?ews_provider: {
+        ews_endpoint: String,
+        ews_username: String,
+        ews_password: String
+      },
+      ?lambda_provider: {
+        lambda_arn: String
+      }
+    ) -> _UpdateAvailabilityConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAvailabilityConfigurationResponse
+
+    interface _UpdateDefaultMailDomainResponse
+      include Smithy::Client::_Response[Types::UpdateDefaultMailDomainResponse]
+    end
+    def update_default_mail_domain: (
+      ?organization_id: String,
+      ?domain_name: String
+    ) -> _UpdateDefaultMailDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDefaultMailDomainResponse
+
+    interface _UpdateGroupResponse
+      include Smithy::Client::_Response[Types::UpdateGroupResponse]
+    end
+    def update_group: (
+      ?organization_id: String,
+      ?group_id: String,
+      ?hidden_from_global_address_list: bool
+    ) -> _UpdateGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGroupResponse
+
+    interface _UpdateImpersonationRoleResponse
+      include Smithy::Client::_Response[Types::UpdateImpersonationRoleResponse]
+    end
+    def update_impersonation_role: (
+      ?organization_id: String,
+      ?impersonation_role_id: String,
+      ?name: String,
+      ?type: String,
+      ?description: String,
+      ?rules: Array[
+        {
+          impersonation_rule_id: String,
+          name: String,
+          description: String,
+          effect: String,
+          target_users: Array[String],
+          not_target_users: untyped
+        }
+      ]
+    ) -> _UpdateImpersonationRoleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateImpersonationRoleResponse
+
+    interface _UpdateMailboxQuotaResponse
+      include Smithy::Client::_Response[Types::UpdateMailboxQuotaResponse]
+    end
+    def update_mailbox_quota: (
+      ?organization_id: String,
+      ?user_id: String,
+      ?mailbox_quota: Integer
+    ) -> _UpdateMailboxQuotaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMailboxQuotaResponse
+
+    interface _UpdateMobileDeviceAccessRuleResponse
+      include Smithy::Client::_Response[Types::UpdateMobileDeviceAccessRuleResponse]
+    end
+    def update_mobile_device_access_rule: (
+      ?organization_id: String,
+      ?mobile_device_access_rule_id: String,
+      ?name: String,
+      ?description: String,
+      ?effect: String,
+      ?device_types: Array[String],
+      ?not_device_types: Array[String],
+      ?device_models: Array[String],
+      ?not_device_models: Array[String],
+      ?device_operating_systems: Array[String],
+      ?not_device_operating_systems: Array[String],
+      ?device_user_agents: Array[String],
+      ?not_device_user_agents: Array[String]
+    ) -> _UpdateMobileDeviceAccessRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMobileDeviceAccessRuleResponse
+
+    interface _UpdatePrimaryEmailAddressResponse
+      include Smithy::Client::_Response[Types::UpdatePrimaryEmailAddressResponse]
+    end
+    def update_primary_email_address: (
+      ?organization_id: String,
+      ?entity_id: String,
+      ?email: String
+    ) -> _UpdatePrimaryEmailAddressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePrimaryEmailAddressResponse
+
+    interface _UpdateResourceResponse
+      include Smithy::Client::_Response[Types::UpdateResourceResponse]
+    end
+    def update_resource: (
+      ?organization_id: String,
+      ?resource_id: String,
+      ?name: String,
+      ?booking_options: {
+        auto_accept_requests: bool,
+        auto_decline_recurring_requests: untyped,
+        auto_decline_conflicting_requests: untyped
+      },
+      ?description: String,
+      ?type: String,
+      ?hidden_from_global_address_list: bool
+    ) -> _UpdateResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResourceResponse
+
+    interface _UpdateUserResponse
+      include Smithy::Client::_Response[Types::UpdateUserResponse]
+    end
+    def update_user: (
+      ?organization_id: String,
+      ?user_id: String,
+      ?role: String,
+      ?display_name: String,
+      ?first_name: String,
+      ?last_name: String,
+      ?hidden_from_global_address_list: bool,
+      ?initials: String,
+      ?telephone: String,
+      ?street: String,
+      ?job_title: String,
+      ?city: String,
+      ?company: String,
+      ?zip_code: String,
+      ?department: String,
+      ?country: String,
+      ?office: String,
+      ?identity_provider_user_id: String
+    ) -> _UpdateUserResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserResponse
+  end
+end

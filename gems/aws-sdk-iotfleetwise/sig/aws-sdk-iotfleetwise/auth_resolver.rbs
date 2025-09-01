@@ -1,0 +1,5 @@
+module Aws::IoTFleetWise
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

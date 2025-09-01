@@ -1,0 +1,1969 @@
+module Aws::Lightsail
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Lightsail::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AllocateStaticIpResponse
+      include Smithy::Client::_Response[Types::AllocateStaticIpResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def allocate_static_ip: (
+      ?static_ip_name: String
+    ) -> _AllocateStaticIpResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AllocateStaticIpResponse
+
+    interface _AttachCertificateToDistributionResponse
+      include Smithy::Client::_Response[Types::AttachCertificateToDistributionResult]
+      def operation: () -> Types::Operation?
+    end
+    def attach_certificate_to_distribution: (
+      ?distribution_name: String,
+      ?certificate_name: String
+    ) -> _AttachCertificateToDistributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachCertificateToDistributionResponse
+
+    interface _AttachDiskResponse
+      include Smithy::Client::_Response[Types::AttachDiskResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def attach_disk: (
+      ?disk_name: String,
+      ?instance_name: String,
+      ?disk_path: String,
+      ?auto_mounting: bool
+    ) -> _AttachDiskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachDiskResponse
+
+    interface _AttachInstancesToLoadBalancerResponse
+      include Smithy::Client::_Response[Types::AttachInstancesToLoadBalancerResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def attach_instances_to_load_balancer: (
+      ?load_balancer_name: String,
+      ?instance_names: Array[String]
+    ) -> _AttachInstancesToLoadBalancerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachInstancesToLoadBalancerResponse
+
+    interface _AttachLoadBalancerTlsCertificateResponse
+      include Smithy::Client::_Response[Types::AttachLoadBalancerTlsCertificateResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def attach_load_balancer_tls_certificate: (
+      ?load_balancer_name: String,
+      ?certificate_name: String
+    ) -> _AttachLoadBalancerTlsCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachLoadBalancerTlsCertificateResponse
+
+    interface _AttachStaticIpResponse
+      include Smithy::Client::_Response[Types::AttachStaticIpResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def attach_static_ip: (
+      ?static_ip_name: String,
+      ?instance_name: String
+    ) -> _AttachStaticIpResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachStaticIpResponse
+
+    interface _CloseInstancePublicPortsResponse
+      include Smithy::Client::_Response[Types::CloseInstancePublicPortsResult]
+      def operation: () -> Types::Operation?
+    end
+    def close_instance_public_ports: (
+      ?port_info: {
+        from_port: Integer,
+        to_port: untyped,
+        protocol: String,
+        cidrs: Array[String],
+        ipv6_cidrs: untyped,
+        cidr_list_aliases: untyped
+      },
+      ?instance_name: String
+    ) -> _CloseInstancePublicPortsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CloseInstancePublicPortsResponse
+
+    interface _CopySnapshotResponse
+      include Smithy::Client::_Response[Types::CopySnapshotResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def copy_snapshot: (
+      ?source_snapshot_name: String,
+      ?source_resource_name: String,
+      ?restore_date: String,
+      ?use_latest_restorable_auto_snapshot: bool,
+      ?target_snapshot_name: String,
+      ?source_region: String
+    ) -> _CopySnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopySnapshotResponse
+
+    interface _CreateBucketResponse
+      include Smithy::Client::_Response[Types::CreateBucketResult]
+      def bucket: () -> Types::Bucket?
+      def operations: () -> Array[Types::Operation]?
+    end
+    def create_bucket: (
+      ?bucket_name: String,
+      ?bundle_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?enable_object_versioning: bool
+    ) -> _CreateBucketResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBucketResponse
+
+    interface _CreateBucketAccessKeyResponse
+      include Smithy::Client::_Response[Types::CreateBucketAccessKeyResult]
+      def access_key: () -> Types::AccessKey?
+      def operations: () -> Array[Types::Operation]?
+    end
+    def create_bucket_access_key: (
+      ?bucket_name: String
+    ) -> _CreateBucketAccessKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBucketAccessKeyResponse
+
+    interface _CreateCertificateResponse
+      include Smithy::Client::_Response[Types::CreateCertificateResult]
+      def certificate: () -> Types::CertificateSummary?
+      def operations: () -> Array[Types::Operation]?
+    end
+    def create_certificate: (
+      ?certificate_name: String,
+      ?domain_name: String,
+      ?subject_alternative_names: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCertificateResponse
+
+    interface _CreateCloudFormationStackResponse
+      include Smithy::Client::_Response[Types::CreateCloudFormationStackResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def create_cloud_formation_stack: (
+      ?instances: Array[
+        {
+          source_name: String,
+          instance_type: String,
+          port_info_source: String,
+          user_data: String,
+          availability_zone: untyped
+        }
+      ]
+    ) -> _CreateCloudFormationStackResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCloudFormationStackResponse
+
+    interface _CreateContactMethodResponse
+      include Smithy::Client::_Response[Types::CreateContactMethodResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def create_contact_method: (
+      ?protocol: String,
+      ?contact_endpoint: String
+    ) -> _CreateContactMethodResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContactMethodResponse
+
+    interface _CreateContainerServiceResponse
+      include Smithy::Client::_Response[Types::CreateContainerServiceResult]
+      def container_service: () -> Types::ContainerService?
+    end
+    def create_container_service: (
+      ?service_name: String,
+      ?power: String,
+      ?scale: Integer,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?public_domain_names: Hash[String,
+        Array[String]
+      ],
+      ?deployment: {
+        containers: Hash[String,
+          {
+            image: String,
+            command: Array[String],
+            environment: Hash[String, String],
+            ports: Hash[String, String]
+          }
+        ],
+        public_endpoint: {
+          container_name: untyped,
+          container_port: Integer,
+          health_check: {
+            healthy_threshold: untyped,
+            unhealthy_threshold: untyped,
+            timeout_seconds: untyped,
+            interval_seconds: untyped,
+            path: untyped,
+            success_codes: untyped
+          }
+        }
+      },
+      ?private_registry_access: {
+        ecr_image_puller_role: {
+          is_active: bool
+        }
+      }
+    ) -> _CreateContainerServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContainerServiceResponse
+
+    interface _CreateContainerServiceDeploymentResponse
+      include Smithy::Client::_Response[Types::CreateContainerServiceDeploymentResult]
+      def container_service: () -> Types::ContainerService?
+    end
+    def create_container_service_deployment: (
+      ?service_name: String,
+      ?containers: Hash[String,
+        {
+          image: String,
+          command: Array[String],
+          environment: Hash[String, String],
+          ports: Hash[String, String]
+        }
+      ],
+      ?public_endpoint: {
+        container_name: String,
+        container_port: Integer,
+        health_check: {
+          healthy_threshold: untyped,
+          unhealthy_threshold: untyped,
+          timeout_seconds: untyped,
+          interval_seconds: untyped,
+          path: untyped,
+          success_codes: untyped
+        }
+      }
+    ) -> _CreateContainerServiceDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContainerServiceDeploymentResponse
+
+    interface _CreateContainerServiceRegistryLoginResponse
+      include Smithy::Client::_Response[Types::CreateContainerServiceRegistryLoginResult]
+      def registry_login: () -> Types::ContainerServiceRegistryLogin?
+    end
+    def create_container_service_registry_login: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateContainerServiceRegistryLoginResponse
+
+    interface _CreateDiskResponse
+      include Smithy::Client::_Response[Types::CreateDiskResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def create_disk: (
+      ?disk_name: String,
+      ?availability_zone: String,
+      ?size_in_gb: Integer,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?add_ons: Array[
+        {
+          add_on_type: String,
+          auto_snapshot_add_on_request: {
+            snapshot_time_of_day: String
+          },
+          stop_instance_on_idle_request: {
+            threshold: String,
+            duration: untyped
+          }
+        }
+      ]
+    ) -> _CreateDiskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDiskResponse
+
+    interface _CreateDiskFromSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateDiskFromSnapshotResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def create_disk_from_snapshot: (
+      ?disk_name: String,
+      ?disk_snapshot_name: String,
+      ?availability_zone: String,
+      ?size_in_gb: Integer,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?add_ons: Array[
+        {
+          add_on_type: String,
+          auto_snapshot_add_on_request: {
+            snapshot_time_of_day: String
+          },
+          stop_instance_on_idle_request: {
+            threshold: String,
+            duration: untyped
+          }
+        }
+      ],
+      ?source_disk_name: String,
+      ?restore_date: String,
+      ?use_latest_restorable_auto_snapshot: bool
+    ) -> _CreateDiskFromSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDiskFromSnapshotResponse
+
+    interface _CreateDiskSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateDiskSnapshotResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def create_disk_snapshot: (
+      ?disk_name: String,
+      ?disk_snapshot_name: String,
+      ?instance_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDiskSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDiskSnapshotResponse
+
+    interface _CreateDistributionResponse
+      include Smithy::Client::_Response[Types::CreateDistributionResult]
+      def distribution: () -> Types::LightsailDistribution?
+      def operation: () -> Types::Operation?
+    end
+    def create_distribution: (
+      ?distribution_name: String,
+      ?origin: {
+        name: String,
+        region_name: String,
+        protocol_policy: String,
+        response_timeout: Integer
+      },
+      ?default_cache_behavior: {
+        behavior: String
+      },
+      ?cache_behavior_settings: {
+        default_ttl: Integer,
+        minimum_ttl: untyped,
+        maximum_ttl: untyped,
+        allowed_http_methods: String,
+        cached_http_methods: untyped,
+        forwarded_cookies: {
+          option: String,
+          cookies_allow_list: Array[String]
+        },
+        forwarded_headers: {
+          option: untyped,
+          headers_allow_list: Array[String]
+        },
+        forwarded_query_strings: {
+          option: bool,
+          query_strings_allow_list: untyped
+        }
+      },
+      ?cache_behaviors: Array[
+        {
+          path: String,
+          behavior: String
+        }
+      ],
+      ?bundle_id: String,
+      ?ip_address_type: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?certificate_name: String,
+      ?viewer_minimum_tls_protocol_version: String
+    ) -> _CreateDistributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDistributionResponse
+
+    interface _CreateDomainResponse
+      include Smithy::Client::_Response[Types::CreateDomainResult]
+      def operation: () -> Types::Operation?
+    end
+    def create_domain: (
+      ?domain_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDomainResponse
+
+    interface _CreateDomainEntryResponse
+      include Smithy::Client::_Response[Types::CreateDomainEntryResult]
+      def operation: () -> Types::Operation?
+    end
+    def create_domain_entry: (
+      ?domain_name: String,
+      ?domain_entry: {
+        id: String,
+        name: String,
+        target: String,
+        is_alias: bool,
+        type: String,
+        options: Hash[String, String]
+      }
+    ) -> _CreateDomainEntryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDomainEntryResponse
+
+    interface _CreateGUISessionAccessDetailsResponse
+      include Smithy::Client::_Response[Types::CreateGUISessionAccessDetailsResult]
+      def resource_name: () -> String?
+      def status: () -> String?
+      def percentage_complete: () -> Integer?
+      def failure_reason: () -> String?
+      def sessions: () -> Array[Types::Session]?
+    end
+    def create_gui_session_access_details: (
+      ?resource_name: String
+    ) -> _CreateGUISessionAccessDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGUISessionAccessDetailsResponse
+
+    interface _CreateInstanceSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateInstanceSnapshotResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def create_instance_snapshot: (
+      ?instance_snapshot_name: String,
+      ?instance_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateInstanceSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInstanceSnapshotResponse
+
+    interface _CreateInstancesResponse
+      include Smithy::Client::_Response[Types::CreateInstancesResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def create_instances: (
+      ?instance_names: Array[String],
+      ?availability_zone: String,
+      ?custom_image_name: String,
+      ?blueprint_id: String,
+      ?bundle_id: String,
+      ?user_data: String,
+      ?key_pair_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?add_ons: Array[
+        {
+          add_on_type: String,
+          auto_snapshot_add_on_request: {
+            snapshot_time_of_day: String
+          },
+          stop_instance_on_idle_request: {
+            threshold: String,
+            duration: untyped
+          }
+        }
+      ],
+      ?ip_address_type: String
+    ) -> _CreateInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInstancesResponse
+
+    interface _CreateInstancesFromSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateInstancesFromSnapshotResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def create_instances_from_snapshot: (
+      ?instance_names: Array[String],
+      ?attached_disk_mapping: Hash[String,
+        Array[
+          {
+            original_disk_path: String,
+            new_disk_name: String
+          }
+        ]
+      ],
+      ?availability_zone: String,
+      ?instance_snapshot_name: String,
+      ?bundle_id: String,
+      ?user_data: String,
+      ?key_pair_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?add_ons: Array[
+        {
+          add_on_type: String,
+          auto_snapshot_add_on_request: {
+            snapshot_time_of_day: String
+          },
+          stop_instance_on_idle_request: {
+            threshold: String,
+            duration: untyped
+          }
+        }
+      ],
+      ?ip_address_type: String,
+      ?source_instance_name: String,
+      ?restore_date: String,
+      ?use_latest_restorable_auto_snapshot: bool
+    ) -> _CreateInstancesFromSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateInstancesFromSnapshotResponse
+
+    interface _CreateKeyPairResponse
+      include Smithy::Client::_Response[Types::CreateKeyPairResult]
+      def key_pair: () -> Types::KeyPair?
+      def public_key_base64: () -> String?
+      def private_key_base64: () -> String?
+      def operation: () -> Types::Operation?
+    end
+    def create_key_pair: (
+      ?key_pair_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateKeyPairResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateKeyPairResponse
+
+    interface _CreateLoadBalancerResponse
+      include Smithy::Client::_Response[Types::CreateLoadBalancerResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def create_load_balancer: (
+      ?load_balancer_name: String,
+      ?instance_port: Integer,
+      ?health_check_path: String,
+      ?certificate_name: String,
+      ?certificate_domain_name: String,
+      ?certificate_alternative_names: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?ip_address_type: String,
+      ?tls_policy_name: String
+    ) -> _CreateLoadBalancerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLoadBalancerResponse
+
+    interface _CreateLoadBalancerTlsCertificateResponse
+      include Smithy::Client::_Response[Types::CreateLoadBalancerTlsCertificateResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def create_load_balancer_tls_certificate: (
+      ?load_balancer_name: String,
+      ?certificate_name: String,
+      ?certificate_domain_name: String,
+      ?certificate_alternative_names: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateLoadBalancerTlsCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLoadBalancerTlsCertificateResponse
+
+    interface _CreateRelationalDatabaseResponse
+      include Smithy::Client::_Response[Types::CreateRelationalDatabaseResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def create_relational_database: (
+      ?relational_database_name: String,
+      ?availability_zone: String,
+      ?relational_database_blueprint_id: String,
+      ?relational_database_bundle_id: String,
+      ?master_database_name: String,
+      ?master_username: String,
+      ?master_user_password: String,
+      ?preferred_backup_window: String,
+      ?preferred_maintenance_window: String,
+      ?publicly_accessible: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateRelationalDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRelationalDatabaseResponse
+
+    interface _CreateRelationalDatabaseFromSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateRelationalDatabaseFromSnapshotResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def create_relational_database_from_snapshot: (
+      ?relational_database_name: String,
+      ?availability_zone: String,
+      ?publicly_accessible: bool,
+      ?relational_database_snapshot_name: String,
+      ?relational_database_bundle_id: String,
+      ?source_relational_database_name: String,
+      ?restore_time: Time,
+      ?use_latest_restorable_time: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateRelationalDatabaseFromSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRelationalDatabaseFromSnapshotResponse
+
+    interface _CreateRelationalDatabaseSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateRelationalDatabaseSnapshotResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def create_relational_database_snapshot: (
+      ?relational_database_name: String,
+      ?relational_database_snapshot_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateRelationalDatabaseSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRelationalDatabaseSnapshotResponse
+
+    interface _DeleteAlarmResponse
+      include Smithy::Client::_Response[Types::DeleteAlarmResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def delete_alarm: (
+      ?alarm_name: String
+    ) -> _DeleteAlarmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAlarmResponse
+
+    interface _DeleteAutoSnapshotResponse
+      include Smithy::Client::_Response[Types::DeleteAutoSnapshotResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def delete_auto_snapshot: (
+      ?resource_name: String,
+      ?date: String
+    ) -> _DeleteAutoSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAutoSnapshotResponse
+
+    interface _DeleteBucketResponse
+      include Smithy::Client::_Response[Types::DeleteBucketResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def delete_bucket: (
+      ?bucket_name: String,
+      ?force_delete: bool
+    ) -> _DeleteBucketResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketResponse
+
+    interface _DeleteBucketAccessKeyResponse
+      include Smithy::Client::_Response[Types::DeleteBucketAccessKeyResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def delete_bucket_access_key: (
+      ?bucket_name: String,
+      ?access_key_id: String
+    ) -> _DeleteBucketAccessKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBucketAccessKeyResponse
+
+    interface _DeleteCertificateResponse
+      include Smithy::Client::_Response[Types::DeleteCertificateResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def delete_certificate: (
+      ?certificate_name: String
+    ) -> _DeleteCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCertificateResponse
+
+    interface _DeleteContactMethodResponse
+      include Smithy::Client::_Response[Types::DeleteContactMethodResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def delete_contact_method: (
+      ?protocol: String
+    ) -> _DeleteContactMethodResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContactMethodResponse
+
+    interface _DeleteContainerImageResponse
+      include Smithy::Client::_Response[Types::DeleteContainerImageResult]
+    end
+    def delete_container_image: (
+      ?service_name: String,
+      ?image: String
+    ) -> _DeleteContainerImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContainerImageResponse
+
+    interface _DeleteContainerServiceResponse
+      include Smithy::Client::_Response[Types::DeleteContainerServiceResult]
+    end
+    def delete_container_service: (
+      ?service_name: String
+    ) -> _DeleteContainerServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteContainerServiceResponse
+
+    interface _DeleteDiskResponse
+      include Smithy::Client::_Response[Types::DeleteDiskResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def delete_disk: (
+      ?disk_name: String,
+      ?force_delete_add_ons: bool
+    ) -> _DeleteDiskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDiskResponse
+
+    interface _DeleteDiskSnapshotResponse
+      include Smithy::Client::_Response[Types::DeleteDiskSnapshotResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def delete_disk_snapshot: (
+      ?disk_snapshot_name: String
+    ) -> _DeleteDiskSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDiskSnapshotResponse
+
+    interface _DeleteDistributionResponse
+      include Smithy::Client::_Response[Types::DeleteDistributionResult]
+      def operation: () -> Types::Operation?
+    end
+    def delete_distribution: (
+      ?distribution_name: String
+    ) -> _DeleteDistributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDistributionResponse
+
+    interface _DeleteDomainResponse
+      include Smithy::Client::_Response[Types::DeleteDomainResult]
+      def operation: () -> Types::Operation?
+    end
+    def delete_domain: (
+      ?domain_name: String
+    ) -> _DeleteDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainResponse
+
+    interface _DeleteDomainEntryResponse
+      include Smithy::Client::_Response[Types::DeleteDomainEntryResult]
+      def operation: () -> Types::Operation?
+    end
+    def delete_domain_entry: (
+      ?domain_name: String,
+      ?domain_entry: {
+        id: String,
+        name: String,
+        target: String,
+        is_alias: bool,
+        type: String,
+        options: Hash[String, String]
+      }
+    ) -> _DeleteDomainEntryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainEntryResponse
+
+    interface _DeleteInstanceResponse
+      include Smithy::Client::_Response[Types::DeleteInstanceResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def delete_instance: (
+      ?instance_name: String,
+      ?force_delete_add_ons: bool
+    ) -> _DeleteInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInstanceResponse
+
+    interface _DeleteInstanceSnapshotResponse
+      include Smithy::Client::_Response[Types::DeleteInstanceSnapshotResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def delete_instance_snapshot: (
+      ?instance_snapshot_name: String
+    ) -> _DeleteInstanceSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteInstanceSnapshotResponse
+
+    interface _DeleteKeyPairResponse
+      include Smithy::Client::_Response[Types::DeleteKeyPairResult]
+      def operation: () -> Types::Operation?
+    end
+    def delete_key_pair: (
+      ?key_pair_name: String,
+      ?expected_fingerprint: String
+    ) -> _DeleteKeyPairResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKeyPairResponse
+
+    interface _DeleteKnownHostKeysResponse
+      include Smithy::Client::_Response[Types::DeleteKnownHostKeysResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def delete_known_host_keys: (
+      ?instance_name: String
+    ) -> _DeleteKnownHostKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKnownHostKeysResponse
+
+    interface _DeleteLoadBalancerResponse
+      include Smithy::Client::_Response[Types::DeleteLoadBalancerResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def delete_load_balancer: (
+      ?load_balancer_name: String
+    ) -> _DeleteLoadBalancerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLoadBalancerResponse
+
+    interface _DeleteLoadBalancerTlsCertificateResponse
+      include Smithy::Client::_Response[Types::DeleteLoadBalancerTlsCertificateResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def delete_load_balancer_tls_certificate: (
+      ?load_balancer_name: String,
+      ?certificate_name: String,
+      ?force: bool
+    ) -> _DeleteLoadBalancerTlsCertificateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLoadBalancerTlsCertificateResponse
+
+    interface _DeleteRelationalDatabaseResponse
+      include Smithy::Client::_Response[Types::DeleteRelationalDatabaseResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def delete_relational_database: (
+      ?relational_database_name: String,
+      ?skip_final_snapshot: bool,
+      ?final_relational_database_snapshot_name: String
+    ) -> _DeleteRelationalDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRelationalDatabaseResponse
+
+    interface _DeleteRelationalDatabaseSnapshotResponse
+      include Smithy::Client::_Response[Types::DeleteRelationalDatabaseSnapshotResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def delete_relational_database_snapshot: (
+      ?relational_database_snapshot_name: String
+    ) -> _DeleteRelationalDatabaseSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRelationalDatabaseSnapshotResponse
+
+    interface _DetachCertificateFromDistributionResponse
+      include Smithy::Client::_Response[Types::DetachCertificateFromDistributionResult]
+      def operation: () -> Types::Operation?
+    end
+    def detach_certificate_from_distribution: (
+      ?distribution_name: String
+    ) -> _DetachCertificateFromDistributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachCertificateFromDistributionResponse
+
+    interface _DetachDiskResponse
+      include Smithy::Client::_Response[Types::DetachDiskResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def detach_disk: (
+      ?disk_name: String
+    ) -> _DetachDiskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachDiskResponse
+
+    interface _DetachInstancesFromLoadBalancerResponse
+      include Smithy::Client::_Response[Types::DetachInstancesFromLoadBalancerResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def detach_instances_from_load_balancer: (
+      ?load_balancer_name: String,
+      ?instance_names: Array[String]
+    ) -> _DetachInstancesFromLoadBalancerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachInstancesFromLoadBalancerResponse
+
+    interface _DetachStaticIpResponse
+      include Smithy::Client::_Response[Types::DetachStaticIpResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def detach_static_ip: (
+      ?static_ip_name: String
+    ) -> _DetachStaticIpResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachStaticIpResponse
+
+    interface _DisableAddOnResponse
+      include Smithy::Client::_Response[Types::DisableAddOnResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def disable_add_on: (
+      ?add_on_type: String,
+      ?resource_name: String
+    ) -> _DisableAddOnResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableAddOnResponse
+
+    interface _DownloadDefaultKeyPairResponse
+      include Smithy::Client::_Response[Types::DownloadDefaultKeyPairResult]
+      def public_key_base64: () -> String?
+      def private_key_base64: () -> String?
+      def created_at: () -> Time?
+    end
+    def download_default_key_pair: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DownloadDefaultKeyPairResponse
+
+    interface _EnableAddOnResponse
+      include Smithy::Client::_Response[Types::EnableAddOnResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def enable_add_on: (
+      ?resource_name: String,
+      ?add_on_request: {
+        add_on_type: String,
+        auto_snapshot_add_on_request: {
+          snapshot_time_of_day: String
+        },
+        stop_instance_on_idle_request: {
+          threshold: String,
+          duration: untyped
+        }
+      }
+    ) -> _EnableAddOnResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableAddOnResponse
+
+    interface _ExportSnapshotResponse
+      include Smithy::Client::_Response[Types::ExportSnapshotResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def export_snapshot: (
+      ?source_snapshot_name: String
+    ) -> _ExportSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportSnapshotResponse
+
+    interface _GetActiveNamesResponse
+      include Smithy::Client::_Response[Types::GetActiveNamesResult]
+      def active_names: () -> Array[String]?
+      def next_page_token: () -> String?
+    end
+    def get_active_names: (
+      ?page_token: String
+    ) -> _GetActiveNamesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetActiveNamesResponse
+
+    interface _GetAlarmsResponse
+      include Smithy::Client::_Response[Types::GetAlarmsResult]
+      def alarms: () -> Array[Types::Alarm]?
+      def next_page_token: () -> String?
+    end
+    def get_alarms: (
+      ?alarm_name: String,
+      ?page_token: String,
+      ?monitored_resource_name: String
+    ) -> _GetAlarmsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAlarmsResponse
+
+    interface _GetAutoSnapshotsResponse
+      include Smithy::Client::_Response[Types::GetAutoSnapshotsResult]
+      def resource_name: () -> String?
+      def resource_type: () -> String?
+      def auto_snapshots: () -> Array[Types::AutoSnapshotDetails]?
+    end
+    def get_auto_snapshots: (
+      ?resource_name: String
+    ) -> _GetAutoSnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutoSnapshotsResponse
+
+    interface _GetBlueprintsResponse
+      include Smithy::Client::_Response[Types::GetBlueprintsResult]
+      def blueprints: () -> Array[Types::Blueprint]?
+      def next_page_token: () -> String?
+    end
+    def get_blueprints: (
+      ?include_inactive: bool,
+      ?page_token: String,
+      ?app_category: String
+    ) -> _GetBlueprintsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBlueprintsResponse
+
+    interface _GetBucketAccessKeysResponse
+      include Smithy::Client::_Response[Types::GetBucketAccessKeysResult]
+      def access_keys: () -> Array[Types::AccessKey]?
+    end
+    def get_bucket_access_keys: (
+      ?bucket_name: String
+    ) -> _GetBucketAccessKeysResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketAccessKeysResponse
+
+    interface _GetBucketBundlesResponse
+      include Smithy::Client::_Response[Types::GetBucketBundlesResult]
+      def bundles: () -> Array[Types::BucketBundle]?
+    end
+    def get_bucket_bundles: (
+      ?include_inactive: bool
+    ) -> _GetBucketBundlesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketBundlesResponse
+
+    interface _GetBucketMetricDataResponse
+      include Smithy::Client::_Response[Types::GetBucketMetricDataResult]
+      def metric_name: () -> String?
+      def metric_data: () -> Array[Types::MetricDatapoint]?
+    end
+    def get_bucket_metric_data: (
+      ?bucket_name: String,
+      ?metric_name: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?period: Integer,
+      ?statistics: Array[String],
+      ?unit: String
+    ) -> _GetBucketMetricDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketMetricDataResponse
+
+    interface _GetBucketsResponse
+      include Smithy::Client::_Response[Types::GetBucketsResult]
+      def buckets: () -> Array[Types::Bucket]?
+      def next_page_token: () -> String?
+      def account_level_bpa_sync: () -> Types::AccountLevelBpaSync?
+    end
+    def get_buckets: (
+      ?bucket_name: String,
+      ?page_token: String,
+      ?include_connected_resources: bool
+    ) -> _GetBucketsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBucketsResponse
+
+    interface _GetBundlesResponse
+      include Smithy::Client::_Response[Types::GetBundlesResult]
+      def bundles: () -> Array[Types::Bundle]?
+      def next_page_token: () -> String?
+    end
+    def get_bundles: (
+      ?include_inactive: bool,
+      ?page_token: String,
+      ?app_category: String
+    ) -> _GetBundlesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBundlesResponse
+
+    interface _GetCertificatesResponse
+      include Smithy::Client::_Response[Types::GetCertificatesResult]
+      def certificates: () -> Array[Types::CertificateSummary]?
+      def next_page_token: () -> String?
+    end
+    def get_certificates: (
+      ?certificate_statuses: Array[String],
+      ?include_certificate_details: bool,
+      ?certificate_name: String,
+      ?page_token: String
+    ) -> _GetCertificatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCertificatesResponse
+
+    interface _GetCloudFormationStackRecordsResponse
+      include Smithy::Client::_Response[Types::GetCloudFormationStackRecordsResult]
+      def cloud_formation_stack_records: () -> Array[Types::CloudFormationStackRecord]?
+      def next_page_token: () -> String?
+    end
+    def get_cloud_formation_stack_records: (
+      ?page_token: String
+    ) -> _GetCloudFormationStackRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCloudFormationStackRecordsResponse
+
+    interface _GetContactMethodsResponse
+      include Smithy::Client::_Response[Types::GetContactMethodsResult]
+      def contact_methods: () -> Array[Types::ContactMethod]?
+    end
+    def get_contact_methods: (
+      ?protocols: Array[String]
+    ) -> _GetContactMethodsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContactMethodsResponse
+
+    interface _GetContainerAPIMetadataResponse
+      include Smithy::Client::_Response[Types::GetContainerAPIMetadataResult]
+      def metadata: () -> Array[Hash[String, String]]?
+    end
+    def get_container_api_metadata: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContainerAPIMetadataResponse
+
+    interface _GetContainerImagesResponse
+      include Smithy::Client::_Response[Types::GetContainerImagesResult]
+      def container_images: () -> Array[Types::ContainerImage]?
+    end
+    def get_container_images: (
+      ?service_name: String
+    ) -> _GetContainerImagesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContainerImagesResponse
+
+    interface _GetContainerLogResponse
+      include Smithy::Client::_Response[Types::GetContainerLogResult]
+      def log_events: () -> Array[Types::ContainerServiceLogEvent]?
+      def next_page_token: () -> String?
+    end
+    def get_container_log: (
+      ?service_name: String,
+      ?container_name: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?filter_pattern: String,
+      ?page_token: String
+    ) -> _GetContainerLogResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContainerLogResponse
+
+    interface _GetContainerServiceDeploymentsResponse
+      include Smithy::Client::_Response[Types::GetContainerServiceDeploymentsResult]
+      def deployments: () -> Array[Types::ContainerServiceDeployment]?
+    end
+    def get_container_service_deployments: (
+      ?service_name: String
+    ) -> _GetContainerServiceDeploymentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContainerServiceDeploymentsResponse
+
+    interface _GetContainerServiceMetricDataResponse
+      include Smithy::Client::_Response[Types::GetContainerServiceMetricDataResult]
+      def metric_name: () -> String?
+      def metric_data: () -> Array[Types::MetricDatapoint]?
+    end
+    def get_container_service_metric_data: (
+      ?service_name: String,
+      ?metric_name: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?period: Integer,
+      ?statistics: Array[String]
+    ) -> _GetContainerServiceMetricDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContainerServiceMetricDataResponse
+
+    interface _GetContainerServicePowersResponse
+      include Smithy::Client::_Response[Types::GetContainerServicePowersResult]
+      def powers: () -> Array[Types::ContainerServicePower]?
+    end
+    def get_container_service_powers: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContainerServicePowersResponse
+
+    interface _GetContainerServicesResponse
+      include Smithy::Client::_Response[Types::ContainerServicesListResult]
+      def container_services: () -> Array[Types::ContainerService]?
+    end
+    def get_container_services: (
+      ?service_name: String
+    ) -> _GetContainerServicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContainerServicesResponse
+
+    interface _GetCostEstimateResponse
+      include Smithy::Client::_Response[Types::GetCostEstimateResult]
+      def resources_budget_estimate: () -> Array[Types::ResourceBudgetEstimate]?
+    end
+    def get_cost_estimate: (
+      ?resource_name: String,
+      ?start_time: Time,
+      ?end_time: Time
+    ) -> _GetCostEstimateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCostEstimateResponse
+
+    interface _GetDiskResponse
+      include Smithy::Client::_Response[Types::GetDiskResult]
+      def disk: () -> Types::Disk?
+    end
+    def get_disk: (
+      ?disk_name: String
+    ) -> _GetDiskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDiskResponse
+
+    interface _GetDiskSnapshotResponse
+      include Smithy::Client::_Response[Types::GetDiskSnapshotResult]
+      def disk_snapshot: () -> Types::DiskSnapshot?
+    end
+    def get_disk_snapshot: (
+      ?disk_snapshot_name: String
+    ) -> _GetDiskSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDiskSnapshotResponse
+
+    interface _GetDiskSnapshotsResponse
+      include Smithy::Client::_Response[Types::GetDiskSnapshotsResult]
+      def disk_snapshots: () -> Array[Types::DiskSnapshot]?
+      def next_page_token: () -> String?
+    end
+    def get_disk_snapshots: (
+      ?page_token: String
+    ) -> _GetDiskSnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDiskSnapshotsResponse
+
+    interface _GetDisksResponse
+      include Smithy::Client::_Response[Types::GetDisksResult]
+      def disks: () -> Array[Types::Disk]?
+      def next_page_token: () -> String?
+    end
+    def get_disks: (
+      ?page_token: String
+    ) -> _GetDisksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDisksResponse
+
+    interface _GetDistributionBundlesResponse
+      include Smithy::Client::_Response[Types::GetDistributionBundlesResult]
+      def bundles: () -> Array[Types::DistributionBundle]?
+    end
+    def get_distribution_bundles: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDistributionBundlesResponse
+
+    interface _GetDistributionLatestCacheResetResponse
+      include Smithy::Client::_Response[Types::GetDistributionLatestCacheResetResult]
+      def status: () -> String?
+      def create_time: () -> Time?
+    end
+    def get_distribution_latest_cache_reset: (
+      ?distribution_name: String
+    ) -> _GetDistributionLatestCacheResetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDistributionLatestCacheResetResponse
+
+    interface _GetDistributionMetricDataResponse
+      include Smithy::Client::_Response[Types::GetDistributionMetricDataResult]
+      def metric_name: () -> String?
+      def metric_data: () -> Array[Types::MetricDatapoint]?
+    end
+    def get_distribution_metric_data: (
+      ?distribution_name: String,
+      ?metric_name: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?period: Integer,
+      ?unit: String,
+      ?statistics: Array[String]
+    ) -> _GetDistributionMetricDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDistributionMetricDataResponse
+
+    interface _GetDistributionsResponse
+      include Smithy::Client::_Response[Types::GetDistributionsResult]
+      def distributions: () -> Array[Types::LightsailDistribution]?
+      def next_page_token: () -> String?
+    end
+    def get_distributions: (
+      ?distribution_name: String,
+      ?page_token: String
+    ) -> _GetDistributionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDistributionsResponse
+
+    interface _GetDomainResponse
+      include Smithy::Client::_Response[Types::GetDomainResult]
+      def domain: () -> Types::Domain?
+    end
+    def get_domain: (
+      ?domain_name: String
+    ) -> _GetDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainResponse
+
+    interface _GetDomainsResponse
+      include Smithy::Client::_Response[Types::GetDomainsResult]
+      def domains: () -> Array[Types::Domain]?
+      def next_page_token: () -> String?
+    end
+    def get_domains: (
+      ?page_token: String
+    ) -> _GetDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainsResponse
+
+    interface _GetExportSnapshotRecordsResponse
+      include Smithy::Client::_Response[Types::GetExportSnapshotRecordsResult]
+      def export_snapshot_records: () -> Array[Types::ExportSnapshotRecord]?
+      def next_page_token: () -> String?
+    end
+    def get_export_snapshot_records: (
+      ?page_token: String
+    ) -> _GetExportSnapshotRecordsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetExportSnapshotRecordsResponse
+
+    interface _GetInstanceResponse
+      include Smithy::Client::_Response[Types::GetInstanceResult]
+      def instance: () -> Types::Instance?
+    end
+    def get_instance: (
+      ?instance_name: String
+    ) -> _GetInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInstanceResponse
+
+    interface _GetInstanceAccessDetailsResponse
+      include Smithy::Client::_Response[Types::GetInstanceAccessDetailsResult]
+      def access_details: () -> Types::InstanceAccessDetails?
+    end
+    def get_instance_access_details: (
+      ?instance_name: String,
+      ?protocol: String
+    ) -> _GetInstanceAccessDetailsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInstanceAccessDetailsResponse
+
+    interface _GetInstanceMetricDataResponse
+      include Smithy::Client::_Response[Types::GetInstanceMetricDataResult]
+      def metric_name: () -> String?
+      def metric_data: () -> Array[Types::MetricDatapoint]?
+    end
+    def get_instance_metric_data: (
+      ?instance_name: String,
+      ?metric_name: String,
+      ?period: Integer,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?unit: String,
+      ?statistics: Array[String]
+    ) -> _GetInstanceMetricDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInstanceMetricDataResponse
+
+    interface _GetInstancePortStatesResponse
+      include Smithy::Client::_Response[Types::GetInstancePortStatesResult]
+      def port_states: () -> Array[Types::InstancePortState]?
+    end
+    def get_instance_port_states: (
+      ?instance_name: String
+    ) -> _GetInstancePortStatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInstancePortStatesResponse
+
+    interface _GetInstanceSnapshotResponse
+      include Smithy::Client::_Response[Types::GetInstanceSnapshotResult]
+      def instance_snapshot: () -> Types::InstanceSnapshot?
+    end
+    def get_instance_snapshot: (
+      ?instance_snapshot_name: String
+    ) -> _GetInstanceSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInstanceSnapshotResponse
+
+    interface _GetInstanceSnapshotsResponse
+      include Smithy::Client::_Response[Types::GetInstanceSnapshotsResult]
+      def instance_snapshots: () -> Array[Types::InstanceSnapshot]?
+      def next_page_token: () -> String?
+    end
+    def get_instance_snapshots: (
+      ?page_token: String
+    ) -> _GetInstanceSnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInstanceSnapshotsResponse
+
+    interface _GetInstanceStateResponse
+      include Smithy::Client::_Response[Types::GetInstanceStateResult]
+      def state: () -> Types::InstanceState?
+    end
+    def get_instance_state: (
+      ?instance_name: String
+    ) -> _GetInstanceStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInstanceStateResponse
+
+    interface _GetInstancesResponse
+      include Smithy::Client::_Response[Types::GetInstancesResult]
+      def instances: () -> Array[Types::Instance]?
+      def next_page_token: () -> String?
+    end
+    def get_instances: (
+      ?page_token: String
+    ) -> _GetInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetInstancesResponse
+
+    interface _GetKeyPairResponse
+      include Smithy::Client::_Response[Types::GetKeyPairResult]
+      def key_pair: () -> Types::KeyPair?
+    end
+    def get_key_pair: (
+      ?key_pair_name: String
+    ) -> _GetKeyPairResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKeyPairResponse
+
+    interface _GetKeyPairsResponse
+      include Smithy::Client::_Response[Types::GetKeyPairsResult]
+      def key_pairs: () -> Array[Types::KeyPair]?
+      def next_page_token: () -> String?
+    end
+    def get_key_pairs: (
+      ?page_token: String,
+      ?include_default_key_pair: bool
+    ) -> _GetKeyPairsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKeyPairsResponse
+
+    interface _GetLoadBalancerResponse
+      include Smithy::Client::_Response[Types::GetLoadBalancerResult]
+      def load_balancer: () -> Types::LoadBalancer?
+    end
+    def get_load_balancer: (
+      ?load_balancer_name: String
+    ) -> _GetLoadBalancerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLoadBalancerResponse
+
+    interface _GetLoadBalancerMetricDataResponse
+      include Smithy::Client::_Response[Types::GetLoadBalancerMetricDataResult]
+      def metric_name: () -> String?
+      def metric_data: () -> Array[Types::MetricDatapoint]?
+    end
+    def get_load_balancer_metric_data: (
+      ?load_balancer_name: String,
+      ?metric_name: String,
+      ?period: Integer,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?unit: String,
+      ?statistics: Array[String]
+    ) -> _GetLoadBalancerMetricDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLoadBalancerMetricDataResponse
+
+    interface _GetLoadBalancerTlsCertificatesResponse
+      include Smithy::Client::_Response[Types::GetLoadBalancerTlsCertificatesResult]
+      def tls_certificates: () -> Array[Types::LoadBalancerTlsCertificate]?
+    end
+    def get_load_balancer_tls_certificates: (
+      ?load_balancer_name: String
+    ) -> _GetLoadBalancerTlsCertificatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLoadBalancerTlsCertificatesResponse
+
+    interface _GetLoadBalancerTlsPoliciesResponse
+      include Smithy::Client::_Response[Types::GetLoadBalancerTlsPoliciesResult]
+      def tls_policies: () -> Array[Types::LoadBalancerTlsPolicy]?
+      def next_page_token: () -> String?
+    end
+    def get_load_balancer_tls_policies: (
+      ?page_token: String
+    ) -> _GetLoadBalancerTlsPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLoadBalancerTlsPoliciesResponse
+
+    interface _GetLoadBalancersResponse
+      include Smithy::Client::_Response[Types::GetLoadBalancersResult]
+      def load_balancers: () -> Array[Types::LoadBalancer]?
+      def next_page_token: () -> String?
+    end
+    def get_load_balancers: (
+      ?page_token: String
+    ) -> _GetLoadBalancersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLoadBalancersResponse
+
+    interface _GetOperationResponse
+      include Smithy::Client::_Response[Types::GetOperationResult]
+      def operation: () -> Types::Operation?
+    end
+    def get_operation: (
+      ?operation_id: String
+    ) -> _GetOperationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOperationResponse
+
+    interface _GetOperationsResponse
+      include Smithy::Client::_Response[Types::GetOperationsResult]
+      def operations: () -> Array[Types::Operation]?
+      def next_page_token: () -> String?
+    end
+    def get_operations: (
+      ?page_token: String
+    ) -> _GetOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOperationsResponse
+
+    interface _GetOperationsForResourceResponse
+      include Smithy::Client::_Response[Types::GetOperationsForResourceResult]
+      def operations: () -> Array[Types::Operation]?
+      def next_page_count: () -> String?
+      def next_page_token: () -> String?
+    end
+    def get_operations_for_resource: (
+      ?resource_name: String,
+      ?page_token: String
+    ) -> _GetOperationsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOperationsForResourceResponse
+
+    interface _GetRegionsResponse
+      include Smithy::Client::_Response[Types::GetRegionsResult]
+      def regions: () -> Array[Types::Region]?
+    end
+    def get_regions: (
+      ?include_availability_zones: bool,
+      ?include_relational_database_availability_zones: bool
+    ) -> _GetRegionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRegionsResponse
+
+    interface _GetRelationalDatabaseResponse
+      include Smithy::Client::_Response[Types::GetRelationalDatabaseResult]
+      def relational_database: () -> Types::RelationalDatabase?
+    end
+    def get_relational_database: (
+      ?relational_database_name: String
+    ) -> _GetRelationalDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRelationalDatabaseResponse
+
+    interface _GetRelationalDatabaseBlueprintsResponse
+      include Smithy::Client::_Response[Types::GetRelationalDatabaseBlueprintsResult]
+      def blueprints: () -> Array[Types::RelationalDatabaseBlueprint]?
+      def next_page_token: () -> String?
+    end
+    def get_relational_database_blueprints: (
+      ?page_token: String
+    ) -> _GetRelationalDatabaseBlueprintsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRelationalDatabaseBlueprintsResponse
+
+    interface _GetRelationalDatabaseBundlesResponse
+      include Smithy::Client::_Response[Types::GetRelationalDatabaseBundlesResult]
+      def bundles: () -> Array[Types::RelationalDatabaseBundle]?
+      def next_page_token: () -> String?
+    end
+    def get_relational_database_bundles: (
+      ?page_token: String,
+      ?include_inactive: bool
+    ) -> _GetRelationalDatabaseBundlesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRelationalDatabaseBundlesResponse
+
+    interface _GetRelationalDatabaseEventsResponse
+      include Smithy::Client::_Response[Types::GetRelationalDatabaseEventsResult]
+      def relational_database_events: () -> Array[Types::RelationalDatabaseEvent]?
+      def next_page_token: () -> String?
+    end
+    def get_relational_database_events: (
+      ?relational_database_name: String,
+      ?duration_in_minutes: Integer,
+      ?page_token: String
+    ) -> _GetRelationalDatabaseEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRelationalDatabaseEventsResponse
+
+    interface _GetRelationalDatabaseLogEventsResponse
+      include Smithy::Client::_Response[Types::GetRelationalDatabaseLogEventsResult]
+      def resource_log_events: () -> Array[Types::LogEvent]?
+      def next_backward_token: () -> String?
+      def next_forward_token: () -> String?
+    end
+    def get_relational_database_log_events: (
+      ?relational_database_name: String,
+      ?log_stream_name: String,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?start_from_head: bool,
+      ?page_token: String
+    ) -> _GetRelationalDatabaseLogEventsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRelationalDatabaseLogEventsResponse
+
+    interface _GetRelationalDatabaseLogStreamsResponse
+      include Smithy::Client::_Response[Types::GetRelationalDatabaseLogStreamsResult]
+      def log_streams: () -> Array[String]?
+    end
+    def get_relational_database_log_streams: (
+      ?relational_database_name: String
+    ) -> _GetRelationalDatabaseLogStreamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRelationalDatabaseLogStreamsResponse
+
+    interface _GetRelationalDatabaseMasterUserPasswordResponse
+      include Smithy::Client::_Response[Types::GetRelationalDatabaseMasterUserPasswordResult]
+      def master_user_password: () -> String?
+      def created_at: () -> Time?
+    end
+    def get_relational_database_master_user_password: (
+      ?relational_database_name: String,
+      ?password_version: String
+    ) -> _GetRelationalDatabaseMasterUserPasswordResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRelationalDatabaseMasterUserPasswordResponse
+
+    interface _GetRelationalDatabaseMetricDataResponse
+      include Smithy::Client::_Response[Types::GetRelationalDatabaseMetricDataResult]
+      def metric_name: () -> String?
+      def metric_data: () -> Array[Types::MetricDatapoint]?
+    end
+    def get_relational_database_metric_data: (
+      ?relational_database_name: String,
+      ?metric_name: String,
+      ?period: Integer,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?unit: String,
+      ?statistics: Array[String]
+    ) -> _GetRelationalDatabaseMetricDataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRelationalDatabaseMetricDataResponse
+
+    interface _GetRelationalDatabaseParametersResponse
+      include Smithy::Client::_Response[Types::GetRelationalDatabaseParametersResult]
+      def parameters: () -> Array[Types::RelationalDatabaseParameter]?
+      def next_page_token: () -> String?
+    end
+    def get_relational_database_parameters: (
+      ?relational_database_name: String,
+      ?page_token: String
+    ) -> _GetRelationalDatabaseParametersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRelationalDatabaseParametersResponse
+
+    interface _GetRelationalDatabaseSnapshotResponse
+      include Smithy::Client::_Response[Types::GetRelationalDatabaseSnapshotResult]
+      def relational_database_snapshot: () -> Types::RelationalDatabaseSnapshot?
+    end
+    def get_relational_database_snapshot: (
+      ?relational_database_snapshot_name: String
+    ) -> _GetRelationalDatabaseSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRelationalDatabaseSnapshotResponse
+
+    interface _GetRelationalDatabaseSnapshotsResponse
+      include Smithy::Client::_Response[Types::GetRelationalDatabaseSnapshotsResult]
+      def relational_database_snapshots: () -> Array[Types::RelationalDatabaseSnapshot]?
+      def next_page_token: () -> String?
+    end
+    def get_relational_database_snapshots: (
+      ?page_token: String
+    ) -> _GetRelationalDatabaseSnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRelationalDatabaseSnapshotsResponse
+
+    interface _GetRelationalDatabasesResponse
+      include Smithy::Client::_Response[Types::GetRelationalDatabasesResult]
+      def relational_databases: () -> Array[Types::RelationalDatabase]?
+      def next_page_token: () -> String?
+    end
+    def get_relational_databases: (
+      ?page_token: String
+    ) -> _GetRelationalDatabasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRelationalDatabasesResponse
+
+    interface _GetSetupHistoryResponse
+      include Smithy::Client::_Response[Types::GetSetupHistoryResult]
+      def setup_history: () -> Array[Types::SetupHistory]?
+      def next_page_token: () -> String?
+    end
+    def get_setup_history: (
+      ?resource_name: String,
+      ?page_token: String
+    ) -> _GetSetupHistoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSetupHistoryResponse
+
+    interface _GetStaticIpResponse
+      include Smithy::Client::_Response[Types::GetStaticIpResult]
+      def static_ip: () -> Types::StaticIp?
+    end
+    def get_static_ip: (
+      ?static_ip_name: String
+    ) -> _GetStaticIpResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStaticIpResponse
+
+    interface _GetStaticIpsResponse
+      include Smithy::Client::_Response[Types::GetStaticIpsResult]
+      def static_ips: () -> Array[Types::StaticIp]?
+      def next_page_token: () -> String?
+    end
+    def get_static_ips: (
+      ?page_token: String
+    ) -> _GetStaticIpsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStaticIpsResponse
+
+    interface _ImportKeyPairResponse
+      include Smithy::Client::_Response[Types::ImportKeyPairResult]
+      def operation: () -> Types::Operation?
+    end
+    def import_key_pair: (
+      ?key_pair_name: String,
+      ?public_key_base64: String
+    ) -> _ImportKeyPairResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportKeyPairResponse
+
+    interface _IsVpcPeeredResponse
+      include Smithy::Client::_Response[Types::IsVpcPeeredResult]
+      def is_peered: () -> bool?
+    end
+    def is_vpc_peered: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _IsVpcPeeredResponse
+
+    interface _OpenInstancePublicPortsResponse
+      include Smithy::Client::_Response[Types::OpenInstancePublicPortsResult]
+      def operation: () -> Types::Operation?
+    end
+    def open_instance_public_ports: (
+      ?port_info: {
+        from_port: Integer,
+        to_port: untyped,
+        protocol: String,
+        cidrs: Array[String],
+        ipv6_cidrs: untyped,
+        cidr_list_aliases: untyped
+      },
+      ?instance_name: String
+    ) -> _OpenInstancePublicPortsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _OpenInstancePublicPortsResponse
+
+    interface _PeerVpcResponse
+      include Smithy::Client::_Response[Types::PeerVpcResult]
+      def operation: () -> Types::Operation?
+    end
+    def peer_vpc: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PeerVpcResponse
+
+    interface _PutAlarmResponse
+      include Smithy::Client::_Response[Types::PutAlarmResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def put_alarm: (
+      ?alarm_name: String,
+      ?metric_name: String,
+      ?monitored_resource_name: String,
+      ?comparison_operator: String,
+      ?threshold: Float,
+      ?evaluation_periods: Integer,
+      ?datapoints_to_alarm: Integer,
+      ?treat_missing_data: String,
+      ?contact_protocols: Array[String],
+      ?notification_triggers: Array[String],
+      ?notification_enabled: bool
+    ) -> _PutAlarmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAlarmResponse
+
+    interface _PutInstancePublicPortsResponse
+      include Smithy::Client::_Response[Types::PutInstancePublicPortsResult]
+      def operation: () -> Types::Operation?
+    end
+    def put_instance_public_ports: (
+      ?port_infos: Array[
+        {
+          from_port: Integer,
+          to_port: untyped,
+          protocol: String,
+          cidrs: Array[String],
+          ipv6_cidrs: untyped,
+          cidr_list_aliases: untyped
+        }
+      ],
+      ?instance_name: String
+    ) -> _PutInstancePublicPortsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutInstancePublicPortsResponse
+
+    interface _RebootInstanceResponse
+      include Smithy::Client::_Response[Types::RebootInstanceResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def reboot_instance: (
+      ?instance_name: String
+    ) -> _RebootInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RebootInstanceResponse
+
+    interface _RebootRelationalDatabaseResponse
+      include Smithy::Client::_Response[Types::RebootRelationalDatabaseResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def reboot_relational_database: (
+      ?relational_database_name: String
+    ) -> _RebootRelationalDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RebootRelationalDatabaseResponse
+
+    interface _RegisterContainerImageResponse
+      include Smithy::Client::_Response[Types::RegisterContainerImageResult]
+      def container_image: () -> Types::ContainerImage?
+    end
+    def register_container_image: (
+      ?service_name: String,
+      ?label: String,
+      ?digest: String
+    ) -> _RegisterContainerImageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterContainerImageResponse
+
+    interface _ReleaseStaticIpResponse
+      include Smithy::Client::_Response[Types::ReleaseStaticIpResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def release_static_ip: (
+      ?static_ip_name: String
+    ) -> _ReleaseStaticIpResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ReleaseStaticIpResponse
+
+    interface _ResetDistributionCacheResponse
+      include Smithy::Client::_Response[Types::ResetDistributionCacheResult]
+      def status: () -> String?
+      def create_time: () -> Time?
+      def operation: () -> Types::Operation?
+    end
+    def reset_distribution_cache: (
+      ?distribution_name: String
+    ) -> _ResetDistributionCacheResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetDistributionCacheResponse
+
+    interface _SendContactMethodVerificationResponse
+      include Smithy::Client::_Response[Types::SendContactMethodVerificationResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def send_contact_method_verification: (
+      ?protocol: String
+    ) -> _SendContactMethodVerificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendContactMethodVerificationResponse
+
+    interface _SetIpAddressTypeResponse
+      include Smithy::Client::_Response[Types::SetIpAddressTypeResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def set_ip_address_type: (
+      ?resource_type: String,
+      ?resource_name: String,
+      ?ip_address_type: String,
+      ?accept_bundle_update: bool
+    ) -> _SetIpAddressTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetIpAddressTypeResponse
+
+    interface _SetResourceAccessForBucketResponse
+      include Smithy::Client::_Response[Types::SetResourceAccessForBucketResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def set_resource_access_for_bucket: (
+      ?resource_name: String,
+      ?bucket_name: String,
+      ?access: String
+    ) -> _SetResourceAccessForBucketResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetResourceAccessForBucketResponse
+
+    interface _SetupInstanceHttpsResponse
+      include Smithy::Client::_Response[Types::SetupInstanceHttpsResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def setup_instance_https: (
+      ?instance_name: String,
+      ?email_address: String,
+      ?domain_names: Array[String],
+      ?certificate_provider: String
+    ) -> _SetupInstanceHttpsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetupInstanceHttpsResponse
+
+    interface _StartGUISessionResponse
+      include Smithy::Client::_Response[Types::StartGUISessionResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def start_gui_session: (
+      ?resource_name: String
+    ) -> _StartGUISessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartGUISessionResponse
+
+    interface _StartInstanceResponse
+      include Smithy::Client::_Response[Types::StartInstanceResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def start_instance: (
+      ?instance_name: String
+    ) -> _StartInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartInstanceResponse
+
+    interface _StartRelationalDatabaseResponse
+      include Smithy::Client::_Response[Types::StartRelationalDatabaseResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def start_relational_database: (
+      ?relational_database_name: String
+    ) -> _StartRelationalDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRelationalDatabaseResponse
+
+    interface _StopGUISessionResponse
+      include Smithy::Client::_Response[Types::StopGUISessionResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def stop_gui_session: (
+      ?resource_name: String
+    ) -> _StopGUISessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopGUISessionResponse
+
+    interface _StopInstanceResponse
+      include Smithy::Client::_Response[Types::StopInstanceResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def stop_instance: (
+      ?instance_name: String,
+      ?force: bool
+    ) -> _StopInstanceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopInstanceResponse
+
+    interface _StopRelationalDatabaseResponse
+      include Smithy::Client::_Response[Types::StopRelationalDatabaseResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def stop_relational_database: (
+      ?relational_database_name: String,
+      ?relational_database_snapshot_name: String
+    ) -> _StopRelationalDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopRelationalDatabaseResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def tag_resource: (
+      ?resource_name: String,
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TestAlarmResponse
+      include Smithy::Client::_Response[Types::TestAlarmResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def test_alarm: (
+      ?alarm_name: String,
+      ?state: String
+    ) -> _TestAlarmResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestAlarmResponse
+
+    interface _UnpeerVpcResponse
+      include Smithy::Client::_Response[Types::UnpeerVpcResult]
+      def operation: () -> Types::Operation?
+    end
+    def unpeer_vpc: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UnpeerVpcResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def untag_resource: (
+      ?resource_name: String,
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateBucketResponse
+      include Smithy::Client::_Response[Types::UpdateBucketResult]
+      def bucket: () -> Types::Bucket?
+      def operations: () -> Array[Types::Operation]?
+    end
+    def update_bucket: (
+      ?bucket_name: String,
+      ?access_rules: {
+        get_object: String,
+        allow_public_overrides: bool
+      },
+      ?versioning: String,
+      ?readonly_access_accounts: Array[String],
+      ?access_log_config: {
+        enabled: bool,
+        destination: String,
+        prefix: String
+      }
+    ) -> _UpdateBucketResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBucketResponse
+
+    interface _UpdateBucketBundleResponse
+      include Smithy::Client::_Response[Types::UpdateBucketBundleResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def update_bucket_bundle: (
+      ?bucket_name: String,
+      ?bundle_id: String
+    ) -> _UpdateBucketBundleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBucketBundleResponse
+
+    interface _UpdateContainerServiceResponse
+      include Smithy::Client::_Response[Types::UpdateContainerServiceResult]
+      def container_service: () -> Types::ContainerService?
+    end
+    def update_container_service: (
+      ?service_name: String,
+      ?power: String,
+      ?scale: Integer,
+      ?is_disabled: bool,
+      ?public_domain_names: Hash[String,
+        Array[String]
+      ],
+      ?private_registry_access: {
+        ecr_image_puller_role: {
+          is_active: bool
+        }
+      }
+    ) -> _UpdateContainerServiceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateContainerServiceResponse
+
+    interface _UpdateDistributionResponse
+      include Smithy::Client::_Response[Types::UpdateDistributionResult]
+      def operation: () -> Types::Operation?
+    end
+    def update_distribution: (
+      ?distribution_name: String,
+      ?origin: {
+        name: String,
+        region_name: String,
+        protocol_policy: String,
+        response_timeout: Integer
+      },
+      ?default_cache_behavior: {
+        behavior: String
+      },
+      ?cache_behavior_settings: {
+        default_ttl: Integer,
+        minimum_ttl: untyped,
+        maximum_ttl: untyped,
+        allowed_http_methods: String,
+        cached_http_methods: untyped,
+        forwarded_cookies: {
+          option: String,
+          cookies_allow_list: Array[String]
+        },
+        forwarded_headers: {
+          option: untyped,
+          headers_allow_list: Array[String]
+        },
+        forwarded_query_strings: {
+          option: bool,
+          query_strings_allow_list: untyped
+        }
+      },
+      ?cache_behaviors: Array[
+        {
+          path: String,
+          behavior: String
+        }
+      ],
+      ?is_enabled: bool,
+      ?viewer_minimum_tls_protocol_version: String,
+      ?certificate_name: String,
+      ?use_default_certificate: bool
+    ) -> _UpdateDistributionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDistributionResponse
+
+    interface _UpdateDistributionBundleResponse
+      include Smithy::Client::_Response[Types::UpdateDistributionBundleResult]
+      def operation: () -> Types::Operation?
+    end
+    def update_distribution_bundle: (
+      ?distribution_name: String,
+      ?bundle_id: String
+    ) -> _UpdateDistributionBundleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDistributionBundleResponse
+
+    interface _UpdateDomainEntryResponse
+      include Smithy::Client::_Response[Types::UpdateDomainEntryResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def update_domain_entry: (
+      ?domain_name: String,
+      ?domain_entry: {
+        id: String,
+        name: String,
+        target: String,
+        is_alias: bool,
+        type: String,
+        options: Hash[String, String]
+      }
+    ) -> _UpdateDomainEntryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDomainEntryResponse
+
+    interface _UpdateInstanceMetadataOptionsResponse
+      include Smithy::Client::_Response[Types::UpdateInstanceMetadataOptionsResult]
+      def operation: () -> Types::Operation?
+    end
+    def update_instance_metadata_options: (
+      ?instance_name: String,
+      ?http_tokens: String,
+      ?http_endpoint: String,
+      ?http_put_response_hop_limit: Integer,
+      ?http_protocol_ipv6: String
+    ) -> _UpdateInstanceMetadataOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateInstanceMetadataOptionsResponse
+
+    interface _UpdateLoadBalancerAttributeResponse
+      include Smithy::Client::_Response[Types::UpdateLoadBalancerAttributeResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def update_load_balancer_attribute: (
+      ?load_balancer_name: String,
+      ?attribute_name: String,
+      ?attribute_value: String
+    ) -> _UpdateLoadBalancerAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLoadBalancerAttributeResponse
+
+    interface _UpdateRelationalDatabaseResponse
+      include Smithy::Client::_Response[Types::UpdateRelationalDatabaseResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def update_relational_database: (
+      ?relational_database_name: String,
+      ?master_user_password: String,
+      ?rotate_master_user_password: bool,
+      ?preferred_backup_window: String,
+      ?preferred_maintenance_window: String,
+      ?enable_backup_retention: bool,
+      ?disable_backup_retention: bool,
+      ?publicly_accessible: bool,
+      ?apply_immediately: bool,
+      ?ca_certificate_identifier: String,
+      ?relational_database_blueprint_id: String
+    ) -> _UpdateRelationalDatabaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRelationalDatabaseResponse
+
+    interface _UpdateRelationalDatabaseParametersResponse
+      include Smithy::Client::_Response[Types::UpdateRelationalDatabaseParametersResult]
+      def operations: () -> Array[Types::Operation]?
+    end
+    def update_relational_database_parameters: (
+      ?relational_database_name: String,
+      ?parameters: Array[
+        {
+          allowed_values: String,
+          apply_method: untyped,
+          apply_type: untyped,
+          data_type: untyped,
+          description: untyped,
+          is_modifiable: bool,
+          parameter_name: untyped,
+          parameter_value: untyped
+        }
+      ]
+    ) -> _UpdateRelationalDatabaseParametersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRelationalDatabaseParametersResponse
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module CloudHSMV2
+      VERSION: String
+    end
+  end

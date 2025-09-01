@@ -1,0 +1,763 @@
+module Aws::CloudHSMV2
+  module Types
+
+    class Backup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_id: String,
+        ?backup_arn: String,
+        ?backup_state: String,
+        ?cluster_id: String,
+        ?create_timestamp: Time,
+        ?copy_timestamp: Time,
+        ?never_expires: bool,
+        ?source_region: String,
+        ?source_backup: String,
+        ?source_cluster: String,
+        ?delete_timestamp: Time,
+        ?tag_list: Array[Types::Tag],
+        ?hsm_type: String,
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_id: String?
+      attr_accessor backup_arn: String?
+      attr_accessor backup_state: String?
+      attr_accessor cluster_id: String?
+      attr_accessor create_timestamp: Time?
+      attr_accessor copy_timestamp: Time?
+      attr_accessor never_expires: bool?
+      attr_accessor source_region: String?
+      attr_accessor source_backup: String?
+      attr_accessor source_cluster: String?
+      attr_accessor delete_timestamp: Time?
+      attr_accessor tag_list: Array[Types::Tag]?
+      attr_accessor hsm_type: String?
+      attr_accessor mode: String?
+    end
+
+    module BackupPolicy
+      DEFAULT: String
+    end
+
+    class BackupRetentionPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: String?
+    end
+
+    module BackupRetentionType
+      DAYS: String
+    end
+
+    module BackupState
+      CREATE_IN_PROGRESS: String
+      READY: String
+      DELETED: String
+      PENDING_DELETION: String
+    end
+
+    class Certificates
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_csr: String,
+        ?hsm_certificate: String,
+        ?aws_hardware_certificate: String,
+        ?manufacturer_hardware_certificate: String,
+        ?cluster_certificate: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_csr: String?
+      attr_accessor hsm_certificate: String?
+      attr_accessor aws_hardware_certificate: String?
+      attr_accessor manufacturer_hardware_certificate: String?
+      attr_accessor cluster_certificate: String?
+    end
+
+    class CloudHsmAccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CloudHsmInternalFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CloudHsmInvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CloudHsmResourceLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CloudHsmResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CloudHsmServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CloudHsmTagException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Cluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_policy: String,
+        ?backup_retention_policy: Types::BackupRetentionPolicy,
+        ?cluster_id: String,
+        ?create_timestamp: Time,
+        ?hsms: Array[Types::Hsm],
+        ?hsm_type: String,
+        ?hsm_type_rollback_expiration: Time,
+        ?pre_co_password: String,
+        ?security_group: String,
+        ?source_backup_id: String,
+        ?state: String,
+        ?state_message: String,
+        ?subnet_mapping: Hash[String, String],
+        ?vpc_id: String,
+        ?network_type: String,
+        ?certificates: Types::Certificates,
+        ?tag_list: Array[Types::Tag],
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_policy: String?
+      attr_accessor backup_retention_policy: Types::BackupRetentionPolicy?
+      attr_accessor cluster_id: String?
+      attr_accessor create_timestamp: Time?
+      attr_accessor hsms: Array[Types::Hsm]?
+      attr_accessor hsm_type: String?
+      attr_accessor hsm_type_rollback_expiration: Time?
+      attr_accessor pre_co_password: String?
+      attr_accessor security_group: String?
+      attr_accessor source_backup_id: String?
+      attr_accessor state: String?
+      attr_accessor state_message: String?
+      attr_accessor subnet_mapping: Hash[String, String]?
+      attr_accessor vpc_id: String?
+      attr_accessor network_type: String?
+      attr_accessor certificates: Types::Certificates?
+      attr_accessor tag_list: Array[Types::Tag]?
+      attr_accessor mode: String?
+    end
+
+    module ClusterMode
+      FIPS: String
+      NON_FIPS: String
+    end
+
+    module ClusterState
+      CREATE_IN_PROGRESS: String
+      UNINITIALIZED: String
+      INITIALIZE_IN_PROGRESS: String
+      INITIALIZED: String
+      ACTIVE: String
+      UPDATE_IN_PROGRESS: String
+      MODIFY_IN_PROGRESS: String
+      ROLLBACK_IN_PROGRESS: String
+      DELETE_IN_PROGRESS: String
+      DELETED: String
+      DEGRADED: String
+    end
+
+    class CopyBackupToRegionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_region: String,
+        ?backup_id: String,
+        ?tag_list: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_region: String?
+      attr_accessor backup_id: String?
+      attr_accessor tag_list: Array[Types::Tag]?
+    end
+
+    class CopyBackupToRegionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_backup: Types::DestinationBackup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_backup: Types::DestinationBackup?
+    end
+
+    class CreateClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_retention_policy: Types::BackupRetentionPolicy,
+        ?hsm_type: String,
+        ?source_backup_id: String,
+        ?subnet_ids: Array[String],
+        ?network_type: String,
+        ?tag_list: Array[Types::Tag],
+        ?mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_retention_policy: Types::BackupRetentionPolicy?
+      attr_accessor hsm_type: String?
+      attr_accessor source_backup_id: String?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor network_type: String?
+      attr_accessor tag_list: Array[Types::Tag]?
+      attr_accessor mode: String?
+    end
+
+    class CreateClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class CreateHsmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?availability_zone: String,
+        ?ip_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor availability_zone: String?
+      attr_accessor ip_address: String?
+    end
+
+    class CreateHsmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hsm: Types::Hsm,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hsm: Types::Hsm?
+    end
+
+    class DeleteBackupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_id: String?
+    end
+
+    class DeleteBackupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup: Types::Backup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup: Types::Backup?
+    end
+
+    class DeleteClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+    end
+
+    class DeleteClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class DeleteHsmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?hsm_id: String,
+        ?eni_id: String,
+        ?eni_ip: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor hsm_id: String?
+      attr_accessor eni_id: String?
+      attr_accessor eni_ip: String?
+    end
+
+    class DeleteHsmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hsm_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hsm_id: String?
+    end
+
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DeleteResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class DescribeBackupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Hash[String, Array[String]],
+        ?shared: bool,
+        ?sort_ascending: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Hash[String, Array[String]]?
+      attr_accessor shared: bool?
+      attr_accessor sort_ascending: bool?
+    end
+
+    class DescribeBackupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backups: Array[Types::Backup],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backups: Array[Types::Backup]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeClustersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filters: Hash[String, Array[String]],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filters: Hash[String, Array[String]]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeClustersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?clusters: Array[Types::Cluster],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor clusters: Array[Types::Cluster]?
+      attr_accessor next_token: String?
+    end
+
+    class DestinationBackup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?create_timestamp: Time,
+        ?source_region: String,
+        ?source_backup: String,
+        ?source_cluster: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor create_timestamp: Time?
+      attr_accessor source_region: String?
+      attr_accessor source_backup: String?
+      attr_accessor source_cluster: String?
+    end
+
+    class GetResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    class Hsm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?availability_zone: String,
+        ?cluster_id: String,
+        ?subnet_id: String,
+        ?eni_id: String,
+        ?eni_ip: String,
+        ?eni_ip_v6: String,
+        ?hsm_id: String,
+        ?hsm_type: String,
+        ?state: String,
+        ?state_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor availability_zone: String?
+      attr_accessor cluster_id: String?
+      attr_accessor subnet_id: String?
+      attr_accessor eni_id: String?
+      attr_accessor eni_ip: String?
+      attr_accessor eni_ip_v6: String?
+      attr_accessor hsm_id: String?
+      attr_accessor hsm_type: String?
+      attr_accessor state: String?
+      attr_accessor state_message: String?
+    end
+
+    module HsmState
+      CREATE_IN_PROGRESS: String
+      ACTIVE: String
+      DEGRADED: String
+      DELETE_IN_PROGRESS: String
+      DELETED: String
+    end
+
+    class InitializeClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?signed_cert: String,
+        ?trust_anchor: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor signed_cert: String?
+      attr_accessor trust_anchor: String?
+    end
+
+    class InitializeClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state: String,
+        ?state_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state: String?
+      attr_accessor state_message: String?
+    end
+
+    class ListTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTagsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_list: Array[Types::Tag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_list: Array[Types::Tag]?
+      attr_accessor next_token: String?
+    end
+
+    class ModifyBackupAttributesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_id: String,
+        ?never_expires: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_id: String?
+      attr_accessor never_expires: bool?
+    end
+
+    class ModifyBackupAttributesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup: Types::Backup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup: Types::Backup?
+    end
+
+    class ModifyClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hsm_type: String,
+        ?backup_retention_policy: Types::BackupRetentionPolicy,
+        ?cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hsm_type: String?
+      attr_accessor backup_retention_policy: Types::BackupRetentionPolicy?
+      attr_accessor cluster_id: String?
+    end
+
+    class ModifyClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    module NetworkType
+      IPV4: String
+      DUALSTACK: String
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class PutResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class RestoreBackupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_id: String?
+    end
+
+    class RestoreBackupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup: Types::Backup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup: Types::Backup?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?tag_list: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor tag_list: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?tag_key_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor tag_key_list: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+  end
+end

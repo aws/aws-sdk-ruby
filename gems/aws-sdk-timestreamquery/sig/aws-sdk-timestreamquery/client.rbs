@@ -1,0 +1,267 @@
+module Aws::TimestreamQuery
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::TimestreamQuery::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CancelQueryResponse
+      include Smithy::Client::_Response[Types::CancelQueryResponse]
+      def cancellation_message: () -> String?
+    end
+    def cancel_query: (
+      ?query_id: String
+    ) -> _CancelQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelQueryResponse
+
+    interface _CreateScheduledQueryResponse
+      include Smithy::Client::_Response[Types::CreateScheduledQueryResponse]
+      def arn: () -> String?
+    end
+    def create_scheduled_query: (
+      ?name: String,
+      ?query_string: String,
+      ?schedule_configuration: {
+        schedule_expression: String
+      },
+      ?notification_configuration: {
+        sns_configuration: {
+          topic_arn: String
+        }
+      },
+      ?target_configuration: {
+        timestream_configuration: {
+          database_name: String,
+          table_name: untyped,
+          time_column: String,
+          dimension_mappings: Array[
+            {
+              name: untyped,
+              dimension_value_type: String
+            }
+          ],
+          multi_measure_mappings: {
+            target_multi_measure_name: untyped,
+            multi_measure_attribute_mappings: Array[
+              {
+                source_column: untyped,
+                target_multi_measure_attribute_name: untyped,
+                measure_value_type: String
+              }
+            ]
+          },
+          mixed_measure_mappings: Array[
+            {
+              measure_name: untyped,
+              source_column: untyped,
+              target_measure_name: untyped,
+              measure_value_type: String,
+              multi_measure_attribute_mappings: untyped
+            }
+          ],
+          measure_name_column: untyped
+        }
+      },
+      ?client_token: String,
+      ?scheduled_query_execution_role_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?kms_key_id: String,
+      ?error_report_configuration: {
+        s3_configuration: {
+          bucket_name: String,
+          object_key_prefix: String,
+          encryption_option: String
+        }
+      }
+    ) -> _CreateScheduledQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateScheduledQueryResponse
+
+    interface _DeleteScheduledQueryResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_scheduled_query: (
+      ?scheduled_query_arn: String
+    ) -> _DeleteScheduledQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteScheduledQueryResponse
+
+    interface _DescribeAccountSettingsResponse
+      include Smithy::Client::_Response[Types::DescribeAccountSettingsResponse]
+      def max_query_tcu: () -> Integer?
+      def query_pricing_model: () -> String?
+      def query_compute: () -> Types::QueryComputeResponse?
+    end
+    def describe_account_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountSettingsResponse
+
+    interface _DescribeEndpointsResponse
+      include Smithy::Client::_Response[Types::DescribeEndpointsResponse]
+      def endpoints: () -> Array[Types::Endpoint]?
+    end
+    def describe_endpoints: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeEndpointsResponse
+
+    interface _DescribeScheduledQueryResponse
+      include Smithy::Client::_Response[Types::DescribeScheduledQueryResponse]
+      def scheduled_query: () -> Types::ScheduledQueryDescription?
+    end
+    def describe_scheduled_query: (
+      ?scheduled_query_arn: String
+    ) -> _DescribeScheduledQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeScheduledQueryResponse
+
+    interface _ExecuteScheduledQueryResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def execute_scheduled_query: (
+      ?scheduled_query_arn: String,
+      ?invocation_time: Time,
+      ?client_token: String,
+      ?query_insights: {
+        mode: String
+      }
+    ) -> _ExecuteScheduledQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteScheduledQueryResponse
+
+    interface _ListScheduledQueriesResponse
+      include Smithy::Client::_Response[Types::ListScheduledQueriesResponse]
+      def scheduled_queries: () -> Array[Types::ScheduledQuery]?
+      def next_token: () -> String?
+    end
+    def list_scheduled_queries: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListScheduledQueriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListScheduledQueriesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PrepareQueryResponse
+      include Smithy::Client::_Response[Types::PrepareQueryResponse]
+      def query_string: () -> String?
+      def columns: () -> Array[Types::SelectColumn]?
+      def parameters: () -> Array[Types::ParameterMapping]?
+    end
+    def prepare_query: (
+      ?query_string: String,
+      ?validate_only: bool
+    ) -> _PrepareQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PrepareQueryResponse
+
+    interface _QueryResponse
+      include Smithy::Client::_Response[Types::QueryResponse]
+      def query_id: () -> String?
+      def next_token: () -> String?
+      def rows: () -> Array[Types::Row]?
+      def column_info: () -> Array[Types::ColumnInfo]?
+      def query_status: () -> Types::QueryStatus?
+      def query_insights_response: () -> Types::QueryInsightsResponse?
+    end
+    def query: (
+      ?query_string: String,
+      ?client_token: String,
+      ?next_token: String,
+      ?max_rows: Integer,
+      ?query_insights: {
+        mode: String
+      }
+    ) -> _QueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _QueryResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAccountSettingsResponse
+      include Smithy::Client::_Response[Types::UpdateAccountSettingsResponse]
+      def max_query_tcu: () -> Integer?
+      def query_pricing_model: () -> String?
+      def query_compute: () -> Types::QueryComputeResponse?
+    end
+    def update_account_settings: (
+      ?max_query_tcu: Integer,
+      ?query_pricing_model: String,
+      ?query_compute: {
+        compute_mode: String,
+        provisioned_capacity: {
+          target_query_tcu: Integer,
+          notification_configuration: {
+            sns_configuration: {
+              topic_arn: String
+            },
+            role_arn: untyped
+          }
+        }
+      }
+    ) -> _UpdateAccountSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAccountSettingsResponse
+
+    interface _UpdateScheduledQueryResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_scheduled_query: (
+      ?scheduled_query_arn: String,
+      ?state: String
+    ) -> _UpdateScheduledQueryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateScheduledQueryResponse
+  end
+end

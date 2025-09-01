@@ -1,0 +1,5 @@
+  module Aws
+    module MarketplaceCommerceAnalytics
+      VERSION: String
+    end
+  end

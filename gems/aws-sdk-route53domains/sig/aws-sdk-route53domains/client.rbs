@@ -1,0 +1,687 @@
+module Aws::Route53Domains
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Route53Domains::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AcceptDomainTransferFromAnotherAwsAccountResponse
+      include Smithy::Client::_Response[Types::AcceptDomainTransferFromAnotherAwsAccountResponse]
+      def operation_id: () -> String?
+    end
+    def accept_domain_transfer_from_another_aws_account: (
+      ?domain_name: String,
+      ?password: String
+    ) -> _AcceptDomainTransferFromAnotherAwsAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptDomainTransferFromAnotherAwsAccountResponse
+
+    interface _AssociateDelegationSignerToDomainResponse
+      include Smithy::Client::_Response[Types::AssociateDelegationSignerToDomainResponse]
+      def operation_id: () -> String?
+    end
+    def associate_delegation_signer_to_domain: (
+      ?domain_name: String,
+      ?signing_attributes: {
+        algorithm: Integer,
+        flags: untyped,
+        public_key: String
+      }
+    ) -> _AssociateDelegationSignerToDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateDelegationSignerToDomainResponse
+
+    interface _CancelDomainTransferToAnotherAwsAccountResponse
+      include Smithy::Client::_Response[Types::CancelDomainTransferToAnotherAwsAccountResponse]
+      def operation_id: () -> String?
+    end
+    def cancel_domain_transfer_to_another_aws_account: (
+      ?domain_name: String
+    ) -> _CancelDomainTransferToAnotherAwsAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelDomainTransferToAnotherAwsAccountResponse
+
+    interface _CheckDomainAvailabilityResponse
+      include Smithy::Client::_Response[Types::CheckDomainAvailabilityResponse]
+      def availability: () -> String?
+    end
+    def check_domain_availability: (
+      ?domain_name: String,
+      ?idn_lang_code: String
+    ) -> _CheckDomainAvailabilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CheckDomainAvailabilityResponse
+
+    interface _CheckDomainTransferabilityResponse
+      include Smithy::Client::_Response[Types::CheckDomainTransferabilityResponse]
+      def transferability: () -> Types::DomainTransferability?
+      def message: () -> String?
+    end
+    def check_domain_transferability: (
+      ?domain_name: String,
+      ?auth_code: String
+    ) -> _CheckDomainTransferabilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CheckDomainTransferabilityResponse
+
+    interface _DeleteDomainResponse
+      include Smithy::Client::_Response[Types::DeleteDomainResponse]
+      def operation_id: () -> String?
+    end
+    def delete_domain: (
+      ?domain_name: String
+    ) -> _DeleteDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainResponse
+
+    interface _DeleteTagsForDomainResponse
+      include Smithy::Client::_Response[Types::DeleteTagsForDomainResponse]
+    end
+    def delete_tags_for_domain: (
+      ?domain_name: String,
+      ?tags_to_delete: Array[String]
+    ) -> _DeleteTagsForDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTagsForDomainResponse
+
+    interface _DisableDomainAutoRenewResponse
+      include Smithy::Client::_Response[Types::DisableDomainAutoRenewResponse]
+    end
+    def disable_domain_auto_renew: (
+      ?domain_name: String
+    ) -> _DisableDomainAutoRenewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableDomainAutoRenewResponse
+
+    interface _DisableDomainTransferLockResponse
+      include Smithy::Client::_Response[Types::DisableDomainTransferLockResponse]
+      def operation_id: () -> String?
+    end
+    def disable_domain_transfer_lock: (
+      ?domain_name: String
+    ) -> _DisableDomainTransferLockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableDomainTransferLockResponse
+
+    interface _DisassociateDelegationSignerFromDomainResponse
+      include Smithy::Client::_Response[Types::DisassociateDelegationSignerFromDomainResponse]
+      def operation_id: () -> String?
+    end
+    def disassociate_delegation_signer_from_domain: (
+      ?domain_name: String,
+      ?id: String
+    ) -> _DisassociateDelegationSignerFromDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateDelegationSignerFromDomainResponse
+
+    interface _EnableDomainAutoRenewResponse
+      include Smithy::Client::_Response[Types::EnableDomainAutoRenewResponse]
+    end
+    def enable_domain_auto_renew: (
+      ?domain_name: String
+    ) -> _EnableDomainAutoRenewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableDomainAutoRenewResponse
+
+    interface _EnableDomainTransferLockResponse
+      include Smithy::Client::_Response[Types::EnableDomainTransferLockResponse]
+      def operation_id: () -> String?
+    end
+    def enable_domain_transfer_lock: (
+      ?domain_name: String
+    ) -> _EnableDomainTransferLockResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableDomainTransferLockResponse
+
+    interface _GetContactReachabilityStatusResponse
+      include Smithy::Client::_Response[Types::GetContactReachabilityStatusResponse]
+      def domain_name: () -> String?
+      def status: () -> String?
+    end
+    def get_contact_reachability_status: (
+      ?domain_name: String
+    ) -> _GetContactReachabilityStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetContactReachabilityStatusResponse
+
+    interface _GetDomainDetailResponse
+      include Smithy::Client::_Response[Types::GetDomainDetailResponse]
+      def domain_name: () -> String?
+      def nameservers: () -> Array[Types::Nameserver]?
+      def auto_renew: () -> bool?
+      def admin_contact: () -> Types::ContactDetail?
+      def registrant_contact: () -> Types::ContactDetail?
+      def tech_contact: () -> Types::ContactDetail?
+      def admin_privacy: () -> bool?
+      def registrant_privacy: () -> bool?
+      def tech_privacy: () -> bool?
+      def registrar_name: () -> String?
+      def who_is_server: () -> String?
+      def registrar_url: () -> String?
+      def abuse_contact_email: () -> String?
+      def abuse_contact_phone: () -> String?
+      def registry_domain_id: () -> String?
+      def creation_date: () -> Time?
+      def updated_date: () -> Time?
+      def expiration_date: () -> Time?
+      def reseller: () -> String?
+      def dns_sec: () -> String?
+      def status_list: () -> Array[String]?
+      def dnssec_keys: () -> Array[Types::DnssecKey]?
+      def billing_contact: () -> Types::ContactDetail?
+      def billing_privacy: () -> bool?
+    end
+    def get_domain_detail: (
+      ?domain_name: String
+    ) -> _GetDomainDetailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainDetailResponse
+
+    interface _GetDomainSuggestionsResponse
+      include Smithy::Client::_Response[Types::GetDomainSuggestionsResponse]
+      def suggestions_list: () -> Array[Types::DomainSuggestion]?
+    end
+    def get_domain_suggestions: (
+      ?domain_name: String,
+      ?suggestion_count: Integer,
+      ?only_available: bool
+    ) -> _GetDomainSuggestionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainSuggestionsResponse
+
+    interface _GetOperationDetailResponse
+      include Smithy::Client::_Response[Types::GetOperationDetailResponse]
+      def operation_id: () -> String?
+      def status: () -> String?
+      def message: () -> String?
+      def domain_name: () -> String?
+      def type: () -> String?
+      def submitted_date: () -> Time?
+      def last_updated_date: () -> Time?
+      def status_flag: () -> String?
+    end
+    def get_operation_detail: (
+      ?operation_id: String
+    ) -> _GetOperationDetailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOperationDetailResponse
+
+    interface _ListDomainsResponse
+      include Smithy::Client::_Response[Types::ListDomainsResponse]
+      def domains: () -> Array[Types::DomainSummary]?
+      def next_page_marker: () -> String?
+    end
+    def list_domains: (
+      ?filter_conditions: Array[
+        {
+          name: String,
+          operator: String,
+          values: Array[String]
+        }
+      ],
+      ?sort_condition: {
+        name: String,
+        sort_order: String
+      },
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainsResponse
+
+    interface _ListOperationsResponse
+      include Smithy::Client::_Response[Types::ListOperationsResponse]
+      def operations: () -> Array[Types::OperationSummary]?
+      def next_page_marker: () -> String?
+    end
+    def list_operations: (
+      ?submitted_since: Time,
+      ?marker: String,
+      ?max_items: Integer,
+      ?status: Array[String],
+      ?type: Array[String],
+      ?sort_by: String,
+      ?sort_order: String
+    ) -> _ListOperationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOperationsResponse
+
+    interface _ListPricesResponse
+      include Smithy::Client::_Response[Types::ListPricesResponse]
+      def prices: () -> Array[Types::DomainPrice]?
+      def next_page_marker: () -> String?
+    end
+    def list_prices: (
+      ?tld: String,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ListPricesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPricesResponse
+
+    interface _ListTagsForDomainResponse
+      include Smithy::Client::_Response[Types::ListTagsForDomainResponse]
+      def tag_list: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_domain: (
+      ?domain_name: String
+    ) -> _ListTagsForDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForDomainResponse
+
+    interface _PushDomainResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def push_domain: (
+      ?domain_name: String,
+      ?target: String
+    ) -> _PushDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PushDomainResponse
+
+    interface _RegisterDomainResponse
+      include Smithy::Client::_Response[Types::RegisterDomainResponse]
+      def operation_id: () -> String?
+    end
+    def register_domain: (
+      ?domain_name: String,
+      ?idn_lang_code: String,
+      ?duration_in_years: Integer,
+      ?auto_renew: bool,
+      ?admin_contact: {
+        first_name: String,
+        last_name: untyped,
+        contact_type: String,
+        organization_name: untyped,
+        address_line1: String,
+        address_line2: untyped,
+        city: String,
+        state: String,
+        country_code: String,
+        zip_code: String,
+        phone_number: String,
+        email: String,
+        fax: untyped,
+        extra_params: Array[
+          {
+            name: String,
+            value: String
+          }
+        ]
+      },
+      ?registrant_contact: {
+        first_name: String,
+        last_name: untyped,
+        contact_type: String,
+        organization_name: untyped,
+        address_line1: String,
+        address_line2: untyped,
+        city: String,
+        state: String,
+        country_code: String,
+        zip_code: String,
+        phone_number: String,
+        email: String,
+        fax: untyped,
+        extra_params: Array[
+          {
+            name: String,
+            value: String
+          }
+        ]
+      },
+      ?tech_contact: {
+        first_name: String,
+        last_name: untyped,
+        contact_type: String,
+        organization_name: untyped,
+        address_line1: String,
+        address_line2: untyped,
+        city: String,
+        state: String,
+        country_code: String,
+        zip_code: String,
+        phone_number: String,
+        email: String,
+        fax: untyped,
+        extra_params: Array[
+          {
+            name: String,
+            value: String
+          }
+        ]
+      },
+      ?privacy_protect_admin_contact: bool,
+      ?privacy_protect_registrant_contact: bool,
+      ?privacy_protect_tech_contact: bool,
+      ?billing_contact: {
+        first_name: String,
+        last_name: untyped,
+        contact_type: String,
+        organization_name: untyped,
+        address_line1: String,
+        address_line2: untyped,
+        city: String,
+        state: String,
+        country_code: String,
+        zip_code: String,
+        phone_number: String,
+        email: String,
+        fax: untyped,
+        extra_params: Array[
+          {
+            name: String,
+            value: String
+          }
+        ]
+      },
+      ?privacy_protect_billing_contact: bool
+    ) -> _RegisterDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterDomainResponse
+
+    interface _RejectDomainTransferFromAnotherAwsAccountResponse
+      include Smithy::Client::_Response[Types::RejectDomainTransferFromAnotherAwsAccountResponse]
+      def operation_id: () -> String?
+    end
+    def reject_domain_transfer_from_another_aws_account: (
+      ?domain_name: String
+    ) -> _RejectDomainTransferFromAnotherAwsAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RejectDomainTransferFromAnotherAwsAccountResponse
+
+    interface _RenewDomainResponse
+      include Smithy::Client::_Response[Types::RenewDomainResponse]
+      def operation_id: () -> String?
+    end
+    def renew_domain: (
+      ?domain_name: String,
+      ?duration_in_years: Integer,
+      ?current_expiry_year: Integer
+    ) -> _RenewDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RenewDomainResponse
+
+    interface _ResendContactReachabilityEmailResponse
+      include Smithy::Client::_Response[Types::ResendContactReachabilityEmailResponse]
+      def domain_name: () -> String?
+      def email_address: () -> String?
+      def is_already_verified: () -> bool?
+    end
+    def resend_contact_reachability_email: (
+      ?domain_name: String
+    ) -> _ResendContactReachabilityEmailResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResendContactReachabilityEmailResponse
+
+    interface _ResendOperationAuthorizationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def resend_operation_authorization: (
+      ?operation_id: String
+    ) -> _ResendOperationAuthorizationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResendOperationAuthorizationResponse
+
+    interface _RetrieveDomainAuthCodeResponse
+      include Smithy::Client::_Response[Types::RetrieveDomainAuthCodeResponse]
+      def auth_code: () -> String?
+    end
+    def retrieve_domain_auth_code: (
+      ?domain_name: String
+    ) -> _RetrieveDomainAuthCodeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RetrieveDomainAuthCodeResponse
+
+    interface _TransferDomainResponse
+      include Smithy::Client::_Response[Types::TransferDomainResponse]
+      def operation_id: () -> String?
+    end
+    def transfer_domain: (
+      ?domain_name: String,
+      ?idn_lang_code: String,
+      ?duration_in_years: Integer,
+      ?nameservers: Array[
+        {
+          name: String,
+          glue_ips: Array[String]
+        }
+      ],
+      ?auth_code: String,
+      ?auto_renew: bool,
+      ?admin_contact: {
+        first_name: String,
+        last_name: untyped,
+        contact_type: String,
+        organization_name: untyped,
+        address_line1: String,
+        address_line2: untyped,
+        city: String,
+        state: String,
+        country_code: String,
+        zip_code: String,
+        phone_number: String,
+        email: String,
+        fax: untyped,
+        extra_params: Array[
+          {
+            name: String,
+            value: String
+          }
+        ]
+      },
+      ?registrant_contact: {
+        first_name: String,
+        last_name: untyped,
+        contact_type: String,
+        organization_name: untyped,
+        address_line1: String,
+        address_line2: untyped,
+        city: String,
+        state: String,
+        country_code: String,
+        zip_code: String,
+        phone_number: String,
+        email: String,
+        fax: untyped,
+        extra_params: Array[
+          {
+            name: String,
+            value: String
+          }
+        ]
+      },
+      ?tech_contact: {
+        first_name: String,
+        last_name: untyped,
+        contact_type: String,
+        organization_name: untyped,
+        address_line1: String,
+        address_line2: untyped,
+        city: String,
+        state: String,
+        country_code: String,
+        zip_code: String,
+        phone_number: String,
+        email: String,
+        fax: untyped,
+        extra_params: Array[
+          {
+            name: String,
+            value: String
+          }
+        ]
+      },
+      ?privacy_protect_admin_contact: bool,
+      ?privacy_protect_registrant_contact: bool,
+      ?privacy_protect_tech_contact: bool,
+      ?billing_contact: {
+        first_name: String,
+        last_name: untyped,
+        contact_type: String,
+        organization_name: untyped,
+        address_line1: String,
+        address_line2: untyped,
+        city: String,
+        state: String,
+        country_code: String,
+        zip_code: String,
+        phone_number: String,
+        email: String,
+        fax: untyped,
+        extra_params: Array[
+          {
+            name: String,
+            value: String
+          }
+        ]
+      },
+      ?privacy_protect_billing_contact: bool
+    ) -> _TransferDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TransferDomainResponse
+
+    interface _TransferDomainToAnotherAwsAccountResponse
+      include Smithy::Client::_Response[Types::TransferDomainToAnotherAwsAccountResponse]
+      def operation_id: () -> String?
+      def password: () -> String?
+    end
+    def transfer_domain_to_another_aws_account: (
+      ?domain_name: String,
+      ?account_id: String
+    ) -> _TransferDomainToAnotherAwsAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TransferDomainToAnotherAwsAccountResponse
+
+    interface _UpdateDomainContactResponse
+      include Smithy::Client::_Response[Types::UpdateDomainContactResponse]
+      def operation_id: () -> String?
+    end
+    def update_domain_contact: (
+      ?domain_name: String,
+      ?admin_contact: {
+        first_name: String,
+        last_name: untyped,
+        contact_type: String,
+        organization_name: untyped,
+        address_line1: String,
+        address_line2: untyped,
+        city: String,
+        state: String,
+        country_code: String,
+        zip_code: String,
+        phone_number: String,
+        email: String,
+        fax: untyped,
+        extra_params: Array[
+          {
+            name: String,
+            value: String
+          }
+        ]
+      },
+      ?registrant_contact: {
+        first_name: String,
+        last_name: untyped,
+        contact_type: String,
+        organization_name: untyped,
+        address_line1: String,
+        address_line2: untyped,
+        city: String,
+        state: String,
+        country_code: String,
+        zip_code: String,
+        phone_number: String,
+        email: String,
+        fax: untyped,
+        extra_params: Array[
+          {
+            name: String,
+            value: String
+          }
+        ]
+      },
+      ?tech_contact: {
+        first_name: String,
+        last_name: untyped,
+        contact_type: String,
+        organization_name: untyped,
+        address_line1: String,
+        address_line2: untyped,
+        city: String,
+        state: String,
+        country_code: String,
+        zip_code: String,
+        phone_number: String,
+        email: String,
+        fax: untyped,
+        extra_params: Array[
+          {
+            name: String,
+            value: String
+          }
+        ]
+      },
+      ?consent: {
+        max_price: Float,
+        currency: String
+      },
+      ?billing_contact: {
+        first_name: String,
+        last_name: untyped,
+        contact_type: String,
+        organization_name: untyped,
+        address_line1: String,
+        address_line2: untyped,
+        city: String,
+        state: String,
+        country_code: String,
+        zip_code: String,
+        phone_number: String,
+        email: String,
+        fax: untyped,
+        extra_params: Array[
+          {
+            name: String,
+            value: String
+          }
+        ]
+      }
+    ) -> _UpdateDomainContactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDomainContactResponse
+
+    interface _UpdateDomainContactPrivacyResponse
+      include Smithy::Client::_Response[Types::UpdateDomainContactPrivacyResponse]
+      def operation_id: () -> String?
+    end
+    def update_domain_contact_privacy: (
+      ?domain_name: String,
+      ?admin_privacy: bool,
+      ?registrant_privacy: bool,
+      ?tech_privacy: bool,
+      ?billing_privacy: bool
+    ) -> _UpdateDomainContactPrivacyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDomainContactPrivacyResponse
+
+    interface _UpdateDomainNameserversResponse
+      include Smithy::Client::_Response[Types::UpdateDomainNameserversResponse]
+      def operation_id: () -> String?
+    end
+    def update_domain_nameservers: (
+      ?domain_name: String,
+      ?fi_auth_key: String,
+      ?nameservers: Array[
+        {
+          name: String,
+          glue_ips: Array[String]
+        }
+      ]
+    ) -> _UpdateDomainNameserversResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDomainNameserversResponse
+
+    interface _UpdateTagsForDomainResponse
+      include Smithy::Client::_Response[Types::UpdateTagsForDomainResponse]
+    end
+    def update_tags_for_domain: (
+      ?domain_name: String,
+      ?tags_to_update: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _UpdateTagsForDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTagsForDomainResponse
+
+    interface _ViewBillingResponse
+      include Smithy::Client::_Response[Types::ViewBillingResponse]
+      def next_page_marker: () -> String?
+      def billing_records: () -> Array[Types::BillingRecord]?
+    end
+    def view_billing: (
+      ?start: Time,
+      ?end: Time,
+      ?marker: String,
+      ?max_items: Integer
+    ) -> _ViewBillingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ViewBillingResponse
+  end
+end

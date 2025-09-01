@@ -1,0 +1,793 @@
+module Aws::Repostspace
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BatchAddChannelRoleToAccessorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?space_id: String,
+        ?channel_id: String,
+        ?accessor_ids: Array[String],
+        ?channel_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor space_id: String?
+      attr_accessor channel_id: String?
+      attr_accessor accessor_ids: Array[String]?
+      attr_accessor channel_role: String?
+    end
+
+    class BatchAddChannelRoleToAccessorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?added_accessor_ids: Array[String],
+        ?errors: Array[Types::BatchError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor added_accessor_ids: Array[String]?
+      attr_accessor errors: Array[Types::BatchError]?
+    end
+
+    class BatchAddRoleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?space_id: String,
+        ?accessor_ids: Array[String],
+        ?role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor space_id: String?
+      attr_accessor accessor_ids: Array[String]?
+      attr_accessor role: String?
+    end
+
+    class BatchAddRoleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?added_accessor_ids: Array[String],
+        ?errors: Array[Types::BatchError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor added_accessor_ids: Array[String]?
+      attr_accessor errors: Array[Types::BatchError]?
+    end
+
+    class BatchError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accessor_id: String,
+        ?error: Integer,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accessor_id: String?
+      attr_accessor error: Integer?
+      attr_accessor message: String?
+    end
+
+    class BatchRemoveChannelRoleFromAccessorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?space_id: String,
+        ?channel_id: String,
+        ?accessor_ids: Array[String],
+        ?channel_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor space_id: String?
+      attr_accessor channel_id: String?
+      attr_accessor accessor_ids: Array[String]?
+      attr_accessor channel_role: String?
+    end
+
+    class BatchRemoveChannelRoleFromAccessorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?removed_accessor_ids: Array[String],
+        ?errors: Array[Types::BatchError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor removed_accessor_ids: Array[String]?
+      attr_accessor errors: Array[Types::BatchError]?
+    end
+
+    class BatchRemoveRoleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?space_id: String,
+        ?accessor_ids: Array[String],
+        ?role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor space_id: String?
+      attr_accessor accessor_ids: Array[String]?
+      attr_accessor role: String?
+    end
+
+    class BatchRemoveRoleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?removed_accessor_ids: Array[String],
+        ?errors: Array[Types::BatchError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor removed_accessor_ids: Array[String]?
+      attr_accessor errors: Array[Types::BatchError]?
+    end
+
+    class ChannelData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?space_id: String,
+        ?channel_id: String,
+        ?channel_name: String,
+        ?channel_description: String,
+        ?create_date_time: Time,
+        ?delete_date_time: Time,
+        ?channel_status: String,
+        ?user_count: Integer,
+        ?group_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor space_id: String?
+      attr_accessor channel_id: String?
+      attr_accessor channel_name: String?
+      attr_accessor channel_description: String?
+      attr_accessor create_date_time: Time?
+      attr_accessor delete_date_time: Time?
+      attr_accessor channel_status: String?
+      attr_accessor user_count: Integer?
+      attr_accessor group_count: Integer?
+    end
+
+    module ChannelRole
+      ASKER: String
+      EXPERT: String
+      MODERATOR: String
+      SUPPORTREQUESTOR: String
+    end
+
+    module ChannelStatus
+      CREATED: String
+      CREATING: String
+      CREATE_FAILED: String
+      DELETED: String
+      DELETING: String
+      DELETE_FAILED: String
+    end
+
+    module ConfigurationStatus
+      CONFIGURED: String
+      UNCONFIGURED: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?space_id: String,
+        ?channel_name: String,
+        ?channel_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor space_id: String?
+      attr_accessor channel_name: String?
+      attr_accessor channel_description: String?
+    end
+
+    class CreateChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_id: String?
+    end
+
+    class CreateSpaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?subdomain: String,
+        ?tier: String,
+        ?description: String,
+        ?user_kms_key: String,
+        ?tags: Hash[String, String],
+        ?role_arn: String,
+        ?supported_email_domains: Types::SupportedEmailDomainsParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor subdomain: String?
+      attr_accessor tier: String?
+      attr_accessor description: String?
+      attr_accessor user_kms_key: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor role_arn: String?
+      attr_accessor supported_email_domains: Types::SupportedEmailDomainsParameters?
+    end
+
+    class CreateSpaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor space_id: String?
+    end
+
+    class DeleteSpaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor space_id: String?
+    end
+
+    class DeregisterAdminInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?space_id: String,
+        ?admin_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor space_id: String?
+      attr_accessor admin_id: String?
+    end
+
+    module FeatureEnableParameter
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module FeatureEnableStatus
+      ENABLED: String
+      DISABLED: String
+      NOT_ALLOWED: String
+    end
+
+    class GetChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?space_id: String,
+        ?channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor space_id: String?
+      attr_accessor channel_id: String?
+    end
+
+    class GetChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?space_id: String,
+        ?channel_id: String,
+        ?channel_name: String,
+        ?channel_description: String,
+        ?create_date_time: Time,
+        ?delete_date_time: Time,
+        ?channel_roles: Hash[String, Array[String]],
+        ?channel_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor space_id: String?
+      attr_accessor channel_id: String?
+      attr_accessor channel_name: String?
+      attr_accessor channel_description: String?
+      attr_accessor create_date_time: Time?
+      attr_accessor delete_date_time: Time?
+      attr_accessor channel_roles: Hash[String, Array[String]]?
+      attr_accessor channel_status: String?
+    end
+
+    class GetSpaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?space_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor space_id: String?
+    end
+
+    class GetSpaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?space_id: String,
+        ?arn: String,
+        ?name: String,
+        ?status: String,
+        ?configuration_status: String,
+        ?client_id: String,
+        ?identity_store_id: String,
+        ?application_arn: String,
+        ?description: String,
+        ?vanity_domain_status: String,
+        ?vanity_domain: String,
+        ?random_domain: String,
+        ?customer_role_arn: String,
+        ?create_date_time: Time,
+        ?delete_date_time: Time,
+        ?tier: String,
+        ?storage_limit: Integer,
+        ?user_admins: Array[String],
+        ?group_admins: Array[String],
+        ?roles: Hash[String, Array[String]],
+        ?user_kms_key: String,
+        ?user_count: Integer,
+        ?content_size: Integer,
+        ?supported_email_domains: Types::SupportedEmailDomainsStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor space_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor configuration_status: String?
+      attr_accessor client_id: String?
+      attr_accessor identity_store_id: String?
+      attr_accessor application_arn: String?
+      attr_accessor description: String?
+      attr_accessor vanity_domain_status: String?
+      attr_accessor vanity_domain: String?
+      attr_accessor random_domain: String?
+      attr_accessor customer_role_arn: String?
+      attr_accessor create_date_time: Time?
+      attr_accessor delete_date_time: Time?
+      attr_accessor tier: String?
+      attr_accessor storage_limit: Integer?
+      attr_accessor user_admins: Array[String]?
+      attr_accessor group_admins: Array[String]?
+      attr_accessor roles: Hash[String, Array[String]]?
+      attr_accessor user_kms_key: String?
+      attr_accessor user_count: Integer?
+      attr_accessor content_size: Integer?
+      attr_accessor supported_email_domains: Types::SupportedEmailDomainsStatus?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class ListChannelsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?space_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor space_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListChannelsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channels: Array[Types::ChannelData],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channels: Array[Types::ChannelData]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSpacesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSpacesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?spaces: Array[Types::SpaceData],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spaces: Array[Types::SpaceData]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class RegisterAdminInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?space_id: String,
+        ?admin_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor space_id: String?
+      attr_accessor admin_id: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    module Role
+      EXPERT: String
+      MODERATOR: String
+      ADMINISTRATOR: String
+      SUPPORTREQUESTOR: String
+    end
+
+    class SendInvitesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?space_id: String,
+        ?accessor_ids: Array[String],
+        ?title: String,
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor space_id: String?
+      attr_accessor accessor_ids: Array[String]?
+      attr_accessor title: String?
+      attr_accessor body: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class SpaceData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?space_id: String,
+        ?arn: String,
+        ?name: String,
+        ?description: String,
+        ?status: String,
+        ?configuration_status: String,
+        ?vanity_domain_status: String,
+        ?vanity_domain: String,
+        ?random_domain: String,
+        ?tier: String,
+        ?storage_limit: Integer,
+        ?create_date_time: Time,
+        ?delete_date_time: Time,
+        ?user_kms_key: String,
+        ?user_count: Integer,
+        ?content_size: Integer,
+        ?supported_email_domains: Types::SupportedEmailDomainsStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor space_id: String?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor configuration_status: String?
+      attr_accessor vanity_domain_status: String?
+      attr_accessor vanity_domain: String?
+      attr_accessor random_domain: String?
+      attr_accessor tier: String?
+      attr_accessor storage_limit: Integer?
+      attr_accessor create_date_time: Time?
+      attr_accessor delete_date_time: Time?
+      attr_accessor user_kms_key: String?
+      attr_accessor user_count: Integer?
+      attr_accessor content_size: Integer?
+      attr_accessor supported_email_domains: Types::SupportedEmailDomainsStatus?
+    end
+
+    class SupportedEmailDomainsParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: String,
+        ?allowed_domains: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: String?
+      attr_accessor allowed_domains: Array[String]?
+    end
+
+    class SupportedEmailDomainsStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: String,
+        ?allowed_domains: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: String?
+      attr_accessor allowed_domains: Array[String]?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    module TierLevel
+      BASIC: String
+      STANDARD: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateChannelInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?space_id: String,
+        ?channel_id: String,
+        ?channel_name: String,
+        ?channel_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor space_id: String?
+      attr_accessor channel_id: String?
+      attr_accessor channel_name: String?
+      attr_accessor channel_description: String?
+    end
+
+    class UpdateChannelOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateSpaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?space_id: String,
+        ?description: String,
+        ?tier: String,
+        ?role_arn: String,
+        ?supported_email_domains: Types::SupportedEmailDomainsParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor space_id: String?
+      attr_accessor description: String?
+      attr_accessor tier: String?
+      attr_accessor role_arn: String?
+      attr_accessor supported_email_domains: Types::SupportedEmailDomainsParameters?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+
+    module VanityDomainStatus
+      PENDING: String
+      APPROVED: String
+      UNAPPROVED: String
+    end
+  end
+end

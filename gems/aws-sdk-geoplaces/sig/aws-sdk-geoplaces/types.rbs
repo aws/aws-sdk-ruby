@@ -1,0 +1,1508 @@
+module Aws::GeoPlaces
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccessPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?position: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor position: Array[Float]?
+    end
+
+    class AccessRestriction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restricted: bool,
+        ?categories: Array[Types::Category],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restricted: bool?
+      attr_accessor categories: Array[Types::Category]?
+    end
+
+    class Address
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label: String,
+        ?country: Types::Country,
+        ?region: Types::Region,
+        ?sub_region: Types::SubRegion,
+        ?locality: String,
+        ?district: String,
+        ?sub_district: String,
+        ?postal_code: String,
+        ?block: String,
+        ?sub_block: String,
+        ?intersection: Array[String],
+        ?street: String,
+        ?street_components: Array[Types::StreetComponents],
+        ?address_number: String,
+        ?building: String,
+        ?secondary_address_components: Array[Types::SecondaryAddressComponent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label: String?
+      attr_accessor country: Types::Country?
+      attr_accessor region: Types::Region?
+      attr_accessor sub_region: Types::SubRegion?
+      attr_accessor locality: String?
+      attr_accessor district: String?
+      attr_accessor sub_district: String?
+      attr_accessor postal_code: String?
+      attr_accessor block: String?
+      attr_accessor sub_block: String?
+      attr_accessor intersection: Array[String]?
+      attr_accessor street: String?
+      attr_accessor street_components: Array[Types::StreetComponents]?
+      attr_accessor address_number: String?
+      attr_accessor building: String?
+      attr_accessor secondary_address_components: Array[Types::SecondaryAddressComponent]?
+    end
+
+    class AddressComponentMatchScores
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?country: Float,
+        ?region: Float,
+        ?sub_region: Float,
+        ?locality: Float,
+        ?district: Float,
+        ?sub_district: Float,
+        ?postal_code: Float,
+        ?block: Float,
+        ?sub_block: Float,
+        ?intersection: Array[Float],
+        ?address_number: Float,
+        ?building: Float,
+        ?secondary_address_components: Array[Types::SecondaryAddressComponentMatchScore],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor country: Float?
+      attr_accessor region: Float?
+      attr_accessor sub_region: Float?
+      attr_accessor locality: Float?
+      attr_accessor district: Float?
+      attr_accessor sub_district: Float?
+      attr_accessor postal_code: Float?
+      attr_accessor block: Float?
+      attr_accessor sub_block: Float?
+      attr_accessor intersection: Array[Float]?
+      attr_accessor address_number: Float?
+      attr_accessor building: Float?
+      attr_accessor secondary_address_components: Array[Types::SecondaryAddressComponentMatchScore]?
+    end
+
+    class AddressComponentPhonemes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?country: Array[Types::PhonemeTranscription],
+        ?region: Array[Types::PhonemeTranscription],
+        ?sub_region: Array[Types::PhonemeTranscription],
+        ?locality: Array[Types::PhonemeTranscription],
+        ?district: Array[Types::PhonemeTranscription],
+        ?sub_district: Array[Types::PhonemeTranscription],
+        ?block: Array[Types::PhonemeTranscription],
+        ?sub_block: Array[Types::PhonemeTranscription],
+        ?street: Array[Types::PhonemeTranscription],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor country: Array[Types::PhonemeTranscription]?
+      attr_accessor region: Array[Types::PhonemeTranscription]?
+      attr_accessor sub_region: Array[Types::PhonemeTranscription]?
+      attr_accessor locality: Array[Types::PhonemeTranscription]?
+      attr_accessor district: Array[Types::PhonemeTranscription]?
+      attr_accessor sub_district: Array[Types::PhonemeTranscription]?
+      attr_accessor block: Array[Types::PhonemeTranscription]?
+      attr_accessor sub_block: Array[Types::PhonemeTranscription]?
+      attr_accessor street: Array[Types::PhonemeTranscription]?
+    end
+
+    class AutocompleteAddressHighlights
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label: Array[Types::Highlight],
+        ?country: Types::CountryHighlights,
+        ?region: Types::RegionHighlights,
+        ?sub_region: Types::SubRegionHighlights,
+        ?locality: Array[Types::Highlight],
+        ?district: Array[Types::Highlight],
+        ?sub_district: Array[Types::Highlight],
+        ?street: Array[Types::Highlight],
+        ?block: Array[Types::Highlight],
+        ?sub_block: Array[Types::Highlight],
+        ?intersection: Array[Array[Types::Highlight]],
+        ?postal_code: Array[Types::Highlight],
+        ?address_number: Array[Types::Highlight],
+        ?building: Array[Types::Highlight],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label: Array[Types::Highlight]?
+      attr_accessor country: Types::CountryHighlights?
+      attr_accessor region: Types::RegionHighlights?
+      attr_accessor sub_region: Types::SubRegionHighlights?
+      attr_accessor locality: Array[Types::Highlight]?
+      attr_accessor district: Array[Types::Highlight]?
+      attr_accessor sub_district: Array[Types::Highlight]?
+      attr_accessor street: Array[Types::Highlight]?
+      attr_accessor block: Array[Types::Highlight]?
+      attr_accessor sub_block: Array[Types::Highlight]?
+      attr_accessor intersection: Array[Array[Types::Highlight]]?
+      attr_accessor postal_code: Array[Types::Highlight]?
+      attr_accessor address_number: Array[Types::Highlight]?
+      attr_accessor building: Array[Types::Highlight]?
+    end
+
+    class AutocompleteFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bounding_box: Array[Float],
+        ?circle: Types::FilterCircle,
+        ?include_countries: Array[String],
+        ?include_place_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bounding_box: Array[Float]?
+      attr_accessor circle: Types::FilterCircle?
+      attr_accessor include_countries: Array[String]?
+      attr_accessor include_place_types: Array[String]?
+    end
+
+    class AutocompleteHighlights
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: Array[Types::Highlight],
+        ?address: Types::AutocompleteAddressHighlights,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: Array[Types::Highlight]?
+      attr_accessor address: Types::AutocompleteAddressHighlights?
+    end
+
+    class AutocompleteRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_text: String,
+        ?max_results: Integer,
+        ?bias_position: Array[Float],
+        ?filter: Types::AutocompleteFilter,
+        ?postal_code_mode: String,
+        ?additional_features: Array[String],
+        ?language: String,
+        ?political_view: String,
+        ?intended_use: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_text: String?
+      attr_accessor max_results: Integer?
+      attr_accessor bias_position: Array[Float]?
+      attr_accessor filter: Types::AutocompleteFilter?
+      attr_accessor postal_code_mode: String?
+      attr_accessor additional_features: Array[String]?
+      attr_accessor language: String?
+      attr_accessor political_view: String?
+      attr_accessor intended_use: String?
+      attr_accessor key: String?
+    end
+
+    class AutocompleteResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pricing_bucket: String,
+        ?result_items: Array[Types::AutocompleteResultItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pricing_bucket: String?
+      attr_accessor result_items: Array[Types::AutocompleteResultItem]?
+    end
+
+    class AutocompleteResultItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place_id: String,
+        ?place_type: String,
+        ?title: String,
+        ?address: Types::Address,
+        ?distance: Integer,
+        ?language: String,
+        ?political_view: String,
+        ?highlights: Types::AutocompleteHighlights,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place_id: String?
+      attr_accessor place_type: String?
+      attr_accessor title: String?
+      attr_accessor address: Types::Address?
+      attr_accessor distance: Integer?
+      attr_accessor language: String?
+      attr_accessor political_view: String?
+      attr_accessor highlights: Types::AutocompleteHighlights?
+    end
+
+    class BusinessChain
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor id: String?
+    end
+
+    class Category
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?localized_name: String,
+        ?primary: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor localized_name: String?
+      attr_accessor primary: bool?
+    end
+
+    class ComponentMatchScores
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: Float,
+        ?address: Types::AddressComponentMatchScores,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: Float?
+      attr_accessor address: Types::AddressComponentMatchScores?
+    end
+
+    class ContactDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label: String,
+        ?value: String,
+        ?categories: Array[Types::Category],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label: String?
+      attr_accessor value: String?
+      attr_accessor categories: Array[Types::Category]?
+    end
+
+    class Contacts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phones: Array[Types::ContactDetails],
+        ?faxes: Array[Types::ContactDetails],
+        ?websites: Array[Types::ContactDetails],
+        ?emails: Array[Types::ContactDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phones: Array[Types::ContactDetails]?
+      attr_accessor faxes: Array[Types::ContactDetails]?
+      attr_accessor websites: Array[Types::ContactDetails]?
+      attr_accessor emails: Array[Types::ContactDetails]?
+    end
+
+    class Country
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code2: String,
+        ?code3: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code2: String?
+      attr_accessor code3: String?
+      attr_accessor name: String?
+    end
+
+    class CountryHighlights
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: Array[Types::Highlight],
+        ?name: Array[Types::Highlight],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: Array[Types::Highlight]?
+      attr_accessor name: Array[Types::Highlight]?
+    end
+
+    class FilterCircle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?center: Array[Float],
+        ?radius: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor center: Array[Float]?
+      attr_accessor radius: Integer?
+    end
+
+    class FoodType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?localized_name: String,
+        ?id: String,
+        ?primary: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor localized_name: String?
+      attr_accessor id: String?
+      attr_accessor primary: bool?
+    end
+
+    class GeocodeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include_countries: Array[String],
+        ?include_place_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_countries: Array[String]?
+      attr_accessor include_place_types: Array[String]?
+    end
+
+    class GeocodeParsedQuery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: Array[Types::ParsedQueryComponent],
+        ?address: Types::GeocodeParsedQueryAddressComponents,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: Array[Types::ParsedQueryComponent]?
+      attr_accessor address: Types::GeocodeParsedQueryAddressComponents?
+    end
+
+    class GeocodeParsedQueryAddressComponents
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?country: Array[Types::ParsedQueryComponent],
+        ?region: Array[Types::ParsedQueryComponent],
+        ?sub_region: Array[Types::ParsedQueryComponent],
+        ?locality: Array[Types::ParsedQueryComponent],
+        ?district: Array[Types::ParsedQueryComponent],
+        ?sub_district: Array[Types::ParsedQueryComponent],
+        ?postal_code: Array[Types::ParsedQueryComponent],
+        ?block: Array[Types::ParsedQueryComponent],
+        ?sub_block: Array[Types::ParsedQueryComponent],
+        ?street: Array[Types::ParsedQueryComponent],
+        ?address_number: Array[Types::ParsedQueryComponent],
+        ?building: Array[Types::ParsedQueryComponent],
+        ?secondary_address_components: Array[Types::ParsedQuerySecondaryAddressComponent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor country: Array[Types::ParsedQueryComponent]?
+      attr_accessor region: Array[Types::ParsedQueryComponent]?
+      attr_accessor sub_region: Array[Types::ParsedQueryComponent]?
+      attr_accessor locality: Array[Types::ParsedQueryComponent]?
+      attr_accessor district: Array[Types::ParsedQueryComponent]?
+      attr_accessor sub_district: Array[Types::ParsedQueryComponent]?
+      attr_accessor postal_code: Array[Types::ParsedQueryComponent]?
+      attr_accessor block: Array[Types::ParsedQueryComponent]?
+      attr_accessor sub_block: Array[Types::ParsedQueryComponent]?
+      attr_accessor street: Array[Types::ParsedQueryComponent]?
+      attr_accessor address_number: Array[Types::ParsedQueryComponent]?
+      attr_accessor building: Array[Types::ParsedQueryComponent]?
+      attr_accessor secondary_address_components: Array[Types::ParsedQuerySecondaryAddressComponent]?
+    end
+
+    class GeocodeQueryComponents
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?country: String,
+        ?region: String,
+        ?sub_region: String,
+        ?locality: String,
+        ?district: String,
+        ?street: String,
+        ?address_number: String,
+        ?postal_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor country: String?
+      attr_accessor region: String?
+      attr_accessor sub_region: String?
+      attr_accessor locality: String?
+      attr_accessor district: String?
+      attr_accessor street: String?
+      attr_accessor address_number: String?
+      attr_accessor postal_code: String?
+    end
+
+    class GeocodeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_text: String,
+        ?query_components: Types::GeocodeQueryComponents,
+        ?max_results: Integer,
+        ?bias_position: Array[Float],
+        ?filter: Types::GeocodeFilter,
+        ?additional_features: Array[String],
+        ?language: String,
+        ?political_view: String,
+        ?intended_use: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_text: String?
+      attr_accessor query_components: Types::GeocodeQueryComponents?
+      attr_accessor max_results: Integer?
+      attr_accessor bias_position: Array[Float]?
+      attr_accessor filter: Types::GeocodeFilter?
+      attr_accessor additional_features: Array[String]?
+      attr_accessor language: String?
+      attr_accessor political_view: String?
+      attr_accessor intended_use: String?
+      attr_accessor key: String?
+    end
+
+    class GeocodeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pricing_bucket: String,
+        ?result_items: Array[Types::GeocodeResultItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pricing_bucket: String?
+      attr_accessor result_items: Array[Types::GeocodeResultItem]?
+    end
+
+    class GeocodeResultItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place_id: String,
+        ?place_type: String,
+        ?title: String,
+        ?address: Types::Address,
+        ?address_number_corrected: bool,
+        ?postal_code_details: Array[Types::PostalCodeDetails],
+        ?position: Array[Float],
+        ?distance: Integer,
+        ?map_view: Array[Float],
+        ?categories: Array[Types::Category],
+        ?food_types: Array[Types::FoodType],
+        ?access_points: Array[Types::AccessPoint],
+        ?time_zone: Types::TimeZone,
+        ?political_view: String,
+        ?match_scores: Types::MatchScoreDetails,
+        ?parsed_query: Types::GeocodeParsedQuery,
+        ?intersections: Array[Types::Intersection],
+        ?main_address: Types::RelatedPlace,
+        ?secondary_addresses: Array[Types::RelatedPlace],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place_id: String?
+      attr_accessor place_type: String?
+      attr_accessor title: String?
+      attr_accessor address: Types::Address?
+      attr_accessor address_number_corrected: bool?
+      attr_accessor postal_code_details: Array[Types::PostalCodeDetails]?
+      attr_accessor position: Array[Float]?
+      attr_accessor distance: Integer?
+      attr_accessor map_view: Array[Float]?
+      attr_accessor categories: Array[Types::Category]?
+      attr_accessor food_types: Array[Types::FoodType]?
+      attr_accessor access_points: Array[Types::AccessPoint]?
+      attr_accessor time_zone: Types::TimeZone?
+      attr_accessor political_view: String?
+      attr_accessor match_scores: Types::MatchScoreDetails?
+      attr_accessor parsed_query: Types::GeocodeParsedQuery?
+      attr_accessor intersections: Array[Types::Intersection]?
+      attr_accessor main_address: Types::RelatedPlace?
+      attr_accessor secondary_addresses: Array[Types::RelatedPlace]?
+    end
+
+    class GetPlaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place_id: String,
+        ?additional_features: Array[String],
+        ?language: String,
+        ?political_view: String,
+        ?intended_use: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place_id: String?
+      attr_accessor additional_features: Array[String]?
+      attr_accessor language: String?
+      attr_accessor political_view: String?
+      attr_accessor intended_use: String?
+      attr_accessor key: String?
+    end
+
+    class GetPlaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place_id: String,
+        ?place_type: String,
+        ?title: String,
+        ?pricing_bucket: String,
+        ?address: Types::Address,
+        ?address_number_corrected: bool,
+        ?postal_code_details: Array[Types::PostalCodeDetails],
+        ?position: Array[Float],
+        ?map_view: Array[Float],
+        ?categories: Array[Types::Category],
+        ?food_types: Array[Types::FoodType],
+        ?business_chains: Array[Types::BusinessChain],
+        ?contacts: Types::Contacts,
+        ?opening_hours: Array[Types::OpeningHours],
+        ?access_points: Array[Types::AccessPoint],
+        ?access_restrictions: Array[Types::AccessRestriction],
+        ?time_zone: Types::TimeZone,
+        ?political_view: String,
+        ?phonemes: Types::PhonemeDetails,
+        ?main_address: Types::RelatedPlace,
+        ?secondary_addresses: Array[Types::RelatedPlace],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place_id: String?
+      attr_accessor place_type: String?
+      attr_accessor title: String?
+      attr_accessor pricing_bucket: String?
+      attr_accessor address: Types::Address?
+      attr_accessor address_number_corrected: bool?
+      attr_accessor postal_code_details: Array[Types::PostalCodeDetails]?
+      attr_accessor position: Array[Float]?
+      attr_accessor map_view: Array[Float]?
+      attr_accessor categories: Array[Types::Category]?
+      attr_accessor food_types: Array[Types::FoodType]?
+      attr_accessor business_chains: Array[Types::BusinessChain]?
+      attr_accessor contacts: Types::Contacts?
+      attr_accessor opening_hours: Array[Types::OpeningHours]?
+      attr_accessor access_points: Array[Types::AccessPoint]?
+      attr_accessor access_restrictions: Array[Types::AccessRestriction]?
+      attr_accessor time_zone: Types::TimeZone?
+      attr_accessor political_view: String?
+      attr_accessor phonemes: Types::PhonemeDetails?
+      attr_accessor main_address: Types::RelatedPlace?
+      attr_accessor secondary_addresses: Array[Types::RelatedPlace]?
+    end
+
+    class Highlight
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_index: Integer,
+        ?end_index: Integer,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_index: Integer?
+      attr_accessor end_index: Integer?
+      attr_accessor value: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Intersection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place_id: String,
+        ?title: String,
+        ?address: Types::Address,
+        ?position: Array[Float],
+        ?distance: Integer,
+        ?route_distance: Integer,
+        ?map_view: Array[Float],
+        ?access_points: Array[Types::AccessPoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place_id: String?
+      attr_accessor title: String?
+      attr_accessor address: Types::Address?
+      attr_accessor position: Array[Float]?
+      attr_accessor distance: Integer?
+      attr_accessor route_distance: Integer?
+      attr_accessor map_view: Array[Float]?
+      attr_accessor access_points: Array[Types::AccessPoint]?
+    end
+
+    class MatchScoreDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?overall: Float,
+        ?components: Types::ComponentMatchScores,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor overall: Float?
+      attr_accessor components: Types::ComponentMatchScores?
+    end
+
+    class OpeningHours
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display: Array[String],
+        ?open_now: bool,
+        ?components: Array[Types::OpeningHoursComponents],
+        ?categories: Array[Types::Category],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display: Array[String]?
+      attr_accessor open_now: bool?
+      attr_accessor components: Array[Types::OpeningHoursComponents]?
+      attr_accessor categories: Array[Types::Category]?
+    end
+
+    class OpeningHoursComponents
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?open_time: String,
+        ?open_duration: String,
+        ?recurrence: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor open_time: String?
+      attr_accessor open_duration: String?
+      attr_accessor recurrence: String?
+    end
+
+    class ParsedQueryComponent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_index: Integer,
+        ?end_index: Integer,
+        ?value: String,
+        ?query_component: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_index: Integer?
+      attr_accessor end_index: Integer?
+      attr_accessor value: String?
+      attr_accessor query_component: String?
+    end
+
+    class ParsedQuerySecondaryAddressComponent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_index: Integer,
+        ?end_index: Integer,
+        ?value: String,
+        ?number: String,
+        ?designator: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_index: Integer?
+      attr_accessor end_index: Integer?
+      attr_accessor value: String?
+      attr_accessor number: String?
+      attr_accessor designator: String?
+    end
+
+    class PhonemeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: Array[Types::PhonemeTranscription],
+        ?address: Types::AddressComponentPhonemes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: Array[Types::PhonemeTranscription]?
+      attr_accessor address: Types::AddressComponentPhonemes?
+    end
+
+    class PhonemeTranscription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?language: String,
+        ?preferred: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor language: String?
+      attr_accessor preferred: bool?
+    end
+
+    class PostalCodeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?postal_code: String,
+        ?postal_authority: String,
+        ?postal_code_type: String,
+        ?usps_zip: Types::UspsZip,
+        ?usps_zip_plus4: Types::UspsZipPlus4,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor postal_code: String?
+      attr_accessor postal_authority: String?
+      attr_accessor postal_code_type: String?
+      attr_accessor usps_zip: Types::UspsZip?
+      attr_accessor usps_zip_plus4: Types::UspsZipPlus4?
+    end
+
+    class QueryRefinement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?refined_term: String,
+        ?original_term: String,
+        ?start_index: Integer,
+        ?end_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor refined_term: String?
+      attr_accessor original_term: String?
+      attr_accessor start_index: Integer?
+      attr_accessor end_index: Integer?
+    end
+
+    class Region
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor name: String?
+    end
+
+    class RegionHighlights
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: Array[Types::Highlight],
+        ?name: Array[Types::Highlight],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: Array[Types::Highlight]?
+      attr_accessor name: Array[Types::Highlight]?
+    end
+
+    class RelatedPlace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place_id: String,
+        ?place_type: String,
+        ?title: String,
+        ?address: Types::Address,
+        ?position: Array[Float],
+        ?access_points: Array[Types::AccessPoint],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place_id: String?
+      attr_accessor place_type: String?
+      attr_accessor title: String?
+      attr_accessor address: Types::Address?
+      attr_accessor position: Array[Float]?
+      attr_accessor access_points: Array[Types::AccessPoint]?
+    end
+
+    class ReverseGeocodeFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include_place_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_place_types: Array[String]?
+    end
+
+    class ReverseGeocodeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_position: Array[Float],
+        ?query_radius: Integer,
+        ?max_results: Integer,
+        ?filter: Types::ReverseGeocodeFilter,
+        ?additional_features: Array[String],
+        ?language: String,
+        ?political_view: String,
+        ?intended_use: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_position: Array[Float]?
+      attr_accessor query_radius: Integer?
+      attr_accessor max_results: Integer?
+      attr_accessor filter: Types::ReverseGeocodeFilter?
+      attr_accessor additional_features: Array[String]?
+      attr_accessor language: String?
+      attr_accessor political_view: String?
+      attr_accessor intended_use: String?
+      attr_accessor key: String?
+    end
+
+    class ReverseGeocodeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pricing_bucket: String,
+        ?result_items: Array[Types::ReverseGeocodeResultItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pricing_bucket: String?
+      attr_accessor result_items: Array[Types::ReverseGeocodeResultItem]?
+    end
+
+    class ReverseGeocodeResultItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place_id: String,
+        ?place_type: String,
+        ?title: String,
+        ?address: Types::Address,
+        ?address_number_corrected: bool,
+        ?postal_code_details: Array[Types::PostalCodeDetails],
+        ?position: Array[Float],
+        ?distance: Integer,
+        ?map_view: Array[Float],
+        ?categories: Array[Types::Category],
+        ?food_types: Array[Types::FoodType],
+        ?access_points: Array[Types::AccessPoint],
+        ?time_zone: Types::TimeZone,
+        ?political_view: String,
+        ?intersections: Array[Types::Intersection],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place_id: String?
+      attr_accessor place_type: String?
+      attr_accessor title: String?
+      attr_accessor address: Types::Address?
+      attr_accessor address_number_corrected: bool?
+      attr_accessor postal_code_details: Array[Types::PostalCodeDetails]?
+      attr_accessor position: Array[Float]?
+      attr_accessor distance: Integer?
+      attr_accessor map_view: Array[Float]?
+      attr_accessor categories: Array[Types::Category]?
+      attr_accessor food_types: Array[Types::FoodType]?
+      attr_accessor access_points: Array[Types::AccessPoint]?
+      attr_accessor time_zone: Types::TimeZone?
+      attr_accessor political_view: String?
+      attr_accessor intersections: Array[Types::Intersection]?
+    end
+
+    class SearchNearbyFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bounding_box: Array[Float],
+        ?include_countries: Array[String],
+        ?include_categories: Array[String],
+        ?exclude_categories: Array[String],
+        ?include_business_chains: Array[String],
+        ?exclude_business_chains: Array[String],
+        ?include_food_types: Array[String],
+        ?exclude_food_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bounding_box: Array[Float]?
+      attr_accessor include_countries: Array[String]?
+      attr_accessor include_categories: Array[String]?
+      attr_accessor exclude_categories: Array[String]?
+      attr_accessor include_business_chains: Array[String]?
+      attr_accessor exclude_business_chains: Array[String]?
+      attr_accessor include_food_types: Array[String]?
+      attr_accessor exclude_food_types: Array[String]?
+    end
+
+    class SearchNearbyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_position: Array[Float],
+        ?query_radius: Integer,
+        ?max_results: Integer,
+        ?filter: Types::SearchNearbyFilter,
+        ?additional_features: Array[String],
+        ?language: String,
+        ?political_view: String,
+        ?intended_use: String,
+        ?next_token: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_position: Array[Float]?
+      attr_accessor query_radius: Integer?
+      attr_accessor max_results: Integer?
+      attr_accessor filter: Types::SearchNearbyFilter?
+      attr_accessor additional_features: Array[String]?
+      attr_accessor language: String?
+      attr_accessor political_view: String?
+      attr_accessor intended_use: String?
+      attr_accessor next_token: String?
+      attr_accessor key: String?
+    end
+
+    class SearchNearbyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pricing_bucket: String,
+        ?result_items: Array[Types::SearchNearbyResultItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pricing_bucket: String?
+      attr_accessor result_items: Array[Types::SearchNearbyResultItem]?
+      attr_accessor next_token: String?
+    end
+
+    class SearchNearbyResultItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place_id: String,
+        ?place_type: String,
+        ?title: String,
+        ?address: Types::Address,
+        ?address_number_corrected: bool,
+        ?position: Array[Float],
+        ?distance: Integer,
+        ?map_view: Array[Float],
+        ?categories: Array[Types::Category],
+        ?food_types: Array[Types::FoodType],
+        ?business_chains: Array[Types::BusinessChain],
+        ?contacts: Types::Contacts,
+        ?opening_hours: Array[Types::OpeningHours],
+        ?access_points: Array[Types::AccessPoint],
+        ?access_restrictions: Array[Types::AccessRestriction],
+        ?time_zone: Types::TimeZone,
+        ?political_view: String,
+        ?phonemes: Types::PhonemeDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place_id: String?
+      attr_accessor place_type: String?
+      attr_accessor title: String?
+      attr_accessor address: Types::Address?
+      attr_accessor address_number_corrected: bool?
+      attr_accessor position: Array[Float]?
+      attr_accessor distance: Integer?
+      attr_accessor map_view: Array[Float]?
+      attr_accessor categories: Array[Types::Category]?
+      attr_accessor food_types: Array[Types::FoodType]?
+      attr_accessor business_chains: Array[Types::BusinessChain]?
+      attr_accessor contacts: Types::Contacts?
+      attr_accessor opening_hours: Array[Types::OpeningHours]?
+      attr_accessor access_points: Array[Types::AccessPoint]?
+      attr_accessor access_restrictions: Array[Types::AccessRestriction]?
+      attr_accessor time_zone: Types::TimeZone?
+      attr_accessor political_view: String?
+      attr_accessor phonemes: Types::PhonemeDetails?
+    end
+
+    class SearchTextFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bounding_box: Array[Float],
+        ?circle: Types::FilterCircle,
+        ?include_countries: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bounding_box: Array[Float]?
+      attr_accessor circle: Types::FilterCircle?
+      attr_accessor include_countries: Array[String]?
+    end
+
+    class SearchTextRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_text: String,
+        ?query_id: String,
+        ?max_results: Integer,
+        ?bias_position: Array[Float],
+        ?filter: Types::SearchTextFilter,
+        ?additional_features: Array[String],
+        ?language: String,
+        ?political_view: String,
+        ?intended_use: String,
+        ?next_token: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_text: String?
+      attr_accessor query_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor bias_position: Array[Float]?
+      attr_accessor filter: Types::SearchTextFilter?
+      attr_accessor additional_features: Array[String]?
+      attr_accessor language: String?
+      attr_accessor political_view: String?
+      attr_accessor intended_use: String?
+      attr_accessor next_token: String?
+      attr_accessor key: String?
+    end
+
+    class SearchTextResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pricing_bucket: String,
+        ?result_items: Array[Types::SearchTextResultItem],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pricing_bucket: String?
+      attr_accessor result_items: Array[Types::SearchTextResultItem]?
+      attr_accessor next_token: String?
+    end
+
+    class SearchTextResultItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place_id: String,
+        ?place_type: String,
+        ?title: String,
+        ?address: Types::Address,
+        ?address_number_corrected: bool,
+        ?position: Array[Float],
+        ?distance: Integer,
+        ?map_view: Array[Float],
+        ?categories: Array[Types::Category],
+        ?food_types: Array[Types::FoodType],
+        ?business_chains: Array[Types::BusinessChain],
+        ?contacts: Types::Contacts,
+        ?opening_hours: Array[Types::OpeningHours],
+        ?access_points: Array[Types::AccessPoint],
+        ?access_restrictions: Array[Types::AccessRestriction],
+        ?time_zone: Types::TimeZone,
+        ?political_view: String,
+        ?phonemes: Types::PhonemeDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place_id: String?
+      attr_accessor place_type: String?
+      attr_accessor title: String?
+      attr_accessor address: Types::Address?
+      attr_accessor address_number_corrected: bool?
+      attr_accessor position: Array[Float]?
+      attr_accessor distance: Integer?
+      attr_accessor map_view: Array[Float]?
+      attr_accessor categories: Array[Types::Category]?
+      attr_accessor food_types: Array[Types::FoodType]?
+      attr_accessor business_chains: Array[Types::BusinessChain]?
+      attr_accessor contacts: Types::Contacts?
+      attr_accessor opening_hours: Array[Types::OpeningHours]?
+      attr_accessor access_points: Array[Types::AccessPoint]?
+      attr_accessor access_restrictions: Array[Types::AccessRestriction]?
+      attr_accessor time_zone: Types::TimeZone?
+      attr_accessor political_view: String?
+      attr_accessor phonemes: Types::PhonemeDetails?
+    end
+
+    class SecondaryAddressComponent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor number: String?
+    end
+
+    class SecondaryAddressComponentMatchScore
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?number: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor number: Float?
+    end
+
+    class StreetComponents
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?base_name: String,
+        ?type: String,
+        ?type_placement: String,
+        ?type_separator: String,
+        ?prefix: String,
+        ?suffix: String,
+        ?direction: String,
+        ?language: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor base_name: String?
+      attr_accessor type: String?
+      attr_accessor type_placement: String?
+      attr_accessor type_separator: String?
+      attr_accessor prefix: String?
+      attr_accessor suffix: String?
+      attr_accessor direction: String?
+      attr_accessor language: String?
+    end
+
+    class SubRegion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor name: String?
+    end
+
+    class SubRegionHighlights
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: Array[Types::Highlight],
+        ?name: Array[Types::Highlight],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: Array[Types::Highlight]?
+      attr_accessor name: Array[Types::Highlight]?
+    end
+
+    class SuggestAddressHighlights
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label: Array[Types::Highlight],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label: Array[Types::Highlight]?
+    end
+
+    class SuggestFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bounding_box: Array[Float],
+        ?circle: Types::FilterCircle,
+        ?include_countries: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bounding_box: Array[Float]?
+      attr_accessor circle: Types::FilterCircle?
+      attr_accessor include_countries: Array[String]?
+    end
+
+    class SuggestHighlights
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: Array[Types::Highlight],
+        ?address: Types::SuggestAddressHighlights,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: Array[Types::Highlight]?
+      attr_accessor address: Types::SuggestAddressHighlights?
+    end
+
+    class SuggestPlaceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place_id: String,
+        ?place_type: String,
+        ?address: Types::Address,
+        ?position: Array[Float],
+        ?distance: Integer,
+        ?map_view: Array[Float],
+        ?categories: Array[Types::Category],
+        ?food_types: Array[Types::FoodType],
+        ?business_chains: Array[Types::BusinessChain],
+        ?access_points: Array[Types::AccessPoint],
+        ?access_restrictions: Array[Types::AccessRestriction],
+        ?time_zone: Types::TimeZone,
+        ?political_view: String,
+        ?phonemes: Types::PhonemeDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place_id: String?
+      attr_accessor place_type: String?
+      attr_accessor address: Types::Address?
+      attr_accessor position: Array[Float]?
+      attr_accessor distance: Integer?
+      attr_accessor map_view: Array[Float]?
+      attr_accessor categories: Array[Types::Category]?
+      attr_accessor food_types: Array[Types::FoodType]?
+      attr_accessor business_chains: Array[Types::BusinessChain]?
+      attr_accessor access_points: Array[Types::AccessPoint]?
+      attr_accessor access_restrictions: Array[Types::AccessRestriction]?
+      attr_accessor time_zone: Types::TimeZone?
+      attr_accessor political_view: String?
+      attr_accessor phonemes: Types::PhonemeDetails?
+    end
+
+    class SuggestQueryResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+        ?query_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+      attr_accessor query_type: String?
+    end
+
+    class SuggestRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_text: String,
+        ?max_results: Integer,
+        ?max_query_refinements: Integer,
+        ?bias_position: Array[Float],
+        ?filter: Types::SuggestFilter,
+        ?additional_features: Array[String],
+        ?language: String,
+        ?political_view: String,
+        ?intended_use: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_text: String?
+      attr_accessor max_results: Integer?
+      attr_accessor max_query_refinements: Integer?
+      attr_accessor bias_position: Array[Float]?
+      attr_accessor filter: Types::SuggestFilter?
+      attr_accessor additional_features: Array[String]?
+      attr_accessor language: String?
+      attr_accessor political_view: String?
+      attr_accessor intended_use: String?
+      attr_accessor key: String?
+    end
+
+    class SuggestResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pricing_bucket: String,
+        ?result_items: Array[Types::SuggestResultItem],
+        ?query_refinements: Array[Types::QueryRefinement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pricing_bucket: String?
+      attr_accessor result_items: Array[Types::SuggestResultItem]?
+      attr_accessor query_refinements: Array[Types::QueryRefinement]?
+    end
+
+    class SuggestResultItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?suggest_result_item_type: String,
+        ?place: Types::SuggestPlaceResult,
+        ?query: Types::SuggestQueryResult,
+        ?highlights: Types::SuggestHighlights,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor suggest_result_item_type: String?
+      attr_accessor place: Types::SuggestPlaceResult?
+      attr_accessor query: Types::SuggestQueryResult?
+      attr_accessor highlights: Types::SuggestHighlights?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TimeZone
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?offset: String,
+        ?offset_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor offset: String?
+      attr_accessor offset_seconds: Integer?
+    end
+
+    class UspsZip
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?zip_classification_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor zip_classification_code: String?
+    end
+
+    class UspsZipPlus4
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_type_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_type_code: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+  end
+end

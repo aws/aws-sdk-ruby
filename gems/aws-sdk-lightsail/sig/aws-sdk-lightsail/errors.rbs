@@ -1,0 +1,52 @@
+module Aws::Lightsail
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def docs: () -> String?
+      def message: () -> String?
+      def tip: () -> String?
+    end
+    class AccountSetupInProgressException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def docs: () -> String?
+      def message: () -> String?
+      def tip: () -> String?
+    end
+    class InvalidInputException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def docs: () -> String?
+      def message: () -> String?
+      def tip: () -> String?
+    end
+    class NotFoundException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def docs: () -> String?
+      def message: () -> String?
+      def tip: () -> String?
+    end
+    class OperationFailureException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def docs: () -> String?
+      def message: () -> String?
+      def tip: () -> String?
+    end
+    class RegionSetupInProgressException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def docs: () -> String?
+      def message: () -> String?
+      def tip: () -> String?
+    end
+    class ServiceException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def docs: () -> String?
+      def message: () -> String?
+      def tip: () -> String?
+    end
+    class UnauthenticatedException < Smithy::Client::ServiceError
+      def code: () -> String?
+      def docs: () -> String?
+      def message: () -> String?
+      def tip: () -> String?
+    end
+  end
+end

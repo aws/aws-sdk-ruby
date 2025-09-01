@@ -1,0 +1,87 @@
+module Aws::Connect
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConditionalOperationFailedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ContactFlowNotPublishedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ContactNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DestinationNotAllowedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DuplicateResourceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IdempotencyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidContactFlowException < Smithy::Client::ServiceError
+      def problems: () -> Array[Types::ProblemDetail]?
+    end
+    class InvalidContactFlowModuleException < Smithy::Client::ServiceError
+      def problems: () -> Array[Types::ProblemDetail]?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def reason: () -> Types::InvalidRequestExceptionReason?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MaximumResultReturnedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OutboundContactNotPermittedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OutputTypeNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PropertyValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def property_list: () -> Array[Types::PropertyValidationExceptionProperty]?
+    end
+    class ResourceConflictException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def resource_type: () -> String?
+      def resource_id: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotReadyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def reason: () -> Types::ServiceQuotaExceededExceptionReason?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UserNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

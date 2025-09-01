@@ -1,0 +1,2913 @@
+module Aws::Location
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApiKeyFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_status: String?
+    end
+
+    class ApiKeyRestrictions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allow_actions: Array[String],
+        ?allow_resources: Array[String],
+        ?allow_referers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allow_actions: Array[String]?
+      attr_accessor allow_resources: Array[String]?
+      attr_accessor allow_referers: Array[String]?
+    end
+
+    class AssociateTrackerConsumerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracker_name: String,
+        ?consumer_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracker_name: String?
+      attr_accessor consumer_arn: String?
+    end
+
+    class AssociateTrackerConsumerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class BatchDeleteDevicePositionHistoryError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_id: String,
+        ?error: Types::BatchItemError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_id: String?
+      attr_accessor error: Types::BatchItemError?
+    end
+
+    class BatchDeleteDevicePositionHistoryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracker_name: String,
+        ?device_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracker_name: String?
+      attr_accessor device_ids: Array[String]?
+    end
+
+    class BatchDeleteDevicePositionHistoryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchDeleteDevicePositionHistoryError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchDeleteDevicePositionHistoryError]?
+    end
+
+    class BatchDeleteGeofenceError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?geofence_id: String,
+        ?error: Types::BatchItemError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor geofence_id: String?
+      attr_accessor error: Types::BatchItemError?
+    end
+
+    class BatchDeleteGeofenceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_name: String,
+        ?geofence_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_name: String?
+      attr_accessor geofence_ids: Array[String]?
+    end
+
+    class BatchDeleteGeofenceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchDeleteGeofenceError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchDeleteGeofenceError]?
+    end
+
+    class BatchEvaluateGeofencesError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_id: String,
+        ?sample_time: Time,
+        ?error: Types::BatchItemError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_id: String?
+      attr_accessor sample_time: Time?
+      attr_accessor error: Types::BatchItemError?
+    end
+
+    class BatchEvaluateGeofencesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_name: String,
+        ?device_position_updates: Array[Types::DevicePositionUpdate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_name: String?
+      attr_accessor device_position_updates: Array[Types::DevicePositionUpdate]?
+    end
+
+    class BatchEvaluateGeofencesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchEvaluateGeofencesError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchEvaluateGeofencesError]?
+    end
+
+    class BatchGetDevicePositionError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_id: String,
+        ?error: Types::BatchItemError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_id: String?
+      attr_accessor error: Types::BatchItemError?
+    end
+
+    class BatchGetDevicePositionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracker_name: String,
+        ?device_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracker_name: String?
+      attr_accessor device_ids: Array[String]?
+    end
+
+    class BatchGetDevicePositionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchGetDevicePositionError],
+        ?device_positions: Array[Types::DevicePosition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchGetDevicePositionError]?
+      attr_accessor device_positions: Array[Types::DevicePosition]?
+    end
+
+    class BatchItemError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchPutGeofenceError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?geofence_id: String,
+        ?error: Types::BatchItemError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor geofence_id: String?
+      attr_accessor error: Types::BatchItemError?
+    end
+
+    class BatchPutGeofenceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_name: String,
+        ?entries: Array[Types::BatchPutGeofenceRequestEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_name: String?
+      attr_accessor entries: Array[Types::BatchPutGeofenceRequestEntry]?
+    end
+
+    class BatchPutGeofenceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?successes: Array[Types::BatchPutGeofenceSuccess],
+        ?errors: Array[Types::BatchPutGeofenceError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor successes: Array[Types::BatchPutGeofenceSuccess]?
+      attr_accessor errors: Array[Types::BatchPutGeofenceError]?
+    end
+
+    class BatchPutGeofenceRequestEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?geofence_id: String,
+        ?geometry: Types::GeofenceGeometry,
+        ?geofence_properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor geofence_id: String?
+      attr_accessor geometry: Types::GeofenceGeometry?
+      attr_accessor geofence_properties: Hash[String, String]?
+    end
+
+    class BatchPutGeofenceSuccess
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?geofence_id: String,
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor geofence_id: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class BatchUpdateDevicePositionError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_id: String,
+        ?sample_time: Time,
+        ?error: Types::BatchItemError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_id: String?
+      attr_accessor sample_time: Time?
+      attr_accessor error: Types::BatchItemError?
+    end
+
+    class BatchUpdateDevicePositionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracker_name: String,
+        ?updates: Array[Types::DevicePositionUpdate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracker_name: String?
+      attr_accessor updates: Array[Types::DevicePositionUpdate]?
+    end
+
+    class BatchUpdateDevicePositionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::BatchUpdateDevicePositionError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::BatchUpdateDevicePositionError]?
+    end
+
+    class CalculateRouteCarModeOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?avoid_ferries: bool,
+        ?avoid_tolls: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor avoid_ferries: bool?
+      attr_accessor avoid_tolls: bool?
+    end
+
+    class CalculateRouteInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calculator_name: String,
+        ?departure_position: Array[Float],
+        ?destination_position: Array[Float],
+        ?waypoint_positions: Array[Array[Float]],
+        ?travel_mode: String,
+        ?departure_time: Time,
+        ?depart_now: bool,
+        ?distance_unit: String,
+        ?include_leg_geometry: bool,
+        ?car_mode_options: Types::CalculateRouteCarModeOptions,
+        ?truck_mode_options: Types::CalculateRouteTruckModeOptions,
+        ?arrival_time: Time,
+        ?optimize_for: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calculator_name: String?
+      attr_accessor departure_position: Array[Float]?
+      attr_accessor destination_position: Array[Float]?
+      attr_accessor waypoint_positions: Array[Array[Float]]?
+      attr_accessor travel_mode: String?
+      attr_accessor departure_time: Time?
+      attr_accessor depart_now: bool?
+      attr_accessor distance_unit: String?
+      attr_accessor include_leg_geometry: bool?
+      attr_accessor car_mode_options: Types::CalculateRouteCarModeOptions?
+      attr_accessor truck_mode_options: Types::CalculateRouteTruckModeOptions?
+      attr_accessor arrival_time: Time?
+      attr_accessor optimize_for: String?
+      attr_accessor key: String?
+    end
+
+    class CalculateRouteMatrixInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calculator_name: String,
+        ?departure_positions: Array[Array[Float]],
+        ?destination_positions: Array[Array[Float]],
+        ?travel_mode: String,
+        ?departure_time: Time,
+        ?depart_now: bool,
+        ?distance_unit: String,
+        ?car_mode_options: Types::CalculateRouteCarModeOptions,
+        ?truck_mode_options: Types::CalculateRouteTruckModeOptions,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calculator_name: String?
+      attr_accessor departure_positions: Array[Array[Float]]?
+      attr_accessor destination_positions: Array[Array[Float]]?
+      attr_accessor travel_mode: String?
+      attr_accessor departure_time: Time?
+      attr_accessor depart_now: bool?
+      attr_accessor distance_unit: String?
+      attr_accessor car_mode_options: Types::CalculateRouteCarModeOptions?
+      attr_accessor truck_mode_options: Types::CalculateRouteTruckModeOptions?
+      attr_accessor key: String?
+    end
+
+    class CalculateRouteMatrixOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route_matrix: Array[Array[Types::RouteMatrixEntry]],
+        ?snapped_departure_positions: Array[Array[Float]],
+        ?snapped_destination_positions: Array[Array[Float]],
+        ?summary: Types::CalculateRouteMatrixSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route_matrix: Array[Array[Types::RouteMatrixEntry]]?
+      attr_accessor snapped_departure_positions: Array[Array[Float]]?
+      attr_accessor snapped_destination_positions: Array[Array[Float]]?
+      attr_accessor summary: Types::CalculateRouteMatrixSummary?
+    end
+
+    class CalculateRouteMatrixSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source: String,
+        ?route_count: Integer,
+        ?error_count: Integer,
+        ?distance_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source: String?
+      attr_accessor route_count: Integer?
+      attr_accessor error_count: Integer?
+      attr_accessor distance_unit: String?
+    end
+
+    class CalculateRouteOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?legs: Array[Types::Leg],
+        ?summary: Types::CalculateRouteSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor legs: Array[Types::Leg]?
+      attr_accessor summary: Types::CalculateRouteSummary?
+    end
+
+    class CalculateRouteSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?route_b_box: Array[Float],
+        ?data_source: String,
+        ?distance: Float,
+        ?duration_seconds: Float,
+        ?distance_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor route_b_box: Array[Float]?
+      attr_accessor data_source: String?
+      attr_accessor distance: Float?
+      attr_accessor duration_seconds: Float?
+      attr_accessor distance_unit: String?
+    end
+
+    class CalculateRouteTruckModeOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?avoid_ferries: bool,
+        ?avoid_tolls: bool,
+        ?dimensions: Types::TruckDimensions,
+        ?weight: Types::TruckWeight,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor avoid_ferries: bool?
+      attr_accessor avoid_tolls: bool?
+      attr_accessor dimensions: Types::TruckDimensions?
+      attr_accessor weight: Types::TruckWeight?
+    end
+
+    class CellSignals
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lte_cell_details: Array[Types::LteCellDetails],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lte_cell_details: Array[Types::LteCellDetails]?
+    end
+
+    class Circle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?center: Array[Float],
+        ?radius: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor center: Array[Float]?
+      attr_accessor radius: Float?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateGeofenceCollectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_name: String,
+        ?pricing_plan: String,
+        ?pricing_plan_data_source: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_name: String?
+      attr_accessor pricing_plan: String?
+      attr_accessor pricing_plan_data_source: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor kms_key_id: String?
+    end
+
+    class CreateGeofenceCollectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_name: String,
+        ?collection_arn: String,
+        ?create_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_name: String?
+      attr_accessor collection_arn: String?
+      attr_accessor create_time: Time?
+    end
+
+    class CreateKeyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_name: String,
+        ?restrictions: Types::ApiKeyRestrictions,
+        ?description: String,
+        ?expire_time: Time,
+        ?no_expiry: bool,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_name: String?
+      attr_accessor restrictions: Types::ApiKeyRestrictions?
+      attr_accessor description: String?
+      attr_accessor expire_time: Time?
+      attr_accessor no_expiry: bool?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateKeyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?key_arn: String,
+        ?key_name: String,
+        ?create_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor key_arn: String?
+      attr_accessor key_name: String?
+      attr_accessor create_time: Time?
+    end
+
+    class CreateMapInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?map_name: String,
+        ?configuration: Types::MapConfiguration,
+        ?pricing_plan: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor map_name: String?
+      attr_accessor configuration: Types::MapConfiguration?
+      attr_accessor pricing_plan: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateMapOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?map_name: String,
+        ?map_arn: String,
+        ?create_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor map_name: String?
+      attr_accessor map_arn: String?
+      attr_accessor create_time: Time?
+    end
+
+    class CreatePlaceIndexInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?data_source: String,
+        ?pricing_plan: String,
+        ?description: String,
+        ?data_source_configuration: Types::DataSourceConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor data_source: String?
+      attr_accessor pricing_plan: String?
+      attr_accessor description: String?
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreatePlaceIndexOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?index_arn: String,
+        ?create_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor index_arn: String?
+      attr_accessor create_time: Time?
+    end
+
+    class CreateRouteCalculatorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calculator_name: String,
+        ?data_source: String,
+        ?pricing_plan: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calculator_name: String?
+      attr_accessor data_source: String?
+      attr_accessor pricing_plan: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateRouteCalculatorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calculator_name: String,
+        ?calculator_arn: String,
+        ?create_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calculator_name: String?
+      attr_accessor calculator_arn: String?
+      attr_accessor create_time: Time?
+    end
+
+    class CreateTrackerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracker_name: String,
+        ?pricing_plan: String,
+        ?kms_key_id: String,
+        ?pricing_plan_data_source: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?position_filtering: String,
+        ?event_bridge_enabled: bool,
+        ?kms_key_enable_geospatial_queries: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracker_name: String?
+      attr_accessor pricing_plan: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor pricing_plan_data_source: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor position_filtering: String?
+      attr_accessor event_bridge_enabled: bool?
+      attr_accessor kms_key_enable_geospatial_queries: bool?
+    end
+
+    class CreateTrackerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracker_name: String,
+        ?tracker_arn: String,
+        ?create_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracker_name: String?
+      attr_accessor tracker_arn: String?
+      attr_accessor create_time: Time?
+    end
+
+    class DataSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?intended_use: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor intended_use: String?
+    end
+
+    class DeleteGeofenceCollectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_name: String?
+    end
+
+    class DeleteGeofenceCollectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteKeyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_name: String,
+        ?force_delete: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_name: String?
+      attr_accessor force_delete: bool?
+    end
+
+    class DeleteKeyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteMapInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?map_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor map_name: String?
+    end
+
+    class DeleteMapOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePlaceIndexInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+    end
+
+    class DeletePlaceIndexOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRouteCalculatorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calculator_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calculator_name: String?
+    end
+
+    class DeleteRouteCalculatorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteTrackerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracker_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracker_name: String?
+    end
+
+    class DeleteTrackerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeGeofenceCollectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_name: String?
+    end
+
+    class DescribeGeofenceCollectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_name: String,
+        ?collection_arn: String,
+        ?description: String,
+        ?pricing_plan: String,
+        ?pricing_plan_data_source: String,
+        ?kms_key_id: String,
+        ?tags: Hash[String, String],
+        ?create_time: Time,
+        ?update_time: Time,
+        ?geofence_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_name: String?
+      attr_accessor collection_arn: String?
+      attr_accessor description: String?
+      attr_accessor pricing_plan: String?
+      attr_accessor pricing_plan_data_source: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor geofence_count: Integer?
+    end
+
+    class DescribeKeyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_name: String?
+    end
+
+    class DescribeKeyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?key_arn: String,
+        ?key_name: String,
+        ?restrictions: Types::ApiKeyRestrictions,
+        ?create_time: Time,
+        ?expire_time: Time,
+        ?update_time: Time,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor key_arn: String?
+      attr_accessor key_name: String?
+      attr_accessor restrictions: Types::ApiKeyRestrictions?
+      attr_accessor create_time: Time?
+      attr_accessor expire_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DescribeMapInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?map_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor map_name: String?
+    end
+
+    class DescribeMapOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?map_name: String,
+        ?map_arn: String,
+        ?pricing_plan: String,
+        ?data_source: String,
+        ?configuration: Types::MapConfiguration,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor map_name: String?
+      attr_accessor map_arn: String?
+      attr_accessor pricing_plan: String?
+      attr_accessor data_source: String?
+      attr_accessor configuration: Types::MapConfiguration?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class DescribePlaceIndexInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+    end
+
+    class DescribePlaceIndexOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?index_arn: String,
+        ?pricing_plan: String,
+        ?description: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?data_source: String,
+        ?data_source_configuration: Types::DataSourceConfiguration,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor index_arn: String?
+      attr_accessor pricing_plan: String?
+      attr_accessor description: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor data_source: String?
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DescribeRouteCalculatorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calculator_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calculator_name: String?
+    end
+
+    class DescribeRouteCalculatorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calculator_name: String,
+        ?calculator_arn: String,
+        ?pricing_plan: String,
+        ?description: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?data_source: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calculator_name: String?
+      attr_accessor calculator_arn: String?
+      attr_accessor pricing_plan: String?
+      attr_accessor description: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor data_source: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DescribeTrackerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracker_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracker_name: String?
+    end
+
+    class DescribeTrackerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracker_name: String,
+        ?tracker_arn: String,
+        ?description: String,
+        ?pricing_plan: String,
+        ?pricing_plan_data_source: String,
+        ?tags: Hash[String, String],
+        ?create_time: Time,
+        ?update_time: Time,
+        ?kms_key_id: String,
+        ?position_filtering: String,
+        ?event_bridge_enabled: bool,
+        ?kms_key_enable_geospatial_queries: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracker_name: String?
+      attr_accessor tracker_arn: String?
+      attr_accessor description: String?
+      attr_accessor pricing_plan: String?
+      attr_accessor pricing_plan_data_source: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor kms_key_id: String?
+      attr_accessor position_filtering: String?
+      attr_accessor event_bridge_enabled: bool?
+      attr_accessor kms_key_enable_geospatial_queries: bool?
+    end
+
+    class DevicePosition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_id: String,
+        ?sample_time: Time,
+        ?received_time: Time,
+        ?position: Array[Float],
+        ?accuracy: Types::PositionalAccuracy,
+        ?position_properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_id: String?
+      attr_accessor sample_time: Time?
+      attr_accessor received_time: Time?
+      attr_accessor position: Array[Float]?
+      attr_accessor accuracy: Types::PositionalAccuracy?
+      attr_accessor position_properties: Hash[String, String]?
+    end
+
+    class DevicePositionUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_id: String,
+        ?sample_time: Time,
+        ?position: Array[Float],
+        ?accuracy: Types::PositionalAccuracy,
+        ?position_properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_id: String?
+      attr_accessor sample_time: Time?
+      attr_accessor position: Array[Float]?
+      attr_accessor accuracy: Types::PositionalAccuracy?
+      attr_accessor position_properties: Hash[String, String]?
+    end
+
+    class DeviceState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_id: String,
+        ?sample_time: Time,
+        ?position: Array[Float],
+        ?accuracy: Types::PositionalAccuracy,
+        ?ipv4_address: String,
+        ?wi_fi_access_points: Array[Types::WiFiAccessPoint],
+        ?cell_signals: Types::CellSignals,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_id: String?
+      attr_accessor sample_time: Time?
+      attr_accessor position: Array[Float]?
+      attr_accessor accuracy: Types::PositionalAccuracy?
+      attr_accessor ipv4_address: String?
+      attr_accessor wi_fi_access_points: Array[Types::WiFiAccessPoint]?
+      attr_accessor cell_signals: Types::CellSignals?
+    end
+
+    class DisassociateTrackerConsumerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracker_name: String,
+        ?consumer_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracker_name: String?
+      attr_accessor consumer_arn: String?
+    end
+
+    class DisassociateTrackerConsumerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ForecastGeofenceEventsDeviceState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?position: Array[Float],
+        ?speed: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor position: Array[Float]?
+      attr_accessor speed: Float?
+    end
+
+    class ForecastGeofenceEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_name: String,
+        ?device_state: Types::ForecastGeofenceEventsDeviceState,
+        ?time_horizon_minutes: Float,
+        ?distance_unit: String,
+        ?speed_unit: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_name: String?
+      attr_accessor device_state: Types::ForecastGeofenceEventsDeviceState?
+      attr_accessor time_horizon_minutes: Float?
+      attr_accessor distance_unit: String?
+      attr_accessor speed_unit: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ForecastGeofenceEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?forecasted_events: Array[Types::ForecastedEvent],
+        ?next_token: String,
+        ?distance_unit: String,
+        ?speed_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor forecasted_events: Array[Types::ForecastedEvent]?
+      attr_accessor next_token: String?
+      attr_accessor distance_unit: String?
+      attr_accessor speed_unit: String?
+    end
+
+    class ForecastedEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?geofence_id: String,
+        ?is_device_in_geofence: bool,
+        ?nearest_distance: Float,
+        ?event_type: String,
+        ?forecasted_breach_time: Time,
+        ?geofence_properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor geofence_id: String?
+      attr_accessor is_device_in_geofence: bool?
+      attr_accessor nearest_distance: Float?
+      attr_accessor event_type: String?
+      attr_accessor forecasted_breach_time: Time?
+      attr_accessor geofence_properties: Hash[String, String]?
+    end
+
+    class GeofenceGeometry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?polygon: Array[Array[Array[Float]]],
+        ?circle: Types::Circle,
+        ?geobuf: String,
+        ?multi_polygon: Array[Array[Array[Array[Float]]]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor polygon: Array[Array[Array[Float]]]?
+      attr_accessor circle: Types::Circle?
+      attr_accessor geobuf: String?
+      attr_accessor multi_polygon: Array[Array[Array[Array[Float]]]]?
+    end
+
+    class GetDevicePositionHistoryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracker_name: String,
+        ?device_id: String,
+        ?next_token: String,
+        ?start_time_inclusive: Time,
+        ?end_time_exclusive: Time,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracker_name: String?
+      attr_accessor device_id: String?
+      attr_accessor next_token: String?
+      attr_accessor start_time_inclusive: Time?
+      attr_accessor end_time_exclusive: Time?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetDevicePositionHistoryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_positions: Array[Types::DevicePosition],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_positions: Array[Types::DevicePosition]?
+      attr_accessor next_token: String?
+    end
+
+    class GetDevicePositionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracker_name: String,
+        ?device_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracker_name: String?
+      attr_accessor device_id: String?
+    end
+
+    class GetDevicePositionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_id: String,
+        ?sample_time: Time,
+        ?received_time: Time,
+        ?position: Array[Float],
+        ?accuracy: Types::PositionalAccuracy,
+        ?position_properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_id: String?
+      attr_accessor sample_time: Time?
+      attr_accessor received_time: Time?
+      attr_accessor position: Array[Float]?
+      attr_accessor accuracy: Types::PositionalAccuracy?
+      attr_accessor position_properties: Hash[String, String]?
+    end
+
+    class GetGeofenceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_name: String,
+        ?geofence_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_name: String?
+      attr_accessor geofence_id: String?
+    end
+
+    class GetGeofenceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?geofence_id: String,
+        ?geometry: Types::GeofenceGeometry,
+        ?status: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?geofence_properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor geofence_id: String?
+      attr_accessor geometry: Types::GeofenceGeometry?
+      attr_accessor status: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor geofence_properties: Hash[String, String]?
+    end
+
+    class GetMapGlyphsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?map_name: String,
+        ?font_stack: String,
+        ?font_unicode_range: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor map_name: String?
+      attr_accessor font_stack: String?
+      attr_accessor font_unicode_range: String?
+      attr_accessor key: String?
+    end
+
+    class GetMapGlyphsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blob: String,
+        ?content_type: String,
+        ?cache_control: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blob: String?
+      attr_accessor content_type: String?
+      attr_accessor cache_control: String?
+    end
+
+    class GetMapSpritesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?map_name: String,
+        ?file_name: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor map_name: String?
+      attr_accessor file_name: String?
+      attr_accessor key: String?
+    end
+
+    class GetMapSpritesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blob: String,
+        ?content_type: String,
+        ?cache_control: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blob: String?
+      attr_accessor content_type: String?
+      attr_accessor cache_control: String?
+    end
+
+    class GetMapStyleDescriptorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?map_name: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor map_name: String?
+      attr_accessor key: String?
+    end
+
+    class GetMapStyleDescriptorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blob: String,
+        ?content_type: String,
+        ?cache_control: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blob: String?
+      attr_accessor content_type: String?
+      attr_accessor cache_control: String?
+    end
+
+    class GetMapTileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?map_name: String,
+        ?z: String,
+        ?x: String,
+        ?y: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor map_name: String?
+      attr_accessor z: String?
+      attr_accessor x: String?
+      attr_accessor y: String?
+      attr_accessor key: String?
+    end
+
+    class GetMapTileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?blob: String,
+        ?content_type: String,
+        ?cache_control: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor blob: String?
+      attr_accessor content_type: String?
+      attr_accessor cache_control: String?
+    end
+
+    class GetPlaceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?place_id: String,
+        ?language: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor place_id: String?
+      attr_accessor language: String?
+      attr_accessor key: String?
+    end
+
+    class GetPlaceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place: Types::Place,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place: Types::Place?
+    end
+
+    class InferredState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?position: Array[Float],
+        ?accuracy: Types::PositionalAccuracy,
+        ?deviation_distance: Float,
+        ?proxy_detected: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor position: Array[Float]?
+      attr_accessor accuracy: Types::PositionalAccuracy?
+      attr_accessor deviation_distance: Float?
+      attr_accessor proxy_detected: bool?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Leg
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_position: Array[Float],
+        ?end_position: Array[Float],
+        ?distance: Float,
+        ?duration_seconds: Float,
+        ?geometry: Types::LegGeometry,
+        ?steps: Array[Types::Step],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_position: Array[Float]?
+      attr_accessor end_position: Array[Float]?
+      attr_accessor distance: Float?
+      attr_accessor duration_seconds: Float?
+      attr_accessor geometry: Types::LegGeometry?
+      attr_accessor steps: Array[Types::Step]?
+    end
+
+    class LegGeometry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?line_string: Array[Array[Float]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor line_string: Array[Array[Float]]?
+    end
+
+    class ListDevicePositionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracker_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filter_geometry: Types::TrackingFilterGeometry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracker_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filter_geometry: Types::TrackingFilterGeometry?
+    end
+
+    class ListDevicePositionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::ListDevicePositionsResponseEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::ListDevicePositionsResponseEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDevicePositionsResponseEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?device_id: String,
+        ?sample_time: Time,
+        ?position: Array[Float],
+        ?accuracy: Types::PositionalAccuracy,
+        ?position_properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor device_id: String?
+      attr_accessor sample_time: Time?
+      attr_accessor position: Array[Float]?
+      attr_accessor accuracy: Types::PositionalAccuracy?
+      attr_accessor position_properties: Hash[String, String]?
+    end
+
+    class ListGeofenceCollectionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListGeofenceCollectionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::ListGeofenceCollectionsResponseEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::ListGeofenceCollectionsResponseEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGeofenceCollectionsResponseEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_name: String,
+        ?description: String,
+        ?pricing_plan: String,
+        ?pricing_plan_data_source: String,
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_name: String?
+      attr_accessor description: String?
+      attr_accessor pricing_plan: String?
+      attr_accessor pricing_plan_data_source: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class ListGeofenceResponseEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?geofence_id: String,
+        ?geometry: Types::GeofenceGeometry,
+        ?status: String,
+        ?create_time: Time,
+        ?update_time: Time,
+        ?geofence_properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor geofence_id: String?
+      attr_accessor geometry: Types::GeofenceGeometry?
+      attr_accessor status: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+      attr_accessor geofence_properties: Hash[String, String]?
+    end
+
+    class ListGeofencesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListGeofencesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::ListGeofenceResponseEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::ListGeofenceResponseEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListKeysInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filter: Types::ApiKeyFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filter: Types::ApiKeyFilter?
+    end
+
+    class ListKeysOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::ListKeysResponseEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::ListKeysResponseEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListKeysResponseEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_name: String,
+        ?expire_time: Time,
+        ?description: String,
+        ?restrictions: Types::ApiKeyRestrictions,
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_name: String?
+      attr_accessor expire_time: Time?
+      attr_accessor description: String?
+      attr_accessor restrictions: Types::ApiKeyRestrictions?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class ListMapsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListMapsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::ListMapsResponseEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::ListMapsResponseEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListMapsResponseEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?map_name: String,
+        ?description: String,
+        ?data_source: String,
+        ?pricing_plan: String,
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor map_name: String?
+      attr_accessor description: String?
+      attr_accessor data_source: String?
+      attr_accessor pricing_plan: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class ListPlaceIndexesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPlaceIndexesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::ListPlaceIndexesResponseEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::ListPlaceIndexesResponseEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPlaceIndexesResponseEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?description: String,
+        ?data_source: String,
+        ?pricing_plan: String,
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor description: String?
+      attr_accessor data_source: String?
+      attr_accessor pricing_plan: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class ListRouteCalculatorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRouteCalculatorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::ListRouteCalculatorsResponseEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::ListRouteCalculatorsResponseEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRouteCalculatorsResponseEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calculator_name: String,
+        ?description: String,
+        ?data_source: String,
+        ?pricing_plan: String,
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calculator_name: String?
+      attr_accessor description: String?
+      attr_accessor data_source: String?
+      attr_accessor pricing_plan: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTrackerConsumersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracker_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracker_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTrackerConsumersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?consumer_arns: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor consumer_arns: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTrackersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTrackersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entries: Array[Types::ListTrackersResponseEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entries: Array[Types::ListTrackersResponseEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTrackersResponseEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracker_name: String,
+        ?description: String,
+        ?pricing_plan: String,
+        ?pricing_plan_data_source: String,
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracker_name: String?
+      attr_accessor description: String?
+      attr_accessor pricing_plan: String?
+      attr_accessor pricing_plan_data_source: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class LteCellDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cell_id: Integer,
+        ?mcc: Integer,
+        ?mnc: Integer,
+        ?local_id: Types::LteLocalId,
+        ?network_measurements: Array[Types::LteNetworkMeasurements],
+        ?timing_advance: Integer,
+        ?nr_capable: bool,
+        ?rsrp: Integer,
+        ?rsrq: Float,
+        ?tac: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cell_id: Integer?
+      attr_accessor mcc: Integer?
+      attr_accessor mnc: Integer?
+      attr_accessor local_id: Types::LteLocalId?
+      attr_accessor network_measurements: Array[Types::LteNetworkMeasurements]?
+      attr_accessor timing_advance: Integer?
+      attr_accessor nr_capable: bool?
+      attr_accessor rsrp: Integer?
+      attr_accessor rsrq: Float?
+      attr_accessor tac: Integer?
+    end
+
+    class LteLocalId
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?earfcn: Integer,
+        ?pci: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor earfcn: Integer?
+      attr_accessor pci: Integer?
+    end
+
+    class LteNetworkMeasurements
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?earfcn: Integer,
+        ?cell_id: Integer,
+        ?pci: Integer,
+        ?rsrp: Integer,
+        ?rsrq: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor earfcn: Integer?
+      attr_accessor cell_id: Integer?
+      attr_accessor pci: Integer?
+      attr_accessor rsrp: Integer?
+      attr_accessor rsrq: Float?
+    end
+
+    class MapConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?style: String,
+        ?political_view: String,
+        ?custom_layers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor style: String?
+      attr_accessor political_view: String?
+      attr_accessor custom_layers: Array[String]?
+    end
+
+    class MapConfigurationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?political_view: String,
+        ?custom_layers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor political_view: String?
+      attr_accessor custom_layers: Array[String]?
+    end
+
+    class Place
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label: String,
+        ?geometry: Types::PlaceGeometry,
+        ?address_number: String,
+        ?street: String,
+        ?neighborhood: String,
+        ?municipality: String,
+        ?sub_region: String,
+        ?region: String,
+        ?country: String,
+        ?postal_code: String,
+        ?interpolated: bool,
+        ?time_zone: Types::TimeZone,
+        ?unit_type: String,
+        ?unit_number: String,
+        ?categories: Array[String],
+        ?supplemental_categories: Array[String],
+        ?sub_municipality: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label: String?
+      attr_accessor geometry: Types::PlaceGeometry?
+      attr_accessor address_number: String?
+      attr_accessor street: String?
+      attr_accessor neighborhood: String?
+      attr_accessor municipality: String?
+      attr_accessor sub_region: String?
+      attr_accessor region: String?
+      attr_accessor country: String?
+      attr_accessor postal_code: String?
+      attr_accessor interpolated: bool?
+      attr_accessor time_zone: Types::TimeZone?
+      attr_accessor unit_type: String?
+      attr_accessor unit_number: String?
+      attr_accessor categories: Array[String]?
+      attr_accessor supplemental_categories: Array[String]?
+      attr_accessor sub_municipality: String?
+    end
+
+    class PlaceGeometry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?point: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor point: Array[Float]?
+    end
+
+    class PositionalAccuracy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?horizontal: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor horizontal: Float?
+    end
+
+    class PutGeofenceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_name: String,
+        ?geofence_id: String,
+        ?geometry: Types::GeofenceGeometry,
+        ?geofence_properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_name: String?
+      attr_accessor geofence_id: String?
+      attr_accessor geometry: Types::GeofenceGeometry?
+      attr_accessor geofence_properties: Hash[String, String]?
+    end
+
+    class PutGeofenceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?geofence_id: String,
+        ?create_time: Time,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor geofence_id: String?
+      attr_accessor create_time: Time?
+      attr_accessor update_time: Time?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RouteMatrixEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?distance: Float,
+        ?duration_seconds: Float,
+        ?error: Types::RouteMatrixEntryError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor distance: Float?
+      attr_accessor duration_seconds: Float?
+      attr_accessor error: Types::RouteMatrixEntryError?
+    end
+
+    class RouteMatrixEntryError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class SearchForPositionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place: Types::Place,
+        ?distance: Float,
+        ?place_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place: Types::Place?
+      attr_accessor distance: Float?
+      attr_accessor place_id: String?
+    end
+
+    class SearchForSuggestionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?place_id: String,
+        ?categories: Array[String],
+        ?supplemental_categories: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor place_id: String?
+      attr_accessor categories: Array[String]?
+      attr_accessor supplemental_categories: Array[String]?
+    end
+
+    class SearchForTextResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?place: Types::Place,
+        ?distance: Float,
+        ?relevance: Float,
+        ?place_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor place: Types::Place?
+      attr_accessor distance: Float?
+      attr_accessor relevance: Float?
+      attr_accessor place_id: String?
+    end
+
+    class SearchPlaceIndexForPositionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?position: Array[Float],
+        ?max_results: Integer,
+        ?language: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor position: Array[Float]?
+      attr_accessor max_results: Integer?
+      attr_accessor language: String?
+      attr_accessor key: String?
+    end
+
+    class SearchPlaceIndexForPositionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: Types::SearchPlaceIndexForPositionSummary,
+        ?results: Array[Types::SearchForPositionResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: Types::SearchPlaceIndexForPositionSummary?
+      attr_accessor results: Array[Types::SearchForPositionResult]?
+    end
+
+    class SearchPlaceIndexForPositionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?position: Array[Float],
+        ?max_results: Integer,
+        ?data_source: String,
+        ?language: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor position: Array[Float]?
+      attr_accessor max_results: Integer?
+      attr_accessor data_source: String?
+      attr_accessor language: String?
+    end
+
+    class SearchPlaceIndexForSuggestionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?text: String,
+        ?bias_position: Array[Float],
+        ?filter_b_box: Array[Float],
+        ?filter_countries: Array[String],
+        ?max_results: Integer,
+        ?language: String,
+        ?filter_categories: Array[String],
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor text: String?
+      attr_accessor bias_position: Array[Float]?
+      attr_accessor filter_b_box: Array[Float]?
+      attr_accessor filter_countries: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor language: String?
+      attr_accessor filter_categories: Array[String]?
+      attr_accessor key: String?
+    end
+
+    class SearchPlaceIndexForSuggestionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: Types::SearchPlaceIndexForSuggestionsSummary,
+        ?results: Array[Types::SearchForSuggestionsResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: Types::SearchPlaceIndexForSuggestionsSummary?
+      attr_accessor results: Array[Types::SearchForSuggestionsResult]?
+    end
+
+    class SearchPlaceIndexForSuggestionsSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?bias_position: Array[Float],
+        ?filter_b_box: Array[Float],
+        ?filter_countries: Array[String],
+        ?max_results: Integer,
+        ?data_source: String,
+        ?language: String,
+        ?filter_categories: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor bias_position: Array[Float]?
+      attr_accessor filter_b_box: Array[Float]?
+      attr_accessor filter_countries: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor data_source: String?
+      attr_accessor language: String?
+      attr_accessor filter_categories: Array[String]?
+    end
+
+    class SearchPlaceIndexForTextInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?text: String,
+        ?bias_position: Array[Float],
+        ?filter_b_box: Array[Float],
+        ?filter_countries: Array[String],
+        ?max_results: Integer,
+        ?language: String,
+        ?filter_categories: Array[String],
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor text: String?
+      attr_accessor bias_position: Array[Float]?
+      attr_accessor filter_b_box: Array[Float]?
+      attr_accessor filter_countries: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor language: String?
+      attr_accessor filter_categories: Array[String]?
+      attr_accessor key: String?
+    end
+
+    class SearchPlaceIndexForTextOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?summary: Types::SearchPlaceIndexForTextSummary,
+        ?results: Array[Types::SearchForTextResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor summary: Types::SearchPlaceIndexForTextSummary?
+      attr_accessor results: Array[Types::SearchForTextResult]?
+    end
+
+    class SearchPlaceIndexForTextSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?bias_position: Array[Float],
+        ?filter_b_box: Array[Float],
+        ?filter_countries: Array[String],
+        ?max_results: Integer,
+        ?result_b_box: Array[Float],
+        ?data_source: String,
+        ?language: String,
+        ?filter_categories: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor bias_position: Array[Float]?
+      attr_accessor filter_b_box: Array[Float]?
+      attr_accessor filter_countries: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor result_b_box: Array[Float]?
+      attr_accessor data_source: String?
+      attr_accessor language: String?
+      attr_accessor filter_categories: Array[String]?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Step
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_position: Array[Float],
+        ?end_position: Array[Float],
+        ?distance: Float,
+        ?duration_seconds: Float,
+        ?geometry_offset: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_position: Array[Float]?
+      attr_accessor end_position: Array[Float]?
+      attr_accessor distance: Float?
+      attr_accessor duration_seconds: Float?
+      attr_accessor geometry_offset: Integer?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TimeZone
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?offset: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor offset: Integer?
+    end
+
+    class TrackingFilterGeometry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?polygon: Array[Array[Array[Float]]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor polygon: Array[Array[Array[Float]]]?
+    end
+
+    class TruckDimensions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?length: Float,
+        ?height: Float,
+        ?width: Float,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor length: Float?
+      attr_accessor height: Float?
+      attr_accessor width: Float?
+      attr_accessor unit: String?
+    end
+
+    class TruckWeight
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total: Float,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total: Float?
+      attr_accessor unit: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateGeofenceCollectionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_name: String,
+        ?pricing_plan: String,
+        ?pricing_plan_data_source: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_name: String?
+      attr_accessor pricing_plan: String?
+      attr_accessor pricing_plan_data_source: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateGeofenceCollectionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?collection_name: String,
+        ?collection_arn: String,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor collection_name: String?
+      attr_accessor collection_arn: String?
+      attr_accessor update_time: Time?
+    end
+
+    class UpdateKeyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_name: String,
+        ?description: String,
+        ?expire_time: Time,
+        ?no_expiry: bool,
+        ?force_update: bool,
+        ?restrictions: Types::ApiKeyRestrictions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_name: String?
+      attr_accessor description: String?
+      attr_accessor expire_time: Time?
+      attr_accessor no_expiry: bool?
+      attr_accessor force_update: bool?
+      attr_accessor restrictions: Types::ApiKeyRestrictions?
+    end
+
+    class UpdateKeyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_arn: String,
+        ?key_name: String,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_arn: String?
+      attr_accessor key_name: String?
+      attr_accessor update_time: Time?
+    end
+
+    class UpdateMapInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?map_name: String,
+        ?pricing_plan: String,
+        ?description: String,
+        ?configuration_update: Types::MapConfigurationUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor map_name: String?
+      attr_accessor pricing_plan: String?
+      attr_accessor description: String?
+      attr_accessor configuration_update: Types::MapConfigurationUpdate?
+    end
+
+    class UpdateMapOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?map_name: String,
+        ?map_arn: String,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor map_name: String?
+      attr_accessor map_arn: String?
+      attr_accessor update_time: Time?
+    end
+
+    class UpdatePlaceIndexInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?pricing_plan: String,
+        ?description: String,
+        ?data_source_configuration: Types::DataSourceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor pricing_plan: String?
+      attr_accessor description: String?
+      attr_accessor data_source_configuration: Types::DataSourceConfiguration?
+    end
+
+    class UpdatePlaceIndexOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index_name: String,
+        ?index_arn: String,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index_name: String?
+      attr_accessor index_arn: String?
+      attr_accessor update_time: Time?
+    end
+
+    class UpdateRouteCalculatorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calculator_name: String,
+        ?pricing_plan: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calculator_name: String?
+      attr_accessor pricing_plan: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateRouteCalculatorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calculator_name: String,
+        ?calculator_arn: String,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calculator_name: String?
+      attr_accessor calculator_arn: String?
+      attr_accessor update_time: Time?
+    end
+
+    class UpdateTrackerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracker_name: String,
+        ?pricing_plan: String,
+        ?pricing_plan_data_source: String,
+        ?description: String,
+        ?position_filtering: String,
+        ?event_bridge_enabled: bool,
+        ?kms_key_enable_geospatial_queries: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracker_name: String?
+      attr_accessor pricing_plan: String?
+      attr_accessor pricing_plan_data_source: String?
+      attr_accessor description: String?
+      attr_accessor position_filtering: String?
+      attr_accessor event_bridge_enabled: bool?
+      attr_accessor kms_key_enable_geospatial_queries: bool?
+    end
+
+    class UpdateTrackerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracker_name: String,
+        ?tracker_arn: String,
+        ?update_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracker_name: String?
+      attr_accessor tracker_arn: String?
+      attr_accessor update_time: Time?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    class VerifyDevicePositionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tracker_name: String,
+        ?device_state: Types::DeviceState,
+        ?distance_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tracker_name: String?
+      attr_accessor device_state: Types::DeviceState?
+      attr_accessor distance_unit: String?
+    end
+
+    class VerifyDevicePositionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inferred_state: Types::InferredState,
+        ?device_id: String,
+        ?sample_time: Time,
+        ?received_time: Time,
+        ?distance_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inferred_state: Types::InferredState?
+      attr_accessor device_id: String?
+      attr_accessor sample_time: Time?
+      attr_accessor received_time: Time?
+      attr_accessor distance_unit: String?
+    end
+
+    class WiFiAccessPoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mac_address: String,
+        ?rss: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mac_address: String?
+      attr_accessor rss: Integer?
+    end
+  end
+end

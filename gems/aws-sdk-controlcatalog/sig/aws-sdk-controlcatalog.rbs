@@ -1,0 +1,5 @@
+  module Aws
+    module ControlCatalog
+      VERSION: String
+    end
+  end

@@ -1,0 +1,1500 @@
+module Aws::ARCRegionswitch
+  module Types
+
+    class AbbreviatedExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan_arn: String,
+        ?execution_id: String,
+        ?version: String,
+        ?updated_at: Time,
+        ?comment: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?mode: String,
+        ?execution_state: String,
+        ?execution_action: String,
+        ?execution_region: String,
+        ?actual_recovery_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan_arn: String?
+      attr_accessor execution_id: String?
+      attr_accessor version: String?
+      attr_accessor updated_at: Time?
+      attr_accessor comment: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor mode: String?
+      attr_accessor execution_state: String?
+      attr_accessor execution_action: String?
+      attr_accessor execution_region: String?
+      attr_accessor actual_recovery_time: String?
+    end
+
+    class AbbreviatedPlan
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?owner: String,
+        ?name: String,
+        ?regions: Array[String],
+        ?recovery_approach: String,
+        ?primary_region: String,
+        ?version: String,
+        ?updated_at: Time,
+        ?description: String,
+        ?execution_role: String,
+        ?active_plan_execution: String,
+        ?recovery_time_objective_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor owner: String?
+      attr_accessor name: String?
+      attr_accessor regions: Array[String]?
+      attr_accessor recovery_approach: String?
+      attr_accessor primary_region: String?
+      attr_accessor version: String?
+      attr_accessor updated_at: Time?
+      attr_accessor description: String?
+      attr_accessor execution_role: String?
+      attr_accessor active_plan_execution: String?
+      attr_accessor recovery_time_objective_minutes: Integer?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AlarmCondition
+      RED: String
+      GREEN: String
+    end
+
+    module AlarmType
+      APPLICATION_HEALTH: String
+      TRIGGER: String
+    end
+
+    module Approval
+      APPROVE: String
+      DECLINE: String
+    end
+
+    class ApprovePlanExecutionStepRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan_arn: String,
+        ?execution_id: String,
+        ?step_name: String,
+        ?approval: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan_arn: String?
+      attr_accessor execution_id: String?
+      attr_accessor step_name: String?
+      attr_accessor approval: String?
+      attr_accessor comment: String?
+    end
+
+    class ApprovePlanExecutionStepResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ArcRoutingControlConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_minutes: Integer,
+        ?cross_account_role: String,
+        ?external_id: String,
+        ?region_and_routing_controls: Hash[String, Array[Types::ArcRoutingControlState]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_minutes: Integer?
+      attr_accessor cross_account_role: String?
+      attr_accessor external_id: String?
+      attr_accessor region_and_routing_controls: Hash[String, Array[Types::ArcRoutingControlState]]?
+    end
+
+    class ArcRoutingControlState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?routing_control_arn: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor routing_control_arn: String?
+      attr_accessor state: String?
+    end
+
+    class Asg
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cross_account_role: String,
+        ?external_id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cross_account_role: String?
+      attr_accessor external_id: String?
+      attr_accessor arn: String?
+    end
+
+    class AssociatedAlarm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cross_account_role: String,
+        ?external_id: String,
+        ?resource_identifier: String,
+        ?alarm_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cross_account_role: String?
+      attr_accessor external_id: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor alarm_type: String?
+    end
+
+    class CancelPlanExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan_arn: String,
+        ?execution_id: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan_arn: String?
+      attr_accessor execution_id: String?
+      attr_accessor comment: String?
+    end
+
+    class CancelPlanExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreatePlanRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?workflows: Array[Types::Workflow],
+        ?execution_role: String,
+        ?recovery_time_objective_minutes: Integer,
+        ?associated_alarms: Hash[String, Types::AssociatedAlarm],
+        ?triggers: Array[Types::Trigger],
+        ?name: String,
+        ?regions: Array[String],
+        ?recovery_approach: String,
+        ?primary_region: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor workflows: Array[Types::Workflow]?
+      attr_accessor execution_role: String?
+      attr_accessor recovery_time_objective_minutes: Integer?
+      attr_accessor associated_alarms: Hash[String, Types::AssociatedAlarm]?
+      attr_accessor triggers: Array[Types::Trigger]?
+      attr_accessor name: String?
+      attr_accessor regions: Array[String]?
+      attr_accessor recovery_approach: String?
+      attr_accessor primary_region: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreatePlanResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan: Types::Plan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan: Types::Plan?
+    end
+
+    class CustomActionLambdaConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_minutes: Integer,
+        ?lambdas: Array[Types::Lambdas],
+        ?retry_interval_minutes: Float,
+        ?region_to_run: String,
+        ?ungraceful: Types::LambdaUngraceful,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_minutes: Integer?
+      attr_accessor lambdas: Array[Types::Lambdas]?
+      attr_accessor retry_interval_minutes: Float?
+      attr_accessor region_to_run: String?
+      attr_accessor ungraceful: Types::LambdaUngraceful?
+    end
+
+    class DeletePlanRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class DeletePlanResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Ec2AsgCapacityIncreaseConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_minutes: Integer,
+        ?asgs: Array[Types::Asg],
+        ?ungraceful: Types::Ec2Ungraceful,
+        ?target_percent: Integer,
+        ?capacity_monitoring_approach: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_minutes: Integer?
+      attr_accessor asgs: Array[Types::Asg]?
+      attr_accessor ungraceful: Types::Ec2Ungraceful?
+      attr_accessor target_percent: Integer?
+      attr_accessor capacity_monitoring_approach: String?
+    end
+
+    module Ec2AsgCapacityMonitoringApproach
+      SAMPLED_MAX_IN_LAST_24_HOURS: String
+      AUTOSCALING_MAX_IN_LAST_24_HOURS: String
+    end
+
+    class Ec2Ungraceful
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minimum_success_percentage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minimum_success_percentage: Integer?
+    end
+
+    class EcsCapacityIncreaseConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_minutes: Integer,
+        ?services: Array[Types::Service],
+        ?ungraceful: Types::EcsUngraceful,
+        ?target_percent: Integer,
+        ?capacity_monitoring_approach: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_minutes: Integer?
+      attr_accessor services: Array[Types::Service]?
+      attr_accessor ungraceful: Types::EcsUngraceful?
+      attr_accessor target_percent: Integer?
+      attr_accessor capacity_monitoring_approach: String?
+    end
+
+    module EcsCapacityMonitoringApproach
+      SAMPLED_MAX_IN_LAST_24_HOURS: String
+      CONTAINER_INSIGHTS_MAX_IN_LAST_24_HOURS: String
+    end
+
+    class EcsUngraceful
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minimum_success_percentage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minimum_success_percentage: Integer?
+    end
+
+    module EksCapacityMonitoringApproach
+      SAMPLED_MAX_IN_LAST_24_HOURS: String
+    end
+
+    class EksCluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cross_account_role: String,
+        ?external_id: String,
+        ?cluster_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cross_account_role: String?
+      attr_accessor external_id: String?
+      attr_accessor cluster_arn: String?
+    end
+
+    class EksResourceScalingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_minutes: Integer,
+        ?kubernetes_resource_type: Types::KubernetesResourceType,
+        ?scaling_resources: Array[Hash[String, Hash[String, Types::KubernetesScalingResource]]],
+        ?eks_clusters: Array[Types::EksCluster],
+        ?ungraceful: Types::EksResourceScalingUngraceful,
+        ?target_percent: Integer,
+        ?capacity_monitoring_approach: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_minutes: Integer?
+      attr_accessor kubernetes_resource_type: Types::KubernetesResourceType?
+      attr_accessor scaling_resources: Array[Hash[String, Hash[String, Types::KubernetesScalingResource]]]?
+      attr_accessor eks_clusters: Array[Types::EksCluster]?
+      attr_accessor ungraceful: Types::EksResourceScalingUngraceful?
+      attr_accessor target_percent: Integer?
+      attr_accessor capacity_monitoring_approach: String?
+    end
+
+    class EksResourceScalingUngraceful
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minimum_success_percentage: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minimum_success_percentage: Integer?
+    end
+
+    module EvaluationStatus
+      PASSED: String
+      ACTION_REQUIRED: String
+      PENDING_EVALUATION: String
+      UNKNOWN: String
+    end
+
+    module ExecutionAction
+      ACTIVATE: String
+      DEACTIVATE: String
+    end
+
+    class ExecutionApprovalConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_minutes: Integer,
+        ?approval_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_minutes: Integer?
+      attr_accessor approval_role: String?
+    end
+
+    class ExecutionBlockConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?custom_action_lambda_config: Types::CustomActionLambdaConfiguration,
+        ?ec2_asg_capacity_increase_config: Types::Ec2AsgCapacityIncreaseConfiguration,
+        ?execution_approval_config: Types::ExecutionApprovalConfiguration,
+        ?arc_routing_control_config: Types::ArcRoutingControlConfiguration,
+        ?global_aurora_config: Types::GlobalAuroraConfiguration,
+        ?parallel_config: Types::ParallelExecutionBlockConfiguration,
+        ?region_switch_plan_config: Types::RegionSwitchPlanConfiguration,
+        ?ecs_capacity_increase_config: Types::EcsCapacityIncreaseConfiguration,
+        ?eks_resource_scaling_config: Types::EksResourceScalingConfiguration,
+        ?route53_health_check_config: Types::Route53HealthCheckConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_action_lambda_config: Types::CustomActionLambdaConfiguration?
+      attr_accessor ec2_asg_capacity_increase_config: Types::Ec2AsgCapacityIncreaseConfiguration?
+      attr_accessor execution_approval_config: Types::ExecutionApprovalConfiguration?
+      attr_accessor arc_routing_control_config: Types::ArcRoutingControlConfiguration?
+      attr_accessor global_aurora_config: Types::GlobalAuroraConfiguration?
+      attr_accessor parallel_config: Types::ParallelExecutionBlockConfiguration?
+      attr_accessor region_switch_plan_config: Types::RegionSwitchPlanConfiguration?
+      attr_accessor ecs_capacity_increase_config: Types::EcsCapacityIncreaseConfiguration?
+      attr_accessor eks_resource_scaling_config: Types::EksResourceScalingConfiguration?
+      attr_accessor route53_health_check_config: Types::Route53HealthCheckConfiguration?
+
+      class CustomActionLambdaConfig < ExecutionBlockConfiguration
+      end
+      class Ec2AsgCapacityIncreaseConfig < ExecutionBlockConfiguration
+      end
+      class ExecutionApprovalConfig < ExecutionBlockConfiguration
+      end
+      class ArcRoutingControlConfig < ExecutionBlockConfiguration
+      end
+      class GlobalAuroraConfig < ExecutionBlockConfiguration
+      end
+      class ParallelConfig < ExecutionBlockConfiguration
+      end
+      class RegionSwitchPlanConfig < ExecutionBlockConfiguration
+      end
+      class EcsCapacityIncreaseConfig < ExecutionBlockConfiguration
+      end
+      class EksResourceScalingConfig < ExecutionBlockConfiguration
+      end
+      class Route53HealthCheckConfig < ExecutionBlockConfiguration
+      end
+      class Unknown < ExecutionBlockConfiguration
+      end
+    end
+
+    module ExecutionBlockType
+      CUSTOM_ACTION_LAMBDA: String
+      EXECUTION_APPROVAL: String
+      AURORA: String
+      EC2_ASG: String
+      ROUTING_CONTROL: String
+      REGION_SWITCH: String
+      PARALLEL: String
+      ECS: String
+      EKS_RESOURCE_SCALING: String
+      ROUTE53_HEALTH_CHECK: String
+    end
+
+    class ExecutionEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp: Time,
+        ?type: String,
+        ?step_name: String,
+        ?execution_block_type: String,
+        ?resources: Array[String],
+        ?error: String,
+        ?description: String,
+        ?event_id: String,
+        ?previous_event_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp: Time?
+      attr_accessor type: String?
+      attr_accessor step_name: String?
+      attr_accessor execution_block_type: String?
+      attr_accessor resources: Array[String]?
+      attr_accessor error: String?
+      attr_accessor description: String?
+      attr_accessor event_id: String?
+      attr_accessor previous_event_id: String?
+    end
+
+    module ExecutionEventType
+      UNKNOWN: String
+      EXECUTION_PENDING: String
+      EXECUTION_STARTED: String
+      EXECUTION_SUCCEEDED: String
+      EXECUTION_FAILED: String
+      EXECUTION_PAUSING: String
+      EXECUTION_PAUSED: String
+      EXECUTION_CANCELING: String
+      EXECUTION_CANCELED: String
+      EXECUTION_PENDING_APPROVAL: String
+      EXECUTION_BEHAVIOR_CHANGED_TO_UNGRACEFUL: String
+      EXECUTION_BEHAVIOR_CHANGED_TO_GRACEFUL: String
+      EXECUTION_PENDING_CHILD_PLAN_MANUAL_APPROVAL: String
+      EXECUTION_SUCCESS_MONITORING_APPLICATION_HEALTH: String
+      STEP_STARTED: String
+      STEP_UPDATE: String
+      STEP_SUCCEEDED: String
+      STEP_FAILED: String
+      STEP_SKIPPED: String
+      STEP_PAUSED_BY_ERROR: String
+      STEP_PAUSED_BY_OPERATOR: String
+      STEP_CANCELED: String
+      STEP_PENDING_APPROVAL: String
+      STEP_EXECUTION_BEHAVIOR_CHANGED_TO_UNGRACEFUL: String
+      STEP_PENDING_APPLICATION_HEALTH_MONITOR: String
+    end
+
+    module ExecutionMode
+      GRACEFUL: String
+      UNGRACEFUL: String
+    end
+
+    module ExecutionState
+      IN_PROGRESS: String
+      PAUSED_BY_FAILED_STEP: String
+      PAUSED_BY_OPERATOR: String
+      COMPLETED: String
+      COMPLETED_WITH_EXCEPTIONS: String
+      CANCELLED: String
+      PLAN_EXECUTION_TIMED_OUT: String
+      PENDING_MANUAL_APPROVAL: String
+      FAILED: String
+      PENDING: String
+      COMPLETED_MONITORING_APPLICATION_HEALTH: String
+    end
+
+    class GetPlanEvaluationStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetPlanEvaluationStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan_arn: String,
+        ?last_evaluation_time: Time,
+        ?last_evaluated_version: String,
+        ?region: String,
+        ?evaluation_state: String,
+        ?warnings: Array[Types::ResourceWarning],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan_arn: String?
+      attr_accessor last_evaluation_time: Time?
+      attr_accessor last_evaluated_version: String?
+      attr_accessor region: String?
+      attr_accessor evaluation_state: String?
+      attr_accessor warnings: Array[Types::ResourceWarning]?
+      attr_accessor next_token: String?
+    end
+
+    class GetPlanExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan_arn: String,
+        ?execution_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan_arn: String?
+      attr_accessor execution_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetPlanExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan_arn: String,
+        ?execution_id: String,
+        ?version: String,
+        ?updated_at: Time,
+        ?comment: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?mode: String,
+        ?execution_state: String,
+        ?execution_action: String,
+        ?execution_region: String,
+        ?step_states: Array[Types::StepState],
+        ?plan: Types::Plan,
+        ?actual_recovery_time: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan_arn: String?
+      attr_accessor execution_id: String?
+      attr_accessor version: String?
+      attr_accessor updated_at: Time?
+      attr_accessor comment: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor mode: String?
+      attr_accessor execution_state: String?
+      attr_accessor execution_action: String?
+      attr_accessor execution_region: String?
+      attr_accessor step_states: Array[Types::StepState]?
+      attr_accessor plan: Types::Plan?
+      attr_accessor actual_recovery_time: String?
+      attr_accessor next_token: String?
+    end
+
+    class GetPlanInRegionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetPlanInRegionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan: Types::Plan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan: Types::Plan?
+    end
+
+    class GetPlanRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetPlanResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan: Types::Plan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan: Types::Plan?
+    end
+
+    class GlobalAuroraConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_minutes: Integer,
+        ?cross_account_role: String,
+        ?external_id: String,
+        ?behavior: String,
+        ?ungraceful: Types::GlobalAuroraUngraceful,
+        ?global_cluster_identifier: String,
+        ?database_cluster_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_minutes: Integer?
+      attr_accessor cross_account_role: String?
+      attr_accessor external_id: String?
+      attr_accessor behavior: String?
+      attr_accessor ungraceful: Types::GlobalAuroraUngraceful?
+      attr_accessor global_cluster_identifier: String?
+      attr_accessor database_cluster_arns: Array[String]?
+    end
+
+    module GlobalAuroraDefaultBehavior
+      SWITCHOVER_ONLY: String
+      FAILOVER: String
+    end
+
+    class GlobalAuroraUngraceful
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ungraceful: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ungraceful: String?
+    end
+
+    module GlobalAuroraUngracefulBehavior
+      FAILOVER: String
+    end
+
+    class IllegalArgumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IllegalStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KubernetesResourceType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_version: String,
+        ?kind: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_version: String?
+      attr_accessor kind: String?
+    end
+
+    class KubernetesScalingResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: String,
+        ?name: String,
+        ?hpa_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+      attr_accessor hpa_name: String?
+    end
+
+    class LambdaUngraceful
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?behavior: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor behavior: String?
+    end
+
+    module LambdaUngracefulBehavior
+      SKIP: String
+    end
+
+    class Lambdas
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cross_account_role: String,
+        ?external_id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cross_account_role: String?
+      attr_accessor external_id: String?
+      attr_accessor arn: String?
+    end
+
+    class ListPlanExecutionEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan_arn: String,
+        ?execution_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan_arn: String?
+      attr_accessor execution_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor name: String?
+    end
+
+    class ListPlanExecutionEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ExecutionEvent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ExecutionEvent]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPlanExecutionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor state: String?
+    end
+
+    class ListPlanExecutionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::AbbreviatedExecution],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::AbbreviatedExecution]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPlansInRegionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPlansInRegionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plans: Array[Types::AbbreviatedPlan],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plans: Array[Types::AbbreviatedPlan]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPlansRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPlansResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plans: Array[Types::AbbreviatedPlan],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plans: Array[Types::AbbreviatedPlan]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRoute53HealthChecksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?hosted_zone_id: String,
+        ?record_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor hosted_zone_id: String?
+      attr_accessor record_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRoute53HealthChecksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health_checks: Array[Types::Route53HealthCheck],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health_checks: Array[Types::Route53HealthCheck]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_tags: Hash[String, String]?
+    end
+
+    class MinimalWorkflow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor name: String?
+    end
+
+    class ParallelExecutionBlockConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?steps: Array[Types::Step],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor steps: Array[Types::Step]?
+    end
+
+    class Plan
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?description: String,
+        ?workflows: Array[Types::Workflow],
+        ?execution_role: String,
+        ?recovery_time_objective_minutes: Integer,
+        ?associated_alarms: Hash[String, Types::AssociatedAlarm],
+        ?triggers: Array[Types::Trigger],
+        ?name: String,
+        ?regions: Array[String],
+        ?recovery_approach: String,
+        ?primary_region: String,
+        ?owner: String,
+        ?version: String,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor workflows: Array[Types::Workflow]?
+      attr_accessor execution_role: String?
+      attr_accessor recovery_time_objective_minutes: Integer?
+      attr_accessor associated_alarms: Hash[String, Types::AssociatedAlarm]?
+      attr_accessor triggers: Array[Types::Trigger]?
+      attr_accessor name: String?
+      attr_accessor regions: Array[String]?
+      attr_accessor recovery_approach: String?
+      attr_accessor primary_region: String?
+      attr_accessor owner: String?
+      attr_accessor version: String?
+      attr_accessor updated_at: Time?
+    end
+
+    module RecoveryApproach
+      ACTIVE_ACTIVE: String
+      ACTIVE_PASSIVE: String
+    end
+
+    class RegionSwitchPlanConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cross_account_role: String,
+        ?external_id: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cross_account_role: String?
+      attr_accessor external_id: String?
+      attr_accessor arn: String?
+    end
+
+    module RegionToRunIn
+      ACTIVATING_REGION: String
+      DEACTIVATING_REGION: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceWarning
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow: Types::MinimalWorkflow,
+        ?version: String,
+        ?step_name: String,
+        ?resource_arn: String,
+        ?warning_status: String,
+        ?warning_updated_time: Time,
+        ?warning_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow: Types::MinimalWorkflow?
+      attr_accessor version: String?
+      attr_accessor step_name: String?
+      attr_accessor resource_arn: String?
+      attr_accessor warning_status: String?
+      attr_accessor warning_updated_time: Time?
+      attr_accessor warning_message: String?
+    end
+
+    module ResourceWarningStatus
+      ACTIVE: String
+      RESOLVED: String
+    end
+
+    class Route53HealthCheck
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?record_name: String,
+        ?health_check_id: String,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor record_name: String?
+      attr_accessor health_check_id: String?
+      attr_accessor region: String?
+    end
+
+    class Route53HealthCheckConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_minutes: Integer,
+        ?cross_account_role: String,
+        ?external_id: String,
+        ?hosted_zone_id: String,
+        ?record_name: String,
+        ?record_sets: Array[Types::Route53ResourceRecordSet],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_minutes: Integer?
+      attr_accessor cross_account_role: String?
+      attr_accessor external_id: String?
+      attr_accessor hosted_zone_id: String?
+      attr_accessor record_name: String?
+      attr_accessor record_sets: Array[Types::Route53ResourceRecordSet]?
+    end
+
+    class Route53ResourceRecordSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_set_identifier: String,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_set_identifier: String?
+      attr_accessor region: String?
+    end
+
+    module RoutingControlStateChange
+      ON: String
+      OFF: String
+    end
+
+    class Service
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cross_account_role: String,
+        ?external_id: String,
+        ?cluster_arn: String,
+        ?service_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cross_account_role: String?
+      attr_accessor external_id: String?
+      attr_accessor cluster_arn: String?
+      attr_accessor service_arn: String?
+    end
+
+    class StartPlanExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan_arn: String,
+        ?target_region: String,
+        ?action: String,
+        ?mode: String,
+        ?comment: String,
+        ?latest_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan_arn: String?
+      attr_accessor target_region: String?
+      attr_accessor action: String?
+      attr_accessor mode: String?
+      attr_accessor comment: String?
+      attr_accessor latest_version: String?
+    end
+
+    class StartPlanExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_id: String,
+        ?plan: String,
+        ?plan_version: String,
+        ?activate_region: String,
+        ?deactivate_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_id: String?
+      attr_accessor plan: String?
+      attr_accessor plan_version: String?
+      attr_accessor activate_region: String?
+      attr_accessor deactivate_region: String?
+    end
+
+    class Step
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?execution_block_configuration: Types::ExecutionBlockConfiguration,
+        ?execution_block_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor execution_block_configuration: Types::ExecutionBlockConfiguration?
+      attr_accessor execution_block_type: String?
+    end
+
+    class StepState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?status: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?step_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor step_mode: String?
+    end
+
+    module StepStatus
+      NOT_STARTED: String
+      RUNNING: String
+      FAILED: String
+      COMPLETED: String
+      CANCELLED: String
+      SKIPPED: String
+      PENDING_APPROVAL: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Trigger
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?target_region: String,
+        ?action: String,
+        ?conditions: Array[Types::TriggerCondition],
+        ?min_delay_minutes_between_executions: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor target_region: String?
+      attr_accessor action: String?
+      attr_accessor conditions: Array[Types::TriggerCondition]?
+      attr_accessor min_delay_minutes_between_executions: Integer?
+    end
+
+    class TriggerCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?associated_alarm_name: String,
+        ?condition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor associated_alarm_name: String?
+      attr_accessor condition: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?resource_tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor resource_tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module UpdatePlanExecutionAction
+      SWITCH_TO_GRACEFUL: String
+      SWITCH_TO_UNGRACEFUL: String
+      PAUSE: String
+      RESUME: String
+    end
+
+    class UpdatePlanExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan_arn: String,
+        ?execution_id: String,
+        ?action: String,
+        ?comment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan_arn: String?
+      attr_accessor execution_id: String?
+      attr_accessor action: String?
+      attr_accessor comment: String?
+    end
+
+    class UpdatePlanExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module UpdatePlanExecutionStepAction
+      SWITCH_TO_UNGRACEFUL: String
+      SKIP: String
+    end
+
+    class UpdatePlanExecutionStepRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan_arn: String,
+        ?execution_id: String,
+        ?comment: String,
+        ?step_name: String,
+        ?action_to_take: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan_arn: String?
+      attr_accessor execution_id: String?
+      attr_accessor comment: String?
+      attr_accessor step_name: String?
+      attr_accessor action_to_take: String?
+    end
+
+    class UpdatePlanExecutionStepResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdatePlanRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?description: String,
+        ?workflows: Array[Types::Workflow],
+        ?execution_role: String,
+        ?recovery_time_objective_minutes: Integer,
+        ?associated_alarms: Hash[String, Types::AssociatedAlarm],
+        ?triggers: Array[Types::Trigger],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor workflows: Array[Types::Workflow]?
+      attr_accessor execution_role: String?
+      attr_accessor recovery_time_objective_minutes: Integer?
+      attr_accessor associated_alarms: Hash[String, Types::AssociatedAlarm]?
+      attr_accessor triggers: Array[Types::Trigger]?
+    end
+
+    class UpdatePlanResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plan: Types::Plan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plan: Types::Plan?
+    end
+
+    class Workflow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?steps: Array[Types::Step],
+        ?workflow_target_action: String,
+        ?workflow_target_region: String,
+        ?workflow_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor steps: Array[Types::Step]?
+      attr_accessor workflow_target_action: String?
+      attr_accessor workflow_target_region: String?
+      attr_accessor workflow_description: String?
+    end
+
+    module WorkflowTargetAction
+      ACTIVATE: String
+      DEACTIVATE: String
+    end
+  end
+end

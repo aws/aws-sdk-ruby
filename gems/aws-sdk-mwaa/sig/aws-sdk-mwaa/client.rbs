@@ -1,0 +1,243 @@
+module Aws::MWAA
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::MWAA::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateCliTokenResponse
+      include Smithy::Client::_Response[Types::CreateCliTokenOutput]
+      def cli_token: () -> String?
+      def web_server_hostname: () -> String?
+    end
+    def create_cli_token: (
+      ?name: String
+    ) -> _CreateCliTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCliTokenResponse
+
+    interface _CreateEnvironmentResponse
+      include Smithy::Client::_Response[Types::CreateEnvironmentOperationOutput]
+      def arn: () -> String?
+    end
+    def create_environment: (
+      ?name: String,
+      ?execution_role_arn: String,
+      ?source_bucket_arn: String,
+      ?dag_s3_path: String,
+      ?network_configuration: {
+        subnet_ids: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?plugins_s3_path: String,
+      ?plugins_s3_object_version: String,
+      ?requirements_s3_path: String,
+      ?requirements_s3_object_version: String,
+      ?startup_script_s3_path: String,
+      ?startup_script_s3_object_version: String,
+      ?airflow_configuration_options: Hash[String, String],
+      ?environment_class: String,
+      ?max_workers: Integer,
+      ?kms_key: String,
+      ?airflow_version: String,
+      ?logging_configuration: {
+        dag_processing_logs: {
+          enabled: bool,
+          log_level: String
+        },
+        scheduler_logs: untyped,
+        webserver_logs: untyped,
+        worker_logs: untyped,
+        task_logs: untyped
+      },
+      ?weekly_maintenance_window_start: String,
+      ?tags: Hash[String, String],
+      ?webserver_access_mode: String,
+      ?min_workers: Integer,
+      ?schedulers: Integer,
+      ?endpoint_management: String,
+      ?min_webservers: Integer,
+      ?max_webservers: Integer
+    ) -> _CreateEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentResponse
+
+    interface _CreateWebLoginTokenResponse
+      include Smithy::Client::_Response[Types::CreateWebLoginTokenOutput]
+      def web_token: () -> String?
+      def web_server_hostname: () -> String?
+      def iam_identity: () -> String?
+      def airflow_identity: () -> String?
+    end
+    def create_web_login_token: (
+      ?name: String
+    ) -> _CreateWebLoginTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWebLoginTokenResponse
+
+    interface _DeleteEnvironmentResponse
+      include Smithy::Client::_Response[Types::DeleteEnvironmentOperationOutput]
+    end
+    def delete_environment: (
+      ?name: String
+    ) -> _DeleteEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentResponse
+
+    interface _GetEnvironmentResponse
+      include Smithy::Client::_Response[Types::GetEnvironmentOperationOutput]
+      def environment: () -> Types::Environment?
+    end
+    def get_environment: (
+      ?name: String
+    ) -> _GetEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnvironmentResponse
+
+    interface _InvokeRestApiResponse
+      include Smithy::Client::_Response[Types::InvokeRestApiResponse]
+      def rest_api_status_code: () -> Integer?
+      def rest_api_response: () -> Smithy::Schema::document?
+    end
+    def invoke_rest_api: (
+      ?name: String,
+      ?path: String,
+      ?method: String,
+      ?query_parameters: Smithy::Schema::document,
+      ?body: Smithy::Schema::document
+    ) -> _InvokeRestApiResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeRestApiResponse
+
+    interface _ListEnvironmentsResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentsOperationOutput]
+      def environments: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_environments: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEnvironmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOperationOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PublishMetricsResponse
+      include Smithy::Client::_Response[Types::PublishMetricsOperationOutput]
+    end
+    def publish_metrics: (
+      ?environment_name: String,
+      ?metric_data: Array[
+        {
+          metric_name: String,
+          timestamp: Time,
+          dimensions: Array[
+            {
+              name: untyped,
+              value: untyped
+            }
+          ],
+          value: Float,
+          unit: String,
+          statistic_values: {
+            sample_count: Integer,
+            sum: untyped,
+            minimum: untyped,
+            maximum: untyped
+          }
+        }
+      ]
+    ) -> _PublishMetricsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishMetricsResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOperationOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOperationOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateEnvironmentResponse
+      include Smithy::Client::_Response[Types::UpdateEnvironmentOperationOutput]
+      def arn: () -> String?
+    end
+    def update_environment: (
+      ?name: String,
+      ?execution_role_arn: String,
+      ?airflow_configuration_options: Hash[String, String],
+      ?airflow_version: String,
+      ?dag_s3_path: String,
+      ?environment_class: String,
+      ?logging_configuration: {
+        dag_processing_logs: {
+          enabled: bool,
+          log_level: String
+        },
+        scheduler_logs: untyped,
+        webserver_logs: untyped,
+        worker_logs: untyped,
+        task_logs: untyped
+      },
+      ?max_workers: Integer,
+      ?min_workers: Integer,
+      ?max_webservers: Integer,
+      ?min_webservers: Integer,
+      ?worker_replacement_strategy: String,
+      ?network_configuration: {
+        security_group_ids: Array[String]
+      },
+      ?plugins_s3_path: String,
+      ?plugins_s3_object_version: String,
+      ?requirements_s3_path: String,
+      ?requirements_s3_object_version: String,
+      ?schedulers: Integer,
+      ?source_bucket_arn: String,
+      ?startup_script_s3_path: String,
+      ?startup_script_s3_object_version: String,
+      ?webserver_access_mode: String,
+      ?weekly_maintenance_window_start: String
+    ) -> _UpdateEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnvironmentResponse
+  end
+end

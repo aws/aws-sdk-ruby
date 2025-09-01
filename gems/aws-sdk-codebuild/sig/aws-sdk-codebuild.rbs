@@ -1,0 +1,5 @@
+  module Aws
+    module CodeBuild
+      VERSION: String
+    end
+  end

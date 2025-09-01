@@ -1,0 +1,2520 @@
+module Aws::KMS
+  module Types
+
+    module AlgorithmSpec
+      RSAES_PKCS1_V1_5: String
+      RSAES_OAEP_SHA_1: String
+      RSAES_OAEP_SHA_256: String
+      RSA_AES_KEY_WRAP_SHA_1: String
+      RSA_AES_KEY_WRAP_SHA_256: String
+      SM2PKE: String
+    end
+
+    class AliasListEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_name: String,
+        ?alias_arn: String,
+        ?target_key_id: String,
+        ?creation_date: Time,
+        ?last_updated_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_name: String?
+      attr_accessor alias_arn: String?
+      attr_accessor target_key_id: String?
+      attr_accessor creation_date: Time?
+      attr_accessor last_updated_date: Time?
+    end
+
+    class AlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CancelKeyDeletionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+    end
+
+    class CancelKeyDeletionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+    end
+
+    class CloudHsmClusterInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CloudHsmClusterInvalidConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CloudHsmClusterNotActiveException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CloudHsmClusterNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CloudHsmClusterNotRelatedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConnectCustomKeyStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_key_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_key_store_id: String?
+    end
+
+    class ConnectCustomKeyStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module ConnectionErrorCodeType
+      INVALID_CREDENTIALS: String
+      CLUSTER_NOT_FOUND: String
+      NETWORK_ERRORS: String
+      INTERNAL_ERROR: String
+      INSUFFICIENT_CLOUDHSM_HSMS: String
+      USER_LOCKED_OUT: String
+      USER_NOT_FOUND: String
+      USER_LOGGED_IN: String
+      SUBNET_NOT_FOUND: String
+      INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET: String
+      XKS_PROXY_ACCESS_DENIED: String
+      XKS_PROXY_NOT_REACHABLE: String
+      XKS_VPC_ENDPOINT_SERVICE_NOT_FOUND: String
+      XKS_PROXY_INVALID_RESPONSE: String
+      XKS_PROXY_INVALID_CONFIGURATION: String
+      XKS_VPC_ENDPOINT_SERVICE_INVALID_CONFIGURATION: String
+      XKS_PROXY_TIMED_OUT: String
+      XKS_PROXY_INVALID_TLS_CONFIGURATION: String
+    end
+
+    module ConnectionStateType
+      CONNECTED: String
+      CONNECTING: String
+      FAILED: String
+      DISCONNECTED: String
+      DISCONNECTING: String
+    end
+
+    class CreateAliasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_name: String,
+        ?target_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_name: String?
+      attr_accessor target_key_id: String?
+    end
+
+    class CreateCustomKeyStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_key_store_name: String,
+        ?cloud_hsm_cluster_id: String,
+        ?trust_anchor_certificate: String,
+        ?key_store_password: String,
+        ?custom_key_store_type: String,
+        ?xks_proxy_uri_endpoint: String,
+        ?xks_proxy_uri_path: String,
+        ?xks_proxy_vpc_endpoint_service_name: String,
+        ?xks_proxy_authentication_credential: Types::XksProxyAuthenticationCredentialType,
+        ?xks_proxy_connectivity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_key_store_name: String?
+      attr_accessor cloud_hsm_cluster_id: String?
+      attr_accessor trust_anchor_certificate: String?
+      attr_accessor key_store_password: String?
+      attr_accessor custom_key_store_type: String?
+      attr_accessor xks_proxy_uri_endpoint: String?
+      attr_accessor xks_proxy_uri_path: String?
+      attr_accessor xks_proxy_vpc_endpoint_service_name: String?
+      attr_accessor xks_proxy_authentication_credential: Types::XksProxyAuthenticationCredentialType?
+      attr_accessor xks_proxy_connectivity: String?
+    end
+
+    class CreateCustomKeyStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_key_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_key_store_id: String?
+    end
+
+    class CreateGrantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?grantee_principal: String,
+        ?retiring_principal: String,
+        ?operations: Array[String],
+        ?constraints: Types::GrantConstraints,
+        ?grant_tokens: Array[String],
+        ?name: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor grantee_principal: String?
+      attr_accessor retiring_principal: String?
+      attr_accessor operations: Array[String]?
+      attr_accessor constraints: Types::GrantConstraints?
+      attr_accessor grant_tokens: Array[String]?
+      attr_accessor name: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class CreateGrantResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grant_token: String,
+        ?grant_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grant_token: String?
+      attr_accessor grant_id: String?
+    end
+
+    class CreateKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+        ?description: String,
+        ?key_usage: String,
+        ?customer_master_key_spec: String,
+        ?key_spec: String,
+        ?origin: String,
+        ?custom_key_store_id: String,
+        ?bypass_policy_lockout_safety_check: bool,
+        ?tags: Array[Types::Tag],
+        ?multi_region: bool,
+        ?xks_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+      attr_accessor description: String?
+      attr_accessor key_usage: String?
+      attr_accessor customer_master_key_spec: String?
+      attr_accessor key_spec: String?
+      attr_accessor origin: String?
+      attr_accessor custom_key_store_id: String?
+      attr_accessor bypass_policy_lockout_safety_check: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor multi_region: bool?
+      attr_accessor xks_key_id: String?
+    end
+
+    class CreateKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_metadata: Types::KeyMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_metadata: Types::KeyMetadata?
+    end
+
+    class CustomKeyStoreHasCMKsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CustomKeyStoreInvalidStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CustomKeyStoreNameInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CustomKeyStoreNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module CustomKeyStoreType
+      AWS_CLOUDHSM: String
+      EXTERNAL_KEY_STORE: String
+    end
+
+    class CustomKeyStoresListEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_key_store_id: String,
+        ?custom_key_store_name: String,
+        ?cloud_hsm_cluster_id: String,
+        ?trust_anchor_certificate: String,
+        ?connection_state: String,
+        ?connection_error_code: String,
+        ?creation_date: Time,
+        ?custom_key_store_type: String,
+        ?xks_proxy_configuration: Types::XksProxyConfigurationType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_key_store_id: String?
+      attr_accessor custom_key_store_name: String?
+      attr_accessor cloud_hsm_cluster_id: String?
+      attr_accessor trust_anchor_certificate: String?
+      attr_accessor connection_state: String?
+      attr_accessor connection_error_code: String?
+      attr_accessor creation_date: Time?
+      attr_accessor custom_key_store_type: String?
+      attr_accessor xks_proxy_configuration: Types::XksProxyConfigurationType?
+    end
+
+    module CustomerMasterKeySpec
+      RSA_2048: String
+      RSA_3072: String
+      RSA_4096: String
+      ECC_NIST_P256: String
+      ECC_NIST_P384: String
+      ECC_NIST_P521: String
+      ECC_SECG_P256K1: String
+      SYMMETRIC_DEFAULT: String
+      HMAC_224: String
+      HMAC_256: String
+      HMAC_384: String
+      HMAC_512: String
+      SM2: String
+    end
+
+    module DataKeyPairSpec
+      RSA_2048: String
+      RSA_3072: String
+      RSA_4096: String
+      ECC_NIST_P256: String
+      ECC_NIST_P384: String
+      ECC_NIST_P521: String
+      ECC_SECG_P256K1: String
+      SM2: String
+    end
+
+    module DataKeySpec
+      AES_256: String
+      AES_128: String
+    end
+
+    class DecryptRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ciphertext_blob: String,
+        ?encryption_context: Hash[String, String],
+        ?grant_tokens: Array[String],
+        ?key_id: String,
+        ?encryption_algorithm: String,
+        ?recipient: Types::RecipientInfo,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ciphertext_blob: String?
+      attr_accessor encryption_context: Hash[String, String]?
+      attr_accessor grant_tokens: Array[String]?
+      attr_accessor key_id: String?
+      attr_accessor encryption_algorithm: String?
+      attr_accessor recipient: Types::RecipientInfo?
+      attr_accessor dry_run: bool?
+    end
+
+    class DecryptResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?plaintext: String,
+        ?encryption_algorithm: String,
+        ?ciphertext_for_recipient: String,
+        ?key_material_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor plaintext: String?
+      attr_accessor encryption_algorithm: String?
+      attr_accessor ciphertext_for_recipient: String?
+      attr_accessor key_material_id: String?
+    end
+
+    class DeleteAliasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_name: String?
+    end
+
+    class DeleteCustomKeyStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_key_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_key_store_id: String?
+    end
+
+    class DeleteCustomKeyStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteImportedKeyMaterialRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?key_material_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor key_material_id: String?
+    end
+
+    class DeleteImportedKeyMaterialResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?key_material_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor key_material_id: String?
+    end
+
+    class DependencyTimeoutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeriveSharedSecretRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?key_agreement_algorithm: String,
+        ?public_key: String,
+        ?grant_tokens: Array[String],
+        ?dry_run: bool,
+        ?recipient: Types::RecipientInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor key_agreement_algorithm: String?
+      attr_accessor public_key: String?
+      attr_accessor grant_tokens: Array[String]?
+      attr_accessor dry_run: bool?
+      attr_accessor recipient: Types::RecipientInfo?
+    end
+
+    class DeriveSharedSecretResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?shared_secret: String,
+        ?ciphertext_for_recipient: String,
+        ?key_agreement_algorithm: String,
+        ?key_origin: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor shared_secret: String?
+      attr_accessor ciphertext_for_recipient: String?
+      attr_accessor key_agreement_algorithm: String?
+      attr_accessor key_origin: String?
+    end
+
+    class DescribeCustomKeyStoresRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_key_store_id: String,
+        ?custom_key_store_name: String,
+        ?limit: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_key_store_id: String?
+      attr_accessor custom_key_store_name: String?
+      attr_accessor limit: Integer?
+      attr_accessor marker: String?
+    end
+
+    class DescribeCustomKeyStoresResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_key_stores: Array[Types::CustomKeyStoresListEntry],
+        ?next_marker: String,
+        ?truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_key_stores: Array[Types::CustomKeyStoresListEntry]?
+      attr_accessor next_marker: String?
+      attr_accessor truncated: bool?
+    end
+
+    class DescribeKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?grant_tokens: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor grant_tokens: Array[String]?
+    end
+
+    class DescribeKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_metadata: Types::KeyMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_metadata: Types::KeyMetadata?
+    end
+
+    class DisableKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+    end
+
+    class DisableKeyRotationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+    end
+
+    class DisabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DisconnectCustomKeyStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_key_store_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_key_store_id: String?
+    end
+
+    class DisconnectCustomKeyStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DryRunOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EnableKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+    end
+
+    class EnableKeyRotationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?rotation_period_in_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor rotation_period_in_days: Integer?
+    end
+
+    class EncryptRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?plaintext: String,
+        ?encryption_context: Hash[String, String],
+        ?grant_tokens: Array[String],
+        ?encryption_algorithm: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor plaintext: String?
+      attr_accessor encryption_context: Hash[String, String]?
+      attr_accessor grant_tokens: Array[String]?
+      attr_accessor encryption_algorithm: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class EncryptResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ciphertext_blob: String,
+        ?key_id: String,
+        ?encryption_algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ciphertext_blob: String?
+      attr_accessor key_id: String?
+      attr_accessor encryption_algorithm: String?
+    end
+
+    module EncryptionAlgorithmSpec
+      SYMMETRIC_DEFAULT: String
+      RSAES_OAEP_SHA_1: String
+      RSAES_OAEP_SHA_256: String
+      SM2PKE: String
+    end
+
+    module ExpirationModelType
+      KEY_MATERIAL_EXPIRES: String
+      KEY_MATERIAL_DOES_NOT_EXPIRE: String
+    end
+
+    class ExpiredImportTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GenerateDataKeyPairRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_context: Hash[String, String],
+        ?key_id: String,
+        ?key_pair_spec: String,
+        ?grant_tokens: Array[String],
+        ?recipient: Types::RecipientInfo,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_context: Hash[String, String]?
+      attr_accessor key_id: String?
+      attr_accessor key_pair_spec: String?
+      attr_accessor grant_tokens: Array[String]?
+      attr_accessor recipient: Types::RecipientInfo?
+      attr_accessor dry_run: bool?
+    end
+
+    class GenerateDataKeyPairResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?private_key_ciphertext_blob: String,
+        ?private_key_plaintext: String,
+        ?public_key: String,
+        ?key_id: String,
+        ?key_pair_spec: String,
+        ?ciphertext_for_recipient: String,
+        ?key_material_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor private_key_ciphertext_blob: String?
+      attr_accessor private_key_plaintext: String?
+      attr_accessor public_key: String?
+      attr_accessor key_id: String?
+      attr_accessor key_pair_spec: String?
+      attr_accessor ciphertext_for_recipient: String?
+      attr_accessor key_material_id: String?
+    end
+
+    class GenerateDataKeyPairWithoutPlaintextRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_context: Hash[String, String],
+        ?key_id: String,
+        ?key_pair_spec: String,
+        ?grant_tokens: Array[String],
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_context: Hash[String, String]?
+      attr_accessor key_id: String?
+      attr_accessor key_pair_spec: String?
+      attr_accessor grant_tokens: Array[String]?
+      attr_accessor dry_run: bool?
+    end
+
+    class GenerateDataKeyPairWithoutPlaintextResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?private_key_ciphertext_blob: String,
+        ?public_key: String,
+        ?key_id: String,
+        ?key_pair_spec: String,
+        ?key_material_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor private_key_ciphertext_blob: String?
+      attr_accessor public_key: String?
+      attr_accessor key_id: String?
+      attr_accessor key_pair_spec: String?
+      attr_accessor key_material_id: String?
+    end
+
+    class GenerateDataKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?encryption_context: Hash[String, String],
+        ?number_of_bytes: Integer,
+        ?key_spec: String,
+        ?grant_tokens: Array[String],
+        ?recipient: Types::RecipientInfo,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor encryption_context: Hash[String, String]?
+      attr_accessor number_of_bytes: Integer?
+      attr_accessor key_spec: String?
+      attr_accessor grant_tokens: Array[String]?
+      attr_accessor recipient: Types::RecipientInfo?
+      attr_accessor dry_run: bool?
+    end
+
+    class GenerateDataKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ciphertext_blob: String,
+        ?plaintext: String,
+        ?key_id: String,
+        ?ciphertext_for_recipient: String,
+        ?key_material_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ciphertext_blob: String?
+      attr_accessor plaintext: String?
+      attr_accessor key_id: String?
+      attr_accessor ciphertext_for_recipient: String?
+      attr_accessor key_material_id: String?
+    end
+
+    class GenerateDataKeyWithoutPlaintextRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?encryption_context: Hash[String, String],
+        ?key_spec: String,
+        ?number_of_bytes: Integer,
+        ?grant_tokens: Array[String],
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor encryption_context: Hash[String, String]?
+      attr_accessor key_spec: String?
+      attr_accessor number_of_bytes: Integer?
+      attr_accessor grant_tokens: Array[String]?
+      attr_accessor dry_run: bool?
+    end
+
+    class GenerateDataKeyWithoutPlaintextResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ciphertext_blob: String,
+        ?key_id: String,
+        ?key_material_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ciphertext_blob: String?
+      attr_accessor key_id: String?
+      attr_accessor key_material_id: String?
+    end
+
+    class GenerateMacRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?key_id: String,
+        ?mac_algorithm: String,
+        ?grant_tokens: Array[String],
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor key_id: String?
+      attr_accessor mac_algorithm: String?
+      attr_accessor grant_tokens: Array[String]?
+      attr_accessor dry_run: bool?
+    end
+
+    class GenerateMacResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mac: String,
+        ?mac_algorithm: String,
+        ?key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mac: String?
+      attr_accessor mac_algorithm: String?
+      attr_accessor key_id: String?
+    end
+
+    class GenerateRandomRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?number_of_bytes: Integer,
+        ?custom_key_store_id: String,
+        ?recipient: Types::RecipientInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor number_of_bytes: Integer?
+      attr_accessor custom_key_store_id: String?
+      attr_accessor recipient: Types::RecipientInfo?
+    end
+
+    class GenerateRandomResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?plaintext: String,
+        ?ciphertext_for_recipient: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor plaintext: String?
+      attr_accessor ciphertext_for_recipient: String?
+    end
+
+    class GetKeyPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?policy_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor policy_name: String?
+    end
+
+    class GetKeyPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+        ?policy_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+      attr_accessor policy_name: String?
+    end
+
+    class GetKeyRotationStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+    end
+
+    class GetKeyRotationStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_rotation_enabled: bool,
+        ?key_id: String,
+        ?rotation_period_in_days: Integer,
+        ?next_rotation_date: Time,
+        ?on_demand_rotation_start_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_rotation_enabled: bool?
+      attr_accessor key_id: String?
+      attr_accessor rotation_period_in_days: Integer?
+      attr_accessor next_rotation_date: Time?
+      attr_accessor on_demand_rotation_start_date: Time?
+    end
+
+    class GetParametersForImportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?wrapping_algorithm: String,
+        ?wrapping_key_spec: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor wrapping_algorithm: String?
+      attr_accessor wrapping_key_spec: String?
+    end
+
+    class GetParametersForImportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?import_token: String,
+        ?public_key: String,
+        ?parameters_valid_to: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor import_token: String?
+      attr_accessor public_key: String?
+      attr_accessor parameters_valid_to: Time?
+    end
+
+    class GetPublicKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?grant_tokens: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor grant_tokens: Array[String]?
+    end
+
+    class GetPublicKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?public_key: String,
+        ?customer_master_key_spec: String,
+        ?key_spec: String,
+        ?key_usage: String,
+        ?encryption_algorithms: Array[String],
+        ?signing_algorithms: Array[String],
+        ?key_agreement_algorithms: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor public_key: String?
+      attr_accessor customer_master_key_spec: String?
+      attr_accessor key_spec: String?
+      attr_accessor key_usage: String?
+      attr_accessor encryption_algorithms: Array[String]?
+      attr_accessor signing_algorithms: Array[String]?
+      attr_accessor key_agreement_algorithms: Array[String]?
+    end
+
+    class GrantConstraints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_context_subset: Hash[String, String],
+        ?encryption_context_equals: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_context_subset: Hash[String, String]?
+      attr_accessor encryption_context_equals: Hash[String, String]?
+    end
+
+    class GrantListEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?grant_id: String,
+        ?name: String,
+        ?creation_date: Time,
+        ?grantee_principal: String,
+        ?retiring_principal: String,
+        ?issuing_account: String,
+        ?operations: Array[String],
+        ?constraints: Types::GrantConstraints,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor grant_id: String?
+      attr_accessor name: String?
+      attr_accessor creation_date: Time?
+      attr_accessor grantee_principal: String?
+      attr_accessor retiring_principal: String?
+      attr_accessor issuing_account: String?
+      attr_accessor operations: Array[String]?
+      attr_accessor constraints: Types::GrantConstraints?
+    end
+
+    module GrantOperation
+      Decrypt: String
+      Encrypt: String
+      GenerateDataKey: String
+      GenerateDataKeyWithoutPlaintext: String
+      ReEncryptFrom: String
+      ReEncryptTo: String
+      Sign: String
+      Verify: String
+      GetPublicKey: String
+      CreateGrant: String
+      RetireGrant: String
+      DescribeKey: String
+      GenerateDataKeyPair: String
+      GenerateDataKeyPairWithoutPlaintext: String
+      GenerateMac: String
+      VerifyMac: String
+      DeriveSharedSecret: String
+    end
+
+    class ImportKeyMaterialRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?import_token: String,
+        ?encrypted_key_material: String,
+        ?valid_to: Time,
+        ?expiration_model: String,
+        ?import_type: String,
+        ?key_material_description: String,
+        ?key_material_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor import_token: String?
+      attr_accessor encrypted_key_material: String?
+      attr_accessor valid_to: Time?
+      attr_accessor expiration_model: String?
+      attr_accessor import_type: String?
+      attr_accessor key_material_description: String?
+      attr_accessor key_material_id: String?
+    end
+
+    class ImportKeyMaterialResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?key_material_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor key_material_id: String?
+    end
+
+    module ImportState
+      IMPORTED: String
+      PENDING_IMPORT: String
+    end
+
+    module ImportType
+      NEW_KEY_MATERIAL: String
+      EXISTING_KEY_MATERIAL: String
+    end
+
+    module IncludeKeyMaterial
+      ALL_KEY_MATERIAL: String
+      ROTATIONS_ONLY: String
+    end
+
+    class IncorrectKeyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IncorrectKeyMaterialException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IncorrectTrustAnchorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidAliasNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidArnException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidCiphertextException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidGrantIdException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidGrantTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidImportTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidKeyUsageException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidMarkerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KMSInternalException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KMSInvalidMacException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KMSInvalidSignatureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KMSInvalidStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module KeyAgreementAlgorithmSpec
+      ECDH: String
+    end
+
+    module KeyEncryptionMechanism
+      RSAES_OAEP_SHA_256: String
+    end
+
+    class KeyListEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor key_arn: String?
+    end
+
+    module KeyManagerType
+      AWS: String
+      CUSTOMER: String
+    end
+
+    module KeyMaterialState
+      NON_CURRENT: String
+      CURRENT: String
+      PENDING_ROTATION: String
+    end
+
+    class KeyMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_account_id: String,
+        ?key_id: String,
+        ?arn: String,
+        ?creation_date: Time,
+        ?enabled: bool,
+        ?description: String,
+        ?key_usage: String,
+        ?key_state: String,
+        ?deletion_date: Time,
+        ?valid_to: Time,
+        ?origin: String,
+        ?custom_key_store_id: String,
+        ?cloud_hsm_cluster_id: String,
+        ?expiration_model: String,
+        ?key_manager: String,
+        ?customer_master_key_spec: String,
+        ?key_spec: String,
+        ?encryption_algorithms: Array[String],
+        ?signing_algorithms: Array[String],
+        ?key_agreement_algorithms: Array[String],
+        ?multi_region: bool,
+        ?multi_region_configuration: Types::MultiRegionConfiguration,
+        ?pending_deletion_window_in_days: Integer,
+        ?mac_algorithms: Array[String],
+        ?xks_key_configuration: Types::XksKeyConfigurationType,
+        ?current_key_material_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_account_id: String?
+      attr_accessor key_id: String?
+      attr_accessor arn: String?
+      attr_accessor creation_date: Time?
+      attr_accessor enabled: bool?
+      attr_accessor description: String?
+      attr_accessor key_usage: String?
+      attr_accessor key_state: String?
+      attr_accessor deletion_date: Time?
+      attr_accessor valid_to: Time?
+      attr_accessor origin: String?
+      attr_accessor custom_key_store_id: String?
+      attr_accessor cloud_hsm_cluster_id: String?
+      attr_accessor expiration_model: String?
+      attr_accessor key_manager: String?
+      attr_accessor customer_master_key_spec: String?
+      attr_accessor key_spec: String?
+      attr_accessor encryption_algorithms: Array[String]?
+      attr_accessor signing_algorithms: Array[String]?
+      attr_accessor key_agreement_algorithms: Array[String]?
+      attr_accessor multi_region: bool?
+      attr_accessor multi_region_configuration: Types::MultiRegionConfiguration?
+      attr_accessor pending_deletion_window_in_days: Integer?
+      attr_accessor mac_algorithms: Array[String]?
+      attr_accessor xks_key_configuration: Types::XksKeyConfigurationType?
+      attr_accessor current_key_material_id: String?
+    end
+
+    module KeySpec
+      RSA_2048: String
+      RSA_3072: String
+      RSA_4096: String
+      ECC_NIST_P256: String
+      ECC_NIST_P384: String
+      ECC_NIST_P521: String
+      ECC_SECG_P256K1: String
+      SYMMETRIC_DEFAULT: String
+      HMAC_224: String
+      HMAC_256: String
+      HMAC_384: String
+      HMAC_512: String
+      SM2: String
+      ML_DSA_44: String
+      ML_DSA_65: String
+      ML_DSA_87: String
+    end
+
+    module KeyState
+      Creating: String
+      Enabled: String
+      Disabled: String
+      PendingDeletion: String
+      PendingImport: String
+      PendingReplicaDeletion: String
+      Unavailable: String
+      Updating: String
+    end
+
+    class KeyUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module KeyUsageType
+      SIGN_VERIFY: String
+      ENCRYPT_DECRYPT: String
+      GENERATE_VERIFY_MAC: String
+      KEY_AGREEMENT: String
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAliasesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?limit: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor limit: Integer?
+      attr_accessor marker: String?
+    end
+
+    class ListAliasesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aliases: Array[Types::AliasListEntry],
+        ?next_marker: String,
+        ?truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aliases: Array[Types::AliasListEntry]?
+      attr_accessor next_marker: String?
+      attr_accessor truncated: bool?
+    end
+
+    class ListGrantsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grants: Array[Types::GrantListEntry],
+        ?next_marker: String,
+        ?truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grants: Array[Types::GrantListEntry]?
+      attr_accessor next_marker: String?
+      attr_accessor truncated: bool?
+    end
+
+    class ListGrantsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit: Integer,
+        ?marker: String,
+        ?key_id: String,
+        ?grant_id: String,
+        ?grantee_principal: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit: Integer?
+      attr_accessor marker: String?
+      attr_accessor key_id: String?
+      attr_accessor grant_id: String?
+      attr_accessor grantee_principal: String?
+    end
+
+    class ListKeyPoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?limit: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor limit: Integer?
+      attr_accessor marker: String?
+    end
+
+    class ListKeyPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_names: Array[String],
+        ?next_marker: String,
+        ?truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_names: Array[String]?
+      attr_accessor next_marker: String?
+      attr_accessor truncated: bool?
+    end
+
+    class ListKeyRotationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?include_key_material: String,
+        ?limit: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor include_key_material: String?
+      attr_accessor limit: Integer?
+      attr_accessor marker: String?
+    end
+
+    class ListKeyRotationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotations: Array[Types::RotationsListEntry],
+        ?next_marker: String,
+        ?truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotations: Array[Types::RotationsListEntry]?
+      attr_accessor next_marker: String?
+      attr_accessor truncated: bool?
+    end
+
+    class ListKeysRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit: Integer?
+      attr_accessor marker: String?
+    end
+
+    class ListKeysResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keys: Array[Types::KeyListEntry],
+        ?next_marker: String,
+        ?truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keys: Array[Types::KeyListEntry]?
+      attr_accessor next_marker: String?
+      attr_accessor truncated: bool?
+    end
+
+    class ListResourceTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?limit: Integer,
+        ?marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor limit: Integer?
+      attr_accessor marker: String?
+    end
+
+    class ListResourceTagsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?next_marker: String,
+        ?truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor next_marker: String?
+      attr_accessor truncated: bool?
+    end
+
+    class ListRetirableGrantsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grants: Array[Types::GrantListEntry],
+        ?next_marker: String,
+        ?truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grants: Array[Types::GrantListEntry]?
+      attr_accessor next_marker: String?
+      attr_accessor truncated: bool?
+    end
+
+    class ListRetirableGrantsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit: Integer,
+        ?marker: String,
+        ?retiring_principal: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit: Integer?
+      attr_accessor marker: String?
+      attr_accessor retiring_principal: String?
+    end
+
+    module MacAlgorithmSpec
+      HMAC_SHA_224: String
+      HMAC_SHA_256: String
+      HMAC_SHA_384: String
+      HMAC_SHA_512: String
+    end
+
+    class MalformedPolicyDocumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module MessageType
+      RAW: String
+      DIGEST: String
+      EXTERNAL_MU: String
+    end
+
+    class MultiRegionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?multi_region_key_type: String,
+        ?primary_key: Types::MultiRegionKey,
+        ?replica_keys: Array[Types::MultiRegionKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor multi_region_key_type: String?
+      attr_accessor primary_key: Types::MultiRegionKey?
+      attr_accessor replica_keys: Array[Types::MultiRegionKey]?
+    end
+
+    class MultiRegionKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor region: String?
+    end
+
+    module MultiRegionKeyType
+      PRIMARY: String
+      REPLICA: String
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module OriginType
+      AWS_KMS: String
+      EXTERNAL: String
+      AWS_CLOUDHSM: String
+      EXTERNAL_KEY_STORE: String
+    end
+
+    class PutKeyPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?policy_name: String,
+        ?policy: String,
+        ?bypass_policy_lockout_safety_check: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor policy_name: String?
+      attr_accessor policy: String?
+      attr_accessor bypass_policy_lockout_safety_check: bool?
+    end
+
+    class ReEncryptRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ciphertext_blob: String,
+        ?source_encryption_context: Hash[String, String],
+        ?source_key_id: String,
+        ?destination_key_id: String,
+        ?destination_encryption_context: Hash[String, String],
+        ?source_encryption_algorithm: String,
+        ?destination_encryption_algorithm: String,
+        ?grant_tokens: Array[String],
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ciphertext_blob: String?
+      attr_accessor source_encryption_context: Hash[String, String]?
+      attr_accessor source_key_id: String?
+      attr_accessor destination_key_id: String?
+      attr_accessor destination_encryption_context: Hash[String, String]?
+      attr_accessor source_encryption_algorithm: String?
+      attr_accessor destination_encryption_algorithm: String?
+      attr_accessor grant_tokens: Array[String]?
+      attr_accessor dry_run: bool?
+    end
+
+    class ReEncryptResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ciphertext_blob: String,
+        ?source_key_id: String,
+        ?key_id: String,
+        ?source_encryption_algorithm: String,
+        ?destination_encryption_algorithm: String,
+        ?source_key_material_id: String,
+        ?destination_key_material_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ciphertext_blob: String?
+      attr_accessor source_key_id: String?
+      attr_accessor key_id: String?
+      attr_accessor source_encryption_algorithm: String?
+      attr_accessor destination_encryption_algorithm: String?
+      attr_accessor source_key_material_id: String?
+      attr_accessor destination_key_material_id: String?
+    end
+
+    class RecipientInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_encryption_algorithm: String,
+        ?attestation_document: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_encryption_algorithm: String?
+      attr_accessor attestation_document: String?
+    end
+
+    class ReplicateKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?replica_region: String,
+        ?policy: String,
+        ?bypass_policy_lockout_safety_check: bool,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor replica_region: String?
+      attr_accessor policy: String?
+      attr_accessor bypass_policy_lockout_safety_check: bool?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ReplicateKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replica_key_metadata: Types::KeyMetadata,
+        ?replica_policy: String,
+        ?replica_tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replica_key_metadata: Types::KeyMetadata?
+      attr_accessor replica_policy: String?
+      attr_accessor replica_tags: Array[Types::Tag]?
+    end
+
+    class RetireGrantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?grant_token: String,
+        ?key_id: String,
+        ?grant_id: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor grant_token: String?
+      attr_accessor key_id: String?
+      attr_accessor grant_id: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class RevokeGrantRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?grant_id: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor grant_id: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class RotateKeyOnDemandRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+    end
+
+    class RotateKeyOnDemandResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+    end
+
+    module RotationType
+      AUTOMATIC: String
+      ON_DEMAND: String
+    end
+
+    class RotationsListEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?key_material_id: String,
+        ?key_material_description: String,
+        ?import_state: String,
+        ?key_material_state: String,
+        ?expiration_model: String,
+        ?valid_to: Time,
+        ?rotation_date: Time,
+        ?rotation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor key_material_id: String?
+      attr_accessor key_material_description: String?
+      attr_accessor import_state: String?
+      attr_accessor key_material_state: String?
+      attr_accessor expiration_model: String?
+      attr_accessor valid_to: Time?
+      attr_accessor rotation_date: Time?
+      attr_accessor rotation_type: String?
+    end
+
+    class ScheduleKeyDeletionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?pending_window_in_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor pending_window_in_days: Integer?
+    end
+
+    class ScheduleKeyDeletionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?deletion_date: Time,
+        ?key_state: String,
+        ?pending_window_in_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor deletion_date: Time?
+      attr_accessor key_state: String?
+      attr_accessor pending_window_in_days: Integer?
+    end
+
+    class SignRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?message: String,
+        ?message_type: String,
+        ?grant_tokens: Array[String],
+        ?signing_algorithm: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor message: String?
+      attr_accessor message_type: String?
+      attr_accessor grant_tokens: Array[String]?
+      attr_accessor signing_algorithm: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class SignResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?signature: String,
+        ?signing_algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor signature: String?
+      attr_accessor signing_algorithm: String?
+    end
+
+    module SigningAlgorithmSpec
+      RSASSA_PSS_SHA_256: String
+      RSASSA_PSS_SHA_384: String
+      RSASSA_PSS_SHA_512: String
+      RSASSA_PKCS1_V1_5_SHA_256: String
+      RSASSA_PKCS1_V1_5_SHA_384: String
+      RSASSA_PKCS1_V1_5_SHA_512: String
+      ECDSA_SHA_256: String
+      ECDSA_SHA_384: String
+      ECDSA_SHA_512: String
+      SM2DSA: String
+      ML_DSA_SHAKE_256: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_key: String,
+        ?tag_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_key: String?
+      attr_accessor tag_value: String?
+    end
+
+    class TagException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class UnsupportedOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateAliasRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias_name: String,
+        ?target_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias_name: String?
+      attr_accessor target_key_id: String?
+    end
+
+    class UpdateCustomKeyStoreRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_key_store_id: String,
+        ?new_custom_key_store_name: String,
+        ?key_store_password: String,
+        ?cloud_hsm_cluster_id: String,
+        ?xks_proxy_uri_endpoint: String,
+        ?xks_proxy_uri_path: String,
+        ?xks_proxy_vpc_endpoint_service_name: String,
+        ?xks_proxy_authentication_credential: Types::XksProxyAuthenticationCredentialType,
+        ?xks_proxy_connectivity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_key_store_id: String?
+      attr_accessor new_custom_key_store_name: String?
+      attr_accessor key_store_password: String?
+      attr_accessor cloud_hsm_cluster_id: String?
+      attr_accessor xks_proxy_uri_endpoint: String?
+      attr_accessor xks_proxy_uri_path: String?
+      attr_accessor xks_proxy_vpc_endpoint_service_name: String?
+      attr_accessor xks_proxy_authentication_credential: Types::XksProxyAuthenticationCredentialType?
+      attr_accessor xks_proxy_connectivity: String?
+    end
+
+    class UpdateCustomKeyStoreResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateKeyDescriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor description: String?
+    end
+
+    class UpdatePrimaryRegionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?primary_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor primary_region: String?
+    end
+
+    class VerifyMacRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?key_id: String,
+        ?mac_algorithm: String,
+        ?mac: String,
+        ?grant_tokens: Array[String],
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor key_id: String?
+      attr_accessor mac_algorithm: String?
+      attr_accessor mac: String?
+      attr_accessor grant_tokens: Array[String]?
+      attr_accessor dry_run: bool?
+    end
+
+    class VerifyMacResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?mac_valid: bool,
+        ?mac_algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor mac_valid: bool?
+      attr_accessor mac_algorithm: String?
+    end
+
+    class VerifyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?message: String,
+        ?message_type: String,
+        ?signature: String,
+        ?signing_algorithm: String,
+        ?grant_tokens: Array[String],
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor message: String?
+      attr_accessor message_type: String?
+      attr_accessor signature: String?
+      attr_accessor signing_algorithm: String?
+      attr_accessor grant_tokens: Array[String]?
+      attr_accessor dry_run: bool?
+    end
+
+    class VerifyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_id: String,
+        ?signature_valid: bool,
+        ?signing_algorithm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_id: String?
+      attr_accessor signature_valid: bool?
+      attr_accessor signing_algorithm: String?
+    end
+
+    module WrappingKeySpec
+      RSA_2048: String
+      RSA_3072: String
+      RSA_4096: String
+      SM2: String
+    end
+
+    class XksKeyAlreadyInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class XksKeyConfigurationType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class XksKeyInvalidConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class XksKeyNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class XksProxyAuthenticationCredentialType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_key_id: String,
+        ?raw_secret_access_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_key_id: String?
+      attr_accessor raw_secret_access_key: String?
+    end
+
+    class XksProxyConfigurationType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connectivity: String,
+        ?access_key_id: String,
+        ?uri_endpoint: String,
+        ?uri_path: String,
+        ?vpc_endpoint_service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connectivity: String?
+      attr_accessor access_key_id: String?
+      attr_accessor uri_endpoint: String?
+      attr_accessor uri_path: String?
+      attr_accessor vpc_endpoint_service_name: String?
+    end
+
+    module XksProxyConnectivityType
+      PUBLIC_ENDPOINT: String
+      VPC_ENDPOINT_SERVICE: String
+    end
+
+    class XksProxyIncorrectAuthenticationCredentialException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class XksProxyInvalidConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class XksProxyInvalidResponseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class XksProxyUriEndpointInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class XksProxyUriInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class XksProxyUriUnreachableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class XksProxyVpcEndpointServiceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class XksProxyVpcEndpointServiceInvalidConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class XksProxyVpcEndpointServiceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

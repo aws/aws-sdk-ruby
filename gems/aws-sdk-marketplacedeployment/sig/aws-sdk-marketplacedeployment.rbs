@@ -1,0 +1,5 @@
+  module Aws
+    module MarketplaceDeployment
+      VERSION: String
+    end
+  end

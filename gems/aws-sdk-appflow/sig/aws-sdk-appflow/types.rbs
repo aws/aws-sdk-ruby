@@ -1,0 +1,3770 @@
+module Aws::Appflow
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AggregationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregation_type: String,
+        ?target_file_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregation_type: String?
+      attr_accessor target_file_size: Integer?
+    end
+
+    module AggregationType
+      NONE: String
+      SINGLE_FILE: String
+    end
+
+    module AmplitudeConnectorOperator
+      BETWEEN: String
+    end
+
+    class AmplitudeConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_key: String,
+        ?secret_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_key: String?
+      attr_accessor secret_key: String?
+    end
+
+    class AmplitudeConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AmplitudeMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AmplitudeSourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+    end
+
+    class ApiKeyCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_key: String,
+        ?api_secret_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_key: String?
+      attr_accessor api_secret_key: String?
+    end
+
+    class AuthParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?is_required: bool,
+        ?label: String,
+        ?description: String,
+        ?is_sensitive_field: bool,
+        ?connector_supplied_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor is_required: bool?
+      attr_accessor label: String?
+      attr_accessor description: String?
+      attr_accessor is_sensitive_field: bool?
+      attr_accessor connector_supplied_values: Array[String]?
+    end
+
+    class AuthenticationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_basic_auth_supported: bool,
+        ?is_api_key_auth_supported: bool,
+        ?is_o_auth2_supported: bool,
+        ?is_custom_auth_supported: bool,
+        ?o_auth2_defaults: Types::OAuth2Defaults,
+        ?custom_auth_configs: Array[Types::CustomAuthConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_basic_auth_supported: bool?
+      attr_accessor is_api_key_auth_supported: bool?
+      attr_accessor is_o_auth2_supported: bool?
+      attr_accessor is_custom_auth_supported: bool?
+      attr_accessor o_auth2_defaults: Types::OAuth2Defaults?
+      attr_accessor custom_auth_configs: Array[Types::CustomAuthConfig]?
+    end
+
+    module AuthenticationType
+      OAUTH2: String
+      APIKEY: String
+      BASIC: String
+      CUSTOM: String
+    end
+
+    class BasicAuthCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username: String,
+        ?password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username: String?
+      attr_accessor password: String?
+    end
+
+    class CancelFlowExecutionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_name: String,
+        ?execution_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_name: String?
+      attr_accessor execution_ids: Array[String]?
+    end
+
+    class CancelFlowExecutionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invalid_executions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invalid_executions: Array[String]?
+    end
+
+    module CatalogType
+      GLUE: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ConnectionMode
+      PUBLIC: String
+      PRIVATE: String
+    end
+
+    class ConnectorAuthenticationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConnectorConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?can_use_as_source: bool,
+        ?can_use_as_destination: bool,
+        ?supported_destination_connectors: Array[String],
+        ?supported_scheduling_frequencies: Array[String],
+        ?is_private_link_enabled: bool,
+        ?is_private_link_endpoint_url_required: bool,
+        ?supported_trigger_types: Array[String],
+        ?connector_metadata: Types::ConnectorMetadata,
+        ?connector_type: String,
+        ?connector_label: String,
+        ?connector_description: String,
+        ?connector_owner: String,
+        ?connector_name: String,
+        ?connector_version: String,
+        ?connector_arn: String,
+        ?connector_modes: Array[String],
+        ?authentication_config: Types::AuthenticationConfig,
+        ?connector_runtime_settings: Array[Types::ConnectorRuntimeSetting],
+        ?supported_api_versions: Array[String],
+        ?supported_operators: Array[String],
+        ?supported_write_operations: Array[String],
+        ?connector_provisioning_type: String,
+        ?connector_provisioning_config: Types::ConnectorProvisioningConfig,
+        ?logo_url: String,
+        ?registered_at: Time,
+        ?registered_by: String,
+        ?supported_data_transfer_types: Array[String],
+        ?supported_data_transfer_apis: Array[Types::DataTransferApi],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor can_use_as_source: bool?
+      attr_accessor can_use_as_destination: bool?
+      attr_accessor supported_destination_connectors: Array[String]?
+      attr_accessor supported_scheduling_frequencies: Array[String]?
+      attr_accessor is_private_link_enabled: bool?
+      attr_accessor is_private_link_endpoint_url_required: bool?
+      attr_accessor supported_trigger_types: Array[String]?
+      attr_accessor connector_metadata: Types::ConnectorMetadata?
+      attr_accessor connector_type: String?
+      attr_accessor connector_label: String?
+      attr_accessor connector_description: String?
+      attr_accessor connector_owner: String?
+      attr_accessor connector_name: String?
+      attr_accessor connector_version: String?
+      attr_accessor connector_arn: String?
+      attr_accessor connector_modes: Array[String]?
+      attr_accessor authentication_config: Types::AuthenticationConfig?
+      attr_accessor connector_runtime_settings: Array[Types::ConnectorRuntimeSetting]?
+      attr_accessor supported_api_versions: Array[String]?
+      attr_accessor supported_operators: Array[String]?
+      attr_accessor supported_write_operations: Array[String]?
+      attr_accessor connector_provisioning_type: String?
+      attr_accessor connector_provisioning_config: Types::ConnectorProvisioningConfig?
+      attr_accessor logo_url: String?
+      attr_accessor registered_at: Time?
+      attr_accessor registered_by: String?
+      attr_accessor supported_data_transfer_types: Array[String]?
+      attr_accessor supported_data_transfer_apis: Array[Types::DataTransferApi]?
+    end
+
+    class ConnectorDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_description: String,
+        ?connector_name: String,
+        ?connector_owner: String,
+        ?connector_version: String,
+        ?application_type: String,
+        ?connector_type: String,
+        ?connector_label: String,
+        ?registered_at: Time,
+        ?registered_by: String,
+        ?connector_provisioning_type: String,
+        ?connector_modes: Array[String],
+        ?supported_data_transfer_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_description: String?
+      attr_accessor connector_name: String?
+      attr_accessor connector_owner: String?
+      attr_accessor connector_version: String?
+      attr_accessor application_type: String?
+      attr_accessor connector_type: String?
+      attr_accessor connector_label: String?
+      attr_accessor registered_at: Time?
+      attr_accessor registered_by: String?
+      attr_accessor connector_provisioning_type: String?
+      attr_accessor connector_modes: Array[String]?
+      attr_accessor supported_data_transfer_types: Array[String]?
+    end
+
+    class ConnectorEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?label: String,
+        ?has_nested_entities: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor label: String?
+      attr_accessor has_nested_entities: bool?
+    end
+
+    class ConnectorEntityField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?parent_identifier: String,
+        ?label: String,
+        ?is_primary_key: bool,
+        ?default_value: String,
+        ?is_deprecated: bool,
+        ?supported_field_type_details: Types::SupportedFieldTypeDetails,
+        ?description: String,
+        ?source_properties: Types::SourceFieldProperties,
+        ?destination_properties: Types::DestinationFieldProperties,
+        ?custom_properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor parent_identifier: String?
+      attr_accessor label: String?
+      attr_accessor is_primary_key: bool?
+      attr_accessor default_value: String?
+      attr_accessor is_deprecated: bool?
+      attr_accessor supported_field_type_details: Types::SupportedFieldTypeDetails?
+      attr_accessor description: String?
+      attr_accessor source_properties: Types::SourceFieldProperties?
+      attr_accessor destination_properties: Types::DestinationFieldProperties?
+      attr_accessor custom_properties: Hash[String, String]?
+    end
+
+    class ConnectorMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amplitude: Types::AmplitudeMetadata,
+        ?datadog: Types::DatadogMetadata,
+        ?dynatrace: Types::DynatraceMetadata,
+        ?google_analytics: Types::GoogleAnalyticsMetadata,
+        ?infor_nexus: Types::InforNexusMetadata,
+        ?marketo: Types::MarketoMetadata,
+        ?redshift: Types::RedshiftMetadata,
+        ?s3: Types::S3Metadata,
+        ?salesforce: Types::SalesforceMetadata,
+        ?service_now: Types::ServiceNowMetadata,
+        ?singular: Types::SingularMetadata,
+        ?slack: Types::SlackMetadata,
+        ?snowflake: Types::SnowflakeMetadata,
+        ?trendmicro: Types::TrendmicroMetadata,
+        ?veeva: Types::VeevaMetadata,
+        ?zendesk: Types::ZendeskMetadata,
+        ?event_bridge: Types::EventBridgeMetadata,
+        ?upsolver: Types::UpsolverMetadata,
+        ?customer_profiles: Types::CustomerProfilesMetadata,
+        ?honeycode: Types::HoneycodeMetadata,
+        ?sapo_data: Types::SAPODataMetadata,
+        ?pardot: Types::PardotMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amplitude: Types::AmplitudeMetadata?
+      attr_accessor datadog: Types::DatadogMetadata?
+      attr_accessor dynatrace: Types::DynatraceMetadata?
+      attr_accessor google_analytics: Types::GoogleAnalyticsMetadata?
+      attr_accessor infor_nexus: Types::InforNexusMetadata?
+      attr_accessor marketo: Types::MarketoMetadata?
+      attr_accessor redshift: Types::RedshiftMetadata?
+      attr_accessor s3: Types::S3Metadata?
+      attr_accessor salesforce: Types::SalesforceMetadata?
+      attr_accessor service_now: Types::ServiceNowMetadata?
+      attr_accessor singular: Types::SingularMetadata?
+      attr_accessor slack: Types::SlackMetadata?
+      attr_accessor snowflake: Types::SnowflakeMetadata?
+      attr_accessor trendmicro: Types::TrendmicroMetadata?
+      attr_accessor veeva: Types::VeevaMetadata?
+      attr_accessor zendesk: Types::ZendeskMetadata?
+      attr_accessor event_bridge: Types::EventBridgeMetadata?
+      attr_accessor upsolver: Types::UpsolverMetadata?
+      attr_accessor customer_profiles: Types::CustomerProfilesMetadata?
+      attr_accessor honeycode: Types::HoneycodeMetadata?
+      attr_accessor sapo_data: Types::SAPODataMetadata?
+      attr_accessor pardot: Types::PardotMetadata?
+    end
+
+    class ConnectorOAuthRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auth_code: String,
+        ?redirect_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auth_code: String?
+      attr_accessor redirect_uri: String?
+    end
+
+    class ConnectorOperator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amplitude: String,
+        ?datadog: String,
+        ?dynatrace: String,
+        ?google_analytics: String,
+        ?infor_nexus: String,
+        ?marketo: String,
+        ?s3: String,
+        ?salesforce: String,
+        ?service_now: String,
+        ?singular: String,
+        ?slack: String,
+        ?trendmicro: String,
+        ?veeva: String,
+        ?zendesk: String,
+        ?sapo_data: String,
+        ?custom_connector: String,
+        ?pardot: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amplitude: String?
+      attr_accessor datadog: String?
+      attr_accessor dynatrace: String?
+      attr_accessor google_analytics: String?
+      attr_accessor infor_nexus: String?
+      attr_accessor marketo: String?
+      attr_accessor s3: String?
+      attr_accessor salesforce: String?
+      attr_accessor service_now: String?
+      attr_accessor singular: String?
+      attr_accessor slack: String?
+      attr_accessor trendmicro: String?
+      attr_accessor veeva: String?
+      attr_accessor zendesk: String?
+      attr_accessor sapo_data: String?
+      attr_accessor custom_connector: String?
+      attr_accessor pardot: String?
+    end
+
+    class ConnectorProfile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_profile_arn: String,
+        ?connector_profile_name: String,
+        ?connector_type: String,
+        ?connector_label: String,
+        ?connection_mode: String,
+        ?credentials_arn: String,
+        ?connector_profile_properties: Types::ConnectorProfileProperties,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?private_connection_provisioning_state: Types::PrivateConnectionProvisioningState,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_profile_arn: String?
+      attr_accessor connector_profile_name: String?
+      attr_accessor connector_type: String?
+      attr_accessor connector_label: String?
+      attr_accessor connection_mode: String?
+      attr_accessor credentials_arn: String?
+      attr_accessor connector_profile_properties: Types::ConnectorProfileProperties?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor private_connection_provisioning_state: Types::PrivateConnectionProvisioningState?
+    end
+
+    class ConnectorProfileConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_profile_properties: Types::ConnectorProfileProperties,
+        ?connector_profile_credentials: Types::ConnectorProfileCredentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_profile_properties: Types::ConnectorProfileProperties?
+      attr_accessor connector_profile_credentials: Types::ConnectorProfileCredentials?
+    end
+
+    class ConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amplitude: Types::AmplitudeConnectorProfileCredentials,
+        ?datadog: Types::DatadogConnectorProfileCredentials,
+        ?dynatrace: Types::DynatraceConnectorProfileCredentials,
+        ?google_analytics: Types::GoogleAnalyticsConnectorProfileCredentials,
+        ?honeycode: Types::HoneycodeConnectorProfileCredentials,
+        ?infor_nexus: Types::InforNexusConnectorProfileCredentials,
+        ?marketo: Types::MarketoConnectorProfileCredentials,
+        ?redshift: Types::RedshiftConnectorProfileCredentials,
+        ?salesforce: Types::SalesforceConnectorProfileCredentials,
+        ?service_now: Types::ServiceNowConnectorProfileCredentials,
+        ?singular: Types::SingularConnectorProfileCredentials,
+        ?slack: Types::SlackConnectorProfileCredentials,
+        ?snowflake: Types::SnowflakeConnectorProfileCredentials,
+        ?trendmicro: Types::TrendmicroConnectorProfileCredentials,
+        ?veeva: Types::VeevaConnectorProfileCredentials,
+        ?zendesk: Types::ZendeskConnectorProfileCredentials,
+        ?sapo_data: Types::SAPODataConnectorProfileCredentials,
+        ?custom_connector: Types::CustomConnectorProfileCredentials,
+        ?pardot: Types::PardotConnectorProfileCredentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amplitude: Types::AmplitudeConnectorProfileCredentials?
+      attr_accessor datadog: Types::DatadogConnectorProfileCredentials?
+      attr_accessor dynatrace: Types::DynatraceConnectorProfileCredentials?
+      attr_accessor google_analytics: Types::GoogleAnalyticsConnectorProfileCredentials?
+      attr_accessor honeycode: Types::HoneycodeConnectorProfileCredentials?
+      attr_accessor infor_nexus: Types::InforNexusConnectorProfileCredentials?
+      attr_accessor marketo: Types::MarketoConnectorProfileCredentials?
+      attr_accessor redshift: Types::RedshiftConnectorProfileCredentials?
+      attr_accessor salesforce: Types::SalesforceConnectorProfileCredentials?
+      attr_accessor service_now: Types::ServiceNowConnectorProfileCredentials?
+      attr_accessor singular: Types::SingularConnectorProfileCredentials?
+      attr_accessor slack: Types::SlackConnectorProfileCredentials?
+      attr_accessor snowflake: Types::SnowflakeConnectorProfileCredentials?
+      attr_accessor trendmicro: Types::TrendmicroConnectorProfileCredentials?
+      attr_accessor veeva: Types::VeevaConnectorProfileCredentials?
+      attr_accessor zendesk: Types::ZendeskConnectorProfileCredentials?
+      attr_accessor sapo_data: Types::SAPODataConnectorProfileCredentials?
+      attr_accessor custom_connector: Types::CustomConnectorProfileCredentials?
+      attr_accessor pardot: Types::PardotConnectorProfileCredentials?
+    end
+
+    class ConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amplitude: Types::AmplitudeConnectorProfileProperties,
+        ?datadog: Types::DatadogConnectorProfileProperties,
+        ?dynatrace: Types::DynatraceConnectorProfileProperties,
+        ?google_analytics: Types::GoogleAnalyticsConnectorProfileProperties,
+        ?honeycode: Types::HoneycodeConnectorProfileProperties,
+        ?infor_nexus: Types::InforNexusConnectorProfileProperties,
+        ?marketo: Types::MarketoConnectorProfileProperties,
+        ?redshift: Types::RedshiftConnectorProfileProperties,
+        ?salesforce: Types::SalesforceConnectorProfileProperties,
+        ?service_now: Types::ServiceNowConnectorProfileProperties,
+        ?singular: Types::SingularConnectorProfileProperties,
+        ?slack: Types::SlackConnectorProfileProperties,
+        ?snowflake: Types::SnowflakeConnectorProfileProperties,
+        ?trendmicro: Types::TrendmicroConnectorProfileProperties,
+        ?veeva: Types::VeevaConnectorProfileProperties,
+        ?zendesk: Types::ZendeskConnectorProfileProperties,
+        ?sapo_data: Types::SAPODataConnectorProfileProperties,
+        ?custom_connector: Types::CustomConnectorProfileProperties,
+        ?pardot: Types::PardotConnectorProfileProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amplitude: Types::AmplitudeConnectorProfileProperties?
+      attr_accessor datadog: Types::DatadogConnectorProfileProperties?
+      attr_accessor dynatrace: Types::DynatraceConnectorProfileProperties?
+      attr_accessor google_analytics: Types::GoogleAnalyticsConnectorProfileProperties?
+      attr_accessor honeycode: Types::HoneycodeConnectorProfileProperties?
+      attr_accessor infor_nexus: Types::InforNexusConnectorProfileProperties?
+      attr_accessor marketo: Types::MarketoConnectorProfileProperties?
+      attr_accessor redshift: Types::RedshiftConnectorProfileProperties?
+      attr_accessor salesforce: Types::SalesforceConnectorProfileProperties?
+      attr_accessor service_now: Types::ServiceNowConnectorProfileProperties?
+      attr_accessor singular: Types::SingularConnectorProfileProperties?
+      attr_accessor slack: Types::SlackConnectorProfileProperties?
+      attr_accessor snowflake: Types::SnowflakeConnectorProfileProperties?
+      attr_accessor trendmicro: Types::TrendmicroConnectorProfileProperties?
+      attr_accessor veeva: Types::VeevaConnectorProfileProperties?
+      attr_accessor zendesk: Types::ZendeskConnectorProfileProperties?
+      attr_accessor sapo_data: Types::SAPODataConnectorProfileProperties?
+      attr_accessor custom_connector: Types::CustomConnectorProfileProperties?
+      attr_accessor pardot: Types::PardotConnectorProfileProperties?
+    end
+
+    class ConnectorProvisioningConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lambda: Types::LambdaConnectorProvisioningConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lambda: Types::LambdaConnectorProvisioningConfig?
+    end
+
+    module ConnectorProvisioningType
+      LAMBDA: String
+    end
+
+    class ConnectorRuntimeSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?data_type: String,
+        ?is_required: bool,
+        ?label: String,
+        ?description: String,
+        ?scope: String,
+        ?connector_supplied_value_options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor data_type: String?
+      attr_accessor is_required: bool?
+      attr_accessor label: String?
+      attr_accessor description: String?
+      attr_accessor scope: String?
+      attr_accessor connector_supplied_value_options: Array[String]?
+    end
+
+    class ConnectorServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ConnectorType
+      SALESFORCE: String
+      SINGULAR: String
+      SLACK: String
+      REDSHIFT: String
+      S3: String
+      MARKETO: String
+      GOOGLEANALYTICS: String
+      ZENDESK: String
+      SERVICENOW: String
+      DATADOG: String
+      TRENDMICRO: String
+      SNOWFLAKE: String
+      DYNATRACE: String
+      INFORNEXUS: String
+      AMPLITUDE: String
+      VEEVA: String
+      EVENTBRIDGE: String
+      LOOKOUTMETRICS: String
+      UPSOLVER: String
+      HONEYCODE: String
+      CUSTOMERPROFILES: String
+      SAPODATA: String
+      CUSTOMCONNECTOR: String
+      PARDOT: String
+    end
+
+    class CreateConnectorProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_profile_name: String,
+        ?kms_arn: String,
+        ?connector_type: String,
+        ?connector_label: String,
+        ?connection_mode: String,
+        ?connector_profile_config: Types::ConnectorProfileConfig,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_profile_name: String?
+      attr_accessor kms_arn: String?
+      attr_accessor connector_type: String?
+      attr_accessor connector_label: String?
+      attr_accessor connection_mode: String?
+      attr_accessor connector_profile_config: Types::ConnectorProfileConfig?
+      attr_accessor client_token: String?
+    end
+
+    class CreateConnectorProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_profile_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_profile_arn: String?
+    end
+
+    class CreateFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_name: String,
+        ?description: String,
+        ?kms_arn: String,
+        ?trigger_config: Types::TriggerConfig,
+        ?source_flow_config: Types::SourceFlowConfig,
+        ?destination_flow_config_list: Array[Types::DestinationFlowConfig],
+        ?tasks: Array[Types::Task],
+        ?tags: Hash[String, String],
+        ?metadata_catalog_config: Types::MetadataCatalogConfig,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_name: String?
+      attr_accessor description: String?
+      attr_accessor kms_arn: String?
+      attr_accessor trigger_config: Types::TriggerConfig?
+      attr_accessor source_flow_config: Types::SourceFlowConfig?
+      attr_accessor destination_flow_config_list: Array[Types::DestinationFlowConfig]?
+      attr_accessor tasks: Array[Types::Task]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor metadata_catalog_config: Types::MetadataCatalogConfig?
+      attr_accessor client_token: String?
+    end
+
+    class CreateFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?flow_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor flow_status: String?
+    end
+
+    class CustomAuthConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_authentication_type: String,
+        ?auth_parameters: Array[Types::AuthParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_authentication_type: String?
+      attr_accessor auth_parameters: Array[Types::AuthParameter]?
+    end
+
+    class CustomAuthCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?custom_authentication_type: String,
+        ?credentials_map: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor custom_authentication_type: String?
+      attr_accessor credentials_map: Hash[String, String]?
+    end
+
+    class CustomConnectorDestinationProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_name: String,
+        ?error_handling_config: Types::ErrorHandlingConfig,
+        ?write_operation_type: String,
+        ?id_field_names: Array[String],
+        ?custom_properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_name: String?
+      attr_accessor error_handling_config: Types::ErrorHandlingConfig?
+      attr_accessor write_operation_type: String?
+      attr_accessor id_field_names: Array[String]?
+      attr_accessor custom_properties: Hash[String, String]?
+    end
+
+    class CustomConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authentication_type: String,
+        ?basic: Types::BasicAuthCredentials,
+        ?oauth2: Types::OAuth2Credentials,
+        ?api_key: Types::ApiKeyCredentials,
+        ?custom: Types::CustomAuthCredentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authentication_type: String?
+      attr_accessor basic: Types::BasicAuthCredentials?
+      attr_accessor oauth2: Types::OAuth2Credentials?
+      attr_accessor api_key: Types::ApiKeyCredentials?
+      attr_accessor custom: Types::CustomAuthCredentials?
+    end
+
+    class CustomConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_properties: Hash[String, String],
+        ?o_auth2_properties: Types::OAuth2Properties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_properties: Hash[String, String]?
+      attr_accessor o_auth2_properties: Types::OAuth2Properties?
+    end
+
+    class CustomConnectorSourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entity_name: String,
+        ?custom_properties: Hash[String, String],
+        ?data_transfer_api: Types::DataTransferApi,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entity_name: String?
+      attr_accessor custom_properties: Hash[String, String]?
+      attr_accessor data_transfer_api: Types::DataTransferApi?
+    end
+
+    class CustomerProfilesDestinationProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?domain_name: String,
+        ?object_type_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor domain_name: String?
+      attr_accessor object_type_name: String?
+    end
+
+    class CustomerProfilesMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module DataPullMode
+      INCREMENTAL: String
+      COMPLETE: String
+    end
+
+    class DataTransferApi
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+    end
+
+    module DataTransferApiType
+      SYNC: String
+      ASYNC: String
+      AUTOMATIC: String
+    end
+
+    module DatadogConnectorOperator
+      PROJECTION: String
+      BETWEEN: String
+      EQUAL_TO: String
+      ADDITION: String
+      MULTIPLICATION: String
+      DIVISION: String
+      SUBTRACTION: String
+      MASK_ALL: String
+      MASK_FIRST_N: String
+      MASK_LAST_N: String
+      VALIDATE_NON_NULL: String
+      VALIDATE_NON_ZERO: String
+      VALIDATE_NON_NEGATIVE: String
+      VALIDATE_NUMERIC: String
+      NO_OP: String
+    end
+
+    class DatadogConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_key: String,
+        ?application_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_key: String?
+      attr_accessor application_key: String?
+    end
+
+    class DatadogConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_url: String?
+    end
+
+    class DatadogMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DatadogSourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+    end
+
+    class DeleteConnectorProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_profile_name: String,
+        ?force_delete: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_profile_name: String?
+      attr_accessor force_delete: bool?
+    end
+
+    class DeleteConnectorProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_name: String,
+        ?force_delete: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_name: String?
+      attr_accessor force_delete: bool?
+    end
+
+    class DeleteFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeConnectorEntityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_entity_name: String,
+        ?connector_type: String,
+        ?connector_profile_name: String,
+        ?api_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_entity_name: String?
+      attr_accessor connector_type: String?
+      attr_accessor connector_profile_name: String?
+      attr_accessor api_version: String?
+    end
+
+    class DescribeConnectorEntityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_entity_fields: Array[Types::ConnectorEntityField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_entity_fields: Array[Types::ConnectorEntityField]?
+    end
+
+    class DescribeConnectorProfilesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_profile_names: Array[String],
+        ?connector_type: String,
+        ?connector_label: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_profile_names: Array[String]?
+      attr_accessor connector_type: String?
+      attr_accessor connector_label: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConnectorProfilesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_profile_details: Array[Types::ConnectorProfile],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_profile_details: Array[Types::ConnectorProfile]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_type: String,
+        ?connector_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_type: String?
+      attr_accessor connector_label: String?
+    end
+
+    class DescribeConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_configuration: Types::ConnectorConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_configuration: Types::ConnectorConfiguration?
+    end
+
+    class DescribeConnectorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_types: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_types: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeConnectorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_configurations: Hash[String, Types::ConnectorConfiguration],
+        ?connectors: Array[Types::ConnectorDetail],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_configurations: Hash[String, Types::ConnectorConfiguration]?
+      attr_accessor connectors: Array[Types::ConnectorDetail]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFlowExecutionRecordsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFlowExecutionRecordsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_executions: Array[Types::ExecutionRecord],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_executions: Array[Types::ExecutionRecord]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_name: String?
+    end
+
+    class DescribeFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?description: String,
+        ?flow_name: String,
+        ?kms_arn: String,
+        ?flow_status: String,
+        ?flow_status_message: String,
+        ?source_flow_config: Types::SourceFlowConfig,
+        ?destination_flow_config_list: Array[Types::DestinationFlowConfig],
+        ?last_run_execution_details: Types::ExecutionDetails,
+        ?trigger_config: Types::TriggerConfig,
+        ?tasks: Array[Types::Task],
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?created_by: String,
+        ?last_updated_by: String,
+        ?tags: Hash[String, String],
+        ?metadata_catalog_config: Types::MetadataCatalogConfig,
+        ?last_run_metadata_catalog_details: Array[Types::MetadataCatalogDetail],
+        ?schema_version: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor description: String?
+      attr_accessor flow_name: String?
+      attr_accessor kms_arn: String?
+      attr_accessor flow_status: String?
+      attr_accessor flow_status_message: String?
+      attr_accessor source_flow_config: Types::SourceFlowConfig?
+      attr_accessor destination_flow_config_list: Array[Types::DestinationFlowConfig]?
+      attr_accessor last_run_execution_details: Types::ExecutionDetails?
+      attr_accessor trigger_config: Types::TriggerConfig?
+      attr_accessor tasks: Array[Types::Task]?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor last_updated_by: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor metadata_catalog_config: Types::MetadataCatalogConfig?
+      attr_accessor last_run_metadata_catalog_details: Array[Types::MetadataCatalogDetail]?
+      attr_accessor schema_version: Integer?
+    end
+
+    class DestinationConnectorProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?redshift: Types::RedshiftDestinationProperties,
+        ?s3: Types::S3DestinationProperties,
+        ?salesforce: Types::SalesforceDestinationProperties,
+        ?snowflake: Types::SnowflakeDestinationProperties,
+        ?event_bridge: Types::EventBridgeDestinationProperties,
+        ?lookout_metrics: Types::LookoutMetricsDestinationProperties,
+        ?upsolver: Types::UpsolverDestinationProperties,
+        ?honeycode: Types::HoneycodeDestinationProperties,
+        ?customer_profiles: Types::CustomerProfilesDestinationProperties,
+        ?zendesk: Types::ZendeskDestinationProperties,
+        ?marketo: Types::MarketoDestinationProperties,
+        ?custom_connector: Types::CustomConnectorDestinationProperties,
+        ?sapo_data: Types::SAPODataDestinationProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor redshift: Types::RedshiftDestinationProperties?
+      attr_accessor s3: Types::S3DestinationProperties?
+      attr_accessor salesforce: Types::SalesforceDestinationProperties?
+      attr_accessor snowflake: Types::SnowflakeDestinationProperties?
+      attr_accessor event_bridge: Types::EventBridgeDestinationProperties?
+      attr_accessor lookout_metrics: Types::LookoutMetricsDestinationProperties?
+      attr_accessor upsolver: Types::UpsolverDestinationProperties?
+      attr_accessor honeycode: Types::HoneycodeDestinationProperties?
+      attr_accessor customer_profiles: Types::CustomerProfilesDestinationProperties?
+      attr_accessor zendesk: Types::ZendeskDestinationProperties?
+      attr_accessor marketo: Types::MarketoDestinationProperties?
+      attr_accessor custom_connector: Types::CustomConnectorDestinationProperties?
+      attr_accessor sapo_data: Types::SAPODataDestinationProperties?
+    end
+
+    class DestinationFieldProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_creatable: bool,
+        ?is_nullable: bool,
+        ?is_upsertable: bool,
+        ?is_updatable: bool,
+        ?is_defaulted_on_create: bool,
+        ?supported_write_operations: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_creatable: bool?
+      attr_accessor is_nullable: bool?
+      attr_accessor is_upsertable: bool?
+      attr_accessor is_updatable: bool?
+      attr_accessor is_defaulted_on_create: bool?
+      attr_accessor supported_write_operations: Array[String]?
+    end
+
+    class DestinationFlowConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_type: String,
+        ?api_version: String,
+        ?connector_profile_name: String,
+        ?destination_connector_properties: Types::DestinationConnectorProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_type: String?
+      attr_accessor api_version: String?
+      attr_accessor connector_profile_name: String?
+      attr_accessor destination_connector_properties: Types::DestinationConnectorProperties?
+    end
+
+    module DynatraceConnectorOperator
+      PROJECTION: String
+      BETWEEN: String
+      EQUAL_TO: String
+      ADDITION: String
+      MULTIPLICATION: String
+      DIVISION: String
+      SUBTRACTION: String
+      MASK_ALL: String
+      MASK_FIRST_N: String
+      MASK_LAST_N: String
+      VALIDATE_NON_NULL: String
+      VALIDATE_NON_ZERO: String
+      VALIDATE_NON_NEGATIVE: String
+      VALIDATE_NUMERIC: String
+      NO_OP: String
+    end
+
+    class DynatraceConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_token: String?
+    end
+
+    class DynatraceConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_url: String?
+    end
+
+    class DynatraceMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DynatraceSourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+    end
+
+    class ErrorHandlingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fail_on_first_destination_error: bool,
+        ?bucket_prefix: String,
+        ?bucket_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fail_on_first_destination_error: bool?
+      attr_accessor bucket_prefix: String?
+      attr_accessor bucket_name: String?
+    end
+
+    class ErrorInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?put_failures_count: Integer,
+        ?execution_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor put_failures_count: Integer?
+      attr_accessor execution_message: String?
+    end
+
+    class EventBridgeDestinationProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+        ?error_handling_config: Types::ErrorHandlingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+      attr_accessor error_handling_config: Types::ErrorHandlingConfig?
+    end
+
+    class EventBridgeMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ExecutionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?most_recent_execution_message: String,
+        ?most_recent_execution_time: Time,
+        ?most_recent_execution_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor most_recent_execution_message: String?
+      attr_accessor most_recent_execution_time: Time?
+      attr_accessor most_recent_execution_status: String?
+    end
+
+    class ExecutionRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_id: String,
+        ?execution_status: String,
+        ?execution_result: Types::ExecutionResult,
+        ?started_at: Time,
+        ?last_updated_at: Time,
+        ?data_pull_start_time: Time,
+        ?data_pull_end_time: Time,
+        ?metadata_catalog_details: Array[Types::MetadataCatalogDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_id: String?
+      attr_accessor execution_status: String?
+      attr_accessor execution_result: Types::ExecutionResult?
+      attr_accessor started_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor data_pull_start_time: Time?
+      attr_accessor data_pull_end_time: Time?
+      attr_accessor metadata_catalog_details: Array[Types::MetadataCatalogDetail]?
+    end
+
+    class ExecutionResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_info: Types::ErrorInfo,
+        ?bytes_processed: Integer,
+        ?bytes_written: Integer,
+        ?records_processed: Integer,
+        ?num_parallel_processes: Integer,
+        ?max_page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_info: Types::ErrorInfo?
+      attr_accessor bytes_processed: Integer?
+      attr_accessor bytes_written: Integer?
+      attr_accessor records_processed: Integer?
+      attr_accessor num_parallel_processes: Integer?
+      attr_accessor max_page_size: Integer?
+    end
+
+    module ExecutionStatus
+      INPROGRESS: String
+      SUCCESSFUL: String
+      ERROR: String
+      CANCELSTARTED: String
+      CANCELED: String
+    end
+
+    class FieldTypeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field_type: String,
+        ?filter_operators: Array[String],
+        ?supported_values: Array[String],
+        ?value_regex_pattern: String,
+        ?supported_date_format: String,
+        ?field_value_range: Types::Range,
+        ?field_length_range: Types::Range,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field_type: String?
+      attr_accessor filter_operators: Array[String]?
+      attr_accessor supported_values: Array[String]?
+      attr_accessor value_regex_pattern: String?
+      attr_accessor supported_date_format: String?
+      attr_accessor field_value_range: Types::Range?
+      attr_accessor field_length_range: Types::Range?
+    end
+
+    module FileType
+      CSV: String
+      JSON: String
+      PARQUET: String
+    end
+
+    class FlowDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?description: String,
+        ?flow_name: String,
+        ?flow_status: String,
+        ?source_connector_type: String,
+        ?source_connector_label: String,
+        ?destination_connector_type: String,
+        ?destination_connector_label: String,
+        ?trigger_type: String,
+        ?created_at: Time,
+        ?last_updated_at: Time,
+        ?created_by: String,
+        ?last_updated_by: String,
+        ?tags: Hash[String, String],
+        ?last_run_execution_details: Types::ExecutionDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor description: String?
+      attr_accessor flow_name: String?
+      attr_accessor flow_status: String?
+      attr_accessor source_connector_type: String?
+      attr_accessor source_connector_label: String?
+      attr_accessor destination_connector_type: String?
+      attr_accessor destination_connector_label: String?
+      attr_accessor trigger_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_updated_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor last_updated_by: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor last_run_execution_details: Types::ExecutionDetails?
+    end
+
+    module FlowStatus
+      ACTIVE: String
+      DEPRECATED: String
+      DELETED: String
+      DRAFT: String
+      ERRORED: String
+      SUSPENDED: String
+    end
+
+    class GlueDataCatalogConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?database_name: String,
+        ?table_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor database_name: String?
+      attr_accessor table_prefix: String?
+    end
+
+    module GoogleAnalyticsConnectorOperator
+      PROJECTION: String
+      BETWEEN: String
+    end
+
+    class GoogleAnalyticsConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?client_secret: String,
+        ?access_token: String,
+        ?refresh_token: String,
+        ?o_auth_request: Types::ConnectorOAuthRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor client_secret: String?
+      attr_accessor access_token: String?
+      attr_accessor refresh_token: String?
+      attr_accessor o_auth_request: Types::ConnectorOAuthRequest?
+    end
+
+    class GoogleAnalyticsConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GoogleAnalyticsMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?o_auth_scopes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor o_auth_scopes: Array[String]?
+    end
+
+    class GoogleAnalyticsSourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+    end
+
+    class HoneycodeConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_token: String,
+        ?refresh_token: String,
+        ?o_auth_request: Types::ConnectorOAuthRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token: String?
+      attr_accessor refresh_token: String?
+      attr_accessor o_auth_request: Types::ConnectorOAuthRequest?
+    end
+
+    class HoneycodeConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class HoneycodeDestinationProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+        ?error_handling_config: Types::ErrorHandlingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+      attr_accessor error_handling_config: Types::ErrorHandlingConfig?
+    end
+
+    class HoneycodeMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?o_auth_scopes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor o_auth_scopes: Array[String]?
+    end
+
+    class IncrementalPullConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datetime_type_field_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datetime_type_field_name: String?
+    end
+
+    module InforNexusConnectorOperator
+      PROJECTION: String
+      BETWEEN: String
+      EQUAL_TO: String
+      ADDITION: String
+      MULTIPLICATION: String
+      DIVISION: String
+      SUBTRACTION: String
+      MASK_ALL: String
+      MASK_FIRST_N: String
+      MASK_LAST_N: String
+      VALIDATE_NON_NULL: String
+      VALIDATE_NON_ZERO: String
+      VALIDATE_NON_NEGATIVE: String
+      VALIDATE_NUMERIC: String
+      NO_OP: String
+    end
+
+    class InforNexusConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_key_id: String,
+        ?user_id: String,
+        ?secret_access_key: String,
+        ?datakey: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_key_id: String?
+      attr_accessor user_id: String?
+      attr_accessor secret_access_key: String?
+      attr_accessor datakey: String?
+    end
+
+    class InforNexusConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_url: String?
+    end
+
+    class InforNexusMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class InforNexusSourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LambdaConnectorProvisioningConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lambda_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lambda_arn: String?
+    end
+
+    class ListConnectorEntitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_profile_name: String,
+        ?connector_type: String,
+        ?entities_path: String,
+        ?api_version: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_profile_name: String?
+      attr_accessor connector_type: String?
+      attr_accessor entities_path: String?
+      attr_accessor api_version: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectorEntitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_entity_map: Hash[String, Array[Types::ConnectorEntity]],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_entity_map: Hash[String, Array[Types::ConnectorEntity]]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connectors: Array[Types::ConnectorDetail],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connectors: Array[Types::ConnectorDetail]?
+      attr_accessor next_token: String?
+    end
+
+    class ListFlowsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListFlowsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flows: Array[Types::FlowDefinition],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flows: Array[Types::FlowDefinition]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class LookoutMetricsDestinationProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module MarketoConnectorOperator
+      PROJECTION: String
+      LESS_THAN: String
+      GREATER_THAN: String
+      BETWEEN: String
+      ADDITION: String
+      MULTIPLICATION: String
+      DIVISION: String
+      SUBTRACTION: String
+      MASK_ALL: String
+      MASK_FIRST_N: String
+      MASK_LAST_N: String
+      VALIDATE_NON_NULL: String
+      VALIDATE_NON_ZERO: String
+      VALIDATE_NON_NEGATIVE: String
+      VALIDATE_NUMERIC: String
+      NO_OP: String
+    end
+
+    class MarketoConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?client_secret: String,
+        ?access_token: String,
+        ?o_auth_request: Types::ConnectorOAuthRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor client_secret: String?
+      attr_accessor access_token: String?
+      attr_accessor o_auth_request: Types::ConnectorOAuthRequest?
+    end
+
+    class MarketoConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_url: String?
+    end
+
+    class MarketoDestinationProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+        ?error_handling_config: Types::ErrorHandlingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+      attr_accessor error_handling_config: Types::ErrorHandlingConfig?
+    end
+
+    class MarketoMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class MarketoSourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+    end
+
+    class MetadataCatalogConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?glue_data_catalog: Types::GlueDataCatalogConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor glue_data_catalog: Types::GlueDataCatalogConfig?
+    end
+
+    class MetadataCatalogDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_type: String,
+        ?table_name: String,
+        ?table_registration_output: Types::RegistrationOutput,
+        ?partition_registration_output: Types::RegistrationOutput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_type: String?
+      attr_accessor table_name: String?
+      attr_accessor table_registration_output: Types::RegistrationOutput?
+      attr_accessor partition_registration_output: Types::RegistrationOutput?
+    end
+
+    class OAuth2Credentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?client_secret: String,
+        ?access_token: String,
+        ?refresh_token: String,
+        ?o_auth_request: Types::ConnectorOAuthRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor client_secret: String?
+      attr_accessor access_token: String?
+      attr_accessor refresh_token: String?
+      attr_accessor o_auth_request: Types::ConnectorOAuthRequest?
+    end
+
+    class OAuth2CustomParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?is_required: bool,
+        ?label: String,
+        ?description: String,
+        ?is_sensitive_field: bool,
+        ?connector_supplied_values: Array[String],
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor is_required: bool?
+      attr_accessor label: String?
+      attr_accessor description: String?
+      attr_accessor is_sensitive_field: bool?
+      attr_accessor connector_supplied_values: Array[String]?
+      attr_accessor type: String?
+    end
+
+    module OAuth2CustomPropType
+      TOKEN_URL: String
+      AUTH_URL: String
+    end
+
+    class OAuth2Defaults
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?oauth_scopes: Array[String],
+        ?token_urls: Array[String],
+        ?auth_code_urls: Array[String],
+        ?oauth2_grant_types_supported: Array[String],
+        ?oauth2_custom_properties: Array[Types::OAuth2CustomParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor oauth_scopes: Array[String]?
+      attr_accessor token_urls: Array[String]?
+      attr_accessor auth_code_urls: Array[String]?
+      attr_accessor oauth2_grant_types_supported: Array[String]?
+      attr_accessor oauth2_custom_properties: Array[Types::OAuth2CustomParameter]?
+    end
+
+    module OAuth2GrantType
+      CLIENT_CREDENTIALS: String
+      AUTHORIZATION_CODE: String
+      JWT_BEARER: String
+    end
+
+    class OAuth2Properties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_url: String,
+        ?o_auth2_grant_type: String,
+        ?token_url_custom_properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_url: String?
+      attr_accessor o_auth2_grant_type: String?
+      attr_accessor token_url_custom_properties: Hash[String, String]?
+    end
+
+    class OAuthCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?client_secret: String,
+        ?access_token: String,
+        ?refresh_token: String,
+        ?o_auth_request: Types::ConnectorOAuthRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor client_secret: String?
+      attr_accessor access_token: String?
+      attr_accessor refresh_token: String?
+      attr_accessor o_auth_request: Types::ConnectorOAuthRequest?
+    end
+
+    class OAuthProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_url: String,
+        ?auth_code_url: String,
+        ?o_auth_scopes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_url: String?
+      attr_accessor auth_code_url: String?
+      attr_accessor o_auth_scopes: Array[String]?
+    end
+
+    module Operator
+      PROJECTION: String
+      LESS_THAN: String
+      GREATER_THAN: String
+      CONTAINS: String
+      BETWEEN: String
+      LESS_THAN_OR_EQUAL_TO: String
+      GREATER_THAN_OR_EQUAL_TO: String
+      EQUAL_TO: String
+      NOT_EQUAL_TO: String
+      ADDITION: String
+      MULTIPLICATION: String
+      DIVISION: String
+      SUBTRACTION: String
+      MASK_ALL: String
+      MASK_FIRST_N: String
+      MASK_LAST_N: String
+      VALIDATE_NON_NULL: String
+      VALIDATE_NON_ZERO: String
+      VALIDATE_NON_NEGATIVE: String
+      VALIDATE_NUMERIC: String
+      NO_OP: String
+    end
+
+    module OperatorPropertiesKeys
+      VALUE: String
+      VALUES: String
+      DATA_TYPE: String
+      UPPER_BOUND: String
+      LOWER_BOUND: String
+      SOURCE_DATA_TYPE: String
+      DESTINATION_DATA_TYPE: String
+      VALIDATION_ACTION: String
+      MASK_VALUE: String
+      MASK_LENGTH: String
+      TRUNCATE_LENGTH: String
+      MATH_OPERATION_FIELDS_ORDER: String
+      CONCAT_FORMAT: String
+      SUBFIELD_CATEGORY_MAP: String
+      EXCLUDE_SOURCE_FIELDS_LIST: String
+      INCLUDE_NEW_FIELDS: String
+      ORDERED_PARTITION_KEYS_LIST: String
+    end
+
+    module Operators
+      PROJECTION: String
+      LESS_THAN: String
+      GREATER_THAN: String
+      CONTAINS: String
+      BETWEEN: String
+      LESS_THAN_OR_EQUAL_TO: String
+      GREATER_THAN_OR_EQUAL_TO: String
+      EQUAL_TO: String
+      NOT_EQUAL_TO: String
+      ADDITION: String
+      MULTIPLICATION: String
+      DIVISION: String
+      SUBTRACTION: String
+      MASK_ALL: String
+      MASK_FIRST_N: String
+      MASK_LAST_N: String
+      VALIDATE_NON_NULL: String
+      VALIDATE_NON_ZERO: String
+      VALIDATE_NON_NEGATIVE: String
+      VALIDATE_NUMERIC: String
+      NO_OP: String
+    end
+
+    module PardotConnectorOperator
+      PROJECTION: String
+      EQUAL_TO: String
+      NO_OP: String
+      ADDITION: String
+      MULTIPLICATION: String
+      DIVISION: String
+      SUBTRACTION: String
+      MASK_ALL: String
+      MASK_FIRST_N: String
+      MASK_LAST_N: String
+      VALIDATE_NON_NULL: String
+      VALIDATE_NON_ZERO: String
+      VALIDATE_NON_NEGATIVE: String
+      VALIDATE_NUMERIC: String
+    end
+
+    class PardotConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_token: String,
+        ?refresh_token: String,
+        ?o_auth_request: Types::ConnectorOAuthRequest,
+        ?client_credentials_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token: String?
+      attr_accessor refresh_token: String?
+      attr_accessor o_auth_request: Types::ConnectorOAuthRequest?
+      attr_accessor client_credentials_arn: String?
+    end
+
+    class PardotConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_url: String,
+        ?is_sandbox_environment: bool,
+        ?business_unit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_url: String?
+      attr_accessor is_sandbox_environment: bool?
+      attr_accessor business_unit_id: String?
+    end
+
+    class PardotMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PardotSourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+    end
+
+    module PathPrefix
+      EXECUTION_ID: String
+      SCHEMA_VERSION: String
+    end
+
+    class PrefixConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix_type: String,
+        ?prefix_format: String,
+        ?path_prefix_hierarchy: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix_type: String?
+      attr_accessor prefix_format: String?
+      attr_accessor path_prefix_hierarchy: Array[String]?
+    end
+
+    module PrefixFormat
+      YEAR: String
+      MONTH: String
+      DAY: String
+      HOUR: String
+      MINUTE: String
+    end
+
+    module PrefixType
+      FILENAME: String
+      PATH: String
+      PATH_AND_FILENAME: String
+    end
+
+    module PrivateConnectionProvisioningFailureCause
+      CONNECTOR_AUTHENTICATION: String
+      CONNECTOR_SERVER: String
+      INTERNAL_SERVER: String
+      ACCESS_DENIED: String
+      VALIDATION: String
+    end
+
+    class PrivateConnectionProvisioningState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?failure_message: String,
+        ?failure_cause: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor failure_message: String?
+      attr_accessor failure_cause: String?
+    end
+
+    module PrivateConnectionProvisioningStatus
+      FAILED: String
+      PENDING: String
+      CREATED: String
+    end
+
+    class Range
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?maximum: Float,
+        ?minimum: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor maximum: Float?
+      attr_accessor minimum: Float?
+    end
+
+    class RedshiftConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username: String,
+        ?password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username: String?
+      attr_accessor password: String?
+    end
+
+    class RedshiftConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database_url: String,
+        ?bucket_name: String,
+        ?bucket_prefix: String,
+        ?role_arn: String,
+        ?data_api_role_arn: String,
+        ?is_redshift_serverless: bool,
+        ?cluster_identifier: String,
+        ?workgroup_name: String,
+        ?database_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database_url: String?
+      attr_accessor bucket_name: String?
+      attr_accessor bucket_prefix: String?
+      attr_accessor role_arn: String?
+      attr_accessor data_api_role_arn: String?
+      attr_accessor is_redshift_serverless: bool?
+      attr_accessor cluster_identifier: String?
+      attr_accessor workgroup_name: String?
+      attr_accessor database_name: String?
+    end
+
+    class RedshiftDestinationProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+        ?intermediate_bucket_name: String,
+        ?bucket_prefix: String,
+        ?error_handling_config: Types::ErrorHandlingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+      attr_accessor intermediate_bucket_name: String?
+      attr_accessor bucket_prefix: String?
+      attr_accessor error_handling_config: Types::ErrorHandlingConfig?
+    end
+
+    class RedshiftMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RegisterConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_label: String,
+        ?description: String,
+        ?connector_provisioning_type: String,
+        ?connector_provisioning_config: Types::ConnectorProvisioningConfig,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_label: String?
+      attr_accessor description: String?
+      attr_accessor connector_provisioning_type: String?
+      attr_accessor connector_provisioning_config: Types::ConnectorProvisioningConfig?
+      attr_accessor client_token: String?
+    end
+
+    class RegisterConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+    end
+
+    class RegistrationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?result: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor result: String?
+      attr_accessor status: String?
+    end
+
+    class ResetConnectorMetadataCacheRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_profile_name: String,
+        ?connector_type: String,
+        ?connector_entity_name: String,
+        ?entities_path: String,
+        ?api_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_profile_name: String?
+      attr_accessor connector_type: String?
+      attr_accessor connector_entity_name: String?
+      attr_accessor entities_path: String?
+      attr_accessor api_version: String?
+    end
+
+    class ResetConnectorMetadataCacheResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module S3ConnectorOperator
+      PROJECTION: String
+      LESS_THAN: String
+      GREATER_THAN: String
+      BETWEEN: String
+      LESS_THAN_OR_EQUAL_TO: String
+      GREATER_THAN_OR_EQUAL_TO: String
+      EQUAL_TO: String
+      NOT_EQUAL_TO: String
+      ADDITION: String
+      MULTIPLICATION: String
+      DIVISION: String
+      SUBTRACTION: String
+      MASK_ALL: String
+      MASK_FIRST_N: String
+      MASK_LAST_N: String
+      VALIDATE_NON_NULL: String
+      VALIDATE_NON_ZERO: String
+      VALIDATE_NON_NEGATIVE: String
+      VALIDATE_NUMERIC: String
+      NO_OP: String
+    end
+
+    class S3DestinationProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?bucket_prefix: String,
+        ?s3_output_format_config: Types::S3OutputFormatConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor bucket_prefix: String?
+      attr_accessor s3_output_format_config: Types::S3OutputFormatConfig?
+    end
+
+    module S3InputFileType
+      CSV: String
+      JSON: String
+    end
+
+    class S3InputFormatConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_input_file_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_input_file_type: String?
+    end
+
+    class S3Metadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class S3OutputFormatConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_type: String,
+        ?prefix_config: Types::PrefixConfig,
+        ?aggregation_config: Types::AggregationConfig,
+        ?preserve_source_data_typing: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_type: String?
+      attr_accessor prefix_config: Types::PrefixConfig?
+      attr_accessor aggregation_config: Types::AggregationConfig?
+      attr_accessor preserve_source_data_typing: bool?
+    end
+
+    class S3SourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?bucket_prefix: String,
+        ?s3_input_format_config: Types::S3InputFormatConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor bucket_prefix: String?
+      attr_accessor s3_input_format_config: Types::S3InputFormatConfig?
+    end
+
+    module SAPODataConnectorOperator
+      PROJECTION: String
+      LESS_THAN: String
+      CONTAINS: String
+      GREATER_THAN: String
+      BETWEEN: String
+      LESS_THAN_OR_EQUAL_TO: String
+      GREATER_THAN_OR_EQUAL_TO: String
+      EQUAL_TO: String
+      NOT_EQUAL_TO: String
+      ADDITION: String
+      MULTIPLICATION: String
+      DIVISION: String
+      SUBTRACTION: String
+      MASK_ALL: String
+      MASK_FIRST_N: String
+      MASK_LAST_N: String
+      VALIDATE_NON_NULL: String
+      VALIDATE_NON_ZERO: String
+      VALIDATE_NON_NEGATIVE: String
+      VALIDATE_NUMERIC: String
+      NO_OP: String
+    end
+
+    class SAPODataConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?basic_auth_credentials: Types::BasicAuthCredentials,
+        ?o_auth_credentials: Types::OAuthCredentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor basic_auth_credentials: Types::BasicAuthCredentials?
+      attr_accessor o_auth_credentials: Types::OAuthCredentials?
+    end
+
+    class SAPODataConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_host_url: String,
+        ?application_service_path: String,
+        ?port_number: Integer,
+        ?client_number: String,
+        ?logon_language: String,
+        ?private_link_service_name: String,
+        ?o_auth_properties: Types::OAuthProperties,
+        ?disable_sso: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_host_url: String?
+      attr_accessor application_service_path: String?
+      attr_accessor port_number: Integer?
+      attr_accessor client_number: String?
+      attr_accessor logon_language: String?
+      attr_accessor private_link_service_name: String?
+      attr_accessor o_auth_properties: Types::OAuthProperties?
+      attr_accessor disable_sso: bool?
+    end
+
+    class SAPODataDestinationProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_path: String,
+        ?success_response_handling_config: Types::SuccessResponseHandlingConfig,
+        ?id_field_names: Array[String],
+        ?error_handling_config: Types::ErrorHandlingConfig,
+        ?write_operation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_path: String?
+      attr_accessor success_response_handling_config: Types::SuccessResponseHandlingConfig?
+      attr_accessor id_field_names: Array[String]?
+      attr_accessor error_handling_config: Types::ErrorHandlingConfig?
+      attr_accessor write_operation_type: String?
+    end
+
+    class SAPODataMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SAPODataPaginationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_page_size: Integer?
+    end
+
+    class SAPODataParallelismConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_parallelism: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_parallelism: Integer?
+    end
+
+    class SAPODataSourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_path: String,
+        ?parallelism_config: Types::SAPODataParallelismConfig,
+        ?pagination_config: Types::SAPODataPaginationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_path: String?
+      attr_accessor parallelism_config: Types::SAPODataParallelismConfig?
+      attr_accessor pagination_config: Types::SAPODataPaginationConfig?
+    end
+
+    module SalesforceConnectorOperator
+      PROJECTION: String
+      LESS_THAN: String
+      CONTAINS: String
+      GREATER_THAN: String
+      BETWEEN: String
+      LESS_THAN_OR_EQUAL_TO: String
+      GREATER_THAN_OR_EQUAL_TO: String
+      EQUAL_TO: String
+      NOT_EQUAL_TO: String
+      ADDITION: String
+      MULTIPLICATION: String
+      DIVISION: String
+      SUBTRACTION: String
+      MASK_ALL: String
+      MASK_FIRST_N: String
+      MASK_LAST_N: String
+      VALIDATE_NON_NULL: String
+      VALIDATE_NON_ZERO: String
+      VALIDATE_NON_NEGATIVE: String
+      VALIDATE_NUMERIC: String
+      NO_OP: String
+    end
+
+    class SalesforceConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_token: String,
+        ?refresh_token: String,
+        ?o_auth_request: Types::ConnectorOAuthRequest,
+        ?client_credentials_arn: String,
+        ?o_auth2_grant_type: String,
+        ?jwt_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_token: String?
+      attr_accessor refresh_token: String?
+      attr_accessor o_auth_request: Types::ConnectorOAuthRequest?
+      attr_accessor client_credentials_arn: String?
+      attr_accessor o_auth2_grant_type: String?
+      attr_accessor jwt_token: String?
+    end
+
+    class SalesforceConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_url: String,
+        ?is_sandbox_environment: bool,
+        ?use_private_link_for_metadata_and_authorization: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_url: String?
+      attr_accessor is_sandbox_environment: bool?
+      attr_accessor use_private_link_for_metadata_and_authorization: bool?
+    end
+
+    module SalesforceDataTransferApi
+      AUTOMATIC: String
+      BULKV2: String
+      REST_SYNC: String
+    end
+
+    class SalesforceDestinationProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+        ?id_field_names: Array[String],
+        ?error_handling_config: Types::ErrorHandlingConfig,
+        ?write_operation_type: String,
+        ?data_transfer_api: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+      attr_accessor id_field_names: Array[String]?
+      attr_accessor error_handling_config: Types::ErrorHandlingConfig?
+      attr_accessor write_operation_type: String?
+      attr_accessor data_transfer_api: String?
+    end
+
+    class SalesforceMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?o_auth_scopes: Array[String],
+        ?data_transfer_apis: Array[String],
+        ?oauth2_grant_types_supported: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor o_auth_scopes: Array[String]?
+      attr_accessor data_transfer_apis: Array[String]?
+      attr_accessor oauth2_grant_types_supported: Array[String]?
+    end
+
+    class SalesforceSourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+        ?enable_dynamic_field_update: bool,
+        ?include_deleted_records: bool,
+        ?data_transfer_api: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+      attr_accessor enable_dynamic_field_update: bool?
+      attr_accessor include_deleted_records: bool?
+      attr_accessor data_transfer_api: String?
+    end
+
+    module ScheduleFrequencyType
+      BYMINUTE: String
+      HOURLY: String
+      DAILY: String
+      WEEKLY: String
+      MONTHLY: String
+      ONCE: String
+    end
+
+    class ScheduledTriggerProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schedule_expression: String,
+        ?data_pull_mode: String,
+        ?schedule_start_time: Time,
+        ?schedule_end_time: Time,
+        ?timezone: String,
+        ?schedule_offset: Integer,
+        ?first_execution_from: Time,
+        ?flow_error_deactivation_threshold: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schedule_expression: String?
+      attr_accessor data_pull_mode: String?
+      attr_accessor schedule_start_time: Time?
+      attr_accessor schedule_end_time: Time?
+      attr_accessor timezone: String?
+      attr_accessor schedule_offset: Integer?
+      attr_accessor first_execution_from: Time?
+      attr_accessor flow_error_deactivation_threshold: Integer?
+    end
+
+    module ServiceNowConnectorOperator
+      PROJECTION: String
+      CONTAINS: String
+      LESS_THAN: String
+      GREATER_THAN: String
+      BETWEEN: String
+      LESS_THAN_OR_EQUAL_TO: String
+      GREATER_THAN_OR_EQUAL_TO: String
+      EQUAL_TO: String
+      NOT_EQUAL_TO: String
+      ADDITION: String
+      MULTIPLICATION: String
+      DIVISION: String
+      SUBTRACTION: String
+      MASK_ALL: String
+      MASK_FIRST_N: String
+      MASK_LAST_N: String
+      VALIDATE_NON_NULL: String
+      VALIDATE_NON_ZERO: String
+      VALIDATE_NON_NEGATIVE: String
+      VALIDATE_NUMERIC: String
+      NO_OP: String
+    end
+
+    class ServiceNowConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username: String,
+        ?password: String,
+        ?o_auth2_credentials: Types::OAuth2Credentials,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username: String?
+      attr_accessor password: String?
+      attr_accessor o_auth2_credentials: Types::OAuth2Credentials?
+    end
+
+    class ServiceNowConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_url: String?
+    end
+
+    class ServiceNowMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ServiceNowSourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SingularConnectorOperator
+      PROJECTION: String
+      EQUAL_TO: String
+      ADDITION: String
+      MULTIPLICATION: String
+      DIVISION: String
+      SUBTRACTION: String
+      MASK_ALL: String
+      MASK_FIRST_N: String
+      MASK_LAST_N: String
+      VALIDATE_NON_NULL: String
+      VALIDATE_NON_ZERO: String
+      VALIDATE_NON_NEGATIVE: String
+      VALIDATE_NUMERIC: String
+      NO_OP: String
+    end
+
+    class SingularConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_key: String?
+    end
+
+    class SingularConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SingularMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class SingularSourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+    end
+
+    module SlackConnectorOperator
+      PROJECTION: String
+      LESS_THAN: String
+      GREATER_THAN: String
+      BETWEEN: String
+      LESS_THAN_OR_EQUAL_TO: String
+      GREATER_THAN_OR_EQUAL_TO: String
+      EQUAL_TO: String
+      ADDITION: String
+      MULTIPLICATION: String
+      DIVISION: String
+      SUBTRACTION: String
+      MASK_ALL: String
+      MASK_FIRST_N: String
+      MASK_LAST_N: String
+      VALIDATE_NON_NULL: String
+      VALIDATE_NON_ZERO: String
+      VALIDATE_NON_NEGATIVE: String
+      VALIDATE_NUMERIC: String
+      NO_OP: String
+    end
+
+    class SlackConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?client_secret: String,
+        ?access_token: String,
+        ?o_auth_request: Types::ConnectorOAuthRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor client_secret: String?
+      attr_accessor access_token: String?
+      attr_accessor o_auth_request: Types::ConnectorOAuthRequest?
+    end
+
+    class SlackConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_url: String?
+    end
+
+    class SlackMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?o_auth_scopes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor o_auth_scopes: Array[String]?
+    end
+
+    class SlackSourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+    end
+
+    class SnowflakeConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username: String,
+        ?password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username: String?
+      attr_accessor password: String?
+    end
+
+    class SnowflakeConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?warehouse: String,
+        ?stage: String,
+        ?bucket_name: String,
+        ?bucket_prefix: String,
+        ?private_link_service_name: String,
+        ?account_name: String,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor warehouse: String?
+      attr_accessor stage: String?
+      attr_accessor bucket_name: String?
+      attr_accessor bucket_prefix: String?
+      attr_accessor private_link_service_name: String?
+      attr_accessor account_name: String?
+      attr_accessor region: String?
+    end
+
+    class SnowflakeDestinationProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+        ?intermediate_bucket_name: String,
+        ?bucket_prefix: String,
+        ?error_handling_config: Types::ErrorHandlingConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+      attr_accessor intermediate_bucket_name: String?
+      attr_accessor bucket_prefix: String?
+      attr_accessor error_handling_config: Types::ErrorHandlingConfig?
+    end
+
+    class SnowflakeMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?supported_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor supported_regions: Array[String]?
+    end
+
+    class SourceConnectorProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amplitude: Types::AmplitudeSourceProperties,
+        ?datadog: Types::DatadogSourceProperties,
+        ?dynatrace: Types::DynatraceSourceProperties,
+        ?google_analytics: Types::GoogleAnalyticsSourceProperties,
+        ?infor_nexus: Types::InforNexusSourceProperties,
+        ?marketo: Types::MarketoSourceProperties,
+        ?s3: Types::S3SourceProperties,
+        ?salesforce: Types::SalesforceSourceProperties,
+        ?service_now: Types::ServiceNowSourceProperties,
+        ?singular: Types::SingularSourceProperties,
+        ?slack: Types::SlackSourceProperties,
+        ?trendmicro: Types::TrendmicroSourceProperties,
+        ?veeva: Types::VeevaSourceProperties,
+        ?zendesk: Types::ZendeskSourceProperties,
+        ?sapo_data: Types::SAPODataSourceProperties,
+        ?custom_connector: Types::CustomConnectorSourceProperties,
+        ?pardot: Types::PardotSourceProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amplitude: Types::AmplitudeSourceProperties?
+      attr_accessor datadog: Types::DatadogSourceProperties?
+      attr_accessor dynatrace: Types::DynatraceSourceProperties?
+      attr_accessor google_analytics: Types::GoogleAnalyticsSourceProperties?
+      attr_accessor infor_nexus: Types::InforNexusSourceProperties?
+      attr_accessor marketo: Types::MarketoSourceProperties?
+      attr_accessor s3: Types::S3SourceProperties?
+      attr_accessor salesforce: Types::SalesforceSourceProperties?
+      attr_accessor service_now: Types::ServiceNowSourceProperties?
+      attr_accessor singular: Types::SingularSourceProperties?
+      attr_accessor slack: Types::SlackSourceProperties?
+      attr_accessor trendmicro: Types::TrendmicroSourceProperties?
+      attr_accessor veeva: Types::VeevaSourceProperties?
+      attr_accessor zendesk: Types::ZendeskSourceProperties?
+      attr_accessor sapo_data: Types::SAPODataSourceProperties?
+      attr_accessor custom_connector: Types::CustomConnectorSourceProperties?
+      attr_accessor pardot: Types::PardotSourceProperties?
+    end
+
+    class SourceFieldProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_retrievable: bool,
+        ?is_queryable: bool,
+        ?is_timestamp_field_for_incremental_queries: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_retrievable: bool?
+      attr_accessor is_queryable: bool?
+      attr_accessor is_timestamp_field_for_incremental_queries: bool?
+    end
+
+    class SourceFlowConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_type: String,
+        ?api_version: String,
+        ?connector_profile_name: String,
+        ?source_connector_properties: Types::SourceConnectorProperties,
+        ?incremental_pull_config: Types::IncrementalPullConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_type: String?
+      attr_accessor api_version: String?
+      attr_accessor connector_profile_name: String?
+      attr_accessor source_connector_properties: Types::SourceConnectorProperties?
+      attr_accessor incremental_pull_config: Types::IncrementalPullConfig?
+    end
+
+    class StartFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_name: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_name: String?
+      attr_accessor client_token: String?
+    end
+
+    class StartFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?flow_status: String,
+        ?execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor flow_status: String?
+      attr_accessor execution_id: String?
+    end
+
+    class StopFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_name: String?
+    end
+
+    class StopFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_arn: String,
+        ?flow_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_arn: String?
+      attr_accessor flow_status: String?
+    end
+
+    class SuccessResponseHandlingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_prefix: String,
+        ?bucket_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_prefix: String?
+      attr_accessor bucket_name: String?
+    end
+
+    module SupportedDataTransferType
+      RECORD: String
+      FILE: String
+    end
+
+    class SupportedFieldTypeDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?v1: Types::FieldTypeDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor v1: Types::FieldTypeDetails?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Task
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_fields: Array[String],
+        ?connector_operator: Types::ConnectorOperator,
+        ?destination_field: String,
+        ?task_type: String,
+        ?task_properties: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_fields: Array[String]?
+      attr_accessor connector_operator: Types::ConnectorOperator?
+      attr_accessor destination_field: String?
+      attr_accessor task_type: String?
+      attr_accessor task_properties: Hash[String, String]?
+    end
+
+    module TaskType
+      ARITHMETIC: String
+      FILTER: String
+      MAP: String
+      MAP_ALL: String
+      MASK: String
+      MERGE: String
+      PASSTHROUGH: String
+      TRUNCATE: String
+      VALIDATE: String
+      PARTITION: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module TrendmicroConnectorOperator
+      PROJECTION: String
+      EQUAL_TO: String
+      ADDITION: String
+      MULTIPLICATION: String
+      DIVISION: String
+      SUBTRACTION: String
+      MASK_ALL: String
+      MASK_FIRST_N: String
+      MASK_LAST_N: String
+      VALIDATE_NON_NULL: String
+      VALIDATE_NON_ZERO: String
+      VALIDATE_NON_NEGATIVE: String
+      VALIDATE_NUMERIC: String
+      NO_OP: String
+    end
+
+    class TrendmicroConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?api_secret_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor api_secret_key: String?
+    end
+
+    class TrendmicroConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TrendmicroMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TrendmicroSourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+    end
+
+    class TriggerConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trigger_type: String,
+        ?trigger_properties: Types::TriggerProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trigger_type: String?
+      attr_accessor trigger_properties: Types::TriggerProperties?
+    end
+
+    class TriggerProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled: Types::ScheduledTriggerProperties,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled: Types::ScheduledTriggerProperties?
+    end
+
+    module TriggerType
+      SCHEDULED: String
+      EVENT: String
+      ONDEMAND: String
+    end
+
+    class UnregisterConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_label: String,
+        ?force_delete: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_label: String?
+      attr_accessor force_delete: bool?
+    end
+
+    class UnregisterConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UnsupportedOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateConnectorProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_profile_name: String,
+        ?connection_mode: String,
+        ?connector_profile_config: Types::ConnectorProfileConfig,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_profile_name: String?
+      attr_accessor connection_mode: String?
+      attr_accessor connector_profile_config: Types::ConnectorProfileConfig?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateConnectorProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_profile_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_profile_arn: String?
+    end
+
+    class UpdateConnectorRegistrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_label: String,
+        ?description: String,
+        ?connector_provisioning_config: Types::ConnectorProvisioningConfig,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_label: String?
+      attr_accessor description: String?
+      attr_accessor connector_provisioning_config: Types::ConnectorProvisioningConfig?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateConnectorRegistrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_arn: String?
+    end
+
+    class UpdateFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_name: String,
+        ?description: String,
+        ?trigger_config: Types::TriggerConfig,
+        ?source_flow_config: Types::SourceFlowConfig,
+        ?destination_flow_config_list: Array[Types::DestinationFlowConfig],
+        ?tasks: Array[Types::Task],
+        ?metadata_catalog_config: Types::MetadataCatalogConfig,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_name: String?
+      attr_accessor description: String?
+      attr_accessor trigger_config: Types::TriggerConfig?
+      attr_accessor source_flow_config: Types::SourceFlowConfig?
+      attr_accessor destination_flow_config_list: Array[Types::DestinationFlowConfig]?
+      attr_accessor tasks: Array[Types::Task]?
+      attr_accessor metadata_catalog_config: Types::MetadataCatalogConfig?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_status: String?
+    end
+
+    class UpsolverDestinationProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?bucket_prefix: String,
+        ?s3_output_format_config: Types::UpsolverS3OutputFormatConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor bucket_prefix: String?
+      attr_accessor s3_output_format_config: Types::UpsolverS3OutputFormatConfig?
+    end
+
+    class UpsolverMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpsolverS3OutputFormatConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_type: String,
+        ?prefix_config: Types::PrefixConfig,
+        ?aggregation_config: Types::AggregationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_type: String?
+      attr_accessor prefix_config: Types::PrefixConfig?
+      attr_accessor aggregation_config: Types::AggregationConfig?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module VeevaConnectorOperator
+      PROJECTION: String
+      LESS_THAN: String
+      GREATER_THAN: String
+      CONTAINS: String
+      BETWEEN: String
+      LESS_THAN_OR_EQUAL_TO: String
+      GREATER_THAN_OR_EQUAL_TO: String
+      EQUAL_TO: String
+      NOT_EQUAL_TO: String
+      ADDITION: String
+      MULTIPLICATION: String
+      DIVISION: String
+      SUBTRACTION: String
+      MASK_ALL: String
+      MASK_FIRST_N: String
+      MASK_LAST_N: String
+      VALIDATE_NON_NULL: String
+      VALIDATE_NON_ZERO: String
+      VALIDATE_NON_NEGATIVE: String
+      VALIDATE_NUMERIC: String
+      NO_OP: String
+    end
+
+    class VeevaConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?username: String,
+        ?password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor username: String?
+      attr_accessor password: String?
+    end
+
+    class VeevaConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_url: String?
+    end
+
+    class VeevaMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class VeevaSourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+        ?document_type: String,
+        ?include_source_files: bool,
+        ?include_renditions: bool,
+        ?include_all_versions: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+      attr_accessor document_type: String?
+      attr_accessor include_source_files: bool?
+      attr_accessor include_renditions: bool?
+      attr_accessor include_all_versions: bool?
+    end
+
+    module WriteOperationType
+      INSERT: String
+      UPSERT: String
+      UPDATE: String
+      DELETE: String
+    end
+
+    module ZendeskConnectorOperator
+      PROJECTION: String
+      GREATER_THAN: String
+      ADDITION: String
+      MULTIPLICATION: String
+      DIVISION: String
+      SUBTRACTION: String
+      MASK_ALL: String
+      MASK_FIRST_N: String
+      MASK_LAST_N: String
+      VALIDATE_NON_NULL: String
+      VALIDATE_NON_ZERO: String
+      VALIDATE_NON_NEGATIVE: String
+      VALIDATE_NUMERIC: String
+      NO_OP: String
+    end
+
+    class ZendeskConnectorProfileCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_id: String,
+        ?client_secret: String,
+        ?access_token: String,
+        ?o_auth_request: Types::ConnectorOAuthRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_id: String?
+      attr_accessor client_secret: String?
+      attr_accessor access_token: String?
+      attr_accessor o_auth_request: Types::ConnectorOAuthRequest?
+    end
+
+    class ZendeskConnectorProfileProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_url: String?
+    end
+
+    class ZendeskDestinationProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+        ?id_field_names: Array[String],
+        ?error_handling_config: Types::ErrorHandlingConfig,
+        ?write_operation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+      attr_accessor id_field_names: Array[String]?
+      attr_accessor error_handling_config: Types::ErrorHandlingConfig?
+      attr_accessor write_operation_type: String?
+    end
+
+    class ZendeskMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?o_auth_scopes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor o_auth_scopes: Array[String]?
+    end
+
+    class ZendeskSourceProperties
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object: String?
+    end
+  end
+end

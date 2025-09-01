@@ -1,0 +1,854 @@
+module Aws::DirectoryServiceData
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module AccessDeniedReason
+      IAM_AUTH: String
+      DIRECTORY_AUTH: String
+      DATA_DISABLED: String
+    end
+
+    class AddGroupMemberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?group_name: String,
+        ?member_name: String,
+        ?member_realm: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor group_name: String?
+      attr_accessor member_name: String?
+      attr_accessor member_realm: String?
+      attr_accessor client_token: String?
+    end
+
+    class AddGroupMemberResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AttributeValue
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s: String,
+        ?n: Integer,
+        ?bool: bool,
+        ?ss: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s: String?
+      attr_accessor n: Integer?
+      attr_accessor bool: bool?
+      attr_accessor ss: Array[String]?
+
+      class S < AttributeValue
+      end
+      class N < AttributeValue
+      end
+      class BOOL < AttributeValue
+      end
+      class SS < AttributeValue
+      end
+      class Unknown < AttributeValue
+      end
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?sam_account_name: String,
+        ?group_type: String,
+        ?group_scope: String,
+        ?other_attributes: Hash[String, Types::AttributeValue],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor sam_account_name: String?
+      attr_accessor group_type: String?
+      attr_accessor group_scope: String?
+      attr_accessor other_attributes: Hash[String, Types::AttributeValue]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?sam_account_name: String,
+        ?sid: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor sam_account_name: String?
+      attr_accessor sid: String?
+    end
+
+    class CreateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?sam_account_name: String,
+        ?email_address: String,
+        ?given_name: String,
+        ?surname: String,
+        ?other_attributes: Hash[String, Types::AttributeValue],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor sam_account_name: String?
+      attr_accessor email_address: String?
+      attr_accessor given_name: String?
+      attr_accessor surname: String?
+      attr_accessor other_attributes: Hash[String, Types::AttributeValue]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateUserResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?sid: String,
+        ?sam_account_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor sid: String?
+      attr_accessor sam_account_name: String?
+    end
+
+    class DeleteGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?sam_account_name: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor sam_account_name: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?sam_account_name: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor sam_account_name: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeleteUserResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?realm: String,
+        ?sam_account_name: String,
+        ?other_attributes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor realm: String?
+      attr_accessor sam_account_name: String?
+      attr_accessor other_attributes: Array[String]?
+    end
+
+    class DescribeGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?realm: String,
+        ?sid: String,
+        ?sam_account_name: String,
+        ?distinguished_name: String,
+        ?group_type: String,
+        ?group_scope: String,
+        ?other_attributes: Hash[String, Types::AttributeValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor realm: String?
+      attr_accessor sid: String?
+      attr_accessor sam_account_name: String?
+      attr_accessor distinguished_name: String?
+      attr_accessor group_type: String?
+      attr_accessor group_scope: String?
+      attr_accessor other_attributes: Hash[String, Types::AttributeValue]?
+    end
+
+    class DescribeUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?sam_account_name: String,
+        ?other_attributes: Array[String],
+        ?realm: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor sam_account_name: String?
+      attr_accessor other_attributes: Array[String]?
+      attr_accessor realm: String?
+    end
+
+    class DescribeUserResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?realm: String,
+        ?sid: String,
+        ?sam_account_name: String,
+        ?distinguished_name: String,
+        ?user_principal_name: String,
+        ?email_address: String,
+        ?given_name: String,
+        ?surname: String,
+        ?enabled: bool,
+        ?other_attributes: Hash[String, Types::AttributeValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor realm: String?
+      attr_accessor sid: String?
+      attr_accessor sam_account_name: String?
+      attr_accessor distinguished_name: String?
+      attr_accessor user_principal_name: String?
+      attr_accessor email_address: String?
+      attr_accessor given_name: String?
+      attr_accessor surname: String?
+      attr_accessor enabled: bool?
+      attr_accessor other_attributes: Hash[String, Types::AttributeValue]?
+    end
+
+    class DirectoryUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module DirectoryUnavailableReason
+      INVALID_DIRECTORY_STATE: String
+      DIRECTORY_TIMEOUT: String
+      DIRECTORY_RESOURCES_EXCEEDED: String
+      NO_DISK_SPACE: String
+      TRUST_AUTH_FAILURE: String
+    end
+
+    class DisableUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?sam_account_name: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor sam_account_name: String?
+      attr_accessor client_token: String?
+    end
+
+    class DisableUserResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Group
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sid: String,
+        ?sam_account_name: String,
+        ?distinguished_name: String,
+        ?group_type: String,
+        ?group_scope: String,
+        ?other_attributes: Hash[String, Types::AttributeValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sid: String?
+      attr_accessor sam_account_name: String?
+      attr_accessor distinguished_name: String?
+      attr_accessor group_type: String?
+      attr_accessor group_scope: String?
+      attr_accessor other_attributes: Hash[String, Types::AttributeValue]?
+    end
+
+    module GroupScope
+      DOMAIN_LOCAL: String
+      GLOBAL: String
+      UNIVERSAL: String
+      BUILTIN_LOCAL: String
+    end
+
+    class GroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sid: String,
+        ?sam_account_name: String,
+        ?group_type: String,
+        ?group_scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sid: String?
+      attr_accessor sam_account_name: String?
+      attr_accessor group_type: String?
+      attr_accessor group_scope: String?
+    end
+
+    module GroupType
+      DISTRIBUTION: String
+      SECURITY: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListGroupMembersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?realm: String,
+        ?member_realm: String,
+        ?sam_account_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor realm: String?
+      attr_accessor member_realm: String?
+      attr_accessor sam_account_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListGroupMembersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?realm: String,
+        ?member_realm: String,
+        ?members: Array[Types::Member],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor realm: String?
+      attr_accessor member_realm: String?
+      attr_accessor members: Array[Types::Member]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGroupsForMemberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?realm: String,
+        ?member_realm: String,
+        ?sam_account_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor realm: String?
+      attr_accessor member_realm: String?
+      attr_accessor sam_account_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListGroupsForMemberResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?realm: String,
+        ?member_realm: String,
+        ?groups: Array[Types::GroupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor realm: String?
+      attr_accessor member_realm: String?
+      attr_accessor groups: Array[Types::GroupSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?realm: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor realm: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListGroupsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?realm: String,
+        ?groups: Array[Types::GroupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor realm: String?
+      attr_accessor groups: Array[Types::GroupSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListUsersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?realm: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor realm: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListUsersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?realm: String,
+        ?users: Array[Types::UserSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor realm: String?
+      attr_accessor users: Array[Types::UserSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class Member
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sid: String,
+        ?sam_account_name: String,
+        ?member_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sid: String?
+      attr_accessor sam_account_name: String?
+      attr_accessor member_type: String?
+    end
+
+    module MemberType
+      USER: String
+      GROUP: String
+      COMPUTER: String
+    end
+
+    class RemoveGroupMemberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?group_name: String,
+        ?member_name: String,
+        ?member_realm: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor group_name: String?
+      attr_accessor member_name: String?
+      attr_accessor member_realm: String?
+      attr_accessor client_token: String?
+    end
+
+    class RemoveGroupMemberResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SearchGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?search_string: String,
+        ?search_attributes: Array[String],
+        ?realm: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor search_string: String?
+      attr_accessor search_attributes: Array[String]?
+      attr_accessor realm: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class SearchGroupsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?realm: String,
+        ?groups: Array[Types::Group],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor realm: String?
+      attr_accessor groups: Array[Types::Group]?
+      attr_accessor next_token: String?
+    end
+
+    class SearchUsersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?realm: String,
+        ?search_string: String,
+        ?search_attributes: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor realm: String?
+      attr_accessor search_string: String?
+      attr_accessor search_attributes: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class SearchUsersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?realm: String,
+        ?users: Array[Types::User],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor realm: String?
+      attr_accessor users: Array[Types::User]?
+      attr_accessor next_token: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UpdateGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?sam_account_name: String,
+        ?group_type: String,
+        ?group_scope: String,
+        ?other_attributes: Hash[String, Types::AttributeValue],
+        ?update_type: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor sam_account_name: String?
+      attr_accessor group_type: String?
+      attr_accessor group_scope: String?
+      attr_accessor other_attributes: Hash[String, Types::AttributeValue]?
+      attr_accessor update_type: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateGroupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module UpdateType
+      ADD: String
+      REPLACE: String
+      REMOVE: String
+    end
+
+    class UpdateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_id: String,
+        ?sam_account_name: String,
+        ?email_address: String,
+        ?given_name: String,
+        ?surname: String,
+        ?other_attributes: Hash[String, Types::AttributeValue],
+        ?update_type: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_id: String?
+      attr_accessor sam_account_name: String?
+      attr_accessor email_address: String?
+      attr_accessor given_name: String?
+      attr_accessor surname: String?
+      attr_accessor other_attributes: Hash[String, Types::AttributeValue]?
+      attr_accessor update_type: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateUserResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class User
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sid: String,
+        ?sam_account_name: String,
+        ?distinguished_name: String,
+        ?user_principal_name: String,
+        ?email_address: String,
+        ?given_name: String,
+        ?surname: String,
+        ?enabled: bool,
+        ?other_attributes: Hash[String, Types::AttributeValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sid: String?
+      attr_accessor sam_account_name: String?
+      attr_accessor distinguished_name: String?
+      attr_accessor user_principal_name: String?
+      attr_accessor email_address: String?
+      attr_accessor given_name: String?
+      attr_accessor surname: String?
+      attr_accessor enabled: bool?
+      attr_accessor other_attributes: Hash[String, Types::AttributeValue]?
+    end
+
+    class UserSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sid: String,
+        ?sam_account_name: String,
+        ?given_name: String,
+        ?surname: String,
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sid: String?
+      attr_accessor sam_account_name: String?
+      attr_accessor given_name: String?
+      attr_accessor surname: String?
+      attr_accessor enabled: bool?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module ValidationExceptionReason
+      INVALID_REALM: String
+      INVALID_DIRECTORY_TYPE: String
+      INVALID_SECONDARY_REGION: String
+      INVALID_NEXT_TOKEN: String
+      INVALID_ATTRIBUTE_VALUE: String
+      INVALID_ATTRIBUTE_NAME: String
+      INVALID_ATTRIBUTE_FOR_USER: String
+      INVALID_ATTRIBUTE_FOR_GROUP: String
+      INVALID_ATTRIBUTE_FOR_SEARCH: String
+      INVALID_ATTRIBUTE_FOR_MODIFY: String
+      DUPLICATE_ATTRIBUTE: String
+      MISSING_ATTRIBUTE: String
+      ATTRIBUTE_EXISTS: String
+      LDAP_SIZE_LIMIT_EXCEEDED: String
+      LDAP_UNSUPPORTED_OPERATION: String
+    end
+  end
+end

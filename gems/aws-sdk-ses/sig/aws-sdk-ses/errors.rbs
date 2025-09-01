@@ -1,0 +1,135 @@
+module Aws::SES
+  module Errors
+    class AccountSendingPausedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AlreadyExistsException < Smithy::Client::ServiceError
+      def name: () -> String?
+      def message: () -> String?
+    end
+    class CannotDeleteException < Smithy::Client::ServiceError
+      def name: () -> String?
+      def message: () -> String?
+    end
+    class ConfigurationSetAlreadyExistsException < Smithy::Client::ServiceError
+      def configuration_set_name: () -> String?
+      def message: () -> String?
+    end
+    class ConfigurationSetDoesNotExistException < Smithy::Client::ServiceError
+      def configuration_set_name: () -> String?
+      def message: () -> String?
+    end
+    class ConfigurationSetSendingPausedException < Smithy::Client::ServiceError
+      def configuration_set_name: () -> String?
+      def message: () -> String?
+    end
+    class CustomVerificationEmailInvalidContentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class CustomVerificationEmailTemplateAlreadyExistsException < Smithy::Client::ServiceError
+      def custom_verification_email_template_name: () -> String?
+      def message: () -> String?
+    end
+    class CustomVerificationEmailTemplateDoesNotExistException < Smithy::Client::ServiceError
+      def custom_verification_email_template_name: () -> String?
+      def message: () -> String?
+    end
+    class EventDestinationAlreadyExistsException < Smithy::Client::ServiceError
+      def configuration_set_name: () -> String?
+      def event_destination_name: () -> String?
+      def message: () -> String?
+    end
+    class EventDestinationDoesNotExistException < Smithy::Client::ServiceError
+      def configuration_set_name: () -> String?
+      def event_destination_name: () -> String?
+      def message: () -> String?
+    end
+    class FromEmailAddressNotVerifiedException < Smithy::Client::ServiceError
+      def from_email_address: () -> String?
+      def message: () -> String?
+    end
+    class InvalidCloudWatchDestinationException < Smithy::Client::ServiceError
+      def configuration_set_name: () -> String?
+      def event_destination_name: () -> String?
+      def message: () -> String?
+    end
+    class InvalidConfigurationSetException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidDeliveryOptionsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidFirehoseDestinationException < Smithy::Client::ServiceError
+      def configuration_set_name: () -> String?
+      def event_destination_name: () -> String?
+      def message: () -> String?
+    end
+    class InvalidLambdaFunctionException < Smithy::Client::ServiceError
+      def function_arn: () -> String?
+      def message: () -> String?
+    end
+    class InvalidPolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRenderingParameterException < Smithy::Client::ServiceError
+      def template_name: () -> String?
+      def message: () -> String?
+    end
+    class InvalidS3ConfigurationException < Smithy::Client::ServiceError
+      def bucket: () -> String?
+      def message: () -> String?
+    end
+    class InvalidSNSDestinationException < Smithy::Client::ServiceError
+      def configuration_set_name: () -> String?
+      def event_destination_name: () -> String?
+      def message: () -> String?
+    end
+    class InvalidSnsTopicException < Smithy::Client::ServiceError
+      def topic: () -> String?
+      def message: () -> String?
+    end
+    class InvalidTemplateException < Smithy::Client::ServiceError
+      def template_name: () -> String?
+      def message: () -> String?
+    end
+    class InvalidTrackingOptionsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MailFromDomainNotVerifiedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MessageRejected < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MissingRenderingAttributeException < Smithy::Client::ServiceError
+      def template_name: () -> String?
+      def message: () -> String?
+    end
+    class ProductionAccessNotGrantedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RuleDoesNotExistException < Smithy::Client::ServiceError
+      def name: () -> String?
+      def message: () -> String?
+    end
+    class RuleSetDoesNotExistException < Smithy::Client::ServiceError
+      def name: () -> String?
+      def message: () -> String?
+    end
+    class TemplateDoesNotExistException < Smithy::Client::ServiceError
+      def template_name: () -> String?
+      def message: () -> String?
+    end
+    class TrackingOptionsAlreadyExistsException < Smithy::Client::ServiceError
+      def configuration_set_name: () -> String?
+      def message: () -> String?
+    end
+    class TrackingOptionsDoesNotExistException < Smithy::Client::ServiceError
+      def configuration_set_name: () -> String?
+      def message: () -> String?
+    end
+  end
+end

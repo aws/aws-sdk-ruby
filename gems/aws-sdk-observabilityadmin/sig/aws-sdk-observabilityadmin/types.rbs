@@ -1,0 +1,598 @@
+module Aws::ObservabilityAdmin
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?amzn_error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor amzn_error_type: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateTelemetryRuleForOrganizationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?rule: Types::TelemetryRule,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor rule: Types::TelemetryRule?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateTelemetryRuleForOrganizationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_arn: String?
+    end
+
+    class CreateTelemetryRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?rule: Types::TelemetryRule,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor rule: Types::TelemetryRule?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateTelemetryRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_arn: String?
+    end
+
+    class DeleteTelemetryRuleForOrganizationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_identifier: String?
+    end
+
+    class DeleteTelemetryRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_identifier: String?
+    end
+
+    module DestinationType
+      CLOUDWATCH_LOGS: String
+    end
+
+    class GetTelemetryEvaluationStatusForOrganizationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+    end
+
+    class GetTelemetryEvaluationStatusOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?failure_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor failure_reason: String?
+    end
+
+    class GetTelemetryRuleForOrganizationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_identifier: String?
+    end
+
+    class GetTelemetryRuleForOrganizationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?rule_arn: String,
+        ?created_time_stamp: Integer,
+        ?last_update_time_stamp: Integer,
+        ?telemetry_rule: Types::TelemetryRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor rule_arn: String?
+      attr_accessor created_time_stamp: Integer?
+      attr_accessor last_update_time_stamp: Integer?
+      attr_accessor telemetry_rule: Types::TelemetryRule?
+    end
+
+    class GetTelemetryRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_identifier: String?
+    end
+
+    class GetTelemetryRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?rule_arn: String,
+        ?created_time_stamp: Integer,
+        ?last_update_time_stamp: Integer,
+        ?telemetry_rule: Types::TelemetryRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor rule_arn: String?
+      attr_accessor created_time_stamp: Integer?
+      attr_accessor last_update_time_stamp: Integer?
+      attr_accessor telemetry_rule: Types::TelemetryRule?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?amzn_error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor amzn_error_type: String?
+    end
+
+    class ListResourceTelemetryForOrganizationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_identifiers: Array[String],
+        ?resource_identifier_prefix: String,
+        ?resource_types: Array[String],
+        ?telemetry_configuration_state: Hash[String, String],
+        ?resource_tags: Hash[String, String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_identifiers: Array[String]?
+      attr_accessor resource_identifier_prefix: String?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor telemetry_configuration_state: Hash[String, String]?
+      attr_accessor resource_tags: Hash[String, String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceTelemetryForOrganizationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?telemetry_configurations: Array[Types::TelemetryConfiguration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor telemetry_configurations: Array[Types::TelemetryConfiguration]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceTelemetryInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier_prefix: String,
+        ?resource_types: Array[String],
+        ?telemetry_configuration_state: Hash[String, String],
+        ?resource_tags: Hash[String, String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier_prefix: String?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor telemetry_configuration_state: Hash[String, String]?
+      attr_accessor resource_tags: Hash[String, String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourceTelemetryOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?telemetry_configurations: Array[Types::TelemetryConfiguration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor telemetry_configurations: Array[Types::TelemetryConfiguration]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTelemetryRulesForOrganizationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name_prefix: String,
+        ?source_account_ids: Array[String],
+        ?source_organization_unit_ids: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name_prefix: String?
+      attr_accessor source_account_ids: Array[String]?
+      attr_accessor source_organization_unit_ids: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTelemetryRulesForOrganizationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?telemetry_rule_summaries: Array[Types::TelemetryRuleSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor telemetry_rule_summaries: Array[Types::TelemetryRuleSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTelemetryRulesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name_prefix: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name_prefix: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTelemetryRulesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?telemetry_rule_summaries: Array[Types::TelemetryRuleSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor telemetry_rule_summaries: Array[Types::TelemetryRuleSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceType
+      AWS_EC2_INSTANCE: String
+      AWS_EC2_VPC: String
+      AWS_LAMDBA_FUNCTION: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?amzn_error_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor amzn_error_type: String?
+    end
+
+    module Status
+      NOT_STARTED: String
+      STARTING: String
+      FAILED_START: String
+      RUNNING: String
+      STOPPING: String
+      FAILED_STOP: String
+      STOPPED: String
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TelemetryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_identifier: String,
+        ?telemetry_configuration_state: Hash[String, String],
+        ?resource_type: String,
+        ?resource_identifier: String,
+        ?resource_tags: Hash[String, String],
+        ?last_update_time_stamp: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_identifier: String?
+      attr_accessor telemetry_configuration_state: Hash[String, String]?
+      attr_accessor resource_type: String?
+      attr_accessor resource_identifier: String?
+      attr_accessor resource_tags: Hash[String, String]?
+      attr_accessor last_update_time_stamp: Integer?
+    end
+
+    class TelemetryDestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_type: String,
+        ?destination_pattern: String,
+        ?retention_in_days: Integer,
+        ?vpc_flow_log_parameters: Types::VPCFlowLogParameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_type: String?
+      attr_accessor destination_pattern: String?
+      attr_accessor retention_in_days: Integer?
+      attr_accessor vpc_flow_log_parameters: Types::VPCFlowLogParameters?
+    end
+
+    class TelemetryRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?telemetry_type: String,
+        ?destination_configuration: Types::TelemetryDestinationConfiguration,
+        ?scope: String,
+        ?selection_criteria: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor telemetry_type: String?
+      attr_accessor destination_configuration: Types::TelemetryDestinationConfiguration?
+      attr_accessor scope: String?
+      attr_accessor selection_criteria: String?
+    end
+
+    class TelemetryRuleSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_name: String,
+        ?rule_arn: String,
+        ?created_time_stamp: Integer,
+        ?last_update_time_stamp: Integer,
+        ?resource_type: String,
+        ?telemetry_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_name: String?
+      attr_accessor rule_arn: String?
+      attr_accessor created_time_stamp: Integer?
+      attr_accessor last_update_time_stamp: Integer?
+      attr_accessor resource_type: String?
+      attr_accessor telemetry_type: String?
+    end
+
+    module TelemetryState
+      ENABLED: String
+      DISABLED: String
+      NOT_APPLICABLE: String
+    end
+
+    module TelemetryType
+      LOGS: String
+      METRICS: String
+      TRACES: String
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateTelemetryRuleForOrganizationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_identifier: String,
+        ?rule: Types::TelemetryRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_identifier: String?
+      attr_accessor rule: Types::TelemetryRule?
+    end
+
+    class UpdateTelemetryRuleForOrganizationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_arn: String?
+    end
+
+    class UpdateTelemetryRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_identifier: String,
+        ?rule: Types::TelemetryRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_identifier: String?
+      attr_accessor rule: Types::TelemetryRule?
+    end
+
+    class UpdateTelemetryRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rule_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rule_arn: String?
+    end
+
+    class VPCFlowLogParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_format: String,
+        ?traffic_type: String,
+        ?max_aggregation_interval: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_format: String?
+      attr_accessor traffic_type: String?
+      attr_accessor max_aggregation_interval: Integer?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

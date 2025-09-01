@@ -1,0 +1,1238 @@
+module Aws::AutoScaling
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::AutoScaling::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AttachInstancesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def attach_instances: (
+      ?instance_ids: Array[String],
+      ?auto_scaling_group_name: String
+    ) -> _AttachInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachInstancesResponse
+
+    interface _AttachLoadBalancerTargetGroupsResponse
+      include Smithy::Client::_Response[Types::AttachLoadBalancerTargetGroupsOutput]
+    end
+    def attach_load_balancer_target_groups: (
+      ?auto_scaling_group_name: String,
+      ?target_group_ar_ns: Array[String]
+    ) -> _AttachLoadBalancerTargetGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachLoadBalancerTargetGroupsResponse
+
+    interface _AttachLoadBalancersResponse
+      include Smithy::Client::_Response[Types::AttachLoadBalancersOutput]
+    end
+    def attach_load_balancers: (
+      ?auto_scaling_group_name: String,
+      ?load_balancer_names: Array[String]
+    ) -> _AttachLoadBalancersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachLoadBalancersResponse
+
+    interface _AttachTrafficSourcesResponse
+      include Smithy::Client::_Response[Types::AttachTrafficSourcesOutput]
+    end
+    def attach_traffic_sources: (
+      ?auto_scaling_group_name: String,
+      ?traffic_sources: Array[
+        {
+          identifier: String,
+          type: untyped
+        }
+      ],
+      ?skip_zonal_shift_validation: bool
+    ) -> _AttachTrafficSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachTrafficSourcesResponse
+
+    interface _BatchDeleteScheduledActionResponse
+      include Smithy::Client::_Response[Types::BatchDeleteScheduledActionOutput]
+      def failed_scheduled_actions: () -> Array[Types::FailedScheduledUpdateGroupActionRequest]?
+    end
+    def batch_delete_scheduled_action: (
+      ?auto_scaling_group_name: String,
+      ?scheduled_action_names: Array[String]
+    ) -> _BatchDeleteScheduledActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchDeleteScheduledActionResponse
+
+    interface _BatchPutScheduledUpdateGroupActionResponse
+      include Smithy::Client::_Response[Types::BatchPutScheduledUpdateGroupActionOutput]
+      def failed_scheduled_update_group_actions: () -> Array[Types::FailedScheduledUpdateGroupActionRequest]?
+    end
+    def batch_put_scheduled_update_group_action: (
+      ?auto_scaling_group_name: String,
+      ?scheduled_update_group_actions: Array[
+        {
+          scheduled_action_name: String,
+          start_time: Time,
+          end_time: untyped,
+          recurrence: untyped,
+          min_size: Integer,
+          max_size: Integer,
+          desired_capacity: Integer,
+          time_zone: untyped
+        }
+      ]
+    ) -> _BatchPutScheduledUpdateGroupActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchPutScheduledUpdateGroupActionResponse
+
+    interface _CancelInstanceRefreshResponse
+      include Smithy::Client::_Response[Types::CancelInstanceRefreshOutput]
+      def instance_refresh_id: () -> String?
+    end
+    def cancel_instance_refresh: (
+      ?auto_scaling_group_name: String
+    ) -> _CancelInstanceRefreshResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelInstanceRefreshResponse
+
+    interface _CompleteLifecycleActionResponse
+      include Smithy::Client::_Response[Types::CompleteLifecycleActionOutput]
+    end
+    def complete_lifecycle_action: (
+      ?lifecycle_hook_name: String,
+      ?auto_scaling_group_name: String,
+      ?lifecycle_action_token: String,
+      ?lifecycle_action_result: String,
+      ?instance_id: String
+    ) -> _CompleteLifecycleActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CompleteLifecycleActionResponse
+
+    interface _CreateAutoScalingGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_auto_scaling_group: (
+      ?auto_scaling_group_name: String,
+      ?launch_configuration_name: String,
+      ?launch_template: {
+        launch_template_id: String,
+        launch_template_name: String,
+        version: untyped
+      },
+      ?mixed_instances_policy: {
+        launch_template: {
+          launch_template_specification: {
+            launch_template_id: String,
+            launch_template_name: String,
+            version: untyped
+          },
+          overrides: Array[
+            {
+              instance_type: untyped,
+              weighted_capacity: String,
+              launch_template_specification: untyped,
+              instance_requirements: {
+                v_cpu_count: {
+                  min: Integer,
+                  max: untyped
+                },
+                memory_mi_b: {
+                  min: untyped,
+                  max: untyped
+                },
+                cpu_manufacturers: Array[String],
+                memory_gi_b_per_v_cpu: {
+                  min: Float,
+                  max: untyped
+                },
+                excluded_instance_types: Array[String],
+                instance_generations: Array[String],
+                spot_max_price_percentage_over_lowest_price: untyped,
+                max_spot_price_as_percentage_of_optimal_on_demand_price: untyped,
+                on_demand_max_price_percentage_over_lowest_price: untyped,
+                bare_metal: String,
+                burstable_performance: String,
+                require_hibernate_support: bool,
+                network_interface_count: {
+                  min: untyped,
+                  max: untyped
+                },
+                local_storage: String,
+                local_storage_types: Array[String],
+                total_local_storage_gb: {
+                  min: untyped,
+                  max: untyped
+                },
+                baseline_ebs_bandwidth_mbps: {
+                  min: untyped,
+                  max: untyped
+                },
+                accelerator_types: Array[String],
+                accelerator_count: {
+                  min: untyped,
+                  max: untyped
+                },
+                accelerator_manufacturers: Array[String],
+                accelerator_names: Array[String],
+                accelerator_total_memory_mi_b: {
+                  min: untyped,
+                  max: untyped
+                },
+                network_bandwidth_gbps: {
+                  min: untyped,
+                  max: untyped
+                },
+                allowed_instance_types: Array[String],
+                baseline_performance_factors: {
+                  cpu: {
+                    references: Array[
+                      {
+                        instance_family: String
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        instances_distribution: {
+          on_demand_allocation_strategy: String,
+          on_demand_base_capacity: Integer,
+          on_demand_percentage_above_base_capacity: Integer,
+          spot_allocation_strategy: untyped,
+          spot_instance_pools: Integer,
+          spot_max_price: String
+        }
+      },
+      ?instance_id: String,
+      ?min_size: Integer,
+      ?max_size: Integer,
+      ?desired_capacity: Integer,
+      ?default_cooldown: Integer,
+      ?availability_zones: Array[String],
+      ?load_balancer_names: Array[String],
+      ?target_group_ar_ns: Array[String],
+      ?health_check_type: String,
+      ?health_check_grace_period: Integer,
+      ?placement_group: String,
+      ?vpc_zone_identifier: String,
+      ?termination_policies: Array[String],
+      ?new_instances_protected_from_scale_in: bool,
+      ?capacity_rebalance: bool,
+      ?lifecycle_hook_specification_list: Array[
+        {
+          lifecycle_hook_name: String,
+          lifecycle_transition: String,
+          notification_metadata: String,
+          heartbeat_timeout: Integer,
+          default_result: String,
+          notification_target_arn: String,
+          role_arn: String
+        }
+      ],
+      ?tags: Array[
+        {
+          resource_id: String,
+          resource_type: untyped,
+          key: String,
+          value: String,
+          propagate_at_launch: bool
+        }
+      ],
+      ?service_linked_role_arn: String,
+      ?max_instance_lifetime: Integer,
+      ?context: String,
+      ?desired_capacity_type: String,
+      ?default_instance_warmup: Integer,
+      ?traffic_sources: Array[
+        {
+          identifier: String,
+          type: untyped
+        }
+      ],
+      ?instance_maintenance_policy: {
+        min_healthy_percentage: Integer,
+        max_healthy_percentage: Integer
+      },
+      ?availability_zone_distribution: {
+        capacity_distribution_strategy: String
+      },
+      ?availability_zone_impairment_policy: {
+        zonal_shift_enabled: bool,
+        impaired_zone_health_check_behavior: String
+      },
+      ?skip_zonal_shift_validation: bool,
+      ?capacity_reservation_specification: {
+        capacity_reservation_preference: String,
+        capacity_reservation_target: {
+          capacity_reservation_ids: Array[String],
+          capacity_reservation_resource_group_arns: Array[String]
+        }
+      }
+    ) -> _CreateAutoScalingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAutoScalingGroupResponse
+
+    interface _CreateLaunchConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_launch_configuration: (
+      ?launch_configuration_name: String,
+      ?image_id: String,
+      ?key_name: String,
+      ?security_groups: Array[String],
+      ?classic_link_vpc_id: String,
+      ?classic_link_vpc_security_groups: Array[String],
+      ?user_data: String,
+      ?instance_id: String,
+      ?instance_type: String,
+      ?kernel_id: String,
+      ?ramdisk_id: String,
+      ?block_device_mappings: Array[
+        {
+          virtual_name: String,
+          device_name: untyped,
+          ebs: {
+            snapshot_id: untyped,
+            volume_size: Integer,
+            volume_type: String,
+            delete_on_termination: bool,
+            iops: Integer,
+            encrypted: bool,
+            throughput: Integer
+          },
+          no_device: bool
+        }
+      ],
+      ?instance_monitoring: {
+        enabled: bool
+      },
+      ?spot_price: String,
+      ?iam_instance_profile: String,
+      ?ebs_optimized: bool,
+      ?associate_public_ip_address: bool,
+      ?placement_tenancy: String,
+      ?metadata_options: {
+        http_tokens: String,
+        http_put_response_hop_limit: Integer,
+        http_endpoint: String
+      }
+    ) -> _CreateLaunchConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLaunchConfigurationResponse
+
+    interface _CreateOrUpdateTagsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def create_or_update_tags: (
+      ?tags: Array[
+        {
+          resource_id: String,
+          resource_type: untyped,
+          key: String,
+          value: String,
+          propagate_at_launch: bool
+        }
+      ]
+    ) -> _CreateOrUpdateTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOrUpdateTagsResponse
+
+    interface _DeleteAutoScalingGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_auto_scaling_group: (
+      ?auto_scaling_group_name: String,
+      ?force_delete: bool
+    ) -> _DeleteAutoScalingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAutoScalingGroupResponse
+
+    interface _DeleteLaunchConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_launch_configuration: (
+      ?launch_configuration_name: String
+    ) -> _DeleteLaunchConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLaunchConfigurationResponse
+
+    interface _DeleteLifecycleHookResponse
+      include Smithy::Client::_Response[Types::DeleteLifecycleHookOutput]
+    end
+    def delete_lifecycle_hook: (
+      ?lifecycle_hook_name: String,
+      ?auto_scaling_group_name: String
+    ) -> _DeleteLifecycleHookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLifecycleHookResponse
+
+    interface _DeleteNotificationConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_notification_configuration: (
+      ?auto_scaling_group_name: String,
+      ?topic_arn: String
+    ) -> _DeleteNotificationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNotificationConfigurationResponse
+
+    interface _DeletePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_policy: (
+      ?auto_scaling_group_name: String,
+      ?policy_name: String
+    ) -> _DeletePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePolicyResponse
+
+    interface _DeleteScheduledActionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_scheduled_action: (
+      ?auto_scaling_group_name: String,
+      ?scheduled_action_name: String
+    ) -> _DeleteScheduledActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteScheduledActionResponse
+
+    interface _DeleteTagsResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_tags: (
+      ?tags: Array[
+        {
+          resource_id: String,
+          resource_type: untyped,
+          key: String,
+          value: String,
+          propagate_at_launch: bool
+        }
+      ]
+    ) -> _DeleteTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTagsResponse
+
+    interface _DeleteWarmPoolResponse
+      include Smithy::Client::_Response[Types::DeleteWarmPoolOutput]
+    end
+    def delete_warm_pool: (
+      ?auto_scaling_group_name: String,
+      ?force_delete: bool
+    ) -> _DeleteWarmPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWarmPoolResponse
+
+    interface _DescribeAccountLimitsResponse
+      include Smithy::Client::_Response[Types::DescribeAccountLimitsOutput]
+      def max_number_of_auto_scaling_groups: () -> Integer?
+      def max_number_of_launch_configurations: () -> Integer?
+      def number_of_auto_scaling_groups: () -> Integer?
+      def number_of_launch_configurations: () -> Integer?
+    end
+    def describe_account_limits: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAccountLimitsResponse
+
+    interface _DescribeAdjustmentTypesResponse
+      include Smithy::Client::_Response[Types::DescribeAdjustmentTypesOutput]
+      def adjustment_types: () -> Array[Types::AdjustmentType]?
+    end
+    def describe_adjustment_types: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAdjustmentTypesResponse
+
+    interface _DescribeAutoScalingGroupsResponse
+      include Smithy::Client::_Response[Types::DescribeAutoScalingGroupsOutput]
+      def auto_scaling_groups: () -> Array[Types::AutoScalingGroup]?
+      def next_token: () -> String?
+    end
+    def describe_auto_scaling_groups: (
+      ?auto_scaling_group_names: Array[String],
+      ?include_instances: bool,
+      ?next_token: String,
+      ?max_records: Integer,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _DescribeAutoScalingGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAutoScalingGroupsResponse
+
+    interface _DescribeAutoScalingInstancesResponse
+      include Smithy::Client::_Response[Types::DescribeAutoScalingInstancesOutput]
+      def auto_scaling_instances: () -> Array[Types::AutoScalingInstanceDetails]?
+      def next_token: () -> String?
+    end
+    def describe_auto_scaling_instances: (
+      ?instance_ids: Array[String],
+      ?max_records: Integer,
+      ?next_token: String
+    ) -> _DescribeAutoScalingInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAutoScalingInstancesResponse
+
+    interface _DescribeAutoScalingNotificationTypesResponse
+      include Smithy::Client::_Response[Types::DescribeAutoScalingNotificationTypesOutput]
+      def auto_scaling_notification_types: () -> Array[String]?
+    end
+    def describe_auto_scaling_notification_types: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeAutoScalingNotificationTypesResponse
+
+    interface _DescribeInstanceRefreshesResponse
+      include Smithy::Client::_Response[Types::DescribeInstanceRefreshesOutput]
+      def instance_refreshes: () -> Array[Types::InstanceRefresh]?
+      def next_token: () -> String?
+    end
+    def describe_instance_refreshes: (
+      ?auto_scaling_group_name: String,
+      ?instance_refresh_ids: Array[String],
+      ?next_token: String,
+      ?max_records: Integer
+    ) -> _DescribeInstanceRefreshesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeInstanceRefreshesResponse
+
+    interface _DescribeLaunchConfigurationsResponse
+      include Smithy::Client::_Response[Types::DescribeLaunchConfigurationsOutput]
+      def launch_configurations: () -> Array[Types::LaunchConfiguration]?
+      def next_token: () -> String?
+    end
+    def describe_launch_configurations: (
+      ?launch_configuration_names: Array[String],
+      ?next_token: String,
+      ?max_records: Integer
+    ) -> _DescribeLaunchConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLaunchConfigurationsResponse
+
+    interface _DescribeLifecycleHookTypesResponse
+      include Smithy::Client::_Response[Types::DescribeLifecycleHookTypesOutput]
+      def lifecycle_hook_types: () -> Array[String]?
+    end
+    def describe_lifecycle_hook_types: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLifecycleHookTypesResponse
+
+    interface _DescribeLifecycleHooksResponse
+      include Smithy::Client::_Response[Types::DescribeLifecycleHooksOutput]
+      def lifecycle_hooks: () -> Array[Types::LifecycleHook]?
+    end
+    def describe_lifecycle_hooks: (
+      ?auto_scaling_group_name: String,
+      ?lifecycle_hook_names: Array[String]
+    ) -> _DescribeLifecycleHooksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLifecycleHooksResponse
+
+    interface _DescribeLoadBalancerTargetGroupsResponse
+      include Smithy::Client::_Response[Types::DescribeLoadBalancerTargetGroupsResponse]
+      def load_balancer_target_groups: () -> Array[Types::LoadBalancerTargetGroupState]?
+      def next_token: () -> String?
+    end
+    def describe_load_balancer_target_groups: (
+      ?auto_scaling_group_name: String,
+      ?next_token: String,
+      ?max_records: Integer
+    ) -> _DescribeLoadBalancerTargetGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLoadBalancerTargetGroupsResponse
+
+    interface _DescribeLoadBalancersResponse
+      include Smithy::Client::_Response[Types::DescribeLoadBalancersResponse]
+      def load_balancers: () -> Array[Types::LoadBalancerState]?
+      def next_token: () -> String?
+    end
+    def describe_load_balancers: (
+      ?auto_scaling_group_name: String,
+      ?next_token: String,
+      ?max_records: Integer
+    ) -> _DescribeLoadBalancersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLoadBalancersResponse
+
+    interface _DescribeMetricCollectionTypesResponse
+      include Smithy::Client::_Response[Types::DescribeMetricCollectionTypesOutput]
+      def metrics: () -> Array[Types::MetricCollectionType]?
+      def granularities: () -> Array[Types::MetricGranularityType]?
+    end
+    def describe_metric_collection_types: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMetricCollectionTypesResponse
+
+    interface _DescribeNotificationConfigurationsResponse
+      include Smithy::Client::_Response[Types::DescribeNotificationConfigurationsOutput]
+      def notification_configurations: () -> Array[Types::NotificationConfiguration]?
+      def next_token: () -> String?
+    end
+    def describe_notification_configurations: (
+      ?auto_scaling_group_names: Array[String],
+      ?next_token: String,
+      ?max_records: Integer
+    ) -> _DescribeNotificationConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeNotificationConfigurationsResponse
+
+    interface _DescribePoliciesResponse
+      include Smithy::Client::_Response[Types::DescribePoliciesOutput]
+      def scaling_policies: () -> Array[Types::ScalingPolicy]?
+      def next_token: () -> String?
+    end
+    def describe_policies: (
+      ?auto_scaling_group_name: String,
+      ?policy_names: Array[String],
+      ?policy_types: Array[String],
+      ?next_token: String,
+      ?max_records: Integer
+    ) -> _DescribePoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribePoliciesResponse
+
+    interface _DescribeScalingActivitiesResponse
+      include Smithy::Client::_Response[Types::DescribeScalingActivitiesOutput]
+      def activities: () -> Array[Types::Activity]?
+      def next_token: () -> String?
+    end
+    def describe_scaling_activities: (
+      ?activity_ids: Array[String],
+      ?auto_scaling_group_name: String,
+      ?include_deleted_groups: bool,
+      ?max_records: Integer,
+      ?next_token: String
+    ) -> _DescribeScalingActivitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeScalingActivitiesResponse
+
+    interface _DescribeScalingProcessTypesResponse
+      include Smithy::Client::_Response[Types::DescribeScalingProcessTypesOutput]
+      def processes: () -> Array[Types::ProcessType]?
+    end
+    def describe_scaling_process_types: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeScalingProcessTypesResponse
+
+    interface _DescribeScheduledActionsResponse
+      include Smithy::Client::_Response[Types::DescribeScheduledActionsOutput]
+      def scheduled_update_group_actions: () -> Array[Types::ScheduledUpdateGroupAction]?
+      def next_token: () -> String?
+    end
+    def describe_scheduled_actions: (
+      ?auto_scaling_group_name: String,
+      ?scheduled_action_names: Array[String],
+      ?start_time: Time,
+      ?end_time: Time,
+      ?next_token: String,
+      ?max_records: Integer
+    ) -> _DescribeScheduledActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeScheduledActionsResponse
+
+    interface _DescribeTagsResponse
+      include Smithy::Client::_Response[Types::DescribeTagsOutput]
+      def tags: () -> Array[Types::TagDescription]?
+      def next_token: () -> String?
+    end
+    def describe_tags: (
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?next_token: String,
+      ?max_records: Integer
+    ) -> _DescribeTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTagsResponse
+
+    interface _DescribeTerminationPolicyTypesResponse
+      include Smithy::Client::_Response[Types::DescribeTerminationPolicyTypesOutput]
+      def termination_policy_types: () -> Array[String]?
+    end
+    def describe_termination_policy_types: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTerminationPolicyTypesResponse
+
+    interface _DescribeTrafficSourcesResponse
+      include Smithy::Client::_Response[Types::DescribeTrafficSourcesResponse]
+      def traffic_sources: () -> Array[Types::TrafficSourceState]?
+      def next_token: () -> String?
+    end
+    def describe_traffic_sources: (
+      ?auto_scaling_group_name: String,
+      ?traffic_source_type: String,
+      ?next_token: String,
+      ?max_records: Integer
+    ) -> _DescribeTrafficSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTrafficSourcesResponse
+
+    interface _DescribeWarmPoolResponse
+      include Smithy::Client::_Response[Types::DescribeWarmPoolOutput]
+      def warm_pool_configuration: () -> Types::WarmPoolConfiguration?
+      def instances: () -> Array[Types::Instance]?
+      def next_token: () -> String?
+    end
+    def describe_warm_pool: (
+      ?auto_scaling_group_name: String,
+      ?max_records: Integer,
+      ?next_token: String
+    ) -> _DescribeWarmPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeWarmPoolResponse
+
+    interface _DetachInstancesResponse
+      include Smithy::Client::_Response[Types::DetachInstancesOutput]
+      def activities: () -> Array[Types::Activity]?
+    end
+    def detach_instances: (
+      ?instance_ids: Array[String],
+      ?auto_scaling_group_name: String,
+      ?should_decrement_desired_capacity: bool
+    ) -> _DetachInstancesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachInstancesResponse
+
+    interface _DetachLoadBalancerTargetGroupsResponse
+      include Smithy::Client::_Response[Types::DetachLoadBalancerTargetGroupsOutput]
+    end
+    def detach_load_balancer_target_groups: (
+      ?auto_scaling_group_name: String,
+      ?target_group_ar_ns: Array[String]
+    ) -> _DetachLoadBalancerTargetGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachLoadBalancerTargetGroupsResponse
+
+    interface _DetachLoadBalancersResponse
+      include Smithy::Client::_Response[Types::DetachLoadBalancersOutput]
+    end
+    def detach_load_balancers: (
+      ?auto_scaling_group_name: String,
+      ?load_balancer_names: Array[String]
+    ) -> _DetachLoadBalancersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachLoadBalancersResponse
+
+    interface _DetachTrafficSourcesResponse
+      include Smithy::Client::_Response[Types::DetachTrafficSourcesOutput]
+    end
+    def detach_traffic_sources: (
+      ?auto_scaling_group_name: String,
+      ?traffic_sources: Array[
+        {
+          identifier: String,
+          type: untyped
+        }
+      ]
+    ) -> _DetachTrafficSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachTrafficSourcesResponse
+
+    interface _DisableMetricsCollectionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def disable_metrics_collection: (
+      ?auto_scaling_group_name: String,
+      ?metrics: Array[String]
+    ) -> _DisableMetricsCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableMetricsCollectionResponse
+
+    interface _EnableMetricsCollectionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def enable_metrics_collection: (
+      ?auto_scaling_group_name: String,
+      ?metrics: Array[String],
+      ?granularity: String
+    ) -> _EnableMetricsCollectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableMetricsCollectionResponse
+
+    interface _EnterStandbyResponse
+      include Smithy::Client::_Response[Types::EnterStandbyOutput]
+      def activities: () -> Array[Types::Activity]?
+    end
+    def enter_standby: (
+      ?instance_ids: Array[String],
+      ?auto_scaling_group_name: String,
+      ?should_decrement_desired_capacity: bool
+    ) -> _EnterStandbyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnterStandbyResponse
+
+    interface _ExecutePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def execute_policy: (
+      ?auto_scaling_group_name: String,
+      ?policy_name: String,
+      ?honor_cooldown: bool,
+      ?metric_value: Float,
+      ?breach_threshold: Float
+    ) -> _ExecutePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecutePolicyResponse
+
+    interface _ExitStandbyResponse
+      include Smithy::Client::_Response[Types::ExitStandbyOutput]
+      def activities: () -> Array[Types::Activity]?
+    end
+    def exit_standby: (
+      ?instance_ids: Array[String],
+      ?auto_scaling_group_name: String
+    ) -> _ExitStandbyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExitStandbyResponse
+
+    interface _GetPredictiveScalingForecastResponse
+      include Smithy::Client::_Response[Types::GetPredictiveScalingForecastOutput]
+      def load_forecast: () -> Array[Types::LoadForecast]?
+      def capacity_forecast: () -> Types::CapacityForecast?
+      def update_time: () -> Time?
+    end
+    def get_predictive_scaling_forecast: (
+      ?auto_scaling_group_name: String,
+      ?policy_name: String,
+      ?start_time: Time,
+      ?end_time: Time
+    ) -> _GetPredictiveScalingForecastResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPredictiveScalingForecastResponse
+
+    interface _PutLifecycleHookResponse
+      include Smithy::Client::_Response[Types::PutLifecycleHookOutput]
+    end
+    def put_lifecycle_hook: (
+      ?lifecycle_hook_name: String,
+      ?auto_scaling_group_name: String,
+      ?lifecycle_transition: String,
+      ?role_arn: String,
+      ?notification_target_arn: String,
+      ?notification_metadata: String,
+      ?heartbeat_timeout: Integer,
+      ?default_result: String
+    ) -> _PutLifecycleHookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutLifecycleHookResponse
+
+    interface _PutNotificationConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_notification_configuration: (
+      ?auto_scaling_group_name: String,
+      ?topic_arn: String,
+      ?notification_types: Array[String]
+    ) -> _PutNotificationConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutNotificationConfigurationResponse
+
+    interface _PutScalingPolicyResponse
+      include Smithy::Client::_Response[Types::PutScalingPolicyOutput]
+      def policy_arn: () -> String?
+      def alarms: () -> Array[Types::Alarm]?
+    end
+    def put_scaling_policy: (
+      ?auto_scaling_group_name: String,
+      ?policy_name: String,
+      ?policy_type: String,
+      ?adjustment_type: String,
+      ?min_adjustment_step: Integer,
+      ?min_adjustment_magnitude: Integer,
+      ?scaling_adjustment: Integer,
+      ?cooldown: Integer,
+      ?metric_aggregation_type: String,
+      ?step_adjustments: Array[
+        {
+          metric_interval_lower_bound: Float,
+          metric_interval_upper_bound: untyped,
+          scaling_adjustment: Integer
+        }
+      ],
+      ?estimated_instance_warmup: Integer,
+      ?target_tracking_configuration: {
+        predefined_metric_specification: {
+          predefined_metric_type: String,
+          resource_label: String
+        },
+        customized_metric_specification: {
+          metric_name: String,
+          namespace: String,
+          dimensions: Array[
+            {
+              name: String,
+              value: String
+            }
+          ],
+          statistic: String,
+          unit: String,
+          period: Integer,
+          metrics: Array[
+            {
+              id: String,
+              expression: String,
+              metric_stat: {
+                metric: {
+                  namespace: untyped,
+                  metric_name: untyped,
+                  dimensions: untyped
+                },
+                stat: String,
+                unit: untyped,
+                period: untyped
+              },
+              label: String,
+              period: untyped,
+              return_data: bool
+            }
+          ]
+        },
+        target_value: Float,
+        disable_scale_in: bool
+      },
+      ?enabled: bool,
+      ?predictive_scaling_configuration: {
+        metric_specifications: Array[
+          {
+            target_value: Float,
+            predefined_metric_pair_specification: {
+              predefined_metric_type: String,
+              resource_label: String
+            },
+            predefined_scaling_metric_specification: {
+              predefined_metric_type: String,
+              resource_label: untyped
+            },
+            predefined_load_metric_specification: {
+              predefined_metric_type: String,
+              resource_label: untyped
+            },
+            customized_scaling_metric_specification: {
+              metric_data_queries: Array[
+                {
+                  id: String,
+                  expression: untyped,
+                  metric_stat: {
+                    metric: {
+                      namespace: String,
+                      metric_name: String,
+                      dimensions: Array[
+                        {
+                          name: String,
+                          value: String
+                        }
+                      ]
+                    },
+                    stat: String,
+                    unit: String
+                  },
+                  label: String,
+                  return_data: bool
+                }
+              ]
+            },
+            customized_load_metric_specification: {
+              metric_data_queries: untyped
+            },
+            customized_capacity_metric_specification: {
+              metric_data_queries: untyped
+            }
+          }
+        ],
+        mode: String,
+        scheduling_buffer_time: Integer,
+        max_capacity_breach_behavior: String,
+        max_capacity_buffer: Integer
+      }
+    ) -> _PutScalingPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutScalingPolicyResponse
+
+    interface _PutScheduledUpdateGroupActionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_scheduled_update_group_action: (
+      ?auto_scaling_group_name: String,
+      ?scheduled_action_name: String,
+      ?time: Time,
+      ?start_time: Time,
+      ?end_time: Time,
+      ?recurrence: String,
+      ?min_size: Integer,
+      ?max_size: Integer,
+      ?desired_capacity: Integer,
+      ?time_zone: String
+    ) -> _PutScheduledUpdateGroupActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutScheduledUpdateGroupActionResponse
+
+    interface _PutWarmPoolResponse
+      include Smithy::Client::_Response[Types::PutWarmPoolOutput]
+    end
+    def put_warm_pool: (
+      ?auto_scaling_group_name: String,
+      ?max_group_prepared_capacity: Integer,
+      ?min_size: Integer,
+      ?pool_state: String,
+      ?instance_reuse_policy: {
+        reuse_on_scale_in: bool
+      }
+    ) -> _PutWarmPoolResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutWarmPoolResponse
+
+    interface _RecordLifecycleActionHeartbeatResponse
+      include Smithy::Client::_Response[Types::RecordLifecycleActionHeartbeatOutput]
+    end
+    def record_lifecycle_action_heartbeat: (
+      ?lifecycle_hook_name: String,
+      ?auto_scaling_group_name: String,
+      ?lifecycle_action_token: String,
+      ?instance_id: String
+    ) -> _RecordLifecycleActionHeartbeatResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RecordLifecycleActionHeartbeatResponse
+
+    interface _ResumeProcessesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def resume_processes: (
+      ?auto_scaling_group_name: String,
+      ?scaling_processes: Array[String]
+    ) -> _ResumeProcessesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResumeProcessesResponse
+
+    interface _RollbackInstanceRefreshResponse
+      include Smithy::Client::_Response[Types::RollbackInstanceRefreshOutput]
+      def instance_refresh_id: () -> String?
+    end
+    def rollback_instance_refresh: (
+      ?auto_scaling_group_name: String
+    ) -> _RollbackInstanceRefreshResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RollbackInstanceRefreshResponse
+
+    interface _SetDesiredCapacityResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_desired_capacity: (
+      ?auto_scaling_group_name: String,
+      ?desired_capacity: Integer,
+      ?honor_cooldown: bool
+    ) -> _SetDesiredCapacityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetDesiredCapacityResponse
+
+    interface _SetInstanceHealthResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def set_instance_health: (
+      ?instance_id: String,
+      ?health_status: String,
+      ?should_respect_grace_period: bool
+    ) -> _SetInstanceHealthResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetInstanceHealthResponse
+
+    interface _SetInstanceProtectionResponse
+      include Smithy::Client::_Response[Types::SetInstanceProtectionOutput]
+    end
+    def set_instance_protection: (
+      ?instance_ids: Array[String],
+      ?auto_scaling_group_name: String,
+      ?protected_from_scale_in: bool
+    ) -> _SetInstanceProtectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SetInstanceProtectionResponse
+
+    interface _StartInstanceRefreshResponse
+      include Smithy::Client::_Response[Types::StartInstanceRefreshOutput]
+      def instance_refresh_id: () -> String?
+    end
+    def start_instance_refresh: (
+      ?auto_scaling_group_name: String,
+      ?strategy: String,
+      ?desired_configuration: {
+        launch_template: {
+          launch_template_id: String,
+          launch_template_name: String,
+          version: untyped
+        },
+        mixed_instances_policy: {
+          launch_template: {
+            launch_template_specification: untyped,
+            overrides: Array[
+              {
+                instance_type: untyped,
+                weighted_capacity: String,
+                launch_template_specification: untyped,
+                instance_requirements: {
+                  v_cpu_count: {
+                    min: Integer,
+                    max: untyped
+                  },
+                  memory_mi_b: {
+                    min: untyped,
+                    max: untyped
+                  },
+                  cpu_manufacturers: Array[String],
+                  memory_gi_b_per_v_cpu: {
+                    min: Float,
+                    max: untyped
+                  },
+                  excluded_instance_types: Array[String],
+                  instance_generations: Array[String],
+                  spot_max_price_percentage_over_lowest_price: untyped,
+                  max_spot_price_as_percentage_of_optimal_on_demand_price: untyped,
+                  on_demand_max_price_percentage_over_lowest_price: untyped,
+                  bare_metal: String,
+                  burstable_performance: String,
+                  require_hibernate_support: bool,
+                  network_interface_count: {
+                    min: untyped,
+                    max: untyped
+                  },
+                  local_storage: String,
+                  local_storage_types: Array[String],
+                  total_local_storage_gb: {
+                    min: untyped,
+                    max: untyped
+                  },
+                  baseline_ebs_bandwidth_mbps: {
+                    min: untyped,
+                    max: untyped
+                  },
+                  accelerator_types: Array[String],
+                  accelerator_count: {
+                    min: untyped,
+                    max: untyped
+                  },
+                  accelerator_manufacturers: Array[String],
+                  accelerator_names: Array[String],
+                  accelerator_total_memory_mi_b: {
+                    min: untyped,
+                    max: untyped
+                  },
+                  network_bandwidth_gbps: {
+                    min: untyped,
+                    max: untyped
+                  },
+                  allowed_instance_types: Array[String],
+                  baseline_performance_factors: {
+                    cpu: {
+                      references: Array[
+                        {
+                          instance_family: String
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          instances_distribution: {
+            on_demand_allocation_strategy: String,
+            on_demand_base_capacity: Integer,
+            on_demand_percentage_above_base_capacity: Integer,
+            spot_allocation_strategy: untyped,
+            spot_instance_pools: Integer,
+            spot_max_price: String
+          }
+        }
+      },
+      ?preferences: {
+        min_healthy_percentage: Integer,
+        instance_warmup: Integer,
+        checkpoint_percentages: Array[Integer],
+        checkpoint_delay: Integer,
+        skip_matching: bool,
+        auto_rollback: bool,
+        scale_in_protected_instances: String,
+        standby_instances: String,
+        alarm_specification: {
+          alarms: Array[String]
+        },
+        max_healthy_percentage: Integer,
+        bake_time: Integer
+      }
+    ) -> _StartInstanceRefreshResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartInstanceRefreshResponse
+
+    interface _SuspendProcessesResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def suspend_processes: (
+      ?auto_scaling_group_name: String,
+      ?scaling_processes: Array[String]
+    ) -> _SuspendProcessesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SuspendProcessesResponse
+
+    interface _TerminateInstanceInAutoScalingGroupResponse
+      include Smithy::Client::_Response[Types::TerminateInstanceInAutoScalingGroupOutput]
+      def activity: () -> Types::Activity?
+    end
+    def terminate_instance_in_auto_scaling_group: (
+      ?instance_id: String,
+      ?should_decrement_desired_capacity: bool
+    ) -> _TerminateInstanceInAutoScalingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateInstanceInAutoScalingGroupResponse
+
+    interface _UpdateAutoScalingGroupResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def update_auto_scaling_group: (
+      ?auto_scaling_group_name: String,
+      ?launch_configuration_name: String,
+      ?launch_template: {
+        launch_template_id: String,
+        launch_template_name: String,
+        version: untyped
+      },
+      ?mixed_instances_policy: {
+        launch_template: {
+          launch_template_specification: {
+            launch_template_id: String,
+            launch_template_name: String,
+            version: untyped
+          },
+          overrides: Array[
+            {
+              instance_type: untyped,
+              weighted_capacity: String,
+              launch_template_specification: untyped,
+              instance_requirements: {
+                v_cpu_count: {
+                  min: Integer,
+                  max: untyped
+                },
+                memory_mi_b: {
+                  min: untyped,
+                  max: untyped
+                },
+                cpu_manufacturers: Array[String],
+                memory_gi_b_per_v_cpu: {
+                  min: Float,
+                  max: untyped
+                },
+                excluded_instance_types: Array[String],
+                instance_generations: Array[String],
+                spot_max_price_percentage_over_lowest_price: untyped,
+                max_spot_price_as_percentage_of_optimal_on_demand_price: untyped,
+                on_demand_max_price_percentage_over_lowest_price: untyped,
+                bare_metal: String,
+                burstable_performance: String,
+                require_hibernate_support: bool,
+                network_interface_count: {
+                  min: untyped,
+                  max: untyped
+                },
+                local_storage: String,
+                local_storage_types: Array[String],
+                total_local_storage_gb: {
+                  min: untyped,
+                  max: untyped
+                },
+                baseline_ebs_bandwidth_mbps: {
+                  min: untyped,
+                  max: untyped
+                },
+                accelerator_types: Array[String],
+                accelerator_count: {
+                  min: untyped,
+                  max: untyped
+                },
+                accelerator_manufacturers: Array[String],
+                accelerator_names: Array[String],
+                accelerator_total_memory_mi_b: {
+                  min: untyped,
+                  max: untyped
+                },
+                network_bandwidth_gbps: {
+                  min: untyped,
+                  max: untyped
+                },
+                allowed_instance_types: Array[String],
+                baseline_performance_factors: {
+                  cpu: {
+                    references: Array[
+                      {
+                        instance_family: String
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        instances_distribution: {
+          on_demand_allocation_strategy: String,
+          on_demand_base_capacity: Integer,
+          on_demand_percentage_above_base_capacity: Integer,
+          spot_allocation_strategy: untyped,
+          spot_instance_pools: Integer,
+          spot_max_price: String
+        }
+      },
+      ?min_size: Integer,
+      ?max_size: Integer,
+      ?desired_capacity: Integer,
+      ?default_cooldown: Integer,
+      ?availability_zones: Array[String],
+      ?health_check_type: String,
+      ?health_check_grace_period: Integer,
+      ?placement_group: String,
+      ?vpc_zone_identifier: String,
+      ?termination_policies: Array[String],
+      ?new_instances_protected_from_scale_in: bool,
+      ?service_linked_role_arn: String,
+      ?max_instance_lifetime: Integer,
+      ?capacity_rebalance: bool,
+      ?context: String,
+      ?desired_capacity_type: String,
+      ?default_instance_warmup: Integer,
+      ?instance_maintenance_policy: {
+        min_healthy_percentage: Integer,
+        max_healthy_percentage: Integer
+      },
+      ?availability_zone_distribution: {
+        capacity_distribution_strategy: String
+      },
+      ?availability_zone_impairment_policy: {
+        zonal_shift_enabled: bool,
+        impaired_zone_health_check_behavior: String
+      },
+      ?skip_zonal_shift_validation: bool,
+      ?capacity_reservation_specification: {
+        capacity_reservation_preference: String,
+        capacity_reservation_target: {
+          capacity_reservation_ids: Array[String],
+          capacity_reservation_resource_group_arns: Array[String]
+        }
+      }
+    ) -> _UpdateAutoScalingGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAutoScalingGroupResponse
+  end
+end

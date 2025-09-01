@@ -1,0 +1,5 @@
+  module Aws
+    module Outposts
+      VERSION: String
+    end
+  end

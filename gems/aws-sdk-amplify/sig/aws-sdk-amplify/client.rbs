@@ -1,0 +1,564 @@
+module Aws::Amplify
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Amplify::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateAppResponse
+      include Smithy::Client::_Response[Types::CreateAppResult]
+      def app: () -> Types::App?
+    end
+    def create_app: (
+      ?name: String,
+      ?description: String,
+      ?repository: String,
+      ?platform: String,
+      ?compute_role_arn: String,
+      ?iam_service_role_arn: String,
+      ?oauth_token: String,
+      ?access_token: String,
+      ?environment_variables: Hash[String, String],
+      ?enable_branch_auto_build: bool,
+      ?enable_branch_auto_deletion: bool,
+      ?enable_basic_auth: bool,
+      ?basic_auth_credentials: String,
+      ?custom_rules: Array[
+        {
+          source: String,
+          target: String,
+          status: String,
+          condition: String
+        }
+      ],
+      ?tags: Hash[String, String],
+      ?build_spec: String,
+      ?custom_headers: String,
+      ?enable_auto_branch_creation: bool,
+      ?auto_branch_creation_patterns: Array[String],
+      ?auto_branch_creation_config: {
+        stage: String,
+        framework: String,
+        enable_auto_build: bool,
+        environment_variables: Hash[String, String],
+        basic_auth_credentials: String,
+        enable_basic_auth: bool,
+        enable_performance_mode: bool,
+        build_spec: String,
+        enable_pull_request_preview: bool,
+        pull_request_environment_name: String
+      },
+      ?job_config: {
+        build_compute_type: String
+      },
+      ?cache_config: {
+        type: String
+      }
+    ) -> _CreateAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAppResponse
+
+    interface _CreateBackendEnvironmentResponse
+      include Smithy::Client::_Response[Types::CreateBackendEnvironmentResult]
+      def backend_environment: () -> Types::BackendEnvironment?
+    end
+    def create_backend_environment: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?stack_name: String,
+      ?deployment_artifacts: String
+    ) -> _CreateBackendEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBackendEnvironmentResponse
+
+    interface _CreateBranchResponse
+      include Smithy::Client::_Response[Types::CreateBranchResult]
+      def branch: () -> Types::Branch?
+    end
+    def create_branch: (
+      ?app_id: String,
+      ?branch_name: String,
+      ?description: String,
+      ?stage: String,
+      ?framework: String,
+      ?enable_notification: bool,
+      ?enable_auto_build: bool,
+      ?enable_skew_protection: bool,
+      ?environment_variables: Hash[String, String],
+      ?basic_auth_credentials: String,
+      ?enable_basic_auth: bool,
+      ?enable_performance_mode: bool,
+      ?tags: Hash[String, String],
+      ?build_spec: String,
+      ?ttl: String,
+      ?display_name: String,
+      ?enable_pull_request_preview: bool,
+      ?pull_request_environment_name: String,
+      ?backend_environment_arn: String,
+      ?backend: {
+        stack_arn: String
+      },
+      ?compute_role_arn: String
+    ) -> _CreateBranchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBranchResponse
+
+    interface _CreateDeploymentResponse
+      include Smithy::Client::_Response[Types::CreateDeploymentResult]
+      def job_id: () -> String?
+      def file_upload_urls: () -> Hash[String, String]?
+      def zip_upload_url: () -> String?
+    end
+    def create_deployment: (
+      ?app_id: String,
+      ?branch_name: String,
+      ?file_map: Hash[String, String]
+    ) -> _CreateDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDeploymentResponse
+
+    interface _CreateDomainAssociationResponse
+      include Smithy::Client::_Response[Types::CreateDomainAssociationResult]
+      def domain_association: () -> Types::DomainAssociation?
+    end
+    def create_domain_association: (
+      ?app_id: String,
+      ?domain_name: String,
+      ?enable_auto_sub_domain: bool,
+      ?sub_domain_settings: Array[
+        {
+          prefix: String,
+          branch_name: String
+        }
+      ],
+      ?auto_sub_domain_creation_patterns: Array[String],
+      ?auto_sub_domain_iam_role: String,
+      ?certificate_settings: {
+        type: String,
+        custom_certificate_arn: String
+      }
+    ) -> _CreateDomainAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDomainAssociationResponse
+
+    interface _CreateWebhookResponse
+      include Smithy::Client::_Response[Types::CreateWebhookResult]
+      def webhook: () -> Types::Webhook?
+    end
+    def create_webhook: (
+      ?app_id: String,
+      ?branch_name: String,
+      ?description: String
+    ) -> _CreateWebhookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateWebhookResponse
+
+    interface _DeleteAppResponse
+      include Smithy::Client::_Response[Types::DeleteAppResult]
+      def app: () -> Types::App?
+    end
+    def delete_app: (
+      ?app_id: String
+    ) -> _DeleteAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAppResponse
+
+    interface _DeleteBackendEnvironmentResponse
+      include Smithy::Client::_Response[Types::DeleteBackendEnvironmentResult]
+      def backend_environment: () -> Types::BackendEnvironment?
+    end
+    def delete_backend_environment: (
+      ?app_id: String,
+      ?environment_name: String
+    ) -> _DeleteBackendEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBackendEnvironmentResponse
+
+    interface _DeleteBranchResponse
+      include Smithy::Client::_Response[Types::DeleteBranchResult]
+      def branch: () -> Types::Branch?
+    end
+    def delete_branch: (
+      ?app_id: String,
+      ?branch_name: String
+    ) -> _DeleteBranchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBranchResponse
+
+    interface _DeleteDomainAssociationResponse
+      include Smithy::Client::_Response[Types::DeleteDomainAssociationResult]
+      def domain_association: () -> Types::DomainAssociation?
+    end
+    def delete_domain_association: (
+      ?app_id: String,
+      ?domain_name: String
+    ) -> _DeleteDomainAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainAssociationResponse
+
+    interface _DeleteJobResponse
+      include Smithy::Client::_Response[Types::DeleteJobResult]
+      def job_summary: () -> Types::JobSummary?
+    end
+    def delete_job: (
+      ?app_id: String,
+      ?branch_name: String,
+      ?job_id: String
+    ) -> _DeleteJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteJobResponse
+
+    interface _DeleteWebhookResponse
+      include Smithy::Client::_Response[Types::DeleteWebhookResult]
+      def webhook: () -> Types::Webhook?
+    end
+    def delete_webhook: (
+      ?webhook_id: String
+    ) -> _DeleteWebhookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWebhookResponse
+
+    interface _GenerateAccessLogsResponse
+      include Smithy::Client::_Response[Types::GenerateAccessLogsResult]
+      def log_url: () -> String?
+    end
+    def generate_access_logs: (
+      ?start_time: Time,
+      ?end_time: Time,
+      ?domain_name: String,
+      ?app_id: String
+    ) -> _GenerateAccessLogsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateAccessLogsResponse
+
+    interface _GetAppResponse
+      include Smithy::Client::_Response[Types::GetAppResult]
+      def app: () -> Types::App?
+    end
+    def get_app: (
+      ?app_id: String
+    ) -> _GetAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAppResponse
+
+    interface _GetArtifactUrlResponse
+      include Smithy::Client::_Response[Types::GetArtifactUrlResult]
+      def artifact_id: () -> String?
+      def artifact_url: () -> String?
+    end
+    def get_artifact_url: (
+      ?artifact_id: String
+    ) -> _GetArtifactUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetArtifactUrlResponse
+
+    interface _GetBackendEnvironmentResponse
+      include Smithy::Client::_Response[Types::GetBackendEnvironmentResult]
+      def backend_environment: () -> Types::BackendEnvironment?
+    end
+    def get_backend_environment: (
+      ?app_id: String,
+      ?environment_name: String
+    ) -> _GetBackendEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBackendEnvironmentResponse
+
+    interface _GetBranchResponse
+      include Smithy::Client::_Response[Types::GetBranchResult]
+      def branch: () -> Types::Branch?
+    end
+    def get_branch: (
+      ?app_id: String,
+      ?branch_name: String
+    ) -> _GetBranchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBranchResponse
+
+    interface _GetDomainAssociationResponse
+      include Smithy::Client::_Response[Types::GetDomainAssociationResult]
+      def domain_association: () -> Types::DomainAssociation?
+    end
+    def get_domain_association: (
+      ?app_id: String,
+      ?domain_name: String
+    ) -> _GetDomainAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainAssociationResponse
+
+    interface _GetJobResponse
+      include Smithy::Client::_Response[Types::GetJobResult]
+      def job: () -> Types::Job?
+    end
+    def get_job: (
+      ?app_id: String,
+      ?branch_name: String,
+      ?job_id: String
+    ) -> _GetJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJobResponse
+
+    interface _GetWebhookResponse
+      include Smithy::Client::_Response[Types::GetWebhookResult]
+      def webhook: () -> Types::Webhook?
+    end
+    def get_webhook: (
+      ?webhook_id: String
+    ) -> _GetWebhookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWebhookResponse
+
+    interface _ListAppsResponse
+      include Smithy::Client::_Response[Types::ListAppsResult]
+      def apps: () -> Array[Types::App]?
+      def next_token: () -> String?
+    end
+    def list_apps: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAppsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppsResponse
+
+    interface _ListArtifactsResponse
+      include Smithy::Client::_Response[Types::ListArtifactsResult]
+      def artifacts: () -> Array[Types::Artifact]?
+      def next_token: () -> String?
+    end
+    def list_artifacts: (
+      ?app_id: String,
+      ?branch_name: String,
+      ?job_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListArtifactsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListArtifactsResponse
+
+    interface _ListBackendEnvironmentsResponse
+      include Smithy::Client::_Response[Types::ListBackendEnvironmentsResult]
+      def backend_environments: () -> Array[Types::BackendEnvironment]?
+      def next_token: () -> String?
+    end
+    def list_backend_environments: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListBackendEnvironmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBackendEnvironmentsResponse
+
+    interface _ListBranchesResponse
+      include Smithy::Client::_Response[Types::ListBranchesResult]
+      def branches: () -> Array[Types::Branch]?
+      def next_token: () -> String?
+    end
+    def list_branches: (
+      ?app_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListBranchesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBranchesResponse
+
+    interface _ListDomainAssociationsResponse
+      include Smithy::Client::_Response[Types::ListDomainAssociationsResult]
+      def domain_associations: () -> Array[Types::DomainAssociation]?
+      def next_token: () -> String?
+    end
+    def list_domain_associations: (
+      ?app_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDomainAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainAssociationsResponse
+
+    interface _ListJobsResponse
+      include Smithy::Client::_Response[Types::ListJobsResult]
+      def job_summaries: () -> Array[Types::JobSummary]?
+      def next_token: () -> String?
+    end
+    def list_jobs: (
+      ?app_id: String,
+      ?branch_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListWebhooksResponse
+      include Smithy::Client::_Response[Types::ListWebhooksResult]
+      def webhooks: () -> Array[Types::Webhook]?
+      def next_token: () -> String?
+    end
+    def list_webhooks: (
+      ?app_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListWebhooksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWebhooksResponse
+
+    interface _StartDeploymentResponse
+      include Smithy::Client::_Response[Types::StartDeploymentResult]
+      def job_summary: () -> Types::JobSummary?
+    end
+    def start_deployment: (
+      ?app_id: String,
+      ?branch_name: String,
+      ?job_id: String,
+      ?source_url: String,
+      ?source_url_type: String
+    ) -> _StartDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDeploymentResponse
+
+    interface _StartJobResponse
+      include Smithy::Client::_Response[Types::StartJobResult]
+      def job_summary: () -> Types::JobSummary?
+    end
+    def start_job: (
+      ?app_id: String,
+      ?branch_name: String,
+      ?job_id: String,
+      ?job_type: String,
+      ?job_reason: String,
+      ?commit_id: String,
+      ?commit_message: String,
+      ?commit_time: Time
+    ) -> _StartJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartJobResponse
+
+    interface _StopJobResponse
+      include Smithy::Client::_Response[Types::StopJobResult]
+      def job_summary: () -> Types::JobSummary?
+    end
+    def stop_job: (
+      ?app_id: String,
+      ?branch_name: String,
+      ?job_id: String
+    ) -> _StopJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAppResponse
+      include Smithy::Client::_Response[Types::UpdateAppResult]
+      def app: () -> Types::App?
+    end
+    def update_app: (
+      ?app_id: String,
+      ?name: String,
+      ?description: String,
+      ?platform: String,
+      ?compute_role_arn: String,
+      ?iam_service_role_arn: String,
+      ?environment_variables: Hash[String, String],
+      ?enable_branch_auto_build: bool,
+      ?enable_branch_auto_deletion: bool,
+      ?enable_basic_auth: bool,
+      ?basic_auth_credentials: String,
+      ?custom_rules: Array[
+        {
+          source: String,
+          target: String,
+          status: String,
+          condition: String
+        }
+      ],
+      ?build_spec: String,
+      ?custom_headers: String,
+      ?enable_auto_branch_creation: bool,
+      ?auto_branch_creation_patterns: Array[String],
+      ?auto_branch_creation_config: {
+        stage: String,
+        framework: String,
+        enable_auto_build: bool,
+        environment_variables: Hash[String, String],
+        basic_auth_credentials: String,
+        enable_basic_auth: bool,
+        enable_performance_mode: bool,
+        build_spec: String,
+        enable_pull_request_preview: bool,
+        pull_request_environment_name: String
+      },
+      ?repository: String,
+      ?oauth_token: String,
+      ?access_token: String,
+      ?job_config: {
+        build_compute_type: String
+      },
+      ?cache_config: {
+        type: String
+      }
+    ) -> _UpdateAppResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAppResponse
+
+    interface _UpdateBranchResponse
+      include Smithy::Client::_Response[Types::UpdateBranchResult]
+      def branch: () -> Types::Branch?
+    end
+    def update_branch: (
+      ?app_id: String,
+      ?branch_name: String,
+      ?description: String,
+      ?framework: String,
+      ?stage: String,
+      ?enable_notification: bool,
+      ?enable_auto_build: bool,
+      ?enable_skew_protection: bool,
+      ?environment_variables: Hash[String, String],
+      ?basic_auth_credentials: String,
+      ?enable_basic_auth: bool,
+      ?enable_performance_mode: bool,
+      ?build_spec: String,
+      ?ttl: String,
+      ?display_name: String,
+      ?enable_pull_request_preview: bool,
+      ?pull_request_environment_name: String,
+      ?backend_environment_arn: String,
+      ?backend: {
+        stack_arn: String
+      },
+      ?compute_role_arn: String
+    ) -> _UpdateBranchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBranchResponse
+
+    interface _UpdateDomainAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateDomainAssociationResult]
+      def domain_association: () -> Types::DomainAssociation?
+    end
+    def update_domain_association: (
+      ?app_id: String,
+      ?domain_name: String,
+      ?enable_auto_sub_domain: bool,
+      ?sub_domain_settings: Array[
+        {
+          prefix: String,
+          branch_name: String
+        }
+      ],
+      ?auto_sub_domain_creation_patterns: Array[String],
+      ?auto_sub_domain_iam_role: String,
+      ?certificate_settings: {
+        type: String,
+        custom_certificate_arn: String
+      }
+    ) -> _UpdateDomainAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDomainAssociationResponse
+
+    interface _UpdateWebhookResponse
+      include Smithy::Client::_Response[Types::UpdateWebhookResult]
+      def webhook: () -> Types::Webhook?
+    end
+    def update_webhook: (
+      ?webhook_id: String,
+      ?branch_name: String,
+      ?description: String
+    ) -> _UpdateWebhookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateWebhookResponse
+  end
+end

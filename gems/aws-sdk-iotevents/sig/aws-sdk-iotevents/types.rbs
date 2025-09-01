@@ -1,0 +1,1795 @@
+module Aws::IoTEvents
+  module Types
+
+    class AcknowledgeFlow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class Action
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?set_variable: Types::SetVariableAction,
+        ?sns: Types::SNSTopicPublishAction,
+        ?iot_topic_publish: Types::IotTopicPublishAction,
+        ?set_timer: Types::SetTimerAction,
+        ?clear_timer: Types::ClearTimerAction,
+        ?reset_timer: Types::ResetTimerAction,
+        ?lambda: Types::LambdaAction,
+        ?iot_events: Types::IotEventsAction,
+        ?sqs: Types::SqsAction,
+        ?firehose: Types::FirehoseAction,
+        ?dynamo_db: Types::DynamoDBAction,
+        ?dynamo_d_bv2: Types::DynamoDBv2Action,
+        ?iot_site_wise: Types::IotSiteWiseAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor set_variable: Types::SetVariableAction?
+      attr_accessor sns: Types::SNSTopicPublishAction?
+      attr_accessor iot_topic_publish: Types::IotTopicPublishAction?
+      attr_accessor set_timer: Types::SetTimerAction?
+      attr_accessor clear_timer: Types::ClearTimerAction?
+      attr_accessor reset_timer: Types::ResetTimerAction?
+      attr_accessor lambda: Types::LambdaAction?
+      attr_accessor iot_events: Types::IotEventsAction?
+      attr_accessor sqs: Types::SqsAction?
+      attr_accessor firehose: Types::FirehoseAction?
+      attr_accessor dynamo_db: Types::DynamoDBAction?
+      attr_accessor dynamo_d_bv2: Types::DynamoDBv2Action?
+      attr_accessor iot_site_wise: Types::IotSiteWiseAction?
+    end
+
+    class AlarmAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sns: Types::SNSTopicPublishAction,
+        ?iot_topic_publish: Types::IotTopicPublishAction,
+        ?lambda: Types::LambdaAction,
+        ?iot_events: Types::IotEventsAction,
+        ?sqs: Types::SqsAction,
+        ?firehose: Types::FirehoseAction,
+        ?dynamo_db: Types::DynamoDBAction,
+        ?dynamo_d_bv2: Types::DynamoDBv2Action,
+        ?iot_site_wise: Types::IotSiteWiseAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sns: Types::SNSTopicPublishAction?
+      attr_accessor iot_topic_publish: Types::IotTopicPublishAction?
+      attr_accessor lambda: Types::LambdaAction?
+      attr_accessor iot_events: Types::IotEventsAction?
+      attr_accessor sqs: Types::SqsAction?
+      attr_accessor firehose: Types::FirehoseAction?
+      attr_accessor dynamo_db: Types::DynamoDBAction?
+      attr_accessor dynamo_d_bv2: Types::DynamoDBv2Action?
+      attr_accessor iot_site_wise: Types::IotSiteWiseAction?
+    end
+
+    class AlarmCapabilities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?initialization_configuration: Types::InitializationConfiguration,
+        ?acknowledge_flow: Types::AcknowledgeFlow,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor initialization_configuration: Types::InitializationConfiguration?
+      attr_accessor acknowledge_flow: Types::AcknowledgeFlow?
+    end
+
+    class AlarmEventActions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_actions: Array[Types::AlarmAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_actions: Array[Types::AlarmAction]?
+    end
+
+    class AlarmModelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?alarm_model_description: String,
+        ?alarm_model_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor alarm_model_description: String?
+      attr_accessor alarm_model_name: String?
+    end
+
+    module AlarmModelVersionStatus
+      ACTIVE: String
+      ACTIVATING: String
+      INACTIVE: String
+      FAILED: String
+    end
+
+    class AlarmModelVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_model_name: String,
+        ?alarm_model_arn: String,
+        ?alarm_model_version: String,
+        ?role_arn: String,
+        ?creation_time: Time,
+        ?last_update_time: Time,
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_model_name: String?
+      attr_accessor alarm_model_arn: String?
+      attr_accessor alarm_model_version: String?
+      attr_accessor role_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_update_time: Time?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    class AlarmNotification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notification_actions: Array[Types::NotificationAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notification_actions: Array[Types::NotificationAction]?
+    end
+
+    class AlarmRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?simple_rule: Types::SimpleRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor simple_rule: Types::SimpleRule?
+    end
+
+    class AnalysisResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?level: String,
+        ?message: String,
+        ?locations: Array[Types::AnalysisResultLocation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor level: String?
+      attr_accessor message: String?
+      attr_accessor locations: Array[Types::AnalysisResultLocation]?
+    end
+
+    module AnalysisResultLevel
+      INFO: String
+      WARNING: String
+      ERROR: String
+    end
+
+    class AnalysisResultLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+    end
+
+    module AnalysisStatus
+      RUNNING: String
+      COMPLETE: String
+      FAILED: String
+    end
+
+    class AssetPropertyTimestamp
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_in_seconds: String,
+        ?offset_in_nanos: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_in_seconds: String?
+      attr_accessor offset_in_nanos: String?
+    end
+
+    class AssetPropertyValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: Types::AssetPropertyVariant,
+        ?timestamp: Types::AssetPropertyTimestamp,
+        ?quality: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: Types::AssetPropertyVariant?
+      attr_accessor timestamp: Types::AssetPropertyTimestamp?
+      attr_accessor quality: String?
+    end
+
+    class AssetPropertyVariant
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?string_value: String,
+        ?integer_value: String,
+        ?double_value: String,
+        ?boolean_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor string_value: String?
+      attr_accessor integer_value: String?
+      attr_accessor double_value: String?
+      attr_accessor boolean_value: String?
+    end
+
+    class Attribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?json_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor json_path: String?
+    end
+
+    class ClearTimerAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timer_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timer_name: String?
+    end
+
+    module ComparisonOperator
+      GREATER: String
+      GREATER_OR_EQUAL: String
+      LESS: String
+      LESS_OR_EQUAL: String
+      EQUAL: String
+      NOT_EQUAL: String
+    end
+
+    class CreateAlarmModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_model_name: String,
+        ?alarm_model_description: String,
+        ?role_arn: String,
+        ?tags: Array[Types::Tag],
+        ?key: String,
+        ?severity: Integer,
+        ?alarm_rule: Types::AlarmRule,
+        ?alarm_notification: Types::AlarmNotification,
+        ?alarm_event_actions: Types::AlarmEventActions,
+        ?alarm_capabilities: Types::AlarmCapabilities,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_model_name: String?
+      attr_accessor alarm_model_description: String?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor key: String?
+      attr_accessor severity: Integer?
+      attr_accessor alarm_rule: Types::AlarmRule?
+      attr_accessor alarm_notification: Types::AlarmNotification?
+      attr_accessor alarm_event_actions: Types::AlarmEventActions?
+      attr_accessor alarm_capabilities: Types::AlarmCapabilities?
+    end
+
+    class CreateAlarmModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?alarm_model_arn: String,
+        ?alarm_model_version: String,
+        ?last_update_time: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor alarm_model_arn: String?
+      attr_accessor alarm_model_version: String?
+      attr_accessor last_update_time: Time?
+      attr_accessor status: String?
+    end
+
+    class CreateDetectorModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_model_name: String,
+        ?detector_model_definition: Types::DetectorModelDefinition,
+        ?detector_model_description: String,
+        ?key: String,
+        ?role_arn: String,
+        ?tags: Array[Types::Tag],
+        ?evaluation_method: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_model_name: String?
+      attr_accessor detector_model_definition: Types::DetectorModelDefinition?
+      attr_accessor detector_model_description: String?
+      attr_accessor key: String?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor evaluation_method: String?
+    end
+
+    class CreateDetectorModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_model_configuration: Types::DetectorModelConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_model_configuration: Types::DetectorModelConfiguration?
+    end
+
+    class CreateInputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_name: String,
+        ?input_description: String,
+        ?input_definition: Types::InputDefinition,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_name: String?
+      attr_accessor input_description: String?
+      attr_accessor input_definition: Types::InputDefinition?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateInputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_configuration: Types::InputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_configuration: Types::InputConfiguration?
+    end
+
+    class DeleteAlarmModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_model_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_model_name: String?
+    end
+
+    class DeleteAlarmModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteDetectorModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_model_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_model_name: String?
+    end
+
+    class DeleteDetectorModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteInputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_name: String?
+    end
+
+    class DeleteInputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeAlarmModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_model_name: String,
+        ?alarm_model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_model_name: String?
+      attr_accessor alarm_model_version: String?
+    end
+
+    class DescribeAlarmModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?alarm_model_arn: String,
+        ?alarm_model_version: String,
+        ?last_update_time: Time,
+        ?status: String,
+        ?status_message: String,
+        ?alarm_model_name: String,
+        ?alarm_model_description: String,
+        ?role_arn: String,
+        ?key: String,
+        ?severity: Integer,
+        ?alarm_rule: Types::AlarmRule,
+        ?alarm_notification: Types::AlarmNotification,
+        ?alarm_event_actions: Types::AlarmEventActions,
+        ?alarm_capabilities: Types::AlarmCapabilities,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor alarm_model_arn: String?
+      attr_accessor alarm_model_version: String?
+      attr_accessor last_update_time: Time?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor alarm_model_name: String?
+      attr_accessor alarm_model_description: String?
+      attr_accessor role_arn: String?
+      attr_accessor key: String?
+      attr_accessor severity: Integer?
+      attr_accessor alarm_rule: Types::AlarmRule?
+      attr_accessor alarm_notification: Types::AlarmNotification?
+      attr_accessor alarm_event_actions: Types::AlarmEventActions?
+      attr_accessor alarm_capabilities: Types::AlarmCapabilities?
+    end
+
+    class DescribeDetectorModelAnalysisRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_id: String?
+    end
+
+    class DescribeDetectorModelAnalysisResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class DescribeDetectorModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_model_name: String,
+        ?detector_model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_model_name: String?
+      attr_accessor detector_model_version: String?
+    end
+
+    class DescribeDetectorModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_model: Types::DetectorModel,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_model: Types::DetectorModel?
+    end
+
+    class DescribeInputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_name: String?
+    end
+
+    class DescribeInputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input: Types::Input,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input: Types::Input?
+    end
+
+    class DescribeLoggingOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeLoggingOptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logging_options: Types::LoggingOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logging_options: Types::LoggingOptions?
+    end
+
+    class DetectorDebugOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_model_name: String,
+        ?key_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_model_name: String?
+      attr_accessor key_value: String?
+    end
+
+    class DetectorModel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_model_definition: Types::DetectorModelDefinition,
+        ?detector_model_configuration: Types::DetectorModelConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_model_definition: Types::DetectorModelDefinition?
+      attr_accessor detector_model_configuration: Types::DetectorModelConfiguration?
+    end
+
+    class DetectorModelConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_model_name: String,
+        ?detector_model_version: String,
+        ?detector_model_description: String,
+        ?detector_model_arn: String,
+        ?role_arn: String,
+        ?creation_time: Time,
+        ?last_update_time: Time,
+        ?status: String,
+        ?key: String,
+        ?evaluation_method: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_model_name: String?
+      attr_accessor detector_model_version: String?
+      attr_accessor detector_model_description: String?
+      attr_accessor detector_model_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_update_time: Time?
+      attr_accessor status: String?
+      attr_accessor key: String?
+      attr_accessor evaluation_method: String?
+    end
+
+    class DetectorModelDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?states: Array[Types::State],
+        ?initial_state_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor states: Array[Types::State]?
+      attr_accessor initial_state_name: String?
+    end
+
+    class DetectorModelSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_model_name: String,
+        ?detector_model_description: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_model_name: String?
+      attr_accessor detector_model_description: String?
+      attr_accessor creation_time: Time?
+    end
+
+    module DetectorModelVersionStatus
+      ACTIVE: String
+      ACTIVATING: String
+      INACTIVE: String
+      DEPRECATED: String
+      DRAFT: String
+      PAUSED: String
+      FAILED: String
+    end
+
+    class DetectorModelVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_model_name: String,
+        ?detector_model_version: String,
+        ?detector_model_arn: String,
+        ?role_arn: String,
+        ?creation_time: Time,
+        ?last_update_time: Time,
+        ?status: String,
+        ?evaluation_method: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_model_name: String?
+      attr_accessor detector_model_version: String?
+      attr_accessor detector_model_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_update_time: Time?
+      attr_accessor status: String?
+      attr_accessor evaluation_method: String?
+    end
+
+    class DynamoDBAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hash_key_type: String,
+        ?hash_key_field: String,
+        ?hash_key_value: String,
+        ?range_key_type: String,
+        ?range_key_field: String,
+        ?range_key_value: String,
+        ?operation: String,
+        ?payload_field: String,
+        ?table_name: String,
+        ?payload: Types::Payload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hash_key_type: String?
+      attr_accessor hash_key_field: String?
+      attr_accessor hash_key_value: String?
+      attr_accessor range_key_type: String?
+      attr_accessor range_key_field: String?
+      attr_accessor range_key_value: String?
+      attr_accessor operation: String?
+      attr_accessor payload_field: String?
+      attr_accessor table_name: String?
+      attr_accessor payload: Types::Payload?
+    end
+
+    class DynamoDBv2Action
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?payload: Types::Payload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor payload: Types::Payload?
+    end
+
+    class EmailConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?from: String,
+        ?content: Types::EmailContent,
+        ?recipients: Types::EmailRecipients,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor from: String?
+      attr_accessor content: Types::EmailContent?
+      attr_accessor recipients: Types::EmailRecipients?
+    end
+
+    class EmailContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subject: String,
+        ?additional_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subject: String?
+      attr_accessor additional_message: String?
+    end
+
+    class EmailRecipients
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?to: Array[Types::RecipientDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor to: Array[Types::RecipientDetail]?
+    end
+
+    module EvaluationMethod
+      BATCH: String
+      SERIAL: String
+    end
+
+    class Event
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_name: String,
+        ?condition: String,
+        ?actions: Array[Types::Action],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_name: String?
+      attr_accessor condition: String?
+      attr_accessor actions: Array[Types::Action]?
+    end
+
+    class FirehoseAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_name: String,
+        ?separator: String,
+        ?payload: Types::Payload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_name: String?
+      attr_accessor separator: String?
+      attr_accessor payload: Types::Payload?
+    end
+
+    class GetDetectorModelAnalysisResultsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetDetectorModelAnalysisResultsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_results: Array[Types::AnalysisResult],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_results: Array[Types::AnalysisResult]?
+      attr_accessor next_token: String?
+    end
+
+    class InitializationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?disabled_on_initialization: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor disabled_on_initialization: bool?
+    end
+
+    class Input
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_configuration: Types::InputConfiguration,
+        ?input_definition: Types::InputDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_configuration: Types::InputConfiguration?
+      attr_accessor input_definition: Types::InputDefinition?
+    end
+
+    class InputConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_name: String,
+        ?input_description: String,
+        ?input_arn: String,
+        ?creation_time: Time,
+        ?last_update_time: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_name: String?
+      attr_accessor input_description: String?
+      attr_accessor input_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_update_time: Time?
+      attr_accessor status: String?
+    end
+
+    class InputDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Array[Types::Attribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Array[Types::Attribute]?
+    end
+
+    class InputIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iot_events_input_identifier: Types::IotEventsInputIdentifier,
+        ?iot_site_wise_input_identifier: Types::IotSiteWiseInputIdentifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iot_events_input_identifier: Types::IotEventsInputIdentifier?
+      attr_accessor iot_site_wise_input_identifier: Types::IotSiteWiseInputIdentifier?
+    end
+
+    module InputStatus
+      CREATING: String
+      UPDATING: String
+      ACTIVE: String
+      DELETING: String
+    end
+
+    class InputSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_name: String,
+        ?input_description: String,
+        ?input_arn: String,
+        ?creation_time: Time,
+        ?last_update_time: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_name: String?
+      attr_accessor input_description: String?
+      attr_accessor input_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_update_time: Time?
+      attr_accessor status: String?
+    end
+
+    class InternalFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IotEventsAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_name: String,
+        ?payload: Types::Payload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_name: String?
+      attr_accessor payload: Types::Payload?
+    end
+
+    class IotEventsInputIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_name: String?
+    end
+
+    class IotSiteWiseAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry_id: String,
+        ?asset_id: String,
+        ?property_id: String,
+        ?property_alias: String,
+        ?property_value: Types::AssetPropertyValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry_id: String?
+      attr_accessor asset_id: String?
+      attr_accessor property_id: String?
+      attr_accessor property_alias: String?
+      attr_accessor property_value: Types::AssetPropertyValue?
+    end
+
+    class IotSiteWiseAssetModelPropertyIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asset_model_id: String,
+        ?property_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asset_model_id: String?
+      attr_accessor property_id: String?
+    end
+
+    class IotSiteWiseInputIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iot_site_wise_asset_model_property_identifier: Types::IotSiteWiseAssetModelPropertyIdentifier,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iot_site_wise_asset_model_property_identifier: Types::IotSiteWiseAssetModelPropertyIdentifier?
+    end
+
+    class IotTopicPublishAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mqtt_topic: String,
+        ?payload: Types::Payload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mqtt_topic: String?
+      attr_accessor payload: Types::Payload?
+    end
+
+    class LambdaAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_arn: String,
+        ?payload: Types::Payload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_arn: String?
+      attr_accessor payload: Types::Payload?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAlarmModelVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_model_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_model_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAlarmModelVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_model_version_summaries: Array[Types::AlarmModelVersionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_model_version_summaries: Array[Types::AlarmModelVersionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAlarmModelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAlarmModelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_model_summaries: Array[Types::AlarmModelSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_model_summaries: Array[Types::AlarmModelSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDetectorModelVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_model_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_model_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDetectorModelVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_model_version_summaries: Array[Types::DetectorModelVersionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_model_version_summaries: Array[Types::DetectorModelVersionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDetectorModelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDetectorModelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_model_summaries: Array[Types::DetectorModelSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_model_summaries: Array[Types::DetectorModelSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListInputRoutingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_identifier: Types::InputIdentifier,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_identifier: Types::InputIdentifier?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListInputRoutingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?routed_resources: Array[Types::RoutedResource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor routed_resources: Array[Types::RoutedResource]?
+      attr_accessor next_token: String?
+    end
+
+    class ListInputsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListInputsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_summaries: Array[Types::InputSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_summaries: Array[Types::InputSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module LoggingLevel
+      ERROR: String
+      INFO: String
+      DEBUG: String
+    end
+
+    class LoggingOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?level: String,
+        ?enabled: bool,
+        ?detector_debug_options: Array[Types::DetectorDebugOption],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor level: String?
+      attr_accessor enabled: bool?
+      attr_accessor detector_debug_options: Array[Types::DetectorDebugOption]?
+    end
+
+    class NotificationAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: Types::NotificationTargetActions,
+        ?sms_configurations: Array[Types::SMSConfiguration],
+        ?email_configurations: Array[Types::EmailConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: Types::NotificationTargetActions?
+      attr_accessor sms_configurations: Array[Types::SMSConfiguration]?
+      attr_accessor email_configurations: Array[Types::EmailConfiguration]?
+    end
+
+    class NotificationTargetActions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lambda_action: Types::LambdaAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lambda_action: Types::LambdaAction?
+    end
+
+    class OnEnterLifecycle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[Types::Event],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[Types::Event]?
+    end
+
+    class OnExitLifecycle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[Types::Event],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[Types::Event]?
+    end
+
+    class OnInputLifecycle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[Types::Event],
+        ?transition_events: Array[Types::TransitionEvent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[Types::Event]?
+      attr_accessor transition_events: Array[Types::TransitionEvent]?
+    end
+
+    class Payload
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_expression: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_expression: String?
+      attr_accessor type: String?
+    end
+
+    module PayloadType
+      STRING: String
+      JSON: String
+    end
+
+    class PutLoggingOptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logging_options: Types::LoggingOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logging_options: Types::LoggingOptions?
+    end
+
+    class RecipientDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sso_identity: Types::SSOIdentity,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sso_identity: Types::SSOIdentity?
+    end
+
+    class ResetTimerAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timer_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timer_name: String?
+    end
+
+    class ResourceAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RoutedResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+    end
+
+    class SMSConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sender_id: String,
+        ?additional_message: String,
+        ?recipients: Array[Types::RecipientDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sender_id: String?
+      attr_accessor additional_message: String?
+      attr_accessor recipients: Array[Types::RecipientDetail]?
+    end
+
+    class SNSTopicPublishAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_arn: String,
+        ?payload: Types::Payload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_arn: String?
+      attr_accessor payload: Types::Payload?
+    end
+
+    class SSOIdentity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_store_id: String,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_store_id: String?
+      attr_accessor user_id: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SetTimerAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timer_name: String,
+        ?seconds: Integer,
+        ?duration_expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timer_name: String?
+      attr_accessor seconds: Integer?
+      attr_accessor duration_expression: String?
+    end
+
+    class SetVariableAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?variable_name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor variable_name: String?
+      attr_accessor value: String?
+    end
+
+    class SimpleRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_property: String,
+        ?comparison_operator: String,
+        ?threshold: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_property: String?
+      attr_accessor comparison_operator: String?
+      attr_accessor threshold: String?
+    end
+
+    class SqsAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queue_url: String,
+        ?use_base64: bool,
+        ?payload: Types::Payload,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queue_url: String?
+      attr_accessor use_base64: bool?
+      attr_accessor payload: Types::Payload?
+    end
+
+    class StartDetectorModelAnalysisRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_model_definition: Types::DetectorModelDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_model_definition: Types::DetectorModelDefinition?
+    end
+
+    class StartDetectorModelAnalysisResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_id: String?
+    end
+
+    class State
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?state_name: String,
+        ?on_input: Types::OnInputLifecycle,
+        ?on_enter: Types::OnEnterLifecycle,
+        ?on_exit: Types::OnExitLifecycle,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor state_name: String?
+      attr_accessor on_input: Types::OnInputLifecycle?
+      attr_accessor on_enter: Types::OnEnterLifecycle?
+      attr_accessor on_exit: Types::OnExitLifecycle?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TransitionEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_name: String,
+        ?condition: String,
+        ?actions: Array[Types::Action],
+        ?next_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_name: String?
+      attr_accessor condition: String?
+      attr_accessor actions: Array[Types::Action]?
+      attr_accessor next_state: String?
+    end
+
+    class UnsupportedOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAlarmModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_model_name: String,
+        ?alarm_model_description: String,
+        ?role_arn: String,
+        ?severity: Integer,
+        ?alarm_rule: Types::AlarmRule,
+        ?alarm_notification: Types::AlarmNotification,
+        ?alarm_event_actions: Types::AlarmEventActions,
+        ?alarm_capabilities: Types::AlarmCapabilities,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_model_name: String?
+      attr_accessor alarm_model_description: String?
+      attr_accessor role_arn: String?
+      attr_accessor severity: Integer?
+      attr_accessor alarm_rule: Types::AlarmRule?
+      attr_accessor alarm_notification: Types::AlarmNotification?
+      attr_accessor alarm_event_actions: Types::AlarmEventActions?
+      attr_accessor alarm_capabilities: Types::AlarmCapabilities?
+    end
+
+    class UpdateAlarmModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_time: Time,
+        ?alarm_model_arn: String,
+        ?alarm_model_version: String,
+        ?last_update_time: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_time: Time?
+      attr_accessor alarm_model_arn: String?
+      attr_accessor alarm_model_version: String?
+      attr_accessor last_update_time: Time?
+      attr_accessor status: String?
+    end
+
+    class UpdateDetectorModelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_model_name: String,
+        ?detector_model_definition: Types::DetectorModelDefinition,
+        ?detector_model_description: String,
+        ?role_arn: String,
+        ?evaluation_method: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_model_name: String?
+      attr_accessor detector_model_definition: Types::DetectorModelDefinition?
+      attr_accessor detector_model_description: String?
+      attr_accessor role_arn: String?
+      attr_accessor evaluation_method: String?
+    end
+
+    class UpdateDetectorModelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?detector_model_configuration: Types::DetectorModelConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor detector_model_configuration: Types::DetectorModelConfiguration?
+    end
+
+    class UpdateInputRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_name: String,
+        ?input_description: String,
+        ?input_definition: Types::InputDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_name: String?
+      attr_accessor input_description: String?
+      attr_accessor input_definition: Types::InputDefinition?
+    end
+
+    class UpdateInputResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input_configuration: Types::InputConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input_configuration: Types::InputConfiguration?
+    end
+  end
+end

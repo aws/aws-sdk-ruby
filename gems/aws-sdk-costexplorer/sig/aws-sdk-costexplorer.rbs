@@ -1,0 +1,5 @@
+  module Aws
+    module CostExplorer
+      VERSION: String
+    end
+  end

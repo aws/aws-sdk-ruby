@@ -1,0 +1,43 @@
+module Aws::SageMakerFeatureStoreRuntime
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessForbidden: StructureShape
+    BatchGetRecordError: StructureShape
+    BatchGetRecordErrors: ListShape
+    BatchGetRecordIdentifier: StructureShape
+    BatchGetRecordIdentifiers: ListShape
+    BatchGetRecordRequest: StructureShape
+    BatchGetRecordResponse: StructureShape
+    BatchGetRecordResultDetail: StructureShape
+    BatchGetRecordResultDetails: ListShape
+    DeleteRecordRequest: StructureShape
+    DeletionMode: EnumShape
+    ExpirationTimeResponse: EnumShape
+    ExpiresAt: StringShape
+    FeatureGroupNameOrArn: StringShape
+    FeatureName: StringShape
+    FeatureNames: ListShape
+    FeatureValue: StructureShape
+    GetRecordRequest: StructureShape
+    GetRecordResponse: StructureShape
+    InternalFailure: StructureShape
+    Message: StringShape
+    PutRecordRequest: StructureShape
+    Record: ListShape
+    RecordIdentifiers: ListShape
+    ResourceNotFound: StructureShape
+    ServiceUnavailable: StructureShape
+    TargetStore: EnumShape
+    TargetStores: ListShape
+    TtlDuration: StructureShape
+    TtlDurationUnit: EnumShape
+    TtlDurationValue: IntegerShape
+    UnprocessedIdentifiers: ListShape
+    ValidationError: StructureShape
+    ValueAsString: StringShape
+    ValueAsStringList: ListShape
+
+    AmazonSageMakerFeatureStoreRuntime: ServiceShape
+  end
+end

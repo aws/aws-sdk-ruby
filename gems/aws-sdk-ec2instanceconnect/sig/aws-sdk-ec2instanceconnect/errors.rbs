@@ -1,0 +1,40 @@
+module Aws::EC2InstanceConnect
+  module Errors
+    class AuthException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EC2InstanceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EC2InstanceStateInvalidException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EC2InstanceTypeInvalidException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class EC2InstanceUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidArgsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SerialConsoleAccessDisabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SerialConsoleSessionLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SerialConsoleSessionUnavailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class SerialConsoleSessionUnsupportedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

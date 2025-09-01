@@ -1,0 +1,2237 @@
+module Aws::Chime
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class Account
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_account_id: String,
+        ?account_id: String,
+        ?name: String,
+        ?account_type: String,
+        ?created_timestamp: Time,
+        ?default_license: String,
+        ?supported_licenses: Array[String],
+        ?account_status: String,
+        ?signin_delegate_groups: Array[Types::SigninDelegateGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_account_id: String?
+      attr_accessor account_id: String?
+      attr_accessor name: String?
+      attr_accessor account_type: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor default_license: String?
+      attr_accessor supported_licenses: Array[String]?
+      attr_accessor account_status: String?
+      attr_accessor signin_delegate_groups: Array[Types::SigninDelegateGroup]?
+    end
+
+    class AccountSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?disable_remote_control: bool,
+        ?enable_dial_out: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor disable_remote_control: bool?
+      attr_accessor enable_dial_out: bool?
+    end
+
+    module AccountStatus
+      Suspended: String
+      Active: String
+    end
+
+    module AccountType
+      Team: String
+      EnterpriseDirectory: String
+      EnterpriseLWA: String
+      EnterpriseOIDC: String
+    end
+
+    class AlexaForBusinessMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_alexa_for_business_enabled: bool,
+        ?alexa_for_business_room_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_alexa_for_business_enabled: bool?
+      attr_accessor alexa_for_business_room_arn: String?
+    end
+
+    class AssociatePhoneNumberWithUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?user_id: String,
+        ?e164_phone_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor user_id: String?
+      attr_accessor e164_phone_number: String?
+    end
+
+    class AssociatePhoneNumberWithUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AssociateSigninDelegateGroupsWithAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?signin_delegate_groups: Array[Types::SigninDelegateGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor signin_delegate_groups: Array[Types::SigninDelegateGroup]?
+    end
+
+    class AssociateSigninDelegateGroupsWithAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class BatchCreateRoomMembershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?room_id: String,
+        ?membership_item_list: Array[Types::MembershipItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor room_id: String?
+      attr_accessor membership_item_list: Array[Types::MembershipItem]?
+    end
+
+    class BatchCreateRoomMembershipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::MemberError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::MemberError]?
+    end
+
+    class BatchDeletePhoneNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_ids: Array[String]?
+    end
+
+    class BatchDeletePhoneNumberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_errors: Array[Types::PhoneNumberError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_errors: Array[Types::PhoneNumberError]?
+    end
+
+    class BatchSuspendUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?user_id_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor user_id_list: Array[String]?
+    end
+
+    class BatchSuspendUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_errors: Array[Types::UserError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_errors: Array[Types::UserError]?
+    end
+
+    class BatchUnsuspendUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?user_id_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor user_id_list: Array[String]?
+    end
+
+    class BatchUnsuspendUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_errors: Array[Types::UserError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_errors: Array[Types::UserError]?
+    end
+
+    class BatchUpdatePhoneNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update_phone_number_request_items: Array[Types::UpdatePhoneNumberRequestItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update_phone_number_request_items: Array[Types::UpdatePhoneNumberRequestItem]?
+    end
+
+    class BatchUpdatePhoneNumberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_errors: Array[Types::PhoneNumberError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_errors: Array[Types::PhoneNumberError]?
+    end
+
+    class BatchUpdateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?update_user_request_items: Array[Types::UpdateUserRequestItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor update_user_request_items: Array[Types::UpdateUserRequestItem]?
+    end
+
+    class BatchUpdateUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_errors: Array[Types::UserError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_errors: Array[Types::UserError]?
+    end
+
+    class Bot
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_id: String,
+        ?user_id: String,
+        ?display_name: String,
+        ?bot_type: String,
+        ?disabled: bool,
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+        ?bot_email: String,
+        ?security_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_id: String?
+      attr_accessor user_id: String?
+      attr_accessor display_name: String?
+      attr_accessor bot_type: String?
+      attr_accessor disabled: bool?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+      attr_accessor bot_email: String?
+      attr_accessor security_token: String?
+    end
+
+    module BotType
+      ChatBot: String
+    end
+
+    class BusinessCallingSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cdr_bucket: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cdr_bucket: String?
+    end
+
+    module CallingNameStatus
+      Unassigned: String
+      UpdateInProgress: String
+      UpdateSucceeded: String
+      UpdateFailed: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class ConversationRetentionSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retention_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retention_days: Integer?
+    end
+
+    class CreateAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class CreateAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account: Types::Account,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account: Types::Account?
+    end
+
+    class CreateBotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?display_name: String,
+        ?domain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor display_name: String?
+      attr_accessor domain: String?
+    end
+
+    class CreateBotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot: Types::Bot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot: Types::Bot?
+    end
+
+    class CreateMeetingDialOutRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?meeting_id: String,
+        ?from_phone_number: String,
+        ?to_phone_number: String,
+        ?join_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor meeting_id: String?
+      attr_accessor from_phone_number: String?
+      attr_accessor to_phone_number: String?
+      attr_accessor join_token: String?
+    end
+
+    class CreateMeetingDialOutResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transaction_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transaction_id: String?
+    end
+
+    class CreatePhoneNumberOrderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_type: String,
+        ?e164_phone_numbers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_type: String?
+      attr_accessor e164_phone_numbers: Array[String]?
+    end
+
+    class CreatePhoneNumberOrderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_order: Types::PhoneNumberOrder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_order: Types::PhoneNumberOrder?
+    end
+
+    class CreateRoomMembershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?room_id: String,
+        ?member_id: String,
+        ?role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor room_id: String?
+      attr_accessor member_id: String?
+      attr_accessor role: String?
+    end
+
+    class CreateRoomMembershipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?room_membership: Types::RoomMembership,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor room_membership: Types::RoomMembership?
+    end
+
+    class CreateRoomRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?name: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor name: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class CreateRoomResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?room: Types::Room,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor room: Types::Room?
+    end
+
+    class CreateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?username: String,
+        ?email: String,
+        ?user_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor username: String?
+      attr_accessor email: String?
+      attr_accessor user_type: String?
+    end
+
+    class CreateUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user: Types::User,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user: Types::User?
+    end
+
+    class DeleteAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class DeleteAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteEventsConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?bot_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor bot_id: String?
+    end
+
+    class DeletePhoneNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_id: String?
+    end
+
+    class DeleteRoomMembershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?room_id: String,
+        ?member_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor room_id: String?
+      attr_accessor member_id: String?
+    end
+
+    class DeleteRoomRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?room_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor room_id: String?
+    end
+
+    class DisassociatePhoneNumberFromUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor user_id: String?
+    end
+
+    class DisassociatePhoneNumberFromUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DisassociateSigninDelegateGroupsFromAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?group_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor group_names: Array[String]?
+    end
+
+    class DisassociateSigninDelegateGroupsFromAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module EmailStatus
+      NotSent: String
+      Sent: String
+      Failed: String
+    end
+
+    module ErrorCode
+      BadRequest: String
+      Conflict: String
+      Forbidden: String
+      NotFound: String
+      PreconditionFailed: String
+      ResourceLimitExceeded: String
+      ServiceFailure: String
+      AccessDenied: String
+      ServiceUnavailable: String
+      Throttled: String
+      Throttling: String
+      Unauthorized: String
+      Unprocessable: String
+      VoiceConnectorGroupAssociationsExist: String
+      PhoneNumberAssociationsExist: String
+    end
+
+    class EventsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot_id: String,
+        ?outbound_events_https_endpoint: String,
+        ?lambda_function_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot_id: String?
+      attr_accessor outbound_events_https_endpoint: String?
+      attr_accessor lambda_function_arn: String?
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class GetAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class GetAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account: Types::Account,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account: Types::Account?
+    end
+
+    class GetAccountSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class GetAccountSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_settings: Types::AccountSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_settings: Types::AccountSettings?
+    end
+
+    class GetBotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?bot_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor bot_id: String?
+    end
+
+    class GetBotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot: Types::Bot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot: Types::Bot?
+    end
+
+    class GetEventsConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?bot_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor bot_id: String?
+    end
+
+    class GetEventsConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events_configuration: Types::EventsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events_configuration: Types::EventsConfiguration?
+    end
+
+    class GetGlobalSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?business_calling: Types::BusinessCallingSettings,
+        ?voice_connector: Types::VoiceConnectorSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor business_calling: Types::BusinessCallingSettings?
+      attr_accessor voice_connector: Types::VoiceConnectorSettings?
+    end
+
+    class GetPhoneNumberOrderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_order_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_order_id: String?
+    end
+
+    class GetPhoneNumberOrderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_order: Types::PhoneNumberOrder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_order: Types::PhoneNumberOrder?
+    end
+
+    class GetPhoneNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_id: String?
+    end
+
+    class GetPhoneNumberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number: Types::PhoneNumber,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number: Types::PhoneNumber?
+    end
+
+    class GetPhoneNumberSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calling_name: String,
+        ?calling_name_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calling_name: String?
+      attr_accessor calling_name_updated_timestamp: Time?
+    end
+
+    class GetRetentionSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+    end
+
+    class GetRetentionSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retention_settings: Types::RetentionSettings,
+        ?initiate_deletion_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retention_settings: Types::RetentionSettings?
+      attr_accessor initiate_deletion_timestamp: Time?
+    end
+
+    class GetRoomRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?room_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor room_id: String?
+    end
+
+    class GetRoomResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?room: Types::Room,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor room: Types::Room?
+    end
+
+    class GetUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor user_id: String?
+    end
+
+    class GetUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user: Types::User,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user: Types::User?
+    end
+
+    class GetUserSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor user_id: String?
+    end
+
+    class GetUserSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_settings: Types::UserSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_settings: Types::UserSettings?
+    end
+
+    class Invite
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invite_id: String,
+        ?status: String,
+        ?email_address: String,
+        ?email_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invite_id: String?
+      attr_accessor status: String?
+      attr_accessor email_address: String?
+      attr_accessor email_status: String?
+    end
+
+    module InviteStatus
+      Pending: String
+      Accepted: String
+      Failed: String
+    end
+
+    class InviteUsersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?user_email_list: Array[String],
+        ?user_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor user_email_list: Array[String]?
+      attr_accessor user_type: String?
+    end
+
+    class InviteUsersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invites: Array[Types::Invite],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invites: Array[Types::Invite]?
+    end
+
+    module License
+      Basic: String
+      Plus: String
+      Pro: String
+      ProTrial: String
+    end
+
+    class ListAccountsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?user_email: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor user_email: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAccountsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accounts: Array[Types::Account],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accounts: Array[Types::Account]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBotsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListBotsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bots: Array[Types::Bot],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bots: Array[Types::Bot]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPhoneNumberOrdersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPhoneNumberOrdersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_orders: Array[Types::PhoneNumberOrder],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_orders: Array[Types::PhoneNumberOrder]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPhoneNumbersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?product_type: String,
+        ?filter_name: String,
+        ?filter_value: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor product_type: String?
+      attr_accessor filter_name: String?
+      attr_accessor filter_value: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPhoneNumbersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_numbers: Array[Types::PhoneNumber],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_numbers: Array[Types::PhoneNumber]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRoomMembershipsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?room_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor room_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRoomMembershipsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?room_memberships: Array[Types::RoomMembership],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor room_memberships: Array[Types::RoomMembership]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRoomsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?member_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor member_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRoomsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rooms: Array[Types::Room],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rooms: Array[Types::Room]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSupportedPhoneNumberCountriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?product_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor product_type: String?
+    end
+
+    class ListSupportedPhoneNumberCountriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_countries: Array[Types::PhoneNumberCountry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_countries: Array[Types::PhoneNumberCountry]?
+    end
+
+    class ListUsersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?user_email: String,
+        ?user_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor user_email: String?
+      attr_accessor user_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListUsersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?users: Array[Types::User],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor users: Array[Types::User]?
+      attr_accessor next_token: String?
+    end
+
+    class LogoutUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor user_id: String?
+    end
+
+    class LogoutUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Member
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?member_id: String,
+        ?member_type: String,
+        ?email: String,
+        ?full_name: String,
+        ?account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor member_id: String?
+      attr_accessor member_type: String?
+      attr_accessor email: String?
+      attr_accessor full_name: String?
+      attr_accessor account_id: String?
+    end
+
+    class MemberError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?member_id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor member_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    module MemberType
+      User: String
+      Bot: String
+      Webhook: String
+    end
+
+    class MembershipItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?member_id: String,
+        ?role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor member_id: String?
+      attr_accessor role: String?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class OrderedPhoneNumber
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?e164_phone_number: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor e164_phone_number: String?
+      attr_accessor status: String?
+    end
+
+    module OrderedPhoneNumberStatus
+      Processing: String
+      Acquired: String
+      Failed: String
+    end
+
+    class PhoneNumber
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_id: String,
+        ?e164_phone_number: String,
+        ?country: String,
+        ?type: String,
+        ?product_type: String,
+        ?status: String,
+        ?capabilities: Types::PhoneNumberCapabilities,
+        ?associations: Array[Types::PhoneNumberAssociation],
+        ?calling_name: String,
+        ?calling_name_status: String,
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+        ?deletion_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_id: String?
+      attr_accessor e164_phone_number: String?
+      attr_accessor country: String?
+      attr_accessor type: String?
+      attr_accessor product_type: String?
+      attr_accessor status: String?
+      attr_accessor capabilities: Types::PhoneNumberCapabilities?
+      attr_accessor associations: Array[Types::PhoneNumberAssociation]?
+      attr_accessor calling_name: String?
+      attr_accessor calling_name_status: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+      attr_accessor deletion_timestamp: Time?
+    end
+
+    class PhoneNumberAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?name: String,
+        ?associated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor name: String?
+      attr_accessor associated_timestamp: Time?
+    end
+
+    module PhoneNumberAssociationName
+      AccountId: String
+      UserId: String
+      VoiceConnectorId: String
+      VoiceConnectorGroupId: String
+      SipRuleId: String
+    end
+
+    class PhoneNumberCapabilities
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inbound_call: bool,
+        ?outbound_call: bool,
+        ?inbound_sms: bool,
+        ?outbound_sms: bool,
+        ?inbound_mms: bool,
+        ?outbound_mms: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inbound_call: bool?
+      attr_accessor outbound_call: bool?
+      attr_accessor inbound_sms: bool?
+      attr_accessor outbound_sms: bool?
+      attr_accessor inbound_mms: bool?
+      attr_accessor outbound_mms: bool?
+    end
+
+    class PhoneNumberCountry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?country_code: String,
+        ?supported_phone_number_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor country_code: String?
+      attr_accessor supported_phone_number_types: Array[String]?
+    end
+
+    class PhoneNumberError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class PhoneNumberOrder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_order_id: String,
+        ?product_type: String,
+        ?status: String,
+        ?ordered_phone_numbers: Array[Types::OrderedPhoneNumber],
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_order_id: String?
+      attr_accessor product_type: String?
+      attr_accessor status: String?
+      attr_accessor ordered_phone_numbers: Array[Types::OrderedPhoneNumber]?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+    end
+
+    module PhoneNumberOrderStatus
+      Processing: String
+      Successful: String
+      Failed: String
+      Partial: String
+    end
+
+    module PhoneNumberProductType
+      BusinessCalling: String
+      VoiceConnector: String
+      SipMediaApplicationDialIn: String
+    end
+
+    module PhoneNumberStatus
+      AcquireInProgress: String
+      AcquireFailed: String
+      Unassigned: String
+      Assigned: String
+      ReleaseInProgress: String
+      DeleteInProgress: String
+      ReleaseFailed: String
+      DeleteFailed: String
+    end
+
+    module PhoneNumberType
+      Local: String
+      TollFree: String
+    end
+
+    class PutEventsConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?bot_id: String,
+        ?outbound_events_https_endpoint: String,
+        ?lambda_function_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor bot_id: String?
+      attr_accessor outbound_events_https_endpoint: String?
+      attr_accessor lambda_function_arn: String?
+    end
+
+    class PutEventsConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events_configuration: Types::EventsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events_configuration: Types::EventsConfiguration?
+    end
+
+    class PutRetentionSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?retention_settings: Types::RetentionSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor retention_settings: Types::RetentionSettings?
+    end
+
+    class PutRetentionSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retention_settings: Types::RetentionSettings,
+        ?initiate_deletion_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retention_settings: Types::RetentionSettings?
+      attr_accessor initiate_deletion_timestamp: Time?
+    end
+
+    class RedactConversationMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?conversation_id: String,
+        ?message_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor conversation_id: String?
+      attr_accessor message_id: String?
+    end
+
+    class RedactConversationMessageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RedactRoomMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?room_id: String,
+        ?message_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor room_id: String?
+      attr_accessor message_id: String?
+    end
+
+    class RedactRoomMessageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RegenerateSecurityTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?bot_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor bot_id: String?
+    end
+
+    class RegenerateSecurityTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot: Types::Bot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot: Types::Bot?
+    end
+
+    module RegistrationStatus
+      Unregistered: String
+      Registered: String
+      Suspended: String
+    end
+
+    class ResetPersonalPINRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor user_id: String?
+    end
+
+    class ResetPersonalPINResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user: Types::User,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user: Types::User?
+    end
+
+    class ResourceLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class RestorePhoneNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_id: String?
+    end
+
+    class RestorePhoneNumberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number: Types::PhoneNumber,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number: Types::PhoneNumber?
+    end
+
+    class RetentionSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?room_retention_settings: Types::RoomRetentionSettings,
+        ?conversation_retention_settings: Types::ConversationRetentionSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor room_retention_settings: Types::RoomRetentionSettings?
+      attr_accessor conversation_retention_settings: Types::ConversationRetentionSettings?
+    end
+
+    class Room
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?room_id: String,
+        ?name: String,
+        ?account_id: String,
+        ?created_by: String,
+        ?created_timestamp: Time,
+        ?updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor room_id: String?
+      attr_accessor name: String?
+      attr_accessor account_id: String?
+      attr_accessor created_by: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor updated_timestamp: Time?
+    end
+
+    class RoomMembership
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?room_id: String,
+        ?member: Types::Member,
+        ?role: String,
+        ?invited_by: String,
+        ?updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor room_id: String?
+      attr_accessor member: Types::Member?
+      attr_accessor role: String?
+      attr_accessor invited_by: String?
+      attr_accessor updated_timestamp: Time?
+    end
+
+    module RoomMembershipRole
+      Administrator: String
+      Member: String
+    end
+
+    class RoomRetentionSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retention_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retention_days: Integer?
+    end
+
+    class SearchAvailablePhoneNumbersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?area_code: String,
+        ?city: String,
+        ?country: String,
+        ?state: String,
+        ?toll_free_prefix: String,
+        ?phone_number_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor area_code: String?
+      attr_accessor city: String?
+      attr_accessor country: String?
+      attr_accessor state: String?
+      attr_accessor toll_free_prefix: String?
+      attr_accessor phone_number_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class SearchAvailablePhoneNumbersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?e164_phone_numbers: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor e164_phone_numbers: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ServiceFailureException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class SigninDelegateGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor group_name: String?
+    end
+
+    class TelephonySettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inbound_calling: bool,
+        ?outbound_calling: bool,
+        ?sms: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inbound_calling: bool?
+      attr_accessor outbound_calling: bool?
+      attr_accessor sms: bool?
+    end
+
+    class ThrottledClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class UnauthorizedClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class UnprocessableEntityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class UpdateAccountRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?name: String,
+        ?default_license: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor name: String?
+      attr_accessor default_license: String?
+    end
+
+    class UpdateAccountResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account: Types::Account,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account: Types::Account?
+    end
+
+    class UpdateAccountSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?account_settings: Types::AccountSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor account_settings: Types::AccountSettings?
+    end
+
+    class UpdateAccountSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateBotRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?bot_id: String,
+        ?disabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor bot_id: String?
+      attr_accessor disabled: bool?
+    end
+
+    class UpdateBotResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bot: Types::Bot,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bot: Types::Bot?
+    end
+
+    class UpdateGlobalSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?business_calling: Types::BusinessCallingSettings,
+        ?voice_connector: Types::VoiceConnectorSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor business_calling: Types::BusinessCallingSettings?
+      attr_accessor voice_connector: Types::VoiceConnectorSettings?
+    end
+
+    class UpdatePhoneNumberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_id: String,
+        ?product_type: String,
+        ?calling_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_id: String?
+      attr_accessor product_type: String?
+      attr_accessor calling_name: String?
+    end
+
+    class UpdatePhoneNumberRequestItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number_id: String,
+        ?product_type: String,
+        ?calling_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number_id: String?
+      attr_accessor product_type: String?
+      attr_accessor calling_name: String?
+    end
+
+    class UpdatePhoneNumberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number: Types::PhoneNumber,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number: Types::PhoneNumber?
+    end
+
+    class UpdatePhoneNumberSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?calling_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor calling_name: String?
+    end
+
+    class UpdateRoomMembershipRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?room_id: String,
+        ?member_id: String,
+        ?role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor room_id: String?
+      attr_accessor member_id: String?
+      attr_accessor role: String?
+    end
+
+    class UpdateRoomMembershipResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?room_membership: Types::RoomMembership,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor room_membership: Types::RoomMembership?
+    end
+
+    class UpdateRoomRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?room_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor room_id: String?
+      attr_accessor name: String?
+    end
+
+    class UpdateRoomResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?room: Types::Room,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor room: Types::Room?
+    end
+
+    class UpdateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?user_id: String,
+        ?license_type: String,
+        ?user_type: String,
+        ?alexa_for_business_metadata: Types::AlexaForBusinessMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor user_id: String?
+      attr_accessor license_type: String?
+      attr_accessor user_type: String?
+      attr_accessor alexa_for_business_metadata: Types::AlexaForBusinessMetadata?
+    end
+
+    class UpdateUserRequestItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?license_type: String,
+        ?user_type: String,
+        ?alexa_for_business_metadata: Types::AlexaForBusinessMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor license_type: String?
+      attr_accessor user_type: String?
+      attr_accessor alexa_for_business_metadata: Types::AlexaForBusinessMetadata?
+    end
+
+    class UpdateUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user: Types::User,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user: Types::User?
+    end
+
+    class UpdateUserSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?user_id: String,
+        ?user_settings: Types::UserSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor user_id: String?
+      attr_accessor user_settings: Types::UserSettings?
+    end
+
+    class User
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?account_id: String,
+        ?primary_email: String,
+        ?primary_provisioned_number: String,
+        ?display_name: String,
+        ?license_type: String,
+        ?user_type: String,
+        ?user_registration_status: String,
+        ?user_invitation_status: String,
+        ?registered_on: Time,
+        ?invited_on: Time,
+        ?alexa_for_business_metadata: Types::AlexaForBusinessMetadata,
+        ?personal_pin: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor account_id: String?
+      attr_accessor primary_email: String?
+      attr_accessor primary_provisioned_number: String?
+      attr_accessor display_name: String?
+      attr_accessor license_type: String?
+      attr_accessor user_type: String?
+      attr_accessor user_registration_status: String?
+      attr_accessor user_invitation_status: String?
+      attr_accessor registered_on: Time?
+      attr_accessor invited_on: Time?
+      attr_accessor alexa_for_business_metadata: Types::AlexaForBusinessMetadata?
+      attr_accessor personal_pin: String?
+    end
+
+    class UserError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class UserSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?telephony: Types::TelephonySettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor telephony: Types::TelephonySettings?
+    end
+
+    module UserType
+      PrivateUser: String
+      SharedDevice: String
+    end
+
+    class VoiceConnectorSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cdr_bucket: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cdr_bucket: String?
+    end
+  end
+end

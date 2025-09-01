@@ -1,0 +1,5 @@
+  module Aws
+    module CodeConnections
+      VERSION: String
+    end
+  end

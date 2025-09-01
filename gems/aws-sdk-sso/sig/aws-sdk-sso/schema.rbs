@@ -1,0 +1,36 @@
+module Aws::SSO
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessKeyType: StringShape
+    AccessTokenType: StringShape
+    AccountIdType: StringShape
+    AccountInfo: StructureShape
+    AccountListType: ListShape
+    AccountNameType: StringShape
+    EmailAddressType: StringShape
+    ErrorDescription: StringShape
+    ExpirationTimestampType: IntegerShape
+    GetRoleCredentialsRequest: StructureShape
+    GetRoleCredentialsResponse: StructureShape
+    InvalidRequestException: StructureShape
+    ListAccountRolesRequest: StructureShape
+    ListAccountRolesResponse: StructureShape
+    ListAccountsRequest: StructureShape
+    ListAccountsResponse: StructureShape
+    LogoutRequest: StructureShape
+    MaxResultType: IntegerShape
+    NextTokenType: StringShape
+    ResourceNotFoundException: StructureShape
+    RoleCredentials: StructureShape
+    RoleInfo: StructureShape
+    RoleListType: ListShape
+    RoleNameType: StringShape
+    SecretAccessKeyType: StringShape
+    SessionTokenType: StringShape
+    TooManyRequestsException: StructureShape
+    UnauthorizedException: StructureShape
+
+    SWBPortalService: ServiceShape
+  end
+end

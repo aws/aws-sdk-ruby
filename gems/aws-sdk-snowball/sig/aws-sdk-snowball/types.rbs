@@ -1,0 +1,1562 @@
+module Aws::Snowball
+  module Types
+
+    class Address
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_id: String,
+        ?name: String,
+        ?company: String,
+        ?street1: String,
+        ?street2: String,
+        ?street3: String,
+        ?city: String,
+        ?state_or_province: String,
+        ?prefecture_or_district: String,
+        ?landmark: String,
+        ?country: String,
+        ?postal_code: String,
+        ?phone_number: String,
+        ?is_restricted: bool,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_id: String?
+      attr_accessor name: String?
+      attr_accessor company: String?
+      attr_accessor street1: String?
+      attr_accessor street2: String?
+      attr_accessor street3: String?
+      attr_accessor city: String?
+      attr_accessor state_or_province: String?
+      attr_accessor prefecture_or_district: String?
+      attr_accessor landmark: String?
+      attr_accessor country: String?
+      attr_accessor postal_code: String?
+      attr_accessor phone_number: String?
+      attr_accessor is_restricted: bool?
+      attr_accessor type: String?
+    end
+
+    module AddressType
+      CUST_PICKUP: String
+      AWS_SHIP: String
+    end
+
+    class CancelClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+    end
+
+    class CancelClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CancelJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class CancelJobResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ClusterLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ClusterListEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?cluster_state: String,
+        ?creation_date: Time,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor cluster_state: String?
+      attr_accessor creation_date: Time?
+      attr_accessor description: String?
+    end
+
+    class ClusterMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?description: String,
+        ?kms_key_arn: String,
+        ?role_arn: String,
+        ?cluster_state: String,
+        ?job_type: String,
+        ?snowball_type: String,
+        ?creation_date: Time,
+        ?resources: Types::JobResource,
+        ?address_id: String,
+        ?shipping_option: String,
+        ?notification: Types::Notification,
+        ?forwarding_address_id: String,
+        ?tax_documents: Types::TaxDocuments,
+        ?on_device_service_configuration: Types::OnDeviceServiceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor description: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor cluster_state: String?
+      attr_accessor job_type: String?
+      attr_accessor snowball_type: String?
+      attr_accessor creation_date: Time?
+      attr_accessor resources: Types::JobResource?
+      attr_accessor address_id: String?
+      attr_accessor shipping_option: String?
+      attr_accessor notification: Types::Notification?
+      attr_accessor forwarding_address_id: String?
+      attr_accessor tax_documents: Types::TaxDocuments?
+      attr_accessor on_device_service_configuration: Types::OnDeviceServiceConfiguration?
+    end
+
+    module ClusterState
+      AWAITING_QUORUM: String
+      PENDING: String
+      IN_USE: String
+      COMPLETE: String
+      CANCELLED: String
+    end
+
+    class CompatibleImage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ami_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ami_id: String?
+      attr_accessor name: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conflict_resource: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conflict_resource: String?
+      attr_accessor message: String?
+    end
+
+    class CreateAddressRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address: Types::Address,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address: Types::Address?
+    end
+
+    class CreateAddressResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_id: String?
+    end
+
+    class CreateClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_type: String,
+        ?resources: Types::JobResource,
+        ?on_device_service_configuration: Types::OnDeviceServiceConfiguration,
+        ?description: String,
+        ?address_id: String,
+        ?kms_key_arn: String,
+        ?role_arn: String,
+        ?snowball_type: String,
+        ?shipping_option: String,
+        ?notification: Types::Notification,
+        ?forwarding_address_id: String,
+        ?tax_documents: Types::TaxDocuments,
+        ?remote_management: String,
+        ?initial_cluster_size: Integer,
+        ?force_create_jobs: bool,
+        ?long_term_pricing_ids: Array[String],
+        ?snowball_capacity_preference: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_type: String?
+      attr_accessor resources: Types::JobResource?
+      attr_accessor on_device_service_configuration: Types::OnDeviceServiceConfiguration?
+      attr_accessor description: String?
+      attr_accessor address_id: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor snowball_type: String?
+      attr_accessor shipping_option: String?
+      attr_accessor notification: Types::Notification?
+      attr_accessor forwarding_address_id: String?
+      attr_accessor tax_documents: Types::TaxDocuments?
+      attr_accessor remote_management: String?
+      attr_accessor initial_cluster_size: Integer?
+      attr_accessor force_create_jobs: bool?
+      attr_accessor long_term_pricing_ids: Array[String]?
+      attr_accessor snowball_capacity_preference: String?
+    end
+
+    class CreateClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?job_list_entries: Array[Types::JobListEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor job_list_entries: Array[Types::JobListEntry]?
+    end
+
+    class CreateJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_type: String,
+        ?resources: Types::JobResource,
+        ?on_device_service_configuration: Types::OnDeviceServiceConfiguration,
+        ?description: String,
+        ?address_id: String,
+        ?kms_key_arn: String,
+        ?role_arn: String,
+        ?snowball_capacity_preference: String,
+        ?shipping_option: String,
+        ?notification: Types::Notification,
+        ?cluster_id: String,
+        ?snowball_type: String,
+        ?forwarding_address_id: String,
+        ?tax_documents: Types::TaxDocuments,
+        ?device_configuration: Types::DeviceConfiguration,
+        ?remote_management: String,
+        ?long_term_pricing_id: String,
+        ?impact_level: String,
+        ?pickup_details: Types::PickupDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_type: String?
+      attr_accessor resources: Types::JobResource?
+      attr_accessor on_device_service_configuration: Types::OnDeviceServiceConfiguration?
+      attr_accessor description: String?
+      attr_accessor address_id: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor snowball_capacity_preference: String?
+      attr_accessor shipping_option: String?
+      attr_accessor notification: Types::Notification?
+      attr_accessor cluster_id: String?
+      attr_accessor snowball_type: String?
+      attr_accessor forwarding_address_id: String?
+      attr_accessor tax_documents: Types::TaxDocuments?
+      attr_accessor device_configuration: Types::DeviceConfiguration?
+      attr_accessor remote_management: String?
+      attr_accessor long_term_pricing_id: String?
+      attr_accessor impact_level: String?
+      attr_accessor pickup_details: Types::PickupDetails?
+    end
+
+    class CreateJobResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class CreateLongTermPricingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?long_term_pricing_type: String,
+        ?is_long_term_pricing_auto_renew: bool,
+        ?snowball_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor long_term_pricing_type: String?
+      attr_accessor is_long_term_pricing_auto_renew: bool?
+      attr_accessor snowball_type: String?
+    end
+
+    class CreateLongTermPricingResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?long_term_pricing_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor long_term_pricing_id: String?
+    end
+
+    class CreateReturnShippingLabelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?shipping_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor shipping_option: String?
+    end
+
+    class CreateReturnShippingLabelResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class DataTransfer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bytes_transferred: Integer,
+        ?objects_transferred: Integer,
+        ?total_bytes: Integer,
+        ?total_objects: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bytes_transferred: Integer?
+      attr_accessor objects_transferred: Integer?
+      attr_accessor total_bytes: Integer?
+      attr_accessor total_objects: Integer?
+    end
+
+    class DependentService
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?service_version: Types::ServiceVersion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor service_version: Types::ServiceVersion?
+    end
+
+    class DescribeAddressRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_id: String?
+    end
+
+    class DescribeAddressResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address: Types::Address,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address: Types::Address?
+    end
+
+    class DescribeAddressesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeAddressesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addresses: Array[Types::Address],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addresses: Array[Types::Address]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+    end
+
+    class DescribeClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_metadata: Types::ClusterMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_metadata: Types::ClusterMetadata?
+    end
+
+    class DescribeJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class DescribeJobResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_metadata: Types::JobMetadata,
+        ?sub_job_metadata: Array[Types::JobMetadata],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_metadata: Types::JobMetadata?
+      attr_accessor sub_job_metadata: Array[Types::JobMetadata]?
+    end
+
+    class DescribeReturnShippingLabelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class DescribeReturnShippingLabelResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?expiration_date: Time,
+        ?return_shipping_label_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor expiration_date: Time?
+      attr_accessor return_shipping_label_uri: String?
+    end
+
+    class DeviceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snowcone_device_configuration: Types::SnowconeDeviceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snowcone_device_configuration: Types::SnowconeDeviceConfiguration?
+    end
+
+    module DeviceServiceName
+      NFS_ON_DEVICE_SERVICE: String
+      S3_ON_DEVICE_SERVICE: String
+    end
+
+    class EKSOnDeviceServiceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kubernetes_version: String,
+        ?eks_anywhere_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kubernetes_version: String?
+      attr_accessor eks_anywhere_version: String?
+    end
+
+    class Ec2AmiResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ami_id: String,
+        ?snowball_ami_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ami_id: String?
+      attr_accessor snowball_ami_id: String?
+    end
+
+    class Ec2RequestFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class EventTriggerDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_resource_arn: String?
+    end
+
+    class GetJobManifestRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class GetJobManifestResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_uri: String?
+    end
+
+    class GetJobUnlockCodeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class GetJobUnlockCodeResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?unlock_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor unlock_code: String?
+    end
+
+    class GetSnowballUsageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetSnowballUsageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?snowball_limit: Integer,
+        ?snowballs_in_use: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor snowball_limit: Integer?
+      attr_accessor snowballs_in_use: Integer?
+    end
+
+    class GetSoftwareUpdatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class GetSoftwareUpdatesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?updates_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor updates_uri: String?
+    end
+
+    class INDTaxDocuments
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gstin: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gstin: String?
+    end
+
+    module ImpactLevel
+      IL2: String
+      IL4: String
+      IL5: String
+      IL6: String
+      IL99: String
+    end
+
+    class InvalidAddressException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidInputCombinationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidJobStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidResourceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_type: String?
+    end
+
+    class JobListEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_state: String,
+        ?is_master: bool,
+        ?job_type: String,
+        ?snowball_type: String,
+        ?creation_date: Time,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_state: String?
+      attr_accessor is_master: bool?
+      attr_accessor job_type: String?
+      attr_accessor snowball_type: String?
+      attr_accessor creation_date: Time?
+      attr_accessor description: String?
+    end
+
+    class JobLogs
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_completion_report_uri: String,
+        ?job_success_log_uri: String,
+        ?job_failure_log_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_completion_report_uri: String?
+      attr_accessor job_success_log_uri: String?
+      attr_accessor job_failure_log_uri: String?
+    end
+
+    class JobMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?job_state: String,
+        ?job_type: String,
+        ?snowball_type: String,
+        ?creation_date: Time,
+        ?resources: Types::JobResource,
+        ?description: String,
+        ?kms_key_arn: String,
+        ?role_arn: String,
+        ?address_id: String,
+        ?shipping_details: Types::ShippingDetails,
+        ?snowball_capacity_preference: String,
+        ?notification: Types::Notification,
+        ?data_transfer_progress: Types::DataTransfer,
+        ?job_log_info: Types::JobLogs,
+        ?cluster_id: String,
+        ?forwarding_address_id: String,
+        ?tax_documents: Types::TaxDocuments,
+        ?device_configuration: Types::DeviceConfiguration,
+        ?remote_management: String,
+        ?long_term_pricing_id: String,
+        ?on_device_service_configuration: Types::OnDeviceServiceConfiguration,
+        ?impact_level: String,
+        ?pickup_details: Types::PickupDetails,
+        ?snowball_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor job_state: String?
+      attr_accessor job_type: String?
+      attr_accessor snowball_type: String?
+      attr_accessor creation_date: Time?
+      attr_accessor resources: Types::JobResource?
+      attr_accessor description: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor address_id: String?
+      attr_accessor shipping_details: Types::ShippingDetails?
+      attr_accessor snowball_capacity_preference: String?
+      attr_accessor notification: Types::Notification?
+      attr_accessor data_transfer_progress: Types::DataTransfer?
+      attr_accessor job_log_info: Types::JobLogs?
+      attr_accessor cluster_id: String?
+      attr_accessor forwarding_address_id: String?
+      attr_accessor tax_documents: Types::TaxDocuments?
+      attr_accessor device_configuration: Types::DeviceConfiguration?
+      attr_accessor remote_management: String?
+      attr_accessor long_term_pricing_id: String?
+      attr_accessor on_device_service_configuration: Types::OnDeviceServiceConfiguration?
+      attr_accessor impact_level: String?
+      attr_accessor pickup_details: Types::PickupDetails?
+      attr_accessor snowball_id: String?
+    end
+
+    class JobResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_resources: Array[Types::S3Resource],
+        ?lambda_resources: Array[Types::LambdaResource],
+        ?ec2_ami_resources: Array[Types::Ec2AmiResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_resources: Array[Types::S3Resource]?
+      attr_accessor lambda_resources: Array[Types::LambdaResource]?
+      attr_accessor ec2_ami_resources: Array[Types::Ec2AmiResource]?
+    end
+
+    module JobState
+      NEW: String
+      PREPARING_APPLIANCE: String
+      PREPARING_SHIPMENT: String
+      IN_TRANSIT_TO_CUSTOMER: String
+      WITH_CUSTOMER: String
+      IN_TRANSIT_TO_AWS: String
+      WITH_AWS_SORTING_FACILITY: String
+      WITH_AWS: String
+      IN_PROGRESS: String
+      COMPLETE: String
+      CANCELLED: String
+      LISTING: String
+      PENDING: String
+    end
+
+    module JobType
+      IMPORT: String
+      EXPORT: String
+      LOCAL_USE: String
+    end
+
+    class KMSRequestFailedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KeyRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?begin_marker: String,
+        ?end_marker: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor begin_marker: String?
+      attr_accessor end_marker: String?
+    end
+
+    class LambdaResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lambda_arn: String,
+        ?event_triggers: Array[Types::EventTriggerDefinition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lambda_arn: String?
+      attr_accessor event_triggers: Array[Types::EventTriggerDefinition]?
+    end
+
+    class ListClusterJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListClusterJobsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_list_entries: Array[Types::JobListEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_list_entries: Array[Types::JobListEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListClustersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListClustersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_list_entries: Array[Types::ClusterListEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_list_entries: Array[Types::ClusterListEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCompatibleImagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCompatibleImagesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?compatible_images: Array[Types::CompatibleImage],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor compatible_images: Array[Types::CompatibleImage]?
+      attr_accessor next_token: String?
+    end
+
+    class ListJobsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListJobsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_list_entries: Array[Types::JobListEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_list_entries: Array[Types::JobListEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLongTermPricingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListLongTermPricingResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?long_term_pricing_entries: Array[Types::LongTermPricingListEntry],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor long_term_pricing_entries: Array[Types::LongTermPricingListEntry]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPickupLocationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPickupLocationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?addresses: Array[Types::Address],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor addresses: Array[Types::Address]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?dependent_services: Array[Types::DependentService],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor dependent_services: Array[Types::DependentService]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceVersionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_versions: Array[Types::ServiceVersion],
+        ?service_name: String,
+        ?dependent_services: Array[Types::DependentService],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_versions: Array[Types::ServiceVersion]?
+      attr_accessor service_name: String?
+      attr_accessor dependent_services: Array[Types::DependentService]?
+      attr_accessor next_token: String?
+    end
+
+    class LongTermPricingListEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?long_term_pricing_id: String,
+        ?long_term_pricing_end_date: Time,
+        ?long_term_pricing_start_date: Time,
+        ?long_term_pricing_type: String,
+        ?current_active_job: String,
+        ?replacement_job: String,
+        ?is_long_term_pricing_auto_renew: bool,
+        ?long_term_pricing_status: String,
+        ?snowball_type: String,
+        ?job_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor long_term_pricing_id: String?
+      attr_accessor long_term_pricing_end_date: Time?
+      attr_accessor long_term_pricing_start_date: Time?
+      attr_accessor long_term_pricing_type: String?
+      attr_accessor current_active_job: String?
+      attr_accessor replacement_job: String?
+      attr_accessor is_long_term_pricing_auto_renew: bool?
+      attr_accessor long_term_pricing_status: String?
+      attr_accessor snowball_type: String?
+      attr_accessor job_ids: Array[String]?
+    end
+
+    module LongTermPricingType
+      ONE_YEAR: String
+      THREE_YEAR: String
+      ONE_MONTH: String
+    end
+
+    class NFSOnDeviceServiceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_limit: Integer,
+        ?storage_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_limit: Integer?
+      attr_accessor storage_unit: String?
+    end
+
+    class Notification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sns_topic_arn: String,
+        ?job_states_to_notify: Array[String],
+        ?notify_all: bool,
+        ?device_pickup_sns_topic_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sns_topic_arn: String?
+      attr_accessor job_states_to_notify: Array[String]?
+      attr_accessor notify_all: bool?
+      attr_accessor device_pickup_sns_topic_arn: String?
+    end
+
+    class OnDeviceServiceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?nfs_on_device_service: Types::NFSOnDeviceServiceConfiguration,
+        ?tgw_on_device_service: Types::TGWOnDeviceServiceConfiguration,
+        ?eks_on_device_service: Types::EKSOnDeviceServiceConfiguration,
+        ?s3_on_device_service: Types::S3OnDeviceServiceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor nfs_on_device_service: Types::NFSOnDeviceServiceConfiguration?
+      attr_accessor tgw_on_device_service: Types::TGWOnDeviceServiceConfiguration?
+      attr_accessor eks_on_device_service: Types::EKSOnDeviceServiceConfiguration?
+      attr_accessor s3_on_device_service: Types::S3OnDeviceServiceConfiguration?
+    end
+
+    class PickupDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?phone_number: String,
+        ?email: String,
+        ?identification_number: String,
+        ?identification_expiration_date: Time,
+        ?identification_issuing_org: String,
+        ?device_pickup_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor phone_number: String?
+      attr_accessor email: String?
+      attr_accessor identification_number: String?
+      attr_accessor identification_expiration_date: Time?
+      attr_accessor identification_issuing_org: String?
+      attr_accessor device_pickup_id: String?
+    end
+
+    module RemoteManagement
+      INSTALLED_ONLY: String
+      INSTALLED_AUTOSTART: String
+      NOT_INSTALLED: String
+    end
+
+    class ReturnShippingLabelAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class S3OnDeviceServiceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_limit: Float,
+        ?storage_unit: String,
+        ?service_size: Integer,
+        ?fault_tolerance: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_limit: Float?
+      attr_accessor storage_unit: String?
+      attr_accessor service_size: Integer?
+      attr_accessor fault_tolerance: Integer?
+    end
+
+    class S3Resource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_arn: String,
+        ?key_range: Types::KeyRange,
+        ?target_on_device_services: Array[Types::TargetOnDeviceService],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_arn: String?
+      attr_accessor key_range: Types::KeyRange?
+      attr_accessor target_on_device_services: Array[Types::TargetOnDeviceService]?
+    end
+
+    module ServiceName
+      KUBERNETES: String
+      EKS_ANYWHERE: String
+    end
+
+    class ServiceVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version: String?
+    end
+
+    class Shipment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?tracking_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor tracking_number: String?
+    end
+
+    module ShipmentState
+      RECEIVED: String
+      RETURNED: String
+    end
+
+    class ShippingDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?shipping_option: String,
+        ?inbound_shipment: Types::Shipment,
+        ?outbound_shipment: Types::Shipment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor shipping_option: String?
+      attr_accessor inbound_shipment: Types::Shipment?
+      attr_accessor outbound_shipment: Types::Shipment?
+    end
+
+    module ShippingLabelStatus
+      IN_PROGRESS: String
+      TIMED_OUT: String
+      SUCCEEDED: String
+      FAILED: String
+    end
+
+    module ShippingOption
+      SECOND_DAY: String
+      NEXT_DAY: String
+      EXPRESS: String
+      STANDARD: String
+    end
+
+    module SnowballCapacity
+      T50: String
+      T80: String
+      T100: String
+      T42: String
+      T98: String
+      T8: String
+      T14: String
+      T32: String
+      NO_PREFERENCE: String
+      T240: String
+      T13: String
+    end
+
+    module SnowballType
+      STANDARD: String
+      EDGE: String
+      EDGE_C: String
+      EDGE_CG: String
+      EDGE_S: String
+      SNC1_HDD: String
+      SNC1_SSD: String
+      V3_5C: String
+      V3_5S: String
+      RACK_5U_C: String
+    end
+
+    class SnowconeDeviceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wireless_connection: Types::WirelessConnection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wireless_connection: Types::WirelessConnection?
+    end
+
+    module StorageUnit
+      TB: String
+    end
+
+    class TGWOnDeviceServiceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_limit: Integer,
+        ?storage_unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_limit: Integer?
+      attr_accessor storage_unit: String?
+    end
+
+    class TargetOnDeviceService
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?transfer_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor transfer_option: String?
+    end
+
+    class TaxDocuments
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ind: Types::INDTaxDocuments,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ind: Types::INDTaxDocuments?
+    end
+
+    module TransferOption
+      IMPORT: String
+      EXPORT: String
+      LOCAL_USE: String
+    end
+
+    class UnsupportedAddressException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_id: String,
+        ?role_arn: String,
+        ?description: String,
+        ?resources: Types::JobResource,
+        ?on_device_service_configuration: Types::OnDeviceServiceConfiguration,
+        ?address_id: String,
+        ?shipping_option: String,
+        ?notification: Types::Notification,
+        ?forwarding_address_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor description: String?
+      attr_accessor resources: Types::JobResource?
+      attr_accessor on_device_service_configuration: Types::OnDeviceServiceConfiguration?
+      attr_accessor address_id: String?
+      attr_accessor shipping_option: String?
+      attr_accessor notification: Types::Notification?
+      attr_accessor forwarding_address_id: String?
+    end
+
+    class UpdateClusterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?role_arn: String,
+        ?notification: Types::Notification,
+        ?resources: Types::JobResource,
+        ?on_device_service_configuration: Types::OnDeviceServiceConfiguration,
+        ?address_id: String,
+        ?shipping_option: String,
+        ?description: String,
+        ?snowball_capacity_preference: String,
+        ?forwarding_address_id: String,
+        ?pickup_details: Types::PickupDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor notification: Types::Notification?
+      attr_accessor resources: Types::JobResource?
+      attr_accessor on_device_service_configuration: Types::OnDeviceServiceConfiguration?
+      attr_accessor address_id: String?
+      attr_accessor shipping_option: String?
+      attr_accessor description: String?
+      attr_accessor snowball_capacity_preference: String?
+      attr_accessor forwarding_address_id: String?
+      attr_accessor pickup_details: Types::PickupDetails?
+    end
+
+    class UpdateJobResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateJobShipmentStateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?shipment_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor shipment_state: String?
+    end
+
+    class UpdateJobShipmentStateResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLongTermPricingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?long_term_pricing_id: String,
+        ?replacement_job: String,
+        ?is_long_term_pricing_auto_renew: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor long_term_pricing_id: String?
+      attr_accessor replacement_job: String?
+      attr_accessor is_long_term_pricing_auto_renew: bool?
+    end
+
+    class UpdateLongTermPricingResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class WirelessConnection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?is_wifi_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor is_wifi_enabled: bool?
+    end
+  end
+end

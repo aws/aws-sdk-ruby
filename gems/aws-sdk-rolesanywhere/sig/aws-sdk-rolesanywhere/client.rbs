@@ -1,0 +1,384 @@
+module Aws::RolesAnywhere
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::RolesAnywhere::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateProfileResponse
+      include Smithy::Client::_Response[Types::CreateProfileOutput]
+      def profile: () -> Types::ProfileDetail?
+    end
+    def create_profile: (
+      ?name: String,
+      ?require_instance_properties: bool,
+      ?session_policy: String,
+      ?role_arns: Array[String],
+      ?managed_policy_arns: Array[String],
+      ?duration_seconds: Integer,
+      ?enabled: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?accept_role_session_name: bool
+    ) -> _CreateProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProfileResponse
+
+    interface _CreateTrustAnchorResponse
+      include Smithy::Client::_Response[Types::CreateTrustAnchorOutput]
+      def trust_anchor: () -> Types::TrustAnchorDetail?
+    end
+    def create_trust_anchor: (
+      ?name: String,
+      ?source: {
+        source_type: String,
+        source_data: {
+          x509_certificate_data: String,
+          acm_pca_arn: untyped
+        }
+      },
+      ?enabled: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?notification_settings: Array[
+        {
+          enabled: bool,
+          event: String,
+          threshold: Integer,
+          channel: String
+        }
+      ]
+    ) -> _CreateTrustAnchorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTrustAnchorResponse
+
+    interface _DeleteAttributeMappingResponse
+      include Smithy::Client::_Response[Types::DeleteAttributeMappingResponse]
+      def profile: () -> Types::ProfileDetail?
+    end
+    def delete_attribute_mapping: (
+      ?profile_id: String,
+      ?certificate_field: String,
+      ?specifiers: Array[String]
+    ) -> _DeleteAttributeMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAttributeMappingResponse
+
+    interface _DeleteCrlResponse
+      include Smithy::Client::_Response[Types::DeleteCrlOutput]
+      def crl: () -> Types::CrlDetail?
+    end
+    def delete_crl: (
+      ?crl_id: String
+    ) -> _DeleteCrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCrlResponse
+
+    interface _DeleteProfileResponse
+      include Smithy::Client::_Response[Types::DeleteProfileOutput]
+      def profile: () -> Types::ProfileDetail?
+    end
+    def delete_profile: (
+      ?profile_id: String
+    ) -> _DeleteProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProfileResponse
+
+    interface _DeleteTrustAnchorResponse
+      include Smithy::Client::_Response[Types::DeleteTrustAnchorOutput]
+      def trust_anchor: () -> Types::TrustAnchorDetail?
+    end
+    def delete_trust_anchor: (
+      ?trust_anchor_id: String
+    ) -> _DeleteTrustAnchorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTrustAnchorResponse
+
+    interface _DisableCrlResponse
+      include Smithy::Client::_Response[Types::DisableCrlOutput]
+      def crl: () -> Types::CrlDetail?
+    end
+    def disable_crl: (
+      ?crl_id: String
+    ) -> _DisableCrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableCrlResponse
+
+    interface _DisableProfileResponse
+      include Smithy::Client::_Response[Types::DisableProfileOutput]
+      def profile: () -> Types::ProfileDetail?
+    end
+    def disable_profile: (
+      ?profile_id: String
+    ) -> _DisableProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableProfileResponse
+
+    interface _DisableTrustAnchorResponse
+      include Smithy::Client::_Response[Types::DisableTrustAnchorOutput]
+      def trust_anchor: () -> Types::TrustAnchorDetail?
+    end
+    def disable_trust_anchor: (
+      ?trust_anchor_id: String
+    ) -> _DisableTrustAnchorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableTrustAnchorResponse
+
+    interface _EnableCrlResponse
+      include Smithy::Client::_Response[Types::EnableCrlOutput]
+      def crl: () -> Types::CrlDetail?
+    end
+    def enable_crl: (
+      ?crl_id: String
+    ) -> _EnableCrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableCrlResponse
+
+    interface _EnableProfileResponse
+      include Smithy::Client::_Response[Types::EnableProfileOutput]
+      def profile: () -> Types::ProfileDetail?
+    end
+    def enable_profile: (
+      ?profile_id: String
+    ) -> _EnableProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableProfileResponse
+
+    interface _EnableTrustAnchorResponse
+      include Smithy::Client::_Response[Types::EnableTrustAnchorOutput]
+      def trust_anchor: () -> Types::TrustAnchorDetail?
+    end
+    def enable_trust_anchor: (
+      ?trust_anchor_id: String
+    ) -> _EnableTrustAnchorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableTrustAnchorResponse
+
+    interface _GetCrlResponse
+      include Smithy::Client::_Response[Types::GetCrlOutput]
+      def crl: () -> Types::CrlDetail?
+    end
+    def get_crl: (
+      ?crl_id: String
+    ) -> _GetCrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCrlResponse
+
+    interface _GetProfileResponse
+      include Smithy::Client::_Response[Types::GetProfileOutput]
+      def profile: () -> Types::ProfileDetail?
+    end
+    def get_profile: (
+      ?profile_id: String
+    ) -> _GetProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProfileResponse
+
+    interface _GetSubjectResponse
+      include Smithy::Client::_Response[Types::GetSubjectOutput]
+      def subject: () -> Types::SubjectDetail?
+    end
+    def get_subject: (
+      ?subject_id: String
+    ) -> _GetSubjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSubjectResponse
+
+    interface _GetTrustAnchorResponse
+      include Smithy::Client::_Response[Types::GetTrustAnchorOutput]
+      def trust_anchor: () -> Types::TrustAnchorDetail?
+    end
+    def get_trust_anchor: (
+      ?trust_anchor_id: String
+    ) -> _GetTrustAnchorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTrustAnchorResponse
+
+    interface _ImportCrlResponse
+      include Smithy::Client::_Response[Types::ImportCrlOutput]
+      def crl: () -> Types::CrlDetail?
+    end
+    def import_crl: (
+      ?name: String,
+      ?crl_data: String,
+      ?enabled: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?trust_anchor_arn: String
+    ) -> _ImportCrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportCrlResponse
+
+    interface _ListCrlsResponse
+      include Smithy::Client::_Response[Types::ListCrlsOutput]
+      def next_token: () -> String?
+      def crls: () -> Array[Types::CrlDetail]?
+    end
+    def list_crls: (
+      ?next_token: String,
+      ?page_size: Integer
+    ) -> _ListCrlsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCrlsResponse
+
+    interface _ListProfilesResponse
+      include Smithy::Client::_Response[Types::ListProfilesOutput]
+      def next_token: () -> String?
+      def profiles: () -> Array[Types::ProfileDetail]?
+    end
+    def list_profiles: (
+      ?next_token: String,
+      ?page_size: Integer
+    ) -> _ListProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProfilesResponse
+
+    interface _ListSubjectsResponse
+      include Smithy::Client::_Response[Types::ListSubjectsOutput]
+      def subjects: () -> Array[Types::SubjectSummary]?
+      def next_token: () -> String?
+    end
+    def list_subjects: (
+      ?next_token: String,
+      ?page_size: Integer
+    ) -> _ListSubjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSubjectsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTrustAnchorsResponse
+      include Smithy::Client::_Response[Types::ListTrustAnchorsOutput]
+      def next_token: () -> String?
+      def trust_anchors: () -> Array[Types::TrustAnchorDetail]?
+    end
+    def list_trust_anchors: (
+      ?next_token: String,
+      ?page_size: Integer
+    ) -> _ListTrustAnchorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTrustAnchorsResponse
+
+    interface _PutAttributeMappingResponse
+      include Smithy::Client::_Response[Types::PutAttributeMappingResponse]
+      def profile: () -> Types::ProfileDetail?
+    end
+    def put_attribute_mapping: (
+      ?profile_id: String,
+      ?certificate_field: String,
+      ?mapping_rules: Array[
+        {
+          specifier: String
+        }
+      ]
+    ) -> _PutAttributeMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAttributeMappingResponse
+
+    interface _PutNotificationSettingsResponse
+      include Smithy::Client::_Response[Types::PutNotificationSettingsResponse]
+      def trust_anchor: () -> Types::TrustAnchorDetail?
+    end
+    def put_notification_settings: (
+      ?trust_anchor_id: String,
+      ?notification_settings: Array[
+        {
+          enabled: bool,
+          event: String,
+          threshold: Integer,
+          channel: String
+        }
+      ]
+    ) -> _PutNotificationSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutNotificationSettingsResponse
+
+    interface _ResetNotificationSettingsResponse
+      include Smithy::Client::_Response[Types::ResetNotificationSettingsResponse]
+      def trust_anchor: () -> Types::TrustAnchorDetail?
+    end
+    def reset_notification_settings: (
+      ?trust_anchor_id: String,
+      ?notification_setting_keys: Array[
+        {
+          event: String,
+          channel: String
+        }
+      ]
+    ) -> _ResetNotificationSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ResetNotificationSettingsResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateCrlResponse
+      include Smithy::Client::_Response[Types::UpdateCrlOutput]
+      def crl: () -> Types::CrlDetail?
+    end
+    def update_crl: (
+      ?crl_id: String,
+      ?name: String,
+      ?crl_data: String
+    ) -> _UpdateCrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCrlResponse
+
+    interface _UpdateProfileResponse
+      include Smithy::Client::_Response[Types::UpdateProfileOutput]
+      def profile: () -> Types::ProfileDetail?
+    end
+    def update_profile: (
+      ?profile_id: String,
+      ?name: String,
+      ?session_policy: String,
+      ?role_arns: Array[String],
+      ?managed_policy_arns: Array[String],
+      ?duration_seconds: Integer,
+      ?accept_role_session_name: bool
+    ) -> _UpdateProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProfileResponse
+
+    interface _UpdateTrustAnchorResponse
+      include Smithy::Client::_Response[Types::UpdateTrustAnchorOutput]
+      def trust_anchor: () -> Types::TrustAnchorDetail?
+    end
+    def update_trust_anchor: (
+      ?trust_anchor_id: String,
+      ?name: String,
+      ?source: {
+        source_type: String,
+        source_data: {
+          x509_certificate_data: String,
+          acm_pca_arn: untyped
+        }
+      }
+    ) -> _UpdateTrustAnchorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTrustAnchorResponse
+  end
+end

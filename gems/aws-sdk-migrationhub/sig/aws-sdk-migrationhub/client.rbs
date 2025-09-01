@@ -1,0 +1,283 @@
+module Aws::MigrationHub
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::MigrationHub::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateCreatedArtifactResponse
+      include Smithy::Client::_Response[Types::AssociateCreatedArtifactResult]
+    end
+    def associate_created_artifact: (
+      ?progress_update_stream: String,
+      ?migration_task_name: String,
+      ?created_artifact: {
+        name: String,
+        description: String
+      },
+      ?dry_run: bool
+    ) -> _AssociateCreatedArtifactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateCreatedArtifactResponse
+
+    interface _AssociateDiscoveredResourceResponse
+      include Smithy::Client::_Response[Types::AssociateDiscoveredResourceResult]
+    end
+    def associate_discovered_resource: (
+      ?progress_update_stream: String,
+      ?migration_task_name: String,
+      ?discovered_resource: {
+        configuration_id: String,
+        description: String
+      },
+      ?dry_run: bool
+    ) -> _AssociateDiscoveredResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateDiscoveredResourceResponse
+
+    interface _AssociateSourceResourceResponse
+      include Smithy::Client::_Response[Types::AssociateSourceResourceResult]
+    end
+    def associate_source_resource: (
+      ?progress_update_stream: String,
+      ?migration_task_name: String,
+      ?source_resource: {
+        name: String,
+        description: String,
+        status_detail: String
+      },
+      ?dry_run: bool
+    ) -> _AssociateSourceResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateSourceResourceResponse
+
+    interface _CreateProgressUpdateStreamResponse
+      include Smithy::Client::_Response[Types::CreateProgressUpdateStreamResult]
+    end
+    def create_progress_update_stream: (
+      ?progress_update_stream_name: String,
+      ?dry_run: bool
+    ) -> _CreateProgressUpdateStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProgressUpdateStreamResponse
+
+    interface _DeleteProgressUpdateStreamResponse
+      include Smithy::Client::_Response[Types::DeleteProgressUpdateStreamResult]
+    end
+    def delete_progress_update_stream: (
+      ?progress_update_stream_name: String,
+      ?dry_run: bool
+    ) -> _DeleteProgressUpdateStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProgressUpdateStreamResponse
+
+    interface _DescribeApplicationStateResponse
+      include Smithy::Client::_Response[Types::DescribeApplicationStateResult]
+      def application_status: () -> String?
+      def last_updated_time: () -> Time?
+    end
+    def describe_application_state: (
+      ?application_id: String
+    ) -> _DescribeApplicationStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeApplicationStateResponse
+
+    interface _DescribeMigrationTaskResponse
+      include Smithy::Client::_Response[Types::DescribeMigrationTaskResult]
+      def migration_task: () -> Types::MigrationTask?
+    end
+    def describe_migration_task: (
+      ?progress_update_stream: String,
+      ?migration_task_name: String
+    ) -> _DescribeMigrationTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeMigrationTaskResponse
+
+    interface _DisassociateCreatedArtifactResponse
+      include Smithy::Client::_Response[Types::DisassociateCreatedArtifactResult]
+    end
+    def disassociate_created_artifact: (
+      ?progress_update_stream: String,
+      ?migration_task_name: String,
+      ?created_artifact_name: String,
+      ?dry_run: bool
+    ) -> _DisassociateCreatedArtifactResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateCreatedArtifactResponse
+
+    interface _DisassociateDiscoveredResourceResponse
+      include Smithy::Client::_Response[Types::DisassociateDiscoveredResourceResult]
+    end
+    def disassociate_discovered_resource: (
+      ?progress_update_stream: String,
+      ?migration_task_name: String,
+      ?configuration_id: String,
+      ?dry_run: bool
+    ) -> _DisassociateDiscoveredResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateDiscoveredResourceResponse
+
+    interface _DisassociateSourceResourceResponse
+      include Smithy::Client::_Response[Types::DisassociateSourceResourceResult]
+    end
+    def disassociate_source_resource: (
+      ?progress_update_stream: String,
+      ?migration_task_name: String,
+      ?source_resource_name: String,
+      ?dry_run: bool
+    ) -> _DisassociateSourceResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateSourceResourceResponse
+
+    interface _ImportMigrationTaskResponse
+      include Smithy::Client::_Response[Types::ImportMigrationTaskResult]
+    end
+    def import_migration_task: (
+      ?progress_update_stream: String,
+      ?migration_task_name: String,
+      ?dry_run: bool
+    ) -> _ImportMigrationTaskResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportMigrationTaskResponse
+
+    interface _ListApplicationStatesResponse
+      include Smithy::Client::_Response[Types::ListApplicationStatesResult]
+      def application_state_list: () -> Array[Types::ApplicationState]?
+      def next_token: () -> String?
+    end
+    def list_application_states: (
+      ?application_ids: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListApplicationStatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListApplicationStatesResponse
+
+    interface _ListCreatedArtifactsResponse
+      include Smithy::Client::_Response[Types::ListCreatedArtifactsResult]
+      def next_token: () -> String?
+      def created_artifact_list: () -> Array[Types::CreatedArtifact]?
+    end
+    def list_created_artifacts: (
+      ?progress_update_stream: String,
+      ?migration_task_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCreatedArtifactsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCreatedArtifactsResponse
+
+    interface _ListDiscoveredResourcesResponse
+      include Smithy::Client::_Response[Types::ListDiscoveredResourcesResult]
+      def next_token: () -> String?
+      def discovered_resource_list: () -> Array[Types::DiscoveredResource]?
+    end
+    def list_discovered_resources: (
+      ?progress_update_stream: String,
+      ?migration_task_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDiscoveredResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDiscoveredResourcesResponse
+
+    interface _ListMigrationTaskUpdatesResponse
+      include Smithy::Client::_Response[Types::ListMigrationTaskUpdatesResult]
+      def next_token: () -> String?
+      def migration_task_update_list: () -> Array[Types::MigrationTaskUpdate]?
+    end
+    def list_migration_task_updates: (
+      ?progress_update_stream: String,
+      ?migration_task_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMigrationTaskUpdatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMigrationTaskUpdatesResponse
+
+    interface _ListMigrationTasksResponse
+      include Smithy::Client::_Response[Types::ListMigrationTasksResult]
+      def next_token: () -> String?
+      def migration_task_summary_list: () -> Array[Types::MigrationTaskSummary]?
+    end
+    def list_migration_tasks: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?resource_name: String
+    ) -> _ListMigrationTasksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMigrationTasksResponse
+
+    interface _ListProgressUpdateStreamsResponse
+      include Smithy::Client::_Response[Types::ListProgressUpdateStreamsResult]
+      def progress_update_stream_summary_list: () -> Array[Types::ProgressUpdateStreamSummary]?
+      def next_token: () -> String?
+    end
+    def list_progress_update_streams: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProgressUpdateStreamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProgressUpdateStreamsResponse
+
+    interface _ListSourceResourcesResponse
+      include Smithy::Client::_Response[Types::ListSourceResourcesResult]
+      def next_token: () -> String?
+      def source_resource_list: () -> Array[Types::SourceResource]?
+    end
+    def list_source_resources: (
+      ?progress_update_stream: String,
+      ?migration_task_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSourceResourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSourceResourcesResponse
+
+    interface _NotifyApplicationStateResponse
+      include Smithy::Client::_Response[Types::NotifyApplicationStateResult]
+    end
+    def notify_application_state: (
+      ?application_id: String,
+      ?status: String,
+      ?update_date_time: Time,
+      ?dry_run: bool
+    ) -> _NotifyApplicationStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _NotifyApplicationStateResponse
+
+    interface _NotifyMigrationTaskStateResponse
+      include Smithy::Client::_Response[Types::NotifyMigrationTaskStateResult]
+    end
+    def notify_migration_task_state: (
+      ?progress_update_stream: String,
+      ?migration_task_name: String,
+      ?task: {
+        status: String,
+        status_detail: String,
+        progress_percent: Integer
+      },
+      ?update_date_time: Time,
+      ?next_update_seconds: Integer,
+      ?dry_run: bool
+    ) -> _NotifyMigrationTaskStateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _NotifyMigrationTaskStateResponse
+
+    interface _PutResourceAttributesResponse
+      include Smithy::Client::_Response[Types::PutResourceAttributesResult]
+    end
+    def put_resource_attributes: (
+      ?progress_update_stream: String,
+      ?migration_task_name: String,
+      ?resource_attribute_list: Array[
+        {
+          type: String,
+          value: String
+        }
+      ],
+      ?dry_run: bool
+    ) -> _PutResourceAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResourceAttributesResponse
+  end
+end

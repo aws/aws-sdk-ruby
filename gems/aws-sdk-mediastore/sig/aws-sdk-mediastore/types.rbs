@@ -1,0 +1,621 @@
+module Aws::MediaStore
+  module Types
+
+    class Container
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: String,
+        ?creation_time: Time,
+        ?arn: String,
+        ?name: String,
+        ?status: String,
+        ?access_logging_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: String?
+      attr_accessor creation_time: Time?
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor access_logging_enabled: bool?
+    end
+
+    class ContainerInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ContainerLevelMetrics
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class ContainerNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ContainerStatus
+      ACTIVE: String
+      CREATING: String
+      DELETING: String
+    end
+
+    class CorsPolicyNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CorsRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_origins: Array[String],
+        ?allowed_methods: Array[String],
+        ?allowed_headers: Array[String],
+        ?max_age_seconds: Integer,
+        ?expose_headers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_origins: Array[String]?
+      attr_accessor allowed_methods: Array[String]?
+      attr_accessor allowed_headers: Array[String]?
+      attr_accessor max_age_seconds: Integer?
+      attr_accessor expose_headers: Array[String]?
+    end
+
+    class CreateContainerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateContainerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container: Types::Container,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container: Types::Container?
+    end
+
+    class DeleteContainerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+    end
+
+    class DeleteContainerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteContainerPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+    end
+
+    class DeleteContainerPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteCorsPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+    end
+
+    class DeleteCorsPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLifecyclePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+    end
+
+    class DeleteLifecyclePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteMetricPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+    end
+
+    class DeleteMetricPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeContainerInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+    end
+
+    class DescribeContainerOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container: Types::Container,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container: Types::Container?
+    end
+
+    class GetContainerPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+    end
+
+    class GetContainerPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    class GetCorsPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+    end
+
+    class GetCorsPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cors_policy: Array[Types::CorsRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cors_policy: Array[Types::CorsRule]?
+    end
+
+    class GetLifecyclePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+    end
+
+    class GetLifecyclePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lifecycle_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lifecycle_policy: String?
+    end
+
+    class GetMetricPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+    end
+
+    class GetMetricPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_policy: Types::MetricPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_policy: Types::MetricPolicy?
+    end
+
+    class InternalServerError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListContainersInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListContainersOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?containers: Array[Types::Container],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor containers: Array[Types::Container]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module MethodName
+      PUT: String
+      GET: String
+      DELETE: String
+      HEAD: String
+    end
+
+    class MetricPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_level_metrics: String,
+        ?metric_policy_rules: Array[Types::MetricPolicyRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_level_metrics: String?
+      attr_accessor metric_policy_rules: Array[Types::MetricPolicyRule]?
+    end
+
+    class MetricPolicyRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_group: String,
+        ?object_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_group: String?
+      attr_accessor object_group_name: String?
+    end
+
+    class PolicyNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PutContainerPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+      attr_accessor policy: String?
+    end
+
+    class PutContainerPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutCorsPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+        ?cors_policy: Array[Types::CorsRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+      attr_accessor cors_policy: Array[Types::CorsRule]?
+    end
+
+    class PutCorsPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutLifecyclePolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+        ?lifecycle_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+      attr_accessor lifecycle_policy: String?
+    end
+
+    class PutLifecyclePolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutMetricPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+        ?metric_policy: Types::MetricPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+      attr_accessor metric_policy: Types::MetricPolicy?
+    end
+
+    class PutMetricPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StartAccessLoggingInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+    end
+
+    class StartAccessLoggingOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopAccessLoggingInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?container_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor container_name: String?
+    end
+
+    class StopAccessLoggingOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+  end
+end

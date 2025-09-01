@@ -1,0 +1,5 @@
+  module Aws
+    module CustomerProfiles
+      VERSION: String
+    end
+  end

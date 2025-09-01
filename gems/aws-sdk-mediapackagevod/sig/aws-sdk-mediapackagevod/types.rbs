@@ -1,0 +1,987 @@
+module Aws::MediaPackageVod
+  module Types
+
+    module AdMarkers
+      NONE: String
+      SCTE35_ENHANCED: String
+      PASSTHROUGH: String
+    end
+
+    class AssetShallow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?created_at: String,
+        ?id: String,
+        ?packaging_group_id: String,
+        ?resource_id: String,
+        ?source_arn: String,
+        ?source_role_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor created_at: String?
+      attr_accessor id: String?
+      attr_accessor packaging_group_id: String?
+      attr_accessor resource_id: String?
+      attr_accessor source_arn: String?
+      attr_accessor source_role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class Authorization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cdn_identifier_secret: String,
+        ?secrets_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cdn_identifier_secret: String?
+      attr_accessor secrets_role_arn: String?
+    end
+
+    class CmafEncryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?constant_initialization_vector: String,
+        ?speke_key_provider: Types::SpekeKeyProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor constant_initialization_vector: String?
+      attr_accessor speke_key_provider: Types::SpekeKeyProvider?
+    end
+
+    class CmafPackage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption: Types::CmafEncryption,
+        ?hls_manifests: Array[Types::HlsManifest],
+        ?include_encoder_configuration_in_segments: bool,
+        ?segment_duration_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption: Types::CmafEncryption?
+      attr_accessor hls_manifests: Array[Types::HlsManifest]?
+      attr_accessor include_encoder_configuration_in_segments: bool?
+      attr_accessor segment_duration_seconds: Integer?
+    end
+
+    class ConfigureLogsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?egress_access_logs: Types::EgressAccessLogs,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor egress_access_logs: Types::EgressAccessLogs?
+      attr_accessor id: String?
+    end
+
+    class ConfigureLogsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?authorization: Types::Authorization,
+        ?created_at: String,
+        ?domain_name: String,
+        ?egress_access_logs: Types::EgressAccessLogs,
+        ?id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor authorization: Types::Authorization?
+      attr_accessor created_at: String?
+      attr_accessor domain_name: String?
+      attr_accessor egress_access_logs: Types::EgressAccessLogs?
+      attr_accessor id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateAssetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?packaging_group_id: String,
+        ?resource_id: String,
+        ?source_arn: String,
+        ?source_role_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor packaging_group_id: String?
+      attr_accessor resource_id: String?
+      attr_accessor source_arn: String?
+      attr_accessor source_role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateAssetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?created_at: String,
+        ?egress_endpoints: Array[Types::EgressEndpoint],
+        ?id: String,
+        ?packaging_group_id: String,
+        ?resource_id: String,
+        ?source_arn: String,
+        ?source_role_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor created_at: String?
+      attr_accessor egress_endpoints: Array[Types::EgressEndpoint]?
+      attr_accessor id: String?
+      attr_accessor packaging_group_id: String?
+      attr_accessor resource_id: String?
+      attr_accessor source_arn: String?
+      attr_accessor source_role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreatePackagingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cmaf_package: Types::CmafPackage,
+        ?dash_package: Types::DashPackage,
+        ?hls_package: Types::HlsPackage,
+        ?id: String,
+        ?mss_package: Types::MssPackage,
+        ?packaging_group_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cmaf_package: Types::CmafPackage?
+      attr_accessor dash_package: Types::DashPackage?
+      attr_accessor hls_package: Types::HlsPackage?
+      attr_accessor id: String?
+      attr_accessor mss_package: Types::MssPackage?
+      attr_accessor packaging_group_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreatePackagingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?cmaf_package: Types::CmafPackage,
+        ?created_at: String,
+        ?dash_package: Types::DashPackage,
+        ?hls_package: Types::HlsPackage,
+        ?id: String,
+        ?mss_package: Types::MssPackage,
+        ?packaging_group_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor cmaf_package: Types::CmafPackage?
+      attr_accessor created_at: String?
+      attr_accessor dash_package: Types::DashPackage?
+      attr_accessor hls_package: Types::HlsPackage?
+      attr_accessor id: String?
+      attr_accessor mss_package: Types::MssPackage?
+      attr_accessor packaging_group_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreatePackagingGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorization: Types::Authorization,
+        ?egress_access_logs: Types::EgressAccessLogs,
+        ?id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization: Types::Authorization?
+      attr_accessor egress_access_logs: Types::EgressAccessLogs?
+      attr_accessor id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreatePackagingGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?authorization: Types::Authorization,
+        ?created_at: String,
+        ?domain_name: String,
+        ?egress_access_logs: Types::EgressAccessLogs,
+        ?id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor authorization: Types::Authorization?
+      attr_accessor created_at: String?
+      attr_accessor domain_name: String?
+      attr_accessor egress_access_logs: Types::EgressAccessLogs?
+      attr_accessor id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DashEncryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?speke_key_provider: Types::SpekeKeyProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor speke_key_provider: Types::SpekeKeyProvider?
+    end
+
+    class DashManifest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_layout: String,
+        ?manifest_name: String,
+        ?min_buffer_time_seconds: Integer,
+        ?profile: String,
+        ?scte_markers_source: String,
+        ?stream_selection: Types::StreamSelection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_layout: String?
+      attr_accessor manifest_name: String?
+      attr_accessor min_buffer_time_seconds: Integer?
+      attr_accessor profile: String?
+      attr_accessor scte_markers_source: String?
+      attr_accessor stream_selection: Types::StreamSelection?
+    end
+
+    class DashPackage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dash_manifests: Array[Types::DashManifest],
+        ?encryption: Types::DashEncryption,
+        ?include_encoder_configuration_in_segments: bool,
+        ?include_iframe_only_stream: bool,
+        ?period_triggers: Array[String],
+        ?segment_duration_seconds: Integer,
+        ?segment_template_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dash_manifests: Array[Types::DashManifest]?
+      attr_accessor encryption: Types::DashEncryption?
+      attr_accessor include_encoder_configuration_in_segments: bool?
+      attr_accessor include_iframe_only_stream: bool?
+      attr_accessor period_triggers: Array[String]?
+      attr_accessor segment_duration_seconds: Integer?
+      attr_accessor segment_template_format: String?
+    end
+
+    class DeleteAssetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteAssetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePackagingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeletePackagingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeletePackagingGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeletePackagingGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeAssetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DescribeAssetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?created_at: String,
+        ?egress_endpoints: Array[Types::EgressEndpoint],
+        ?id: String,
+        ?packaging_group_id: String,
+        ?resource_id: String,
+        ?source_arn: String,
+        ?source_role_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor created_at: String?
+      attr_accessor egress_endpoints: Array[Types::EgressEndpoint]?
+      attr_accessor id: String?
+      attr_accessor packaging_group_id: String?
+      attr_accessor resource_id: String?
+      attr_accessor source_arn: String?
+      attr_accessor source_role_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DescribePackagingConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DescribePackagingConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?cmaf_package: Types::CmafPackage,
+        ?created_at: String,
+        ?dash_package: Types::DashPackage,
+        ?hls_package: Types::HlsPackage,
+        ?id: String,
+        ?mss_package: Types::MssPackage,
+        ?packaging_group_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor cmaf_package: Types::CmafPackage?
+      attr_accessor created_at: String?
+      attr_accessor dash_package: Types::DashPackage?
+      attr_accessor hls_package: Types::HlsPackage?
+      attr_accessor id: String?
+      attr_accessor mss_package: Types::MssPackage?
+      attr_accessor packaging_group_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DescribePackagingGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DescribePackagingGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approximate_asset_count: Integer,
+        ?arn: String,
+        ?authorization: Types::Authorization,
+        ?created_at: String,
+        ?domain_name: String,
+        ?egress_access_logs: Types::EgressAccessLogs,
+        ?id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approximate_asset_count: Integer?
+      attr_accessor arn: String?
+      attr_accessor authorization: Types::Authorization?
+      attr_accessor created_at: String?
+      attr_accessor domain_name: String?
+      attr_accessor egress_access_logs: Types::EgressAccessLogs?
+      attr_accessor id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class EgressAccessLogs
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+    end
+
+    class EgressEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?packaging_configuration_id: String,
+        ?status: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor packaging_configuration_id: String?
+      attr_accessor status: String?
+      attr_accessor url: String?
+    end
+
+    class EncryptionContractConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?preset_speke20_audio: String,
+        ?preset_speke20_video: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor preset_speke20_audio: String?
+      attr_accessor preset_speke20_video: String?
+    end
+
+    module EncryptionMethod
+      AES_128: String
+      SAMPLE_AES: String
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class HlsEncryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?constant_initialization_vector: String,
+        ?encryption_method: String,
+        ?speke_key_provider: Types::SpekeKeyProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor constant_initialization_vector: String?
+      attr_accessor encryption_method: String?
+      attr_accessor speke_key_provider: Types::SpekeKeyProvider?
+    end
+
+    class HlsManifest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ad_markers: String,
+        ?include_iframe_only_stream: bool,
+        ?manifest_name: String,
+        ?program_date_time_interval_seconds: Integer,
+        ?repeat_ext_x_key: bool,
+        ?stream_selection: Types::StreamSelection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ad_markers: String?
+      attr_accessor include_iframe_only_stream: bool?
+      attr_accessor manifest_name: String?
+      attr_accessor program_date_time_interval_seconds: Integer?
+      attr_accessor repeat_ext_x_key: bool?
+      attr_accessor stream_selection: Types::StreamSelection?
+    end
+
+    class HlsPackage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption: Types::HlsEncryption,
+        ?hls_manifests: Array[Types::HlsManifest],
+        ?include_dvb_subtitles: bool,
+        ?segment_duration_seconds: Integer,
+        ?use_audio_rendition_group: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption: Types::HlsEncryption?
+      attr_accessor hls_manifests: Array[Types::HlsManifest]?
+      attr_accessor include_dvb_subtitles: bool?
+      attr_accessor segment_duration_seconds: Integer?
+      attr_accessor use_audio_rendition_group: bool?
+    end
+
+    class InternalServerErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAssetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?packaging_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor packaging_group_id: String?
+    end
+
+    class ListAssetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assets: Array[Types::AssetShallow],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assets: Array[Types::AssetShallow]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPackagingConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?packaging_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor packaging_group_id: String?
+    end
+
+    class ListPackagingConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?packaging_configurations: Array[Types::PackagingConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor packaging_configurations: Array[Types::PackagingConfiguration]?
+    end
+
+    class ListPackagingGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListPackagingGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?packaging_groups: Array[Types::PackagingGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor packaging_groups: Array[Types::PackagingGroup]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module ManifestLayout
+      FULL: String
+      COMPACT: String
+    end
+
+    class MssEncryption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?speke_key_provider: Types::SpekeKeyProvider,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor speke_key_provider: Types::SpekeKeyProvider?
+    end
+
+    class MssManifest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_name: String,
+        ?stream_selection: Types::StreamSelection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_name: String?
+      attr_accessor stream_selection: Types::StreamSelection?
+    end
+
+    class MssPackage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption: Types::MssEncryption,
+        ?mss_manifests: Array[Types::MssManifest],
+        ?segment_duration_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption: Types::MssEncryption?
+      attr_accessor mss_manifests: Array[Types::MssManifest]?
+      attr_accessor segment_duration_seconds: Integer?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PackagingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?cmaf_package: Types::CmafPackage,
+        ?created_at: String,
+        ?dash_package: Types::DashPackage,
+        ?hls_package: Types::HlsPackage,
+        ?id: String,
+        ?mss_package: Types::MssPackage,
+        ?packaging_group_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor cmaf_package: Types::CmafPackage?
+      attr_accessor created_at: String?
+      attr_accessor dash_package: Types::DashPackage?
+      attr_accessor hls_package: Types::HlsPackage?
+      attr_accessor id: String?
+      attr_accessor mss_package: Types::MssPackage?
+      attr_accessor packaging_group_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class PackagingGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approximate_asset_count: Integer,
+        ?arn: String,
+        ?authorization: Types::Authorization,
+        ?created_at: String,
+        ?domain_name: String,
+        ?egress_access_logs: Types::EgressAccessLogs,
+        ?id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approximate_asset_count: Integer?
+      attr_accessor arn: String?
+      attr_accessor authorization: Types::Authorization?
+      attr_accessor created_at: String?
+      attr_accessor domain_name: String?
+      attr_accessor egress_access_logs: Types::EgressAccessLogs?
+      attr_accessor id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module PresetSpeke20Audio
+      PRESET_AUDIO_1: String
+      PRESET_AUDIO_2: String
+      PRESET_AUDIO_3: String
+      SHARED: String
+      UNENCRYPTED: String
+    end
+
+    module PresetSpeke20Video
+      PRESET_VIDEO_1: String
+      PRESET_VIDEO_2: String
+      PRESET_VIDEO_3: String
+      PRESET_VIDEO_4: String
+      PRESET_VIDEO_5: String
+      PRESET_VIDEO_6: String
+      PRESET_VIDEO_7: String
+      PRESET_VIDEO_8: String
+      SHARED: String
+      UNENCRYPTED: String
+    end
+
+    module Profile
+      NONE: String
+      HBBTV_1_5: String
+    end
+
+    module ScteMarkersSource
+      SEGMENTS: String
+      MANIFEST: String
+    end
+
+    module SegmentTemplateFormat
+      NUMBER_WITH_TIMELINE: String
+      TIME_WITH_TIMELINE: String
+      NUMBER_WITH_DURATION: String
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SpekeKeyProvider
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_contract_configuration: Types::EncryptionContractConfiguration,
+        ?role_arn: String,
+        ?system_ids: Array[String],
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_contract_configuration: Types::EncryptionContractConfiguration?
+      attr_accessor role_arn: String?
+      attr_accessor system_ids: Array[String]?
+      attr_accessor url: String?
+    end
+
+    module StreamOrder
+      ORIGINAL: String
+      VIDEO_BITRATE_ASCENDING: String
+      VIDEO_BITRATE_DESCENDING: String
+    end
+
+    class StreamSelection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_video_bits_per_second: Integer,
+        ?min_video_bits_per_second: Integer,
+        ?stream_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_video_bits_per_second: Integer?
+      attr_accessor min_video_bits_per_second: Integer?
+      attr_accessor stream_order: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnprocessableEntityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdatePackagingGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?authorization: Types::Authorization,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor authorization: Types::Authorization?
+      attr_accessor id: String?
+    end
+
+    class UpdatePackagingGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?approximate_asset_count: Integer,
+        ?arn: String,
+        ?authorization: Types::Authorization,
+        ?created_at: String,
+        ?domain_name: String,
+        ?egress_access_logs: Types::EgressAccessLogs,
+        ?id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor approximate_asset_count: Integer?
+      attr_accessor arn: String?
+      attr_accessor authorization: Types::Authorization?
+      attr_accessor created_at: String?
+      attr_accessor domain_name: String?
+      attr_accessor egress_access_logs: Types::EgressAccessLogs?
+      attr_accessor id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module Periodtriggerselement
+      ADS: String
+    end
+  end
+end

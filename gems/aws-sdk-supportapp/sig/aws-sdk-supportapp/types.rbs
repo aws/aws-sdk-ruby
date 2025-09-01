@@ -1,0 +1,368 @@
+module Aws::SupportApp
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateSlackChannelConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?team_id: String,
+        ?channel_id: String,
+        ?channel_name: String,
+        ?notify_on_create_or_reopen_case: bool,
+        ?notify_on_add_correspondence_to_case: bool,
+        ?notify_on_resolve_case: bool,
+        ?notify_on_case_severity: String,
+        ?channel_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor team_id: String?
+      attr_accessor channel_id: String?
+      attr_accessor channel_name: String?
+      attr_accessor notify_on_create_or_reopen_case: bool?
+      attr_accessor notify_on_add_correspondence_to_case: bool?
+      attr_accessor notify_on_resolve_case: bool?
+      attr_accessor notify_on_case_severity: String?
+      attr_accessor channel_role_arn: String?
+    end
+
+    class CreateSlackChannelConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAccountAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAccountAliasOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSlackChannelConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?team_id: String,
+        ?channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor team_id: String?
+      attr_accessor channel_id: String?
+    end
+
+    class DeleteSlackChannelConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSlackWorkspaceConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?team_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor team_id: String?
+    end
+
+    class DeleteSlackWorkspaceConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetAccountAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetAccountAliasOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_alias: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_alias: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListSlackChannelConfigurationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListSlackChannelConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?slack_channel_configurations: Array[Types::SlackChannelConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor slack_channel_configurations: Array[Types::SlackChannelConfiguration]?
+    end
+
+    class ListSlackWorkspaceConfigurationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListSlackWorkspaceConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?slack_workspace_configurations: Array[Types::SlackWorkspaceConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor slack_workspace_configurations: Array[Types::SlackWorkspaceConfiguration]?
+    end
+
+    class PutAccountAliasInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_alias: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_alias: String?
+    end
+
+    class PutAccountAliasOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RegisterSlackWorkspaceForOrganizationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?team_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor team_id: String?
+    end
+
+    class RegisterSlackWorkspaceForOrganizationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?team_id: String,
+        ?team_name: String,
+        ?account_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor team_id: String?
+      attr_accessor team_name: String?
+      attr_accessor account_type: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SlackChannelConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?team_id: String,
+        ?channel_id: String,
+        ?channel_name: String,
+        ?notify_on_create_or_reopen_case: bool,
+        ?notify_on_add_correspondence_to_case: bool,
+        ?notify_on_resolve_case: bool,
+        ?notify_on_case_severity: String,
+        ?channel_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor team_id: String?
+      attr_accessor channel_id: String?
+      attr_accessor channel_name: String?
+      attr_accessor notify_on_create_or_reopen_case: bool?
+      attr_accessor notify_on_add_correspondence_to_case: bool?
+      attr_accessor notify_on_resolve_case: bool?
+      attr_accessor notify_on_case_severity: String?
+      attr_accessor channel_role_arn: String?
+    end
+
+    class SlackWorkspaceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?team_id: String,
+        ?team_name: String,
+        ?allow_organization_member_account: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor team_id: String?
+      attr_accessor team_name: String?
+      attr_accessor allow_organization_member_account: bool?
+    end
+
+    class UpdateSlackChannelConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?team_id: String,
+        ?channel_id: String,
+        ?channel_name: String,
+        ?notify_on_create_or_reopen_case: bool,
+        ?notify_on_add_correspondence_to_case: bool,
+        ?notify_on_resolve_case: bool,
+        ?notify_on_case_severity: String,
+        ?channel_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor team_id: String?
+      attr_accessor channel_id: String?
+      attr_accessor channel_name: String?
+      attr_accessor notify_on_create_or_reopen_case: bool?
+      attr_accessor notify_on_add_correspondence_to_case: bool?
+      attr_accessor notify_on_resolve_case: bool?
+      attr_accessor notify_on_case_severity: String?
+      attr_accessor channel_role_arn: String?
+    end
+
+    class UpdateSlackChannelConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?team_id: String,
+        ?channel_id: String,
+        ?channel_name: String,
+        ?notify_on_create_or_reopen_case: bool,
+        ?notify_on_add_correspondence_to_case: bool,
+        ?notify_on_resolve_case: bool,
+        ?notify_on_case_severity: String,
+        ?channel_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor team_id: String?
+      attr_accessor channel_id: String?
+      attr_accessor channel_name: String?
+      attr_accessor notify_on_create_or_reopen_case: bool?
+      attr_accessor notify_on_add_correspondence_to_case: bool?
+      attr_accessor notify_on_resolve_case: bool?
+      attr_accessor notify_on_case_severity: String?
+      attr_accessor channel_role_arn: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

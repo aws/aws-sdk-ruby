@@ -1,0 +1,429 @@
+module Aws::AIOps
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateInvestigationGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?role_arn: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?retention_in_days: Integer,
+        ?tags: Hash[String, String],
+        ?tag_key_boundaries: Array[String],
+        ?chatbot_notification_channel: Hash[String, Array[String]],
+        ?is_cloud_trail_event_history_enabled: bool,
+        ?cross_account_configurations: Array[Types::CrossAccountConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor role_arn: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor retention_in_days: Integer?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor tag_key_boundaries: Array[String]?
+      attr_accessor chatbot_notification_channel: Hash[String, Array[String]]?
+      attr_accessor is_cloud_trail_event_history_enabled: bool?
+      attr_accessor cross_account_configurations: Array[Types::CrossAccountConfiguration]?
+    end
+
+    class CreateInvestigationGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class CrossAccountConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_role_arn: String?
+    end
+
+    class DeleteInvestigationGroupPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteInvestigationGroupPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteInvestigationGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor kms_key_id: String?
+    end
+
+    module EncryptionConfigurationType
+      AWS_OWNED_KEY: String
+      CUSTOMER_MANAGED_KMS_KEY: String
+    end
+
+    class ForbiddenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetInvestigationGroupPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetInvestigationGroupPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?investigation_group_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor investigation_group_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class GetInvestigationGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetInvestigationGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?created_by: String,
+        ?created_at: Integer,
+        ?last_modified_by: String,
+        ?last_modified_at: Integer,
+        ?name: String,
+        ?arn: String,
+        ?role_arn: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?retention_in_days: Integer,
+        ?chatbot_notification_channel: Hash[String, Array[String]],
+        ?tag_key_boundaries: Array[String],
+        ?is_cloud_trail_event_history_enabled: bool,
+        ?cross_account_configurations: Array[Types::CrossAccountConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor created_by: String?
+      attr_accessor created_at: Integer?
+      attr_accessor last_modified_by: String?
+      attr_accessor last_modified_at: Integer?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor retention_in_days: Integer?
+      attr_accessor chatbot_notification_channel: Hash[String, Array[String]]?
+      attr_accessor tag_key_boundaries: Array[String]?
+      attr_accessor is_cloud_trail_event_history_enabled: bool?
+      attr_accessor cross_account_configurations: Array[Types::CrossAccountConfiguration]?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListInvestigationGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListInvestigationGroupsModel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+    end
+
+    class ListInvestigationGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?investigation_groups: Array[Types::ListInvestigationGroupsModel],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor investigation_groups: Array[Types::ListInvestigationGroupsModel]?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class PutInvestigationGroupPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor policy: String?
+    end
+
+    class PutInvestigationGroupPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?investigation_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor investigation_group_arn: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateInvestigationGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateInvestigationGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?role_arn: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?tag_key_boundaries: Array[String],
+        ?chatbot_notification_channel: Hash[String, Array[String]],
+        ?is_cloud_trail_event_history_enabled: bool,
+        ?cross_account_configurations: Array[Types::CrossAccountConfiguration],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor role_arn: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor tag_key_boundaries: Array[String]?
+      attr_accessor chatbot_notification_channel: Hash[String, Array[String]]?
+      attr_accessor is_cloud_trail_event_history_enabled: bool?
+      attr_accessor cross_account_configurations: Array[Types::CrossAccountConfiguration]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

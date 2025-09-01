@@ -1,0 +1,5 @@
+  module Aws
+    module Keyspaces
+      VERSION: String
+    end
+  end

@@ -1,0 +1,117 @@
+module Aws::Pricing
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Pricing::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _DescribeServicesResponse
+      include Smithy::Client::_Response[Types::DescribeServicesResponse]
+      def services: () -> Array[Types::Service]?
+      def format_version: () -> String?
+      def next_token: () -> String?
+    end
+    def describe_services: (
+      ?service_code: String,
+      ?format_version: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeServicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeServicesResponse
+
+    interface _GetAttributeValuesResponse
+      include Smithy::Client::_Response[Types::GetAttributeValuesResponse]
+      def attribute_values: () -> Array[Types::AttributeValue]?
+      def next_token: () -> String?
+    end
+    def get_attribute_values: (
+      ?service_code: String,
+      ?attribute_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetAttributeValuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAttributeValuesResponse
+
+    interface _GetPriceListFileUrlResponse
+      include Smithy::Client::_Response[Types::GetPriceListFileUrlResponse]
+      def url: () -> String?
+    end
+    def get_price_list_file_url: (
+      ?price_list_arn: String,
+      ?file_format: String
+    ) -> _GetPriceListFileUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPriceListFileUrlResponse
+
+    interface _GetProductsResponse
+      include Smithy::Client::_Response[Types::GetProductsResponse]
+      def format_version: () -> String?
+      def price_list: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def get_products: (
+      ?service_code: String,
+      ?filters: Array[
+        {
+          type: String,
+          field: String,
+          value: String
+        }
+      ],
+      ?format_version: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetProductsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProductsResponse
+
+    interface _ListPriceListsResponse
+      include Smithy::Client::_Response[Types::ListPriceListsResponse]
+      def price_lists: () -> Array[Types::PriceList]?
+      def next_token: () -> String?
+    end
+    def list_price_lists: (
+      ?service_code: String,
+      ?effective_date: Time,
+      ?region_code: String,
+      ?currency_code: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPriceListsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPriceListsResponse
+  end
+end

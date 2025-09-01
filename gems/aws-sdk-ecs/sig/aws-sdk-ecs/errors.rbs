@@ -1,0 +1,86 @@
+module Aws::ECS
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AttributeLimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class BlockedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ClientException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ClusterContainsContainerInstancesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ClusterContainsServicesException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ClusterContainsTasksException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ClusterNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConflictException < Smithy::Client::ServiceError
+      def resource_ids: () -> Array[String]?
+      def message: () -> String?
+    end
+    class InvalidParameterException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MissingVersionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NamespaceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoUpdateAvailableException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PlatformTaskDefinitionIncompatibilityException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PlatformUnknownException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceDeploymentNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceNotActiveException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TargetNotConnectedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TargetNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TaskSetNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnsupportedFeatureException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UpdateInProgressException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

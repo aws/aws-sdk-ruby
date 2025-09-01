@@ -1,0 +1,604 @@
+module Aws::NetworkMonitor
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AddressFamily
+      IPV4: String
+      IPV6: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateMonitorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_name: String,
+        ?probes: Array[Types::CreateMonitorProbeInput],
+        ?aggregation_period: Integer,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_name: String?
+      attr_accessor probes: Array[Types::CreateMonitorProbeInput]?
+      attr_accessor aggregation_period: Integer?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateMonitorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn: String,
+        ?monitor_name: String,
+        ?state: String,
+        ?aggregation_period: Integer,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn: String?
+      attr_accessor monitor_name: String?
+      attr_accessor state: String?
+      attr_accessor aggregation_period: Integer?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateMonitorProbeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_arn: String,
+        ?destination: String,
+        ?destination_port: Integer,
+        ?protocol: String,
+        ?packet_size: Integer,
+        ?probe_tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_arn: String?
+      attr_accessor destination: String?
+      attr_accessor destination_port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor packet_size: Integer?
+      attr_accessor probe_tags: Hash[String, String]?
+    end
+
+    class CreateProbeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_name: String,
+        ?probe: Types::ProbeInput,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_name: String?
+      attr_accessor probe: Types::ProbeInput?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateProbeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?probe_id: String,
+        ?probe_arn: String,
+        ?source_arn: String,
+        ?destination: String,
+        ?destination_port: Integer,
+        ?protocol: String,
+        ?packet_size: Integer,
+        ?address_family: String,
+        ?vpc_id: String,
+        ?state: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor probe_id: String?
+      attr_accessor probe_arn: String?
+      attr_accessor source_arn: String?
+      attr_accessor destination: String?
+      attr_accessor destination_port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor packet_size: Integer?
+      attr_accessor address_family: String?
+      attr_accessor vpc_id: String?
+      attr_accessor state: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class DeleteMonitorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_name: String?
+    end
+
+    class DeleteMonitorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteProbeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_name: String,
+        ?probe_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_name: String?
+      attr_accessor probe_id: String?
+    end
+
+    class DeleteProbeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetMonitorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_name: String?
+    end
+
+    class GetMonitorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn: String,
+        ?monitor_name: String,
+        ?state: String,
+        ?aggregation_period: Integer,
+        ?tags: Hash[String, String],
+        ?probes: Array[Types::Probe],
+        ?created_at: Time,
+        ?modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn: String?
+      attr_accessor monitor_name: String?
+      attr_accessor state: String?
+      attr_accessor aggregation_period: Integer?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor probes: Array[Types::Probe]?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+    end
+
+    class GetProbeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_name: String,
+        ?probe_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_name: String?
+      attr_accessor probe_id: String?
+    end
+
+    class GetProbeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?probe_id: String,
+        ?probe_arn: String,
+        ?source_arn: String,
+        ?destination: String,
+        ?destination_port: Integer,
+        ?protocol: String,
+        ?packet_size: Integer,
+        ?address_family: String,
+        ?vpc_id: String,
+        ?state: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor probe_id: String?
+      attr_accessor probe_arn: String?
+      attr_accessor source_arn: String?
+      attr_accessor destination: String?
+      attr_accessor destination_port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor packet_size: Integer?
+      attr_accessor address_family: String?
+      attr_accessor vpc_id: String?
+      attr_accessor state: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListMonitorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor state: String?
+    end
+
+    class ListMonitorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitors: Array[Types::MonitorSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitors: Array[Types::MonitorSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module MonitorState
+      PENDING: String
+      ACTIVE: String
+      INACTIVE: String
+      ERROR: String
+      DELETING: String
+    end
+
+    class MonitorSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn: String,
+        ?monitor_name: String,
+        ?state: String,
+        ?aggregation_period: Integer,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn: String?
+      attr_accessor monitor_name: String?
+      attr_accessor state: String?
+      attr_accessor aggregation_period: Integer?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class Probe
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?probe_id: String,
+        ?probe_arn: String,
+        ?source_arn: String,
+        ?destination: String,
+        ?destination_port: Integer,
+        ?protocol: String,
+        ?packet_size: Integer,
+        ?address_family: String,
+        ?vpc_id: String,
+        ?state: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor probe_id: String?
+      attr_accessor probe_arn: String?
+      attr_accessor source_arn: String?
+      attr_accessor destination: String?
+      attr_accessor destination_port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor packet_size: Integer?
+      attr_accessor address_family: String?
+      attr_accessor vpc_id: String?
+      attr_accessor state: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ProbeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_arn: String,
+        ?destination: String,
+        ?destination_port: Integer,
+        ?protocol: String,
+        ?packet_size: Integer,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_arn: String?
+      attr_accessor destination: String?
+      attr_accessor destination_port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor packet_size: Integer?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module ProbeState
+      PENDING: String
+      ACTIVE: String
+      INACTIVE: String
+      ERROR: String
+      DELETING: String
+      DELETED: String
+    end
+
+    module Protocol
+      TCP: String
+      ICMP: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateMonitorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_name: String,
+        ?aggregation_period: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_name: String?
+      attr_accessor aggregation_period: Integer?
+    end
+
+    class UpdateMonitorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn: String,
+        ?monitor_name: String,
+        ?state: String,
+        ?aggregation_period: Integer,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn: String?
+      attr_accessor monitor_name: String?
+      attr_accessor state: String?
+      attr_accessor aggregation_period: Integer?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class UpdateProbeInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_name: String,
+        ?probe_id: String,
+        ?state: String,
+        ?destination: String,
+        ?destination_port: Integer,
+        ?protocol: String,
+        ?packet_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_name: String?
+      attr_accessor probe_id: String?
+      attr_accessor state: String?
+      attr_accessor destination: String?
+      attr_accessor destination_port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor packet_size: Integer?
+    end
+
+    class UpdateProbeOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?probe_id: String,
+        ?probe_arn: String,
+        ?source_arn: String,
+        ?destination: String,
+        ?destination_port: Integer,
+        ?protocol: String,
+        ?packet_size: Integer,
+        ?address_family: String,
+        ?vpc_id: String,
+        ?state: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor probe_id: String?
+      attr_accessor probe_arn: String?
+      attr_accessor source_arn: String?
+      attr_accessor destination: String?
+      attr_accessor destination_port: Integer?
+      attr_accessor protocol: String?
+      attr_accessor packet_size: Integer?
+      attr_accessor address_family: String?
+      attr_accessor vpc_id: String?
+      attr_accessor state: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

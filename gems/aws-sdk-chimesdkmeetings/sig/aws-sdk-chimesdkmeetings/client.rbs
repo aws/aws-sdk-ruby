@@ -1,0 +1,315 @@
+module Aws::ChimeSDKMeetings
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::ChimeSDKMeetings::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchCreateAttendeeResponse
+      include Smithy::Client::_Response[Types::BatchCreateAttendeeResponse]
+      def attendees: () -> Array[Types::Attendee]?
+      def errors: () -> Array[Types::CreateAttendeeError]?
+    end
+    def batch_create_attendee: (
+      ?meeting_id: String,
+      ?attendees: Array[
+        {
+          external_user_id: String,
+          capabilities: {
+            audio: String,
+            video: untyped,
+            content: untyped
+          }
+        }
+      ]
+    ) -> _BatchCreateAttendeeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchCreateAttendeeResponse
+
+    interface _BatchUpdateAttendeeCapabilitiesExceptResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def batch_update_attendee_capabilities_except: (
+      ?meeting_id: String,
+      ?excluded_attendee_ids: Array[
+        {
+          attendee_id: String
+        }
+      ],
+      ?capabilities: {
+        audio: String,
+        video: untyped,
+        content: untyped
+      }
+    ) -> _BatchUpdateAttendeeCapabilitiesExceptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateAttendeeCapabilitiesExceptResponse
+
+    interface _CreateAttendeeResponse
+      include Smithy::Client::_Response[Types::CreateAttendeeResponse]
+      def attendee: () -> Types::Attendee?
+    end
+    def create_attendee: (
+      ?meeting_id: String,
+      ?external_user_id: String,
+      ?capabilities: {
+        audio: String,
+        video: untyped,
+        content: untyped
+      }
+    ) -> _CreateAttendeeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAttendeeResponse
+
+    interface _CreateMeetingResponse
+      include Smithy::Client::_Response[Types::CreateMeetingResponse]
+      def meeting: () -> Types::Meeting?
+    end
+    def create_meeting: (
+      ?client_request_token: String,
+      ?media_region: String,
+      ?meeting_host_id: String,
+      ?external_meeting_id: String,
+      ?notifications_configuration: {
+        lambda_function_arn: String,
+        sns_topic_arn: untyped,
+        sqs_queue_arn: untyped
+      },
+      ?meeting_features: {
+        audio: {
+          echo_reduction: String
+        },
+        video: {
+          max_resolution: String
+        },
+        content: {
+          max_resolution: String
+        },
+        attendee: {
+          max_count: Integer
+        }
+      },
+      ?primary_meeting_id: String,
+      ?tenant_ids: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateMeetingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMeetingResponse
+
+    interface _CreateMeetingWithAttendeesResponse
+      include Smithy::Client::_Response[Types::CreateMeetingWithAttendeesResponse]
+      def meeting: () -> Types::Meeting?
+      def attendees: () -> Array[Types::Attendee]?
+      def errors: () -> Array[Types::CreateAttendeeError]?
+    end
+    def create_meeting_with_attendees: (
+      ?client_request_token: String,
+      ?media_region: String,
+      ?meeting_host_id: String,
+      ?external_meeting_id: String,
+      ?meeting_features: {
+        audio: {
+          echo_reduction: String
+        },
+        video: {
+          max_resolution: String
+        },
+        content: {
+          max_resolution: String
+        },
+        attendee: {
+          max_count: Integer
+        }
+      },
+      ?notifications_configuration: {
+        lambda_function_arn: String,
+        sns_topic_arn: untyped,
+        sqs_queue_arn: untyped
+      },
+      ?attendees: Array[
+        {
+          external_user_id: String,
+          capabilities: {
+            audio: String,
+            video: untyped,
+            content: untyped
+          }
+        }
+      ],
+      ?primary_meeting_id: String,
+      ?tenant_ids: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateMeetingWithAttendeesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMeetingWithAttendeesResponse
+
+    interface _DeleteAttendeeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_attendee: (
+      ?meeting_id: String,
+      ?attendee_id: String
+    ) -> _DeleteAttendeeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAttendeeResponse
+
+    interface _DeleteMeetingResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_meeting: (
+      ?meeting_id: String
+    ) -> _DeleteMeetingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMeetingResponse
+
+    interface _GetAttendeeResponse
+      include Smithy::Client::_Response[Types::GetAttendeeResponse]
+      def attendee: () -> Types::Attendee?
+    end
+    def get_attendee: (
+      ?meeting_id: String,
+      ?attendee_id: String
+    ) -> _GetAttendeeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAttendeeResponse
+
+    interface _GetMeetingResponse
+      include Smithy::Client::_Response[Types::GetMeetingResponse]
+      def meeting: () -> Types::Meeting?
+    end
+    def get_meeting: (
+      ?meeting_id: String
+    ) -> _GetMeetingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMeetingResponse
+
+    interface _ListAttendeesResponse
+      include Smithy::Client::_Response[Types::ListAttendeesResponse]
+      def attendees: () -> Array[Types::Attendee]?
+      def next_token: () -> String?
+    end
+    def list_attendees: (
+      ?meeting_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAttendeesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAttendeesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _StartMeetingTranscriptionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def start_meeting_transcription: (
+      ?meeting_id: String,
+      ?transcription_configuration: {
+        engine_transcribe_settings: {
+          language_code: String,
+          vocabulary_filter_method: String,
+          vocabulary_filter_name: String,
+          vocabulary_name: untyped,
+          region: String,
+          enable_partial_results_stabilization: bool,
+          partial_results_stability: String,
+          content_identification_type: String,
+          content_redaction_type: String,
+          pii_entity_types: String,
+          language_model_name: String,
+          identify_language: untyped,
+          language_options: String,
+          preferred_language: untyped,
+          vocabulary_names: String,
+          vocabulary_filter_names: untyped
+        },
+        engine_transcribe_medical_settings: {
+          language_code: String,
+          specialty: String,
+          type: String,
+          vocabulary_name: untyped,
+          region: String,
+          content_identification_type: String
+        }
+      }
+    ) -> _StartMeetingTranscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMeetingTranscriptionResponse
+
+    interface _StopMeetingTranscriptionResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def stop_meeting_transcription: (
+      ?meeting_id: String
+    ) -> _StopMeetingTranscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopMeetingTranscriptionResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAttendeeCapabilitiesResponse
+      include Smithy::Client::_Response[Types::UpdateAttendeeCapabilitiesResponse]
+      def attendee: () -> Types::Attendee?
+    end
+    def update_attendee_capabilities: (
+      ?meeting_id: String,
+      ?attendee_id: String,
+      ?capabilities: {
+        audio: String,
+        video: untyped,
+        content: untyped
+      }
+    ) -> _UpdateAttendeeCapabilitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAttendeeCapabilitiesResponse
+  end
+end

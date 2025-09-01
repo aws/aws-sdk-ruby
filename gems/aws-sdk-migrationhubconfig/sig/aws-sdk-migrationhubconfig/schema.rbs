@@ -1,0 +1,35 @@
+module Aws::MigrationHubConfig
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    ControlId: StringShape
+    CreateHomeRegionControlRequest: StructureShape
+    CreateHomeRegionControlResult: StructureShape
+    DeleteHomeRegionControlRequest: StructureShape
+    DeleteHomeRegionControlResult: StructureShape
+    DescribeHomeRegionControlsMaxResults: IntegerShape
+    DescribeHomeRegionControlsRequest: StructureShape
+    DescribeHomeRegionControlsResult: StructureShape
+    DryRun: BooleanShape
+    DryRunOperation: StructureShape
+    ErrorMessage: StringShape
+    GetHomeRegionRequest: StructureShape
+    GetHomeRegionResult: StructureShape
+    HomeRegion: StringShape
+    HomeRegionControl: StructureShape
+    HomeRegionControls: ListShape
+    InternalServerError: StructureShape
+    InvalidInputException: StructureShape
+    RequestedTime: TimestampShape
+    RetryAfterSeconds: IntegerShape
+    ServiceUnavailableException: StructureShape
+    Target: StructureShape
+    TargetId: StringShape
+    TargetType: EnumShape
+    ThrottlingException: StructureShape
+    Token: StringShape
+
+    AWSMigrationHubMultiAccountService: ServiceShape
+  end
+end

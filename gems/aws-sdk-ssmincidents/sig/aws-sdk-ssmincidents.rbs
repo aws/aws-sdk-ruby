@@ -1,0 +1,5 @@
+  module Aws
+    module SSMIncidents
+      VERSION: String
+    end
+  end

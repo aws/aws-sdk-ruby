@@ -1,0 +1,758 @@
+module Aws::B2bi
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::B2bi::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateCapabilityResponse
+      include Smithy::Client::_Response[Types::CreateCapabilityResponse]
+      def capability_id: () -> String?
+      def capability_arn: () -> String?
+      def name: () -> String?
+      def type: () -> String?
+      def configuration: () -> Types::CapabilityConfiguration?
+      def instructions_documents: () -> Array[Types::S3Location]?
+      def created_at: () -> Time?
+    end
+    def create_capability: (
+      ?name: String,
+      ?type: String,
+      ?configuration: {
+        edi: {
+          capability_direction: String,
+          type: {
+            x12_details: {
+              transaction_set: String,
+              version: String
+            }
+          },
+          input_location: {
+            bucket_name: String,
+            key: String
+          },
+          output_location: untyped,
+          transformer_id: String
+        }
+      },
+      ?instructions_documents: Array[
+        {
+          bucket_name: String,
+          key: String
+        }
+      ],
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateCapabilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCapabilityResponse
+
+    interface _CreatePartnershipResponse
+      include Smithy::Client::_Response[Types::CreatePartnershipResponse]
+      def profile_id: () -> String?
+      def partnership_id: () -> String?
+      def partnership_arn: () -> String?
+      def name: () -> String?
+      def email: () -> String?
+      def phone: () -> String?
+      def capabilities: () -> Array[String]?
+      def capability_options: () -> Types::CapabilityOptions?
+      def trading_partner_id: () -> String?
+      def created_at: () -> Time?
+    end
+    def create_partnership: (
+      ?profile_id: String,
+      ?name: String,
+      ?email: String,
+      ?phone: String,
+      ?capabilities: Array[String],
+      ?capability_options: {
+        outbound_edi: {
+          x12: {
+            common: {
+              interchange_control_headers: {
+                sender_id_qualifier: String,
+                sender_id: String,
+                receiver_id_qualifier: untyped,
+                receiver_id: String,
+                repetition_separator: String,
+                acknowledgment_requested_code: String,
+                usage_indicator_code: String
+              },
+              functional_group_headers: {
+                application_sender_code: String,
+                application_receiver_code: String,
+                responsible_agency_code: String
+              },
+              delimiters: {
+                component_separator: String,
+                data_element_separator: String,
+                segment_terminator: String
+              },
+              validate_edi: bool,
+              control_numbers: {
+                starting_interchange_control_number: Integer,
+                starting_functional_group_control_number: Integer,
+                starting_transaction_set_control_number: Integer
+              },
+              gs05_time_format: String
+            },
+            wrap_options: {
+              wrap_by: String,
+              line_terminator: String,
+              line_length: Integer
+            }
+          }
+        },
+        inbound_edi: {
+          x12: {
+            acknowledgment_options: {
+              functional_acknowledgment: String,
+              technical_acknowledgment: String
+            }
+          }
+        }
+      },
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreatePartnershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePartnershipResponse
+
+    interface _CreateProfileResponse
+      include Smithy::Client::_Response[Types::CreateProfileResponse]
+      def profile_id: () -> String?
+      def profile_arn: () -> String?
+      def name: () -> String?
+      def business_name: () -> String?
+      def phone: () -> String?
+      def email: () -> String?
+      def logging: () -> String?
+      def log_group_name: () -> String?
+      def created_at: () -> Time?
+    end
+    def create_profile: (
+      ?name: String,
+      ?email: String,
+      ?phone: String,
+      ?business_name: String,
+      ?logging: String,
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProfileResponse
+
+    interface _CreateStarterMappingTemplateResponse
+      include Smithy::Client::_Response[Types::CreateStarterMappingTemplateResponse]
+      def mapping_template: () -> String?
+    end
+    def create_starter_mapping_template: (
+      ?output_sample_location: {
+        bucket_name: String,
+        key: String
+      },
+      ?mapping_type: String,
+      ?template_details: {
+        x12: {
+          transaction_set: String,
+          version: String
+        }
+      }
+    ) -> _CreateStarterMappingTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStarterMappingTemplateResponse
+
+    interface _CreateTransformerResponse
+      include Smithy::Client::_Response[Types::CreateTransformerResponse]
+      def transformer_id: () -> String?
+      def transformer_arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def file_format: () -> String?
+      def mapping_template: () -> String?
+      def edi_type: () -> Types::EdiType?
+      def sample_document: () -> String?
+      def input_conversion: () -> Types::InputConversion?
+      def mapping: () -> Types::Mapping?
+      def output_conversion: () -> Types::OutputConversion?
+      def sample_documents: () -> Types::SampleDocuments?
+    end
+    def create_transformer: (
+      ?name: String,
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?file_format: String,
+      ?mapping_template: String,
+      ?edi_type: {
+        x12_details: {
+          transaction_set: String,
+          version: String
+        }
+      },
+      ?sample_document: String,
+      ?input_conversion: {
+        from_format: String,
+        format_options: {
+          x12: {
+            transaction_set: String,
+            version: String
+          }
+        },
+        advanced_options: {
+          x12: {
+            split_options: {
+              split_by: String
+            }
+          }
+        }
+      },
+      ?mapping: {
+        template_language: String,
+        template: String
+      },
+      ?output_conversion: {
+        to_format: String,
+        format_options: {
+          x12: {
+            transaction_set: String,
+            version: String
+          }
+        }
+      },
+      ?sample_documents: {
+        bucket_name: String,
+        keys: Array[
+          {
+            input: String,
+            output: untyped
+          }
+        ]
+      }
+    ) -> _CreateTransformerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTransformerResponse
+
+    interface _DeleteCapabilityResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_capability: (
+      ?capability_id: String
+    ) -> _DeleteCapabilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCapabilityResponse
+
+    interface _DeletePartnershipResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_partnership: (
+      ?partnership_id: String
+    ) -> _DeletePartnershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePartnershipResponse
+
+    interface _DeleteProfileResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_profile: (
+      ?profile_id: String
+    ) -> _DeleteProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProfileResponse
+
+    interface _DeleteTransformerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_transformer: (
+      ?transformer_id: String
+    ) -> _DeleteTransformerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTransformerResponse
+
+    interface _GenerateMappingResponse
+      include Smithy::Client::_Response[Types::GenerateMappingResponse]
+      def mapping_template: () -> String?
+      def mapping_accuracy: () -> Float?
+    end
+    def generate_mapping: (
+      ?input_file_content: String,
+      ?output_file_content: String,
+      ?mapping_type: String
+    ) -> _GenerateMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateMappingResponse
+
+    interface _GetCapabilityResponse
+      include Smithy::Client::_Response[Types::GetCapabilityResponse]
+      def capability_id: () -> String?
+      def capability_arn: () -> String?
+      def name: () -> String?
+      def type: () -> String?
+      def configuration: () -> Types::CapabilityConfiguration?
+      def instructions_documents: () -> Array[Types::S3Location]?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+    end
+    def get_capability: (
+      ?capability_id: String
+    ) -> _GetCapabilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCapabilityResponse
+
+    interface _GetPartnershipResponse
+      include Smithy::Client::_Response[Types::GetPartnershipResponse]
+      def profile_id: () -> String?
+      def partnership_id: () -> String?
+      def partnership_arn: () -> String?
+      def name: () -> String?
+      def email: () -> String?
+      def phone: () -> String?
+      def capabilities: () -> Array[String]?
+      def capability_options: () -> Types::CapabilityOptions?
+      def trading_partner_id: () -> String?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+    end
+    def get_partnership: (
+      ?partnership_id: String
+    ) -> _GetPartnershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPartnershipResponse
+
+    interface _GetProfileResponse
+      include Smithy::Client::_Response[Types::GetProfileResponse]
+      def profile_id: () -> String?
+      def profile_arn: () -> String?
+      def name: () -> String?
+      def email: () -> String?
+      def phone: () -> String?
+      def business_name: () -> String?
+      def logging: () -> String?
+      def log_group_name: () -> String?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+    end
+    def get_profile: (
+      ?profile_id: String
+    ) -> _GetProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProfileResponse
+
+    interface _GetTransformerResponse
+      include Smithy::Client::_Response[Types::GetTransformerResponse]
+      def transformer_id: () -> String?
+      def transformer_arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+      def file_format: () -> String?
+      def mapping_template: () -> String?
+      def edi_type: () -> Types::EdiType?
+      def sample_document: () -> String?
+      def input_conversion: () -> Types::InputConversion?
+      def mapping: () -> Types::Mapping?
+      def output_conversion: () -> Types::OutputConversion?
+      def sample_documents: () -> Types::SampleDocuments?
+    end
+    def get_transformer: (
+      ?transformer_id: String
+    ) -> _GetTransformerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTransformerResponse
+
+    interface _GetTransformerJobResponse
+      include Smithy::Client::_Response[Types::GetTransformerJobResponse]
+      def status: () -> String?
+      def output_files: () -> Array[Types::S3Location]?
+      def message: () -> String?
+    end
+    def get_transformer_job: (
+      ?transformer_job_id: String,
+      ?transformer_id: String
+    ) -> _GetTransformerJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTransformerJobResponse
+
+    interface _ListCapabilitiesResponse
+      include Smithy::Client::_Response[Types::ListCapabilitiesResponse]
+      def capabilities: () -> Array[Types::CapabilitySummary]?
+      def next_token: () -> String?
+    end
+    def list_capabilities: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCapabilitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCapabilitiesResponse
+
+    interface _ListPartnershipsResponse
+      include Smithy::Client::_Response[Types::ListPartnershipsResponse]
+      def partnerships: () -> Array[Types::PartnershipSummary]?
+      def next_token: () -> String?
+    end
+    def list_partnerships: (
+      ?profile_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPartnershipsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPartnershipsResponse
+
+    interface _ListProfilesResponse
+      include Smithy::Client::_Response[Types::ListProfilesResponse]
+      def profiles: () -> Array[Types::ProfileSummary]?
+      def next_token: () -> String?
+    end
+    def list_profiles: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProfilesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTransformersResponse
+      include Smithy::Client::_Response[Types::ListTransformersResponse]
+      def transformers: () -> Array[Types::TransformerSummary]?
+      def next_token: () -> String?
+    end
+    def list_transformers: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTransformersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTransformersResponse
+
+    interface _StartTransformerJobResponse
+      include Smithy::Client::_Response[Types::StartTransformerJobResponse]
+      def transformer_job_id: () -> String?
+    end
+    def start_transformer_job: (
+      ?input_file: {
+        bucket_name: String,
+        key: String
+      },
+      ?output_location: {
+        bucket_name: String,
+        key: String
+      },
+      ?transformer_id: String,
+      ?client_token: String
+    ) -> _StartTransformerJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTransformerJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _TestConversionResponse
+      include Smithy::Client::_Response[Types::TestConversionResponse]
+      def converted_file_content: () -> String?
+      def validation_messages: () -> Array[String]?
+    end
+    def test_conversion: (
+      ?source: {
+        file_format: String,
+        input_file: {
+          file_content: String
+        }
+      },
+      ?target: {
+        file_format: String,
+        format_details: {
+          x12: {
+            transaction_set: String,
+            version: String
+          }
+        },
+        output_sample_file: {
+          file_location: {
+            bucket_name: String,
+            key: String
+          }
+        }
+      }
+    ) -> _TestConversionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestConversionResponse
+
+    interface _TestMappingResponse
+      include Smithy::Client::_Response[Types::TestMappingResponse]
+      def mapped_file_content: () -> String?
+    end
+    def test_mapping: (
+      ?input_file_content: String,
+      ?mapping_template: String,
+      ?file_format: String
+    ) -> _TestMappingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestMappingResponse
+
+    interface _TestParsingResponse
+      include Smithy::Client::_Response[Types::TestParsingResponse]
+      def parsed_file_content: () -> String?
+      def parsed_split_file_contents: () -> Array[String]?
+    end
+    def test_parsing: (
+      ?input_file: {
+        bucket_name: String,
+        key: String
+      },
+      ?file_format: String,
+      ?edi_type: {
+        x12_details: {
+          transaction_set: String,
+          version: String
+        }
+      },
+      ?advanced_options: {
+        x12: {
+          split_options: {
+            split_by: String
+          }
+        }
+      }
+    ) -> _TestParsingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TestParsingResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateCapabilityResponse
+      include Smithy::Client::_Response[Types::UpdateCapabilityResponse]
+      def capability_id: () -> String?
+      def capability_arn: () -> String?
+      def name: () -> String?
+      def type: () -> String?
+      def configuration: () -> Types::CapabilityConfiguration?
+      def instructions_documents: () -> Array[Types::S3Location]?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+    end
+    def update_capability: (
+      ?capability_id: String,
+      ?name: String,
+      ?configuration: {
+        edi: {
+          capability_direction: String,
+          type: {
+            x12_details: {
+              transaction_set: String,
+              version: String
+            }
+          },
+          input_location: {
+            bucket_name: String,
+            key: String
+          },
+          output_location: untyped,
+          transformer_id: String
+        }
+      },
+      ?instructions_documents: Array[
+        {
+          bucket_name: String,
+          key: String
+        }
+      ]
+    ) -> _UpdateCapabilityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCapabilityResponse
+
+    interface _UpdatePartnershipResponse
+      include Smithy::Client::_Response[Types::UpdatePartnershipResponse]
+      def profile_id: () -> String?
+      def partnership_id: () -> String?
+      def partnership_arn: () -> String?
+      def name: () -> String?
+      def email: () -> String?
+      def phone: () -> String?
+      def capabilities: () -> Array[String]?
+      def capability_options: () -> Types::CapabilityOptions?
+      def trading_partner_id: () -> String?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+    end
+    def update_partnership: (
+      ?partnership_id: String,
+      ?name: String,
+      ?capabilities: Array[String],
+      ?capability_options: {
+        outbound_edi: {
+          x12: {
+            common: {
+              interchange_control_headers: {
+                sender_id_qualifier: String,
+                sender_id: String,
+                receiver_id_qualifier: untyped,
+                receiver_id: String,
+                repetition_separator: String,
+                acknowledgment_requested_code: String,
+                usage_indicator_code: String
+              },
+              functional_group_headers: {
+                application_sender_code: String,
+                application_receiver_code: String,
+                responsible_agency_code: String
+              },
+              delimiters: {
+                component_separator: String,
+                data_element_separator: String,
+                segment_terminator: String
+              },
+              validate_edi: bool,
+              control_numbers: {
+                starting_interchange_control_number: Integer,
+                starting_functional_group_control_number: Integer,
+                starting_transaction_set_control_number: Integer
+              },
+              gs05_time_format: String
+            },
+            wrap_options: {
+              wrap_by: String,
+              line_terminator: String,
+              line_length: Integer
+            }
+          }
+        },
+        inbound_edi: {
+          x12: {
+            acknowledgment_options: {
+              functional_acknowledgment: String,
+              technical_acknowledgment: String
+            }
+          }
+        }
+      }
+    ) -> _UpdatePartnershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePartnershipResponse
+
+    interface _UpdateProfileResponse
+      include Smithy::Client::_Response[Types::UpdateProfileResponse]
+      def profile_id: () -> String?
+      def profile_arn: () -> String?
+      def name: () -> String?
+      def email: () -> String?
+      def phone: () -> String?
+      def business_name: () -> String?
+      def logging: () -> String?
+      def log_group_name: () -> String?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+    end
+    def update_profile: (
+      ?profile_id: String,
+      ?name: String,
+      ?email: String,
+      ?phone: String,
+      ?business_name: String
+    ) -> _UpdateProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProfileResponse
+
+    interface _UpdateTransformerResponse
+      include Smithy::Client::_Response[Types::UpdateTransformerResponse]
+      def transformer_id: () -> String?
+      def transformer_arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def modified_at: () -> Time?
+      def file_format: () -> String?
+      def mapping_template: () -> String?
+      def edi_type: () -> Types::EdiType?
+      def sample_document: () -> String?
+      def input_conversion: () -> Types::InputConversion?
+      def mapping: () -> Types::Mapping?
+      def output_conversion: () -> Types::OutputConversion?
+      def sample_documents: () -> Types::SampleDocuments?
+    end
+    def update_transformer: (
+      ?transformer_id: String,
+      ?name: String,
+      ?status: String,
+      ?file_format: String,
+      ?mapping_template: String,
+      ?edi_type: {
+        x12_details: {
+          transaction_set: String,
+          version: String
+        }
+      },
+      ?sample_document: String,
+      ?input_conversion: {
+        from_format: String,
+        format_options: {
+          x12: {
+            transaction_set: String,
+            version: String
+          }
+        },
+        advanced_options: {
+          x12: {
+            split_options: {
+              split_by: String
+            }
+          }
+        }
+      },
+      ?mapping: {
+        template_language: String,
+        template: String
+      },
+      ?output_conversion: {
+        to_format: String,
+        format_options: {
+          x12: {
+            transaction_set: String,
+            version: String
+          }
+        }
+      },
+      ?sample_documents: {
+        bucket_name: String,
+        keys: Array[
+          {
+            input: String,
+            output: untyped
+          }
+        ]
+      }
+    ) -> _UpdateTransformerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTransformerResponse
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module WorkSpaces
+      VERSION: String
+    end
+  end

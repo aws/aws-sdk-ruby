@@ -1,0 +1,1833 @@
+module Aws::Textract
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class Adapter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adapter_id: String,
+        ?pages: Array[String],
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adapter_id: String?
+      attr_accessor pages: Array[String]?
+      attr_accessor version: String?
+    end
+
+    class AdapterOverview
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adapter_id: String,
+        ?adapter_name: String,
+        ?creation_time: Time,
+        ?feature_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adapter_id: String?
+      attr_accessor adapter_name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor feature_types: Array[String]?
+    end
+
+    class AdapterVersionDatasetConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?manifest_s3_object: Types::S3Object,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor manifest_s3_object: Types::S3Object?
+    end
+
+    class AdapterVersionEvaluationMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?baseline: Types::EvaluationMetric,
+        ?adapter_version: Types::EvaluationMetric,
+        ?feature_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor baseline: Types::EvaluationMetric?
+      attr_accessor adapter_version: Types::EvaluationMetric?
+      attr_accessor feature_type: String?
+    end
+
+    class AdapterVersionOverview
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adapter_id: String,
+        ?adapter_version: String,
+        ?creation_time: Time,
+        ?feature_types: Array[String],
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adapter_id: String?
+      attr_accessor adapter_version: String?
+      attr_accessor creation_time: Time?
+      attr_accessor feature_types: Array[String]?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    module AdapterVersionStatus
+      ACTIVE: String
+      AT_RISK: String
+      DEPRECATED: String
+      CREATION_ERROR: String
+      CREATION_IN_PROGRESS: String
+    end
+
+    class AdaptersConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adapters: Array[Types::Adapter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adapters: Array[Types::Adapter]?
+    end
+
+    class AnalyzeDocumentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document: Types::Document,
+        ?feature_types: Array[String],
+        ?human_loop_config: Types::HumanLoopConfig,
+        ?queries_config: Types::QueriesConfig,
+        ?adapters_config: Types::AdaptersConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document: Types::Document?
+      attr_accessor feature_types: Array[String]?
+      attr_accessor human_loop_config: Types::HumanLoopConfig?
+      attr_accessor queries_config: Types::QueriesConfig?
+      attr_accessor adapters_config: Types::AdaptersConfig?
+    end
+
+    class AnalyzeDocumentResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_metadata: Types::DocumentMetadata,
+        ?blocks: Array[Types::Block],
+        ?human_loop_activation_output: Types::HumanLoopActivationOutput,
+        ?analyze_document_model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_metadata: Types::DocumentMetadata?
+      attr_accessor blocks: Array[Types::Block]?
+      attr_accessor human_loop_activation_output: Types::HumanLoopActivationOutput?
+      attr_accessor analyze_document_model_version: String?
+    end
+
+    class AnalyzeExpenseRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document: Types::Document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document: Types::Document?
+    end
+
+    class AnalyzeExpenseResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_metadata: Types::DocumentMetadata,
+        ?expense_documents: Array[Types::ExpenseDocument],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_metadata: Types::DocumentMetadata?
+      attr_accessor expense_documents: Array[Types::ExpenseDocument]?
+    end
+
+    class AnalyzeIDDetections
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?normalized_value: Types::NormalizedValue,
+        ?confidence: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor normalized_value: Types::NormalizedValue?
+      attr_accessor confidence: Float?
+    end
+
+    class AnalyzeIDRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_pages: Array[Types::Document],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_pages: Array[Types::Document]?
+    end
+
+    class AnalyzeIDResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_documents: Array[Types::IdentityDocument],
+        ?document_metadata: Types::DocumentMetadata,
+        ?analyze_id_model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_documents: Array[Types::IdentityDocument]?
+      attr_accessor document_metadata: Types::DocumentMetadata?
+      attr_accessor analyze_id_model_version: String?
+    end
+
+    module AutoUpdate
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class BadDocumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class Block
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?block_type: String,
+        ?confidence: Float,
+        ?text: String,
+        ?text_type: String,
+        ?row_index: Integer,
+        ?column_index: Integer,
+        ?row_span: Integer,
+        ?column_span: Integer,
+        ?geometry: Types::Geometry,
+        ?id: String,
+        ?relationships: Array[Types::Relationship],
+        ?entity_types: Array[String],
+        ?selection_status: String,
+        ?page: Integer,
+        ?query: Types::Query,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor block_type: String?
+      attr_accessor confidence: Float?
+      attr_accessor text: String?
+      attr_accessor text_type: String?
+      attr_accessor row_index: Integer?
+      attr_accessor column_index: Integer?
+      attr_accessor row_span: Integer?
+      attr_accessor column_span: Integer?
+      attr_accessor geometry: Types::Geometry?
+      attr_accessor id: String?
+      attr_accessor relationships: Array[Types::Relationship]?
+      attr_accessor entity_types: Array[String]?
+      attr_accessor selection_status: String?
+      attr_accessor page: Integer?
+      attr_accessor query: Types::Query?
+    end
+
+    module BlockType
+      KEY_VALUE_SET: String
+      PAGE: String
+      LINE: String
+      WORD: String
+      TABLE: String
+      CELL: String
+      SELECTION_ELEMENT: String
+      MERGED_CELL: String
+      TITLE: String
+      QUERY: String
+      QUERY_RESULT: String
+      SIGNATURE: String
+      TABLE_TITLE: String
+      TABLE_FOOTER: String
+      LAYOUT_TEXT: String
+      LAYOUT_TITLE: String
+      LAYOUT_HEADER: String
+      LAYOUT_FOOTER: String
+      LAYOUT_SECTION_HEADER: String
+      LAYOUT_PAGE_NUMBER: String
+      LAYOUT_LIST: String
+      LAYOUT_FIGURE: String
+      LAYOUT_TABLE: String
+      LAYOUT_KEY_VALUE: String
+    end
+
+    class BoundingBox
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?width: Float,
+        ?height: Float,
+        ?left: Float,
+        ?top: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor width: Float?
+      attr_accessor height: Float?
+      attr_accessor left: Float?
+      attr_accessor top: Float?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    module ContentClassifier
+      FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION: String
+      FREE_OF_ADULT_CONTENT: String
+    end
+
+    class CreateAdapterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adapter_name: String,
+        ?client_request_token: String,
+        ?description: String,
+        ?feature_types: Array[String],
+        ?auto_update: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adapter_name: String?
+      attr_accessor client_request_token: String?
+      attr_accessor description: String?
+      attr_accessor feature_types: Array[String]?
+      attr_accessor auto_update: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateAdapterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adapter_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adapter_id: String?
+    end
+
+    class CreateAdapterVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adapter_id: String,
+        ?client_request_token: String,
+        ?dataset_config: Types::AdapterVersionDatasetConfig,
+        ?kms_key_id: String,
+        ?output_config: Types::OutputConfig,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adapter_id: String?
+      attr_accessor client_request_token: String?
+      attr_accessor dataset_config: Types::AdapterVersionDatasetConfig?
+      attr_accessor kms_key_id: String?
+      attr_accessor output_config: Types::OutputConfig?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateAdapterVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adapter_id: String,
+        ?adapter_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adapter_id: String?
+      attr_accessor adapter_version: String?
+    end
+
+    class DeleteAdapterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adapter_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adapter_id: String?
+    end
+
+    class DeleteAdapterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAdapterVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adapter_id: String,
+        ?adapter_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adapter_id: String?
+      attr_accessor adapter_version: String?
+    end
+
+    class DeleteAdapterVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DetectDocumentTextRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document: Types::Document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document: Types::Document?
+    end
+
+    class DetectDocumentTextResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_metadata: Types::DocumentMetadata,
+        ?blocks: Array[Types::Block],
+        ?detect_document_text_model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_metadata: Types::DocumentMetadata?
+      attr_accessor blocks: Array[Types::Block]?
+      attr_accessor detect_document_text_model_version: String?
+    end
+
+    class DetectedSignature
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?page: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor page: Integer?
+    end
+
+    class Document
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bytes: String,
+        ?s3_object: Types::S3Object,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bytes: String?
+      attr_accessor s3_object: Types::S3Object?
+    end
+
+    class DocumentGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?split_documents: Array[Types::SplitDocument],
+        ?detected_signatures: Array[Types::DetectedSignature],
+        ?undetected_signatures: Array[Types::UndetectedSignature],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor split_documents: Array[Types::SplitDocument]?
+      attr_accessor detected_signatures: Array[Types::DetectedSignature]?
+      attr_accessor undetected_signatures: Array[Types::UndetectedSignature]?
+    end
+
+    class DocumentLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_object: Types::S3Object,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_object: Types::S3Object?
+    end
+
+    class DocumentMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pages: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pages: Integer?
+    end
+
+    class DocumentTooLargeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    module EntityType
+      KEY: String
+      VALUE: String
+      COLUMN_HEADER: String
+      TABLE_TITLE: String
+      TABLE_FOOTER: String
+      TABLE_SECTION_TITLE: String
+      TABLE_SUMMARY: String
+      STRUCTURED_TABLE: String
+      SEMI_STRUCTURED_TABLE: String
+    end
+
+    class EvaluationMetric
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?f1_score: Float,
+        ?precision: Float,
+        ?recall: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor f1_score: Float?
+      attr_accessor precision: Float?
+      attr_accessor recall: Float?
+    end
+
+    class ExpenseCurrency
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?confidence: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor confidence: Float?
+    end
+
+    class ExpenseDetection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?geometry: Types::Geometry,
+        ?confidence: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor geometry: Types::Geometry?
+      attr_accessor confidence: Float?
+    end
+
+    class ExpenseDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expense_index: Integer,
+        ?summary_fields: Array[Types::ExpenseField],
+        ?line_item_groups: Array[Types::LineItemGroup],
+        ?blocks: Array[Types::Block],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expense_index: Integer?
+      attr_accessor summary_fields: Array[Types::ExpenseField]?
+      attr_accessor line_item_groups: Array[Types::LineItemGroup]?
+      attr_accessor blocks: Array[Types::Block]?
+    end
+
+    class ExpenseField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: Types::ExpenseType,
+        ?label_detection: Types::ExpenseDetection,
+        ?value_detection: Types::ExpenseDetection,
+        ?page_number: Integer,
+        ?currency: Types::ExpenseCurrency,
+        ?group_properties: Array[Types::ExpenseGroupProperty],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: Types::ExpenseType?
+      attr_accessor label_detection: Types::ExpenseDetection?
+      attr_accessor value_detection: Types::ExpenseDetection?
+      attr_accessor page_number: Integer?
+      attr_accessor currency: Types::ExpenseCurrency?
+      attr_accessor group_properties: Array[Types::ExpenseGroupProperty]?
+    end
+
+    class ExpenseGroupProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?types: Array[String],
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor types: Array[String]?
+      attr_accessor id: String?
+    end
+
+    class ExpenseType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?confidence: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor confidence: Float?
+    end
+
+    class Extraction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lending_document: Types::LendingDocument,
+        ?expense_document: Types::ExpenseDocument,
+        ?identity_document: Types::IdentityDocument,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lending_document: Types::LendingDocument?
+      attr_accessor expense_document: Types::ExpenseDocument?
+      attr_accessor identity_document: Types::IdentityDocument?
+    end
+
+    module FeatureType
+      TABLES: String
+      FORMS: String
+      QUERIES: String
+      SIGNATURES: String
+      LAYOUT: String
+    end
+
+    class Geometry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bounding_box: Types::BoundingBox,
+        ?polygon: Array[Types::Point],
+        ?rotation_angle: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bounding_box: Types::BoundingBox?
+      attr_accessor polygon: Array[Types::Point]?
+      attr_accessor rotation_angle: Float?
+    end
+
+    class GetAdapterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adapter_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adapter_id: String?
+    end
+
+    class GetAdapterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adapter_id: String,
+        ?adapter_name: String,
+        ?creation_time: Time,
+        ?description: String,
+        ?feature_types: Array[String],
+        ?auto_update: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adapter_id: String?
+      attr_accessor adapter_name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor description: String?
+      attr_accessor feature_types: Array[String]?
+      attr_accessor auto_update: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetAdapterVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adapter_id: String,
+        ?adapter_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adapter_id: String?
+      attr_accessor adapter_version: String?
+    end
+
+    class GetAdapterVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adapter_id: String,
+        ?adapter_version: String,
+        ?creation_time: Time,
+        ?feature_types: Array[String],
+        ?status: String,
+        ?status_message: String,
+        ?dataset_config: Types::AdapterVersionDatasetConfig,
+        ?kms_key_id: String,
+        ?output_config: Types::OutputConfig,
+        ?evaluation_metrics: Array[Types::AdapterVersionEvaluationMetric],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adapter_id: String?
+      attr_accessor adapter_version: String?
+      attr_accessor creation_time: Time?
+      attr_accessor feature_types: Array[String]?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor dataset_config: Types::AdapterVersionDatasetConfig?
+      attr_accessor kms_key_id: String?
+      attr_accessor output_config: Types::OutputConfig?
+      attr_accessor evaluation_metrics: Array[Types::AdapterVersionEvaluationMetric]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetDocumentAnalysisRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetDocumentAnalysisResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_metadata: Types::DocumentMetadata,
+        ?job_status: String,
+        ?next_token: String,
+        ?blocks: Array[Types::Block],
+        ?warnings: Array[Types::Warning],
+        ?status_message: String,
+        ?analyze_document_model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_metadata: Types::DocumentMetadata?
+      attr_accessor job_status: String?
+      attr_accessor next_token: String?
+      attr_accessor blocks: Array[Types::Block]?
+      attr_accessor warnings: Array[Types::Warning]?
+      attr_accessor status_message: String?
+      attr_accessor analyze_document_model_version: String?
+    end
+
+    class GetDocumentTextDetectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetDocumentTextDetectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_metadata: Types::DocumentMetadata,
+        ?job_status: String,
+        ?next_token: String,
+        ?blocks: Array[Types::Block],
+        ?warnings: Array[Types::Warning],
+        ?status_message: String,
+        ?detect_document_text_model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_metadata: Types::DocumentMetadata?
+      attr_accessor job_status: String?
+      attr_accessor next_token: String?
+      attr_accessor blocks: Array[Types::Block]?
+      attr_accessor warnings: Array[Types::Warning]?
+      attr_accessor status_message: String?
+      attr_accessor detect_document_text_model_version: String?
+    end
+
+    class GetExpenseAnalysisRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetExpenseAnalysisResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_metadata: Types::DocumentMetadata,
+        ?job_status: String,
+        ?next_token: String,
+        ?expense_documents: Array[Types::ExpenseDocument],
+        ?warnings: Array[Types::Warning],
+        ?status_message: String,
+        ?analyze_expense_model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_metadata: Types::DocumentMetadata?
+      attr_accessor job_status: String?
+      attr_accessor next_token: String?
+      attr_accessor expense_documents: Array[Types::ExpenseDocument]?
+      attr_accessor warnings: Array[Types::Warning]?
+      attr_accessor status_message: String?
+      attr_accessor analyze_expense_model_version: String?
+    end
+
+    class GetLendingAnalysisRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetLendingAnalysisResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_metadata: Types::DocumentMetadata,
+        ?job_status: String,
+        ?next_token: String,
+        ?results: Array[Types::LendingResult],
+        ?warnings: Array[Types::Warning],
+        ?status_message: String,
+        ?analyze_lending_model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_metadata: Types::DocumentMetadata?
+      attr_accessor job_status: String?
+      attr_accessor next_token: String?
+      attr_accessor results: Array[Types::LendingResult]?
+      attr_accessor warnings: Array[Types::Warning]?
+      attr_accessor status_message: String?
+      attr_accessor analyze_lending_model_version: String?
+    end
+
+    class GetLendingAnalysisSummaryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class GetLendingAnalysisSummaryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_metadata: Types::DocumentMetadata,
+        ?job_status: String,
+        ?summary: Types::LendingSummary,
+        ?warnings: Array[Types::Warning],
+        ?status_message: String,
+        ?analyze_lending_model_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_metadata: Types::DocumentMetadata?
+      attr_accessor job_status: String?
+      attr_accessor summary: Types::LendingSummary?
+      attr_accessor warnings: Array[Types::Warning]?
+      attr_accessor status_message: String?
+      attr_accessor analyze_lending_model_version: String?
+    end
+
+    class HumanLoopActivationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?human_loop_arn: String,
+        ?human_loop_activation_reasons: Array[String],
+        ?human_loop_activation_conditions_evaluation_results: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor human_loop_arn: String?
+      attr_accessor human_loop_activation_reasons: Array[String]?
+      attr_accessor human_loop_activation_conditions_evaluation_results: String?
+    end
+
+    class HumanLoopConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?human_loop_name: String,
+        ?flow_definition_arn: String,
+        ?data_attributes: Types::HumanLoopDataAttributes,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor human_loop_name: String?
+      attr_accessor flow_definition_arn: String?
+      attr_accessor data_attributes: Types::HumanLoopDataAttributes?
+    end
+
+    class HumanLoopDataAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_classifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_classifiers: Array[String]?
+    end
+
+    class HumanLoopQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_type: String,
+        ?quota_code: String,
+        ?service_code: String,
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_type: String?
+      attr_accessor quota_code: String?
+      attr_accessor service_code: String?
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class IdempotentParameterMismatchException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class IdentityDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_index: Integer,
+        ?identity_document_fields: Array[Types::IdentityDocumentField],
+        ?blocks: Array[Types::Block],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_index: Integer?
+      attr_accessor identity_document_fields: Array[Types::IdentityDocumentField]?
+      attr_accessor blocks: Array[Types::Block]?
+    end
+
+    class IdentityDocumentField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: Types::AnalyzeIDDetections,
+        ?value_detection: Types::AnalyzeIDDetections,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: Types::AnalyzeIDDetections?
+      attr_accessor value_detection: Types::AnalyzeIDDetections?
+    end
+
+    class InternalServerError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class InvalidJobIdException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class InvalidKMSKeyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class InvalidS3ObjectException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    module JobStatus
+      IN_PROGRESS: String
+      SUCCEEDED: String
+      FAILED: String
+      PARTIAL_SUCCESS: String
+    end
+
+    class LendingDetection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?selection_status: String,
+        ?geometry: Types::Geometry,
+        ?confidence: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor selection_status: String?
+      attr_accessor geometry: Types::Geometry?
+      attr_accessor confidence: Float?
+    end
+
+    class LendingDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lending_fields: Array[Types::LendingField],
+        ?signature_detections: Array[Types::SignatureDetection],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lending_fields: Array[Types::LendingField]?
+      attr_accessor signature_detections: Array[Types::SignatureDetection]?
+    end
+
+    class LendingField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?key_detection: Types::LendingDetection,
+        ?value_detections: Array[Types::LendingDetection],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor key_detection: Types::LendingDetection?
+      attr_accessor value_detections: Array[Types::LendingDetection]?
+    end
+
+    class LendingResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?page: Integer,
+        ?page_classification: Types::PageClassification,
+        ?extractions: Array[Types::Extraction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor page: Integer?
+      attr_accessor page_classification: Types::PageClassification?
+      attr_accessor extractions: Array[Types::Extraction]?
+    end
+
+    class LendingSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_groups: Array[Types::DocumentGroup],
+        ?undetected_document_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_groups: Array[Types::DocumentGroup]?
+      attr_accessor undetected_document_types: Array[String]?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class LineItemFields
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?line_item_expense_fields: Array[Types::ExpenseField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor line_item_expense_fields: Array[Types::ExpenseField]?
+    end
+
+    class LineItemGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?line_item_group_index: Integer,
+        ?line_items: Array[Types::LineItemFields],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor line_item_group_index: Integer?
+      attr_accessor line_items: Array[Types::LineItemFields]?
+    end
+
+    class ListAdapterVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adapter_id: String,
+        ?after_creation_time: Time,
+        ?before_creation_time: Time,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adapter_id: String?
+      attr_accessor after_creation_time: Time?
+      attr_accessor before_creation_time: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAdapterVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adapter_versions: Array[Types::AdapterVersionOverview],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adapter_versions: Array[Types::AdapterVersionOverview]?
+      attr_accessor next_token: String?
+    end
+
+    class ListAdaptersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?after_creation_time: Time,
+        ?before_creation_time: Time,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor after_creation_time: Time?
+      attr_accessor before_creation_time: Time?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAdaptersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adapters: Array[Types::AdapterOverview],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adapters: Array[Types::AdapterOverview]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class NormalizedValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?value_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor value_type: String?
+    end
+
+    class NotificationChannel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sns_topic_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sns_topic_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class OutputConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_bucket: String,
+        ?s3_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_prefix: String?
+    end
+
+    class PageClassification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?page_type: Array[Types::Prediction],
+        ?page_number: Array[Types::Prediction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor page_type: Array[Types::Prediction]?
+      attr_accessor page_number: Array[Types::Prediction]?
+    end
+
+    class Point
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?x: Float,
+        ?y: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor x: Float?
+      attr_accessor y: Float?
+    end
+
+    class Prediction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?confidence: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor confidence: Float?
+    end
+
+    class ProvisionedThroughputExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class QueriesConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?queries: Array[Types::Query],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor queries: Array[Types::Query]?
+    end
+
+    class Query
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?alias: String,
+        ?pages: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor alias: String?
+      attr_accessor pages: Array[String]?
+    end
+
+    class Relationship
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor ids: Array[String]?
+    end
+
+    module RelationshipType
+      VALUE: String
+      CHILD: String
+      COMPLEX_FEATURES: String
+      MERGED_CELL: String
+      TITLE: String
+      ANSWER: String
+      TABLE: String
+      TABLE_TITLE: String
+      TABLE_FOOTER: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class S3Object
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?name: String,
+        ?version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor name: String?
+      attr_accessor version: String?
+    end
+
+    module SelectionStatus
+      SELECTED: String
+      NOT_SELECTED: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class SignatureDetection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?confidence: Float,
+        ?geometry: Types::Geometry,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor confidence: Float?
+      attr_accessor geometry: Types::Geometry?
+    end
+
+    class SplitDocument
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index: Integer,
+        ?pages: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index: Integer?
+      attr_accessor pages: Array[Integer]?
+    end
+
+    class StartDocumentAnalysisRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_location: Types::DocumentLocation,
+        ?feature_types: Array[String],
+        ?client_request_token: String,
+        ?job_tag: String,
+        ?notification_channel: Types::NotificationChannel,
+        ?output_config: Types::OutputConfig,
+        ?kms_key_id: String,
+        ?queries_config: Types::QueriesConfig,
+        ?adapters_config: Types::AdaptersConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_location: Types::DocumentLocation?
+      attr_accessor feature_types: Array[String]?
+      attr_accessor client_request_token: String?
+      attr_accessor job_tag: String?
+      attr_accessor notification_channel: Types::NotificationChannel?
+      attr_accessor output_config: Types::OutputConfig?
+      attr_accessor kms_key_id: String?
+      attr_accessor queries_config: Types::QueriesConfig?
+      attr_accessor adapters_config: Types::AdaptersConfig?
+    end
+
+    class StartDocumentAnalysisResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StartDocumentTextDetectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_location: Types::DocumentLocation,
+        ?client_request_token: String,
+        ?job_tag: String,
+        ?notification_channel: Types::NotificationChannel,
+        ?output_config: Types::OutputConfig,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_location: Types::DocumentLocation?
+      attr_accessor client_request_token: String?
+      attr_accessor job_tag: String?
+      attr_accessor notification_channel: Types::NotificationChannel?
+      attr_accessor output_config: Types::OutputConfig?
+      attr_accessor kms_key_id: String?
+    end
+
+    class StartDocumentTextDetectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StartExpenseAnalysisRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_location: Types::DocumentLocation,
+        ?client_request_token: String,
+        ?job_tag: String,
+        ?notification_channel: Types::NotificationChannel,
+        ?output_config: Types::OutputConfig,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_location: Types::DocumentLocation?
+      attr_accessor client_request_token: String?
+      attr_accessor job_tag: String?
+      attr_accessor notification_channel: Types::NotificationChannel?
+      attr_accessor output_config: Types::OutputConfig?
+      attr_accessor kms_key_id: String?
+    end
+
+    class StartExpenseAnalysisResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class StartLendingAnalysisRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?document_location: Types::DocumentLocation,
+        ?client_request_token: String,
+        ?job_tag: String,
+        ?notification_channel: Types::NotificationChannel,
+        ?output_config: Types::OutputConfig,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor document_location: Types::DocumentLocation?
+      attr_accessor client_request_token: String?
+      attr_accessor job_tag: String?
+      attr_accessor notification_channel: Types::NotificationChannel?
+      attr_accessor output_config: Types::OutputConfig?
+      attr_accessor kms_key_id: String?
+    end
+
+    class StartLendingAnalysisResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module TextType
+      HANDWRITING: String
+      PRINTED: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class UndetectedSignature
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?page: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor page: Integer?
+    end
+
+    class UnsupportedDocumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAdapterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adapter_id: String,
+        ?description: String,
+        ?adapter_name: String,
+        ?auto_update: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adapter_id: String?
+      attr_accessor description: String?
+      attr_accessor adapter_name: String?
+      attr_accessor auto_update: String?
+    end
+
+    class UpdateAdapterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?adapter_id: String,
+        ?adapter_name: String,
+        ?creation_time: Time,
+        ?description: String,
+        ?feature_types: Array[String],
+        ?auto_update: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor adapter_id: String?
+      attr_accessor adapter_name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor description: String?
+      attr_accessor feature_types: Array[String]?
+      attr_accessor auto_update: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor code: String?
+    end
+
+    module ValueType
+      DATE: String
+    end
+
+    class Warning
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?pages: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor pages: Array[Integer]?
+    end
+  end
+end

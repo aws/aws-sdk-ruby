@@ -1,0 +1,781 @@
+module Aws::S3Vectors
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateIndexInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?vector_bucket_arn: String,
+        ?index_name: String,
+        ?data_type: String,
+        ?dimension: Integer,
+        ?distance_metric: String,
+        ?metadata_configuration: Types::MetadataConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor vector_bucket_arn: String?
+      attr_accessor index_name: String?
+      attr_accessor data_type: String?
+      attr_accessor dimension: Integer?
+      attr_accessor distance_metric: String?
+      attr_accessor metadata_configuration: Types::MetadataConfiguration?
+    end
+
+    class CreateIndexOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateVectorBucketInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class CreateVectorBucketOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module DataType
+      FLOAT32: String
+    end
+
+    class DeleteIndexInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?index_name: String,
+        ?index_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor index_name: String?
+      attr_accessor index_arn: String?
+    end
+
+    class DeleteIndexOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteVectorBucketInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?vector_bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor vector_bucket_arn: String?
+    end
+
+    class DeleteVectorBucketOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteVectorBucketPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?vector_bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor vector_bucket_arn: String?
+    end
+
+    class DeleteVectorBucketPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteVectorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?index_name: String,
+        ?index_arn: String,
+        ?keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor index_name: String?
+      attr_accessor index_arn: String?
+      attr_accessor keys: Array[String]?
+    end
+
+    class DeleteVectorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module DistanceMetric
+      EUCLIDEAN: String
+      COSINE: String
+    end
+
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sse_type: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sse_type: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class GetIndexInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?index_name: String,
+        ?index_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor index_name: String?
+      attr_accessor index_arn: String?
+    end
+
+    class GetIndexOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?index: Types::Index,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor index: Types::Index?
+    end
+
+    class GetOutputVector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?data: Types::VectorData,
+        ?metadata: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor data: Types::VectorData?
+      attr_accessor metadata: Smithy::Schema::document?
+    end
+
+    class GetVectorBucketInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?vector_bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor vector_bucket_arn: String?
+    end
+
+    class GetVectorBucketOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket: Types::VectorBucket,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket: Types::VectorBucket?
+    end
+
+    class GetVectorBucketPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?vector_bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor vector_bucket_arn: String?
+    end
+
+    class GetVectorBucketPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    class GetVectorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?index_name: String,
+        ?index_arn: String,
+        ?keys: Array[String],
+        ?return_data: bool,
+        ?return_metadata: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor index_name: String?
+      attr_accessor index_arn: String?
+      attr_accessor keys: Array[String]?
+      attr_accessor return_data: bool?
+      attr_accessor return_metadata: bool?
+    end
+
+    class GetVectorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vectors: Array[Types::GetOutputVector],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vectors: Array[Types::GetOutputVector]?
+    end
+
+    class Index
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?index_name: String,
+        ?index_arn: String,
+        ?creation_time: Time,
+        ?data_type: String,
+        ?dimension: Integer,
+        ?distance_metric: String,
+        ?metadata_configuration: Types::MetadataConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor index_name: String?
+      attr_accessor index_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor data_type: String?
+      attr_accessor dimension: Integer?
+      attr_accessor distance_metric: String?
+      attr_accessor metadata_configuration: Types::MetadataConfiguration?
+    end
+
+    class IndexSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?index_name: String,
+        ?index_arn: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor index_name: String?
+      attr_accessor index_arn: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KmsDisabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KmsInvalidKeyUsageException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KmsInvalidStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KmsNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListIndexesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?vector_bucket_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor vector_bucket_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor prefix: String?
+    end
+
+    class ListIndexesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?indexes: Array[Types::IndexSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor indexes: Array[Types::IndexSummary]?
+    end
+
+    class ListOutputVector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?data: Types::VectorData,
+        ?metadata: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor data: Types::VectorData?
+      attr_accessor metadata: Smithy::Schema::document?
+    end
+
+    class ListVectorBucketsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor prefix: String?
+    end
+
+    class ListVectorBucketsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?vector_buckets: Array[Types::VectorBucketSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor vector_buckets: Array[Types::VectorBucketSummary]?
+    end
+
+    class ListVectorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?index_name: String,
+        ?index_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?segment_count: Integer,
+        ?segment_index: Integer,
+        ?return_data: bool,
+        ?return_metadata: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor index_name: String?
+      attr_accessor index_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor segment_count: Integer?
+      attr_accessor segment_index: Integer?
+      attr_accessor return_data: bool?
+      attr_accessor return_metadata: bool?
+    end
+
+    class ListVectorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?vectors: Array[Types::ListOutputVector],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor vectors: Array[Types::ListOutputVector]?
+    end
+
+    class MetadataConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?non_filterable_metadata_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor non_filterable_metadata_keys: Array[String]?
+    end
+
+    class NotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PutInputVector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?data: Types::VectorData,
+        ?metadata: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor data: Types::VectorData?
+      attr_accessor metadata: Smithy::Schema::document?
+    end
+
+    class PutVectorBucketPolicyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?vector_bucket_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor vector_bucket_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class PutVectorBucketPolicyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutVectorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?index_name: String,
+        ?index_arn: String,
+        ?vectors: Array[Types::PutInputVector],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor index_name: String?
+      attr_accessor index_arn: String?
+      attr_accessor vectors: Array[Types::PutInputVector]?
+    end
+
+    class PutVectorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class QueryOutputVector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?data: Types::VectorData,
+        ?metadata: Smithy::Schema::document,
+        ?distance: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor data: Types::VectorData?
+      attr_accessor metadata: Smithy::Schema::document?
+      attr_accessor distance: Float?
+    end
+
+    class QueryVectorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?index_name: String,
+        ?index_arn: String,
+        ?top_k: Integer,
+        ?query_vector: Types::VectorData,
+        ?filter: Smithy::Schema::document,
+        ?return_metadata: bool,
+        ?return_distance: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor index_name: String?
+      attr_accessor index_arn: String?
+      attr_accessor top_k: Integer?
+      attr_accessor query_vector: Types::VectorData?
+      attr_accessor filter: Smithy::Schema::document?
+      attr_accessor return_metadata: bool?
+      attr_accessor return_distance: bool?
+    end
+
+    class QueryVectorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vectors: Array[Types::QueryOutputVector],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vectors: Array[Types::QueryOutputVector]?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SseType
+      AES256: String
+      AWS_KMS: String
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor message: String?
+    end
+
+    class VectorBucket
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?vector_bucket_arn: String,
+        ?creation_time: Time,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor vector_bucket_arn: String?
+      attr_accessor creation_time: Time?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+    end
+
+    class VectorBucketSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vector_bucket_name: String,
+        ?vector_bucket_arn: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vector_bucket_name: String?
+      attr_accessor vector_bucket_arn: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class VectorData
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?float32: Array[Float],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor float32: Array[Float]?
+
+      class Float32 < VectorData
+      end
+      class Unknown < VectorData
+      end
+    end
+  end
+end

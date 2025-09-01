@@ -1,0 +1,700 @@
+module Aws::MWAA
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateCliTokenInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class CreateCliTokenOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cli_token: String,
+        ?web_server_hostname: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cli_token: String?
+      attr_accessor web_server_hostname: String?
+    end
+
+    class CreateEnvironmentOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?execution_role_arn: String,
+        ?source_bucket_arn: String,
+        ?dag_s3_path: String,
+        ?network_configuration: Types::NetworkConfiguration,
+        ?plugins_s3_path: String,
+        ?plugins_s3_object_version: String,
+        ?requirements_s3_path: String,
+        ?requirements_s3_object_version: String,
+        ?startup_script_s3_path: String,
+        ?startup_script_s3_object_version: String,
+        ?airflow_configuration_options: Hash[String, String],
+        ?environment_class: String,
+        ?max_workers: Integer,
+        ?kms_key: String,
+        ?airflow_version: String,
+        ?logging_configuration: Types::LoggingConfigurationInput,
+        ?weekly_maintenance_window_start: String,
+        ?tags: Hash[String, String],
+        ?webserver_access_mode: String,
+        ?min_workers: Integer,
+        ?schedulers: Integer,
+        ?endpoint_management: String,
+        ?min_webservers: Integer,
+        ?max_webservers: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor source_bucket_arn: String?
+      attr_accessor dag_s3_path: String?
+      attr_accessor network_configuration: Types::NetworkConfiguration?
+      attr_accessor plugins_s3_path: String?
+      attr_accessor plugins_s3_object_version: String?
+      attr_accessor requirements_s3_path: String?
+      attr_accessor requirements_s3_object_version: String?
+      attr_accessor startup_script_s3_path: String?
+      attr_accessor startup_script_s3_object_version: String?
+      attr_accessor airflow_configuration_options: Hash[String, String]?
+      attr_accessor environment_class: String?
+      attr_accessor max_workers: Integer?
+      attr_accessor kms_key: String?
+      attr_accessor airflow_version: String?
+      attr_accessor logging_configuration: Types::LoggingConfigurationInput?
+      attr_accessor weekly_maintenance_window_start: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor webserver_access_mode: String?
+      attr_accessor min_workers: Integer?
+      attr_accessor schedulers: Integer?
+      attr_accessor endpoint_management: String?
+      attr_accessor min_webservers: Integer?
+      attr_accessor max_webservers: Integer?
+    end
+
+    class CreateEnvironmentOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class CreateWebLoginTokenInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class CreateWebLoginTokenOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_token: String,
+        ?web_server_hostname: String,
+        ?iam_identity: String,
+        ?airflow_identity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_token: String?
+      attr_accessor web_server_hostname: String?
+      attr_accessor iam_identity: String?
+      attr_accessor airflow_identity: String?
+    end
+
+    class DeleteEnvironmentOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteEnvironmentOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Dimension
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    class Environment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?status: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?webserver_url: String,
+        ?execution_role_arn: String,
+        ?service_role_arn: String,
+        ?kms_key: String,
+        ?airflow_version: String,
+        ?source_bucket_arn: String,
+        ?dag_s3_path: String,
+        ?plugins_s3_path: String,
+        ?plugins_s3_object_version: String,
+        ?requirements_s3_path: String,
+        ?requirements_s3_object_version: String,
+        ?startup_script_s3_path: String,
+        ?startup_script_s3_object_version: String,
+        ?airflow_configuration_options: Hash[String, String],
+        ?environment_class: String,
+        ?max_workers: Integer,
+        ?network_configuration: Types::NetworkConfiguration,
+        ?logging_configuration: Types::LoggingConfiguration,
+        ?last_update: Types::LastUpdate,
+        ?weekly_maintenance_window_start: String,
+        ?tags: Hash[String, String],
+        ?webserver_access_mode: String,
+        ?min_workers: Integer,
+        ?schedulers: Integer,
+        ?webserver_vpc_endpoint_service: String,
+        ?database_vpc_endpoint_service: String,
+        ?celery_executor_queue: String,
+        ?endpoint_management: String,
+        ?min_webservers: Integer,
+        ?max_webservers: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor webserver_url: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor service_role_arn: String?
+      attr_accessor kms_key: String?
+      attr_accessor airflow_version: String?
+      attr_accessor source_bucket_arn: String?
+      attr_accessor dag_s3_path: String?
+      attr_accessor plugins_s3_path: String?
+      attr_accessor plugins_s3_object_version: String?
+      attr_accessor requirements_s3_path: String?
+      attr_accessor requirements_s3_object_version: String?
+      attr_accessor startup_script_s3_path: String?
+      attr_accessor startup_script_s3_object_version: String?
+      attr_accessor airflow_configuration_options: Hash[String, String]?
+      attr_accessor environment_class: String?
+      attr_accessor max_workers: Integer?
+      attr_accessor network_configuration: Types::NetworkConfiguration?
+      attr_accessor logging_configuration: Types::LoggingConfiguration?
+      attr_accessor last_update: Types::LastUpdate?
+      attr_accessor weekly_maintenance_window_start: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor webserver_access_mode: String?
+      attr_accessor min_workers: Integer?
+      attr_accessor schedulers: Integer?
+      attr_accessor webserver_vpc_endpoint_service: String?
+      attr_accessor database_vpc_endpoint_service: String?
+      attr_accessor celery_executor_queue: String?
+      attr_accessor endpoint_management: String?
+      attr_accessor min_webservers: Integer?
+      attr_accessor max_webservers: Integer?
+    end
+
+    class GetEnvironmentOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetEnvironmentOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment: Types::Environment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment: Types::Environment?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvokeRestApiRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?path: String,
+        ?method: String,
+        ?query_parameters: Smithy::Schema::document,
+        ?body: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor path: String?
+      attr_accessor method: String?
+      attr_accessor query_parameters: Smithy::Schema::document?
+      attr_accessor body: Smithy::Schema::document?
+    end
+
+    class InvokeRestApiResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rest_api_status_code: Integer,
+        ?rest_api_response: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rest_api_status_code: Integer?
+      attr_accessor rest_api_response: Smithy::Schema::document?
+    end
+
+    class LastUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?created_at: Time,
+        ?error: Types::UpdateError,
+        ?source: String,
+        ?worker_replacement_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor error: Types::UpdateError?
+      attr_accessor source: String?
+      attr_accessor worker_replacement_strategy: String?
+    end
+
+    class ListEnvironmentsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEnvironmentsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environments: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environments: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class LoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dag_processing_logs: Types::ModuleLoggingConfiguration,
+        ?scheduler_logs: Types::ModuleLoggingConfiguration,
+        ?webserver_logs: Types::ModuleLoggingConfiguration,
+        ?worker_logs: Types::ModuleLoggingConfiguration,
+        ?task_logs: Types::ModuleLoggingConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dag_processing_logs: Types::ModuleLoggingConfiguration?
+      attr_accessor scheduler_logs: Types::ModuleLoggingConfiguration?
+      attr_accessor webserver_logs: Types::ModuleLoggingConfiguration?
+      attr_accessor worker_logs: Types::ModuleLoggingConfiguration?
+      attr_accessor task_logs: Types::ModuleLoggingConfiguration?
+    end
+
+    class LoggingConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dag_processing_logs: Types::ModuleLoggingConfigurationInput,
+        ?scheduler_logs: Types::ModuleLoggingConfigurationInput,
+        ?webserver_logs: Types::ModuleLoggingConfigurationInput,
+        ?worker_logs: Types::ModuleLoggingConfigurationInput,
+        ?task_logs: Types::ModuleLoggingConfigurationInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dag_processing_logs: Types::ModuleLoggingConfigurationInput?
+      attr_accessor scheduler_logs: Types::ModuleLoggingConfigurationInput?
+      attr_accessor webserver_logs: Types::ModuleLoggingConfigurationInput?
+      attr_accessor worker_logs: Types::ModuleLoggingConfigurationInput?
+      attr_accessor task_logs: Types::ModuleLoggingConfigurationInput?
+    end
+
+    class MetricDatum
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metric_name: String,
+        ?timestamp: Time,
+        ?dimensions: Array[Types::Dimension],
+        ?value: Float,
+        ?unit: String,
+        ?statistic_values: Types::StatisticSet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metric_name: String?
+      attr_accessor timestamp: Time?
+      attr_accessor dimensions: Array[Types::Dimension]?
+      attr_accessor value: Float?
+      attr_accessor unit: String?
+      attr_accessor statistic_values: Types::StatisticSet?
+    end
+
+    class ModuleLoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?log_level: String,
+        ?cloud_watch_log_group_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor log_level: String?
+      attr_accessor cloud_watch_log_group_arn: String?
+    end
+
+    class ModuleLoggingConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?log_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor log_level: String?
+    end
+
+    class NetworkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor security_group_ids: Array[String]?
+    end
+
+    class PublishMetricsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_name: String,
+        ?metric_data: Array[Types::MetricDatum],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_name: String?
+      attr_accessor metric_data: Array[Types::MetricDatum]?
+    end
+
+    class PublishMetricsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RestApiClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rest_api_status_code: Integer,
+        ?rest_api_response: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rest_api_status_code: Integer?
+      attr_accessor rest_api_response: Smithy::Schema::document?
+    end
+
+    class RestApiServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rest_api_status_code: Integer,
+        ?rest_api_response: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rest_api_status_code: Integer?
+      attr_accessor rest_api_response: Smithy::Schema::document?
+    end
+
+    class StatisticSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sample_count: Integer,
+        ?sum: Float,
+        ?minimum: Float,
+        ?maximum: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sample_count: Integer?
+      attr_accessor sum: Float?
+      attr_accessor minimum: Float?
+      attr_accessor maximum: Float?
+    end
+
+    class TagResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UntagResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateEnvironmentOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?execution_role_arn: String,
+        ?airflow_configuration_options: Hash[String, String],
+        ?airflow_version: String,
+        ?dag_s3_path: String,
+        ?environment_class: String,
+        ?logging_configuration: Types::LoggingConfigurationInput,
+        ?max_workers: Integer,
+        ?min_workers: Integer,
+        ?max_webservers: Integer,
+        ?min_webservers: Integer,
+        ?worker_replacement_strategy: String,
+        ?network_configuration: Types::UpdateNetworkConfigurationInput,
+        ?plugins_s3_path: String,
+        ?plugins_s3_object_version: String,
+        ?requirements_s3_path: String,
+        ?requirements_s3_object_version: String,
+        ?schedulers: Integer,
+        ?source_bucket_arn: String,
+        ?startup_script_s3_path: String,
+        ?startup_script_s3_object_version: String,
+        ?webserver_access_mode: String,
+        ?weekly_maintenance_window_start: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor airflow_configuration_options: Hash[String, String]?
+      attr_accessor airflow_version: String?
+      attr_accessor dag_s3_path: String?
+      attr_accessor environment_class: String?
+      attr_accessor logging_configuration: Types::LoggingConfigurationInput?
+      attr_accessor max_workers: Integer?
+      attr_accessor min_workers: Integer?
+      attr_accessor max_webservers: Integer?
+      attr_accessor min_webservers: Integer?
+      attr_accessor worker_replacement_strategy: String?
+      attr_accessor network_configuration: Types::UpdateNetworkConfigurationInput?
+      attr_accessor plugins_s3_path: String?
+      attr_accessor plugins_s3_object_version: String?
+      attr_accessor requirements_s3_path: String?
+      attr_accessor requirements_s3_object_version: String?
+      attr_accessor schedulers: Integer?
+      attr_accessor source_bucket_arn: String?
+      attr_accessor startup_script_s3_path: String?
+      attr_accessor startup_script_s3_object_version: String?
+      attr_accessor webserver_access_mode: String?
+      attr_accessor weekly_maintenance_window_start: String?
+    end
+
+    class UpdateEnvironmentOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class UpdateError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class UpdateNetworkConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_group_ids: Array[String]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

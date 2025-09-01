@@ -1,0 +1,685 @@
+module Aws::Savingsplans
+  module Types
+
+    class CreateSavingsPlanRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plan_offering_id: String,
+        ?commitment: String,
+        ?upfront_payment_amount: String,
+        ?purchase_time: Time,
+        ?client_token: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plan_offering_id: String?
+      attr_accessor commitment: String?
+      attr_accessor upfront_payment_amount: String?
+      attr_accessor purchase_time: Time?
+      attr_accessor client_token: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSavingsPlanResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plan_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plan_id: String?
+    end
+
+    module CurrencyCode
+      CNY: String
+      USD: String
+    end
+
+    class DeleteQueuedSavingsPlanRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plan_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plan_id: String?
+    end
+
+    class DeleteQueuedSavingsPlanResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeSavingsPlanRatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plan_id: String,
+        ?filters: Array[Types::SavingsPlanRateFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plan_id: String?
+      attr_accessor filters: Array[Types::SavingsPlanRateFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeSavingsPlanRatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plan_id: String,
+        ?search_results: Array[Types::SavingsPlanRate],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plan_id: String?
+      attr_accessor search_results: Array[Types::SavingsPlanRate]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSavingsPlansOfferingRatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plan_offering_ids: Array[String],
+        ?savings_plan_payment_options: Array[String],
+        ?savings_plan_types: Array[String],
+        ?products: Array[String],
+        ?service_codes: Array[String],
+        ?usage_types: Array[String],
+        ?operations: Array[String],
+        ?filters: Array[Types::SavingsPlanOfferingRateFilterElement],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plan_offering_ids: Array[String]?
+      attr_accessor savings_plan_payment_options: Array[String]?
+      attr_accessor savings_plan_types: Array[String]?
+      attr_accessor products: Array[String]?
+      attr_accessor service_codes: Array[String]?
+      attr_accessor usage_types: Array[String]?
+      attr_accessor operations: Array[String]?
+      attr_accessor filters: Array[Types::SavingsPlanOfferingRateFilterElement]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeSavingsPlansOfferingRatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_results: Array[Types::SavingsPlanOfferingRate],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_results: Array[Types::SavingsPlanOfferingRate]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSavingsPlansOfferingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?offering_ids: Array[String],
+        ?payment_options: Array[String],
+        ?product_type: String,
+        ?plan_types: Array[String],
+        ?durations: Array[Integer],
+        ?currencies: Array[String],
+        ?descriptions: Array[String],
+        ?service_codes: Array[String],
+        ?usage_types: Array[String],
+        ?operations: Array[String],
+        ?filters: Array[Types::SavingsPlanOfferingFilterElement],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor offering_ids: Array[String]?
+      attr_accessor payment_options: Array[String]?
+      attr_accessor product_type: String?
+      attr_accessor plan_types: Array[String]?
+      attr_accessor durations: Array[Integer]?
+      attr_accessor currencies: Array[String]?
+      attr_accessor descriptions: Array[String]?
+      attr_accessor service_codes: Array[String]?
+      attr_accessor usage_types: Array[String]?
+      attr_accessor operations: Array[String]?
+      attr_accessor filters: Array[Types::SavingsPlanOfferingFilterElement]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeSavingsPlansOfferingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_results: Array[Types::SavingsPlanOffering],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_results: Array[Types::SavingsPlanOffering]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSavingsPlansRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plan_arns: Array[String],
+        ?savings_plan_ids: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?states: Array[String],
+        ?filters: Array[Types::SavingsPlanFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plan_arns: Array[String]?
+      attr_accessor savings_plan_ids: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor states: Array[String]?
+      attr_accessor filters: Array[Types::SavingsPlanFilter]?
+    end
+
+    class DescribeSavingsPlansResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plans: Array[Types::SavingsPlan],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plans: Array[Types::SavingsPlan]?
+      attr_accessor next_token: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ParentSavingsPlanOffering
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?offering_id: String,
+        ?payment_option: String,
+        ?plan_type: String,
+        ?duration_seconds: Integer,
+        ?currency: String,
+        ?plan_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor offering_id: String?
+      attr_accessor payment_option: String?
+      attr_accessor plan_type: String?
+      attr_accessor duration_seconds: Integer?
+      attr_accessor currency: String?
+      attr_accessor plan_description: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReturnSavingsPlanRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plan_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plan_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class ReturnSavingsPlanResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plan_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plan_id: String?
+    end
+
+    class SavingsPlan
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?offering_id: String,
+        ?savings_plan_id: String,
+        ?savings_plan_arn: String,
+        ?description: String,
+        ?start: String,
+        ?end: String,
+        ?state: String,
+        ?region: String,
+        ?ec2_instance_family: String,
+        ?savings_plan_type: String,
+        ?payment_option: String,
+        ?product_types: Array[String],
+        ?currency: String,
+        ?commitment: String,
+        ?upfront_payment_amount: String,
+        ?recurring_payment_amount: String,
+        ?term_duration_in_seconds: Integer,
+        ?tags: Hash[String, String],
+        ?returnable_until: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor offering_id: String?
+      attr_accessor savings_plan_id: String?
+      attr_accessor savings_plan_arn: String?
+      attr_accessor description: String?
+      attr_accessor start: String?
+      attr_accessor end: String?
+      attr_accessor state: String?
+      attr_accessor region: String?
+      attr_accessor ec2_instance_family: String?
+      attr_accessor savings_plan_type: String?
+      attr_accessor payment_option: String?
+      attr_accessor product_types: Array[String]?
+      attr_accessor currency: String?
+      attr_accessor commitment: String?
+      attr_accessor upfront_payment_amount: String?
+      attr_accessor recurring_payment_amount: String?
+      attr_accessor term_duration_in_seconds: Integer?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor returnable_until: String?
+    end
+
+    class SavingsPlanFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class SavingsPlanOffering
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?offering_id: String,
+        ?product_types: Array[String],
+        ?plan_type: String,
+        ?description: String,
+        ?payment_option: String,
+        ?duration_seconds: Integer,
+        ?currency: String,
+        ?service_code: String,
+        ?usage_type: String,
+        ?operation: String,
+        ?properties: Array[Types::SavingsPlanOfferingProperty],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor offering_id: String?
+      attr_accessor product_types: Array[String]?
+      attr_accessor plan_type: String?
+      attr_accessor description: String?
+      attr_accessor payment_option: String?
+      attr_accessor duration_seconds: Integer?
+      attr_accessor currency: String?
+      attr_accessor service_code: String?
+      attr_accessor usage_type: String?
+      attr_accessor operation: String?
+      attr_accessor properties: Array[Types::SavingsPlanOfferingProperty]?
+    end
+
+    module SavingsPlanOfferingFilterAttribute
+      region: String
+      instanceFamily: String
+    end
+
+    class SavingsPlanOfferingFilterElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class SavingsPlanOfferingProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    module SavingsPlanOfferingPropertyKey
+      REGION: String
+      INSTANCE_FAMILY: String
+    end
+
+    class SavingsPlanOfferingRate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plan_offering: Types::ParentSavingsPlanOffering,
+        ?rate: String,
+        ?unit: String,
+        ?product_type: String,
+        ?service_code: String,
+        ?usage_type: String,
+        ?operation: String,
+        ?properties: Array[Types::SavingsPlanOfferingRateProperty],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plan_offering: Types::ParentSavingsPlanOffering?
+      attr_accessor rate: String?
+      attr_accessor unit: String?
+      attr_accessor product_type: String?
+      attr_accessor service_code: String?
+      attr_accessor usage_type: String?
+      attr_accessor operation: String?
+      attr_accessor properties: Array[Types::SavingsPlanOfferingRateProperty]?
+    end
+
+    class SavingsPlanOfferingRateFilterElement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class SavingsPlanOfferingRateProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    module SavingsPlanPaymentOption
+      ALL_UPFRONT: String
+      PARTIAL_UPFRONT: String
+      NO_UPFRONT: String
+    end
+
+    module SavingsPlanProductType
+      EC2: String
+      FARGATE: String
+      LAMBDA: String
+      SAGEMAKER: String
+    end
+
+    class SavingsPlanRate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rate: String,
+        ?currency: String,
+        ?unit: String,
+        ?product_type: String,
+        ?service_code: String,
+        ?usage_type: String,
+        ?operation: String,
+        ?properties: Array[Types::SavingsPlanRateProperty],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rate: String?
+      attr_accessor currency: String?
+      attr_accessor unit: String?
+      attr_accessor product_type: String?
+      attr_accessor service_code: String?
+      attr_accessor usage_type: String?
+      attr_accessor operation: String?
+      attr_accessor properties: Array[Types::SavingsPlanRateProperty]?
+    end
+
+    class SavingsPlanRateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module SavingsPlanRateFilterAttribute
+      REGION: String
+      INSTANCE_FAMILY: String
+      INSTANCE_TYPE: String
+      PRODUCT_DESCRIPTION: String
+      TENANCY: String
+      PRODUCT_ID: String
+    end
+
+    module SavingsPlanRateFilterName
+      REGION: String
+      INSTANCE_TYPE: String
+      PRODUCT_DESCRIPTION: String
+      TENANCY: String
+      PRODUCT_TYPE: String
+      SERVICE_CODE: String
+      USAGE_TYPE: String
+      OPERATION: String
+    end
+
+    class SavingsPlanRateProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
+    module SavingsPlanRatePropertyKey
+      REGION: String
+      INSTANCE_TYPE: String
+      INSTANCE_FAMILY: String
+      PRODUCT_DESCRIPTION: String
+      TENANCY: String
+    end
+
+    module SavingsPlanRateServiceCode
+      EC2: String
+      FARGATE: String
+      FARGATE_EKS: String
+      LAMBDA: String
+      SAGEMAKER: String
+    end
+
+    module SavingsPlanRateUnit
+      HOURS: String
+      LAMBDA_GB_SECOND: String
+      REQUEST: String
+    end
+
+    module SavingsPlanState
+      PAYMENT_PENDING: String
+      PAYMENT_FAILED: String
+      ACTIVE: String
+      RETIRED: String
+      QUEUED: String
+      QUEUED_DELETED: String
+      PENDING_RETURN: String
+      RETURNED: String
+    end
+
+    module SavingsPlanType
+      COMPUTE: String
+      EC2_INSTANCE: String
+      SAGEMAKER: String
+    end
+
+    module SavingsPlansFilterName
+      REGION: String
+      EC2_INSTANCE_FAMILY: String
+      COMMITMENT: String
+      UPFRONT: String
+      TERM: String
+      SAVINGS_PLAN_TYPE: String
+      PAYMENT_OPTION: String
+      START: String
+      END: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

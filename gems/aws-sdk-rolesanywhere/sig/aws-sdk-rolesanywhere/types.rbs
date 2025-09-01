@@ -1,0 +1,1080 @@
+module Aws::RolesAnywhere
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AttributeMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_field: String,
+        ?mapping_rules: Array[Types::MappingRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_field: String?
+      attr_accessor mapping_rules: Array[Types::MappingRule]?
+    end
+
+    class CreateProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?require_instance_properties: bool,
+        ?session_policy: String,
+        ?role_arns: Array[String],
+        ?managed_policy_arns: Array[String],
+        ?duration_seconds: Integer,
+        ?enabled: bool,
+        ?tags: Array[Types::Tag],
+        ?accept_role_session_name: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor require_instance_properties: bool?
+      attr_accessor session_policy: String?
+      attr_accessor role_arns: Array[String]?
+      attr_accessor managed_policy_arns: Array[String]?
+      attr_accessor duration_seconds: Integer?
+      attr_accessor enabled: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor accept_role_session_name: bool?
+    end
+
+    class CreateProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile: Types::ProfileDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile: Types::ProfileDetail?
+    end
+
+    class CreateTrustAnchorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?source: Types::Source,
+        ?enabled: bool,
+        ?tags: Array[Types::Tag],
+        ?notification_settings: Array[Types::NotificationSetting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor source: Types::Source?
+      attr_accessor enabled: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor notification_settings: Array[Types::NotificationSetting]?
+    end
+
+    class CreateTrustAnchorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_anchor: Types::TrustAnchorDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_anchor: Types::TrustAnchorDetail?
+    end
+
+    class CredentialSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?seen_at: Time,
+        ?serial_number: String,
+        ?issuer: String,
+        ?enabled: bool,
+        ?x509_certificate_data: String,
+        ?failed: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor seen_at: Time?
+      attr_accessor serial_number: String?
+      attr_accessor issuer: String?
+      attr_accessor enabled: bool?
+      attr_accessor x509_certificate_data: String?
+      attr_accessor failed: bool?
+    end
+
+    class CrlDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crl_id: String,
+        ?crl_arn: String,
+        ?name: String,
+        ?enabled: bool,
+        ?crl_data: String,
+        ?trust_anchor_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crl_id: String?
+      attr_accessor crl_arn: String?
+      attr_accessor name: String?
+      attr_accessor enabled: bool?
+      attr_accessor crl_data: String?
+      attr_accessor trust_anchor_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class DeleteAttributeMappingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?certificate_field: String,
+        ?specifiers: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor certificate_field: String?
+      attr_accessor specifiers: Array[String]?
+    end
+
+    class DeleteAttributeMappingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile: Types::ProfileDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile: Types::ProfileDetail?
+    end
+
+    class DeleteCrlInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crl_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crl_id: String?
+    end
+
+    class DeleteCrlOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crl: Types::CrlDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crl: Types::CrlDetail?
+    end
+
+    class DeleteProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+    end
+
+    class DeleteProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile: Types::ProfileDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile: Types::ProfileDetail?
+    end
+
+    class DeleteTrustAnchorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_anchor_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_anchor_id: String?
+    end
+
+    class DeleteTrustAnchorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_anchor: Types::TrustAnchorDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_anchor: Types::TrustAnchorDetail?
+    end
+
+    class DisableCrlInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crl_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crl_id: String?
+    end
+
+    class DisableCrlOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crl: Types::CrlDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crl: Types::CrlDetail?
+    end
+
+    class DisableProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+    end
+
+    class DisableProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile: Types::ProfileDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile: Types::ProfileDetail?
+    end
+
+    class DisableTrustAnchorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_anchor_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_anchor_id: String?
+    end
+
+    class DisableTrustAnchorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_anchor: Types::TrustAnchorDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_anchor: Types::TrustAnchorDetail?
+    end
+
+    class EnableCrlInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crl_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crl_id: String?
+    end
+
+    class EnableCrlOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crl: Types::CrlDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crl: Types::CrlDetail?
+    end
+
+    class EnableProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+    end
+
+    class EnableProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile: Types::ProfileDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile: Types::ProfileDetail?
+    end
+
+    class EnableTrustAnchorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_anchor_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_anchor_id: String?
+    end
+
+    class EnableTrustAnchorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_anchor: Types::TrustAnchorDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_anchor: Types::TrustAnchorDetail?
+    end
+
+    class GetCrlInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crl_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crl_id: String?
+    end
+
+    class GetCrlOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crl: Types::CrlDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crl: Types::CrlDetail?
+    end
+
+    class GetProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+    end
+
+    class GetProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile: Types::ProfileDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile: Types::ProfileDetail?
+    end
+
+    class GetSubjectInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subject_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subject_id: String?
+    end
+
+    class GetSubjectOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subject: Types::SubjectDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subject: Types::SubjectDetail?
+    end
+
+    class GetTrustAnchorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_anchor_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_anchor_id: String?
+    end
+
+    class GetTrustAnchorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_anchor: Types::TrustAnchorDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_anchor: Types::TrustAnchorDetail?
+    end
+
+    class ImportCrlInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?crl_data: String,
+        ?enabled: bool,
+        ?tags: Array[Types::Tag],
+        ?trust_anchor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor crl_data: String?
+      attr_accessor enabled: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor trust_anchor_arn: String?
+    end
+
+    class ImportCrlOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crl: Types::CrlDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crl: Types::CrlDetail?
+    end
+
+    class InstanceProperty
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?seen_at: Time,
+        ?properties: Hash[String, String],
+        ?failed: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor seen_at: Time?
+      attr_accessor properties: Hash[String, String]?
+      attr_accessor failed: bool?
+    end
+
+    class ListCrlsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListCrlsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?crls: Array[Types::CrlDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor crls: Array[Types::CrlDetail]?
+    end
+
+    class ListProfilesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListProfilesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?profiles: Array[Types::ProfileDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor profiles: Array[Types::ProfileDetail]?
+    end
+
+    class ListSubjectsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListSubjectsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subjects: Array[Types::SubjectSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subjects: Array[Types::SubjectSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListTrustAnchorsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+    end
+
+    class ListTrustAnchorsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?trust_anchors: Array[Types::TrustAnchorDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor trust_anchors: Array[Types::TrustAnchorDetail]?
+    end
+
+    class MappingRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?specifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor specifier: String?
+    end
+
+    class NotificationSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?event: String,
+        ?threshold: Integer,
+        ?channel: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor event: String?
+      attr_accessor threshold: Integer?
+      attr_accessor channel: String?
+    end
+
+    class NotificationSettingDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?event: String,
+        ?threshold: Integer,
+        ?channel: String,
+        ?configured_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor event: String?
+      attr_accessor threshold: Integer?
+      attr_accessor channel: String?
+      attr_accessor configured_by: String?
+    end
+
+    class NotificationSettingKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event: String,
+        ?channel: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event: String?
+      attr_accessor channel: String?
+    end
+
+    class ProfileDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?profile_arn: String,
+        ?name: String,
+        ?require_instance_properties: bool,
+        ?enabled: bool,
+        ?created_by: String,
+        ?session_policy: String,
+        ?role_arns: Array[String],
+        ?managed_policy_arns: Array[String],
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?duration_seconds: Integer,
+        ?accept_role_session_name: bool,
+        ?attribute_mappings: Array[Types::AttributeMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor profile_arn: String?
+      attr_accessor name: String?
+      attr_accessor require_instance_properties: bool?
+      attr_accessor enabled: bool?
+      attr_accessor created_by: String?
+      attr_accessor session_policy: String?
+      attr_accessor role_arns: Array[String]?
+      attr_accessor managed_policy_arns: Array[String]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor duration_seconds: Integer?
+      attr_accessor accept_role_session_name: bool?
+      attr_accessor attribute_mappings: Array[Types::AttributeMapping]?
+    end
+
+    class PutAttributeMappingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?certificate_field: String,
+        ?mapping_rules: Array[Types::MappingRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor certificate_field: String?
+      attr_accessor mapping_rules: Array[Types::MappingRule]?
+    end
+
+    class PutAttributeMappingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile: Types::ProfileDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile: Types::ProfileDetail?
+    end
+
+    class PutNotificationSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_anchor_id: String,
+        ?notification_settings: Array[Types::NotificationSetting],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_anchor_id: String?
+      attr_accessor notification_settings: Array[Types::NotificationSetting]?
+    end
+
+    class PutNotificationSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_anchor: Types::TrustAnchorDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_anchor: Types::TrustAnchorDetail?
+    end
+
+    class ResetNotificationSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_anchor_id: String,
+        ?notification_setting_keys: Array[Types::NotificationSettingKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_anchor_id: String?
+      attr_accessor notification_setting_keys: Array[Types::NotificationSettingKey]?
+    end
+
+    class ResetNotificationSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_anchor: Types::TrustAnchorDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_anchor: Types::TrustAnchorDetail?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Source
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_type: String,
+        ?source_data: Types::SourceData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_type: String?
+      attr_accessor source_data: Types::SourceData?
+    end
+
+    class SourceData
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?x509_certificate_data: String,
+        ?acm_pca_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor x509_certificate_data: String?
+      attr_accessor acm_pca_arn: String?
+
+      class X509CertificateData < SourceData
+      end
+      class AcmPcaArn < SourceData
+      end
+      class Unknown < SourceData
+      end
+    end
+
+    class SubjectDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subject_arn: String,
+        ?subject_id: String,
+        ?enabled: bool,
+        ?x509_subject: String,
+        ?last_seen_at: Time,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?credentials: Array[Types::CredentialSummary],
+        ?instance_properties: Array[Types::InstanceProperty],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subject_arn: String?
+      attr_accessor subject_id: String?
+      attr_accessor enabled: bool?
+      attr_accessor x509_subject: String?
+      attr_accessor last_seen_at: Time?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor credentials: Array[Types::CredentialSummary]?
+      attr_accessor instance_properties: Array[Types::InstanceProperty]?
+    end
+
+    class SubjectSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subject_arn: String,
+        ?subject_id: String,
+        ?enabled: bool,
+        ?x509_subject: String,
+        ?last_seen_at: Time,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subject_arn: String?
+      attr_accessor subject_id: String?
+      attr_accessor enabled: bool?
+      attr_accessor x509_subject: String?
+      attr_accessor last_seen_at: Time?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TrustAnchorDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_anchor_id: String,
+        ?trust_anchor_arn: String,
+        ?name: String,
+        ?source: Types::Source,
+        ?enabled: bool,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?notification_settings: Array[Types::NotificationSettingDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_anchor_id: String?
+      attr_accessor trust_anchor_arn: String?
+      attr_accessor name: String?
+      attr_accessor source: Types::Source?
+      attr_accessor enabled: bool?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor notification_settings: Array[Types::NotificationSettingDetail]?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateCrlInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crl_id: String,
+        ?name: String,
+        ?crl_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crl_id: String?
+      attr_accessor name: String?
+      attr_accessor crl_data: String?
+    end
+
+    class UpdateCrlOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?crl: Types::CrlDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor crl: Types::CrlDetail?
+    end
+
+    class UpdateProfileInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?name: String,
+        ?session_policy: String,
+        ?role_arns: Array[String],
+        ?managed_policy_arns: Array[String],
+        ?duration_seconds: Integer,
+        ?accept_role_session_name: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor name: String?
+      attr_accessor session_policy: String?
+      attr_accessor role_arns: Array[String]?
+      attr_accessor managed_policy_arns: Array[String]?
+      attr_accessor duration_seconds: Integer?
+      attr_accessor accept_role_session_name: bool?
+    end
+
+    class UpdateProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile: Types::ProfileDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile: Types::ProfileDetail?
+    end
+
+    class UpdateTrustAnchorInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_anchor_id: String,
+        ?name: String,
+        ?source: Types::Source,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_anchor_id: String?
+      attr_accessor name: String?
+      attr_accessor source: Types::Source?
+    end
+
+    class UpdateTrustAnchorOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trust_anchor: Types::TrustAnchorDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trust_anchor: Types::TrustAnchorDetail?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

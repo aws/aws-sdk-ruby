@@ -1,0 +1,25 @@
+module Aws::EKSAuth
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    AssumeRoleForPodIdentityRequest: StructureShape
+    AssumeRoleForPodIdentityResponse: StructureShape
+    AssumedRoleUser: StructureShape
+    ClusterName: StringShape
+    Credentials: StructureShape
+    ExpiredTokenException: StructureShape
+    InternalServerException: StructureShape
+    InvalidParameterException: StructureShape
+    InvalidRequestException: StructureShape
+    InvalidTokenException: StructureShape
+    JwtToken: StringShape
+    PodIdentityAssociation: StructureShape
+    ResourceNotFoundException: StructureShape
+    ServiceUnavailableException: StructureShape
+    Subject: StructureShape
+    ThrottlingException: StructureShape
+
+    EKSAuthFrontend: ServiceShape
+  end
+end

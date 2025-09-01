@@ -1,0 +1,5 @@
+  module Aws
+    module ChimeSDKMeetings
+      VERSION: String
+    end
+  end

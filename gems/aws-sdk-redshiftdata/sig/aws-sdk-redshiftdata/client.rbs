@@ -1,0 +1,255 @@
+module Aws::RedshiftData
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::RedshiftData::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _BatchExecuteStatementResponse
+      include Smithy::Client::_Response[Types::BatchExecuteStatementOutput]
+      def id: () -> String?
+      def created_at: () -> Time?
+      def cluster_identifier: () -> String?
+      def db_user: () -> String?
+      def db_groups: () -> Array[String]?
+      def database: () -> String?
+      def secret_arn: () -> String?
+      def workgroup_name: () -> String?
+      def session_id: () -> String?
+    end
+    def batch_execute_statement: (
+      ?sqls: Array[String],
+      ?cluster_identifier: String,
+      ?secret_arn: String,
+      ?db_user: String,
+      ?database: String,
+      ?with_event: bool,
+      ?statement_name: String,
+      ?workgroup_name: String,
+      ?client_token: String,
+      ?session_keep_alive_seconds: Integer,
+      ?session_id: String,
+      ?result_format: String
+    ) -> _BatchExecuteStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchExecuteStatementResponse
+
+    interface _CancelStatementResponse
+      include Smithy::Client::_Response[Types::CancelStatementResponse]
+      def status: () -> bool?
+    end
+    def cancel_statement: (
+      ?id: String
+    ) -> _CancelStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelStatementResponse
+
+    interface _DescribeStatementResponse
+      include Smithy::Client::_Response[Types::DescribeStatementResponse]
+      def id: () -> String?
+      def secret_arn: () -> String?
+      def db_user: () -> String?
+      def database: () -> String?
+      def cluster_identifier: () -> String?
+      def duration: () -> Integer?
+      def error: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def redshift_pid: () -> Integer?
+      def has_result_set: () -> bool?
+      def query_string: () -> String?
+      def result_rows: () -> Integer?
+      def result_size: () -> Integer?
+      def redshift_query_id: () -> Integer?
+      def query_parameters: () -> Array[Types::SqlParameter]?
+      def sub_statements: () -> Array[Types::SubStatementData]?
+      def workgroup_name: () -> String?
+      def session_id: () -> String?
+      def result_format: () -> String?
+    end
+    def describe_statement: (
+      ?id: String
+    ) -> _DescribeStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeStatementResponse
+
+    interface _DescribeTableResponse
+      include Smithy::Client::_Response[Types::DescribeTableResponse]
+      def table_name: () -> String?
+      def column_list: () -> Array[Types::ColumnMetadata]?
+      def next_token: () -> String?
+    end
+    def describe_table: (
+      ?cluster_identifier: String,
+      ?secret_arn: String,
+      ?db_user: String,
+      ?database: String,
+      ?connected_database: String,
+      ?schema: String,
+      ?table: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?workgroup_name: String
+    ) -> _DescribeTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeTableResponse
+
+    interface _ExecuteStatementResponse
+      include Smithy::Client::_Response[Types::ExecuteStatementOutput]
+      def id: () -> String?
+      def created_at: () -> Time?
+      def cluster_identifier: () -> String?
+      def db_user: () -> String?
+      def db_groups: () -> Array[String]?
+      def database: () -> String?
+      def secret_arn: () -> String?
+      def workgroup_name: () -> String?
+      def session_id: () -> String?
+    end
+    def execute_statement: (
+      ?sql: String,
+      ?cluster_identifier: String,
+      ?secret_arn: String,
+      ?db_user: String,
+      ?database: String,
+      ?with_event: bool,
+      ?statement_name: String,
+      ?parameters: Array[
+        {
+          name: String,
+          value: String
+        }
+      ],
+      ?workgroup_name: String,
+      ?client_token: String,
+      ?session_keep_alive_seconds: Integer,
+      ?session_id: String,
+      ?result_format: String
+    ) -> _ExecuteStatementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExecuteStatementResponse
+
+    interface _GetStatementResultResponse
+      include Smithy::Client::_Response[Types::GetStatementResultResponse]
+      def records: () -> Array[Array[Types::Field]]?
+      def column_metadata: () -> Array[Types::ColumnMetadata]?
+      def total_num_rows: () -> Integer?
+      def next_token: () -> String?
+    end
+    def get_statement_result: (
+      ?id: String,
+      ?next_token: String
+    ) -> _GetStatementResultResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStatementResultResponse
+
+    interface _GetStatementResultV2Response
+      include Smithy::Client::_Response[Types::GetStatementResultV2Response]
+      def records: () -> Array[Types::QueryRecords]?
+      def column_metadata: () -> Array[Types::ColumnMetadata]?
+      def total_num_rows: () -> Integer?
+      def result_format: () -> String?
+      def next_token: () -> String?
+    end
+    def get_statement_result_v2: (
+      ?id: String,
+      ?next_token: String
+    ) -> _GetStatementResultV2Response | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStatementResultV2Response
+
+    interface _ListDatabasesResponse
+      include Smithy::Client::_Response[Types::ListDatabasesResponse]
+      def databases: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_databases: (
+      ?cluster_identifier: String,
+      ?database: String,
+      ?secret_arn: String,
+      ?db_user: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?workgroup_name: String
+    ) -> _ListDatabasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDatabasesResponse
+
+    interface _ListSchemasResponse
+      include Smithy::Client::_Response[Types::ListSchemasResponse]
+      def schemas: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_schemas: (
+      ?cluster_identifier: String,
+      ?secret_arn: String,
+      ?db_user: String,
+      ?database: String,
+      ?connected_database: String,
+      ?schema_pattern: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?workgroup_name: String
+    ) -> _ListSchemasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSchemasResponse
+
+    interface _ListStatementsResponse
+      include Smithy::Client::_Response[Types::ListStatementsResponse]
+      def statements: () -> Array[Types::StatementData]?
+      def next_token: () -> String?
+    end
+    def list_statements: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?statement_name: String,
+      ?status: String,
+      ?role_level: bool,
+      ?database: String,
+      ?cluster_identifier: String,
+      ?workgroup_name: String
+    ) -> _ListStatementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStatementsResponse
+
+    interface _ListTablesResponse
+      include Smithy::Client::_Response[Types::ListTablesResponse]
+      def tables: () -> Array[Types::TableMember]?
+      def next_token: () -> String?
+    end
+    def list_tables: (
+      ?cluster_identifier: String,
+      ?secret_arn: String,
+      ?db_user: String,
+      ?database: String,
+      ?connected_database: String,
+      ?schema_pattern: String,
+      ?table_pattern: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?workgroup_name: String
+    ) -> _ListTablesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTablesResponse
+  end
+end

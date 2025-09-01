@@ -1,0 +1,2698 @@
+module Aws::LakeFormation
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AddLFTagsToResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?resource: Types::Resource,
+        ?lf_tags: Array[Types::LFTagPair],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor resource: Types::Resource?
+      attr_accessor lf_tags: Array[Types::LFTagPair]?
+    end
+
+    class AddLFTagsToResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failures: Array[Types::LFTagError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failures: Array[Types::LFTagError]?
+    end
+
+    class AddObjectInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uri: String,
+        ?e_tag: String,
+        ?size: Integer,
+        ?partition_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uri: String?
+      attr_accessor e_tag: String?
+      attr_accessor size: Integer?
+      attr_accessor partition_values: Array[String]?
+    end
+
+    class AllRowsWildcard
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class AlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ApplicationStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class AssumeDecoratedRoleWithSAMLRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?saml_assertion: String,
+        ?role_arn: String,
+        ?principal_arn: String,
+        ?duration_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor saml_assertion: String?
+      attr_accessor role_arn: String?
+      attr_accessor principal_arn: String?
+      attr_accessor duration_seconds: Integer?
+    end
+
+    class AssumeDecoratedRoleWithSAMLResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_key_id: String,
+        ?secret_access_key: String,
+        ?session_token: String,
+        ?expiration: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_key_id: String?
+      attr_accessor secret_access_key: String?
+      attr_accessor session_token: String?
+      attr_accessor expiration: Time?
+    end
+
+    class AuditContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?additional_audit_context: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor additional_audit_context: String?
+    end
+
+    class BatchGrantPermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?entries: Array[Types::BatchPermissionsRequestEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor entries: Array[Types::BatchPermissionsRequestEntry]?
+    end
+
+    class BatchGrantPermissionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failures: Array[Types::BatchPermissionsFailureEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failures: Array[Types::BatchPermissionsFailureEntry]?
+    end
+
+    class BatchPermissionsFailureEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?request_entry: Types::BatchPermissionsRequestEntry,
+        ?error: Types::ErrorDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor request_entry: Types::BatchPermissionsRequestEntry?
+      attr_accessor error: Types::ErrorDetail?
+    end
+
+    class BatchPermissionsRequestEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?principal: Types::DataLakePrincipal,
+        ?resource: Types::Resource,
+        ?permissions: Array[String],
+        ?condition: Types::Condition,
+        ?permissions_with_grant_option: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor principal: Types::DataLakePrincipal?
+      attr_accessor resource: Types::Resource?
+      attr_accessor permissions: Array[String]?
+      attr_accessor condition: Types::Condition?
+      attr_accessor permissions_with_grant_option: Array[String]?
+    end
+
+    class BatchRevokePermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?entries: Array[Types::BatchPermissionsRequestEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor entries: Array[Types::BatchPermissionsRequestEntry]?
+    end
+
+    class BatchRevokePermissionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failures: Array[Types::BatchPermissionsFailureEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failures: Array[Types::BatchPermissionsFailureEntry]?
+    end
+
+    class CancelTransactionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transaction_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transaction_id: String?
+    end
+
+    class CancelTransactionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CatalogResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class ColumnLFTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?lf_tags: Array[Types::LFTagPair],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor lf_tags: Array[Types::LFTagPair]?
+    end
+
+    class ColumnWildcard
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?excluded_column_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor excluded_column_names: Array[String]?
+    end
+
+    class CommitTransactionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transaction_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transaction_id: String?
+    end
+
+    class CommitTransactionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transaction_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transaction_status: String?
+    end
+
+    module ComparisonOperator
+      EQ: String
+      NE: String
+      LE: String
+      LT: String
+      GE: String
+      GT: String
+      CONTAINS: String
+      NOT_CONTAINS: String
+      BEGINS_WITH: String
+      IN: String
+      BETWEEN: String
+    end
+
+    class ConcurrentModificationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Condition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expression: String?
+    end
+
+    class CreateDataCellsFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_data: Types::DataCellsFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_data: Types::DataCellsFilter?
+    end
+
+    class CreateDataCellsFilterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateLFTagExpressionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?catalog_id: String,
+        ?expression: Array[Types::LFTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor catalog_id: String?
+      attr_accessor expression: Array[Types::LFTag]?
+    end
+
+    class CreateLFTagExpressionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateLFTagRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?tag_key: String,
+        ?tag_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor tag_key: String?
+      attr_accessor tag_values: Array[String]?
+    end
+
+    class CreateLFTagResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class CreateLakeFormationIdentityCenterConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?instance_arn: String,
+        ?external_filtering: Types::ExternalFilteringConfiguration,
+        ?share_recipients: Array[Types::DataLakePrincipal],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor instance_arn: String?
+      attr_accessor external_filtering: Types::ExternalFilteringConfiguration?
+      attr_accessor share_recipients: Array[Types::DataLakePrincipal]?
+    end
+
+    class CreateLakeFormationIdentityCenterConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+    end
+
+    class CreateLakeFormationOptInRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal: Types::DataLakePrincipal,
+        ?resource: Types::Resource,
+        ?condition: Types::Condition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal: Types::DataLakePrincipal?
+      attr_accessor resource: Types::Resource?
+      attr_accessor condition: Types::Condition?
+    end
+
+    class CreateLakeFormationOptInResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DataCellsFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_catalog_id: String,
+        ?database_name: String,
+        ?table_name: String,
+        ?name: String,
+        ?row_filter: Types::RowFilter,
+        ?column_names: Array[String],
+        ?column_wildcard: Types::ColumnWildcard,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_catalog_id: String?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor name: String?
+      attr_accessor row_filter: Types::RowFilter?
+      attr_accessor column_names: Array[String]?
+      attr_accessor column_wildcard: Types::ColumnWildcard?
+      attr_accessor version_id: String?
+    end
+
+    class DataCellsFilterResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_catalog_id: String,
+        ?database_name: String,
+        ?table_name: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_catalog_id: String?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor name: String?
+    end
+
+    class DataLakePrincipal
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_lake_principal_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_lake_principal_identifier: String?
+    end
+
+    module DataLakeResourceType
+      CATALOG: String
+      DATABASE: String
+      TABLE: String
+      DATA_LOCATION: String
+      LF_TAG: String
+      LF_TAG_POLICY: String
+      LF_TAG_POLICY_DATABASE: String
+      LF_TAG_POLICY_TABLE: String
+      LF_NAMED_TAG_EXPRESSION: String
+    end
+
+    class DataLakeSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_lake_admins: Array[Types::DataLakePrincipal],
+        ?read_only_admins: Array[Types::DataLakePrincipal],
+        ?create_database_default_permissions: Array[Types::PrincipalPermissions],
+        ?create_table_default_permissions: Array[Types::PrincipalPermissions],
+        ?parameters: Hash[String, String],
+        ?trusted_resource_owners: Array[String],
+        ?allow_external_data_filtering: bool,
+        ?allow_full_table_external_data_access: bool,
+        ?external_data_filtering_allow_list: Array[Types::DataLakePrincipal],
+        ?authorized_session_tag_value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_lake_admins: Array[Types::DataLakePrincipal]?
+      attr_accessor read_only_admins: Array[Types::DataLakePrincipal]?
+      attr_accessor create_database_default_permissions: Array[Types::PrincipalPermissions]?
+      attr_accessor create_table_default_permissions: Array[Types::PrincipalPermissions]?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor trusted_resource_owners: Array[String]?
+      attr_accessor allow_external_data_filtering: bool?
+      attr_accessor allow_full_table_external_data_access: bool?
+      attr_accessor external_data_filtering_allow_list: Array[Types::DataLakePrincipal]?
+      attr_accessor authorized_session_tag_value_list: Array[String]?
+    end
+
+    class DataLocationResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class DatabaseResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteDataCellsFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_catalog_id: String,
+        ?database_name: String,
+        ?table_name: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_catalog_id: String?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteDataCellsFilterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLFTagExpressionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?catalog_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor catalog_id: String?
+    end
+
+    class DeleteLFTagExpressionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLFTagRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?tag_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor tag_key: String?
+    end
+
+    class DeleteLFTagResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLakeFormationIdentityCenterConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+    end
+
+    class DeleteLakeFormationIdentityCenterConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteLakeFormationOptInRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal: Types::DataLakePrincipal,
+        ?resource: Types::Resource,
+        ?condition: Types::Condition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal: Types::DataLakePrincipal?
+      attr_accessor resource: Types::Resource?
+      attr_accessor condition: Types::Condition?
+    end
+
+    class DeleteLakeFormationOptInResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteObjectInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uri: String,
+        ?e_tag: String,
+        ?partition_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uri: String?
+      attr_accessor e_tag: String?
+      attr_accessor partition_values: Array[String]?
+    end
+
+    class DeleteObjectsOnCancelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?database_name: String,
+        ?table_name: String,
+        ?transaction_id: String,
+        ?objects: Array[Types::VirtualObject],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor transaction_id: String?
+      attr_accessor objects: Array[Types::VirtualObject]?
+    end
+
+    class DeleteObjectsOnCancelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeregisterResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DeregisterResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeLakeFormationIdentityCenterConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+    end
+
+    class DescribeLakeFormationIdentityCenterConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?instance_arn: String,
+        ?application_arn: String,
+        ?external_filtering: Types::ExternalFilteringConfiguration,
+        ?share_recipients: Array[Types::DataLakePrincipal],
+        ?resource_share: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor instance_arn: String?
+      attr_accessor application_arn: String?
+      attr_accessor external_filtering: Types::ExternalFilteringConfiguration?
+      attr_accessor share_recipients: Array[Types::DataLakePrincipal]?
+      attr_accessor resource_share: String?
+    end
+
+    class DescribeResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DescribeResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_info: Types::ResourceInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_info: Types::ResourceInfo?
+    end
+
+    class DescribeTransactionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transaction_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transaction_id: String?
+    end
+
+    class DescribeTransactionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transaction_description: Types::TransactionDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transaction_description: Types::TransactionDescription?
+    end
+
+    class DetailsMap
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share: Array[String]?
+    end
+
+    module EnableStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class EntityNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ErrorDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class ExecutionStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?average_execution_time_millis: Integer,
+        ?data_scanned_bytes: Integer,
+        ?work_units_executed_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor average_execution_time_millis: Integer?
+      attr_accessor data_scanned_bytes: Integer?
+      attr_accessor work_units_executed_count: Integer?
+    end
+
+    class ExpiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ExtendTransactionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transaction_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transaction_id: String?
+    end
+
+    class ExtendTransactionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ExternalFilteringConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?authorized_targets: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor authorized_targets: Array[String]?
+    end
+
+    module FieldNameString
+      RESOURCE_ARN: String
+      ROLE_ARN: String
+      LAST_MODIFIED: String
+    end
+
+    class FilterCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?field: String,
+        ?comparison_operator: String,
+        ?string_value_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor field: String?
+      attr_accessor comparison_operator: String?
+      attr_accessor string_value_list: Array[String]?
+    end
+
+    class GetDataCellsFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_catalog_id: String,
+        ?database_name: String,
+        ?table_name: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_catalog_id: String?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor name: String?
+    end
+
+    class GetDataCellsFilterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_cells_filter: Types::DataCellsFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_cells_filter: Types::DataCellsFilter?
+    end
+
+    class GetDataLakePrincipalRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetDataLakePrincipalResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity: String?
+    end
+
+    class GetDataLakeSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+    end
+
+    class GetDataLakeSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_lake_settings: Types::DataLakeSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_lake_settings: Types::DataLakeSettings?
+    end
+
+    class GetEffectivePermissionsForPathRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?resource_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor resource_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetEffectivePermissionsForPathResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permissions: Array[Types::PrincipalResourcePermissions],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permissions: Array[Types::PrincipalResourcePermissions]?
+      attr_accessor next_token: String?
+    end
+
+    class GetLFTagExpressionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?catalog_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor catalog_id: String?
+    end
+
+    class GetLFTagExpressionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?catalog_id: String,
+        ?expression: Array[Types::LFTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor catalog_id: String?
+      attr_accessor expression: Array[Types::LFTag]?
+    end
+
+    class GetLFTagRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?tag_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor tag_key: String?
+    end
+
+    class GetLFTagResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?tag_key: String,
+        ?tag_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor tag_key: String?
+      attr_accessor tag_values: Array[String]?
+    end
+
+    class GetQueryStateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+    end
+
+    class GetQueryStateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error: String?
+      attr_accessor state: String?
+    end
+
+    class GetQueryStatisticsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+    end
+
+    class GetQueryStatisticsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_statistics: Types::ExecutionStatistics,
+        ?planning_statistics: Types::PlanningStatistics,
+        ?query_submission_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_statistics: Types::ExecutionStatistics?
+      attr_accessor planning_statistics: Types::PlanningStatistics?
+      attr_accessor query_submission_time: Time?
+    end
+
+    class GetResourceLFTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?resource: Types::Resource,
+        ?show_assigned_lf_tags: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor resource: Types::Resource?
+      attr_accessor show_assigned_lf_tags: bool?
+    end
+
+    class GetResourceLFTagsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lf_tag_on_database: Array[Types::LFTagPair],
+        ?lf_tags_on_table: Array[Types::LFTagPair],
+        ?lf_tags_on_columns: Array[Types::ColumnLFTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lf_tag_on_database: Array[Types::LFTagPair]?
+      attr_accessor lf_tags_on_table: Array[Types::LFTagPair]?
+      attr_accessor lf_tags_on_columns: Array[Types::ColumnLFTag]?
+    end
+
+    class GetTableObjectsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?database_name: String,
+        ?table_name: String,
+        ?transaction_id: String,
+        ?query_as_of_time: Time,
+        ?partition_predicate: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor transaction_id: String?
+      attr_accessor query_as_of_time: Time?
+      attr_accessor partition_predicate: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetTableObjectsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?objects: Array[Types::PartitionObjects],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor objects: Array[Types::PartitionObjects]?
+      attr_accessor next_token: String?
+    end
+
+    class GetTemporaryGluePartitionCredentialsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_arn: String,
+        ?partition: Types::PartitionValueList,
+        ?permissions: Array[String],
+        ?duration_seconds: Integer,
+        ?audit_context: Types::AuditContext,
+        ?supported_permission_types: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_arn: String?
+      attr_accessor partition: Types::PartitionValueList?
+      attr_accessor permissions: Array[String]?
+      attr_accessor duration_seconds: Integer?
+      attr_accessor audit_context: Types::AuditContext?
+      attr_accessor supported_permission_types: Array[String]?
+    end
+
+    class GetTemporaryGluePartitionCredentialsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_key_id: String,
+        ?secret_access_key: String,
+        ?session_token: String,
+        ?expiration: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_key_id: String?
+      attr_accessor secret_access_key: String?
+      attr_accessor session_token: String?
+      attr_accessor expiration: Time?
+    end
+
+    class GetTemporaryGlueTableCredentialsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_arn: String,
+        ?permissions: Array[String],
+        ?duration_seconds: Integer,
+        ?audit_context: Types::AuditContext,
+        ?supported_permission_types: Array[String],
+        ?s3_path: String,
+        ?query_session_context: Types::QuerySessionContext,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_arn: String?
+      attr_accessor permissions: Array[String]?
+      attr_accessor duration_seconds: Integer?
+      attr_accessor audit_context: Types::AuditContext?
+      attr_accessor supported_permission_types: Array[String]?
+      attr_accessor s3_path: String?
+      attr_accessor query_session_context: Types::QuerySessionContext?
+    end
+
+    class GetTemporaryGlueTableCredentialsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_key_id: String,
+        ?secret_access_key: String,
+        ?session_token: String,
+        ?expiration: Time,
+        ?vended_s3_path: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_key_id: String?
+      attr_accessor secret_access_key: String?
+      attr_accessor session_token: String?
+      attr_accessor expiration: Time?
+      attr_accessor vended_s3_path: Array[String]?
+    end
+
+    class GetWorkUnitResultsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+        ?work_unit_id: Integer,
+        ?work_unit_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+      attr_accessor work_unit_id: Integer?
+      attr_accessor work_unit_token: String?
+    end
+
+    class GetWorkUnitResultsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result_stream: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result_stream: String?
+    end
+
+    class GetWorkUnitsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_size: Integer,
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_size: Integer?
+      attr_accessor query_id: String?
+    end
+
+    class GetWorkUnitsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?query_id: String,
+        ?work_unit_ranges: Array[Types::WorkUnitRange],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor query_id: String?
+      attr_accessor work_unit_ranges: Array[Types::WorkUnitRange]?
+    end
+
+    class GlueEncryptionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GrantPermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?principal: Types::DataLakePrincipal,
+        ?resource: Types::Resource,
+        ?permissions: Array[String],
+        ?condition: Types::Condition,
+        ?permissions_with_grant_option: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor principal: Types::DataLakePrincipal?
+      attr_accessor resource: Types::Resource?
+      attr_accessor permissions: Array[String]?
+      attr_accessor condition: Types::Condition?
+      attr_accessor permissions_with_grant_option: Array[String]?
+    end
+
+    class GrantPermissionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class InternalServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidInputException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LFTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_key: String,
+        ?tag_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_key: String?
+      attr_accessor tag_values: Array[String]?
+    end
+
+    class LFTagError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lf_tag: Types::LFTagPair,
+        ?error: Types::ErrorDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lf_tag: Types::LFTagPair?
+      attr_accessor error: Types::ErrorDetail?
+    end
+
+    class LFTagExpression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?catalog_id: String,
+        ?expression: Array[Types::LFTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor catalog_id: String?
+      attr_accessor expression: Array[Types::LFTag]?
+    end
+
+    class LFTagExpressionResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor name: String?
+    end
+
+    class LFTagKeyResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?tag_key: String,
+        ?tag_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor tag_key: String?
+      attr_accessor tag_values: Array[String]?
+    end
+
+    class LFTagPair
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?tag_key: String,
+        ?tag_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor tag_key: String?
+      attr_accessor tag_values: Array[String]?
+    end
+
+    class LFTagPolicyResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?resource_type: String,
+        ?expression: Array[Types::LFTag],
+        ?expression_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor expression: Array[Types::LFTag]?
+      attr_accessor expression_name: String?
+    end
+
+    class LakeFormationOptInsInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: Types::Resource,
+        ?principal: Types::DataLakePrincipal,
+        ?condition: Types::Condition,
+        ?last_modified: Time,
+        ?last_updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: Types::Resource?
+      attr_accessor principal: Types::DataLakePrincipal?
+      attr_accessor condition: Types::Condition?
+      attr_accessor last_modified: Time?
+      attr_accessor last_updated_by: String?
+    end
+
+    class ListDataCellsFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table: Types::TableResource,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table: Types::TableResource?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDataCellsFilterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_cells_filters: Array[Types::DataCellsFilter],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_cells_filters: Array[Types::DataCellsFilter]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLFTagExpressionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListLFTagExpressionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lf_tag_expressions: Array[Types::LFTagExpression],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lf_tag_expressions: Array[Types::LFTagExpression]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLFTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?resource_share_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor resource_share_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListLFTagsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lf_tags: Array[Types::LFTagPair],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lf_tags: Array[Types::LFTagPair]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLakeFormationOptInsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal: Types::DataLakePrincipal,
+        ?resource: Types::Resource,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal: Types::DataLakePrincipal?
+      attr_accessor resource: Types::Resource?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListLakeFormationOptInsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lake_formation_opt_ins_info_list: Array[Types::LakeFormationOptInsInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lake_formation_opt_ins_info_list: Array[Types::LakeFormationOptInsInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?principal: Types::DataLakePrincipal,
+        ?resource_type: String,
+        ?resource: Types::Resource,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?include_related: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor principal: Types::DataLakePrincipal?
+      attr_accessor resource_type: String?
+      attr_accessor resource: Types::Resource?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor include_related: String?
+    end
+
+    class ListPermissionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal_resource_permissions: Array[Types::PrincipalResourcePermissions],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal_resource_permissions: Array[Types::PrincipalResourcePermissions]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_condition_list: Array[Types::FilterCondition],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_condition_list: Array[Types::FilterCondition]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_info_list: Array[Types::ResourceInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_info_list: Array[Types::ResourceInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTableStorageOptimizersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?database_name: String,
+        ?table_name: String,
+        ?storage_optimizer_type: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor storage_optimizer_type: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTableStorageOptimizersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_optimizer_list: Array[Types::StorageOptimizer],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_optimizer_list: Array[Types::StorageOptimizer]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTransactionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?status_filter: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor status_filter: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTransactionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transactions: Array[Types::TransactionDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transactions: Array[Types::TransactionDescription]?
+      attr_accessor next_token: String?
+    end
+
+    class OperationTimeoutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module OptimizerType
+      COMPACTION: String
+      GARBAGE_COLLECTION: String
+      GENERIC: String
+    end
+
+    class PartitionObjects
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partition_values: Array[String],
+        ?objects: Array[Types::TableObject],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partition_values: Array[String]?
+      attr_accessor objects: Array[Types::TableObject]?
+    end
+
+    class PartitionValueList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor values: Array[String]?
+    end
+
+    module Permission
+      ALL: String
+      SELECT: String
+      ALTER: String
+      DROP: String
+      DELETE: String
+      INSERT: String
+      DESCRIBE: String
+      CREATE_DATABASE: String
+      CREATE_TABLE: String
+      DATA_LOCATION_ACCESS: String
+      CREATE_LF_TAG: String
+      ASSOCIATE: String
+      GRANT_WITH_LF_TAG_EXPRESSION: String
+      CREATE_LF_TAG_EXPRESSION: String
+      CREATE_CATALOG: String
+      SUPER_USER: String
+    end
+
+    module PermissionType
+      COLUMN_PERMISSION: String
+      CELL_FILTER_PERMISSION: String
+      NESTED_PERMISSION: String
+      NESTED_CELL_PERMISSION: String
+    end
+
+    class PermissionTypeMismatchException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PlanningStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?estimated_data_to_scan_bytes: Integer,
+        ?planning_time_millis: Integer,
+        ?queue_time_millis: Integer,
+        ?work_units_generated_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor estimated_data_to_scan_bytes: Integer?
+      attr_accessor planning_time_millis: Integer?
+      attr_accessor queue_time_millis: Integer?
+      attr_accessor work_units_generated_count: Integer?
+    end
+
+    class PrincipalPermissions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal: Types::DataLakePrincipal,
+        ?permissions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal: Types::DataLakePrincipal?
+      attr_accessor permissions: Array[String]?
+    end
+
+    class PrincipalResourcePermissions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?principal: Types::DataLakePrincipal,
+        ?resource: Types::Resource,
+        ?condition: Types::Condition,
+        ?permissions: Array[String],
+        ?permissions_with_grant_option: Array[String],
+        ?additional_details: Types::DetailsMap,
+        ?last_updated: Time,
+        ?last_updated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor principal: Types::DataLakePrincipal?
+      attr_accessor resource: Types::Resource?
+      attr_accessor condition: Types::Condition?
+      attr_accessor permissions: Array[String]?
+      attr_accessor permissions_with_grant_option: Array[String]?
+      attr_accessor additional_details: Types::DetailsMap?
+      attr_accessor last_updated: Time?
+      attr_accessor last_updated_by: String?
+    end
+
+    class PutDataLakeSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?data_lake_settings: Types::DataLakeSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor data_lake_settings: Types::DataLakeSettings?
+    end
+
+    class PutDataLakeSettingsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class QueryPlanningContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?database_name: String,
+        ?query_as_of_time: Time,
+        ?query_parameters: Hash[String, String],
+        ?transaction_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor database_name: String?
+      attr_accessor query_as_of_time: Time?
+      attr_accessor query_parameters: Hash[String, String]?
+      attr_accessor transaction_id: String?
+    end
+
+    class QuerySessionContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+        ?query_start_time: Time,
+        ?cluster_id: String,
+        ?query_authorization_id: String,
+        ?additional_context: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+      attr_accessor query_start_time: Time?
+      attr_accessor cluster_id: String?
+      attr_accessor query_authorization_id: String?
+      attr_accessor additional_context: Hash[String, String]?
+    end
+
+    module QueryStateString
+      PENDING: String
+      WORKUNITS_AVAILABLE: String
+      ERROR: String
+      FINISHED: String
+      EXPIRED: String
+    end
+
+    class RegisterResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?use_service_linked_role: bool,
+        ?role_arn: String,
+        ?with_federation: bool,
+        ?hybrid_access_enabled: bool,
+        ?with_privileged_access: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor use_service_linked_role: bool?
+      attr_accessor role_arn: String?
+      attr_accessor with_federation: bool?
+      attr_accessor hybrid_access_enabled: bool?
+      attr_accessor with_privileged_access: bool?
+    end
+
+    class RegisterResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RemoveLFTagsFromResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?resource: Types::Resource,
+        ?lf_tags: Array[Types::LFTagPair],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor resource: Types::Resource?
+      attr_accessor lf_tags: Array[Types::LFTagPair]?
+    end
+
+    class RemoveLFTagsFromResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failures: Array[Types::LFTagError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failures: Array[Types::LFTagError]?
+    end
+
+    class Resource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog: Types::CatalogResource,
+        ?database: Types::DatabaseResource,
+        ?table: Types::TableResource,
+        ?table_with_columns: Types::TableWithColumnsResource,
+        ?data_location: Types::DataLocationResource,
+        ?data_cells_filter: Types::DataCellsFilterResource,
+        ?lf_tag: Types::LFTagKeyResource,
+        ?lf_tag_policy: Types::LFTagPolicyResource,
+        ?lf_tag_expression: Types::LFTagExpressionResource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog: Types::CatalogResource?
+      attr_accessor database: Types::DatabaseResource?
+      attr_accessor table: Types::TableResource?
+      attr_accessor table_with_columns: Types::TableWithColumnsResource?
+      attr_accessor data_location: Types::DataLocationResource?
+      attr_accessor data_cells_filter: Types::DataCellsFilterResource?
+      attr_accessor lf_tag: Types::LFTagKeyResource?
+      attr_accessor lf_tag_policy: Types::LFTagPolicyResource?
+      attr_accessor lf_tag_expression: Types::LFTagExpressionResource?
+    end
+
+    class ResourceInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?role_arn: String,
+        ?last_modified: Time,
+        ?with_federation: bool,
+        ?hybrid_access_enabled: bool,
+        ?with_privileged_access: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor last_modified: Time?
+      attr_accessor with_federation: bool?
+      attr_accessor hybrid_access_enabled: bool?
+      attr_accessor with_privileged_access: bool?
+    end
+
+    class ResourceNotReadyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNumberLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ResourceShareType
+      FOREIGN: String
+      ALL: String
+    end
+
+    module ResourceType
+      DATABASE: String
+      TABLE: String
+    end
+
+    class RevokePermissionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?principal: Types::DataLakePrincipal,
+        ?resource: Types::Resource,
+        ?permissions: Array[String],
+        ?condition: Types::Condition,
+        ?permissions_with_grant_option: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor principal: Types::DataLakePrincipal?
+      attr_accessor resource: Types::Resource?
+      attr_accessor permissions: Array[String]?
+      attr_accessor condition: Types::Condition?
+      attr_accessor permissions_with_grant_option: Array[String]?
+    end
+
+    class RevokePermissionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RowFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_expression: String,
+        ?all_rows_wildcard: Types::AllRowsWildcard,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_expression: String?
+      attr_accessor all_rows_wildcard: Types::AllRowsWildcard?
+    end
+
+    class SearchDatabasesByLFTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?catalog_id: String,
+        ?expression: Array[Types::LFTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor catalog_id: String?
+      attr_accessor expression: Array[Types::LFTag]?
+    end
+
+    class SearchDatabasesByLFTagsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?database_list: Array[Types::TaggedDatabase],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor database_list: Array[Types::TaggedDatabase]?
+    end
+
+    class SearchTablesByLFTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?catalog_id: String,
+        ?expression: Array[Types::LFTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor catalog_id: String?
+      attr_accessor expression: Array[Types::LFTag]?
+    end
+
+    class SearchTablesByLFTagsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?table_list: Array[Types::TaggedTable],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor table_list: Array[Types::TaggedTable]?
+    end
+
+    class StartQueryPlanningRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_planning_context: Types::QueryPlanningContext,
+        ?query_string: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_planning_context: Types::QueryPlanningContext?
+      attr_accessor query_string: String?
+    end
+
+    class StartQueryPlanningResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+    end
+
+    class StartTransactionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transaction_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transaction_type: String?
+    end
+
+    class StartTransactionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transaction_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transaction_id: String?
+    end
+
+    class StatisticsNotReadyYetException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StorageOptimizer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_optimizer_type: String,
+        ?config: Hash[String, String],
+        ?error_message: String,
+        ?warnings: String,
+        ?last_run_details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_optimizer_type: String?
+      attr_accessor config: Hash[String, String]?
+      attr_accessor error_message: String?
+      attr_accessor warnings: String?
+      attr_accessor last_run_details: String?
+    end
+
+    class TableObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uri: String,
+        ?e_tag: String,
+        ?size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uri: String?
+      attr_accessor e_tag: String?
+      attr_accessor size: Integer?
+    end
+
+    class TableResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?database_name: String,
+        ?name: String,
+        ?table_wildcard: Types::TableWildcard,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor database_name: String?
+      attr_accessor name: String?
+      attr_accessor table_wildcard: Types::TableWildcard?
+    end
+
+    class TableWildcard
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TableWithColumnsResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?database_name: String,
+        ?name: String,
+        ?column_names: Array[String],
+        ?column_wildcard: Types::ColumnWildcard,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor database_name: String?
+      attr_accessor name: String?
+      attr_accessor column_names: Array[String]?
+      attr_accessor column_wildcard: Types::ColumnWildcard?
+    end
+
+    class TaggedDatabase
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?database: Types::DatabaseResource,
+        ?lf_tags: Array[Types::LFTagPair],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor database: Types::DatabaseResource?
+      attr_accessor lf_tags: Array[Types::LFTagPair]?
+    end
+
+    class TaggedTable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table: Types::TableResource,
+        ?lf_tag_on_database: Array[Types::LFTagPair],
+        ?lf_tags_on_table: Array[Types::LFTagPair],
+        ?lf_tags_on_columns: Array[Types::ColumnLFTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table: Types::TableResource?
+      attr_accessor lf_tag_on_database: Array[Types::LFTagPair]?
+      attr_accessor lf_tags_on_table: Array[Types::LFTagPair]?
+      attr_accessor lf_tags_on_columns: Array[Types::ColumnLFTag]?
+    end
+
+    class ThrottledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TransactionCanceledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TransactionCommitInProgressException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TransactionCommittedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TransactionDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transaction_id: String,
+        ?transaction_status: String,
+        ?transaction_start_time: Time,
+        ?transaction_end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transaction_id: String?
+      attr_accessor transaction_status: String?
+      attr_accessor transaction_start_time: Time?
+      attr_accessor transaction_end_time: Time?
+    end
+
+    module TransactionStatus
+      ACTIVE: String
+      COMMITTED: String
+      ABORTED: String
+      COMMIT_IN_PROGRESS: String
+    end
+
+    module TransactionStatusFilter
+      ALL: String
+      COMPLETED: String
+      ACTIVE: String
+      COMMITTED: String
+      ABORTED: String
+    end
+
+    module TransactionType
+      READ_AND_WRITE: String
+      READ_ONLY: String
+    end
+
+    class UpdateDataCellsFilterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_data: Types::DataCellsFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_data: Types::DataCellsFilter?
+    end
+
+    class UpdateDataCellsFilterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLFTagExpressionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?catalog_id: String,
+        ?expression: Array[Types::LFTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor catalog_id: String?
+      attr_accessor expression: Array[Types::LFTag]?
+    end
+
+    class UpdateLFTagExpressionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLFTagRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?tag_key: String,
+        ?tag_values_to_delete: Array[String],
+        ?tag_values_to_add: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor tag_key: String?
+      attr_accessor tag_values_to_delete: Array[String]?
+      attr_accessor tag_values_to_add: Array[String]?
+    end
+
+    class UpdateLFTagResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLakeFormationIdentityCenterConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?share_recipients: Array[Types::DataLakePrincipal],
+        ?application_status: String,
+        ?external_filtering: Types::ExternalFilteringConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor share_recipients: Array[Types::DataLakePrincipal]?
+      attr_accessor application_status: String?
+      attr_accessor external_filtering: Types::ExternalFilteringConfiguration?
+    end
+
+    class UpdateLakeFormationIdentityCenterConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?resource_arn: String,
+        ?with_federation: bool,
+        ?hybrid_access_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor with_federation: bool?
+      attr_accessor hybrid_access_enabled: bool?
+    end
+
+    class UpdateResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateTableObjectsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?database_name: String,
+        ?table_name: String,
+        ?transaction_id: String,
+        ?write_operations: Array[Types::WriteOperation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor transaction_id: String?
+      attr_accessor write_operations: Array[Types::WriteOperation]?
+    end
+
+    class UpdateTableObjectsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateTableStorageOptimizerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_id: String,
+        ?database_name: String,
+        ?table_name: String,
+        ?storage_optimizer_config: Hash[String, Hash[String, String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_id: String?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor storage_optimizer_config: Hash[String, Hash[String, String]]?
+    end
+
+    class UpdateTableStorageOptimizerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?result: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor result: String?
+    end
+
+    class VirtualObject
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uri: String,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uri: String?
+      attr_accessor e_tag: String?
+    end
+
+    class WorkUnitRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?work_unit_id_max: Integer,
+        ?work_unit_id_min: Integer,
+        ?work_unit_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor work_unit_id_max: Integer?
+      attr_accessor work_unit_id_min: Integer?
+      attr_accessor work_unit_token: String?
+    end
+
+    class WorkUnitsNotReadyYetException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WriteOperation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?add_object: Types::AddObjectInput,
+        ?delete_object: Types::DeleteObjectInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor add_object: Types::AddObjectInput?
+      attr_accessor delete_object: Types::DeleteObjectInput?
+    end
+  end
+end

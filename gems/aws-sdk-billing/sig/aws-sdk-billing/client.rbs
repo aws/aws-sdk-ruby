@@ -1,0 +1,179 @@
+module Aws::Billing
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Billing::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateBillingViewResponse
+      include Smithy::Client::_Response[Types::CreateBillingViewResponse]
+      def arn: () -> String?
+      def created_at: () -> Time?
+    end
+    def create_billing_view: (
+      ?name: String,
+      ?description: String,
+      ?source_views: Array[String],
+      ?data_filter_expression: {
+        dimensions: {
+          key: String,
+          values: Array[String]
+        },
+        tags: {
+          key: String,
+          values: untyped
+        }
+      },
+      ?client_token: String,
+      ?resource_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateBillingViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBillingViewResponse
+
+    interface _DeleteBillingViewResponse
+      include Smithy::Client::_Response[Types::DeleteBillingViewResponse]
+      def arn: () -> String?
+    end
+    def delete_billing_view: (
+      ?arn: String
+    ) -> _DeleteBillingViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBillingViewResponse
+
+    interface _GetBillingViewResponse
+      include Smithy::Client::_Response[Types::GetBillingViewResponse]
+      def billing_view: () -> Types::BillingViewElement?
+    end
+    def get_billing_view: (
+      ?arn: String
+    ) -> _GetBillingViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBillingViewResponse
+
+    interface _GetResourcePolicyResponse
+      include Smithy::Client::_Response[Types::GetResourcePolicyResponse]
+      def resource_arn: () -> String?
+      def policy: () -> String?
+    end
+    def get_resource_policy: (
+      ?resource_arn: String
+    ) -> _GetResourcePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResourcePolicyResponse
+
+    interface _ListBillingViewsResponse
+      include Smithy::Client::_Response[Types::ListBillingViewsResponse]
+      def billing_views: () -> Array[Types::BillingViewListElement]?
+      def next_token: () -> String?
+    end
+    def list_billing_views: (
+      ?active_time_range: {
+        active_after_inclusive: Time,
+        active_before_inclusive: untyped
+      },
+      ?arns: Array[String],
+      ?billing_view_types: Array[String],
+      ?owner_account_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListBillingViewsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBillingViewsResponse
+
+    interface _ListSourceViewsForBillingViewResponse
+      include Smithy::Client::_Response[Types::ListSourceViewsForBillingViewResponse]
+      def source_views: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_source_views_for_billing_view: (
+      ?arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSourceViewsForBillingViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSourceViewsForBillingViewResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def resource_tags: () -> Array[Types::ResourceTag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?resource_tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?resource_tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateBillingViewResponse
+      include Smithy::Client::_Response[Types::UpdateBillingViewResponse]
+      def arn: () -> String?
+      def updated_at: () -> Time?
+    end
+    def update_billing_view: (
+      ?arn: String,
+      ?name: String,
+      ?description: String,
+      ?data_filter_expression: {
+        dimensions: {
+          key: String,
+          values: Array[String]
+        },
+        tags: {
+          key: String,
+          values: untyped
+        }
+      }
+    ) -> _UpdateBillingViewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBillingViewResponse
+  end
+end

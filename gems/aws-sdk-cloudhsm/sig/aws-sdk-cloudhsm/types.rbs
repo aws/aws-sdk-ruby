@@ -1,0 +1,637 @@
+module Aws::CloudHSM
+  module Types
+
+    class AddTagsToResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_list: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_list: Array[Types::Tag]?
+    end
+
+    class AddTagsToResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    module ClientVersion
+      FIVE_ONE: String
+      FIVE_THREE: String
+    end
+
+    class CloudHsmInternalException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retryable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retryable: bool?
+    end
+
+    module CloudHsmObjectState
+      READY: String
+      UPDATING: String
+      DEGRADED: String
+    end
+
+    class CloudHsmServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retryable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retryable: bool?
+    end
+
+    class CreateHapgRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label: String?
+    end
+
+    class CreateHapgResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hapg_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hapg_arn: String?
+    end
+
+    class CreateHsmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_id: String,
+        ?ssh_key: String,
+        ?eni_ip: String,
+        ?iam_role_arn: String,
+        ?external_id: String,
+        ?subscription_type: String,
+        ?client_token: String,
+        ?syslog_ip: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_id: String?
+      attr_accessor ssh_key: String?
+      attr_accessor eni_ip: String?
+      attr_accessor iam_role_arn: String?
+      attr_accessor external_id: String?
+      attr_accessor subscription_type: String?
+      attr_accessor client_token: String?
+      attr_accessor syslog_ip: String?
+    end
+
+    class CreateHsmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hsm_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hsm_arn: String?
+    end
+
+    class CreateLunaClientRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?label: String,
+        ?certificate: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor label: String?
+      attr_accessor certificate: String?
+    end
+
+    class CreateLunaClientResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_arn: String?
+    end
+
+    class DeleteHapgRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hapg_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hapg_arn: String?
+    end
+
+    class DeleteHapgResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class DeleteHsmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hsm_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hsm_arn: String?
+    end
+
+    class DeleteHsmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class DeleteLunaClientRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_arn: String?
+    end
+
+    class DeleteLunaClientResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    class DescribeHapgRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hapg_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hapg_arn: String?
+    end
+
+    class DescribeHapgResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hapg_arn: String,
+        ?hapg_serial: String,
+        ?hsms_last_action_failed: Array[String],
+        ?hsms_pending_deletion: Array[String],
+        ?hsms_pending_registration: Array[String],
+        ?label: String,
+        ?last_modified_timestamp: String,
+        ?partition_serial_list: Array[String],
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hapg_arn: String?
+      attr_accessor hapg_serial: String?
+      attr_accessor hsms_last_action_failed: Array[String]?
+      attr_accessor hsms_pending_deletion: Array[String]?
+      attr_accessor hsms_pending_registration: Array[String]?
+      attr_accessor label: String?
+      attr_accessor last_modified_timestamp: String?
+      attr_accessor partition_serial_list: Array[String]?
+      attr_accessor state: String?
+    end
+
+    class DescribeHsmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hsm_arn: String,
+        ?hsm_serial_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hsm_arn: String?
+      attr_accessor hsm_serial_number: String?
+    end
+
+    class DescribeHsmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hsm_arn: String,
+        ?status: String,
+        ?status_details: String,
+        ?availability_zone: String,
+        ?eni_id: String,
+        ?eni_ip: String,
+        ?subscription_type: String,
+        ?subscription_start_date: String,
+        ?subscription_end_date: String,
+        ?vpc_id: String,
+        ?subnet_id: String,
+        ?iam_role_arn: String,
+        ?serial_number: String,
+        ?vendor_name: String,
+        ?hsm_type: String,
+        ?software_version: String,
+        ?ssh_public_key: String,
+        ?ssh_key_last_updated: String,
+        ?server_cert_uri: String,
+        ?server_cert_last_updated: String,
+        ?partitions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hsm_arn: String?
+      attr_accessor status: String?
+      attr_accessor status_details: String?
+      attr_accessor availability_zone: String?
+      attr_accessor eni_id: String?
+      attr_accessor eni_ip: String?
+      attr_accessor subscription_type: String?
+      attr_accessor subscription_start_date: String?
+      attr_accessor subscription_end_date: String?
+      attr_accessor vpc_id: String?
+      attr_accessor subnet_id: String?
+      attr_accessor iam_role_arn: String?
+      attr_accessor serial_number: String?
+      attr_accessor vendor_name: String?
+      attr_accessor hsm_type: String?
+      attr_accessor software_version: String?
+      attr_accessor ssh_public_key: String?
+      attr_accessor ssh_key_last_updated: String?
+      attr_accessor server_cert_uri: String?
+      attr_accessor server_cert_last_updated: String?
+      attr_accessor partitions: Array[String]?
+    end
+
+    class DescribeLunaClientRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_arn: String,
+        ?certificate_fingerprint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_arn: String?
+      attr_accessor certificate_fingerprint: String?
+    end
+
+    class DescribeLunaClientResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_arn: String,
+        ?certificate: String,
+        ?certificate_fingerprint: String,
+        ?last_modified_timestamp: String,
+        ?label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_arn: String?
+      attr_accessor certificate: String?
+      attr_accessor certificate_fingerprint: String?
+      attr_accessor last_modified_timestamp: String?
+      attr_accessor label: String?
+    end
+
+    class GetConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_arn: String,
+        ?client_version: String,
+        ?hapg_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_arn: String?
+      attr_accessor client_version: String?
+      attr_accessor hapg_list: Array[String]?
+    end
+
+    class GetConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?config_type: String,
+        ?config_file: String,
+        ?config_cred: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor config_type: String?
+      attr_accessor config_file: String?
+      attr_accessor config_cred: String?
+    end
+
+    module HsmStatus
+      PENDING: String
+      RUNNING: String
+      UPDATING: String
+      SUSPENDED: String
+      TERMINATING: String
+      TERMINATED: String
+      DEGRADED: String
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retryable: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retryable: bool?
+    end
+
+    class ListAvailableZonesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ListAvailableZonesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?az_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor az_list: Array[String]?
+    end
+
+    class ListHapgsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListHapgsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hapg_list: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hapg_list: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListHsmsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListHsmsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hsm_list: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hsm_list: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLunaClientsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListLunaClientsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_list: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_list: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_list: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_list: Array[Types::Tag]?
+    end
+
+    class ModifyHapgRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hapg_arn: String,
+        ?label: String,
+        ?partition_serial_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hapg_arn: String?
+      attr_accessor label: String?
+      attr_accessor partition_serial_list: Array[String]?
+    end
+
+    class ModifyHapgResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hapg_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hapg_arn: String?
+    end
+
+    class ModifyHsmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hsm_arn: String,
+        ?subnet_id: String,
+        ?eni_ip: String,
+        ?iam_role_arn: String,
+        ?external_id: String,
+        ?syslog_ip: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hsm_arn: String?
+      attr_accessor subnet_id: String?
+      attr_accessor eni_ip: String?
+      attr_accessor iam_role_arn: String?
+      attr_accessor external_id: String?
+      attr_accessor syslog_ip: String?
+    end
+
+    class ModifyHsmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hsm_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hsm_arn: String?
+    end
+
+    class ModifyLunaClientRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_arn: String,
+        ?certificate: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_arn: String?
+      attr_accessor certificate: String?
+    end
+
+    class ModifyLunaClientResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_arn: String?
+    end
+
+    class RemoveTagsFromResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_key_list: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_key_list: Array[String]?
+    end
+
+    class RemoveTagsFromResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    module SubscriptionType
+      PRODUCTION: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+  end
+end

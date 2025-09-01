@@ -1,0 +1,862 @@
+module Aws::Route53Resolver
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Route53Resolver::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateFirewallRuleGroupResponse
+      include Smithy::Client::_Response[Types::AssociateFirewallRuleGroupResponse]
+      def firewall_rule_group_association: () -> Types::FirewallRuleGroupAssociation?
+    end
+    def associate_firewall_rule_group: (
+      ?creator_request_id: String,
+      ?firewall_rule_group_id: String,
+      ?vpc_id: String,
+      ?priority: Integer,
+      ?name: String,
+      ?mutation_protection: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _AssociateFirewallRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateFirewallRuleGroupResponse
+
+    interface _AssociateResolverEndpointIpAddressResponse
+      include Smithy::Client::_Response[Types::AssociateResolverEndpointIpAddressResponse]
+      def resolver_endpoint: () -> Types::ResolverEndpoint?
+    end
+    def associate_resolver_endpoint_ip_address: (
+      ?resolver_endpoint_id: String,
+      ?ip_address: {
+        ip_id: String,
+        subnet_id: String,
+        ip: String,
+        ipv6: String
+      }
+    ) -> _AssociateResolverEndpointIpAddressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateResolverEndpointIpAddressResponse
+
+    interface _AssociateResolverQueryLogConfigResponse
+      include Smithy::Client::_Response[Types::AssociateResolverQueryLogConfigResponse]
+      def resolver_query_log_config_association: () -> Types::ResolverQueryLogConfigAssociation?
+    end
+    def associate_resolver_query_log_config: (
+      ?resolver_query_log_config_id: String,
+      ?resource_id: String
+    ) -> _AssociateResolverQueryLogConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateResolverQueryLogConfigResponse
+
+    interface _AssociateResolverRuleResponse
+      include Smithy::Client::_Response[Types::AssociateResolverRuleResponse]
+      def resolver_rule_association: () -> Types::ResolverRuleAssociation?
+    end
+    def associate_resolver_rule: (
+      ?resolver_rule_id: String,
+      ?name: String,
+      ?vpc_id: String
+    ) -> _AssociateResolverRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateResolverRuleResponse
+
+    interface _CreateFirewallDomainListResponse
+      include Smithy::Client::_Response[Types::CreateFirewallDomainListResponse]
+      def firewall_domain_list: () -> Types::FirewallDomainList?
+    end
+    def create_firewall_domain_list: (
+      ?creator_request_id: String,
+      ?name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateFirewallDomainListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFirewallDomainListResponse
+
+    interface _CreateFirewallRuleResponse
+      include Smithy::Client::_Response[Types::CreateFirewallRuleResponse]
+      def firewall_rule: () -> Types::FirewallRule?
+    end
+    def create_firewall_rule: (
+      ?creator_request_id: String,
+      ?firewall_rule_group_id: String,
+      ?firewall_domain_list_id: String,
+      ?priority: Integer,
+      ?action: String,
+      ?block_response: String,
+      ?block_override_domain: String,
+      ?block_override_dns_type: String,
+      ?block_override_ttl: Integer,
+      ?name: String,
+      ?firewall_domain_redirection_action: String,
+      ?qtype: String,
+      ?dns_threat_protection: String,
+      ?confidence_threshold: String
+    ) -> _CreateFirewallRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFirewallRuleResponse
+
+    interface _CreateFirewallRuleGroupResponse
+      include Smithy::Client::_Response[Types::CreateFirewallRuleGroupResponse]
+      def firewall_rule_group: () -> Types::FirewallRuleGroup?
+    end
+    def create_firewall_rule_group: (
+      ?creator_request_id: String,
+      ?name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateFirewallRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFirewallRuleGroupResponse
+
+    interface _CreateOutpostResolverResponse
+      include Smithy::Client::_Response[Types::CreateOutpostResolverResponse]
+      def outpost_resolver: () -> Types::OutpostResolver?
+    end
+    def create_outpost_resolver: (
+      ?creator_request_id: String,
+      ?name: String,
+      ?instance_count: Integer,
+      ?preferred_instance_type: String,
+      ?outpost_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateOutpostResolverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateOutpostResolverResponse
+
+    interface _CreateResolverEndpointResponse
+      include Smithy::Client::_Response[Types::CreateResolverEndpointResponse]
+      def resolver_endpoint: () -> Types::ResolverEndpoint?
+    end
+    def create_resolver_endpoint: (
+      ?creator_request_id: String,
+      ?name: String,
+      ?security_group_ids: Array[String],
+      ?direction: String,
+      ?ip_addresses: Array[
+        {
+          subnet_id: String,
+          ip: String,
+          ipv6: String
+        }
+      ],
+      ?outpost_arn: String,
+      ?preferred_instance_type: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?resolver_endpoint_type: String,
+      ?protocols: Array[String]
+    ) -> _CreateResolverEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResolverEndpointResponse
+
+    interface _CreateResolverQueryLogConfigResponse
+      include Smithy::Client::_Response[Types::CreateResolverQueryLogConfigResponse]
+      def resolver_query_log_config: () -> Types::ResolverQueryLogConfig?
+    end
+    def create_resolver_query_log_config: (
+      ?name: String,
+      ?destination_arn: String,
+      ?creator_request_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateResolverQueryLogConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResolverQueryLogConfigResponse
+
+    interface _CreateResolverRuleResponse
+      include Smithy::Client::_Response[Types::CreateResolverRuleResponse]
+      def resolver_rule: () -> Types::ResolverRule?
+    end
+    def create_resolver_rule: (
+      ?creator_request_id: String,
+      ?name: String,
+      ?rule_type: String,
+      ?domain_name: String,
+      ?target_ips: Array[
+        {
+          ip: String,
+          port: Integer,
+          ipv6: String,
+          protocol: String,
+          server_name_indication: String
+        }
+      ],
+      ?resolver_endpoint_id: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?delegation_record: String
+    ) -> _CreateResolverRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateResolverRuleResponse
+
+    interface _DeleteFirewallDomainListResponse
+      include Smithy::Client::_Response[Types::DeleteFirewallDomainListResponse]
+      def firewall_domain_list: () -> Types::FirewallDomainList?
+    end
+    def delete_firewall_domain_list: (
+      ?firewall_domain_list_id: String
+    ) -> _DeleteFirewallDomainListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFirewallDomainListResponse
+
+    interface _DeleteFirewallRuleResponse
+      include Smithy::Client::_Response[Types::DeleteFirewallRuleResponse]
+      def firewall_rule: () -> Types::FirewallRule?
+    end
+    def delete_firewall_rule: (
+      ?firewall_rule_group_id: String,
+      ?firewall_domain_list_id: String,
+      ?firewall_threat_protection_id: String,
+      ?qtype: String
+    ) -> _DeleteFirewallRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFirewallRuleResponse
+
+    interface _DeleteFirewallRuleGroupResponse
+      include Smithy::Client::_Response[Types::DeleteFirewallRuleGroupResponse]
+      def firewall_rule_group: () -> Types::FirewallRuleGroup?
+    end
+    def delete_firewall_rule_group: (
+      ?firewall_rule_group_id: String
+    ) -> _DeleteFirewallRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFirewallRuleGroupResponse
+
+    interface _DeleteOutpostResolverResponse
+      include Smithy::Client::_Response[Types::DeleteOutpostResolverResponse]
+      def outpost_resolver: () -> Types::OutpostResolver?
+    end
+    def delete_outpost_resolver: (
+      ?id: String
+    ) -> _DeleteOutpostResolverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteOutpostResolverResponse
+
+    interface _DeleteResolverEndpointResponse
+      include Smithy::Client::_Response[Types::DeleteResolverEndpointResponse]
+      def resolver_endpoint: () -> Types::ResolverEndpoint?
+    end
+    def delete_resolver_endpoint: (
+      ?resolver_endpoint_id: String
+    ) -> _DeleteResolverEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResolverEndpointResponse
+
+    interface _DeleteResolverQueryLogConfigResponse
+      include Smithy::Client::_Response[Types::DeleteResolverQueryLogConfigResponse]
+      def resolver_query_log_config: () -> Types::ResolverQueryLogConfig?
+    end
+    def delete_resolver_query_log_config: (
+      ?resolver_query_log_config_id: String
+    ) -> _DeleteResolverQueryLogConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResolverQueryLogConfigResponse
+
+    interface _DeleteResolverRuleResponse
+      include Smithy::Client::_Response[Types::DeleteResolverRuleResponse]
+      def resolver_rule: () -> Types::ResolverRule?
+    end
+    def delete_resolver_rule: (
+      ?resolver_rule_id: String
+    ) -> _DeleteResolverRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteResolverRuleResponse
+
+    interface _DisassociateFirewallRuleGroupResponse
+      include Smithy::Client::_Response[Types::DisassociateFirewallRuleGroupResponse]
+      def firewall_rule_group_association: () -> Types::FirewallRuleGroupAssociation?
+    end
+    def disassociate_firewall_rule_group: (
+      ?firewall_rule_group_association_id: String
+    ) -> _DisassociateFirewallRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateFirewallRuleGroupResponse
+
+    interface _DisassociateResolverEndpointIpAddressResponse
+      include Smithy::Client::_Response[Types::DisassociateResolverEndpointIpAddressResponse]
+      def resolver_endpoint: () -> Types::ResolverEndpoint?
+    end
+    def disassociate_resolver_endpoint_ip_address: (
+      ?resolver_endpoint_id: String,
+      ?ip_address: {
+        ip_id: String,
+        subnet_id: String,
+        ip: String,
+        ipv6: String
+      }
+    ) -> _DisassociateResolverEndpointIpAddressResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateResolverEndpointIpAddressResponse
+
+    interface _DisassociateResolverQueryLogConfigResponse
+      include Smithy::Client::_Response[Types::DisassociateResolverQueryLogConfigResponse]
+      def resolver_query_log_config_association: () -> Types::ResolverQueryLogConfigAssociation?
+    end
+    def disassociate_resolver_query_log_config: (
+      ?resolver_query_log_config_id: String,
+      ?resource_id: String
+    ) -> _DisassociateResolverQueryLogConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateResolverQueryLogConfigResponse
+
+    interface _DisassociateResolverRuleResponse
+      include Smithy::Client::_Response[Types::DisassociateResolverRuleResponse]
+      def resolver_rule_association: () -> Types::ResolverRuleAssociation?
+    end
+    def disassociate_resolver_rule: (
+      ?vpc_id: String,
+      ?resolver_rule_id: String
+    ) -> _DisassociateResolverRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateResolverRuleResponse
+
+    interface _GetFirewallConfigResponse
+      include Smithy::Client::_Response[Types::GetFirewallConfigResponse]
+      def firewall_config: () -> Types::FirewallConfig?
+    end
+    def get_firewall_config: (
+      ?resource_id: String
+    ) -> _GetFirewallConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFirewallConfigResponse
+
+    interface _GetFirewallDomainListResponse
+      include Smithy::Client::_Response[Types::GetFirewallDomainListResponse]
+      def firewall_domain_list: () -> Types::FirewallDomainList?
+    end
+    def get_firewall_domain_list: (
+      ?firewall_domain_list_id: String
+    ) -> _GetFirewallDomainListResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFirewallDomainListResponse
+
+    interface _GetFirewallRuleGroupResponse
+      include Smithy::Client::_Response[Types::GetFirewallRuleGroupResponse]
+      def firewall_rule_group: () -> Types::FirewallRuleGroup?
+    end
+    def get_firewall_rule_group: (
+      ?firewall_rule_group_id: String
+    ) -> _GetFirewallRuleGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFirewallRuleGroupResponse
+
+    interface _GetFirewallRuleGroupAssociationResponse
+      include Smithy::Client::_Response[Types::GetFirewallRuleGroupAssociationResponse]
+      def firewall_rule_group_association: () -> Types::FirewallRuleGroupAssociation?
+    end
+    def get_firewall_rule_group_association: (
+      ?firewall_rule_group_association_id: String
+    ) -> _GetFirewallRuleGroupAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFirewallRuleGroupAssociationResponse
+
+    interface _GetFirewallRuleGroupPolicyResponse
+      include Smithy::Client::_Response[Types::GetFirewallRuleGroupPolicyResponse]
+      def firewall_rule_group_policy: () -> String?
+    end
+    def get_firewall_rule_group_policy: (
+      ?arn: String
+    ) -> _GetFirewallRuleGroupPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFirewallRuleGroupPolicyResponse
+
+    interface _GetOutpostResolverResponse
+      include Smithy::Client::_Response[Types::GetOutpostResolverResponse]
+      def outpost_resolver: () -> Types::OutpostResolver?
+    end
+    def get_outpost_resolver: (
+      ?id: String
+    ) -> _GetOutpostResolverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetOutpostResolverResponse
+
+    interface _GetResolverConfigResponse
+      include Smithy::Client::_Response[Types::GetResolverConfigResponse]
+      def resolver_config: () -> Types::ResolverConfig?
+    end
+    def get_resolver_config: (
+      ?resource_id: String
+    ) -> _GetResolverConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResolverConfigResponse
+
+    interface _GetResolverDnssecConfigResponse
+      include Smithy::Client::_Response[Types::GetResolverDnssecConfigResponse]
+      def resolver_dnssec_config: () -> Types::ResolverDnssecConfig?
+    end
+    def get_resolver_dnssec_config: (
+      ?resource_id: String
+    ) -> _GetResolverDnssecConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResolverDnssecConfigResponse
+
+    interface _GetResolverEndpointResponse
+      include Smithy::Client::_Response[Types::GetResolverEndpointResponse]
+      def resolver_endpoint: () -> Types::ResolverEndpoint?
+    end
+    def get_resolver_endpoint: (
+      ?resolver_endpoint_id: String
+    ) -> _GetResolverEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResolverEndpointResponse
+
+    interface _GetResolverQueryLogConfigResponse
+      include Smithy::Client::_Response[Types::GetResolverQueryLogConfigResponse]
+      def resolver_query_log_config: () -> Types::ResolverQueryLogConfig?
+    end
+    def get_resolver_query_log_config: (
+      ?resolver_query_log_config_id: String
+    ) -> _GetResolverQueryLogConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResolverQueryLogConfigResponse
+
+    interface _GetResolverQueryLogConfigAssociationResponse
+      include Smithy::Client::_Response[Types::GetResolverQueryLogConfigAssociationResponse]
+      def resolver_query_log_config_association: () -> Types::ResolverQueryLogConfigAssociation?
+    end
+    def get_resolver_query_log_config_association: (
+      ?resolver_query_log_config_association_id: String
+    ) -> _GetResolverQueryLogConfigAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResolverQueryLogConfigAssociationResponse
+
+    interface _GetResolverQueryLogConfigPolicyResponse
+      include Smithy::Client::_Response[Types::GetResolverQueryLogConfigPolicyResponse]
+      def resolver_query_log_config_policy: () -> String?
+    end
+    def get_resolver_query_log_config_policy: (
+      ?arn: String
+    ) -> _GetResolverQueryLogConfigPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResolverQueryLogConfigPolicyResponse
+
+    interface _GetResolverRuleResponse
+      include Smithy::Client::_Response[Types::GetResolverRuleResponse]
+      def resolver_rule: () -> Types::ResolverRule?
+    end
+    def get_resolver_rule: (
+      ?resolver_rule_id: String
+    ) -> _GetResolverRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResolverRuleResponse
+
+    interface _GetResolverRuleAssociationResponse
+      include Smithy::Client::_Response[Types::GetResolverRuleAssociationResponse]
+      def resolver_rule_association: () -> Types::ResolverRuleAssociation?
+    end
+    def get_resolver_rule_association: (
+      ?resolver_rule_association_id: String
+    ) -> _GetResolverRuleAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResolverRuleAssociationResponse
+
+    interface _GetResolverRulePolicyResponse
+      include Smithy::Client::_Response[Types::GetResolverRulePolicyResponse]
+      def resolver_rule_policy: () -> String?
+    end
+    def get_resolver_rule_policy: (
+      ?arn: String
+    ) -> _GetResolverRulePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetResolverRulePolicyResponse
+
+    interface _ImportFirewallDomainsResponse
+      include Smithy::Client::_Response[Types::ImportFirewallDomainsResponse]
+      def id: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+    end
+    def import_firewall_domains: (
+      ?firewall_domain_list_id: String,
+      ?operation: String,
+      ?domain_file_url: String
+    ) -> _ImportFirewallDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportFirewallDomainsResponse
+
+    interface _ListFirewallConfigsResponse
+      include Smithy::Client::_Response[Types::ListFirewallConfigsResponse]
+      def next_token: () -> String?
+      def firewall_configs: () -> Array[Types::FirewallConfig]?
+    end
+    def list_firewall_configs: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFirewallConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFirewallConfigsResponse
+
+    interface _ListFirewallDomainListsResponse
+      include Smithy::Client::_Response[Types::ListFirewallDomainListsResponse]
+      def next_token: () -> String?
+      def firewall_domain_lists: () -> Array[Types::FirewallDomainListMetadata]?
+    end
+    def list_firewall_domain_lists: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFirewallDomainListsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFirewallDomainListsResponse
+
+    interface _ListFirewallDomainsResponse
+      include Smithy::Client::_Response[Types::ListFirewallDomainsResponse]
+      def next_token: () -> String?
+      def domains: () -> Array[String]?
+    end
+    def list_firewall_domains: (
+      ?firewall_domain_list_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFirewallDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFirewallDomainsResponse
+
+    interface _ListFirewallRuleGroupAssociationsResponse
+      include Smithy::Client::_Response[Types::ListFirewallRuleGroupAssociationsResponse]
+      def next_token: () -> String?
+      def firewall_rule_group_associations: () -> Array[Types::FirewallRuleGroupAssociation]?
+    end
+    def list_firewall_rule_group_associations: (
+      ?firewall_rule_group_id: String,
+      ?vpc_id: String,
+      ?priority: Integer,
+      ?status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFirewallRuleGroupAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFirewallRuleGroupAssociationsResponse
+
+    interface _ListFirewallRuleGroupsResponse
+      include Smithy::Client::_Response[Types::ListFirewallRuleGroupsResponse]
+      def next_token: () -> String?
+      def firewall_rule_groups: () -> Array[Types::FirewallRuleGroupMetadata]?
+    end
+    def list_firewall_rule_groups: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFirewallRuleGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFirewallRuleGroupsResponse
+
+    interface _ListFirewallRulesResponse
+      include Smithy::Client::_Response[Types::ListFirewallRulesResponse]
+      def next_token: () -> String?
+      def firewall_rules: () -> Array[Types::FirewallRule]?
+    end
+    def list_firewall_rules: (
+      ?firewall_rule_group_id: String,
+      ?priority: Integer,
+      ?action: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFirewallRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFirewallRulesResponse
+
+    interface _ListOutpostResolversResponse
+      include Smithy::Client::_Response[Types::ListOutpostResolversResponse]
+      def outpost_resolvers: () -> Array[Types::OutpostResolver]?
+      def next_token: () -> String?
+    end
+    def list_outpost_resolvers: (
+      ?outpost_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListOutpostResolversResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOutpostResolversResponse
+
+    interface _ListResolverConfigsResponse
+      include Smithy::Client::_Response[Types::ListResolverConfigsResponse]
+      def next_token: () -> String?
+      def resolver_configs: () -> Array[Types::ResolverConfig]?
+    end
+    def list_resolver_configs: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListResolverConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResolverConfigsResponse
+
+    interface _ListResolverDnssecConfigsResponse
+      include Smithy::Client::_Response[Types::ListResolverDnssecConfigsResponse]
+      def next_token: () -> String?
+      def resolver_dnssec_configs: () -> Array[Types::ResolverDnssecConfig]?
+    end
+    def list_resolver_dnssec_configs: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListResolverDnssecConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResolverDnssecConfigsResponse
+
+    interface _ListResolverEndpointIpAddressesResponse
+      include Smithy::Client::_Response[Types::ListResolverEndpointIpAddressesResponse]
+      def next_token: () -> String?
+      def max_results: () -> Integer?
+      def ip_addresses: () -> Array[Types::IpAddressResponse]?
+    end
+    def list_resolver_endpoint_ip_addresses: (
+      ?resolver_endpoint_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListResolverEndpointIpAddressesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResolverEndpointIpAddressesResponse
+
+    interface _ListResolverEndpointsResponse
+      include Smithy::Client::_Response[Types::ListResolverEndpointsResponse]
+      def next_token: () -> String?
+      def max_results: () -> Integer?
+      def resolver_endpoints: () -> Array[Types::ResolverEndpoint]?
+    end
+    def list_resolver_endpoints: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListResolverEndpointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResolverEndpointsResponse
+
+    interface _ListResolverQueryLogConfigAssociationsResponse
+      include Smithy::Client::_Response[Types::ListResolverQueryLogConfigAssociationsResponse]
+      def next_token: () -> String?
+      def total_count: () -> Integer?
+      def total_filtered_count: () -> Integer?
+      def resolver_query_log_config_associations: () -> Array[Types::ResolverQueryLogConfigAssociation]?
+    end
+    def list_resolver_query_log_config_associations: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?sort_by: String,
+      ?sort_order: String
+    ) -> _ListResolverQueryLogConfigAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResolverQueryLogConfigAssociationsResponse
+
+    interface _ListResolverQueryLogConfigsResponse
+      include Smithy::Client::_Response[Types::ListResolverQueryLogConfigsResponse]
+      def next_token: () -> String?
+      def total_count: () -> Integer?
+      def total_filtered_count: () -> Integer?
+      def resolver_query_log_configs: () -> Array[Types::ResolverQueryLogConfig]?
+    end
+    def list_resolver_query_log_configs: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ],
+      ?sort_by: String,
+      ?sort_order: String
+    ) -> _ListResolverQueryLogConfigsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResolverQueryLogConfigsResponse
+
+    interface _ListResolverRuleAssociationsResponse
+      include Smithy::Client::_Response[Types::ListResolverRuleAssociationsResponse]
+      def next_token: () -> String?
+      def max_results: () -> Integer?
+      def resolver_rule_associations: () -> Array[Types::ResolverRuleAssociation]?
+    end
+    def list_resolver_rule_associations: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListResolverRuleAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResolverRuleAssociationsResponse
+
+    interface _ListResolverRulesResponse
+      include Smithy::Client::_Response[Types::ListResolverRulesResponse]
+      def next_token: () -> String?
+      def max_results: () -> Integer?
+      def resolver_rules: () -> Array[Types::ResolverRule]?
+    end
+    def list_resolver_rules: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filters: Array[
+        {
+          name: String,
+          values: Array[String]
+        }
+      ]
+    ) -> _ListResolverRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResolverRulesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PutFirewallRuleGroupPolicyResponse
+      include Smithy::Client::_Response[Types::PutFirewallRuleGroupPolicyResponse]
+      def return_value: () -> bool?
+    end
+    def put_firewall_rule_group_policy: (
+      ?arn: String,
+      ?firewall_rule_group_policy: String
+    ) -> _PutFirewallRuleGroupPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutFirewallRuleGroupPolicyResponse
+
+    interface _PutResolverQueryLogConfigPolicyResponse
+      include Smithy::Client::_Response[Types::PutResolverQueryLogConfigPolicyResponse]
+      def return_value: () -> bool?
+    end
+    def put_resolver_query_log_config_policy: (
+      ?arn: String,
+      ?resolver_query_log_config_policy: String
+    ) -> _PutResolverQueryLogConfigPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResolverQueryLogConfigPolicyResponse
+
+    interface _PutResolverRulePolicyResponse
+      include Smithy::Client::_Response[Types::PutResolverRulePolicyResponse]
+      def return_value: () -> bool?
+    end
+    def put_resolver_rule_policy: (
+      ?arn: String,
+      ?resolver_rule_policy: String
+    ) -> _PutResolverRulePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutResolverRulePolicyResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateFirewallConfigResponse
+      include Smithy::Client::_Response[Types::UpdateFirewallConfigResponse]
+      def firewall_config: () -> Types::FirewallConfig?
+    end
+    def update_firewall_config: (
+      ?resource_id: String,
+      ?firewall_fail_open: String
+    ) -> _UpdateFirewallConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFirewallConfigResponse
+
+    interface _UpdateFirewallDomainsResponse
+      include Smithy::Client::_Response[Types::UpdateFirewallDomainsResponse]
+      def id: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+    end
+    def update_firewall_domains: (
+      ?firewall_domain_list_id: String,
+      ?operation: String,
+      ?domains: Array[String]
+    ) -> _UpdateFirewallDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFirewallDomainsResponse
+
+    interface _UpdateFirewallRuleResponse
+      include Smithy::Client::_Response[Types::UpdateFirewallRuleResponse]
+      def firewall_rule: () -> Types::FirewallRule?
+    end
+    def update_firewall_rule: (
+      ?firewall_rule_group_id: String,
+      ?firewall_domain_list_id: String,
+      ?firewall_threat_protection_id: String,
+      ?priority: Integer,
+      ?action: String,
+      ?block_response: String,
+      ?block_override_domain: String,
+      ?block_override_dns_type: String,
+      ?block_override_ttl: Integer,
+      ?name: String,
+      ?firewall_domain_redirection_action: String,
+      ?qtype: String,
+      ?dns_threat_protection: String,
+      ?confidence_threshold: String
+    ) -> _UpdateFirewallRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFirewallRuleResponse
+
+    interface _UpdateFirewallRuleGroupAssociationResponse
+      include Smithy::Client::_Response[Types::UpdateFirewallRuleGroupAssociationResponse]
+      def firewall_rule_group_association: () -> Types::FirewallRuleGroupAssociation?
+    end
+    def update_firewall_rule_group_association: (
+      ?firewall_rule_group_association_id: String,
+      ?priority: Integer,
+      ?mutation_protection: String,
+      ?name: String
+    ) -> _UpdateFirewallRuleGroupAssociationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFirewallRuleGroupAssociationResponse
+
+    interface _UpdateOutpostResolverResponse
+      include Smithy::Client::_Response[Types::UpdateOutpostResolverResponse]
+      def outpost_resolver: () -> Types::OutpostResolver?
+    end
+    def update_outpost_resolver: (
+      ?id: String,
+      ?name: String,
+      ?instance_count: Integer,
+      ?preferred_instance_type: String
+    ) -> _UpdateOutpostResolverResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateOutpostResolverResponse
+
+    interface _UpdateResolverConfigResponse
+      include Smithy::Client::_Response[Types::UpdateResolverConfigResponse]
+      def resolver_config: () -> Types::ResolverConfig?
+    end
+    def update_resolver_config: (
+      ?resource_id: String,
+      ?autodefined_reverse_flag: String
+    ) -> _UpdateResolverConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResolverConfigResponse
+
+    interface _UpdateResolverDnssecConfigResponse
+      include Smithy::Client::_Response[Types::UpdateResolverDnssecConfigResponse]
+      def resolver_dnssec_config: () -> Types::ResolverDnssecConfig?
+    end
+    def update_resolver_dnssec_config: (
+      ?resource_id: String,
+      ?validation: String
+    ) -> _UpdateResolverDnssecConfigResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResolverDnssecConfigResponse
+
+    interface _UpdateResolverEndpointResponse
+      include Smithy::Client::_Response[Types::UpdateResolverEndpointResponse]
+      def resolver_endpoint: () -> Types::ResolverEndpoint?
+    end
+    def update_resolver_endpoint: (
+      ?resolver_endpoint_id: String,
+      ?name: String,
+      ?resolver_endpoint_type: String,
+      ?update_ip_addresses: Array[
+        {
+          ip_id: String,
+          ipv6: String
+        }
+      ],
+      ?protocols: Array[String]
+    ) -> _UpdateResolverEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResolverEndpointResponse
+
+    interface _UpdateResolverRuleResponse
+      include Smithy::Client::_Response[Types::UpdateResolverRuleResponse]
+      def resolver_rule: () -> Types::ResolverRule?
+    end
+    def update_resolver_rule: (
+      ?resolver_rule_id: String,
+      ?config: {
+        name: String,
+        target_ips: Array[
+          {
+            ip: String,
+            port: Integer,
+            ipv6: String,
+            protocol: String,
+            server_name_indication: String
+          }
+        ],
+        resolver_endpoint_id: String
+      }
+    ) -> _UpdateResolverRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateResolverRuleResponse
+  end
+end

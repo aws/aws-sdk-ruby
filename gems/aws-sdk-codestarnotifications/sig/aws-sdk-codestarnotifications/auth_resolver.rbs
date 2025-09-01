@@ -1,0 +1,5 @@
+module Aws::Codestarnotifications
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

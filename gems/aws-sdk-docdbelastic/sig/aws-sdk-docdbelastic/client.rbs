@@ -1,0 +1,250 @@
+module Aws::DocDBElastic
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::DocDBElastic::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _ApplyPendingMaintenanceActionResponse
+      include Smithy::Client::_Response[Types::ApplyPendingMaintenanceActionOutput]
+      def resource_pending_maintenance_action: () -> Types::ResourcePendingMaintenanceAction?
+    end
+    def apply_pending_maintenance_action: (
+      ?resource_arn: String,
+      ?apply_action: String,
+      ?opt_in_type: String,
+      ?apply_on: String
+    ) -> _ApplyPendingMaintenanceActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ApplyPendingMaintenanceActionResponse
+
+    interface _CopyClusterSnapshotResponse
+      include Smithy::Client::_Response[Types::CopyClusterSnapshotOutput]
+      def snapshot: () -> Types::ClusterSnapshot?
+    end
+    def copy_cluster_snapshot: (
+      ?snapshot_arn: String,
+      ?target_snapshot_name: String,
+      ?kms_key_id: String,
+      ?copy_tags: bool,
+      ?tags: Hash[String, String]
+    ) -> _CopyClusterSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyClusterSnapshotResponse
+
+    interface _CreateClusterResponse
+      include Smithy::Client::_Response[Types::CreateClusterOperationOutput]
+      def cluster: () -> Types::Cluster?
+    end
+    def create_cluster: (
+      ?cluster_name: String,
+      ?auth_type: String,
+      ?admin_user_name: String,
+      ?admin_user_password: String,
+      ?shard_capacity: Integer,
+      ?shard_count: Integer,
+      ?vpc_security_group_ids: Array[String],
+      ?subnet_ids: Array[String],
+      ?kms_key_id: String,
+      ?client_token: String,
+      ?preferred_maintenance_window: String,
+      ?tags: Hash[String, String],
+      ?backup_retention_period: Integer,
+      ?preferred_backup_window: String,
+      ?shard_instance_count: Integer
+    ) -> _CreateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateClusterResponse
+
+    interface _CreateClusterSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateClusterSnapshotOperationOutput]
+      def snapshot: () -> Types::ClusterSnapshot?
+    end
+    def create_cluster_snapshot: (
+      ?cluster_arn: String,
+      ?snapshot_name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateClusterSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateClusterSnapshotResponse
+
+    interface _DeleteClusterResponse
+      include Smithy::Client::_Response[Types::DeleteClusterOperationOutput]
+      def cluster: () -> Types::Cluster?
+    end
+    def delete_cluster: (
+      ?cluster_arn: String
+    ) -> _DeleteClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteClusterResponse
+
+    interface _DeleteClusterSnapshotResponse
+      include Smithy::Client::_Response[Types::DeleteClusterSnapshotOperationOutput]
+      def snapshot: () -> Types::ClusterSnapshot?
+    end
+    def delete_cluster_snapshot: (
+      ?snapshot_arn: String
+    ) -> _DeleteClusterSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteClusterSnapshotResponse
+
+    interface _GetClusterResponse
+      include Smithy::Client::_Response[Types::GetClusterOperationOutput]
+      def cluster: () -> Types::Cluster?
+    end
+    def get_cluster: (
+      ?cluster_arn: String
+    ) -> _GetClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetClusterResponse
+
+    interface _GetClusterSnapshotResponse
+      include Smithy::Client::_Response[Types::GetClusterSnapshotOperationOutput]
+      def snapshot: () -> Types::ClusterSnapshot?
+    end
+    def get_cluster_snapshot: (
+      ?snapshot_arn: String
+    ) -> _GetClusterSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetClusterSnapshotResponse
+
+    interface _GetPendingMaintenanceActionResponse
+      include Smithy::Client::_Response[Types::GetPendingMaintenanceActionOutput]
+      def resource_pending_maintenance_action: () -> Types::ResourcePendingMaintenanceAction?
+    end
+    def get_pending_maintenance_action: (
+      ?resource_arn: String
+    ) -> _GetPendingMaintenanceActionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPendingMaintenanceActionResponse
+
+    interface _ListClusterSnapshotsResponse
+      include Smithy::Client::_Response[Types::ListClusterSnapshotsOperationOutput]
+      def snapshots: () -> Array[Types::ClusterSnapshotInList]?
+      def next_token: () -> String?
+    end
+    def list_cluster_snapshots: (
+      ?cluster_arn: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?snapshot_type: String
+    ) -> _ListClusterSnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListClusterSnapshotsResponse
+
+    interface _ListClustersResponse
+      include Smithy::Client::_Response[Types::ListClustersOperationOutput]
+      def clusters: () -> Array[Types::ClusterInList]?
+      def next_token: () -> String?
+    end
+    def list_clusters: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListClustersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListClustersResponse
+
+    interface _ListPendingMaintenanceActionsResponse
+      include Smithy::Client::_Response[Types::ListPendingMaintenanceActionsOutput]
+      def resource_pending_maintenance_actions: () -> Array[Types::ResourcePendingMaintenanceAction]?
+      def next_token: () -> String?
+    end
+    def list_pending_maintenance_actions: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPendingMaintenanceActionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPendingMaintenanceActionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _RestoreClusterFromSnapshotResponse
+      include Smithy::Client::_Response[Types::RestoreClusterFromSnapshotOperationOutput]
+      def cluster: () -> Types::Cluster?
+    end
+    def restore_cluster_from_snapshot: (
+      ?cluster_name: String,
+      ?snapshot_arn: String,
+      ?vpc_security_group_ids: Array[String],
+      ?subnet_ids: Array[String],
+      ?kms_key_id: String,
+      ?tags: Hash[String, String],
+      ?shard_capacity: Integer,
+      ?shard_instance_count: Integer
+    ) -> _RestoreClusterFromSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreClusterFromSnapshotResponse
+
+    interface _StartClusterResponse
+      include Smithy::Client::_Response[Types::StartClusterOutput]
+      def cluster: () -> Types::Cluster?
+    end
+    def start_cluster: (
+      ?cluster_arn: String
+    ) -> _StartClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartClusterResponse
+
+    interface _StopClusterResponse
+      include Smithy::Client::_Response[Types::StopClusterOutput]
+      def cluster: () -> Types::Cluster?
+    end
+    def stop_cluster: (
+      ?cluster_arn: String
+    ) -> _StopClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopClusterResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateClusterResponse
+      include Smithy::Client::_Response[Types::UpdateClusterOperationOutput]
+      def cluster: () -> Types::Cluster?
+    end
+    def update_cluster: (
+      ?cluster_arn: String,
+      ?auth_type: String,
+      ?shard_capacity: Integer,
+      ?shard_count: Integer,
+      ?vpc_security_group_ids: Array[String],
+      ?subnet_ids: Array[String],
+      ?admin_user_password: String,
+      ?client_token: String,
+      ?preferred_maintenance_window: String,
+      ?backup_retention_period: Integer,
+      ?preferred_backup_window: String,
+      ?shard_instance_count: Integer
+    ) -> _UpdateClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateClusterResponse
+  end
+end

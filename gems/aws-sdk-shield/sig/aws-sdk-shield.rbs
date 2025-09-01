@@ -1,0 +1,5 @@
+  module Aws
+    module Shield
+      VERSION: String
+    end
+  end

@@ -1,0 +1,1894 @@
+module Aws::CustomerProfiles
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CustomerProfiles::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddProfileKeyResponse
+      include Smithy::Client::_Response[Types::AddProfileKeyResponse]
+      def key_name: () -> String?
+      def values: () -> Array[String]?
+    end
+    def add_profile_key: (
+      ?profile_id: String,
+      ?key_name: String,
+      ?values: Array[String],
+      ?domain_name: String
+    ) -> _AddProfileKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddProfileKeyResponse
+
+    interface _BatchGetCalculatedAttributeForProfileResponse
+      include Smithy::Client::_Response[Types::BatchGetCalculatedAttributeForProfileResponse]
+      def errors: () -> Array[Types::BatchGetCalculatedAttributeForProfileError]?
+      def calculated_attribute_values: () -> Array[Types::CalculatedAttributeValue]?
+      def condition_overrides: () -> Types::ConditionOverrides?
+    end
+    def batch_get_calculated_attribute_for_profile: (
+      ?calculated_attribute_name: String,
+      ?domain_name: String,
+      ?profile_ids: Array[String],
+      ?condition_overrides: {
+        range: {
+          start: Integer,
+          end: Integer,
+          unit: String
+        }
+      }
+    ) -> _BatchGetCalculatedAttributeForProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetCalculatedAttributeForProfileResponse
+
+    interface _BatchGetProfileResponse
+      include Smithy::Client::_Response[Types::BatchGetProfileResponse]
+      def errors: () -> Array[Types::BatchGetProfileError]?
+      def profiles: () -> Array[Types::Profile]?
+    end
+    def batch_get_profile: (
+      ?domain_name: String,
+      ?profile_ids: Array[String]
+    ) -> _BatchGetProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetProfileResponse
+
+    interface _CreateCalculatedAttributeDefinitionResponse
+      include Smithy::Client::_Response[Types::CreateCalculatedAttributeDefinitionResponse]
+      def calculated_attribute_name: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+      def attribute_details: () -> Types::AttributeDetails?
+      def conditions: () -> Types::Conditions?
+      def filter: () -> Types::Filter?
+      def statistic: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def use_historical_data: () -> bool?
+      def status: () -> String?
+      def readiness: () -> Types::Readiness?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_calculated_attribute_definition: (
+      ?domain_name: String,
+      ?calculated_attribute_name: String,
+      ?display_name: String,
+      ?description: String,
+      ?attribute_details: {
+        attributes: Array[
+          {
+            name: String
+          }
+        ],
+        expression: String
+      },
+      ?conditions: {
+        range: {
+          value: Integer,
+          unit: String,
+          value_range: {
+            start: Integer,
+            end: Integer
+          },
+          timestamp_source: String,
+          timestamp_format: untyped
+        },
+        object_count: Integer,
+        threshold: {
+          value: untyped,
+          operator: String
+        }
+      },
+      ?filter: {
+        include: String,
+        groups: Array[
+          {
+            type: String,
+            dimensions: Array[
+              {
+                attributes: Hash[String,
+                  {
+                    dimension_type: String,
+                    values: Array[String]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      ?statistic: String,
+      ?use_historical_data: bool,
+      ?tags: Hash[String, String]
+    ) -> _CreateCalculatedAttributeDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCalculatedAttributeDefinitionResponse
+
+    interface _CreateDomainResponse
+      include Smithy::Client::_Response[Types::CreateDomainResponse]
+      def domain_name: () -> String?
+      def default_expiration_days: () -> Integer?
+      def default_encryption_key: () -> String?
+      def dead_letter_queue_url: () -> String?
+      def matching: () -> Types::MatchingResponse?
+      def rule_based_matching: () -> Types::RuleBasedMatchingResponse?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_domain: (
+      ?domain_name: String,
+      ?default_expiration_days: Integer,
+      ?default_encryption_key: String,
+      ?dead_letter_queue_url: String,
+      ?matching: {
+        enabled: bool,
+        job_schedule: {
+          day_of_the_week: String,
+          time: String
+        },
+        auto_merging: {
+          enabled: untyped,
+          consolidation: {
+            matching_attributes_list: Array[
+              Array[String]
+            ]
+          },
+          conflict_resolution: {
+            conflict_resolving_model: String,
+            source_name: String
+          },
+          min_allowed_confidence_score_for_merging: Float
+        },
+        exporting_config: {
+          s3_exporting: {
+            s3_bucket_name: String,
+            s3_key_name: String
+          }
+        }
+      },
+      ?rule_based_matching: {
+        enabled: bool,
+        matching_rules: Array[
+          {
+            rule: Array[String]
+          }
+        ],
+        max_allowed_rule_level_for_merging: Integer,
+        max_allowed_rule_level_for_matching: Integer,
+        attribute_types_selector: {
+          attribute_matching_model: String,
+          address: Array[String],
+          phone_number: Array[String],
+          email_address: Array[String]
+        },
+        conflict_resolution: {
+          conflict_resolving_model: String,
+          source_name: String
+        },
+        exporting_config: {
+          s3_exporting: {
+            s3_bucket_name: String,
+            s3_key_name: String
+          }
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDomainResponse
+
+    interface _CreateDomainLayoutResponse
+      include Smithy::Client::_Response[Types::CreateDomainLayoutResponse]
+      def layout_definition_name: () -> String?
+      def description: () -> String?
+      def display_name: () -> String?
+      def is_default: () -> bool?
+      def layout_type: () -> String?
+      def layout: () -> String?
+      def version: () -> String?
+      def tags: () -> Hash[String, String]?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+    end
+    def create_domain_layout: (
+      ?domain_name: String,
+      ?layout_definition_name: String,
+      ?description: String,
+      ?display_name: String,
+      ?is_default: bool,
+      ?layout_type: String,
+      ?layout: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateDomainLayoutResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDomainLayoutResponse
+
+    interface _CreateEventStreamResponse
+      include Smithy::Client::_Response[Types::CreateEventStreamResponse]
+      def event_stream_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_event_stream: (
+      ?domain_name: String,
+      ?uri: String,
+      ?event_stream_name: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateEventStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEventStreamResponse
+
+    interface _CreateEventTriggerResponse
+      include Smithy::Client::_Response[Types::CreateEventTriggerResponse]
+      def event_trigger_name: () -> String?
+      def object_type_name: () -> String?
+      def description: () -> String?
+      def event_trigger_conditions: () -> Array[Types::EventTriggerCondition]?
+      def segment_filter: () -> String?
+      def event_trigger_limits: () -> Types::EventTriggerLimits?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_event_trigger: (
+      ?domain_name: String,
+      ?event_trigger_name: String,
+      ?object_type_name: String,
+      ?description: String,
+      ?event_trigger_conditions: Array[
+        {
+          event_trigger_dimensions: Array[
+            {
+              object_attributes: Array[
+                {
+                  source: String,
+                  field_name: String,
+                  comparison_operator: String,
+                  values: Array[String]
+                }
+              ]
+            }
+          ],
+          logical_operator: String
+        }
+      ],
+      ?segment_filter: String,
+      ?event_trigger_limits: {
+        event_expiration: Integer,
+        periods: Array[
+          {
+            unit: String,
+            value: Integer,
+            max_invocations_per_profile: Integer,
+            unlimited: bool
+          }
+        ]
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateEventTriggerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEventTriggerResponse
+
+    interface _CreateIntegrationWorkflowResponse
+      include Smithy::Client::_Response[Types::CreateIntegrationWorkflowResponse]
+      def workflow_id: () -> String?
+      def message: () -> String?
+    end
+    def create_integration_workflow: (
+      ?domain_name: String,
+      ?workflow_type: String,
+      ?integration_config: {
+        appflow_integration: {
+          flow_definition: {
+            description: String,
+            flow_name: String,
+            kms_arn: String,
+            source_flow_config: {
+              connector_profile_name: String,
+              connector_type: String,
+              incremental_pull_config: {
+                datetime_type_field_name: String
+              },
+              source_connector_properties: {
+                marketo: {
+                  object: String
+                },
+                s3: {
+                  bucket_name: String,
+                  bucket_prefix: String
+                },
+                salesforce: {
+                  object: untyped,
+                  enable_dynamic_field_update: bool,
+                  include_deleted_records: untyped
+                },
+                service_now: {
+                  object: untyped
+                },
+                zendesk: {
+                  object: untyped
+                }
+              }
+            },
+            tasks: Array[
+              {
+                connector_operator: {
+                  marketo: String,
+                  s3: String,
+                  salesforce: String,
+                  service_now: String,
+                  zendesk: String
+                },
+                destination_field: String,
+                source_fields: Array[String],
+                task_properties: Hash[String, String],
+                task_type: String
+              }
+            ],
+            trigger_config: {
+              trigger_type: String,
+              trigger_properties: {
+                scheduled: {
+                  schedule_expression: String,
+                  data_pull_mode: String,
+                  schedule_start_time: Time,
+                  schedule_end_time: untyped,
+                  timezone: String,
+                  schedule_offset: Integer,
+                  first_execution_from: untyped
+                }
+              }
+            }
+          },
+          batches: Array[
+            {
+              start_time: Time,
+              end_time: untyped
+            }
+          ]
+        }
+      },
+      ?object_type_name: String,
+      ?role_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateIntegrationWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIntegrationWorkflowResponse
+
+    interface _CreateProfileResponse
+      include Smithy::Client::_Response[Types::CreateProfileResponse]
+      def profile_id: () -> String?
+    end
+    def create_profile: (
+      ?domain_name: String,
+      ?account_number: String,
+      ?additional_information: String,
+      ?party_type: String,
+      ?business_name: String,
+      ?first_name: String,
+      ?middle_name: String,
+      ?last_name: String,
+      ?birth_date: String,
+      ?gender: String,
+      ?phone_number: String,
+      ?mobile_phone_number: String,
+      ?home_phone_number: String,
+      ?business_phone_number: String,
+      ?email_address: String,
+      ?personal_email_address: String,
+      ?business_email_address: String,
+      ?address: {
+        address1: String,
+        address2: untyped,
+        address3: untyped,
+        address4: untyped,
+        city: untyped,
+        county: untyped,
+        state: untyped,
+        province: untyped,
+        country: untyped,
+        postal_code: untyped
+      },
+      ?shipping_address: {
+        address1: String,
+        address2: untyped,
+        address3: untyped,
+        address4: untyped,
+        city: untyped,
+        county: untyped,
+        state: untyped,
+        province: untyped,
+        country: untyped,
+        postal_code: untyped
+      },
+      ?mailing_address: {
+        address1: String,
+        address2: untyped,
+        address3: untyped,
+        address4: untyped,
+        city: untyped,
+        county: untyped,
+        state: untyped,
+        province: untyped,
+        country: untyped,
+        postal_code: untyped
+      },
+      ?billing_address: {
+        address1: String,
+        address2: untyped,
+        address3: untyped,
+        address4: untyped,
+        city: untyped,
+        county: untyped,
+        state: untyped,
+        province: untyped,
+        country: untyped,
+        postal_code: untyped
+      },
+      ?attributes: Hash[String, String],
+      ?party_type_string: String,
+      ?gender_string: String,
+      ?profile_type: String,
+      ?engagement_preferences: {
+        phone: Array[
+          {
+            key_name: String,
+            key_value: String,
+            profile_id: String,
+            contact_type: String
+          }
+        ],
+        email: Array[
+          {
+            key_name: untyped,
+            key_value: untyped,
+            profile_id: untyped,
+            contact_type: untyped
+          }
+        ]
+      }
+    ) -> _CreateProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProfileResponse
+
+    interface _CreateSegmentDefinitionResponse
+      include Smithy::Client::_Response[Types::CreateSegmentDefinitionResponse]
+      def segment_definition_name: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def segment_definition_arn: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_segment_definition: (
+      ?domain_name: String,
+      ?segment_definition_name: String,
+      ?display_name: String,
+      ?description: String,
+      ?segment_groups: {
+        groups: Array[
+          {
+            dimensions: Array[
+              {
+                profile_attributes: {
+                  account_number: {
+                    dimension_type: String,
+                    values: Array[String]
+                  },
+                  additional_information: {
+                    dimension_type: untyped,
+                    values: Array[String]
+                  },
+                  first_name: untyped,
+                  last_name: untyped,
+                  middle_name: untyped,
+                  gender_string: untyped,
+                  party_type_string: untyped,
+                  birth_date: {
+                    dimension_type: String,
+                    values: Array[String]
+                  },
+                  phone_number: untyped,
+                  business_name: untyped,
+                  business_phone_number: untyped,
+                  home_phone_number: untyped,
+                  mobile_phone_number: untyped,
+                  email_address: untyped,
+                  personal_email_address: untyped,
+                  business_email_address: untyped,
+                  address: {
+                    city: untyped,
+                    country: untyped,
+                    county: untyped,
+                    postal_code: untyped,
+                    province: untyped,
+                    state: untyped
+                  },
+                  shipping_address: untyped,
+                  mailing_address: untyped,
+                  billing_address: untyped,
+                  attributes: Hash[String,
+                    {
+                      dimension_type: String,
+                      values: untyped
+                    }
+                  ],
+                  profile_type: {
+                    dimension_type: String,
+                    values: Array[String]
+                  }
+                },
+                calculated_attributes: Hash[String,
+                  {
+                    dimension_type: untyped,
+                    values: untyped,
+                    condition_overrides: {
+                      range: {
+                        start: Integer,
+                        end: Integer,
+                        unit: String
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            source_segments: Array[
+              {
+                segment_definition_name: String
+              }
+            ],
+            source_type: String,
+            type: untyped
+          }
+        ],
+        include: untyped
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateSegmentDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSegmentDefinitionResponse
+
+    interface _CreateSegmentEstimateResponse
+      include Smithy::Client::_Response[Types::CreateSegmentEstimateResponse]
+      def domain_name: () -> String?
+      def estimate_id: () -> String?
+      def status_code: () -> Integer?
+    end
+    def create_segment_estimate: (
+      ?domain_name: String,
+      ?segment_query: {
+        groups: Array[
+          {
+            dimensions: Array[
+              {
+                profile_attributes: {
+                  account_number: {
+                    dimension_type: String,
+                    values: Array[String]
+                  },
+                  additional_information: {
+                    dimension_type: untyped,
+                    values: Array[String]
+                  },
+                  first_name: untyped,
+                  last_name: untyped,
+                  middle_name: untyped,
+                  gender_string: untyped,
+                  party_type_string: untyped,
+                  birth_date: {
+                    dimension_type: String,
+                    values: Array[String]
+                  },
+                  phone_number: untyped,
+                  business_name: untyped,
+                  business_phone_number: untyped,
+                  home_phone_number: untyped,
+                  mobile_phone_number: untyped,
+                  email_address: untyped,
+                  personal_email_address: untyped,
+                  business_email_address: untyped,
+                  address: {
+                    city: untyped,
+                    country: untyped,
+                    county: untyped,
+                    postal_code: untyped,
+                    province: untyped,
+                    state: untyped
+                  },
+                  shipping_address: untyped,
+                  mailing_address: untyped,
+                  billing_address: untyped,
+                  attributes: Hash[String,
+                    {
+                      dimension_type: String,
+                      values: untyped
+                    }
+                  ],
+                  profile_type: {
+                    dimension_type: String,
+                    values: Array[String]
+                  }
+                },
+                calculated_attributes: Hash[String,
+                  {
+                    dimension_type: untyped,
+                    values: untyped,
+                    condition_overrides: {
+                      range: {
+                        start: Integer,
+                        end: Integer,
+                        unit: String
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            source_segments: Array[
+              {
+                segment_definition_name: String
+              }
+            ],
+            source_type: String,
+            type: untyped
+          }
+        ],
+        include: untyped
+      }
+    ) -> _CreateSegmentEstimateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSegmentEstimateResponse
+
+    interface _CreateSegmentSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateSegmentSnapshotResponse]
+      def snapshot_id: () -> String?
+    end
+    def create_segment_snapshot: (
+      ?domain_name: String,
+      ?segment_definition_name: String,
+      ?data_format: String,
+      ?encryption_key: String,
+      ?role_arn: String,
+      ?destination_uri: String
+    ) -> _CreateSegmentSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSegmentSnapshotResponse
+
+    interface _CreateUploadJobResponse
+      include Smithy::Client::_Response[Types::CreateUploadJobResponse]
+      def job_id: () -> String?
+    end
+    def create_upload_job: (
+      ?domain_name: String,
+      ?display_name: String,
+      ?fields: Hash[String,
+        {
+          source: String,
+          target: untyped,
+          content_type: String
+        }
+      ],
+      ?unique_key: String,
+      ?data_expiry: Integer
+    ) -> _CreateUploadJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUploadJobResponse
+
+    interface _DeleteCalculatedAttributeDefinitionResponse
+      include Smithy::Client::_Response[Types::DeleteCalculatedAttributeDefinitionResponse]
+    end
+    def delete_calculated_attribute_definition: (
+      ?domain_name: String,
+      ?calculated_attribute_name: String
+    ) -> _DeleteCalculatedAttributeDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCalculatedAttributeDefinitionResponse
+
+    interface _DeleteDomainResponse
+      include Smithy::Client::_Response[Types::DeleteDomainResponse]
+      def message: () -> String?
+    end
+    def delete_domain: (
+      ?domain_name: String
+    ) -> _DeleteDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainResponse
+
+    interface _DeleteDomainLayoutResponse
+      include Smithy::Client::_Response[Types::DeleteDomainLayoutResponse]
+      def message: () -> String?
+    end
+    def delete_domain_layout: (
+      ?domain_name: String,
+      ?layout_definition_name: String
+    ) -> _DeleteDomainLayoutResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainLayoutResponse
+
+    interface _DeleteEventStreamResponse
+      include Smithy::Client::_Response[Types::DeleteEventStreamResponse]
+    end
+    def delete_event_stream: (
+      ?domain_name: String,
+      ?event_stream_name: String
+    ) -> _DeleteEventStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventStreamResponse
+
+    interface _DeleteEventTriggerResponse
+      include Smithy::Client::_Response[Types::DeleteEventTriggerResponse]
+      def message: () -> String?
+    end
+    def delete_event_trigger: (
+      ?domain_name: String,
+      ?event_trigger_name: String
+    ) -> _DeleteEventTriggerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEventTriggerResponse
+
+    interface _DeleteIntegrationResponse
+      include Smithy::Client::_Response[Types::DeleteIntegrationResponse]
+      def message: () -> String?
+    end
+    def delete_integration: (
+      ?domain_name: String,
+      ?uri: String
+    ) -> _DeleteIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteIntegrationResponse
+
+    interface _DeleteProfileResponse
+      include Smithy::Client::_Response[Types::DeleteProfileResponse]
+      def message: () -> String?
+    end
+    def delete_profile: (
+      ?profile_id: String,
+      ?domain_name: String
+    ) -> _DeleteProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProfileResponse
+
+    interface _DeleteProfileKeyResponse
+      include Smithy::Client::_Response[Types::DeleteProfileKeyResponse]
+      def message: () -> String?
+    end
+    def delete_profile_key: (
+      ?profile_id: String,
+      ?key_name: String,
+      ?values: Array[String],
+      ?domain_name: String
+    ) -> _DeleteProfileKeyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProfileKeyResponse
+
+    interface _DeleteProfileObjectResponse
+      include Smithy::Client::_Response[Types::DeleteProfileObjectResponse]
+      def message: () -> String?
+    end
+    def delete_profile_object: (
+      ?profile_id: String,
+      ?profile_object_unique_key: String,
+      ?object_type_name: String,
+      ?domain_name: String
+    ) -> _DeleteProfileObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProfileObjectResponse
+
+    interface _DeleteProfileObjectTypeResponse
+      include Smithy::Client::_Response[Types::DeleteProfileObjectTypeResponse]
+      def message: () -> String?
+    end
+    def delete_profile_object_type: (
+      ?domain_name: String,
+      ?object_type_name: String
+    ) -> _DeleteProfileObjectTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteProfileObjectTypeResponse
+
+    interface _DeleteSegmentDefinitionResponse
+      include Smithy::Client::_Response[Types::DeleteSegmentDefinitionResponse]
+      def message: () -> String?
+    end
+    def delete_segment_definition: (
+      ?domain_name: String,
+      ?segment_definition_name: String
+    ) -> _DeleteSegmentDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSegmentDefinitionResponse
+
+    interface _DeleteWorkflowResponse
+      include Smithy::Client::_Response[Types::DeleteWorkflowResponse]
+    end
+    def delete_workflow: (
+      ?domain_name: String,
+      ?workflow_id: String
+    ) -> _DeleteWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteWorkflowResponse
+
+    interface _DetectProfileObjectTypeResponse
+      include Smithy::Client::_Response[Types::DetectProfileObjectTypeResponse]
+      def detected_profile_object_types: () -> Array[Types::DetectedProfileObjectType]?
+    end
+    def detect_profile_object_type: (
+      ?objects: Array[String],
+      ?domain_name: String
+    ) -> _DetectProfileObjectTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetectProfileObjectTypeResponse
+
+    interface _GetAutoMergingPreviewResponse
+      include Smithy::Client::_Response[Types::GetAutoMergingPreviewResponse]
+      def domain_name: () -> String?
+      def number_of_matches_in_sample: () -> Integer?
+      def number_of_profiles_in_sample: () -> Integer?
+      def number_of_profiles_will_be_merged: () -> Integer?
+    end
+    def get_auto_merging_preview: (
+      ?domain_name: String,
+      ?consolidation: {
+        matching_attributes_list: Array[
+          Array[String]
+        ]
+      },
+      ?conflict_resolution: {
+        conflict_resolving_model: String,
+        source_name: String
+      },
+      ?min_allowed_confidence_score_for_merging: Float
+    ) -> _GetAutoMergingPreviewResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAutoMergingPreviewResponse
+
+    interface _GetCalculatedAttributeDefinitionResponse
+      include Smithy::Client::_Response[Types::GetCalculatedAttributeDefinitionResponse]
+      def calculated_attribute_name: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def statistic: () -> String?
+      def filter: () -> Types::Filter?
+      def conditions: () -> Types::Conditions?
+      def attribute_details: () -> Types::AttributeDetails?
+      def use_historical_data: () -> bool?
+      def status: () -> String?
+      def readiness: () -> Types::Readiness?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_calculated_attribute_definition: (
+      ?domain_name: String,
+      ?calculated_attribute_name: String
+    ) -> _GetCalculatedAttributeDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCalculatedAttributeDefinitionResponse
+
+    interface _GetCalculatedAttributeForProfileResponse
+      include Smithy::Client::_Response[Types::GetCalculatedAttributeForProfileResponse]
+      def calculated_attribute_name: () -> String?
+      def display_name: () -> String?
+      def is_data_partial: () -> String?
+      def value: () -> String?
+      def last_object_timestamp: () -> Time?
+    end
+    def get_calculated_attribute_for_profile: (
+      ?domain_name: String,
+      ?profile_id: String,
+      ?calculated_attribute_name: String
+    ) -> _GetCalculatedAttributeForProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCalculatedAttributeForProfileResponse
+
+    interface _GetDomainResponse
+      include Smithy::Client::_Response[Types::GetDomainResponse]
+      def domain_name: () -> String?
+      def default_expiration_days: () -> Integer?
+      def default_encryption_key: () -> String?
+      def dead_letter_queue_url: () -> String?
+      def stats: () -> Types::DomainStats?
+      def matching: () -> Types::MatchingResponse?
+      def rule_based_matching: () -> Types::RuleBasedMatchingResponse?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_domain: (
+      ?domain_name: String
+    ) -> _GetDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainResponse
+
+    interface _GetDomainLayoutResponse
+      include Smithy::Client::_Response[Types::GetDomainLayoutResponse]
+      def layout_definition_name: () -> String?
+      def description: () -> String?
+      def display_name: () -> String?
+      def is_default: () -> bool?
+      def layout_type: () -> String?
+      def layout: () -> String?
+      def version: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_domain_layout: (
+      ?domain_name: String,
+      ?layout_definition_name: String
+    ) -> _GetDomainLayoutResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDomainLayoutResponse
+
+    interface _GetEventStreamResponse
+      include Smithy::Client::_Response[Types::GetEventStreamResponse]
+      def domain_name: () -> String?
+      def event_stream_arn: () -> String?
+      def created_at: () -> Time?
+      def state: () -> String?
+      def stopped_since: () -> Time?
+      def destination_details: () -> Types::EventStreamDestinationDetails?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_event_stream: (
+      ?domain_name: String,
+      ?event_stream_name: String
+    ) -> _GetEventStreamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventStreamResponse
+
+    interface _GetEventTriggerResponse
+      include Smithy::Client::_Response[Types::GetEventTriggerResponse]
+      def event_trigger_name: () -> String?
+      def object_type_name: () -> String?
+      def description: () -> String?
+      def event_trigger_conditions: () -> Array[Types::EventTriggerCondition]?
+      def segment_filter: () -> String?
+      def event_trigger_limits: () -> Types::EventTriggerLimits?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_event_trigger: (
+      ?domain_name: String,
+      ?event_trigger_name: String
+    ) -> _GetEventTriggerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEventTriggerResponse
+
+    interface _GetIdentityResolutionJobResponse
+      include Smithy::Client::_Response[Types::GetIdentityResolutionJobResponse]
+      def domain_name: () -> String?
+      def job_id: () -> String?
+      def status: () -> String?
+      def message: () -> String?
+      def job_start_time: () -> Time?
+      def job_end_time: () -> Time?
+      def last_updated_at: () -> Time?
+      def job_expiration_time: () -> Time?
+      def auto_merging: () -> Types::AutoMerging?
+      def exporting_location: () -> Types::ExportingLocation?
+      def job_stats: () -> Types::JobStats?
+    end
+    def get_identity_resolution_job: (
+      ?domain_name: String,
+      ?job_id: String
+    ) -> _GetIdentityResolutionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIdentityResolutionJobResponse
+
+    interface _GetIntegrationResponse
+      include Smithy::Client::_Response[Types::GetIntegrationResponse]
+      def domain_name: () -> String?
+      def uri: () -> String?
+      def object_type_name: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def object_type_names: () -> Hash[String, String]?
+      def workflow_id: () -> String?
+      def is_unstructured: () -> bool?
+      def role_arn: () -> String?
+      def event_trigger_names: () -> Array[String]?
+    end
+    def get_integration: (
+      ?domain_name: String,
+      ?uri: String
+    ) -> _GetIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIntegrationResponse
+
+    interface _GetMatchesResponse
+      include Smithy::Client::_Response[Types::GetMatchesResponse]
+      def next_token: () -> String?
+      def match_generation_date: () -> Time?
+      def potential_matches: () -> Integer?
+      def matches: () -> Array[Types::MatchItem]?
+    end
+    def get_matches: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?domain_name: String
+    ) -> _GetMatchesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMatchesResponse
+
+    interface _GetProfileObjectTypeResponse
+      include Smithy::Client::_Response[Types::GetProfileObjectTypeResponse]
+      def object_type_name: () -> String?
+      def description: () -> String?
+      def template_id: () -> String?
+      def expiration_days: () -> Integer?
+      def encryption_key: () -> String?
+      def allow_profile_creation: () -> bool?
+      def source_last_updated_timestamp_format: () -> String?
+      def max_available_profile_object_count: () -> Integer?
+      def max_profile_object_count: () -> Integer?
+      def fields: () -> Hash[String, Types::ObjectTypeField]?
+      def keys: () -> Hash[String, Array[Types::ObjectTypeKey]]?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_profile_object_type: (
+      ?domain_name: String,
+      ?object_type_name: String
+    ) -> _GetProfileObjectTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProfileObjectTypeResponse
+
+    interface _GetProfileObjectTypeTemplateResponse
+      include Smithy::Client::_Response[Types::GetProfileObjectTypeTemplateResponse]
+      def template_id: () -> String?
+      def source_name: () -> String?
+      def source_object: () -> String?
+      def allow_profile_creation: () -> bool?
+      def source_last_updated_timestamp_format: () -> String?
+      def fields: () -> Hash[String, Types::ObjectTypeField]?
+      def keys: () -> Hash[String, Array[Types::ObjectTypeKey]]?
+    end
+    def get_profile_object_type_template: (
+      ?template_id: String
+    ) -> _GetProfileObjectTypeTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetProfileObjectTypeTemplateResponse
+
+    interface _GetSegmentDefinitionResponse
+      include Smithy::Client::_Response[Types::GetSegmentDefinitionResponse]
+      def segment_definition_name: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+      def segment_groups: () -> Types::SegmentGroup?
+      def segment_definition_arn: () -> String?
+      def created_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_segment_definition: (
+      ?domain_name: String,
+      ?segment_definition_name: String
+    ) -> _GetSegmentDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSegmentDefinitionResponse
+
+    interface _GetSegmentEstimateResponse
+      include Smithy::Client::_Response[Types::GetSegmentEstimateResponse]
+      def domain_name: () -> String?
+      def estimate_id: () -> String?
+      def status: () -> String?
+      def estimate: () -> String?
+      def message: () -> String?
+      def status_code: () -> Integer?
+    end
+    def get_segment_estimate: (
+      ?domain_name: String,
+      ?estimate_id: String
+    ) -> _GetSegmentEstimateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSegmentEstimateResponse
+
+    interface _GetSegmentMembershipResponse
+      include Smithy::Client::_Response[Types::GetSegmentMembershipResponse]
+      def segment_definition_name: () -> String?
+      def profiles: () -> Array[Types::ProfileQueryResult]?
+      def failures: () -> Array[Types::ProfileQueryFailures]?
+    end
+    def get_segment_membership: (
+      ?domain_name: String,
+      ?segment_definition_name: String,
+      ?profile_ids: Array[String]
+    ) -> _GetSegmentMembershipResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSegmentMembershipResponse
+
+    interface _GetSegmentSnapshotResponse
+      include Smithy::Client::_Response[Types::GetSegmentSnapshotResponse]
+      def snapshot_id: () -> String?
+      def status: () -> String?
+      def status_message: () -> String?
+      def data_format: () -> String?
+      def encryption_key: () -> String?
+      def role_arn: () -> String?
+      def destination_uri: () -> String?
+    end
+    def get_segment_snapshot: (
+      ?domain_name: String,
+      ?segment_definition_name: String,
+      ?snapshot_id: String
+    ) -> _GetSegmentSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSegmentSnapshotResponse
+
+    interface _GetSimilarProfilesResponse
+      include Smithy::Client::_Response[Types::GetSimilarProfilesResponse]
+      def profile_ids: () -> Array[String]?
+      def match_id: () -> String?
+      def match_type: () -> String?
+      def rule_level: () -> Integer?
+      def confidence_score: () -> Float?
+      def next_token: () -> String?
+    end
+    def get_similar_profiles: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?domain_name: String,
+      ?match_type: String,
+      ?search_key: String,
+      ?search_value: String
+    ) -> _GetSimilarProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSimilarProfilesResponse
+
+    interface _GetUploadJobResponse
+      include Smithy::Client::_Response[Types::GetUploadJobResponse]
+      def job_id: () -> String?
+      def display_name: () -> String?
+      def status: () -> String?
+      def status_reason: () -> String?
+      def created_at: () -> Time?
+      def completed_at: () -> Time?
+      def fields: () -> Hash[String, Types::ObjectTypeField]?
+      def unique_key: () -> String?
+      def results_summary: () -> Types::ResultsSummary?
+      def data_expiry: () -> Integer?
+    end
+    def get_upload_job: (
+      ?domain_name: String,
+      ?job_id: String
+    ) -> _GetUploadJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUploadJobResponse
+
+    interface _GetUploadJobPathResponse
+      include Smithy::Client::_Response[Types::GetUploadJobPathResponse]
+      def url: () -> String?
+      def client_token: () -> String?
+      def valid_until: () -> Time?
+    end
+    def get_upload_job_path: (
+      ?domain_name: String,
+      ?job_id: String
+    ) -> _GetUploadJobPathResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUploadJobPathResponse
+
+    interface _GetWorkflowResponse
+      include Smithy::Client::_Response[Types::GetWorkflowResponse]
+      def workflow_id: () -> String?
+      def workflow_type: () -> String?
+      def status: () -> String?
+      def error_description: () -> String?
+      def start_date: () -> Time?
+      def last_updated_at: () -> Time?
+      def attributes: () -> Types::WorkflowAttributes?
+      def metrics: () -> Types::WorkflowMetrics?
+    end
+    def get_workflow: (
+      ?domain_name: String,
+      ?workflow_id: String
+    ) -> _GetWorkflowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkflowResponse
+
+    interface _GetWorkflowStepsResponse
+      include Smithy::Client::_Response[Types::GetWorkflowStepsResponse]
+      def workflow_id: () -> String?
+      def workflow_type: () -> String?
+      def items: () -> Array[Types::WorkflowStepItem]?
+      def next_token: () -> String?
+    end
+    def get_workflow_steps: (
+      ?domain_name: String,
+      ?workflow_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _GetWorkflowStepsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetWorkflowStepsResponse
+
+    interface _ListAccountIntegrationsResponse
+      include Smithy::Client::_Response[Types::ListAccountIntegrationsResponse]
+      def items: () -> Array[Types::ListIntegrationItem]?
+      def next_token: () -> String?
+    end
+    def list_account_integrations: (
+      ?uri: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?include_hidden: bool
+    ) -> _ListAccountIntegrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAccountIntegrationsResponse
+
+    interface _ListCalculatedAttributeDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListCalculatedAttributeDefinitionsResponse]
+      def items: () -> Array[Types::ListCalculatedAttributeDefinitionItem]?
+      def next_token: () -> String?
+    end
+    def list_calculated_attribute_definitions: (
+      ?domain_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCalculatedAttributeDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCalculatedAttributeDefinitionsResponse
+
+    interface _ListCalculatedAttributesForProfileResponse
+      include Smithy::Client::_Response[Types::ListCalculatedAttributesForProfileResponse]
+      def items: () -> Array[Types::ListCalculatedAttributeForProfileItem]?
+      def next_token: () -> String?
+    end
+    def list_calculated_attributes_for_profile: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?domain_name: String,
+      ?profile_id: String
+    ) -> _ListCalculatedAttributesForProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCalculatedAttributesForProfileResponse
+
+    interface _ListDomainLayoutsResponse
+      include Smithy::Client::_Response[Types::ListDomainLayoutsResponse]
+      def items: () -> Array[Types::LayoutItem]?
+      def next_token: () -> String?
+    end
+    def list_domain_layouts: (
+      ?domain_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDomainLayoutsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainLayoutsResponse
+
+    interface _ListDomainsResponse
+      include Smithy::Client::_Response[Types::ListDomainsResponse]
+      def items: () -> Array[Types::ListDomainItem]?
+      def next_token: () -> String?
+    end
+    def list_domains: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDomainsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDomainsResponse
+
+    interface _ListEventStreamsResponse
+      include Smithy::Client::_Response[Types::ListEventStreamsResponse]
+      def items: () -> Array[Types::EventStreamSummary]?
+      def next_token: () -> String?
+    end
+    def list_event_streams: (
+      ?domain_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEventStreamsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventStreamsResponse
+
+    interface _ListEventTriggersResponse
+      include Smithy::Client::_Response[Types::ListEventTriggersResponse]
+      def items: () -> Array[Types::EventTriggerSummaryItem]?
+      def next_token: () -> String?
+    end
+    def list_event_triggers: (
+      ?domain_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListEventTriggersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEventTriggersResponse
+
+    interface _ListIdentityResolutionJobsResponse
+      include Smithy::Client::_Response[Types::ListIdentityResolutionJobsResponse]
+      def identity_resolution_jobs_list: () -> Array[Types::IdentityResolutionJob]?
+      def next_token: () -> String?
+    end
+    def list_identity_resolution_jobs: (
+      ?domain_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListIdentityResolutionJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIdentityResolutionJobsResponse
+
+    interface _ListIntegrationsResponse
+      include Smithy::Client::_Response[Types::ListIntegrationsResponse]
+      def items: () -> Array[Types::ListIntegrationItem]?
+      def next_token: () -> String?
+    end
+    def list_integrations: (
+      ?domain_name: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?include_hidden: bool
+    ) -> _ListIntegrationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIntegrationsResponse
+
+    interface _ListObjectTypeAttributesResponse
+      include Smithy::Client::_Response[Types::ListObjectTypeAttributesResponse]
+      def items: () -> Array[Types::ListObjectTypeAttributeItem]?
+      def next_token: () -> String?
+    end
+    def list_object_type_attributes: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?domain_name: String,
+      ?object_type_name: String
+    ) -> _ListObjectTypeAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListObjectTypeAttributesResponse
+
+    interface _ListProfileAttributeValuesResponse
+      include Smithy::Client::_Response[Types::ProfileAttributeValuesResponse]
+      def domain_name: () -> String?
+      def attribute_name: () -> String?
+      def items: () -> Array[Types::AttributeValueItem]?
+      def status_code: () -> Integer?
+    end
+    def list_profile_attribute_values: (
+      ?domain_name: String,
+      ?attribute_name: String
+    ) -> _ListProfileAttributeValuesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProfileAttributeValuesResponse
+
+    interface _ListProfileObjectTypeTemplatesResponse
+      include Smithy::Client::_Response[Types::ListProfileObjectTypeTemplatesResponse]
+      def items: () -> Array[Types::ListProfileObjectTypeTemplateItem]?
+      def next_token: () -> String?
+    end
+    def list_profile_object_type_templates: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProfileObjectTypeTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProfileObjectTypeTemplatesResponse
+
+    interface _ListProfileObjectTypesResponse
+      include Smithy::Client::_Response[Types::ListProfileObjectTypesResponse]
+      def items: () -> Array[Types::ListProfileObjectTypeItem]?
+      def next_token: () -> String?
+    end
+    def list_profile_object_types: (
+      ?domain_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListProfileObjectTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProfileObjectTypesResponse
+
+    interface _ListProfileObjectsResponse
+      include Smithy::Client::_Response[Types::ListProfileObjectsResponse]
+      def items: () -> Array[Types::ListProfileObjectsItem]?
+      def next_token: () -> String?
+    end
+    def list_profile_objects: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?domain_name: String,
+      ?object_type_name: String,
+      ?profile_id: String,
+      ?object_filter: {
+        key_name: String,
+        values: Array[String]
+      }
+    ) -> _ListProfileObjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProfileObjectsResponse
+
+    interface _ListRuleBasedMatchesResponse
+      include Smithy::Client::_Response[Types::ListRuleBasedMatchesResponse]
+      def match_ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_rule_based_matches: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?domain_name: String
+    ) -> _ListRuleBasedMatchesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRuleBasedMatchesResponse
+
+    interface _ListSegmentDefinitionsResponse
+      include Smithy::Client::_Response[Types::ListSegmentDefinitionsResponse]
+      def next_token: () -> String?
+      def items: () -> Array[Types::SegmentDefinitionItem]?
+    end
+    def list_segment_definitions: (
+      ?domain_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListSegmentDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSegmentDefinitionsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListUploadJobsResponse
+      include Smithy::Client::_Response[Types::ListUploadJobsResponse]
+      def next_token: () -> String?
+      def items: () -> Array[Types::UploadJobItem]?
+    end
+    def list_upload_jobs: (
+      ?domain_name: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListUploadJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListUploadJobsResponse
+
+    interface _ListWorkflowsResponse
+      include Smithy::Client::_Response[Types::ListWorkflowsResponse]
+      def items: () -> Array[Types::ListWorkflowsItem]?
+      def next_token: () -> String?
+    end
+    def list_workflows: (
+      ?domain_name: String,
+      ?workflow_type: String,
+      ?status: String,
+      ?query_start_date: Time,
+      ?query_end_date: Time,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListWorkflowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkflowsResponse
+
+    interface _MergeProfilesResponse
+      include Smithy::Client::_Response[Types::MergeProfilesResponse]
+      def message: () -> String?
+    end
+    def merge_profiles: (
+      ?domain_name: String,
+      ?main_profile_id: String,
+      ?profile_ids_to_be_merged: Array[String],
+      ?field_source_profile_ids: {
+        account_number: String,
+        additional_information: untyped,
+        party_type: untyped,
+        business_name: untyped,
+        first_name: untyped,
+        middle_name: untyped,
+        last_name: untyped,
+        birth_date: untyped,
+        gender: untyped,
+        phone_number: untyped,
+        mobile_phone_number: untyped,
+        home_phone_number: untyped,
+        business_phone_number: untyped,
+        email_address: untyped,
+        personal_email_address: untyped,
+        business_email_address: untyped,
+        address: untyped,
+        shipping_address: untyped,
+        mailing_address: untyped,
+        billing_address: untyped,
+        attributes: Hash[String, String],
+        profile_type: untyped,
+        engagement_preferences: untyped
+      }
+    ) -> _MergeProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _MergeProfilesResponse
+
+    interface _PutIntegrationResponse
+      include Smithy::Client::_Response[Types::PutIntegrationResponse]
+      def domain_name: () -> String?
+      def uri: () -> String?
+      def object_type_name: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+      def object_type_names: () -> Hash[String, String]?
+      def workflow_id: () -> String?
+      def is_unstructured: () -> bool?
+      def role_arn: () -> String?
+      def event_trigger_names: () -> Array[String]?
+    end
+    def put_integration: (
+      ?domain_name: String,
+      ?uri: String,
+      ?object_type_name: String,
+      ?tags: Hash[String, String],
+      ?flow_definition: {
+        description: String,
+        flow_name: String,
+        kms_arn: String,
+        source_flow_config: {
+          connector_profile_name: String,
+          connector_type: String,
+          incremental_pull_config: {
+            datetime_type_field_name: String
+          },
+          source_connector_properties: {
+            marketo: {
+              object: String
+            },
+            s3: {
+              bucket_name: String,
+              bucket_prefix: String
+            },
+            salesforce: {
+              object: untyped,
+              enable_dynamic_field_update: bool,
+              include_deleted_records: untyped
+            },
+            service_now: {
+              object: untyped
+            },
+            zendesk: {
+              object: untyped
+            }
+          }
+        },
+        tasks: Array[
+          {
+            connector_operator: {
+              marketo: String,
+              s3: String,
+              salesforce: String,
+              service_now: String,
+              zendesk: String
+            },
+            destination_field: String,
+            source_fields: Array[String],
+            task_properties: Hash[String, String],
+            task_type: String
+          }
+        ],
+        trigger_config: {
+          trigger_type: String,
+          trigger_properties: {
+            scheduled: {
+              schedule_expression: String,
+              data_pull_mode: String,
+              schedule_start_time: Time,
+              schedule_end_time: untyped,
+              timezone: String,
+              schedule_offset: Integer,
+              first_execution_from: untyped
+            }
+          }
+        }
+      },
+      ?object_type_names: Hash[String, String],
+      ?role_arn: String,
+      ?event_trigger_names: Array[String]
+    ) -> _PutIntegrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutIntegrationResponse
+
+    interface _PutProfileObjectResponse
+      include Smithy::Client::_Response[Types::PutProfileObjectResponse]
+      def profile_object_unique_key: () -> String?
+    end
+    def put_profile_object: (
+      ?object_type_name: String,
+      ?object: String,
+      ?domain_name: String
+    ) -> _PutProfileObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutProfileObjectResponse
+
+    interface _PutProfileObjectTypeResponse
+      include Smithy::Client::_Response[Types::PutProfileObjectTypeResponse]
+      def object_type_name: () -> String?
+      def description: () -> String?
+      def template_id: () -> String?
+      def expiration_days: () -> Integer?
+      def encryption_key: () -> String?
+      def allow_profile_creation: () -> bool?
+      def source_last_updated_timestamp_format: () -> String?
+      def max_profile_object_count: () -> Integer?
+      def max_available_profile_object_count: () -> Integer?
+      def fields: () -> Hash[String, Types::ObjectTypeField]?
+      def keys: () -> Hash[String, Array[Types::ObjectTypeKey]]?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def put_profile_object_type: (
+      ?domain_name: String,
+      ?object_type_name: String,
+      ?description: String,
+      ?template_id: String,
+      ?expiration_days: Integer,
+      ?encryption_key: String,
+      ?allow_profile_creation: bool,
+      ?source_last_updated_timestamp_format: String,
+      ?max_profile_object_count: Integer,
+      ?fields: Hash[String,
+        {
+          source: String,
+          target: untyped,
+          content_type: String
+        }
+      ],
+      ?keys: Hash[String,
+        Array[
+          {
+            standard_identifiers: Array[String],
+            field_names: Array[String]
+          }
+        ]
+      ],
+      ?tags: Hash[String, String]
+    ) -> _PutProfileObjectTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutProfileObjectTypeResponse
+
+    interface _SearchProfilesResponse
+      include Smithy::Client::_Response[Types::SearchProfilesResponse]
+      def items: () -> Array[Types::Profile]?
+      def next_token: () -> String?
+    end
+    def search_profiles: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?domain_name: String,
+      ?key_name: String,
+      ?values: Array[String],
+      ?additional_search_keys: Array[
+        {
+          key_name: String,
+          values: Array[String]
+        }
+      ],
+      ?logical_operator: String
+    ) -> _SearchProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SearchProfilesResponse
+
+    interface _StartUploadJobResponse
+      include Smithy::Client::_Response[Types::StartUploadJobResponse]
+    end
+    def start_upload_job: (
+      ?domain_name: String,
+      ?job_id: String
+    ) -> _StartUploadJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartUploadJobResponse
+
+    interface _StopUploadJobResponse
+      include Smithy::Client::_Response[Types::StopUploadJobResponse]
+    end
+    def stop_upload_job: (
+      ?domain_name: String,
+      ?job_id: String
+    ) -> _StopUploadJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopUploadJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateCalculatedAttributeDefinitionResponse
+      include Smithy::Client::_Response[Types::UpdateCalculatedAttributeDefinitionResponse]
+      def calculated_attribute_name: () -> String?
+      def display_name: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def statistic: () -> String?
+      def conditions: () -> Types::Conditions?
+      def attribute_details: () -> Types::AttributeDetails?
+      def use_historical_data: () -> bool?
+      def status: () -> String?
+      def readiness: () -> Types::Readiness?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_calculated_attribute_definition: (
+      ?domain_name: String,
+      ?calculated_attribute_name: String,
+      ?display_name: String,
+      ?description: String,
+      ?conditions: {
+        range: {
+          value: Integer,
+          unit: String,
+          value_range: {
+            start: Integer,
+            end: Integer
+          },
+          timestamp_source: String,
+          timestamp_format: untyped
+        },
+        object_count: Integer,
+        threshold: {
+          value: untyped,
+          operator: String
+        }
+      }
+    ) -> _UpdateCalculatedAttributeDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCalculatedAttributeDefinitionResponse
+
+    interface _UpdateDomainResponse
+      include Smithy::Client::_Response[Types::UpdateDomainResponse]
+      def domain_name: () -> String?
+      def default_expiration_days: () -> Integer?
+      def default_encryption_key: () -> String?
+      def dead_letter_queue_url: () -> String?
+      def matching: () -> Types::MatchingResponse?
+      def rule_based_matching: () -> Types::RuleBasedMatchingResponse?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_domain: (
+      ?domain_name: String,
+      ?default_expiration_days: Integer,
+      ?default_encryption_key: String,
+      ?dead_letter_queue_url: String,
+      ?matching: {
+        enabled: bool,
+        job_schedule: {
+          day_of_the_week: String,
+          time: String
+        },
+        auto_merging: {
+          enabled: untyped,
+          consolidation: {
+            matching_attributes_list: Array[
+              Array[String]
+            ]
+          },
+          conflict_resolution: {
+            conflict_resolving_model: String,
+            source_name: String
+          },
+          min_allowed_confidence_score_for_merging: Float
+        },
+        exporting_config: {
+          s3_exporting: {
+            s3_bucket_name: String,
+            s3_key_name: String
+          }
+        }
+      },
+      ?rule_based_matching: {
+        enabled: bool,
+        matching_rules: Array[
+          {
+            rule: Array[String]
+          }
+        ],
+        max_allowed_rule_level_for_merging: Integer,
+        max_allowed_rule_level_for_matching: Integer,
+        attribute_types_selector: {
+          attribute_matching_model: String,
+          address: Array[String],
+          phone_number: Array[String],
+          email_address: Array[String]
+        },
+        conflict_resolution: {
+          conflict_resolving_model: String,
+          source_name: String
+        },
+        exporting_config: {
+          s3_exporting: {
+            s3_bucket_name: String,
+            s3_key_name: String
+          }
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _UpdateDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDomainResponse
+
+    interface _UpdateDomainLayoutResponse
+      include Smithy::Client::_Response[Types::UpdateDomainLayoutResponse]
+      def layout_definition_name: () -> String?
+      def description: () -> String?
+      def display_name: () -> String?
+      def is_default: () -> bool?
+      def layout_type: () -> String?
+      def layout: () -> String?
+      def version: () -> String?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_domain_layout: (
+      ?domain_name: String,
+      ?layout_definition_name: String,
+      ?description: String,
+      ?display_name: String,
+      ?is_default: bool,
+      ?layout_type: String,
+      ?layout: String
+    ) -> _UpdateDomainLayoutResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDomainLayoutResponse
+
+    interface _UpdateEventTriggerResponse
+      include Smithy::Client::_Response[Types::UpdateEventTriggerResponse]
+      def event_trigger_name: () -> String?
+      def object_type_name: () -> String?
+      def description: () -> String?
+      def event_trigger_conditions: () -> Array[Types::EventTriggerCondition]?
+      def segment_filter: () -> String?
+      def event_trigger_limits: () -> Types::EventTriggerLimits?
+      def created_at: () -> Time?
+      def last_updated_at: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def update_event_trigger: (
+      ?domain_name: String,
+      ?event_trigger_name: String,
+      ?object_type_name: String,
+      ?description: String,
+      ?event_trigger_conditions: Array[
+        {
+          event_trigger_dimensions: Array[
+            {
+              object_attributes: Array[
+                {
+                  source: String,
+                  field_name: String,
+                  comparison_operator: String,
+                  values: Array[String]
+                }
+              ]
+            }
+          ],
+          logical_operator: String
+        }
+      ],
+      ?segment_filter: String,
+      ?event_trigger_limits: {
+        event_expiration: Integer,
+        periods: Array[
+          {
+            unit: String,
+            value: Integer,
+            max_invocations_per_profile: Integer,
+            unlimited: bool
+          }
+        ]
+      }
+    ) -> _UpdateEventTriggerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEventTriggerResponse
+
+    interface _UpdateProfileResponse
+      include Smithy::Client::_Response[Types::UpdateProfileResponse]
+      def profile_id: () -> String?
+    end
+    def update_profile: (
+      ?domain_name: String,
+      ?profile_id: String,
+      ?additional_information: String,
+      ?account_number: String,
+      ?party_type: String,
+      ?business_name: String,
+      ?first_name: String,
+      ?middle_name: String,
+      ?last_name: String,
+      ?birth_date: String,
+      ?gender: String,
+      ?phone_number: String,
+      ?mobile_phone_number: String,
+      ?home_phone_number: String,
+      ?business_phone_number: String,
+      ?email_address: String,
+      ?personal_email_address: String,
+      ?business_email_address: String,
+      ?address: {
+        address1: String,
+        address2: untyped,
+        address3: untyped,
+        address4: untyped,
+        city: untyped,
+        county: untyped,
+        state: untyped,
+        province: untyped,
+        country: untyped,
+        postal_code: untyped
+      },
+      ?shipping_address: {
+        address1: String,
+        address2: untyped,
+        address3: untyped,
+        address4: untyped,
+        city: untyped,
+        county: untyped,
+        state: untyped,
+        province: untyped,
+        country: untyped,
+        postal_code: untyped
+      },
+      ?mailing_address: {
+        address1: String,
+        address2: untyped,
+        address3: untyped,
+        address4: untyped,
+        city: untyped,
+        county: untyped,
+        state: untyped,
+        province: untyped,
+        country: untyped,
+        postal_code: untyped
+      },
+      ?billing_address: {
+        address1: String,
+        address2: untyped,
+        address3: untyped,
+        address4: untyped,
+        city: untyped,
+        county: untyped,
+        state: untyped,
+        province: untyped,
+        country: untyped,
+        postal_code: untyped
+      },
+      ?attributes: Hash[String, String],
+      ?party_type_string: String,
+      ?gender_string: String,
+      ?profile_type: String,
+      ?engagement_preferences: {
+        phone: Array[
+          {
+            key_name: String,
+            key_value: String,
+            profile_id: String,
+            contact_type: String
+          }
+        ],
+        email: Array[
+          {
+            key_name: untyped,
+            key_value: untyped,
+            profile_id: untyped,
+            contact_type: untyped
+          }
+        ]
+      }
+    ) -> _UpdateProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProfileResponse
+  end
+end

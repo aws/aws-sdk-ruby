@@ -1,0 +1,3587 @@
+module Aws::CodeDeploy
+  module Types
+
+    class AddTagsToOnPremisesInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?instance_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor instance_names: Array[String]?
+    end
+
+    class Alarm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class AlarmConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?ignore_poll_alarm_failure: bool,
+        ?alarms: Array[Types::Alarm],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor ignore_poll_alarm_failure: bool?
+      attr_accessor alarms: Array[Types::Alarm]?
+    end
+
+    class AlarmsLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AppSpecContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: String,
+        ?sha256: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: String?
+      attr_accessor sha256: String?
+    end
+
+    class ApplicationAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApplicationDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApplicationInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?application_name: String,
+        ?create_time: Time,
+        ?linked_to_git_hub: bool,
+        ?git_hub_account_name: String,
+        ?compute_platform: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor application_name: String?
+      attr_accessor create_time: Time?
+      attr_accessor linked_to_git_hub: bool?
+      attr_accessor git_hub_account_name: String?
+      attr_accessor compute_platform: String?
+    end
+
+    class ApplicationLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ApplicationNameRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ApplicationRevisionSortBy
+      RegisterTime: String
+      FirstUsedTime: String
+      LastUsedTime: String
+    end
+
+    class ArnNotSupportedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AutoRollbackConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?events: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor events: Array[String]?
+    end
+
+    module AutoRollbackEvent
+      DEPLOYMENT_FAILURE: String
+      DEPLOYMENT_STOP_ON_ALARM: String
+      DEPLOYMENT_STOP_ON_REQUEST: String
+    end
+
+    class AutoScalingGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?hook: String,
+        ?termination_hook: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor hook: String?
+      attr_accessor termination_hook: String?
+    end
+
+    class BatchGetApplicationRevisionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?revisions: Array[Types::RevisionLocation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor revisions: Array[Types::RevisionLocation]?
+    end
+
+    class BatchGetApplicationRevisionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?error_message: String,
+        ?revisions: Array[Types::RevisionInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor error_message: String?
+      attr_accessor revisions: Array[Types::RevisionInfo]?
+    end
+
+    class BatchGetApplicationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_names: Array[String]?
+    end
+
+    class BatchGetApplicationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?applications_info: Array[Types::ApplicationInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor applications_info: Array[Types::ApplicationInfo]?
+    end
+
+    class BatchGetDeploymentGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?deployment_group_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor deployment_group_names: Array[String]?
+    end
+
+    class BatchGetDeploymentGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_groups_info: Array[Types::DeploymentGroupInfo],
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_groups_info: Array[Types::DeploymentGroupInfo]?
+      attr_accessor error_message: String?
+    end
+
+    class BatchGetDeploymentInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?instance_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor instance_ids: Array[String]?
+    end
+
+    class BatchGetDeploymentInstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instances_summary: Array[Types::InstanceSummary],
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instances_summary: Array[Types::InstanceSummary]?
+      attr_accessor error_message: String?
+    end
+
+    class BatchGetDeploymentTargetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?target_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor target_ids: Array[String]?
+    end
+
+    class BatchGetDeploymentTargetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_targets: Array[Types::DeploymentTarget],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_targets: Array[Types::DeploymentTarget]?
+    end
+
+    class BatchGetDeploymentsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_ids: Array[String]?
+    end
+
+    class BatchGetDeploymentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployments_info: Array[Types::DeploymentInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployments_info: Array[Types::DeploymentInfo]?
+    end
+
+    class BatchGetOnPremisesInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_names: Array[String]?
+    end
+
+    class BatchGetOnPremisesInstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_infos: Array[Types::InstanceInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_infos: Array[Types::InstanceInfo]?
+    end
+
+    class BatchLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BlueGreenDeploymentConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terminate_blue_instances_on_deployment_success: Types::BlueInstanceTerminationOption,
+        ?deployment_ready_option: Types::DeploymentReadyOption,
+        ?green_fleet_provisioning_option: Types::GreenFleetProvisioningOption,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terminate_blue_instances_on_deployment_success: Types::BlueInstanceTerminationOption?
+      attr_accessor deployment_ready_option: Types::DeploymentReadyOption?
+      attr_accessor green_fleet_provisioning_option: Types::GreenFleetProvisioningOption?
+    end
+
+    class BlueInstanceTerminationOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+        ?termination_wait_time_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+      attr_accessor termination_wait_time_in_minutes: Integer?
+    end
+
+    class BucketNameFilterRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module BundleType
+      Tar: String
+      TarGZip: String
+      Zip: String
+      YAML: String
+      JSON: String
+    end
+
+    class CloudFormationTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?target_id: String,
+        ?last_updated_at: Time,
+        ?lifecycle_events: Array[Types::LifecycleEvent],
+        ?status: String,
+        ?resource_type: String,
+        ?target_version_weight: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor target_id: String?
+      attr_accessor last_updated_at: Time?
+      attr_accessor lifecycle_events: Array[Types::LifecycleEvent]?
+      attr_accessor status: String?
+      attr_accessor resource_type: String?
+      attr_accessor target_version_weight: Float?
+    end
+
+    module ComputePlatform
+      SERVER: String
+      LAMBDA: String
+      ECS: String
+    end
+
+    class ContinueDeploymentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?deployment_wait_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor deployment_wait_type: String?
+    end
+
+    class CreateApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?compute_platform: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor compute_platform: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+    end
+
+    class CreateDeploymentConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_config_name: String,
+        ?minimum_healthy_hosts: Types::MinimumHealthyHosts,
+        ?traffic_routing_config: Types::TrafficRoutingConfig,
+        ?compute_platform: String,
+        ?zonal_config: Types::ZonalConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_config_name: String?
+      attr_accessor minimum_healthy_hosts: Types::MinimumHealthyHosts?
+      attr_accessor traffic_routing_config: Types::TrafficRoutingConfig?
+      attr_accessor compute_platform: String?
+      attr_accessor zonal_config: Types::ZonalConfig?
+    end
+
+    class CreateDeploymentConfigOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_config_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_config_id: String?
+    end
+
+    class CreateDeploymentGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?deployment_group_name: String,
+        ?deployment_config_name: String,
+        ?ec2_tag_filters: Array[Types::EC2TagFilter],
+        ?on_premises_instance_tag_filters: Array[Types::TagFilter],
+        ?auto_scaling_groups: Array[String],
+        ?service_role_arn: String,
+        ?trigger_configurations: Array[Types::TriggerConfig],
+        ?alarm_configuration: Types::AlarmConfiguration,
+        ?auto_rollback_configuration: Types::AutoRollbackConfiguration,
+        ?outdated_instances_strategy: String,
+        ?deployment_style: Types::DeploymentStyle,
+        ?blue_green_deployment_configuration: Types::BlueGreenDeploymentConfiguration,
+        ?load_balancer_info: Types::LoadBalancerInfo,
+        ?ec2_tag_set: Types::EC2TagSet,
+        ?ecs_services: Array[Types::ECSService],
+        ?on_premises_tag_set: Types::OnPremisesTagSet,
+        ?tags: Array[Types::Tag],
+        ?termination_hook_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor deployment_group_name: String?
+      attr_accessor deployment_config_name: String?
+      attr_accessor ec2_tag_filters: Array[Types::EC2TagFilter]?
+      attr_accessor on_premises_instance_tag_filters: Array[Types::TagFilter]?
+      attr_accessor auto_scaling_groups: Array[String]?
+      attr_accessor service_role_arn: String?
+      attr_accessor trigger_configurations: Array[Types::TriggerConfig]?
+      attr_accessor alarm_configuration: Types::AlarmConfiguration?
+      attr_accessor auto_rollback_configuration: Types::AutoRollbackConfiguration?
+      attr_accessor outdated_instances_strategy: String?
+      attr_accessor deployment_style: Types::DeploymentStyle?
+      attr_accessor blue_green_deployment_configuration: Types::BlueGreenDeploymentConfiguration?
+      attr_accessor load_balancer_info: Types::LoadBalancerInfo?
+      attr_accessor ec2_tag_set: Types::EC2TagSet?
+      attr_accessor ecs_services: Array[Types::ECSService]?
+      attr_accessor on_premises_tag_set: Types::OnPremisesTagSet?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor termination_hook_enabled: bool?
+    end
+
+    class CreateDeploymentGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_group_id: String?
+    end
+
+    class CreateDeploymentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?deployment_group_name: String,
+        ?revision: Types::RevisionLocation,
+        ?deployment_config_name: String,
+        ?description: String,
+        ?ignore_application_stop_failures: bool,
+        ?target_instances: Types::TargetInstances,
+        ?auto_rollback_configuration: Types::AutoRollbackConfiguration,
+        ?update_outdated_instances_only: bool,
+        ?file_exists_behavior: String,
+        ?override_alarm_configuration: Types::AlarmConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor deployment_group_name: String?
+      attr_accessor revision: Types::RevisionLocation?
+      attr_accessor deployment_config_name: String?
+      attr_accessor description: String?
+      attr_accessor ignore_application_stop_failures: bool?
+      attr_accessor target_instances: Types::TargetInstances?
+      attr_accessor auto_rollback_configuration: Types::AutoRollbackConfiguration?
+      attr_accessor update_outdated_instances_only: bool?
+      attr_accessor file_exists_behavior: String?
+      attr_accessor override_alarm_configuration: Types::AlarmConfiguration?
+    end
+
+    class CreateDeploymentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+    end
+
+    class DeleteApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+    end
+
+    class DeleteDeploymentConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_config_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_config_name: String?
+    end
+
+    class DeleteDeploymentGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?deployment_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor deployment_group_name: String?
+    end
+
+    class DeleteDeploymentGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hooks_not_cleaned_up: Array[Types::AutoScalingGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hooks_not_cleaned_up: Array[Types::AutoScalingGroup]?
+    end
+
+    class DeleteGitHubAccountTokenInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_name: String?
+    end
+
+    class DeleteGitHubAccountTokenOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_name: String?
+    end
+
+    class DeleteResourcesByExternalIdInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?external_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor external_id: String?
+    end
+
+    class DeleteResourcesByExternalIdOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeploymentAlreadyCompletedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeploymentConfigAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeploymentConfigDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeploymentConfigInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeploymentConfigInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_config_id: String,
+        ?deployment_config_name: String,
+        ?minimum_healthy_hosts: Types::MinimumHealthyHosts,
+        ?create_time: Time,
+        ?compute_platform: String,
+        ?traffic_routing_config: Types::TrafficRoutingConfig,
+        ?zonal_config: Types::ZonalConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_config_id: String?
+      attr_accessor deployment_config_name: String?
+      attr_accessor minimum_healthy_hosts: Types::MinimumHealthyHosts?
+      attr_accessor create_time: Time?
+      attr_accessor compute_platform: String?
+      attr_accessor traffic_routing_config: Types::TrafficRoutingConfig?
+      attr_accessor zonal_config: Types::ZonalConfig?
+    end
+
+    class DeploymentConfigLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeploymentConfigNameRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module DeploymentCreator
+      User: String
+      Autoscaling: String
+      CodeDeployRollback: String
+      CodeDeploy: String
+      CodeDeployAutoUpdate: String
+      CloudFormation: String
+      CloudFormationRollback: String
+      AutoscalingTermination: String
+    end
+
+    class DeploymentDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeploymentGroupAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeploymentGroupDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeploymentGroupInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?deployment_group_id: String,
+        ?deployment_group_name: String,
+        ?deployment_config_name: String,
+        ?ec2_tag_filters: Array[Types::EC2TagFilter],
+        ?on_premises_instance_tag_filters: Array[Types::TagFilter],
+        ?auto_scaling_groups: Array[Types::AutoScalingGroup],
+        ?service_role_arn: String,
+        ?target_revision: Types::RevisionLocation,
+        ?trigger_configurations: Array[Types::TriggerConfig],
+        ?alarm_configuration: Types::AlarmConfiguration,
+        ?auto_rollback_configuration: Types::AutoRollbackConfiguration,
+        ?deployment_style: Types::DeploymentStyle,
+        ?outdated_instances_strategy: String,
+        ?blue_green_deployment_configuration: Types::BlueGreenDeploymentConfiguration,
+        ?load_balancer_info: Types::LoadBalancerInfo,
+        ?last_successful_deployment: Types::LastDeploymentInfo,
+        ?last_attempted_deployment: Types::LastDeploymentInfo,
+        ?ec2_tag_set: Types::EC2TagSet,
+        ?on_premises_tag_set: Types::OnPremisesTagSet,
+        ?compute_platform: String,
+        ?ecs_services: Array[Types::ECSService],
+        ?termination_hook_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor deployment_group_id: String?
+      attr_accessor deployment_group_name: String?
+      attr_accessor deployment_config_name: String?
+      attr_accessor ec2_tag_filters: Array[Types::EC2TagFilter]?
+      attr_accessor on_premises_instance_tag_filters: Array[Types::TagFilter]?
+      attr_accessor auto_scaling_groups: Array[Types::AutoScalingGroup]?
+      attr_accessor service_role_arn: String?
+      attr_accessor target_revision: Types::RevisionLocation?
+      attr_accessor trigger_configurations: Array[Types::TriggerConfig]?
+      attr_accessor alarm_configuration: Types::AlarmConfiguration?
+      attr_accessor auto_rollback_configuration: Types::AutoRollbackConfiguration?
+      attr_accessor deployment_style: Types::DeploymentStyle?
+      attr_accessor outdated_instances_strategy: String?
+      attr_accessor blue_green_deployment_configuration: Types::BlueGreenDeploymentConfiguration?
+      attr_accessor load_balancer_info: Types::LoadBalancerInfo?
+      attr_accessor last_successful_deployment: Types::LastDeploymentInfo?
+      attr_accessor last_attempted_deployment: Types::LastDeploymentInfo?
+      attr_accessor ec2_tag_set: Types::EC2TagSet?
+      attr_accessor on_premises_tag_set: Types::OnPremisesTagSet?
+      attr_accessor compute_platform: String?
+      attr_accessor ecs_services: Array[Types::ECSService]?
+      attr_accessor termination_hook_enabled: bool?
+    end
+
+    class DeploymentGroupLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeploymentGroupNameRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeploymentIdRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeploymentInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?deployment_group_name: String,
+        ?deployment_config_name: String,
+        ?deployment_id: String,
+        ?previous_revision: Types::RevisionLocation,
+        ?revision: Types::RevisionLocation,
+        ?status: String,
+        ?error_information: Types::ErrorInformation,
+        ?create_time: Time,
+        ?start_time: Time,
+        ?complete_time: Time,
+        ?deployment_overview: Types::DeploymentOverview,
+        ?description: String,
+        ?creator: String,
+        ?ignore_application_stop_failures: bool,
+        ?auto_rollback_configuration: Types::AutoRollbackConfiguration,
+        ?update_outdated_instances_only: bool,
+        ?rollback_info: Types::RollbackInfo,
+        ?deployment_style: Types::DeploymentStyle,
+        ?target_instances: Types::TargetInstances,
+        ?instance_termination_wait_time_started: bool,
+        ?blue_green_deployment_configuration: Types::BlueGreenDeploymentConfiguration,
+        ?load_balancer_info: Types::LoadBalancerInfo,
+        ?additional_deployment_status_info: String,
+        ?file_exists_behavior: String,
+        ?deployment_status_messages: Array[String],
+        ?compute_platform: String,
+        ?external_id: String,
+        ?related_deployments: Types::RelatedDeployments,
+        ?override_alarm_configuration: Types::AlarmConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor deployment_group_name: String?
+      attr_accessor deployment_config_name: String?
+      attr_accessor deployment_id: String?
+      attr_accessor previous_revision: Types::RevisionLocation?
+      attr_accessor revision: Types::RevisionLocation?
+      attr_accessor status: String?
+      attr_accessor error_information: Types::ErrorInformation?
+      attr_accessor create_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor complete_time: Time?
+      attr_accessor deployment_overview: Types::DeploymentOverview?
+      attr_accessor description: String?
+      attr_accessor creator: String?
+      attr_accessor ignore_application_stop_failures: bool?
+      attr_accessor auto_rollback_configuration: Types::AutoRollbackConfiguration?
+      attr_accessor update_outdated_instances_only: bool?
+      attr_accessor rollback_info: Types::RollbackInfo?
+      attr_accessor deployment_style: Types::DeploymentStyle?
+      attr_accessor target_instances: Types::TargetInstances?
+      attr_accessor instance_termination_wait_time_started: bool?
+      attr_accessor blue_green_deployment_configuration: Types::BlueGreenDeploymentConfiguration?
+      attr_accessor load_balancer_info: Types::LoadBalancerInfo?
+      attr_accessor additional_deployment_status_info: String?
+      attr_accessor file_exists_behavior: String?
+      attr_accessor deployment_status_messages: Array[String]?
+      attr_accessor compute_platform: String?
+      attr_accessor external_id: String?
+      attr_accessor related_deployments: Types::RelatedDeployments?
+      attr_accessor override_alarm_configuration: Types::AlarmConfiguration?
+    end
+
+    class DeploymentIsNotInReadyStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeploymentLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeploymentNotStartedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module DeploymentOption
+      WITH_TRAFFIC_CONTROL: String
+      WITHOUT_TRAFFIC_CONTROL: String
+    end
+
+    class DeploymentOverview
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pending: Integer,
+        ?in_progress: Integer,
+        ?succeeded: Integer,
+        ?failed: Integer,
+        ?skipped: Integer,
+        ?ready: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pending: Integer?
+      attr_accessor in_progress: Integer?
+      attr_accessor succeeded: Integer?
+      attr_accessor failed: Integer?
+      attr_accessor skipped: Integer?
+      attr_accessor ready: Integer?
+    end
+
+    module DeploymentReadyAction
+      CONTINUE_DEPLOYMENT: String
+      STOP_DEPLOYMENT: String
+    end
+
+    class DeploymentReadyOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action_on_timeout: String,
+        ?wait_time_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action_on_timeout: String?
+      attr_accessor wait_time_in_minutes: Integer?
+    end
+
+    module DeploymentStatus
+      CREATED: String
+      QUEUED: String
+      IN_PROGRESS: String
+      BAKING: String
+      SUCCEEDED: String
+      FAILED: String
+      STOPPED: String
+      READY: String
+    end
+
+    class DeploymentStyle
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_type: String,
+        ?deployment_option: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_type: String?
+      attr_accessor deployment_option: String?
+    end
+
+    class DeploymentTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_target_type: String,
+        ?instance_target: Types::InstanceTarget,
+        ?lambda_target: Types::LambdaTarget,
+        ?ecs_target: Types::ECSTarget,
+        ?cloud_formation_target: Types::CloudFormationTarget,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_target_type: String?
+      attr_accessor instance_target: Types::InstanceTarget?
+      attr_accessor lambda_target: Types::LambdaTarget?
+      attr_accessor ecs_target: Types::ECSTarget?
+      attr_accessor cloud_formation_target: Types::CloudFormationTarget?
+    end
+
+    class DeploymentTargetDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeploymentTargetIdRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DeploymentTargetListSizeExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module DeploymentTargetType
+      INSTANCE_TARGET: String
+      LAMBDA_TARGET: String
+      ECS_TARGET: String
+      CLOUDFORMATION_TARGET: String
+    end
+
+    module DeploymentType
+      IN_PLACE: String
+      BLUE_GREEN: String
+    end
+
+    module DeploymentWaitType
+      READY_WAIT: String
+      TERMINATION_WAIT: String
+    end
+
+    class DeregisterOnPremisesInstanceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_name: String?
+    end
+
+    class DescriptionTooLongException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Diagnostics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?script_name: String,
+        ?message: String,
+        ?log_tail: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor script_name: String?
+      attr_accessor message: String?
+      attr_accessor log_tail: String?
+    end
+
+    class EC2TagFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+      attr_accessor type: String?
+    end
+
+    module EC2TagFilterType
+      KEY_ONLY: String
+      VALUE_ONLY: String
+      KEY_AND_VALUE: String
+    end
+
+    class EC2TagSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_tag_set_list: Array[Array[Types::EC2TagFilter]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_tag_set_list: Array[Array[Types::EC2TagFilter]]?
+    end
+
+    class ECSService
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?cluster_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor cluster_name: String?
+    end
+
+    class ECSServiceMappingLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ECSTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?target_id: String,
+        ?target_arn: String,
+        ?last_updated_at: Time,
+        ?lifecycle_events: Array[Types::LifecycleEvent],
+        ?status: String,
+        ?task_sets_info: Array[Types::ECSTaskSet],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor target_id: String?
+      attr_accessor target_arn: String?
+      attr_accessor last_updated_at: Time?
+      attr_accessor lifecycle_events: Array[Types::LifecycleEvent]?
+      attr_accessor status: String?
+      attr_accessor task_sets_info: Array[Types::ECSTaskSet]?
+    end
+
+    class ECSTaskSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifer: String,
+        ?desired_count: Integer,
+        ?pending_count: Integer,
+        ?running_count: Integer,
+        ?status: String,
+        ?traffic_weight: Float,
+        ?target_group: Types::TargetGroupInfo,
+        ?task_set_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifer: String?
+      attr_accessor desired_count: Integer?
+      attr_accessor pending_count: Integer?
+      attr_accessor running_count: Integer?
+      attr_accessor status: String?
+      attr_accessor traffic_weight: Float?
+      attr_accessor target_group: Types::TargetGroupInfo?
+      attr_accessor task_set_label: String?
+    end
+
+    class ELBInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    module ErrorCode
+      AGENT_ISSUE: String
+      ALARM_ACTIVE: String
+      APPLICATION_MISSING: String
+      AUTOSCALING_VALIDATION_ERROR: String
+      AUTO_SCALING_CONFIGURATION: String
+      AUTO_SCALING_IAM_ROLE_PERMISSIONS: String
+      CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND: String
+      CUSTOMER_APPLICATION_UNHEALTHY: String
+      DEPLOYMENT_GROUP_MISSING: String
+      ECS_UPDATE_ERROR: String
+      ELASTIC_LOAD_BALANCING_INVALID: String
+      ELB_INVALID_INSTANCE: String
+      HEALTH_CONSTRAINTS: String
+      HEALTH_CONSTRAINTS_INVALID: String
+      HOOK_EXECUTION_FAILURE: String
+      IAM_ROLE_MISSING: String
+      IAM_ROLE_PERMISSIONS: String
+      INTERNAL_ERROR: String
+      INVALID_ECS_SERVICE: String
+      INVALID_LAMBDA_CONFIGURATION: String
+      INVALID_LAMBDA_FUNCTION: String
+      INVALID_REVISION: String
+      MANUAL_STOP: String
+      MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION: String
+      MISSING_ELB_INFORMATION: String
+      MISSING_GITHUB_TOKEN: String
+      NO_EC2_SUBSCRIPTION: String
+      NO_INSTANCES: String
+      OVER_MAX_INSTANCES: String
+      RESOURCE_LIMIT_EXCEEDED: String
+      REVISION_MISSING: String
+      THROTTLED: String
+      TIMEOUT: String
+      CLOUDFORMATION_STACK_FAILURE: String
+    end
+
+    class ErrorInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module FileExistsBehavior
+      DISALLOW: String
+      OVERWRITE: String
+      RETAIN: String
+    end
+
+    class GenericRevisionInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?deployment_groups: Array[String],
+        ?first_used_time: Time,
+        ?last_used_time: Time,
+        ?register_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor deployment_groups: Array[String]?
+      attr_accessor first_used_time: Time?
+      attr_accessor last_used_time: Time?
+      attr_accessor register_time: Time?
+    end
+
+    class GetApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+    end
+
+    class GetApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: Types::ApplicationInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: Types::ApplicationInfo?
+    end
+
+    class GetApplicationRevisionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?revision: Types::RevisionLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor revision: Types::RevisionLocation?
+    end
+
+    class GetApplicationRevisionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?revision: Types::RevisionLocation,
+        ?revision_info: Types::GenericRevisionInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor revision: Types::RevisionLocation?
+      attr_accessor revision_info: Types::GenericRevisionInfo?
+    end
+
+    class GetDeploymentConfigInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_config_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_config_name: String?
+    end
+
+    class GetDeploymentConfigOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_config_info: Types::DeploymentConfigInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_config_info: Types::DeploymentConfigInfo?
+    end
+
+    class GetDeploymentGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?deployment_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor deployment_group_name: String?
+    end
+
+    class GetDeploymentGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_group_info: Types::DeploymentGroupInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_group_info: Types::DeploymentGroupInfo?
+    end
+
+    class GetDeploymentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+    end
+
+    class GetDeploymentInstanceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor instance_id: String?
+    end
+
+    class GetDeploymentInstanceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_summary: Types::InstanceSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_summary: Types::InstanceSummary?
+    end
+
+    class GetDeploymentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_info: Types::DeploymentInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_info: Types::DeploymentInfo?
+    end
+
+    class GetDeploymentTargetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?target_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor target_id: String?
+    end
+
+    class GetDeploymentTargetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_target: Types::DeploymentTarget,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_target: Types::DeploymentTarget?
+    end
+
+    class GetOnPremisesInstanceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_name: String?
+    end
+
+    class GetOnPremisesInstanceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_info: Types::InstanceInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_info: Types::InstanceInfo?
+    end
+
+    class GitHubAccountTokenDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GitHubAccountTokenNameRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GitHubLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository: String,
+        ?commit_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository: String?
+      attr_accessor commit_id: String?
+    end
+
+    module GreenFleetProvisioningAction
+      DISCOVER_EXISTING: String
+      COPY_AUTO_SCALING_GROUP: String
+    end
+
+    class GreenFleetProvisioningOption
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?action: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor action: String?
+    end
+
+    class IamArnRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IamSessionArnAlreadyRegisteredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IamUserArnAlreadyRegisteredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class IamUserArnRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module InstanceAction
+      TERMINATE: String
+      KEEP_ALIVE: String
+    end
+
+    class InstanceDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InstanceIdRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InstanceInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_name: String,
+        ?iam_session_arn: String,
+        ?iam_user_arn: String,
+        ?instance_arn: String,
+        ?register_time: Time,
+        ?deregister_time: Time,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_name: String?
+      attr_accessor iam_session_arn: String?
+      attr_accessor iam_user_arn: String?
+      attr_accessor instance_arn: String?
+      attr_accessor register_time: Time?
+      attr_accessor deregister_time: Time?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class InstanceLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InstanceNameAlreadyRegisteredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InstanceNameRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InstanceNotRegisteredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module InstanceStatus
+      PENDING: String
+      IN_PROGRESS: String
+      SUCCEEDED: String
+      FAILED: String
+      SKIPPED: String
+      UNKNOWN: String
+      READY: String
+    end
+
+    class InstanceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?instance_id: String,
+        ?status: String,
+        ?last_updated_at: Time,
+        ?lifecycle_events: Array[Types::LifecycleEvent],
+        ?instance_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor instance_id: String?
+      attr_accessor status: String?
+      attr_accessor last_updated_at: Time?
+      attr_accessor lifecycle_events: Array[Types::LifecycleEvent]?
+      attr_accessor instance_type: String?
+    end
+
+    class InstanceTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?target_id: String,
+        ?target_arn: String,
+        ?status: String,
+        ?last_updated_at: Time,
+        ?lifecycle_events: Array[Types::LifecycleEvent],
+        ?instance_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor target_id: String?
+      attr_accessor target_arn: String?
+      attr_accessor status: String?
+      attr_accessor last_updated_at: Time?
+      attr_accessor lifecycle_events: Array[Types::LifecycleEvent]?
+      attr_accessor instance_label: String?
+    end
+
+    module InstanceType
+      BLUE: String
+      GREEN: String
+    end
+
+    class InvalidAlarmConfigException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidApplicationNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidArnException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidAutoRollbackConfigException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidAutoScalingGroupException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidBlueGreenDeploymentConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidBucketNameFilterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidComputePlatformException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDeployedStateFilterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDeploymentConfigNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDeploymentGroupNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDeploymentIdException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDeploymentInstanceTypeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDeploymentStatusException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDeploymentStyleException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDeploymentTargetIdException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidDeploymentWaitTypeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidEC2TagCombinationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidEC2TagException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidECSServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidExternalIdException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidFileExistsBehaviorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidGitHubAccountTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidGitHubAccountTokenNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidIamSessionArnException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidIamUserArnException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidIgnoreApplicationStopFailuresValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidInputException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidInstanceNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidInstanceStatusException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidInstanceTypeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidKeyPrefixFilterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidLifecycleEventHookExecutionIdException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidLifecycleEventHookExecutionStatusException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidLoadBalancerInfoException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidMinimumHealthyHostValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidOnPremisesTagCombinationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRegistrationStatusException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRevisionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRoleException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSortByException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidSortOrderException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTagException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTagFilterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTagsToAddException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTargetFilterNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTargetGroupPairException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTargetInstancesException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTimeRangeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTrafficRoutingConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidTriggerConfigException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidUpdateOutdatedInstancesOnlyValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidZonalDeploymentConfigurationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LambdaFunctionInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?function_name: String,
+        ?function_alias: String,
+        ?current_version: String,
+        ?target_version: String,
+        ?target_version_weight: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor function_name: String?
+      attr_accessor function_alias: String?
+      attr_accessor current_version: String?
+      attr_accessor target_version: String?
+      attr_accessor target_version_weight: Float?
+    end
+
+    class LambdaTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?target_id: String,
+        ?target_arn: String,
+        ?status: String,
+        ?last_updated_at: Time,
+        ?lifecycle_events: Array[Types::LifecycleEvent],
+        ?lambda_function_info: Types::LambdaFunctionInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor target_id: String?
+      attr_accessor target_arn: String?
+      attr_accessor status: String?
+      attr_accessor last_updated_at: Time?
+      attr_accessor lifecycle_events: Array[Types::LifecycleEvent]?
+      attr_accessor lambda_function_info: Types::LambdaFunctionInfo?
+    end
+
+    class LastDeploymentInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?status: String,
+        ?end_time: Time,
+        ?create_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor status: String?
+      attr_accessor end_time: Time?
+      attr_accessor create_time: Time?
+    end
+
+    module LifecycleErrorCode
+      SUCCESS: String
+      SCRIPT_MISSING: String
+      SCRIPT_NOT_EXECUTABLE: String
+      SCRIPT_TIMED_OUT: String
+      SCRIPT_FAILED: String
+      UNKNOWN_ERROR: String
+    end
+
+    class LifecycleEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lifecycle_event_name: String,
+        ?diagnostics: Types::Diagnostics,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lifecycle_event_name: String?
+      attr_accessor diagnostics: Types::Diagnostics?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor status: String?
+    end
+
+    class LifecycleEventAlreadyCompletedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module LifecycleEventStatus
+      PENDING: String
+      IN_PROGRESS: String
+      SUCCEEDED: String
+      FAILED: String
+      SKIPPED: String
+      UNKNOWN: String
+    end
+
+    class LifecycleHookLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListApplicationRevisionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?sort_by: String,
+        ?sort_order: String,
+        ?s3_bucket: String,
+        ?s3_key_prefix: String,
+        ?deployed: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_key_prefix: String?
+      attr_accessor deployed: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationRevisionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revisions: Array[Types::RevisionLocation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revisions: Array[Types::RevisionLocation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?applications: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor applications: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentConfigsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentConfigsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_configs_list: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_configs_list: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentGroupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentGroupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?deployment_groups: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor deployment_groups: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?next_token: String,
+        ?instance_status_filter: Array[String],
+        ?instance_type_filter: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor next_token: String?
+      attr_accessor instance_status_filter: Array[String]?
+      attr_accessor instance_type_filter: Array[String]?
+    end
+
+    class ListDeploymentInstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instances_list: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instances_list: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentTargetsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?next_token: String,
+        ?target_filters: Hash[String, Array[String]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor next_token: String?
+      attr_accessor target_filters: Hash[String, Array[String]]?
+    end
+
+    class ListDeploymentTargetsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?deployment_group_name: String,
+        ?external_id: String,
+        ?include_only_statuses: Array[String],
+        ?create_time_range: Types::TimeRange,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor deployment_group_name: String?
+      attr_accessor external_id: String?
+      attr_accessor include_only_statuses: Array[String]?
+      attr_accessor create_time_range: Types::TimeRange?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployments: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployments: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListGitHubAccountTokenNamesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+    end
+
+    class ListGitHubAccountTokenNamesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_name_list: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_name_list: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListOnPremisesInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registration_status: String,
+        ?tag_filters: Array[Types::TagFilter],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registration_status: String?
+      attr_accessor tag_filters: Array[Types::TagFilter]?
+      attr_accessor next_token: String?
+    end
+
+    class ListOnPremisesInstancesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_names: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_names: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    module ListStateFilterAction
+      Include: String
+      Exclude: String
+      Ignore: String
+    end
+
+    class ListTagsForResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor next_token: String?
+    end
+
+    class LoadBalancerInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?elb_info_list: Array[Types::ELBInfo],
+        ?target_group_info_list: Array[Types::TargetGroupInfo],
+        ?target_group_pair_info_list: Array[Types::TargetGroupPairInfo],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor elb_info_list: Array[Types::ELBInfo]?
+      attr_accessor target_group_info_list: Array[Types::TargetGroupInfo]?
+      attr_accessor target_group_pair_info_list: Array[Types::TargetGroupPairInfo]?
+    end
+
+    class MinimumHealthyHosts
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: Integer?
+    end
+
+    class MinimumHealthyHostsPerZone
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?value: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor value: Integer?
+    end
+
+    module MinimumHealthyHostsPerZoneType
+      HOST_COUNT: String
+      FLEET_PERCENT: String
+    end
+
+    module MinimumHealthyHostsType
+      HOST_COUNT: String
+      FLEET_PERCENT: String
+    end
+
+    class MultipleIamArnsProvidedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class OnPremisesTagSet
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?on_premises_tag_set_list: Array[Array[Types::TagFilter]],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor on_premises_tag_set_list: Array[Array[Types::TagFilter]]?
+    end
+
+    class OperationNotSupportedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module OutdatedInstancesStrategy
+      Update: String
+      Ignore: String
+    end
+
+    class PutLifecycleEventHookExecutionStatusInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?lifecycle_event_hook_execution_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor lifecycle_event_hook_execution_id: String?
+      attr_accessor status: String?
+    end
+
+    class PutLifecycleEventHookExecutionStatusOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lifecycle_event_hook_execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lifecycle_event_hook_execution_id: String?
+    end
+
+    class RawString
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: String,
+        ?sha256: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: String?
+      attr_accessor sha256: String?
+    end
+
+    class RegisterApplicationRevisionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?description: String,
+        ?revision: Types::RevisionLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor description: String?
+      attr_accessor revision: Types::RevisionLocation?
+    end
+
+    class RegisterOnPremisesInstanceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_name: String,
+        ?iam_session_arn: String,
+        ?iam_user_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_name: String?
+      attr_accessor iam_session_arn: String?
+      attr_accessor iam_user_arn: String?
+    end
+
+    module RegistrationStatus
+      Registered: String
+      Deregistered: String
+    end
+
+    class RelatedDeployments
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_update_outdated_instances_root_deployment_id: String,
+        ?auto_update_outdated_instances_deployment_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_update_outdated_instances_root_deployment_id: String?
+      attr_accessor auto_update_outdated_instances_deployment_ids: Array[String]?
+    end
+
+    class RemoveTagsFromOnPremisesInstancesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?instance_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor instance_names: Array[String]?
+    end
+
+    class ResourceArnRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RevisionDoesNotExistException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RevisionInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision_location: Types::RevisionLocation,
+        ?generic_revision_info: Types::GenericRevisionInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision_location: Types::RevisionLocation?
+      attr_accessor generic_revision_info: Types::GenericRevisionInfo?
+    end
+
+    class RevisionLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision_type: String,
+        ?s3_location: Types::S3Location,
+        ?git_hub_location: Types::GitHubLocation,
+        ?string: Types::RawString,
+        ?app_spec_content: Types::AppSpecContent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision_type: String?
+      attr_accessor s3_location: Types::S3Location?
+      attr_accessor git_hub_location: Types::GitHubLocation?
+      attr_accessor string: Types::RawString?
+      attr_accessor app_spec_content: Types::AppSpecContent?
+    end
+
+    module RevisionLocationType
+      S3: String
+      GitHub: String
+      String: String
+      AppSpecContent: String
+    end
+
+    class RevisionRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RoleRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RollbackInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rollback_deployment_id: String,
+        ?rollback_triggering_deployment_id: String,
+        ?rollback_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rollback_deployment_id: String?
+      attr_accessor rollback_triggering_deployment_id: String?
+      attr_accessor rollback_message: String?
+    end
+
+    class S3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?bundle_type: String,
+        ?version: String,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor bundle_type: String?
+      attr_accessor version: String?
+      attr_accessor e_tag: String?
+    end
+
+    class SkipWaitTimeForInstanceTerminationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+    end
+
+    module SortOrder
+      Ascending: String
+      Descending: String
+    end
+
+    class StopDeploymentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_id: String,
+        ?auto_rollback_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_id: String?
+      attr_accessor auto_rollback_enabled: bool?
+    end
+
+    class StopDeploymentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    module StopStatus
+      PENDING: String
+      SUCCEEDED: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+      attr_accessor type: String?
+    end
+
+    module TagFilterType
+      KEY_ONLY: String
+      VALUE_ONLY: String
+      KEY_AND_VALUE: String
+    end
+
+    class TagLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagRequiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TagSetListLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module TargetFilterName
+      TARGET_STATUS: String
+      SERVER_INSTANCE_LABEL: String
+    end
+
+    class TargetGroupInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class TargetGroupPairInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_groups: Array[Types::TargetGroupInfo],
+        ?prod_traffic_route: Types::TrafficRoute,
+        ?test_traffic_route: Types::TrafficRoute,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_groups: Array[Types::TargetGroupInfo]?
+      attr_accessor prod_traffic_route: Types::TrafficRoute?
+      attr_accessor test_traffic_route: Types::TrafficRoute?
+    end
+
+    class TargetInstances
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_filters: Array[Types::EC2TagFilter],
+        ?auto_scaling_groups: Array[String],
+        ?ec2_tag_set: Types::EC2TagSet,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_filters: Array[Types::EC2TagFilter]?
+      attr_accessor auto_scaling_groups: Array[String]?
+      attr_accessor ec2_tag_set: Types::EC2TagSet?
+    end
+
+    module TargetLabel
+      BLUE: String
+      GREEN: String
+    end
+
+    module TargetStatus
+      PENDING: String
+      IN_PROGRESS: String
+      SUCCEEDED: String
+      FAILED: String
+      SKIPPED: String
+      UNKNOWN: String
+      READY: String
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TimeBasedCanary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?canary_percentage: Integer,
+        ?canary_interval: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor canary_percentage: Integer?
+      attr_accessor canary_interval: Integer?
+    end
+
+    class TimeBasedLinear
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?linear_percentage: Integer,
+        ?linear_interval: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor linear_percentage: Integer?
+      attr_accessor linear_interval: Integer?
+    end
+
+    class TimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start: Time,
+        ?end: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start: Time?
+      attr_accessor end: Time?
+    end
+
+    class TrafficRoute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listener_arns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listener_arns: Array[String]?
+    end
+
+    class TrafficRoutingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?time_based_canary: Types::TimeBasedCanary,
+        ?time_based_linear: Types::TimeBasedLinear,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor time_based_canary: Types::TimeBasedCanary?
+      attr_accessor time_based_linear: Types::TimeBasedLinear?
+    end
+
+    module TrafficRoutingType
+      TimeBasedCanary: String
+      TimeBasedLinear: String
+      AllAtOnce: String
+    end
+
+    class TriggerConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?trigger_name: String,
+        ?trigger_target_arn: String,
+        ?trigger_events: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor trigger_name: String?
+      attr_accessor trigger_target_arn: String?
+      attr_accessor trigger_events: Array[String]?
+    end
+
+    module TriggerEventType
+      DEPLOYMENT_START: String
+      DEPLOYMENT_SUCCESS: String
+      DEPLOYMENT_FAILURE: String
+      DEPLOYMENT_STOP: String
+      DEPLOYMENT_ROLLBACK: String
+      DEPLOYMENT_READY: String
+      INSTANCE_START: String
+      INSTANCE_SUCCESS: String
+      INSTANCE_FAILURE: String
+      INSTANCE_READY: String
+    end
+
+    class TriggerTargetsLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnsupportedActionForDeploymentTypeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateApplicationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?new_application_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor new_application_name: String?
+    end
+
+    class UpdateDeploymentGroupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_name: String,
+        ?current_deployment_group_name: String,
+        ?new_deployment_group_name: String,
+        ?deployment_config_name: String,
+        ?ec2_tag_filters: Array[Types::EC2TagFilter],
+        ?on_premises_instance_tag_filters: Array[Types::TagFilter],
+        ?auto_scaling_groups: Array[String],
+        ?service_role_arn: String,
+        ?trigger_configurations: Array[Types::TriggerConfig],
+        ?alarm_configuration: Types::AlarmConfiguration,
+        ?auto_rollback_configuration: Types::AutoRollbackConfiguration,
+        ?outdated_instances_strategy: String,
+        ?deployment_style: Types::DeploymentStyle,
+        ?blue_green_deployment_configuration: Types::BlueGreenDeploymentConfiguration,
+        ?load_balancer_info: Types::LoadBalancerInfo,
+        ?ec2_tag_set: Types::EC2TagSet,
+        ?ecs_services: Array[Types::ECSService],
+        ?on_premises_tag_set: Types::OnPremisesTagSet,
+        ?termination_hook_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_name: String?
+      attr_accessor current_deployment_group_name: String?
+      attr_accessor new_deployment_group_name: String?
+      attr_accessor deployment_config_name: String?
+      attr_accessor ec2_tag_filters: Array[Types::EC2TagFilter]?
+      attr_accessor on_premises_instance_tag_filters: Array[Types::TagFilter]?
+      attr_accessor auto_scaling_groups: Array[String]?
+      attr_accessor service_role_arn: String?
+      attr_accessor trigger_configurations: Array[Types::TriggerConfig]?
+      attr_accessor alarm_configuration: Types::AlarmConfiguration?
+      attr_accessor auto_rollback_configuration: Types::AutoRollbackConfiguration?
+      attr_accessor outdated_instances_strategy: String?
+      attr_accessor deployment_style: Types::DeploymentStyle?
+      attr_accessor blue_green_deployment_configuration: Types::BlueGreenDeploymentConfiguration?
+      attr_accessor load_balancer_info: Types::LoadBalancerInfo?
+      attr_accessor ec2_tag_set: Types::EC2TagSet?
+      attr_accessor ecs_services: Array[Types::ECSService]?
+      attr_accessor on_premises_tag_set: Types::OnPremisesTagSet?
+      attr_accessor termination_hook_enabled: bool?
+    end
+
+    class UpdateDeploymentGroupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hooks_not_cleaned_up: Array[Types::AutoScalingGroup],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hooks_not_cleaned_up: Array[Types::AutoScalingGroup]?
+    end
+
+    class ZonalConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?first_zone_monitor_duration_in_seconds: Integer,
+        ?monitor_duration_in_seconds: Integer,
+        ?minimum_healthy_hosts_per_zone: Types::MinimumHealthyHostsPerZone,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor first_zone_monitor_duration_in_seconds: Integer?
+      attr_accessor monitor_duration_in_seconds: Integer?
+      attr_accessor minimum_healthy_hosts_per_zone: Types::MinimumHealthyHostsPerZone?
+    end
+  end
+end

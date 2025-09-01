@@ -1,0 +1,2727 @@
+module Aws::Firehose
+  module Types
+
+    class AmazonOpenSearchServerlessBufferingHints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interval_in_seconds: Integer,
+        ?size_in_m_bs: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interval_in_seconds: Integer?
+      attr_accessor size_in_m_bs: Integer?
+    end
+
+    class AmazonOpenSearchServerlessDestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?collection_endpoint: String,
+        ?index_name: String,
+        ?buffering_hints: Types::AmazonOpenSearchServerlessBufferingHints,
+        ?retry_options: Types::AmazonOpenSearchServerlessRetryOptions,
+        ?s3_backup_mode: String,
+        ?s3_configuration: Types::S3DestinationConfiguration,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?vpc_configuration: Types::VpcConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor collection_endpoint: String?
+      attr_accessor index_name: String?
+      attr_accessor buffering_hints: Types::AmazonOpenSearchServerlessBufferingHints?
+      attr_accessor retry_options: Types::AmazonOpenSearchServerlessRetryOptions?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_configuration: Types::S3DestinationConfiguration?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor vpc_configuration: Types::VpcConfiguration?
+    end
+
+    class AmazonOpenSearchServerlessDestinationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?collection_endpoint: String,
+        ?index_name: String,
+        ?buffering_hints: Types::AmazonOpenSearchServerlessBufferingHints,
+        ?retry_options: Types::AmazonOpenSearchServerlessRetryOptions,
+        ?s3_backup_mode: String,
+        ?s3_destination_description: Types::S3DestinationDescription,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?vpc_configuration_description: Types::VpcConfigurationDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor collection_endpoint: String?
+      attr_accessor index_name: String?
+      attr_accessor buffering_hints: Types::AmazonOpenSearchServerlessBufferingHints?
+      attr_accessor retry_options: Types::AmazonOpenSearchServerlessRetryOptions?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_destination_description: Types::S3DestinationDescription?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor vpc_configuration_description: Types::VpcConfigurationDescription?
+    end
+
+    class AmazonOpenSearchServerlessDestinationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?collection_endpoint: String,
+        ?index_name: String,
+        ?buffering_hints: Types::AmazonOpenSearchServerlessBufferingHints,
+        ?retry_options: Types::AmazonOpenSearchServerlessRetryOptions,
+        ?s3_update: Types::S3DestinationUpdate,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor collection_endpoint: String?
+      attr_accessor index_name: String?
+      attr_accessor buffering_hints: Types::AmazonOpenSearchServerlessBufferingHints?
+      attr_accessor retry_options: Types::AmazonOpenSearchServerlessRetryOptions?
+      attr_accessor s3_update: Types::S3DestinationUpdate?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+    end
+
+    class AmazonOpenSearchServerlessRetryOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration_in_seconds: Integer?
+    end
+
+    module AmazonOpenSearchServerlessS3BackupMode
+      FailedDocumentsOnly: String
+      AllDocuments: String
+    end
+
+    class AmazonopensearchserviceBufferingHints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interval_in_seconds: Integer,
+        ?size_in_m_bs: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interval_in_seconds: Integer?
+      attr_accessor size_in_m_bs: Integer?
+    end
+
+    class AmazonopensearchserviceDestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?domain_arn: String,
+        ?cluster_endpoint: String,
+        ?index_name: String,
+        ?type_name: String,
+        ?index_rotation_period: String,
+        ?buffering_hints: Types::AmazonopensearchserviceBufferingHints,
+        ?retry_options: Types::AmazonopensearchserviceRetryOptions,
+        ?s3_backup_mode: String,
+        ?s3_configuration: Types::S3DestinationConfiguration,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?vpc_configuration: Types::VpcConfiguration,
+        ?document_id_options: Types::DocumentIdOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor domain_arn: String?
+      attr_accessor cluster_endpoint: String?
+      attr_accessor index_name: String?
+      attr_accessor type_name: String?
+      attr_accessor index_rotation_period: String?
+      attr_accessor buffering_hints: Types::AmazonopensearchserviceBufferingHints?
+      attr_accessor retry_options: Types::AmazonopensearchserviceRetryOptions?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_configuration: Types::S3DestinationConfiguration?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor vpc_configuration: Types::VpcConfiguration?
+      attr_accessor document_id_options: Types::DocumentIdOptions?
+    end
+
+    class AmazonopensearchserviceDestinationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?domain_arn: String,
+        ?cluster_endpoint: String,
+        ?index_name: String,
+        ?type_name: String,
+        ?index_rotation_period: String,
+        ?buffering_hints: Types::AmazonopensearchserviceBufferingHints,
+        ?retry_options: Types::AmazonopensearchserviceRetryOptions,
+        ?s3_backup_mode: String,
+        ?s3_destination_description: Types::S3DestinationDescription,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?vpc_configuration_description: Types::VpcConfigurationDescription,
+        ?document_id_options: Types::DocumentIdOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor domain_arn: String?
+      attr_accessor cluster_endpoint: String?
+      attr_accessor index_name: String?
+      attr_accessor type_name: String?
+      attr_accessor index_rotation_period: String?
+      attr_accessor buffering_hints: Types::AmazonopensearchserviceBufferingHints?
+      attr_accessor retry_options: Types::AmazonopensearchserviceRetryOptions?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_destination_description: Types::S3DestinationDescription?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor vpc_configuration_description: Types::VpcConfigurationDescription?
+      attr_accessor document_id_options: Types::DocumentIdOptions?
+    end
+
+    class AmazonopensearchserviceDestinationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?domain_arn: String,
+        ?cluster_endpoint: String,
+        ?index_name: String,
+        ?type_name: String,
+        ?index_rotation_period: String,
+        ?buffering_hints: Types::AmazonopensearchserviceBufferingHints,
+        ?retry_options: Types::AmazonopensearchserviceRetryOptions,
+        ?s3_update: Types::S3DestinationUpdate,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?document_id_options: Types::DocumentIdOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor domain_arn: String?
+      attr_accessor cluster_endpoint: String?
+      attr_accessor index_name: String?
+      attr_accessor type_name: String?
+      attr_accessor index_rotation_period: String?
+      attr_accessor buffering_hints: Types::AmazonopensearchserviceBufferingHints?
+      attr_accessor retry_options: Types::AmazonopensearchserviceRetryOptions?
+      attr_accessor s3_update: Types::S3DestinationUpdate?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor document_id_options: Types::DocumentIdOptions?
+    end
+
+    module AmazonopensearchserviceIndexRotationPeriod
+      NoRotation: String
+      OneHour: String
+      OneDay: String
+      OneWeek: String
+      OneMonth: String
+    end
+
+    class AmazonopensearchserviceRetryOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration_in_seconds: Integer?
+    end
+
+    module AmazonopensearchserviceS3BackupMode
+      FailedDocumentsOnly: String
+      AllDocuments: String
+    end
+
+    class AuthenticationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?connectivity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor connectivity: String?
+    end
+
+    class BufferingHints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?size_in_m_bs: Integer,
+        ?interval_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor size_in_m_bs: Integer?
+      attr_accessor interval_in_seconds: Integer?
+    end
+
+    class CatalogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_arn: String,
+        ?warehouse_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_arn: String?
+      attr_accessor warehouse_location: String?
+    end
+
+    class CloudWatchLoggingOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?log_group_name: String,
+        ?log_stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor log_group_name: String?
+      attr_accessor log_stream_name: String?
+    end
+
+    module CompressionFormat
+      UNCOMPRESSED: String
+      GZIP: String
+      ZIP: String
+      SNAPPY: String
+      HADOOP_SNAPPY: String
+    end
+
+    class ConcurrentModificationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Connectivity
+      PUBLIC: String
+      PRIVATE: String
+    end
+
+    module ContentEncoding
+      NONE: String
+      GZIP: String
+    end
+
+    class CopyCommand
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_table_name: String,
+        ?data_table_columns: String,
+        ?copy_options: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_table_name: String?
+      attr_accessor data_table_columns: String?
+      attr_accessor copy_options: String?
+    end
+
+    class CreateDeliveryStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_name: String,
+        ?delivery_stream_type: String,
+        ?direct_put_source_configuration: Types::DirectPutSourceConfiguration,
+        ?kinesis_stream_source_configuration: Types::KinesisStreamSourceConfiguration,
+        ?delivery_stream_encryption_configuration_input: Types::DeliveryStreamEncryptionConfigurationInput,
+        ?s3_destination_configuration: Types::S3DestinationConfiguration,
+        ?extended_s3_destination_configuration: Types::ExtendedS3DestinationConfiguration,
+        ?redshift_destination_configuration: Types::RedshiftDestinationConfiguration,
+        ?elasticsearch_destination_configuration: Types::ElasticsearchDestinationConfiguration,
+        ?amazonopensearchservice_destination_configuration: Types::AmazonopensearchserviceDestinationConfiguration,
+        ?splunk_destination_configuration: Types::SplunkDestinationConfiguration,
+        ?http_endpoint_destination_configuration: Types::HttpEndpointDestinationConfiguration,
+        ?tags: Array[Types::Tag],
+        ?amazon_open_search_serverless_destination_configuration: Types::AmazonOpenSearchServerlessDestinationConfiguration,
+        ?msk_source_configuration: Types::MSKSourceConfiguration,
+        ?snowflake_destination_configuration: Types::SnowflakeDestinationConfiguration,
+        ?iceberg_destination_configuration: Types::IcebergDestinationConfiguration,
+        ?database_source_configuration: Types::DatabaseSourceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_name: String?
+      attr_accessor delivery_stream_type: String?
+      attr_accessor direct_put_source_configuration: Types::DirectPutSourceConfiguration?
+      attr_accessor kinesis_stream_source_configuration: Types::KinesisStreamSourceConfiguration?
+      attr_accessor delivery_stream_encryption_configuration_input: Types::DeliveryStreamEncryptionConfigurationInput?
+      attr_accessor s3_destination_configuration: Types::S3DestinationConfiguration?
+      attr_accessor extended_s3_destination_configuration: Types::ExtendedS3DestinationConfiguration?
+      attr_accessor redshift_destination_configuration: Types::RedshiftDestinationConfiguration?
+      attr_accessor elasticsearch_destination_configuration: Types::ElasticsearchDestinationConfiguration?
+      attr_accessor amazonopensearchservice_destination_configuration: Types::AmazonopensearchserviceDestinationConfiguration?
+      attr_accessor splunk_destination_configuration: Types::SplunkDestinationConfiguration?
+      attr_accessor http_endpoint_destination_configuration: Types::HttpEndpointDestinationConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor amazon_open_search_serverless_destination_configuration: Types::AmazonOpenSearchServerlessDestinationConfiguration?
+      attr_accessor msk_source_configuration: Types::MSKSourceConfiguration?
+      attr_accessor snowflake_destination_configuration: Types::SnowflakeDestinationConfiguration?
+      attr_accessor iceberg_destination_configuration: Types::IcebergDestinationConfiguration?
+      attr_accessor database_source_configuration: Types::DatabaseSourceConfiguration?
+    end
+
+    class CreateDeliveryStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_arn: String?
+    end
+
+    class DataFormatConversionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema_configuration: Types::SchemaConfiguration,
+        ?input_format_configuration: Types::InputFormatConfiguration,
+        ?output_format_configuration: Types::OutputFormatConfiguration,
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema_configuration: Types::SchemaConfiguration?
+      attr_accessor input_format_configuration: Types::InputFormatConfiguration?
+      attr_accessor output_format_configuration: Types::OutputFormatConfiguration?
+      attr_accessor enabled: bool?
+    end
+
+    class DatabaseColumnList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include: Array[String],
+        ?exclude: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include: Array[String]?
+      attr_accessor exclude: Array[String]?
+    end
+
+    class DatabaseList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include: Array[String],
+        ?exclude: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include: Array[String]?
+      attr_accessor exclude: Array[String]?
+    end
+
+    class DatabaseSnapshotInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?table: String,
+        ?request_timestamp: Time,
+        ?requested_by: String,
+        ?status: String,
+        ?failure_description: Types::FailureDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor table: String?
+      attr_accessor request_timestamp: Time?
+      attr_accessor requested_by: String?
+      attr_accessor status: String?
+      attr_accessor failure_description: Types::FailureDescription?
+    end
+
+    class DatabaseSourceAuthenticationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secrets_manager_configuration: Types::SecretsManagerConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration?
+    end
+
+    class DatabaseSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?endpoint: String,
+        ?port: Integer,
+        ?ssl_mode: String,
+        ?databases: Types::DatabaseList,
+        ?tables: Types::DatabaseTableList,
+        ?columns: Types::DatabaseColumnList,
+        ?surrogate_keys: Array[String],
+        ?snapshot_watermark_table: String,
+        ?database_source_authentication_configuration: Types::DatabaseSourceAuthenticationConfiguration,
+        ?database_source_vpc_configuration: Types::DatabaseSourceVPCConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor endpoint: String?
+      attr_accessor port: Integer?
+      attr_accessor ssl_mode: String?
+      attr_accessor databases: Types::DatabaseList?
+      attr_accessor tables: Types::DatabaseTableList?
+      attr_accessor columns: Types::DatabaseColumnList?
+      attr_accessor surrogate_keys: Array[String]?
+      attr_accessor snapshot_watermark_table: String?
+      attr_accessor database_source_authentication_configuration: Types::DatabaseSourceAuthenticationConfiguration?
+      attr_accessor database_source_vpc_configuration: Types::DatabaseSourceVPCConfiguration?
+    end
+
+    class DatabaseSourceDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?endpoint: String,
+        ?port: Integer,
+        ?ssl_mode: String,
+        ?databases: Types::DatabaseList,
+        ?tables: Types::DatabaseTableList,
+        ?columns: Types::DatabaseColumnList,
+        ?surrogate_keys: Array[String],
+        ?snapshot_watermark_table: String,
+        ?snapshot_info: Array[Types::DatabaseSnapshotInfo],
+        ?database_source_authentication_configuration: Types::DatabaseSourceAuthenticationConfiguration,
+        ?database_source_vpc_configuration: Types::DatabaseSourceVPCConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor endpoint: String?
+      attr_accessor port: Integer?
+      attr_accessor ssl_mode: String?
+      attr_accessor databases: Types::DatabaseList?
+      attr_accessor tables: Types::DatabaseTableList?
+      attr_accessor columns: Types::DatabaseColumnList?
+      attr_accessor surrogate_keys: Array[String]?
+      attr_accessor snapshot_watermark_table: String?
+      attr_accessor snapshot_info: Array[Types::DatabaseSnapshotInfo]?
+      attr_accessor database_source_authentication_configuration: Types::DatabaseSourceAuthenticationConfiguration?
+      attr_accessor database_source_vpc_configuration: Types::DatabaseSourceVPCConfiguration?
+    end
+
+    class DatabaseSourceVPCConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpc_endpoint_service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpc_endpoint_service_name: String?
+    end
+
+    class DatabaseTableList
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include: Array[String],
+        ?exclude: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include: Array[String]?
+      attr_accessor exclude: Array[String]?
+    end
+
+    module DatabaseType
+      MySQL: String
+      PostgreSQL: String
+    end
+
+    module DefaultDocumentIdFormat
+      FIREHOSE_DEFAULT: String
+      NO_DOCUMENT_ID: String
+    end
+
+    class DeleteDeliveryStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_name: String,
+        ?allow_force_delete: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_name: String?
+      attr_accessor allow_force_delete: bool?
+    end
+
+    class DeleteDeliveryStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeliveryStreamDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_name: String,
+        ?delivery_stream_arn: String,
+        ?delivery_stream_status: String,
+        ?failure_description: Types::FailureDescription,
+        ?delivery_stream_encryption_configuration: Types::DeliveryStreamEncryptionConfiguration,
+        ?delivery_stream_type: String,
+        ?version_id: String,
+        ?create_timestamp: Time,
+        ?last_update_timestamp: Time,
+        ?source: Types::SourceDescription,
+        ?destinations: Array[Types::DestinationDescription],
+        ?has_more_destinations: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_name: String?
+      attr_accessor delivery_stream_arn: String?
+      attr_accessor delivery_stream_status: String?
+      attr_accessor failure_description: Types::FailureDescription?
+      attr_accessor delivery_stream_encryption_configuration: Types::DeliveryStreamEncryptionConfiguration?
+      attr_accessor delivery_stream_type: String?
+      attr_accessor version_id: String?
+      attr_accessor create_timestamp: Time?
+      attr_accessor last_update_timestamp: Time?
+      attr_accessor source: Types::SourceDescription?
+      attr_accessor destinations: Array[Types::DestinationDescription]?
+      attr_accessor has_more_destinations: bool?
+    end
+
+    class DeliveryStreamEncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_arn: String,
+        ?key_type: String,
+        ?status: String,
+        ?failure_description: Types::FailureDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_arn: String?
+      attr_accessor key_type: String?
+      attr_accessor status: String?
+      attr_accessor failure_description: Types::FailureDescription?
+    end
+
+    class DeliveryStreamEncryptionConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_arn: String,
+        ?key_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_arn: String?
+      attr_accessor key_type: String?
+    end
+
+    module DeliveryStreamEncryptionStatus
+      ENABLED: String
+      ENABLING: String
+      ENABLING_FAILED: String
+      DISABLED: String
+      DISABLING: String
+      DISABLING_FAILED: String
+    end
+
+    module DeliveryStreamFailureType
+      VPC_ENDPOINT_SERVICE_NAME_NOT_FOUND: String
+      VPC_INTERFACE_ENDPOINT_SERVICE_ACCESS_DENIED: String
+      RETIRE_KMS_GRANT_FAILED: String
+      CREATE_KMS_GRANT_FAILED: String
+      KMS_ACCESS_DENIED: String
+      DISABLED_KMS_KEY: String
+      INVALID_KMS_KEY: String
+      KMS_KEY_NOT_FOUND: String
+      KMS_OPT_IN_REQUIRED: String
+      CREATE_ENI_FAILED: String
+      DELETE_ENI_FAILED: String
+      SUBNET_NOT_FOUND: String
+      SECURITY_GROUP_NOT_FOUND: String
+      ENI_ACCESS_DENIED: String
+      SUBNET_ACCESS_DENIED: String
+      SECURITY_GROUP_ACCESS_DENIED: String
+      UNKNOWN_ERROR: String
+    end
+
+    module DeliveryStreamStatus
+      CREATING: String
+      CREATING_FAILED: String
+      DELETING: String
+      DELETING_FAILED: String
+      ACTIVE: String
+    end
+
+    module DeliveryStreamType
+      DirectPut: String
+      KinesisStreamAsSource: String
+      MSKAsSource: String
+      DatabaseAsSource: String
+    end
+
+    class DescribeDeliveryStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_name: String,
+        ?limit: Integer,
+        ?exclusive_start_destination_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_name: String?
+      attr_accessor limit: Integer?
+      attr_accessor exclusive_start_destination_id: String?
+    end
+
+    class DescribeDeliveryStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_description: Types::DeliveryStreamDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_description: Types::DeliveryStreamDescription?
+    end
+
+    class Deserializer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?open_x_json_ser_de: Types::OpenXJsonSerDe,
+        ?hive_json_ser_de: Types::HiveJsonSerDe,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor open_x_json_ser_de: Types::OpenXJsonSerDe?
+      attr_accessor hive_json_ser_de: Types::HiveJsonSerDe?
+    end
+
+    class DestinationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_id: String,
+        ?s3_destination_description: Types::S3DestinationDescription,
+        ?extended_s3_destination_description: Types::ExtendedS3DestinationDescription,
+        ?redshift_destination_description: Types::RedshiftDestinationDescription,
+        ?elasticsearch_destination_description: Types::ElasticsearchDestinationDescription,
+        ?amazonopensearchservice_destination_description: Types::AmazonopensearchserviceDestinationDescription,
+        ?splunk_destination_description: Types::SplunkDestinationDescription,
+        ?http_endpoint_destination_description: Types::HttpEndpointDestinationDescription,
+        ?snowflake_destination_description: Types::SnowflakeDestinationDescription,
+        ?amazon_open_search_serverless_destination_description: Types::AmazonOpenSearchServerlessDestinationDescription,
+        ?iceberg_destination_description: Types::IcebergDestinationDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_id: String?
+      attr_accessor s3_destination_description: Types::S3DestinationDescription?
+      attr_accessor extended_s3_destination_description: Types::ExtendedS3DestinationDescription?
+      attr_accessor redshift_destination_description: Types::RedshiftDestinationDescription?
+      attr_accessor elasticsearch_destination_description: Types::ElasticsearchDestinationDescription?
+      attr_accessor amazonopensearchservice_destination_description: Types::AmazonopensearchserviceDestinationDescription?
+      attr_accessor splunk_destination_description: Types::SplunkDestinationDescription?
+      attr_accessor http_endpoint_destination_description: Types::HttpEndpointDestinationDescription?
+      attr_accessor snowflake_destination_description: Types::SnowflakeDestinationDescription?
+      attr_accessor amazon_open_search_serverless_destination_description: Types::AmazonOpenSearchServerlessDestinationDescription?
+      attr_accessor iceberg_destination_description: Types::IcebergDestinationDescription?
+    end
+
+    class DestinationTableConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_table_name: String,
+        ?destination_database_name: String,
+        ?unique_keys: Array[String],
+        ?partition_spec: Types::PartitionSpec,
+        ?s3_error_output_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_table_name: String?
+      attr_accessor destination_database_name: String?
+      attr_accessor unique_keys: Array[String]?
+      attr_accessor partition_spec: Types::PartitionSpec?
+      attr_accessor s3_error_output_prefix: String?
+    end
+
+    class DirectPutSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?throughput_hint_in_m_bs: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor throughput_hint_in_m_bs: Integer?
+    end
+
+    class DirectPutSourceDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?throughput_hint_in_m_bs: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor throughput_hint_in_m_bs: Integer?
+    end
+
+    class DocumentIdOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_document_id_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_document_id_format: String?
+    end
+
+    class DynamicPartitioningConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retry_options: Types::RetryOptions,
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retry_options: Types::RetryOptions?
+      attr_accessor enabled: bool?
+    end
+
+    class ElasticsearchBufferingHints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interval_in_seconds: Integer,
+        ?size_in_m_bs: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interval_in_seconds: Integer?
+      attr_accessor size_in_m_bs: Integer?
+    end
+
+    class ElasticsearchDestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?domain_arn: String,
+        ?cluster_endpoint: String,
+        ?index_name: String,
+        ?type_name: String,
+        ?index_rotation_period: String,
+        ?buffering_hints: Types::ElasticsearchBufferingHints,
+        ?retry_options: Types::ElasticsearchRetryOptions,
+        ?s3_backup_mode: String,
+        ?s3_configuration: Types::S3DestinationConfiguration,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?vpc_configuration: Types::VpcConfiguration,
+        ?document_id_options: Types::DocumentIdOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor domain_arn: String?
+      attr_accessor cluster_endpoint: String?
+      attr_accessor index_name: String?
+      attr_accessor type_name: String?
+      attr_accessor index_rotation_period: String?
+      attr_accessor buffering_hints: Types::ElasticsearchBufferingHints?
+      attr_accessor retry_options: Types::ElasticsearchRetryOptions?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_configuration: Types::S3DestinationConfiguration?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor vpc_configuration: Types::VpcConfiguration?
+      attr_accessor document_id_options: Types::DocumentIdOptions?
+    end
+
+    class ElasticsearchDestinationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?domain_arn: String,
+        ?cluster_endpoint: String,
+        ?index_name: String,
+        ?type_name: String,
+        ?index_rotation_period: String,
+        ?buffering_hints: Types::ElasticsearchBufferingHints,
+        ?retry_options: Types::ElasticsearchRetryOptions,
+        ?s3_backup_mode: String,
+        ?s3_destination_description: Types::S3DestinationDescription,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?vpc_configuration_description: Types::VpcConfigurationDescription,
+        ?document_id_options: Types::DocumentIdOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor domain_arn: String?
+      attr_accessor cluster_endpoint: String?
+      attr_accessor index_name: String?
+      attr_accessor type_name: String?
+      attr_accessor index_rotation_period: String?
+      attr_accessor buffering_hints: Types::ElasticsearchBufferingHints?
+      attr_accessor retry_options: Types::ElasticsearchRetryOptions?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_destination_description: Types::S3DestinationDescription?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor vpc_configuration_description: Types::VpcConfigurationDescription?
+      attr_accessor document_id_options: Types::DocumentIdOptions?
+    end
+
+    class ElasticsearchDestinationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?domain_arn: String,
+        ?cluster_endpoint: String,
+        ?index_name: String,
+        ?type_name: String,
+        ?index_rotation_period: String,
+        ?buffering_hints: Types::ElasticsearchBufferingHints,
+        ?retry_options: Types::ElasticsearchRetryOptions,
+        ?s3_update: Types::S3DestinationUpdate,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?document_id_options: Types::DocumentIdOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor domain_arn: String?
+      attr_accessor cluster_endpoint: String?
+      attr_accessor index_name: String?
+      attr_accessor type_name: String?
+      attr_accessor index_rotation_period: String?
+      attr_accessor buffering_hints: Types::ElasticsearchBufferingHints?
+      attr_accessor retry_options: Types::ElasticsearchRetryOptions?
+      attr_accessor s3_update: Types::S3DestinationUpdate?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor document_id_options: Types::DocumentIdOptions?
+    end
+
+    module ElasticsearchIndexRotationPeriod
+      NoRotation: String
+      OneHour: String
+      OneDay: String
+      OneWeek: String
+      OneMonth: String
+    end
+
+    class ElasticsearchRetryOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration_in_seconds: Integer?
+    end
+
+    module ElasticsearchS3BackupMode
+      FailedDocumentsOnly: String
+      AllDocuments: String
+    end
+
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?no_encryption_config: String,
+        ?kms_encryption_config: Types::KMSEncryptionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor no_encryption_config: String?
+      attr_accessor kms_encryption_config: Types::KMSEncryptionConfig?
+    end
+
+    class ExtendedS3DestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?bucket_arn: String,
+        ?prefix: String,
+        ?error_output_prefix: String,
+        ?buffering_hints: Types::BufferingHints,
+        ?compression_format: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?s3_backup_mode: String,
+        ?s3_backup_configuration: Types::S3DestinationConfiguration,
+        ?data_format_conversion_configuration: Types::DataFormatConversionConfiguration,
+        ?dynamic_partitioning_configuration: Types::DynamicPartitioningConfiguration,
+        ?file_extension: String,
+        ?custom_time_zone: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor bucket_arn: String?
+      attr_accessor prefix: String?
+      attr_accessor error_output_prefix: String?
+      attr_accessor buffering_hints: Types::BufferingHints?
+      attr_accessor compression_format: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_backup_configuration: Types::S3DestinationConfiguration?
+      attr_accessor data_format_conversion_configuration: Types::DataFormatConversionConfiguration?
+      attr_accessor dynamic_partitioning_configuration: Types::DynamicPartitioningConfiguration?
+      attr_accessor file_extension: String?
+      attr_accessor custom_time_zone: String?
+    end
+
+    class ExtendedS3DestinationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?bucket_arn: String,
+        ?prefix: String,
+        ?error_output_prefix: String,
+        ?buffering_hints: Types::BufferingHints,
+        ?compression_format: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?s3_backup_mode: String,
+        ?s3_backup_description: Types::S3DestinationDescription,
+        ?data_format_conversion_configuration: Types::DataFormatConversionConfiguration,
+        ?dynamic_partitioning_configuration: Types::DynamicPartitioningConfiguration,
+        ?file_extension: String,
+        ?custom_time_zone: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor bucket_arn: String?
+      attr_accessor prefix: String?
+      attr_accessor error_output_prefix: String?
+      attr_accessor buffering_hints: Types::BufferingHints?
+      attr_accessor compression_format: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_backup_description: Types::S3DestinationDescription?
+      attr_accessor data_format_conversion_configuration: Types::DataFormatConversionConfiguration?
+      attr_accessor dynamic_partitioning_configuration: Types::DynamicPartitioningConfiguration?
+      attr_accessor file_extension: String?
+      attr_accessor custom_time_zone: String?
+    end
+
+    class ExtendedS3DestinationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?bucket_arn: String,
+        ?prefix: String,
+        ?error_output_prefix: String,
+        ?buffering_hints: Types::BufferingHints,
+        ?compression_format: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?s3_backup_mode: String,
+        ?s3_backup_update: Types::S3DestinationUpdate,
+        ?data_format_conversion_configuration: Types::DataFormatConversionConfiguration,
+        ?dynamic_partitioning_configuration: Types::DynamicPartitioningConfiguration,
+        ?file_extension: String,
+        ?custom_time_zone: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor bucket_arn: String?
+      attr_accessor prefix: String?
+      attr_accessor error_output_prefix: String?
+      attr_accessor buffering_hints: Types::BufferingHints?
+      attr_accessor compression_format: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_backup_update: Types::S3DestinationUpdate?
+      attr_accessor data_format_conversion_configuration: Types::DataFormatConversionConfiguration?
+      attr_accessor dynamic_partitioning_configuration: Types::DynamicPartitioningConfiguration?
+      attr_accessor file_extension: String?
+      attr_accessor custom_time_zone: String?
+    end
+
+    class FailureDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?details: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor details: String?
+    end
+
+    module HECEndpointType
+      Raw: String
+      Event: String
+    end
+
+    class HiveJsonSerDe
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timestamp_formats: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timestamp_formats: Array[String]?
+    end
+
+    class HttpEndpointBufferingHints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?size_in_m_bs: Integer,
+        ?interval_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor size_in_m_bs: Integer?
+      attr_accessor interval_in_seconds: Integer?
+    end
+
+    class HttpEndpointCommonAttribute
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attribute_name: String,
+        ?attribute_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attribute_name: String?
+      attr_accessor attribute_value: String?
+    end
+
+    class HttpEndpointConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?name: String,
+        ?access_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor name: String?
+      attr_accessor access_key: String?
+    end
+
+    class HttpEndpointDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor name: String?
+    end
+
+    class HttpEndpointDestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_configuration: Types::HttpEndpointConfiguration,
+        ?buffering_hints: Types::HttpEndpointBufferingHints,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?request_configuration: Types::HttpEndpointRequestConfiguration,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?role_arn: String,
+        ?retry_options: Types::HttpEndpointRetryOptions,
+        ?s3_backup_mode: String,
+        ?s3_configuration: Types::S3DestinationConfiguration,
+        ?secrets_manager_configuration: Types::SecretsManagerConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_configuration: Types::HttpEndpointConfiguration?
+      attr_accessor buffering_hints: Types::HttpEndpointBufferingHints?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor request_configuration: Types::HttpEndpointRequestConfiguration?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor role_arn: String?
+      attr_accessor retry_options: Types::HttpEndpointRetryOptions?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_configuration: Types::S3DestinationConfiguration?
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration?
+    end
+
+    class HttpEndpointDestinationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_configuration: Types::HttpEndpointDescription,
+        ?buffering_hints: Types::HttpEndpointBufferingHints,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?request_configuration: Types::HttpEndpointRequestConfiguration,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?role_arn: String,
+        ?retry_options: Types::HttpEndpointRetryOptions,
+        ?s3_backup_mode: String,
+        ?s3_destination_description: Types::S3DestinationDescription,
+        ?secrets_manager_configuration: Types::SecretsManagerConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_configuration: Types::HttpEndpointDescription?
+      attr_accessor buffering_hints: Types::HttpEndpointBufferingHints?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor request_configuration: Types::HttpEndpointRequestConfiguration?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor role_arn: String?
+      attr_accessor retry_options: Types::HttpEndpointRetryOptions?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_destination_description: Types::S3DestinationDescription?
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration?
+    end
+
+    class HttpEndpointDestinationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint_configuration: Types::HttpEndpointConfiguration,
+        ?buffering_hints: Types::HttpEndpointBufferingHints,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?request_configuration: Types::HttpEndpointRequestConfiguration,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?role_arn: String,
+        ?retry_options: Types::HttpEndpointRetryOptions,
+        ?s3_backup_mode: String,
+        ?s3_update: Types::S3DestinationUpdate,
+        ?secrets_manager_configuration: Types::SecretsManagerConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint_configuration: Types::HttpEndpointConfiguration?
+      attr_accessor buffering_hints: Types::HttpEndpointBufferingHints?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor request_configuration: Types::HttpEndpointRequestConfiguration?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor role_arn: String?
+      attr_accessor retry_options: Types::HttpEndpointRetryOptions?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_update: Types::S3DestinationUpdate?
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration?
+    end
+
+    class HttpEndpointRequestConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_encoding: String,
+        ?common_attributes: Array[Types::HttpEndpointCommonAttribute],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_encoding: String?
+      attr_accessor common_attributes: Array[Types::HttpEndpointCommonAttribute]?
+    end
+
+    class HttpEndpointRetryOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration_in_seconds: Integer?
+    end
+
+    module HttpEndpointS3BackupMode
+      FailedDataOnly: String
+      AllData: String
+    end
+
+    class IcebergDestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_table_configuration_list: Array[Types::DestinationTableConfiguration],
+        ?schema_evolution_configuration: Types::SchemaEvolutionConfiguration,
+        ?table_creation_configuration: Types::TableCreationConfiguration,
+        ?buffering_hints: Types::BufferingHints,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?s3_backup_mode: String,
+        ?retry_options: Types::RetryOptions,
+        ?role_arn: String,
+        ?append_only: bool,
+        ?catalog_configuration: Types::CatalogConfiguration,
+        ?s3_configuration: Types::S3DestinationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_table_configuration_list: Array[Types::DestinationTableConfiguration]?
+      attr_accessor schema_evolution_configuration: Types::SchemaEvolutionConfiguration?
+      attr_accessor table_creation_configuration: Types::TableCreationConfiguration?
+      attr_accessor buffering_hints: Types::BufferingHints?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor retry_options: Types::RetryOptions?
+      attr_accessor role_arn: String?
+      attr_accessor append_only: bool?
+      attr_accessor catalog_configuration: Types::CatalogConfiguration?
+      attr_accessor s3_configuration: Types::S3DestinationConfiguration?
+    end
+
+    class IcebergDestinationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_table_configuration_list: Array[Types::DestinationTableConfiguration],
+        ?schema_evolution_configuration: Types::SchemaEvolutionConfiguration,
+        ?table_creation_configuration: Types::TableCreationConfiguration,
+        ?buffering_hints: Types::BufferingHints,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?s3_backup_mode: String,
+        ?retry_options: Types::RetryOptions,
+        ?role_arn: String,
+        ?append_only: bool,
+        ?catalog_configuration: Types::CatalogConfiguration,
+        ?s3_destination_description: Types::S3DestinationDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_table_configuration_list: Array[Types::DestinationTableConfiguration]?
+      attr_accessor schema_evolution_configuration: Types::SchemaEvolutionConfiguration?
+      attr_accessor table_creation_configuration: Types::TableCreationConfiguration?
+      attr_accessor buffering_hints: Types::BufferingHints?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor retry_options: Types::RetryOptions?
+      attr_accessor role_arn: String?
+      attr_accessor append_only: bool?
+      attr_accessor catalog_configuration: Types::CatalogConfiguration?
+      attr_accessor s3_destination_description: Types::S3DestinationDescription?
+    end
+
+    class IcebergDestinationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_table_configuration_list: Array[Types::DestinationTableConfiguration],
+        ?schema_evolution_configuration: Types::SchemaEvolutionConfiguration,
+        ?table_creation_configuration: Types::TableCreationConfiguration,
+        ?buffering_hints: Types::BufferingHints,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?s3_backup_mode: String,
+        ?retry_options: Types::RetryOptions,
+        ?role_arn: String,
+        ?append_only: bool,
+        ?catalog_configuration: Types::CatalogConfiguration,
+        ?s3_configuration: Types::S3DestinationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_table_configuration_list: Array[Types::DestinationTableConfiguration]?
+      attr_accessor schema_evolution_configuration: Types::SchemaEvolutionConfiguration?
+      attr_accessor table_creation_configuration: Types::TableCreationConfiguration?
+      attr_accessor buffering_hints: Types::BufferingHints?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor retry_options: Types::RetryOptions?
+      attr_accessor role_arn: String?
+      attr_accessor append_only: bool?
+      attr_accessor catalog_configuration: Types::CatalogConfiguration?
+      attr_accessor s3_configuration: Types::S3DestinationConfiguration?
+    end
+
+    module IcebergS3BackupMode
+      FailedDataOnly: String
+      AllData: String
+    end
+
+    class InputFormatConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deserializer: Types::Deserializer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deserializer: Types::Deserializer?
+    end
+
+    class InvalidArgumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidKMSResourceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class InvalidSourceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class KMSEncryptionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?awskms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor awskms_key_arn: String?
+    end
+
+    module KeyType
+      AWS_OWNED_CMK: String
+      CUSTOMER_MANAGED_CMK: String
+    end
+
+    class KinesisStreamSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kinesis_stream_arn: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kinesis_stream_arn: String?
+      attr_accessor role_arn: String?
+    end
+
+    class KinesisStreamSourceDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kinesis_stream_arn: String,
+        ?role_arn: String,
+        ?delivery_start_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kinesis_stream_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor delivery_start_timestamp: Time?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListDeliveryStreamsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?limit: Integer,
+        ?delivery_stream_type: String,
+        ?exclusive_start_delivery_stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor limit: Integer?
+      attr_accessor delivery_stream_type: String?
+      attr_accessor exclusive_start_delivery_stream_name: String?
+    end
+
+    class ListDeliveryStreamsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_names: Array[String],
+        ?has_more_delivery_streams: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_names: Array[String]?
+      attr_accessor has_more_delivery_streams: bool?
+    end
+
+    class ListTagsForDeliveryStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_name: String,
+        ?exclusive_start_tag_key: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_name: String?
+      attr_accessor exclusive_start_tag_key: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListTagsForDeliveryStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?has_more_tags: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor has_more_tags: bool?
+    end
+
+    class MSKSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?msk_cluster_arn: String,
+        ?topic_name: String,
+        ?authentication_configuration: Types::AuthenticationConfiguration,
+        ?read_from_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor msk_cluster_arn: String?
+      attr_accessor topic_name: String?
+      attr_accessor authentication_configuration: Types::AuthenticationConfiguration?
+      attr_accessor read_from_timestamp: Time?
+    end
+
+    class MSKSourceDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?msk_cluster_arn: String,
+        ?topic_name: String,
+        ?authentication_configuration: Types::AuthenticationConfiguration,
+        ?delivery_start_timestamp: Time,
+        ?read_from_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor msk_cluster_arn: String?
+      attr_accessor topic_name: String?
+      attr_accessor authentication_configuration: Types::AuthenticationConfiguration?
+      attr_accessor delivery_start_timestamp: Time?
+      attr_accessor read_from_timestamp: Time?
+    end
+
+    module NoEncryptionConfig
+      NoEncryption: String
+    end
+
+    class OpenXJsonSerDe
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?convert_dots_in_json_keys_to_underscores: bool,
+        ?case_insensitive: bool,
+        ?column_to_json_key_mappings: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor convert_dots_in_json_keys_to_underscores: bool?
+      attr_accessor case_insensitive: bool?
+      attr_accessor column_to_json_key_mappings: Hash[String, String]?
+    end
+
+    module OrcCompression
+      NONE: String
+      ZLIB: String
+      SNAPPY: String
+    end
+
+    module OrcFormatVersion
+      V0_11: String
+      V0_12: String
+    end
+
+    class OrcSerDe
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stripe_size_bytes: Integer,
+        ?block_size_bytes: Integer,
+        ?row_index_stride: Integer,
+        ?enable_padding: bool,
+        ?padding_tolerance: Float,
+        ?compression: String,
+        ?bloom_filter_columns: Array[String],
+        ?bloom_filter_false_positive_probability: Float,
+        ?dictionary_key_threshold: Float,
+        ?format_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stripe_size_bytes: Integer?
+      attr_accessor block_size_bytes: Integer?
+      attr_accessor row_index_stride: Integer?
+      attr_accessor enable_padding: bool?
+      attr_accessor padding_tolerance: Float?
+      attr_accessor compression: String?
+      attr_accessor bloom_filter_columns: Array[String]?
+      attr_accessor bloom_filter_false_positive_probability: Float?
+      attr_accessor dictionary_key_threshold: Float?
+      attr_accessor format_version: String?
+    end
+
+    class OutputFormatConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?serializer: Types::Serializer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor serializer: Types::Serializer?
+    end
+
+    module ParquetCompression
+      UNCOMPRESSED: String
+      GZIP: String
+      SNAPPY: String
+    end
+
+    class ParquetSerDe
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?block_size_bytes: Integer,
+        ?page_size_bytes: Integer,
+        ?compression: String,
+        ?enable_dictionary_compression: bool,
+        ?max_padding_bytes: Integer,
+        ?writer_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor block_size_bytes: Integer?
+      attr_accessor page_size_bytes: Integer?
+      attr_accessor compression: String?
+      attr_accessor enable_dictionary_compression: bool?
+      attr_accessor max_padding_bytes: Integer?
+      attr_accessor writer_version: String?
+    end
+
+    module ParquetWriterVersion
+      V1: String
+      V2: String
+    end
+
+    class PartitionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_name: String?
+    end
+
+    class PartitionSpec
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity: Array[Types::PartitionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity: Array[Types::PartitionField]?
+    end
+
+    class ProcessingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?processors: Array[Types::Processor],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor processors: Array[Types::Processor]?
+    end
+
+    class Processor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?parameters: Array[Types::ProcessorParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor parameters: Array[Types::ProcessorParameter]?
+    end
+
+    class ProcessorParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parameter_name: String,
+        ?parameter_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parameter_name: String?
+      attr_accessor parameter_value: String?
+    end
+
+    module ProcessorParameterName
+      LAMBDA_ARN: String
+      LAMBDA_NUMBER_OF_RETRIES: String
+      METADATA_EXTRACTION_QUERY: String
+      JSON_PARSING_ENGINE: String
+      ROLE_ARN: String
+      BUFFER_SIZE_IN_MB: String
+      BUFFER_INTERVAL_IN_SECONDS: String
+      SUB_RECORD_TYPE: String
+      Delimiter: String
+      COMPRESSION_FORMAT: String
+      DATA_MESSAGE_EXTRACTION: String
+    end
+
+    module ProcessorType
+      RecordDeAggregation: String
+      Decompression: String
+      CloudWatchLogProcessing: String
+      Lambda: String
+      MetadataExtraction: String
+      AppendDelimiterToRecord: String
+    end
+
+    class PutRecordBatchInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_name: String,
+        ?records: Array[Types::Record],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_name: String?
+      attr_accessor records: Array[Types::Record]?
+    end
+
+    class PutRecordBatchOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_put_count: Integer,
+        ?encrypted: bool,
+        ?request_responses: Array[Types::PutRecordBatchResponseEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_put_count: Integer?
+      attr_accessor encrypted: bool?
+      attr_accessor request_responses: Array[Types::PutRecordBatchResponseEntry]?
+    end
+
+    class PutRecordBatchResponseEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_id: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_id: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class PutRecordInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_name: String,
+        ?record: Types::Record,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_name: String?
+      attr_accessor record: Types::Record?
+    end
+
+    class PutRecordOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_id: String,
+        ?encrypted: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_id: String?
+      attr_accessor encrypted: bool?
+    end
+
+    class Record
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: String?
+    end
+
+    class RedshiftDestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?cluster_jdbcurl: String,
+        ?copy_command: Types::CopyCommand,
+        ?username: String,
+        ?password: String,
+        ?retry_options: Types::RedshiftRetryOptions,
+        ?s3_configuration: Types::S3DestinationConfiguration,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?s3_backup_mode: String,
+        ?s3_backup_configuration: Types::S3DestinationConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?secrets_manager_configuration: Types::SecretsManagerConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor cluster_jdbcurl: String?
+      attr_accessor copy_command: Types::CopyCommand?
+      attr_accessor username: String?
+      attr_accessor password: String?
+      attr_accessor retry_options: Types::RedshiftRetryOptions?
+      attr_accessor s3_configuration: Types::S3DestinationConfiguration?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_backup_configuration: Types::S3DestinationConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration?
+    end
+
+    class RedshiftDestinationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?cluster_jdbcurl: String,
+        ?copy_command: Types::CopyCommand,
+        ?username: String,
+        ?retry_options: Types::RedshiftRetryOptions,
+        ?s3_destination_description: Types::S3DestinationDescription,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?s3_backup_mode: String,
+        ?s3_backup_description: Types::S3DestinationDescription,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?secrets_manager_configuration: Types::SecretsManagerConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor cluster_jdbcurl: String?
+      attr_accessor copy_command: Types::CopyCommand?
+      attr_accessor username: String?
+      attr_accessor retry_options: Types::RedshiftRetryOptions?
+      attr_accessor s3_destination_description: Types::S3DestinationDescription?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_backup_description: Types::S3DestinationDescription?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration?
+    end
+
+    class RedshiftDestinationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?cluster_jdbcurl: String,
+        ?copy_command: Types::CopyCommand,
+        ?username: String,
+        ?password: String,
+        ?retry_options: Types::RedshiftRetryOptions,
+        ?s3_update: Types::S3DestinationUpdate,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?s3_backup_mode: String,
+        ?s3_backup_update: Types::S3DestinationUpdate,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?secrets_manager_configuration: Types::SecretsManagerConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor cluster_jdbcurl: String?
+      attr_accessor copy_command: Types::CopyCommand?
+      attr_accessor username: String?
+      attr_accessor password: String?
+      attr_accessor retry_options: Types::RedshiftRetryOptions?
+      attr_accessor s3_update: Types::S3DestinationUpdate?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_backup_update: Types::S3DestinationUpdate?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration?
+    end
+
+    class RedshiftRetryOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration_in_seconds: Integer?
+    end
+
+    module RedshiftS3BackupMode
+      Disabled: String
+      Enabled: String
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RetryOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration_in_seconds: Integer?
+    end
+
+    module S3BackupMode
+      Disabled: String
+      Enabled: String
+    end
+
+    class S3DestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?bucket_arn: String,
+        ?prefix: String,
+        ?error_output_prefix: String,
+        ?buffering_hints: Types::BufferingHints,
+        ?compression_format: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor bucket_arn: String?
+      attr_accessor prefix: String?
+      attr_accessor error_output_prefix: String?
+      attr_accessor buffering_hints: Types::BufferingHints?
+      attr_accessor compression_format: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+    end
+
+    class S3DestinationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?bucket_arn: String,
+        ?prefix: String,
+        ?error_output_prefix: String,
+        ?buffering_hints: Types::BufferingHints,
+        ?compression_format: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor bucket_arn: String?
+      attr_accessor prefix: String?
+      attr_accessor error_output_prefix: String?
+      attr_accessor buffering_hints: Types::BufferingHints?
+      attr_accessor compression_format: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+    end
+
+    class S3DestinationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?bucket_arn: String,
+        ?prefix: String,
+        ?error_output_prefix: String,
+        ?buffering_hints: Types::BufferingHints,
+        ?compression_format: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor bucket_arn: String?
+      attr_accessor prefix: String?
+      attr_accessor error_output_prefix: String?
+      attr_accessor buffering_hints: Types::BufferingHints?
+      attr_accessor compression_format: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+    end
+
+    module SSLMode
+      Disabled: String
+      Enabled: String
+    end
+
+    class SchemaConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?catalog_id: String,
+        ?database_name: String,
+        ?table_name: String,
+        ?region: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor catalog_id: String?
+      attr_accessor database_name: String?
+      attr_accessor table_name: String?
+      attr_accessor region: String?
+      attr_accessor version_id: String?
+    end
+
+    class SchemaEvolutionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class SecretsManagerConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_arn: String,
+        ?role_arn: String,
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_arn: String?
+      attr_accessor role_arn: String?
+      attr_accessor enabled: bool?
+    end
+
+    class Serializer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?parquet_ser_de: Types::ParquetSerDe,
+        ?orc_ser_de: Types::OrcSerDe,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor parquet_ser_de: Types::ParquetSerDe?
+      attr_accessor orc_ser_de: Types::OrcSerDe?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SnapshotRequestedBy
+      USER: String
+      FIREHOSE: String
+    end
+
+    module SnapshotStatus
+      IN_PROGRESS: String
+      COMPLETE: String
+      SUSPENDED: String
+    end
+
+    class SnowflakeBufferingHints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?size_in_m_bs: Integer,
+        ?interval_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor size_in_m_bs: Integer?
+      attr_accessor interval_in_seconds: Integer?
+    end
+
+    module SnowflakeDataLoadingOption
+      JSON_MAPPING: String
+      VARIANT_CONTENT_MAPPING: String
+      VARIANT_CONTENT_AND_METADATA_MAPPING: String
+    end
+
+    class SnowflakeDestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_url: String,
+        ?private_key: String,
+        ?key_passphrase: String,
+        ?user: String,
+        ?database: String,
+        ?schema: String,
+        ?table: String,
+        ?snowflake_role_configuration: Types::SnowflakeRoleConfiguration,
+        ?data_loading_option: String,
+        ?meta_data_column_name: String,
+        ?content_column_name: String,
+        ?snowflake_vpc_configuration: Types::SnowflakeVpcConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?role_arn: String,
+        ?retry_options: Types::SnowflakeRetryOptions,
+        ?s3_backup_mode: String,
+        ?s3_configuration: Types::S3DestinationConfiguration,
+        ?secrets_manager_configuration: Types::SecretsManagerConfiguration,
+        ?buffering_hints: Types::SnowflakeBufferingHints,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_url: String?
+      attr_accessor private_key: String?
+      attr_accessor key_passphrase: String?
+      attr_accessor user: String?
+      attr_accessor database: String?
+      attr_accessor schema: String?
+      attr_accessor table: String?
+      attr_accessor snowflake_role_configuration: Types::SnowflakeRoleConfiguration?
+      attr_accessor data_loading_option: String?
+      attr_accessor meta_data_column_name: String?
+      attr_accessor content_column_name: String?
+      attr_accessor snowflake_vpc_configuration: Types::SnowflakeVpcConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor role_arn: String?
+      attr_accessor retry_options: Types::SnowflakeRetryOptions?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_configuration: Types::S3DestinationConfiguration?
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration?
+      attr_accessor buffering_hints: Types::SnowflakeBufferingHints?
+    end
+
+    class SnowflakeDestinationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_url: String,
+        ?user: String,
+        ?database: String,
+        ?schema: String,
+        ?table: String,
+        ?snowflake_role_configuration: Types::SnowflakeRoleConfiguration,
+        ?data_loading_option: String,
+        ?meta_data_column_name: String,
+        ?content_column_name: String,
+        ?snowflake_vpc_configuration: Types::SnowflakeVpcConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?role_arn: String,
+        ?retry_options: Types::SnowflakeRetryOptions,
+        ?s3_backup_mode: String,
+        ?s3_destination_description: Types::S3DestinationDescription,
+        ?secrets_manager_configuration: Types::SecretsManagerConfiguration,
+        ?buffering_hints: Types::SnowflakeBufferingHints,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_url: String?
+      attr_accessor user: String?
+      attr_accessor database: String?
+      attr_accessor schema: String?
+      attr_accessor table: String?
+      attr_accessor snowflake_role_configuration: Types::SnowflakeRoleConfiguration?
+      attr_accessor data_loading_option: String?
+      attr_accessor meta_data_column_name: String?
+      attr_accessor content_column_name: String?
+      attr_accessor snowflake_vpc_configuration: Types::SnowflakeVpcConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor role_arn: String?
+      attr_accessor retry_options: Types::SnowflakeRetryOptions?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_destination_description: Types::S3DestinationDescription?
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration?
+      attr_accessor buffering_hints: Types::SnowflakeBufferingHints?
+    end
+
+    class SnowflakeDestinationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_url: String,
+        ?private_key: String,
+        ?key_passphrase: String,
+        ?user: String,
+        ?database: String,
+        ?schema: String,
+        ?table: String,
+        ?snowflake_role_configuration: Types::SnowflakeRoleConfiguration,
+        ?data_loading_option: String,
+        ?meta_data_column_name: String,
+        ?content_column_name: String,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?role_arn: String,
+        ?retry_options: Types::SnowflakeRetryOptions,
+        ?s3_backup_mode: String,
+        ?s3_update: Types::S3DestinationUpdate,
+        ?secrets_manager_configuration: Types::SecretsManagerConfiguration,
+        ?buffering_hints: Types::SnowflakeBufferingHints,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_url: String?
+      attr_accessor private_key: String?
+      attr_accessor key_passphrase: String?
+      attr_accessor user: String?
+      attr_accessor database: String?
+      attr_accessor schema: String?
+      attr_accessor table: String?
+      attr_accessor snowflake_role_configuration: Types::SnowflakeRoleConfiguration?
+      attr_accessor data_loading_option: String?
+      attr_accessor meta_data_column_name: String?
+      attr_accessor content_column_name: String?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor role_arn: String?
+      attr_accessor retry_options: Types::SnowflakeRetryOptions?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_update: Types::S3DestinationUpdate?
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration?
+      attr_accessor buffering_hints: Types::SnowflakeBufferingHints?
+    end
+
+    class SnowflakeRetryOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration_in_seconds: Integer?
+    end
+
+    class SnowflakeRoleConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?snowflake_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor snowflake_role: String?
+    end
+
+    module SnowflakeS3BackupMode
+      FailedDataOnly: String
+      AllData: String
+    end
+
+    class SnowflakeVpcConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?private_link_vpce_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor private_link_vpce_id: String?
+    end
+
+    class SourceDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?direct_put_source_description: Types::DirectPutSourceDescription,
+        ?kinesis_stream_source_description: Types::KinesisStreamSourceDescription,
+        ?msk_source_description: Types::MSKSourceDescription,
+        ?database_source_description: Types::DatabaseSourceDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor direct_put_source_description: Types::DirectPutSourceDescription?
+      attr_accessor kinesis_stream_source_description: Types::KinesisStreamSourceDescription?
+      attr_accessor msk_source_description: Types::MSKSourceDescription?
+      attr_accessor database_source_description: Types::DatabaseSourceDescription?
+    end
+
+    class SplunkBufferingHints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?interval_in_seconds: Integer,
+        ?size_in_m_bs: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor interval_in_seconds: Integer?
+      attr_accessor size_in_m_bs: Integer?
+    end
+
+    class SplunkDestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hec_endpoint: String,
+        ?hec_endpoint_type: String,
+        ?hec_token: String,
+        ?hec_acknowledgment_timeout_in_seconds: Integer,
+        ?retry_options: Types::SplunkRetryOptions,
+        ?s3_backup_mode: String,
+        ?s3_configuration: Types::S3DestinationConfiguration,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?buffering_hints: Types::SplunkBufferingHints,
+        ?secrets_manager_configuration: Types::SecretsManagerConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hec_endpoint: String?
+      attr_accessor hec_endpoint_type: String?
+      attr_accessor hec_token: String?
+      attr_accessor hec_acknowledgment_timeout_in_seconds: Integer?
+      attr_accessor retry_options: Types::SplunkRetryOptions?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_configuration: Types::S3DestinationConfiguration?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor buffering_hints: Types::SplunkBufferingHints?
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration?
+    end
+
+    class SplunkDestinationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hec_endpoint: String,
+        ?hec_endpoint_type: String,
+        ?hec_token: String,
+        ?hec_acknowledgment_timeout_in_seconds: Integer,
+        ?retry_options: Types::SplunkRetryOptions,
+        ?s3_backup_mode: String,
+        ?s3_destination_description: Types::S3DestinationDescription,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?buffering_hints: Types::SplunkBufferingHints,
+        ?secrets_manager_configuration: Types::SecretsManagerConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hec_endpoint: String?
+      attr_accessor hec_endpoint_type: String?
+      attr_accessor hec_token: String?
+      attr_accessor hec_acknowledgment_timeout_in_seconds: Integer?
+      attr_accessor retry_options: Types::SplunkRetryOptions?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_destination_description: Types::S3DestinationDescription?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor buffering_hints: Types::SplunkBufferingHints?
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration?
+    end
+
+    class SplunkDestinationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hec_endpoint: String,
+        ?hec_endpoint_type: String,
+        ?hec_token: String,
+        ?hec_acknowledgment_timeout_in_seconds: Integer,
+        ?retry_options: Types::SplunkRetryOptions,
+        ?s3_backup_mode: String,
+        ?s3_update: Types::S3DestinationUpdate,
+        ?processing_configuration: Types::ProcessingConfiguration,
+        ?cloud_watch_logging_options: Types::CloudWatchLoggingOptions,
+        ?buffering_hints: Types::SplunkBufferingHints,
+        ?secrets_manager_configuration: Types::SecretsManagerConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hec_endpoint: String?
+      attr_accessor hec_endpoint_type: String?
+      attr_accessor hec_token: String?
+      attr_accessor hec_acknowledgment_timeout_in_seconds: Integer?
+      attr_accessor retry_options: Types::SplunkRetryOptions?
+      attr_accessor s3_backup_mode: String?
+      attr_accessor s3_update: Types::S3DestinationUpdate?
+      attr_accessor processing_configuration: Types::ProcessingConfiguration?
+      attr_accessor cloud_watch_logging_options: Types::CloudWatchLoggingOptions?
+      attr_accessor buffering_hints: Types::SplunkBufferingHints?
+      attr_accessor secrets_manager_configuration: Types::SecretsManagerConfiguration?
+    end
+
+    class SplunkRetryOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration_in_seconds: Integer?
+    end
+
+    module SplunkS3BackupMode
+      FailedEventsOnly: String
+      AllEvents: String
+    end
+
+    class StartDeliveryStreamEncryptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_name: String,
+        ?delivery_stream_encryption_configuration_input: Types::DeliveryStreamEncryptionConfigurationInput,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_name: String?
+      attr_accessor delivery_stream_encryption_configuration_input: Types::DeliveryStreamEncryptionConfigurationInput?
+    end
+
+    class StartDeliveryStreamEncryptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopDeliveryStreamEncryptionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_name: String?
+    end
+
+    class StopDeliveryStreamEncryptionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TableCreationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagDeliveryStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagDeliveryStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UntagDeliveryStreamInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_name: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_name: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagDeliveryStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDestinationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delivery_stream_name: String,
+        ?current_delivery_stream_version_id: String,
+        ?destination_id: String,
+        ?s3_destination_update: Types::S3DestinationUpdate,
+        ?extended_s3_destination_update: Types::ExtendedS3DestinationUpdate,
+        ?redshift_destination_update: Types::RedshiftDestinationUpdate,
+        ?elasticsearch_destination_update: Types::ElasticsearchDestinationUpdate,
+        ?amazonopensearchservice_destination_update: Types::AmazonopensearchserviceDestinationUpdate,
+        ?splunk_destination_update: Types::SplunkDestinationUpdate,
+        ?http_endpoint_destination_update: Types::HttpEndpointDestinationUpdate,
+        ?amazon_open_search_serverless_destination_update: Types::AmazonOpenSearchServerlessDestinationUpdate,
+        ?snowflake_destination_update: Types::SnowflakeDestinationUpdate,
+        ?iceberg_destination_update: Types::IcebergDestinationUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delivery_stream_name: String?
+      attr_accessor current_delivery_stream_version_id: String?
+      attr_accessor destination_id: String?
+      attr_accessor s3_destination_update: Types::S3DestinationUpdate?
+      attr_accessor extended_s3_destination_update: Types::ExtendedS3DestinationUpdate?
+      attr_accessor redshift_destination_update: Types::RedshiftDestinationUpdate?
+      attr_accessor elasticsearch_destination_update: Types::ElasticsearchDestinationUpdate?
+      attr_accessor amazonopensearchservice_destination_update: Types::AmazonopensearchserviceDestinationUpdate?
+      attr_accessor splunk_destination_update: Types::SplunkDestinationUpdate?
+      attr_accessor http_endpoint_destination_update: Types::HttpEndpointDestinationUpdate?
+      attr_accessor amazon_open_search_serverless_destination_update: Types::AmazonOpenSearchServerlessDestinationUpdate?
+      attr_accessor snowflake_destination_update: Types::SnowflakeDestinationUpdate?
+      attr_accessor iceberg_destination_update: Types::IcebergDestinationUpdate?
+    end
+
+    class UpdateDestinationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class VpcConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?role_arn: String,
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor role_arn: String?
+      attr_accessor security_group_ids: Array[String]?
+    end
+
+    class VpcConfigurationDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subnet_ids: Array[String],
+        ?role_arn: String,
+        ?security_group_ids: Array[String],
+        ?vpc_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor role_arn: String?
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor vpc_id: String?
+    end
+  end
+end

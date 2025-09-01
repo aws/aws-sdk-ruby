@@ -1,0 +1,349 @@
+module Aws::CostandUsageReportService
+  module Types
+
+    module AWSRegion
+      CAPE_TOWN: String
+      HONG_KONG: String
+      MUMBAI: String
+      HYDERABAD: String
+      SINGAPORE: String
+      SYDNEY: String
+      JAKARTA: String
+      TOKYO: String
+      SEOUL: String
+      OSAKA: String
+      CANADA_CENTRAL: String
+      FRANKFURT: String
+      ZURICH: String
+      IRELAND: String
+      LONDON: String
+      PARIS: String
+      STOCKHOLM: String
+      MILANO: String
+      SPAIN: String
+      UAE: String
+      BAHRAIN: String
+      SAO_PAULO: String
+      US_STANDARD: String
+      OHIO: String
+      NORTHERN_CALIFORNIA: String
+      OREGON: String
+      BEIJING: String
+      NINGXIA: String
+    end
+
+    module AdditionalArtifact
+      REDSHIFT: String
+      QUICKSIGHT: String
+      ATHENA: String
+    end
+
+    module CompressionFormat
+      ZIP: String
+      GZIP: String
+      Parquet: String
+    end
+
+    class DeleteReportDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_name: String?
+    end
+
+    class DeleteReportDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?response_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor response_message: String?
+    end
+
+    class DescribeReportDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeReportDefinitionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_definitions: Array[Types::ReportDefinition],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_definitions: Array[Types::ReportDefinition]?
+      attr_accessor next_token: String?
+    end
+
+    class DuplicateReportNameException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InternalErrorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module LastStatus
+      SUCCESS: String
+      ERROR_PERMISSIONS: String
+      ERROR_NO_BUCKET: String
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_name: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ModifyReportDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_name: String,
+        ?report_definition: Types::ReportDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_name: String?
+      attr_accessor report_definition: Types::ReportDefinition?
+    end
+
+    class ModifyReportDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class PutReportDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_definition: Types::ReportDefinition,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_definition: Types::ReportDefinition?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutReportDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ReportDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_name: String,
+        ?time_unit: String,
+        ?format: String,
+        ?compression: String,
+        ?additional_schema_elements: Array[String],
+        ?s3_bucket: String,
+        ?s3_prefix: String,
+        ?s3_region: String,
+        ?additional_artifacts: Array[String],
+        ?refresh_closed_reports: bool,
+        ?report_versioning: String,
+        ?billing_view_arn: String,
+        ?report_status: Types::ReportStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_name: String?
+      attr_accessor time_unit: String?
+      attr_accessor format: String?
+      attr_accessor compression: String?
+      attr_accessor additional_schema_elements: Array[String]?
+      attr_accessor s3_bucket: String?
+      attr_accessor s3_prefix: String?
+      attr_accessor s3_region: String?
+      attr_accessor additional_artifacts: Array[String]?
+      attr_accessor refresh_closed_reports: bool?
+      attr_accessor report_versioning: String?
+      attr_accessor billing_view_arn: String?
+      attr_accessor report_status: Types::ReportStatus?
+    end
+
+    module ReportFormat
+      CSV: String
+      Parquet: String
+    end
+
+    class ReportLimitReachedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReportStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?last_delivery: String,
+        ?last_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor last_delivery: String?
+      attr_accessor last_status: String?
+    end
+
+    module ReportVersioning
+      CREATE_NEW_REPORT: String
+      OVERWRITE_REPORT: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SchemaElement
+      RESOURCES: String
+      SPLIT_COST_ALLOCATION_DATA: String
+      MANUAL_DISCOUNT_COMPATIBILITY: String
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module TimeUnit
+      HOURLY: String
+      DAILY: String
+      MONTHLY: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?report_name: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor report_name: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

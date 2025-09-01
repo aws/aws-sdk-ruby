@@ -1,0 +1,43 @@
+module Aws::EventBridge
+  module Errors
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IllegalStatusException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidEventPatternException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ManagedRuleException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationDisabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PolicyLengthExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

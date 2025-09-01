@@ -1,0 +1,5 @@
+  module Aws
+    module WorkDocs
+      VERSION: String
+    end
+  end

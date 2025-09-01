@@ -1,0 +1,2599 @@
+module Aws::BedrockAgent
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::BedrockAgent::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateAgentCollaboratorResponse
+      include Smithy::Client::_Response[Types::AssociateAgentCollaboratorResponse]
+      def agent_collaborator: () -> Types::AgentCollaborator?
+    end
+    def associate_agent_collaborator: (
+      ?agent_id: String,
+      ?agent_version: String,
+      ?agent_descriptor: {
+        alias_arn: String
+      },
+      ?collaborator_name: String,
+      ?collaboration_instruction: String,
+      ?relay_conversation_history: String,
+      ?client_token: String
+    ) -> _AssociateAgentCollaboratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateAgentCollaboratorResponse
+
+    interface _AssociateAgentKnowledgeBaseResponse
+      include Smithy::Client::_Response[Types::AssociateAgentKnowledgeBaseResponse]
+      def agent_knowledge_base: () -> Types::AgentKnowledgeBase?
+    end
+    def associate_agent_knowledge_base: (
+      ?agent_id: String,
+      ?agent_version: String,
+      ?knowledge_base_id: String,
+      ?description: String,
+      ?knowledge_base_state: String
+    ) -> _AssociateAgentKnowledgeBaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateAgentKnowledgeBaseResponse
+
+    interface _CreateAgentResponse
+      include Smithy::Client::_Response[Types::CreateAgentResponse]
+      def agent: () -> Types::Agent?
+    end
+    def create_agent: (
+      ?agent_name: String,
+      ?client_token: String,
+      ?instruction: String,
+      ?foundation_model: String,
+      ?description: String,
+      ?orchestration_type: String,
+      ?custom_orchestration: {
+        executor: {
+          lambda: String
+        }
+      },
+      ?idle_session_ttl_in_seconds: Integer,
+      ?agent_resource_role_arn: String,
+      ?customer_encryption_key_arn: String,
+      ?tags: Hash[String, String],
+      ?prompt_override_configuration: {
+        prompt_configurations: Array[
+          {
+            prompt_type: String,
+            prompt_creation_mode: String,
+            prompt_state: String,
+            base_prompt_template: String,
+            inference_configuration: {
+              temperature: Float,
+              top_p: Float,
+              top_k: Integer,
+              maximum_length: Integer,
+              stop_sequences: Array[String]
+            },
+            parser_mode: untyped,
+            foundation_model: String,
+            additional_model_request_fields: Smithy::Schema::document
+          }
+        ],
+        override_lambda: String
+      },
+      ?guardrail_configuration: {
+        guardrail_identifier: String,
+        guardrail_version: String
+      },
+      ?memory_configuration: {
+        enabled_memory_types: Array[String],
+        storage_days: Integer,
+        session_summary_configuration: {
+          max_recent_sessions: Integer
+        }
+      },
+      ?agent_collaboration: String
+    ) -> _CreateAgentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAgentResponse
+
+    interface _CreateAgentActionGroupResponse
+      include Smithy::Client::_Response[Types::CreateAgentActionGroupResponse]
+      def agent_action_group: () -> Types::AgentActionGroup?
+    end
+    def create_agent_action_group: (
+      ?agent_id: String,
+      ?agent_version: String,
+      ?action_group_name: String,
+      ?client_token: String,
+      ?description: String,
+      ?parent_action_group_signature: String,
+      ?parent_action_group_signature_params: Hash[String, String],
+      ?action_group_executor: {
+        lambda: String,
+        custom_control: String
+      },
+      ?api_schema: {
+        s3: {
+          s3_bucket_name: String,
+          s3_object_key: String
+        },
+        payload: String
+      },
+      ?action_group_state: String,
+      ?function_schema: {
+        functions: Array[
+          {
+            name: String,
+            description: String,
+            parameters: Hash[String,
+              {
+                description: String,
+                type: String,
+                required: bool
+              }
+            ],
+            require_confirmation: String
+          }
+        ]
+      }
+    ) -> _CreateAgentActionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAgentActionGroupResponse
+
+    interface _CreateAgentAliasResponse
+      include Smithy::Client::_Response[Types::CreateAgentAliasResponse]
+      def agent_alias: () -> Types::AgentAlias?
+    end
+    def create_agent_alias: (
+      ?agent_id: String,
+      ?agent_alias_name: String,
+      ?client_token: String,
+      ?description: String,
+      ?routing_configuration: Array[
+        {
+          agent_version: String,
+          provisioned_throughput: String
+        }
+      ],
+      ?tags: Hash[String, String]
+    ) -> _CreateAgentAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAgentAliasResponse
+
+    interface _CreateDataSourceResponse
+      include Smithy::Client::_Response[Types::CreateDataSourceResponse]
+      def data_source: () -> Types::DataSource?
+    end
+    def create_data_source: (
+      ?knowledge_base_id: String,
+      ?client_token: String,
+      ?name: String,
+      ?description: String,
+      ?data_source_configuration: {
+        type: String,
+        s3_configuration: {
+          bucket_arn: String,
+          inclusion_prefixes: Array[String],
+          bucket_owner_account_id: String
+        },
+        web_configuration: {
+          source_configuration: {
+            url_configuration: {
+              seed_urls: Array[
+                {
+                  url: String
+                }
+              ]
+            }
+          },
+          crawler_configuration: {
+            crawler_limits: {
+              rate_limit: Integer,
+              max_pages: untyped
+            },
+            inclusion_filters: Array[String],
+            exclusion_filters: untyped,
+            scope: String,
+            user_agent: String,
+            user_agent_header: String
+          }
+        },
+        confluence_configuration: {
+          source_configuration: {
+            host_url: String,
+            host_type: String,
+            auth_type: String,
+            credentials_secret_arn: String
+          },
+          crawler_configuration: {
+            filter_configuration: {
+              type: String,
+              pattern_object_filter: {
+                filters: Array[
+                  {
+                    object_type: String,
+                    inclusion_filters: untyped,
+                    exclusion_filters: untyped
+                  }
+                ]
+              }
+            }
+          }
+        },
+        salesforce_configuration: {
+          source_configuration: {
+            host_url: untyped,
+            auth_type: String,
+            credentials_secret_arn: untyped
+          },
+          crawler_configuration: {
+            filter_configuration: untyped
+          }
+        },
+        share_point_configuration: {
+          source_configuration: {
+            tenant_id: String,
+            domain: String,
+            site_urls: Array[String],
+            host_type: String,
+            auth_type: String,
+            credentials_secret_arn: untyped
+          },
+          crawler_configuration: {
+            filter_configuration: untyped
+          }
+        }
+      },
+      ?data_deletion_policy: String,
+      ?server_side_encryption_configuration: {
+        kms_key_arn: String
+      },
+      ?vector_ingestion_configuration: {
+        chunking_configuration: {
+          chunking_strategy: String,
+          fixed_size_chunking_configuration: {
+            max_tokens: Integer,
+            overlap_percentage: untyped
+          },
+          hierarchical_chunking_configuration: {
+            level_configurations: Array[
+              {
+                max_tokens: untyped
+              }
+            ],
+            overlap_tokens: untyped
+          },
+          semantic_chunking_configuration: {
+            max_tokens: untyped,
+            buffer_size: untyped,
+            breakpoint_percentile_threshold: untyped
+          }
+        },
+        custom_transformation_configuration: {
+          intermediate_storage: {
+            s3_location: {
+              uri: String
+            }
+          },
+          transformations: Array[
+            {
+              transformation_function: {
+                transformation_lambda_configuration: {
+                  lambda_arn: String
+                }
+              },
+              step_to_apply: String
+            }
+          ]
+        },
+        parsing_configuration: {
+          parsing_strategy: String,
+          bedrock_foundation_model_configuration: {
+            model_arn: String,
+            parsing_prompt: {
+              parsing_prompt_text: String
+            },
+            parsing_modality: String
+          },
+          bedrock_data_automation_configuration: {
+            parsing_modality: untyped
+          }
+        },
+        context_enrichment_configuration: {
+          type: String,
+          bedrock_foundation_model_configuration: {
+            enrichment_strategy_configuration: {
+              method: String
+            },
+            model_arn: untyped
+          }
+        }
+      }
+    ) -> _CreateDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataSourceResponse
+
+    interface _CreateFlowResponse
+      include Smithy::Client::_Response[Types::CreateFlowResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def execution_role_arn: () -> String?
+      def customer_encryption_key_arn: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def version: () -> String?
+      def definition: () -> Types::FlowDefinition?
+    end
+    def create_flow: (
+      ?name: String,
+      ?description: String,
+      ?execution_role_arn: String,
+      ?customer_encryption_key_arn: String,
+      ?definition: {
+        nodes: Array[
+          {
+            name: String,
+            type: String,
+            configuration: {
+              input: {
+              },
+              output: {
+              },
+              knowledge_base: {
+                knowledge_base_id: String,
+                model_id: String,
+                guardrail_configuration: {
+                  guardrail_identifier: String,
+                  guardrail_version: String
+                },
+                number_of_results: Integer,
+                prompt_template: {
+                  text_prompt_template: String
+                },
+                inference_configuration: {
+                  text: {
+                    temperature: Float,
+                    top_p: Float,
+                    max_tokens: Integer,
+                    stop_sequences: Array[String]
+                  }
+                },
+                reranking_configuration: {
+                  type: String,
+                  bedrock_reranking_configuration: {
+                    model_configuration: {
+                      model_arn: String,
+                      additional_model_request_fields: Hash[String, Smithy::Schema::document]
+                    },
+                    number_of_reranked_results: untyped,
+                    metadata_configuration: {
+                      selection_mode: String,
+                      selective_mode_configuration: {
+                        fields_to_include: Array[
+                          {
+                            field_name: String
+                          }
+                        ],
+                        fields_to_exclude: untyped
+                      }
+                    }
+                  }
+                },
+                orchestration_configuration: {
+                  prompt_template: untyped,
+                  inference_config: untyped,
+                  additional_model_request_fields: untyped,
+                  performance_config: {
+                    latency: String
+                  }
+                }
+              },
+              condition: {
+                conditions: Array[
+                  {
+                    name: String,
+                    expression: String
+                  }
+                ]
+              },
+              lex: {
+                bot_alias_arn: String,
+                locale_id: String
+              },
+              prompt: {
+                source_configuration: {
+                  resource: {
+                    prompt_arn: String
+                  },
+                  inline: {
+                    template_type: String,
+                    template_configuration: {
+                      text: {
+                        text: String,
+                        cache_point: {
+                          type: String
+                        },
+                        input_variables: Array[
+                          {
+                            name: String
+                          }
+                        ]
+                      },
+                      chat: {
+                        messages: Array[
+                          {
+                            role: String,
+                            content: Array[
+                              {
+                                text: untyped,
+                                cache_point: untyped
+                              }
+                            ]
+                          }
+                        ],
+                        system: Array[
+                          {
+                            text: String,
+                            cache_point: untyped
+                          }
+                        ],
+                        input_variables: untyped,
+                        tool_configuration: {
+                          tools: Array[
+                            {
+                              tool_spec: {
+                                name: String,
+                                description: untyped,
+                                input_schema: {
+                                  json: Smithy::Schema::document
+                                }
+                              },
+                              cache_point: untyped
+                            }
+                          ],
+                          tool_choice: {
+                            auto: {
+                            },
+                            any: {
+                            },
+                            tool: {
+                              name: untyped
+                            }
+                          }
+                        }
+                      }
+                    },
+                    model_id: String,
+                    inference_configuration: untyped,
+                    additional_model_request_fields: untyped
+                  }
+                },
+                guardrail_configuration: untyped
+              },
+              lambda_function: {
+                lambda_arn: String
+              },
+              storage: {
+                service_configuration: {
+                  s3: {
+                    bucket_name: String
+                  }
+                }
+              },
+              agent: {
+                agent_alias_arn: String
+              },
+              retrieval: {
+                service_configuration: {
+                  s3: {
+                    bucket_name: untyped
+                  }
+                }
+              },
+              iterator: {
+              },
+              collector: {
+              },
+              inline_code: {
+                code: String,
+                language: String
+              },
+              loop: {
+                definition: untyped
+              },
+              loop_input: {
+              },
+              loop_controller: {
+                continue_condition: {
+                  name: untyped,
+                  expression: untyped
+                },
+                max_iterations: untyped
+              }
+            },
+            inputs: Array[
+              {
+                name: String,
+                type: String,
+                expression: String,
+                category: String
+              }
+            ],
+            outputs: Array[
+              {
+                name: String,
+                type: untyped
+              }
+            ]
+          }
+        ],
+        connections: Array[
+          {
+            type: String,
+            name: String,
+            source: untyped,
+            target: untyped,
+            configuration: {
+              data: {
+                source_output: untyped,
+                target_input: untyped
+              },
+              conditional: {
+                condition: untyped
+              }
+            }
+          }
+        ]
+      },
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFlowResponse
+
+    interface _CreateFlowAliasResponse
+      include Smithy::Client::_Response[Types::CreateFlowAliasResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def routing_configuration: () -> Array[Types::FlowAliasRoutingConfigurationListItem]?
+      def concurrency_configuration: () -> Types::FlowAliasConcurrencyConfiguration?
+      def flow_id: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def create_flow_alias: (
+      ?name: String,
+      ?description: String,
+      ?routing_configuration: Array[
+        {
+          flow_version: String
+        }
+      ],
+      ?concurrency_configuration: {
+        type: String,
+        max_concurrency: Integer
+      },
+      ?flow_identifier: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateFlowAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFlowAliasResponse
+
+    interface _CreateFlowVersionResponse
+      include Smithy::Client::_Response[Types::CreateFlowVersionResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def execution_role_arn: () -> String?
+      def customer_encryption_key_arn: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def version: () -> String?
+      def definition: () -> Types::FlowDefinition?
+    end
+    def create_flow_version: (
+      ?flow_identifier: String,
+      ?description: String,
+      ?client_token: String
+    ) -> _CreateFlowVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFlowVersionResponse
+
+    interface _CreateKnowledgeBaseResponse
+      include Smithy::Client::_Response[Types::CreateKnowledgeBaseResponse]
+      def knowledge_base: () -> Types::KnowledgeBase?
+    end
+    def create_knowledge_base: (
+      ?client_token: String,
+      ?name: String,
+      ?description: String,
+      ?role_arn: String,
+      ?knowledge_base_configuration: {
+        type: String,
+        vector_knowledge_base_configuration: {
+          embedding_model_arn: String,
+          embedding_model_configuration: {
+            bedrock_embedding_model_configuration: {
+              dimensions: Integer,
+              embedding_data_type: String
+            }
+          },
+          supplemental_data_storage_configuration: {
+            storage_locations: Array[
+              {
+                type: String,
+                s3_location: {
+                  uri: String
+                }
+              }
+            ]
+          }
+        },
+        kendra_knowledge_base_configuration: {
+          kendra_index_arn: String
+        },
+        sql_knowledge_base_configuration: {
+          type: String,
+          redshift_configuration: {
+            storage_configurations: Array[
+              {
+                type: String,
+                aws_data_catalog_configuration: {
+                  table_names: Array[String]
+                },
+                redshift_configuration: {
+                  database_name: String
+                }
+              }
+            ],
+            query_engine_configuration: {
+              type: String,
+              serverless_configuration: {
+                workgroup_arn: String,
+                auth_configuration: {
+                  type: String,
+                  username_password_secret_arn: String
+                }
+              },
+              provisioned_configuration: {
+                cluster_identifier: String,
+                auth_configuration: {
+                  type: String,
+                  database_user: String,
+                  username_password_secret_arn: untyped
+                }
+              }
+            },
+            query_generation_configuration: {
+              execution_timeout_seconds: Integer,
+              generation_context: {
+                tables: Array[
+                  {
+                    name: String,
+                    description: String,
+                    inclusion: String,
+                    columns: Array[
+                      {
+                        name: String,
+                        description: untyped,
+                        inclusion: untyped
+                      }
+                    ]
+                  }
+                ],
+                curated_queries: Array[
+                  {
+                    natural_language: String,
+                    sql: String
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      ?storage_configuration: {
+        type: String,
+        opensearch_serverless_configuration: {
+          collection_arn: String,
+          vector_index_name: String,
+          field_mapping: {
+            vector_field: String,
+            text_field: untyped,
+            metadata_field: untyped
+          }
+        },
+        opensearch_managed_cluster_configuration: {
+          domain_endpoint: String,
+          domain_arn: String,
+          vector_index_name: String,
+          field_mapping: {
+            vector_field: untyped,
+            text_field: untyped,
+            metadata_field: untyped
+          }
+        },
+        pinecone_configuration: {
+          connection_string: String,
+          credentials_secret_arn: String,
+          namespace: String,
+          field_mapping: {
+            text_field: untyped,
+            metadata_field: untyped
+          }
+        },
+        redis_enterprise_cloud_configuration: {
+          endpoint: String,
+          vector_index_name: String,
+          credentials_secret_arn: untyped,
+          field_mapping: {
+            vector_field: untyped,
+            text_field: untyped,
+            metadata_field: untyped
+          }
+        },
+        rds_configuration: {
+          resource_arn: String,
+          credentials_secret_arn: untyped,
+          database_name: String,
+          table_name: String,
+          field_mapping: {
+            primary_key_field: String,
+            vector_field: untyped,
+            text_field: untyped,
+            metadata_field: untyped,
+            custom_metadata_field: untyped
+          }
+        },
+        mongo_db_atlas_configuration: {
+          endpoint: String,
+          database_name: String,
+          collection_name: String,
+          vector_index_name: String,
+          credentials_secret_arn: untyped,
+          field_mapping: {
+            vector_field: untyped,
+            text_field: untyped,
+            metadata_field: untyped
+          },
+          endpoint_service_name: String,
+          text_index_name: untyped
+        },
+        neptune_analytics_configuration: {
+          graph_arn: String,
+          field_mapping: {
+            text_field: untyped,
+            metadata_field: untyped
+          }
+        },
+        s3_vectors_configuration: {
+          vector_bucket_arn: String,
+          index_arn: String,
+          index_name: String
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateKnowledgeBaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateKnowledgeBaseResponse
+
+    interface _CreatePromptResponse
+      include Smithy::Client::_Response[Types::CreatePromptResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def customer_encryption_key_arn: () -> String?
+      def default_variant: () -> String?
+      def variants: () -> Array[Types::PromptVariant]?
+      def id: () -> String?
+      def arn: () -> String?
+      def version: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def create_prompt: (
+      ?name: String,
+      ?description: String,
+      ?customer_encryption_key_arn: String,
+      ?default_variant: String,
+      ?variants: Array[
+        {
+          name: String,
+          template_type: String,
+          template_configuration: {
+            text: {
+              text: String,
+              cache_point: {
+                type: String
+              },
+              input_variables: Array[
+                {
+                  name: String
+                }
+              ]
+            },
+            chat: {
+              messages: Array[
+                {
+                  role: String,
+                  content: Array[
+                    {
+                      text: String,
+                      cache_point: untyped
+                    }
+                  ]
+                }
+              ],
+              system: Array[
+                {
+                  text: String,
+                  cache_point: untyped
+                }
+              ],
+              input_variables: untyped,
+              tool_configuration: {
+                tools: Array[
+                  {
+                    tool_spec: {
+                      name: String,
+                      description: untyped,
+                      input_schema: {
+                        json: Smithy::Schema::document
+                      }
+                    },
+                    cache_point: untyped
+                  }
+                ],
+                tool_choice: {
+                  auto: {
+                  },
+                  any: {
+                  },
+                  tool: {
+                    name: untyped
+                  }
+                }
+              }
+            }
+          },
+          model_id: String,
+          inference_configuration: {
+            text: {
+              temperature: Float,
+              top_p: Float,
+              max_tokens: Integer,
+              stop_sequences: Array[String]
+            }
+          },
+          metadata: Array[
+            {
+              key: String,
+              value: String
+            }
+          ],
+          additional_model_request_fields: untyped,
+          gen_ai_resource: {
+            agent: {
+              agent_identifier: String
+            }
+          }
+        }
+      ],
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreatePromptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePromptResponse
+
+    interface _CreatePromptVersionResponse
+      include Smithy::Client::_Response[Types::CreatePromptVersionResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def customer_encryption_key_arn: () -> String?
+      def default_variant: () -> String?
+      def variants: () -> Array[Types::PromptVariant]?
+      def id: () -> String?
+      def arn: () -> String?
+      def version: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def create_prompt_version: (
+      ?prompt_identifier: String,
+      ?description: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreatePromptVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePromptVersionResponse
+
+    interface _DeleteAgentResponse
+      include Smithy::Client::_Response[Types::DeleteAgentResponse]
+      def agent_id: () -> String?
+      def agent_status: () -> String?
+    end
+    def delete_agent: (
+      ?agent_id: String,
+      ?skip_resource_in_use_check: bool
+    ) -> _DeleteAgentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAgentResponse
+
+    interface _DeleteAgentActionGroupResponse
+      include Smithy::Client::_Response[Types::DeleteAgentActionGroupResponse]
+    end
+    def delete_agent_action_group: (
+      ?agent_id: String,
+      ?agent_version: String,
+      ?action_group_id: String,
+      ?skip_resource_in_use_check: bool
+    ) -> _DeleteAgentActionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAgentActionGroupResponse
+
+    interface _DeleteAgentAliasResponse
+      include Smithy::Client::_Response[Types::DeleteAgentAliasResponse]
+      def agent_id: () -> String?
+      def agent_alias_id: () -> String?
+      def agent_alias_status: () -> String?
+    end
+    def delete_agent_alias: (
+      ?agent_id: String,
+      ?agent_alias_id: String
+    ) -> _DeleteAgentAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAgentAliasResponse
+
+    interface _DeleteAgentVersionResponse
+      include Smithy::Client::_Response[Types::DeleteAgentVersionResponse]
+      def agent_id: () -> String?
+      def agent_version: () -> String?
+      def agent_status: () -> String?
+    end
+    def delete_agent_version: (
+      ?agent_id: String,
+      ?agent_version: String,
+      ?skip_resource_in_use_check: bool
+    ) -> _DeleteAgentVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAgentVersionResponse
+
+    interface _DeleteDataSourceResponse
+      include Smithy::Client::_Response[Types::DeleteDataSourceResponse]
+      def knowledge_base_id: () -> String?
+      def data_source_id: () -> String?
+      def status: () -> String?
+    end
+    def delete_data_source: (
+      ?knowledge_base_id: String,
+      ?data_source_id: String
+    ) -> _DeleteDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataSourceResponse
+
+    interface _DeleteFlowResponse
+      include Smithy::Client::_Response[Types::DeleteFlowResponse]
+      def id: () -> String?
+    end
+    def delete_flow: (
+      ?flow_identifier: String,
+      ?skip_resource_in_use_check: bool
+    ) -> _DeleteFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFlowResponse
+
+    interface _DeleteFlowAliasResponse
+      include Smithy::Client::_Response[Types::DeleteFlowAliasResponse]
+      def flow_id: () -> String?
+      def id: () -> String?
+    end
+    def delete_flow_alias: (
+      ?flow_identifier: String,
+      ?alias_identifier: String
+    ) -> _DeleteFlowAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFlowAliasResponse
+
+    interface _DeleteFlowVersionResponse
+      include Smithy::Client::_Response[Types::DeleteFlowVersionResponse]
+      def id: () -> String?
+      def version: () -> String?
+    end
+    def delete_flow_version: (
+      ?flow_identifier: String,
+      ?flow_version: String,
+      ?skip_resource_in_use_check: bool
+    ) -> _DeleteFlowVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFlowVersionResponse
+
+    interface _DeleteKnowledgeBaseResponse
+      include Smithy::Client::_Response[Types::DeleteKnowledgeBaseResponse]
+      def knowledge_base_id: () -> String?
+      def status: () -> String?
+    end
+    def delete_knowledge_base: (
+      ?knowledge_base_id: String
+    ) -> _DeleteKnowledgeBaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKnowledgeBaseResponse
+
+    interface _DeleteKnowledgeBaseDocumentsResponse
+      include Smithy::Client::_Response[Types::DeleteKnowledgeBaseDocumentsResponse]
+      def document_details: () -> Array[Types::KnowledgeBaseDocumentDetail]?
+    end
+    def delete_knowledge_base_documents: (
+      ?knowledge_base_id: String,
+      ?data_source_id: String,
+      ?client_token: String,
+      ?document_identifiers: Array[
+        {
+          data_source_type: String,
+          s3: {
+            uri: String
+          },
+          custom: {
+            id: String
+          }
+        }
+      ]
+    ) -> _DeleteKnowledgeBaseDocumentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKnowledgeBaseDocumentsResponse
+
+    interface _DeletePromptResponse
+      include Smithy::Client::_Response[Types::DeletePromptResponse]
+      def id: () -> String?
+      def version: () -> String?
+    end
+    def delete_prompt: (
+      ?prompt_identifier: String,
+      ?prompt_version: String
+    ) -> _DeletePromptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePromptResponse
+
+    interface _DisassociateAgentCollaboratorResponse
+      include Smithy::Client::_Response[Types::DisassociateAgentCollaboratorResponse]
+    end
+    def disassociate_agent_collaborator: (
+      ?agent_id: String,
+      ?agent_version: String,
+      ?collaborator_id: String
+    ) -> _DisassociateAgentCollaboratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateAgentCollaboratorResponse
+
+    interface _DisassociateAgentKnowledgeBaseResponse
+      include Smithy::Client::_Response[Types::DisassociateAgentKnowledgeBaseResponse]
+    end
+    def disassociate_agent_knowledge_base: (
+      ?agent_id: String,
+      ?agent_version: String,
+      ?knowledge_base_id: String
+    ) -> _DisassociateAgentKnowledgeBaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateAgentKnowledgeBaseResponse
+
+    interface _GetAgentResponse
+      include Smithy::Client::_Response[Types::GetAgentResponse]
+      def agent: () -> Types::Agent?
+    end
+    def get_agent: (
+      ?agent_id: String
+    ) -> _GetAgentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgentResponse
+
+    interface _GetAgentActionGroupResponse
+      include Smithy::Client::_Response[Types::GetAgentActionGroupResponse]
+      def agent_action_group: () -> Types::AgentActionGroup?
+    end
+    def get_agent_action_group: (
+      ?agent_id: String,
+      ?agent_version: String,
+      ?action_group_id: String
+    ) -> _GetAgentActionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgentActionGroupResponse
+
+    interface _GetAgentAliasResponse
+      include Smithy::Client::_Response[Types::GetAgentAliasResponse]
+      def agent_alias: () -> Types::AgentAlias?
+    end
+    def get_agent_alias: (
+      ?agent_id: String,
+      ?agent_alias_id: String
+    ) -> _GetAgentAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgentAliasResponse
+
+    interface _GetAgentCollaboratorResponse
+      include Smithy::Client::_Response[Types::GetAgentCollaboratorResponse]
+      def agent_collaborator: () -> Types::AgentCollaborator?
+    end
+    def get_agent_collaborator: (
+      ?agent_id: String,
+      ?agent_version: String,
+      ?collaborator_id: String
+    ) -> _GetAgentCollaboratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgentCollaboratorResponse
+
+    interface _GetAgentKnowledgeBaseResponse
+      include Smithy::Client::_Response[Types::GetAgentKnowledgeBaseResponse]
+      def agent_knowledge_base: () -> Types::AgentKnowledgeBase?
+    end
+    def get_agent_knowledge_base: (
+      ?agent_id: String,
+      ?agent_version: String,
+      ?knowledge_base_id: String
+    ) -> _GetAgentKnowledgeBaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgentKnowledgeBaseResponse
+
+    interface _GetAgentVersionResponse
+      include Smithy::Client::_Response[Types::GetAgentVersionResponse]
+      def agent_version: () -> Types::AgentVersion?
+    end
+    def get_agent_version: (
+      ?agent_id: String,
+      ?agent_version: String
+    ) -> _GetAgentVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAgentVersionResponse
+
+    interface _GetDataSourceResponse
+      include Smithy::Client::_Response[Types::GetDataSourceResponse]
+      def data_source: () -> Types::DataSource?
+    end
+    def get_data_source: (
+      ?knowledge_base_id: String,
+      ?data_source_id: String
+    ) -> _GetDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataSourceResponse
+
+    interface _GetFlowResponse
+      include Smithy::Client::_Response[Types::GetFlowResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def execution_role_arn: () -> String?
+      def customer_encryption_key_arn: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def version: () -> String?
+      def definition: () -> Types::FlowDefinition?
+      def validations: () -> Array[Types::FlowValidation]?
+    end
+    def get_flow: (
+      ?flow_identifier: String
+    ) -> _GetFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFlowResponse
+
+    interface _GetFlowAliasResponse
+      include Smithy::Client::_Response[Types::GetFlowAliasResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def routing_configuration: () -> Array[Types::FlowAliasRoutingConfigurationListItem]?
+      def concurrency_configuration: () -> Types::FlowAliasConcurrencyConfiguration?
+      def flow_id: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_flow_alias: (
+      ?flow_identifier: String,
+      ?alias_identifier: String
+    ) -> _GetFlowAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFlowAliasResponse
+
+    interface _GetFlowVersionResponse
+      include Smithy::Client::_Response[Types::GetFlowVersionResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def execution_role_arn: () -> String?
+      def customer_encryption_key_arn: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def version: () -> String?
+      def definition: () -> Types::FlowDefinition?
+    end
+    def get_flow_version: (
+      ?flow_identifier: String,
+      ?flow_version: String
+    ) -> _GetFlowVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFlowVersionResponse
+
+    interface _GetIngestionJobResponse
+      include Smithy::Client::_Response[Types::GetIngestionJobResponse]
+      def ingestion_job: () -> Types::IngestionJob?
+    end
+    def get_ingestion_job: (
+      ?knowledge_base_id: String,
+      ?data_source_id: String,
+      ?ingestion_job_id: String
+    ) -> _GetIngestionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetIngestionJobResponse
+
+    interface _GetKnowledgeBaseResponse
+      include Smithy::Client::_Response[Types::GetKnowledgeBaseResponse]
+      def knowledge_base: () -> Types::KnowledgeBase?
+    end
+    def get_knowledge_base: (
+      ?knowledge_base_id: String
+    ) -> _GetKnowledgeBaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKnowledgeBaseResponse
+
+    interface _GetKnowledgeBaseDocumentsResponse
+      include Smithy::Client::_Response[Types::GetKnowledgeBaseDocumentsResponse]
+      def document_details: () -> Array[Types::KnowledgeBaseDocumentDetail]?
+    end
+    def get_knowledge_base_documents: (
+      ?knowledge_base_id: String,
+      ?data_source_id: String,
+      ?document_identifiers: Array[
+        {
+          data_source_type: String,
+          s3: {
+            uri: String
+          },
+          custom: {
+            id: String
+          }
+        }
+      ]
+    ) -> _GetKnowledgeBaseDocumentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKnowledgeBaseDocumentsResponse
+
+    interface _GetPromptResponse
+      include Smithy::Client::_Response[Types::GetPromptResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def customer_encryption_key_arn: () -> String?
+      def default_variant: () -> String?
+      def variants: () -> Array[Types::PromptVariant]?
+      def id: () -> String?
+      def arn: () -> String?
+      def version: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_prompt: (
+      ?prompt_identifier: String,
+      ?prompt_version: String
+    ) -> _GetPromptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPromptResponse
+
+    interface _IngestKnowledgeBaseDocumentsResponse
+      include Smithy::Client::_Response[Types::IngestKnowledgeBaseDocumentsResponse]
+      def document_details: () -> Array[Types::KnowledgeBaseDocumentDetail]?
+    end
+    def ingest_knowledge_base_documents: (
+      ?knowledge_base_id: String,
+      ?data_source_id: String,
+      ?client_token: String,
+      ?documents: Array[
+        {
+          metadata: {
+            type: String,
+            inline_attributes: Array[
+              {
+                key: String,
+                value: {
+                  type: String,
+                  number_value: Float,
+                  boolean_value: bool,
+                  string_value: String,
+                  string_list_value: Array[String]
+                }
+              }
+            ],
+            s3_location: {
+              uri: String,
+              bucket_owner_account_id: String
+            }
+          },
+          content: {
+            data_source_type: String,
+            custom: {
+              custom_document_identifier: {
+                id: String
+              },
+              source_type: String,
+              s3_location: untyped,
+              inline_content: {
+                type: String,
+                byte_content: {
+                  mime_type: untyped,
+                  data: String
+                },
+                text_content: {
+                  data: String
+                }
+              }
+            },
+            s3: {
+              s3_location: {
+                uri: String
+              }
+            }
+          }
+        }
+      ]
+    ) -> _IngestKnowledgeBaseDocumentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _IngestKnowledgeBaseDocumentsResponse
+
+    interface _ListAgentActionGroupsResponse
+      include Smithy::Client::_Response[Types::ListAgentActionGroupsResponse]
+      def action_group_summaries: () -> Array[Types::ActionGroupSummary]?
+      def next_token: () -> String?
+    end
+    def list_agent_action_groups: (
+      ?agent_id: String,
+      ?agent_version: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgentActionGroupsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentActionGroupsResponse
+
+    interface _ListAgentAliasesResponse
+      include Smithy::Client::_Response[Types::ListAgentAliasesResponse]
+      def agent_alias_summaries: () -> Array[Types::AgentAliasSummary]?
+      def next_token: () -> String?
+    end
+    def list_agent_aliases: (
+      ?agent_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgentAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentAliasesResponse
+
+    interface _ListAgentCollaboratorsResponse
+      include Smithy::Client::_Response[Types::ListAgentCollaboratorsResponse]
+      def agent_collaborator_summaries: () -> Array[Types::AgentCollaboratorSummary]?
+      def next_token: () -> String?
+    end
+    def list_agent_collaborators: (
+      ?agent_id: String,
+      ?agent_version: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgentCollaboratorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentCollaboratorsResponse
+
+    interface _ListAgentKnowledgeBasesResponse
+      include Smithy::Client::_Response[Types::ListAgentKnowledgeBasesResponse]
+      def agent_knowledge_base_summaries: () -> Array[Types::AgentKnowledgeBaseSummary]?
+      def next_token: () -> String?
+    end
+    def list_agent_knowledge_bases: (
+      ?agent_id: String,
+      ?agent_version: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgentKnowledgeBasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentKnowledgeBasesResponse
+
+    interface _ListAgentVersionsResponse
+      include Smithy::Client::_Response[Types::ListAgentVersionsResponse]
+      def agent_version_summaries: () -> Array[Types::AgentVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_agent_versions: (
+      ?agent_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgentVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentVersionsResponse
+
+    interface _ListAgentsResponse
+      include Smithy::Client::_Response[Types::ListAgentsResponse]
+      def agent_summaries: () -> Array[Types::AgentSummary]?
+      def next_token: () -> String?
+    end
+    def list_agents: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAgentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAgentsResponse
+
+    interface _ListDataSourcesResponse
+      include Smithy::Client::_Response[Types::ListDataSourcesResponse]
+      def data_source_summaries: () -> Array[Types::DataSourceSummary]?
+      def next_token: () -> String?
+    end
+    def list_data_sources: (
+      ?knowledge_base_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDataSourcesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataSourcesResponse
+
+    interface _ListFlowAliasesResponse
+      include Smithy::Client::_Response[Types::ListFlowAliasesResponse]
+      def flow_alias_summaries: () -> Array[Types::FlowAliasSummary]?
+      def next_token: () -> String?
+    end
+    def list_flow_aliases: (
+      ?flow_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFlowAliasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFlowAliasesResponse
+
+    interface _ListFlowVersionsResponse
+      include Smithy::Client::_Response[Types::ListFlowVersionsResponse]
+      def flow_version_summaries: () -> Array[Types::FlowVersionSummary]?
+      def next_token: () -> String?
+    end
+    def list_flow_versions: (
+      ?flow_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFlowVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFlowVersionsResponse
+
+    interface _ListFlowsResponse
+      include Smithy::Client::_Response[Types::ListFlowsResponse]
+      def flow_summaries: () -> Array[Types::FlowSummary]?
+      def next_token: () -> String?
+    end
+    def list_flows: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListFlowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFlowsResponse
+
+    interface _ListIngestionJobsResponse
+      include Smithy::Client::_Response[Types::ListIngestionJobsResponse]
+      def ingestion_job_summaries: () -> Array[Types::IngestionJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_ingestion_jobs: (
+      ?knowledge_base_id: String,
+      ?data_source_id: String,
+      ?filters: Array[
+        {
+          attribute: String,
+          operator: String,
+          values: Array[String]
+        }
+      ],
+      ?sort_by: {
+        attribute: String,
+        order: String
+      },
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListIngestionJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIngestionJobsResponse
+
+    interface _ListKnowledgeBaseDocumentsResponse
+      include Smithy::Client::_Response[Types::ListKnowledgeBaseDocumentsResponse]
+      def document_details: () -> Array[Types::KnowledgeBaseDocumentDetail]?
+      def next_token: () -> String?
+    end
+    def list_knowledge_base_documents: (
+      ?knowledge_base_id: String,
+      ?data_source_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListKnowledgeBaseDocumentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKnowledgeBaseDocumentsResponse
+
+    interface _ListKnowledgeBasesResponse
+      include Smithy::Client::_Response[Types::ListKnowledgeBasesResponse]
+      def knowledge_base_summaries: () -> Array[Types::KnowledgeBaseSummary]?
+      def next_token: () -> String?
+    end
+    def list_knowledge_bases: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListKnowledgeBasesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKnowledgeBasesResponse
+
+    interface _ListPromptsResponse
+      include Smithy::Client::_Response[Types::ListPromptsResponse]
+      def prompt_summaries: () -> Array[Types::PromptSummary]?
+      def next_token: () -> String?
+    end
+    def list_prompts: (
+      ?prompt_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPromptsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPromptsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _PrepareAgentResponse
+      include Smithy::Client::_Response[Types::PrepareAgentResponse]
+      def agent_id: () -> String?
+      def agent_status: () -> String?
+      def agent_version: () -> String?
+      def prepared_at: () -> Time?
+    end
+    def prepare_agent: (
+      ?agent_id: String
+    ) -> _PrepareAgentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PrepareAgentResponse
+
+    interface _PrepareFlowResponse
+      include Smithy::Client::_Response[Types::PrepareFlowResponse]
+      def id: () -> String?
+      def status: () -> String?
+    end
+    def prepare_flow: (
+      ?flow_identifier: String
+    ) -> _PrepareFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PrepareFlowResponse
+
+    interface _StartIngestionJobResponse
+      include Smithy::Client::_Response[Types::StartIngestionJobResponse]
+      def ingestion_job: () -> Types::IngestionJob?
+    end
+    def start_ingestion_job: (
+      ?knowledge_base_id: String,
+      ?data_source_id: String,
+      ?client_token: String,
+      ?description: String
+    ) -> _StartIngestionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartIngestionJobResponse
+
+    interface _StopIngestionJobResponse
+      include Smithy::Client::_Response[Types::StopIngestionJobResponse]
+      def ingestion_job: () -> Types::IngestionJob?
+    end
+    def stop_ingestion_job: (
+      ?knowledge_base_id: String,
+      ?data_source_id: String,
+      ?ingestion_job_id: String
+    ) -> _StopIngestionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopIngestionJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateAgentResponse
+      include Smithy::Client::_Response[Types::UpdateAgentResponse]
+      def agent: () -> Types::Agent?
+    end
+    def update_agent: (
+      ?agent_id: String,
+      ?agent_name: String,
+      ?instruction: String,
+      ?foundation_model: String,
+      ?description: String,
+      ?orchestration_type: String,
+      ?custom_orchestration: {
+        executor: {
+          lambda: String
+        }
+      },
+      ?idle_session_ttl_in_seconds: Integer,
+      ?agent_resource_role_arn: String,
+      ?customer_encryption_key_arn: String,
+      ?prompt_override_configuration: {
+        prompt_configurations: Array[
+          {
+            prompt_type: String,
+            prompt_creation_mode: String,
+            prompt_state: String,
+            base_prompt_template: String,
+            inference_configuration: {
+              temperature: Float,
+              top_p: Float,
+              top_k: Integer,
+              maximum_length: Integer,
+              stop_sequences: Array[String]
+            },
+            parser_mode: untyped,
+            foundation_model: String,
+            additional_model_request_fields: Smithy::Schema::document
+          }
+        ],
+        override_lambda: String
+      },
+      ?guardrail_configuration: {
+        guardrail_identifier: String,
+        guardrail_version: String
+      },
+      ?memory_configuration: {
+        enabled_memory_types: Array[String],
+        storage_days: Integer,
+        session_summary_configuration: {
+          max_recent_sessions: Integer
+        }
+      },
+      ?agent_collaboration: String
+    ) -> _UpdateAgentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgentResponse
+
+    interface _UpdateAgentActionGroupResponse
+      include Smithy::Client::_Response[Types::UpdateAgentActionGroupResponse]
+      def agent_action_group: () -> Types::AgentActionGroup?
+    end
+    def update_agent_action_group: (
+      ?agent_id: String,
+      ?agent_version: String,
+      ?action_group_id: String,
+      ?action_group_name: String,
+      ?description: String,
+      ?parent_action_group_signature: String,
+      ?parent_action_group_signature_params: Hash[String, String],
+      ?action_group_executor: {
+        lambda: String,
+        custom_control: String
+      },
+      ?action_group_state: String,
+      ?api_schema: {
+        s3: {
+          s3_bucket_name: String,
+          s3_object_key: String
+        },
+        payload: String
+      },
+      ?function_schema: {
+        functions: Array[
+          {
+            name: String,
+            description: String,
+            parameters: Hash[String,
+              {
+                description: String,
+                type: String,
+                required: bool
+              }
+            ],
+            require_confirmation: String
+          }
+        ]
+      }
+    ) -> _UpdateAgentActionGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgentActionGroupResponse
+
+    interface _UpdateAgentAliasResponse
+      include Smithy::Client::_Response[Types::UpdateAgentAliasResponse]
+      def agent_alias: () -> Types::AgentAlias?
+    end
+    def update_agent_alias: (
+      ?agent_id: String,
+      ?agent_alias_id: String,
+      ?agent_alias_name: String,
+      ?description: String,
+      ?routing_configuration: Array[
+        {
+          agent_version: String,
+          provisioned_throughput: String
+        }
+      ],
+      ?alias_invocation_state: String
+    ) -> _UpdateAgentAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgentAliasResponse
+
+    interface _UpdateAgentCollaboratorResponse
+      include Smithy::Client::_Response[Types::UpdateAgentCollaboratorResponse]
+      def agent_collaborator: () -> Types::AgentCollaborator?
+    end
+    def update_agent_collaborator: (
+      ?agent_id: String,
+      ?agent_version: String,
+      ?collaborator_id: String,
+      ?agent_descriptor: {
+        alias_arn: String
+      },
+      ?collaborator_name: String,
+      ?collaboration_instruction: String,
+      ?relay_conversation_history: String
+    ) -> _UpdateAgentCollaboratorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgentCollaboratorResponse
+
+    interface _UpdateAgentKnowledgeBaseResponse
+      include Smithy::Client::_Response[Types::UpdateAgentKnowledgeBaseResponse]
+      def agent_knowledge_base: () -> Types::AgentKnowledgeBase?
+    end
+    def update_agent_knowledge_base: (
+      ?agent_id: String,
+      ?agent_version: String,
+      ?knowledge_base_id: String,
+      ?description: String,
+      ?knowledge_base_state: String
+    ) -> _UpdateAgentKnowledgeBaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAgentKnowledgeBaseResponse
+
+    interface _UpdateDataSourceResponse
+      include Smithy::Client::_Response[Types::UpdateDataSourceResponse]
+      def data_source: () -> Types::DataSource?
+    end
+    def update_data_source: (
+      ?knowledge_base_id: String,
+      ?data_source_id: String,
+      ?name: String,
+      ?description: String,
+      ?data_source_configuration: {
+        type: String,
+        s3_configuration: {
+          bucket_arn: String,
+          inclusion_prefixes: Array[String],
+          bucket_owner_account_id: String
+        },
+        web_configuration: {
+          source_configuration: {
+            url_configuration: {
+              seed_urls: Array[
+                {
+                  url: String
+                }
+              ]
+            }
+          },
+          crawler_configuration: {
+            crawler_limits: {
+              rate_limit: Integer,
+              max_pages: untyped
+            },
+            inclusion_filters: Array[String],
+            exclusion_filters: untyped,
+            scope: String,
+            user_agent: String,
+            user_agent_header: String
+          }
+        },
+        confluence_configuration: {
+          source_configuration: {
+            host_url: String,
+            host_type: String,
+            auth_type: String,
+            credentials_secret_arn: String
+          },
+          crawler_configuration: {
+            filter_configuration: {
+              type: String,
+              pattern_object_filter: {
+                filters: Array[
+                  {
+                    object_type: String,
+                    inclusion_filters: untyped,
+                    exclusion_filters: untyped
+                  }
+                ]
+              }
+            }
+          }
+        },
+        salesforce_configuration: {
+          source_configuration: {
+            host_url: untyped,
+            auth_type: String,
+            credentials_secret_arn: untyped
+          },
+          crawler_configuration: {
+            filter_configuration: untyped
+          }
+        },
+        share_point_configuration: {
+          source_configuration: {
+            tenant_id: String,
+            domain: String,
+            site_urls: Array[String],
+            host_type: String,
+            auth_type: String,
+            credentials_secret_arn: untyped
+          },
+          crawler_configuration: {
+            filter_configuration: untyped
+          }
+        }
+      },
+      ?data_deletion_policy: String,
+      ?server_side_encryption_configuration: {
+        kms_key_arn: String
+      },
+      ?vector_ingestion_configuration: {
+        chunking_configuration: {
+          chunking_strategy: String,
+          fixed_size_chunking_configuration: {
+            max_tokens: Integer,
+            overlap_percentage: untyped
+          },
+          hierarchical_chunking_configuration: {
+            level_configurations: Array[
+              {
+                max_tokens: untyped
+              }
+            ],
+            overlap_tokens: untyped
+          },
+          semantic_chunking_configuration: {
+            max_tokens: untyped,
+            buffer_size: untyped,
+            breakpoint_percentile_threshold: untyped
+          }
+        },
+        custom_transformation_configuration: {
+          intermediate_storage: {
+            s3_location: {
+              uri: String
+            }
+          },
+          transformations: Array[
+            {
+              transformation_function: {
+                transformation_lambda_configuration: {
+                  lambda_arn: String
+                }
+              },
+              step_to_apply: String
+            }
+          ]
+        },
+        parsing_configuration: {
+          parsing_strategy: String,
+          bedrock_foundation_model_configuration: {
+            model_arn: String,
+            parsing_prompt: {
+              parsing_prompt_text: String
+            },
+            parsing_modality: String
+          },
+          bedrock_data_automation_configuration: {
+            parsing_modality: untyped
+          }
+        },
+        context_enrichment_configuration: {
+          type: String,
+          bedrock_foundation_model_configuration: {
+            enrichment_strategy_configuration: {
+              method: String
+            },
+            model_arn: untyped
+          }
+        }
+      }
+    ) -> _UpdateDataSourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataSourceResponse
+
+    interface _UpdateFlowResponse
+      include Smithy::Client::_Response[Types::UpdateFlowResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def execution_role_arn: () -> String?
+      def customer_encryption_key_arn: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def version: () -> String?
+      def definition: () -> Types::FlowDefinition?
+    end
+    def update_flow: (
+      ?name: String,
+      ?description: String,
+      ?execution_role_arn: String,
+      ?customer_encryption_key_arn: String,
+      ?definition: {
+        nodes: Array[
+          {
+            name: String,
+            type: String,
+            configuration: {
+              input: {
+              },
+              output: {
+              },
+              knowledge_base: {
+                knowledge_base_id: String,
+                model_id: String,
+                guardrail_configuration: {
+                  guardrail_identifier: String,
+                  guardrail_version: String
+                },
+                number_of_results: Integer,
+                prompt_template: {
+                  text_prompt_template: String
+                },
+                inference_configuration: {
+                  text: {
+                    temperature: Float,
+                    top_p: Float,
+                    max_tokens: Integer,
+                    stop_sequences: Array[String]
+                  }
+                },
+                reranking_configuration: {
+                  type: String,
+                  bedrock_reranking_configuration: {
+                    model_configuration: {
+                      model_arn: String,
+                      additional_model_request_fields: Hash[String, Smithy::Schema::document]
+                    },
+                    number_of_reranked_results: untyped,
+                    metadata_configuration: {
+                      selection_mode: String,
+                      selective_mode_configuration: {
+                        fields_to_include: Array[
+                          {
+                            field_name: String
+                          }
+                        ],
+                        fields_to_exclude: untyped
+                      }
+                    }
+                  }
+                },
+                orchestration_configuration: {
+                  prompt_template: untyped,
+                  inference_config: untyped,
+                  additional_model_request_fields: untyped,
+                  performance_config: {
+                    latency: String
+                  }
+                }
+              },
+              condition: {
+                conditions: Array[
+                  {
+                    name: String,
+                    expression: String
+                  }
+                ]
+              },
+              lex: {
+                bot_alias_arn: String,
+                locale_id: String
+              },
+              prompt: {
+                source_configuration: {
+                  resource: {
+                    prompt_arn: String
+                  },
+                  inline: {
+                    template_type: String,
+                    template_configuration: {
+                      text: {
+                        text: String,
+                        cache_point: {
+                          type: String
+                        },
+                        input_variables: Array[
+                          {
+                            name: String
+                          }
+                        ]
+                      },
+                      chat: {
+                        messages: Array[
+                          {
+                            role: String,
+                            content: Array[
+                              {
+                                text: untyped,
+                                cache_point: untyped
+                              }
+                            ]
+                          }
+                        ],
+                        system: Array[
+                          {
+                            text: String,
+                            cache_point: untyped
+                          }
+                        ],
+                        input_variables: untyped,
+                        tool_configuration: {
+                          tools: Array[
+                            {
+                              tool_spec: {
+                                name: String,
+                                description: untyped,
+                                input_schema: {
+                                  json: Smithy::Schema::document
+                                }
+                              },
+                              cache_point: untyped
+                            }
+                          ],
+                          tool_choice: {
+                            auto: {
+                            },
+                            any: {
+                            },
+                            tool: {
+                              name: untyped
+                            }
+                          }
+                        }
+                      }
+                    },
+                    model_id: String,
+                    inference_configuration: untyped,
+                    additional_model_request_fields: untyped
+                  }
+                },
+                guardrail_configuration: untyped
+              },
+              lambda_function: {
+                lambda_arn: String
+              },
+              storage: {
+                service_configuration: {
+                  s3: {
+                    bucket_name: String
+                  }
+                }
+              },
+              agent: {
+                agent_alias_arn: String
+              },
+              retrieval: {
+                service_configuration: {
+                  s3: {
+                    bucket_name: untyped
+                  }
+                }
+              },
+              iterator: {
+              },
+              collector: {
+              },
+              inline_code: {
+                code: String,
+                language: String
+              },
+              loop: {
+                definition: untyped
+              },
+              loop_input: {
+              },
+              loop_controller: {
+                continue_condition: {
+                  name: untyped,
+                  expression: untyped
+                },
+                max_iterations: untyped
+              }
+            },
+            inputs: Array[
+              {
+                name: String,
+                type: String,
+                expression: String,
+                category: String
+              }
+            ],
+            outputs: Array[
+              {
+                name: String,
+                type: untyped
+              }
+            ]
+          }
+        ],
+        connections: Array[
+          {
+            type: String,
+            name: String,
+            source: untyped,
+            target: untyped,
+            configuration: {
+              data: {
+                source_output: untyped,
+                target_input: untyped
+              },
+              conditional: {
+                condition: untyped
+              }
+            }
+          }
+        ]
+      },
+      ?flow_identifier: String
+    ) -> _UpdateFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFlowResponse
+
+    interface _UpdateFlowAliasResponse
+      include Smithy::Client::_Response[Types::UpdateFlowAliasResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def routing_configuration: () -> Array[Types::FlowAliasRoutingConfigurationListItem]?
+      def concurrency_configuration: () -> Types::FlowAliasConcurrencyConfiguration?
+      def flow_id: () -> String?
+      def id: () -> String?
+      def arn: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def update_flow_alias: (
+      ?name: String,
+      ?description: String,
+      ?routing_configuration: Array[
+        {
+          flow_version: String
+        }
+      ],
+      ?concurrency_configuration: {
+        type: String,
+        max_concurrency: Integer
+      },
+      ?flow_identifier: String,
+      ?alias_identifier: String
+    ) -> _UpdateFlowAliasResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFlowAliasResponse
+
+    interface _UpdateKnowledgeBaseResponse
+      include Smithy::Client::_Response[Types::UpdateKnowledgeBaseResponse]
+      def knowledge_base: () -> Types::KnowledgeBase?
+    end
+    def update_knowledge_base: (
+      ?knowledge_base_id: String,
+      ?name: String,
+      ?description: String,
+      ?role_arn: String,
+      ?knowledge_base_configuration: {
+        type: String,
+        vector_knowledge_base_configuration: {
+          embedding_model_arn: String,
+          embedding_model_configuration: {
+            bedrock_embedding_model_configuration: {
+              dimensions: Integer,
+              embedding_data_type: String
+            }
+          },
+          supplemental_data_storage_configuration: {
+            storage_locations: Array[
+              {
+                type: String,
+                s3_location: {
+                  uri: String
+                }
+              }
+            ]
+          }
+        },
+        kendra_knowledge_base_configuration: {
+          kendra_index_arn: String
+        },
+        sql_knowledge_base_configuration: {
+          type: String,
+          redshift_configuration: {
+            storage_configurations: Array[
+              {
+                type: String,
+                aws_data_catalog_configuration: {
+                  table_names: Array[String]
+                },
+                redshift_configuration: {
+                  database_name: String
+                }
+              }
+            ],
+            query_engine_configuration: {
+              type: String,
+              serverless_configuration: {
+                workgroup_arn: String,
+                auth_configuration: {
+                  type: String,
+                  username_password_secret_arn: String
+                }
+              },
+              provisioned_configuration: {
+                cluster_identifier: String,
+                auth_configuration: {
+                  type: String,
+                  database_user: String,
+                  username_password_secret_arn: untyped
+                }
+              }
+            },
+            query_generation_configuration: {
+              execution_timeout_seconds: Integer,
+              generation_context: {
+                tables: Array[
+                  {
+                    name: String,
+                    description: String,
+                    inclusion: String,
+                    columns: Array[
+                      {
+                        name: String,
+                        description: untyped,
+                        inclusion: untyped
+                      }
+                    ]
+                  }
+                ],
+                curated_queries: Array[
+                  {
+                    natural_language: String,
+                    sql: String
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      ?storage_configuration: {
+        type: String,
+        opensearch_serverless_configuration: {
+          collection_arn: String,
+          vector_index_name: String,
+          field_mapping: {
+            vector_field: String,
+            text_field: untyped,
+            metadata_field: untyped
+          }
+        },
+        opensearch_managed_cluster_configuration: {
+          domain_endpoint: String,
+          domain_arn: String,
+          vector_index_name: String,
+          field_mapping: {
+            vector_field: untyped,
+            text_field: untyped,
+            metadata_field: untyped
+          }
+        },
+        pinecone_configuration: {
+          connection_string: String,
+          credentials_secret_arn: String,
+          namespace: String,
+          field_mapping: {
+            text_field: untyped,
+            metadata_field: untyped
+          }
+        },
+        redis_enterprise_cloud_configuration: {
+          endpoint: String,
+          vector_index_name: String,
+          credentials_secret_arn: untyped,
+          field_mapping: {
+            vector_field: untyped,
+            text_field: untyped,
+            metadata_field: untyped
+          }
+        },
+        rds_configuration: {
+          resource_arn: String,
+          credentials_secret_arn: untyped,
+          database_name: String,
+          table_name: String,
+          field_mapping: {
+            primary_key_field: String,
+            vector_field: untyped,
+            text_field: untyped,
+            metadata_field: untyped,
+            custom_metadata_field: untyped
+          }
+        },
+        mongo_db_atlas_configuration: {
+          endpoint: String,
+          database_name: String,
+          collection_name: String,
+          vector_index_name: String,
+          credentials_secret_arn: untyped,
+          field_mapping: {
+            vector_field: untyped,
+            text_field: untyped,
+            metadata_field: untyped
+          },
+          endpoint_service_name: String,
+          text_index_name: untyped
+        },
+        neptune_analytics_configuration: {
+          graph_arn: String,
+          field_mapping: {
+            text_field: untyped,
+            metadata_field: untyped
+          }
+        },
+        s3_vectors_configuration: {
+          vector_bucket_arn: String,
+          index_arn: String,
+          index_name: String
+        }
+      }
+    ) -> _UpdateKnowledgeBaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateKnowledgeBaseResponse
+
+    interface _UpdatePromptResponse
+      include Smithy::Client::_Response[Types::UpdatePromptResponse]
+      def name: () -> String?
+      def description: () -> String?
+      def customer_encryption_key_arn: () -> String?
+      def default_variant: () -> String?
+      def variants: () -> Array[Types::PromptVariant]?
+      def id: () -> String?
+      def arn: () -> String?
+      def version: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def update_prompt: (
+      ?name: String,
+      ?description: String,
+      ?customer_encryption_key_arn: String,
+      ?default_variant: String,
+      ?variants: Array[
+        {
+          name: String,
+          template_type: String,
+          template_configuration: {
+            text: {
+              text: String,
+              cache_point: {
+                type: String
+              },
+              input_variables: Array[
+                {
+                  name: String
+                }
+              ]
+            },
+            chat: {
+              messages: Array[
+                {
+                  role: String,
+                  content: Array[
+                    {
+                      text: String,
+                      cache_point: untyped
+                    }
+                  ]
+                }
+              ],
+              system: Array[
+                {
+                  text: String,
+                  cache_point: untyped
+                }
+              ],
+              input_variables: untyped,
+              tool_configuration: {
+                tools: Array[
+                  {
+                    tool_spec: {
+                      name: String,
+                      description: untyped,
+                      input_schema: {
+                        json: Smithy::Schema::document
+                      }
+                    },
+                    cache_point: untyped
+                  }
+                ],
+                tool_choice: {
+                  auto: {
+                  },
+                  any: {
+                  },
+                  tool: {
+                    name: untyped
+                  }
+                }
+              }
+            }
+          },
+          model_id: String,
+          inference_configuration: {
+            text: {
+              temperature: Float,
+              top_p: Float,
+              max_tokens: Integer,
+              stop_sequences: Array[String]
+            }
+          },
+          metadata: Array[
+            {
+              key: String,
+              value: String
+            }
+          ],
+          additional_model_request_fields: untyped,
+          gen_ai_resource: {
+            agent: {
+              agent_identifier: String
+            }
+          }
+        }
+      ],
+      ?prompt_identifier: String
+    ) -> _UpdatePromptResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePromptResponse
+
+    interface _ValidateFlowDefinitionResponse
+      include Smithy::Client::_Response[Types::ValidateFlowDefinitionResponse]
+      def validations: () -> Array[Types::FlowValidation]?
+    end
+    def validate_flow_definition: (
+      ?definition: {
+        nodes: Array[
+          {
+            name: String,
+            type: String,
+            configuration: {
+              input: {
+              },
+              output: {
+              },
+              knowledge_base: {
+                knowledge_base_id: String,
+                model_id: String,
+                guardrail_configuration: {
+                  guardrail_identifier: String,
+                  guardrail_version: String
+                },
+                number_of_results: Integer,
+                prompt_template: {
+                  text_prompt_template: String
+                },
+                inference_configuration: {
+                  text: {
+                    temperature: Float,
+                    top_p: Float,
+                    max_tokens: Integer,
+                    stop_sequences: Array[String]
+                  }
+                },
+                reranking_configuration: {
+                  type: String,
+                  bedrock_reranking_configuration: {
+                    model_configuration: {
+                      model_arn: String,
+                      additional_model_request_fields: Hash[String, Smithy::Schema::document]
+                    },
+                    number_of_reranked_results: untyped,
+                    metadata_configuration: {
+                      selection_mode: String,
+                      selective_mode_configuration: {
+                        fields_to_include: Array[
+                          {
+                            field_name: String
+                          }
+                        ],
+                        fields_to_exclude: untyped
+                      }
+                    }
+                  }
+                },
+                orchestration_configuration: {
+                  prompt_template: untyped,
+                  inference_config: untyped,
+                  additional_model_request_fields: untyped,
+                  performance_config: {
+                    latency: String
+                  }
+                }
+              },
+              condition: {
+                conditions: Array[
+                  {
+                    name: String,
+                    expression: String
+                  }
+                ]
+              },
+              lex: {
+                bot_alias_arn: String,
+                locale_id: String
+              },
+              prompt: {
+                source_configuration: {
+                  resource: {
+                    prompt_arn: String
+                  },
+                  inline: {
+                    template_type: String,
+                    template_configuration: {
+                      text: {
+                        text: String,
+                        cache_point: {
+                          type: String
+                        },
+                        input_variables: Array[
+                          {
+                            name: String
+                          }
+                        ]
+                      },
+                      chat: {
+                        messages: Array[
+                          {
+                            role: String,
+                            content: Array[
+                              {
+                                text: untyped,
+                                cache_point: untyped
+                              }
+                            ]
+                          }
+                        ],
+                        system: Array[
+                          {
+                            text: String,
+                            cache_point: untyped
+                          }
+                        ],
+                        input_variables: untyped,
+                        tool_configuration: {
+                          tools: Array[
+                            {
+                              tool_spec: {
+                                name: String,
+                                description: untyped,
+                                input_schema: {
+                                  json: Smithy::Schema::document
+                                }
+                              },
+                              cache_point: untyped
+                            }
+                          ],
+                          tool_choice: {
+                            auto: {
+                            },
+                            any: {
+                            },
+                            tool: {
+                              name: untyped
+                            }
+                          }
+                        }
+                      }
+                    },
+                    model_id: String,
+                    inference_configuration: untyped,
+                    additional_model_request_fields: untyped
+                  }
+                },
+                guardrail_configuration: untyped
+              },
+              lambda_function: {
+                lambda_arn: String
+              },
+              storage: {
+                service_configuration: {
+                  s3: {
+                    bucket_name: String
+                  }
+                }
+              },
+              agent: {
+                agent_alias_arn: String
+              },
+              retrieval: {
+                service_configuration: {
+                  s3: {
+                    bucket_name: untyped
+                  }
+                }
+              },
+              iterator: {
+              },
+              collector: {
+              },
+              inline_code: {
+                code: String,
+                language: String
+              },
+              loop: {
+                definition: untyped
+              },
+              loop_input: {
+              },
+              loop_controller: {
+                continue_condition: {
+                  name: untyped,
+                  expression: untyped
+                },
+                max_iterations: untyped
+              }
+            },
+            inputs: Array[
+              {
+                name: String,
+                type: String,
+                expression: String,
+                category: String
+              }
+            ],
+            outputs: Array[
+              {
+                name: String,
+                type: untyped
+              }
+            ]
+          }
+        ],
+        connections: Array[
+          {
+            type: String,
+            name: String,
+            source: untyped,
+            target: untyped,
+            configuration: {
+              data: {
+                source_output: untyped,
+                target_input: untyped
+              },
+              conditional: {
+                condition: untyped
+              }
+            }
+          }
+        ]
+      }
+    ) -> _ValidateFlowDefinitionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ValidateFlowDefinitionResponse
+  end
+end

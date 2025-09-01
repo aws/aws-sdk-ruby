@@ -1,0 +1,20 @@
+module Aws::ApiGatewayManagementApi
+  module Schema
+    include Smithy::Schema::Shapes
+
+    Data: BlobShape
+    DeleteConnectionRequest: StructureShape
+    ForbiddenException: StructureShape
+    GetConnectionRequest: StructureShape
+    GetConnectionResponse: StructureShape
+    GoneException: StructureShape
+    Identity: StructureShape
+    LimitExceededException: StructureShape
+    PayloadTooLargeException: StructureShape
+    PostToConnectionRequest: StructureShape
+    String: StringShape
+    Timestampiso8601: TimestampShape
+
+    ApiGatewayManagementApi: ServiceShape
+  end
+end

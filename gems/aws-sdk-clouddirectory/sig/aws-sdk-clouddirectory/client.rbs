@@ -1,0 +1,1385 @@
+module Aws::CloudDirectory
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::CloudDirectory::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AddFacetToObjectResponse
+      include Smithy::Client::_Response[Types::AddFacetToObjectResponse]
+    end
+    def add_facet_to_object: (
+      ?directory_arn: String,
+      ?schema_facet: {
+        schema_arn: String,
+        facet_name: String
+      },
+      ?object_attribute_list: Array[
+        {
+          key: {
+            schema_arn: String,
+            facet_name: String,
+            name: String
+          },
+          value: {
+            string_value: String,
+            binary_value: String,
+            boolean_value: bool,
+            number_value: String,
+            datetime_value: Time
+          }
+        }
+      ],
+      ?object_reference: {
+        selector: String
+      }
+    ) -> _AddFacetToObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddFacetToObjectResponse
+
+    interface _ApplySchemaResponse
+      include Smithy::Client::_Response[Types::ApplySchemaResponse]
+      def applied_schema_arn: () -> String?
+      def directory_arn: () -> String?
+    end
+    def apply_schema: (
+      ?published_schema_arn: String,
+      ?directory_arn: String
+    ) -> _ApplySchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ApplySchemaResponse
+
+    interface _AttachObjectResponse
+      include Smithy::Client::_Response[Types::AttachObjectResponse]
+      def attached_object_identifier: () -> String?
+    end
+    def attach_object: (
+      ?directory_arn: String,
+      ?parent_reference: {
+        selector: String
+      },
+      ?child_reference: {
+        selector: String
+      },
+      ?link_name: String
+    ) -> _AttachObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachObjectResponse
+
+    interface _AttachPolicyResponse
+      include Smithy::Client::_Response[Types::AttachPolicyResponse]
+    end
+    def attach_policy: (
+      ?directory_arn: String,
+      ?policy_reference: {
+        selector: String
+      },
+      ?object_reference: {
+        selector: String
+      }
+    ) -> _AttachPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachPolicyResponse
+
+    interface _AttachToIndexResponse
+      include Smithy::Client::_Response[Types::AttachToIndexResponse]
+      def attached_object_identifier: () -> String?
+    end
+    def attach_to_index: (
+      ?directory_arn: String,
+      ?index_reference: {
+        selector: String
+      },
+      ?target_reference: {
+        selector: String
+      }
+    ) -> _AttachToIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachToIndexResponse
+
+    interface _AttachTypedLinkResponse
+      include Smithy::Client::_Response[Types::AttachTypedLinkResponse]
+      def typed_link_specifier: () -> Types::TypedLinkSpecifier?
+    end
+    def attach_typed_link: (
+      ?directory_arn: String,
+      ?source_object_reference: {
+        selector: String
+      },
+      ?target_object_reference: {
+        selector: String
+      },
+      ?typed_link_facet: {
+        schema_arn: String,
+        typed_link_name: String
+      },
+      ?attributes: Array[
+        {
+          attribute_name: String,
+          value: {
+            string_value: String,
+            binary_value: String,
+            boolean_value: bool,
+            number_value: String,
+            datetime_value: Time
+          }
+        }
+      ]
+    ) -> _AttachTypedLinkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AttachTypedLinkResponse
+
+    interface _BatchReadResponse
+      include Smithy::Client::_Response[Types::BatchReadResponse]
+      def responses: () -> Array[Types::BatchReadOperationResponse]?
+    end
+    def batch_read: (
+      ?directory_arn: String,
+      ?operations: Array[
+        {
+          list_object_attributes: {
+            object_reference: {
+              selector: String
+            },
+            next_token: String,
+            max_results: Integer,
+            facet_filter: {
+              schema_arn: String,
+              facet_name: String
+            }
+          },
+          list_object_children: {
+            object_reference: untyped,
+            next_token: untyped,
+            max_results: untyped
+          },
+          list_attached_indices: {
+            target_reference: untyped,
+            next_token: untyped,
+            max_results: untyped
+          },
+          list_object_parent_paths: {
+            object_reference: untyped,
+            next_token: untyped,
+            max_results: untyped
+          },
+          get_object_information: {
+            object_reference: untyped
+          },
+          get_object_attributes: {
+            object_reference: untyped,
+            schema_facet: untyped,
+            attribute_names: Array[String]
+          },
+          list_object_parents: {
+            object_reference: untyped,
+            next_token: untyped,
+            max_results: untyped
+          },
+          list_object_policies: {
+            object_reference: untyped,
+            next_token: untyped,
+            max_results: untyped
+          },
+          list_policy_attachments: {
+            policy_reference: untyped,
+            next_token: untyped,
+            max_results: untyped
+          },
+          lookup_policy: {
+            object_reference: untyped,
+            next_token: untyped,
+            max_results: untyped
+          },
+          list_index: {
+            ranges_on_indexed_values: Array[
+              {
+                attribute_key: {
+                  schema_arn: untyped,
+                  facet_name: untyped,
+                  name: String
+                },
+                range: {
+                  start_mode: String,
+                  start_value: {
+                    string_value: String,
+                    binary_value: String,
+                    boolean_value: bool,
+                    number_value: String,
+                    datetime_value: Time
+                  },
+                  end_mode: untyped,
+                  end_value: untyped
+                }
+              }
+            ],
+            index_reference: untyped,
+            max_results: untyped,
+            next_token: untyped
+          },
+          list_outgoing_typed_links: {
+            object_reference: untyped,
+            filter_attribute_ranges: Array[
+              {
+                attribute_name: untyped,
+                range: untyped
+              }
+            ],
+            filter_typed_link: {
+              schema_arn: untyped,
+              typed_link_name: String
+            },
+            next_token: untyped,
+            max_results: untyped
+          },
+          list_incoming_typed_links: {
+            object_reference: untyped,
+            filter_attribute_ranges: untyped,
+            filter_typed_link: untyped,
+            next_token: untyped,
+            max_results: untyped
+          },
+          get_link_attributes: {
+            typed_link_specifier: {
+              typed_link_facet: untyped,
+              source_object_reference: untyped,
+              target_object_reference: untyped,
+              identity_attribute_values: Array[
+                {
+                  attribute_name: untyped,
+                  value: untyped
+                }
+              ]
+            },
+            attribute_names: untyped
+          }
+        }
+      ],
+      ?consistency_level: String
+    ) -> _BatchReadResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchReadResponse
+
+    interface _BatchWriteResponse
+      include Smithy::Client::_Response[Types::BatchWriteResponse]
+      def responses: () -> Array[Types::BatchWriteOperationResponse]?
+    end
+    def batch_write: (
+      ?directory_arn: String,
+      ?operations: Array[
+        {
+          create_object: {
+            schema_facet: Array[
+              {
+                schema_arn: String,
+                facet_name: String
+              }
+            ],
+            object_attribute_list: Array[
+              {
+                key: {
+                  schema_arn: untyped,
+                  facet_name: untyped,
+                  name: String
+                },
+                value: {
+                  string_value: String,
+                  binary_value: String,
+                  boolean_value: bool,
+                  number_value: String,
+                  datetime_value: Time
+                }
+              }
+            ],
+            parent_reference: {
+              selector: String
+            },
+            link_name: String,
+            batch_reference_name: String
+          },
+          attach_object: {
+            parent_reference: untyped,
+            child_reference: untyped,
+            link_name: untyped
+          },
+          detach_object: {
+            parent_reference: untyped,
+            link_name: untyped,
+            batch_reference_name: untyped
+          },
+          update_object_attributes: {
+            object_reference: untyped,
+            attribute_updates: Array[
+              {
+                object_attribute_key: untyped,
+                object_attribute_action: {
+                  object_attribute_action_type: String,
+                  object_attribute_update_value: untyped
+                }
+              }
+            ]
+          },
+          delete_object: {
+            object_reference: untyped
+          },
+          add_facet_to_object: {
+            schema_facet: {
+              schema_arn: untyped,
+              facet_name: untyped
+            },
+            object_attribute_list: untyped,
+            object_reference: untyped
+          },
+          remove_facet_from_object: {
+            schema_facet: untyped,
+            object_reference: untyped
+          },
+          attach_policy: {
+            policy_reference: untyped,
+            object_reference: untyped
+          },
+          detach_policy: {
+            policy_reference: untyped,
+            object_reference: untyped
+          },
+          create_index: {
+            ordered_indexed_attribute_list: Array[
+              {
+                schema_arn: untyped,
+                facet_name: untyped,
+                name: untyped
+              }
+            ],
+            is_unique: bool,
+            parent_reference: untyped,
+            link_name: untyped,
+            batch_reference_name: untyped
+          },
+          attach_to_index: {
+            index_reference: untyped,
+            target_reference: untyped
+          },
+          detach_from_index: {
+            index_reference: untyped,
+            target_reference: untyped
+          },
+          attach_typed_link: {
+            source_object_reference: untyped,
+            target_object_reference: untyped,
+            typed_link_facet: {
+              schema_arn: untyped,
+              typed_link_name: String
+            },
+            attributes: Array[
+              {
+                attribute_name: untyped,
+                value: untyped
+              }
+            ]
+          },
+          detach_typed_link: {
+            typed_link_specifier: {
+              typed_link_facet: untyped,
+              source_object_reference: untyped,
+              target_object_reference: untyped,
+              identity_attribute_values: untyped
+            }
+          },
+          update_link_attributes: {
+            typed_link_specifier: untyped,
+            attribute_updates: Array[
+              {
+                attribute_key: untyped,
+                attribute_action: {
+                  attribute_action_type: untyped,
+                  attribute_update_value: untyped
+                }
+              }
+            ]
+          }
+        }
+      ]
+    ) -> _BatchWriteResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchWriteResponse
+
+    interface _CreateDirectoryResponse
+      include Smithy::Client::_Response[Types::CreateDirectoryResponse]
+      def directory_arn: () -> String?
+      def name: () -> String?
+      def object_identifier: () -> String?
+      def applied_schema_arn: () -> String?
+    end
+    def create_directory: (
+      ?name: String,
+      ?schema_arn: String
+    ) -> _CreateDirectoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDirectoryResponse
+
+    interface _CreateFacetResponse
+      include Smithy::Client::_Response[Types::CreateFacetResponse]
+    end
+    def create_facet: (
+      ?schema_arn: String,
+      ?name: String,
+      ?attributes: Array[
+        {
+          name: String,
+          attribute_definition: {
+            type: String,
+            default_value: {
+              string_value: String,
+              binary_value: String,
+              boolean_value: bool,
+              number_value: String,
+              datetime_value: Time
+            },
+            is_immutable: bool,
+            rules: Hash[String,
+              {
+                type: String,
+                parameters: Hash[String, String]
+              }
+            ]
+          },
+          attribute_reference: {
+            target_facet_name: String,
+            target_attribute_name: untyped
+          },
+          required_behavior: String
+        }
+      ],
+      ?object_type: String,
+      ?facet_style: String
+    ) -> _CreateFacetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFacetResponse
+
+    interface _CreateIndexResponse
+      include Smithy::Client::_Response[Types::CreateIndexResponse]
+      def object_identifier: () -> String?
+    end
+    def create_index: (
+      ?directory_arn: String,
+      ?ordered_indexed_attribute_list: Array[
+        {
+          schema_arn: String,
+          facet_name: String,
+          name: String
+        }
+      ],
+      ?is_unique: bool,
+      ?parent_reference: {
+        selector: String
+      },
+      ?link_name: String
+    ) -> _CreateIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateIndexResponse
+
+    interface _CreateObjectResponse
+      include Smithy::Client::_Response[Types::CreateObjectResponse]
+      def object_identifier: () -> String?
+    end
+    def create_object: (
+      ?directory_arn: String,
+      ?schema_facets: Array[
+        {
+          schema_arn: String,
+          facet_name: String
+        }
+      ],
+      ?object_attribute_list: Array[
+        {
+          key: {
+            schema_arn: String,
+            facet_name: String,
+            name: String
+          },
+          value: {
+            string_value: String,
+            binary_value: String,
+            boolean_value: bool,
+            number_value: String,
+            datetime_value: Time
+          }
+        }
+      ],
+      ?parent_reference: {
+        selector: String
+      },
+      ?link_name: String
+    ) -> _CreateObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateObjectResponse
+
+    interface _CreateSchemaResponse
+      include Smithy::Client::_Response[Types::CreateSchemaResponse]
+      def schema_arn: () -> String?
+    end
+    def create_schema: (
+      ?name: String
+    ) -> _CreateSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSchemaResponse
+
+    interface _CreateTypedLinkFacetResponse
+      include Smithy::Client::_Response[Types::CreateTypedLinkFacetResponse]
+    end
+    def create_typed_link_facet: (
+      ?schema_arn: String,
+      ?facet: {
+        name: String,
+        attributes: Array[
+          {
+            name: String,
+            type: String,
+            default_value: {
+              string_value: String,
+              binary_value: String,
+              boolean_value: bool,
+              number_value: String,
+              datetime_value: Time
+            },
+            is_immutable: bool,
+            rules: Hash[String,
+              {
+                type: String,
+                parameters: Hash[String, String]
+              }
+            ],
+            required_behavior: String
+          }
+        ],
+        identity_attribute_order: Array[String]
+      }
+    ) -> _CreateTypedLinkFacetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTypedLinkFacetResponse
+
+    interface _DeleteDirectoryResponse
+      include Smithy::Client::_Response[Types::DeleteDirectoryResponse]
+      def directory_arn: () -> String?
+    end
+    def delete_directory: (
+      ?directory_arn: String
+    ) -> _DeleteDirectoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDirectoryResponse
+
+    interface _DeleteFacetResponse
+      include Smithy::Client::_Response[Types::DeleteFacetResponse]
+    end
+    def delete_facet: (
+      ?schema_arn: String,
+      ?name: String
+    ) -> _DeleteFacetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFacetResponse
+
+    interface _DeleteObjectResponse
+      include Smithy::Client::_Response[Types::DeleteObjectResponse]
+    end
+    def delete_object: (
+      ?directory_arn: String,
+      ?object_reference: {
+        selector: String
+      }
+    ) -> _DeleteObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteObjectResponse
+
+    interface _DeleteSchemaResponse
+      include Smithy::Client::_Response[Types::DeleteSchemaResponse]
+      def schema_arn: () -> String?
+    end
+    def delete_schema: (
+      ?schema_arn: String
+    ) -> _DeleteSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSchemaResponse
+
+    interface _DeleteTypedLinkFacetResponse
+      include Smithy::Client::_Response[Types::DeleteTypedLinkFacetResponse]
+    end
+    def delete_typed_link_facet: (
+      ?schema_arn: String,
+      ?name: String
+    ) -> _DeleteTypedLinkFacetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTypedLinkFacetResponse
+
+    interface _DetachFromIndexResponse
+      include Smithy::Client::_Response[Types::DetachFromIndexResponse]
+      def detached_object_identifier: () -> String?
+    end
+    def detach_from_index: (
+      ?directory_arn: String,
+      ?index_reference: {
+        selector: String
+      },
+      ?target_reference: {
+        selector: String
+      }
+    ) -> _DetachFromIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachFromIndexResponse
+
+    interface _DetachObjectResponse
+      include Smithy::Client::_Response[Types::DetachObjectResponse]
+      def detached_object_identifier: () -> String?
+    end
+    def detach_object: (
+      ?directory_arn: String,
+      ?parent_reference: {
+        selector: String
+      },
+      ?link_name: String
+    ) -> _DetachObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachObjectResponse
+
+    interface _DetachPolicyResponse
+      include Smithy::Client::_Response[Types::DetachPolicyResponse]
+    end
+    def detach_policy: (
+      ?directory_arn: String,
+      ?policy_reference: {
+        selector: String
+      },
+      ?object_reference: {
+        selector: String
+      }
+    ) -> _DetachPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachPolicyResponse
+
+    interface _DetachTypedLinkResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def detach_typed_link: (
+      ?directory_arn: String,
+      ?typed_link_specifier: {
+        typed_link_facet: {
+          schema_arn: String,
+          typed_link_name: String
+        },
+        source_object_reference: {
+          selector: String
+        },
+        target_object_reference: untyped,
+        identity_attribute_values: Array[
+          {
+            attribute_name: String,
+            value: {
+              string_value: String,
+              binary_value: String,
+              boolean_value: bool,
+              number_value: String,
+              datetime_value: Time
+            }
+          }
+        ]
+      }
+    ) -> _DetachTypedLinkResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DetachTypedLinkResponse
+
+    interface _DisableDirectoryResponse
+      include Smithy::Client::_Response[Types::DisableDirectoryResponse]
+      def directory_arn: () -> String?
+    end
+    def disable_directory: (
+      ?directory_arn: String
+    ) -> _DisableDirectoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisableDirectoryResponse
+
+    interface _EnableDirectoryResponse
+      include Smithy::Client::_Response[Types::EnableDirectoryResponse]
+      def directory_arn: () -> String?
+    end
+    def enable_directory: (
+      ?directory_arn: String
+    ) -> _EnableDirectoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _EnableDirectoryResponse
+
+    interface _GetAppliedSchemaVersionResponse
+      include Smithy::Client::_Response[Types::GetAppliedSchemaVersionResponse]
+      def applied_schema_arn: () -> String?
+    end
+    def get_applied_schema_version: (
+      ?schema_arn: String
+    ) -> _GetAppliedSchemaVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAppliedSchemaVersionResponse
+
+    interface _GetDirectoryResponse
+      include Smithy::Client::_Response[Types::GetDirectoryResponse]
+      def directory: () -> Types::Directory?
+    end
+    def get_directory: (
+      ?directory_arn: String
+    ) -> _GetDirectoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDirectoryResponse
+
+    interface _GetFacetResponse
+      include Smithy::Client::_Response[Types::GetFacetResponse]
+      def facet: () -> Types::Facet?
+    end
+    def get_facet: (
+      ?schema_arn: String,
+      ?name: String
+    ) -> _GetFacetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFacetResponse
+
+    interface _GetLinkAttributesResponse
+      include Smithy::Client::_Response[Types::GetLinkAttributesResponse]
+      def attributes: () -> Array[Types::AttributeKeyAndValue]?
+    end
+    def get_link_attributes: (
+      ?directory_arn: String,
+      ?typed_link_specifier: {
+        typed_link_facet: {
+          schema_arn: String,
+          typed_link_name: String
+        },
+        source_object_reference: {
+          selector: String
+        },
+        target_object_reference: untyped,
+        identity_attribute_values: Array[
+          {
+            attribute_name: String,
+            value: {
+              string_value: String,
+              binary_value: String,
+              boolean_value: bool,
+              number_value: String,
+              datetime_value: Time
+            }
+          }
+        ]
+      },
+      ?attribute_names: Array[String],
+      ?consistency_level: String
+    ) -> _GetLinkAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLinkAttributesResponse
+
+    interface _GetObjectAttributesResponse
+      include Smithy::Client::_Response[Types::GetObjectAttributesResponse]
+      def attributes: () -> Array[Types::AttributeKeyAndValue]?
+    end
+    def get_object_attributes: (
+      ?directory_arn: String,
+      ?object_reference: {
+        selector: String
+      },
+      ?consistency_level: String,
+      ?schema_facet: {
+        schema_arn: String,
+        facet_name: String
+      },
+      ?attribute_names: Array[String]
+    ) -> _GetObjectAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetObjectAttributesResponse
+
+    interface _GetObjectInformationResponse
+      include Smithy::Client::_Response[Types::GetObjectInformationResponse]
+      def schema_facets: () -> Array[Types::SchemaFacet]?
+      def object_identifier: () -> String?
+    end
+    def get_object_information: (
+      ?directory_arn: String,
+      ?object_reference: {
+        selector: String
+      },
+      ?consistency_level: String
+    ) -> _GetObjectInformationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetObjectInformationResponse
+
+    interface _GetSchemaAsJsonResponse
+      include Smithy::Client::_Response[Types::GetSchemaAsJsonResponse]
+      def name: () -> String?
+      def document: () -> String?
+    end
+    def get_schema_as_json: (
+      ?schema_arn: String
+    ) -> _GetSchemaAsJsonResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSchemaAsJsonResponse
+
+    interface _GetTypedLinkFacetInformationResponse
+      include Smithy::Client::_Response[Types::GetTypedLinkFacetInformationResponse]
+      def identity_attribute_order: () -> Array[String]?
+    end
+    def get_typed_link_facet_information: (
+      ?schema_arn: String,
+      ?name: String
+    ) -> _GetTypedLinkFacetInformationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTypedLinkFacetInformationResponse
+
+    interface _ListAppliedSchemaArnsResponse
+      include Smithy::Client::_Response[Types::ListAppliedSchemaArnsResponse]
+      def schema_arns: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_applied_schema_arns: (
+      ?directory_arn: String,
+      ?schema_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListAppliedSchemaArnsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAppliedSchemaArnsResponse
+
+    interface _ListAttachedIndicesResponse
+      include Smithy::Client::_Response[Types::ListAttachedIndicesResponse]
+      def index_attachments: () -> Array[Types::IndexAttachment]?
+      def next_token: () -> String?
+    end
+    def list_attached_indices: (
+      ?directory_arn: String,
+      ?target_reference: {
+        selector: String
+      },
+      ?next_token: String,
+      ?max_results: Integer,
+      ?consistency_level: String
+    ) -> _ListAttachedIndicesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAttachedIndicesResponse
+
+    interface _ListDevelopmentSchemaArnsResponse
+      include Smithy::Client::_Response[Types::ListDevelopmentSchemaArnsResponse]
+      def schema_arns: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_development_schema_arns: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDevelopmentSchemaArnsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDevelopmentSchemaArnsResponse
+
+    interface _ListDirectoriesResponse
+      include Smithy::Client::_Response[Types::ListDirectoriesResponse]
+      def directories: () -> Array[Types::Directory]?
+      def next_token: () -> String?
+    end
+    def list_directories: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?state: String
+    ) -> _ListDirectoriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDirectoriesResponse
+
+    interface _ListFacetAttributesResponse
+      include Smithy::Client::_Response[Types::ListFacetAttributesResponse]
+      def attributes: () -> Array[Types::FacetAttribute]?
+      def next_token: () -> String?
+    end
+    def list_facet_attributes: (
+      ?schema_arn: String,
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFacetAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFacetAttributesResponse
+
+    interface _ListFacetNamesResponse
+      include Smithy::Client::_Response[Types::ListFacetNamesResponse]
+      def facet_names: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_facet_names: (
+      ?schema_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFacetNamesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFacetNamesResponse
+
+    interface _ListIncomingTypedLinksResponse
+      include Smithy::Client::_Response[Types::ListIncomingTypedLinksResponse]
+      def link_specifiers: () -> Array[Types::TypedLinkSpecifier]?
+      def next_token: () -> String?
+    end
+    def list_incoming_typed_links: (
+      ?directory_arn: String,
+      ?object_reference: {
+        selector: String
+      },
+      ?filter_attribute_ranges: Array[
+        {
+          attribute_name: String,
+          range: {
+            start_mode: String,
+            start_value: {
+              string_value: String,
+              binary_value: String,
+              boolean_value: bool,
+              number_value: String,
+              datetime_value: Time
+            },
+            end_mode: untyped,
+            end_value: untyped
+          }
+        }
+      ],
+      ?filter_typed_link: {
+        schema_arn: String,
+        typed_link_name: String
+      },
+      ?next_token: String,
+      ?max_results: Integer,
+      ?consistency_level: String
+    ) -> _ListIncomingTypedLinksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIncomingTypedLinksResponse
+
+    interface _ListIndexResponse
+      include Smithy::Client::_Response[Types::ListIndexResponse]
+      def index_attachments: () -> Array[Types::IndexAttachment]?
+      def next_token: () -> String?
+    end
+    def list_index: (
+      ?directory_arn: String,
+      ?ranges_on_indexed_values: Array[
+        {
+          attribute_key: {
+            schema_arn: String,
+            facet_name: String,
+            name: String
+          },
+          range: {
+            start_mode: String,
+            start_value: {
+              string_value: String,
+              binary_value: String,
+              boolean_value: bool,
+              number_value: String,
+              datetime_value: Time
+            },
+            end_mode: untyped,
+            end_value: untyped
+          }
+        }
+      ],
+      ?index_reference: {
+        selector: String
+      },
+      ?max_results: Integer,
+      ?next_token: String,
+      ?consistency_level: String
+    ) -> _ListIndexResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListIndexResponse
+
+    interface _ListManagedSchemaArnsResponse
+      include Smithy::Client::_Response[Types::ListManagedSchemaArnsResponse]
+      def schema_arns: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_managed_schema_arns: (
+      ?schema_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListManagedSchemaArnsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListManagedSchemaArnsResponse
+
+    interface _ListObjectAttributesResponse
+      include Smithy::Client::_Response[Types::ListObjectAttributesResponse]
+      def attributes: () -> Array[Types::AttributeKeyAndValue]?
+      def next_token: () -> String?
+    end
+    def list_object_attributes: (
+      ?directory_arn: String,
+      ?object_reference: {
+        selector: String
+      },
+      ?next_token: String,
+      ?max_results: Integer,
+      ?consistency_level: String,
+      ?facet_filter: {
+        schema_arn: String,
+        facet_name: String
+      }
+    ) -> _ListObjectAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListObjectAttributesResponse
+
+    interface _ListObjectChildrenResponse
+      include Smithy::Client::_Response[Types::ListObjectChildrenResponse]
+      def children: () -> Hash[String, String]?
+      def next_token: () -> String?
+    end
+    def list_object_children: (
+      ?directory_arn: String,
+      ?object_reference: {
+        selector: String
+      },
+      ?next_token: String,
+      ?max_results: Integer,
+      ?consistency_level: String
+    ) -> _ListObjectChildrenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListObjectChildrenResponse
+
+    interface _ListObjectParentPathsResponse
+      include Smithy::Client::_Response[Types::ListObjectParentPathsResponse]
+      def path_to_object_identifiers_list: () -> Array[Types::PathToObjectIdentifiers]?
+      def next_token: () -> String?
+    end
+    def list_object_parent_paths: (
+      ?directory_arn: String,
+      ?object_reference: {
+        selector: String
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListObjectParentPathsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListObjectParentPathsResponse
+
+    interface _ListObjectParentsResponse
+      include Smithy::Client::_Response[Types::ListObjectParentsResponse]
+      def parents: () -> Hash[String, String]?
+      def next_token: () -> String?
+      def parent_links: () -> Array[Types::ObjectIdentifierAndLinkNameTuple]?
+    end
+    def list_object_parents: (
+      ?directory_arn: String,
+      ?object_reference: {
+        selector: String
+      },
+      ?next_token: String,
+      ?max_results: Integer,
+      ?consistency_level: String,
+      ?include_all_links_to_each_parent: bool
+    ) -> _ListObjectParentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListObjectParentsResponse
+
+    interface _ListObjectPoliciesResponse
+      include Smithy::Client::_Response[Types::ListObjectPoliciesResponse]
+      def attached_policy_ids: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_object_policies: (
+      ?directory_arn: String,
+      ?object_reference: {
+        selector: String
+      },
+      ?next_token: String,
+      ?max_results: Integer,
+      ?consistency_level: String
+    ) -> _ListObjectPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListObjectPoliciesResponse
+
+    interface _ListOutgoingTypedLinksResponse
+      include Smithy::Client::_Response[Types::ListOutgoingTypedLinksResponse]
+      def typed_link_specifiers: () -> Array[Types::TypedLinkSpecifier]?
+      def next_token: () -> String?
+    end
+    def list_outgoing_typed_links: (
+      ?directory_arn: String,
+      ?object_reference: {
+        selector: String
+      },
+      ?filter_attribute_ranges: Array[
+        {
+          attribute_name: String,
+          range: {
+            start_mode: String,
+            start_value: {
+              string_value: String,
+              binary_value: String,
+              boolean_value: bool,
+              number_value: String,
+              datetime_value: Time
+            },
+            end_mode: untyped,
+            end_value: untyped
+          }
+        }
+      ],
+      ?filter_typed_link: {
+        schema_arn: String,
+        typed_link_name: String
+      },
+      ?next_token: String,
+      ?max_results: Integer,
+      ?consistency_level: String
+    ) -> _ListOutgoingTypedLinksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListOutgoingTypedLinksResponse
+
+    interface _ListPolicyAttachmentsResponse
+      include Smithy::Client::_Response[Types::ListPolicyAttachmentsResponse]
+      def object_identifiers: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_policy_attachments: (
+      ?directory_arn: String,
+      ?policy_reference: {
+        selector: String
+      },
+      ?next_token: String,
+      ?max_results: Integer,
+      ?consistency_level: String
+    ) -> _ListPolicyAttachmentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPolicyAttachmentsResponse
+
+    interface _ListPublishedSchemaArnsResponse
+      include Smithy::Client::_Response[Types::ListPublishedSchemaArnsResponse]
+      def schema_arns: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_published_schema_arns: (
+      ?schema_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListPublishedSchemaArnsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPublishedSchemaArnsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Array[Types::Tag]?
+      def next_token: () -> String?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTypedLinkFacetAttributesResponse
+      include Smithy::Client::_Response[Types::ListTypedLinkFacetAttributesResponse]
+      def attributes: () -> Array[Types::TypedLinkAttributeDefinition]?
+      def next_token: () -> String?
+    end
+    def list_typed_link_facet_attributes: (
+      ?schema_arn: String,
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTypedLinkFacetAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTypedLinkFacetAttributesResponse
+
+    interface _ListTypedLinkFacetNamesResponse
+      include Smithy::Client::_Response[Types::ListTypedLinkFacetNamesResponse]
+      def facet_names: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_typed_link_facet_names: (
+      ?schema_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTypedLinkFacetNamesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTypedLinkFacetNamesResponse
+
+    interface _LookupPolicyResponse
+      include Smithy::Client::_Response[Types::LookupPolicyResponse]
+      def policy_to_path_list: () -> Array[Types::PolicyToPath]?
+      def next_token: () -> String?
+    end
+    def lookup_policy: (
+      ?directory_arn: String,
+      ?object_reference: {
+        selector: String
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _LookupPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _LookupPolicyResponse
+
+    interface _PublishSchemaResponse
+      include Smithy::Client::_Response[Types::PublishSchemaResponse]
+      def published_schema_arn: () -> String?
+    end
+    def publish_schema: (
+      ?development_schema_arn: String,
+      ?version: String,
+      ?minor_version: String,
+      ?name: String
+    ) -> _PublishSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PublishSchemaResponse
+
+    interface _PutSchemaFromJsonResponse
+      include Smithy::Client::_Response[Types::PutSchemaFromJsonResponse]
+      def arn: () -> String?
+    end
+    def put_schema_from_json: (
+      ?schema_arn: String,
+      ?document: String
+    ) -> _PutSchemaFromJsonResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutSchemaFromJsonResponse
+
+    interface _RemoveFacetFromObjectResponse
+      include Smithy::Client::_Response[Types::RemoveFacetFromObjectResponse]
+    end
+    def remove_facet_from_object: (
+      ?directory_arn: String,
+      ?schema_facet: {
+        schema_arn: String,
+        facet_name: String
+      },
+      ?object_reference: {
+        selector: String
+      }
+    ) -> _RemoveFacetFromObjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveFacetFromObjectResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateFacetResponse
+      include Smithy::Client::_Response[Types::UpdateFacetResponse]
+    end
+    def update_facet: (
+      ?schema_arn: String,
+      ?name: String,
+      ?attribute_updates: Array[
+        {
+          attribute: {
+            name: String,
+            attribute_definition: {
+              type: String,
+              default_value: {
+                string_value: String,
+                binary_value: String,
+                boolean_value: bool,
+                number_value: String,
+                datetime_value: Time
+              },
+              is_immutable: bool,
+              rules: Hash[String,
+                {
+                  type: String,
+                  parameters: Hash[String, String]
+                }
+              ]
+            },
+            attribute_reference: {
+              target_facet_name: String,
+              target_attribute_name: untyped
+            },
+            required_behavior: String
+          },
+          action: String
+        }
+      ],
+      ?object_type: String
+    ) -> _UpdateFacetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFacetResponse
+
+    interface _UpdateLinkAttributesResponse
+      include Smithy::Client::_Response[Types::UpdateLinkAttributesResponse]
+    end
+    def update_link_attributes: (
+      ?directory_arn: String,
+      ?typed_link_specifier: {
+        typed_link_facet: {
+          schema_arn: String,
+          typed_link_name: String
+        },
+        source_object_reference: {
+          selector: String
+        },
+        target_object_reference: untyped,
+        identity_attribute_values: Array[
+          {
+            attribute_name: String,
+            value: {
+              string_value: String,
+              binary_value: String,
+              boolean_value: bool,
+              number_value: String,
+              datetime_value: Time
+            }
+          }
+        ]
+      },
+      ?attribute_updates: Array[
+        {
+          attribute_key: {
+            schema_arn: String,
+            facet_name: String,
+            name: String
+          },
+          attribute_action: {
+            attribute_action_type: String,
+            attribute_update_value: {
+              string_value: String,
+              binary_value: String,
+              boolean_value: bool,
+              number_value: String,
+              datetime_value: Time
+            }
+          }
+        }
+      ]
+    ) -> _UpdateLinkAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLinkAttributesResponse
+
+    interface _UpdateObjectAttributesResponse
+      include Smithy::Client::_Response[Types::UpdateObjectAttributesResponse]
+      def object_identifier: () -> String?
+    end
+    def update_object_attributes: (
+      ?directory_arn: String,
+      ?object_reference: {
+        selector: String
+      },
+      ?attribute_updates: Array[
+        {
+          object_attribute_key: {
+            schema_arn: String,
+            facet_name: String,
+            name: String
+          },
+          object_attribute_action: {
+            object_attribute_action_type: String,
+            object_attribute_update_value: {
+              string_value: String,
+              binary_value: String,
+              boolean_value: bool,
+              number_value: String,
+              datetime_value: Time
+            }
+          }
+        }
+      ]
+    ) -> _UpdateObjectAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateObjectAttributesResponse
+
+    interface _UpdateSchemaResponse
+      include Smithy::Client::_Response[Types::UpdateSchemaResponse]
+      def schema_arn: () -> String?
+    end
+    def update_schema: (
+      ?schema_arn: String,
+      ?name: String
+    ) -> _UpdateSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSchemaResponse
+
+    interface _UpdateTypedLinkFacetResponse
+      include Smithy::Client::_Response[Types::UpdateTypedLinkFacetResponse]
+    end
+    def update_typed_link_facet: (
+      ?schema_arn: String,
+      ?name: String,
+      ?attribute_updates: Array[
+        {
+          attribute: {
+            name: String,
+            type: String,
+            default_value: {
+              string_value: String,
+              binary_value: String,
+              boolean_value: bool,
+              number_value: String,
+              datetime_value: Time
+            },
+            is_immutable: bool,
+            rules: Hash[String,
+              {
+                type: String,
+                parameters: Hash[String, String]
+              }
+            ],
+            required_behavior: String
+          },
+          action: String
+        }
+      ],
+      ?identity_attribute_order: Array[String]
+    ) -> _UpdateTypedLinkFacetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTypedLinkFacetResponse
+
+    interface _UpgradeAppliedSchemaResponse
+      include Smithy::Client::_Response[Types::UpgradeAppliedSchemaResponse]
+      def upgraded_schema_arn: () -> String?
+      def directory_arn: () -> String?
+    end
+    def upgrade_applied_schema: (
+      ?published_schema_arn: String,
+      ?directory_arn: String,
+      ?dry_run: bool
+    ) -> _UpgradeAppliedSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpgradeAppliedSchemaResponse
+
+    interface _UpgradePublishedSchemaResponse
+      include Smithy::Client::_Response[Types::UpgradePublishedSchemaResponse]
+      def upgraded_schema_arn: () -> String?
+    end
+    def upgrade_published_schema: (
+      ?development_schema_arn: String,
+      ?published_schema_arn: String,
+      ?minor_version: String,
+      ?dry_run: bool
+    ) -> _UpgradePublishedSchemaResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpgradePublishedSchemaResponse
+  end
+end

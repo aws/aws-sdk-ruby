@@ -1,0 +1,5 @@
+  module Aws
+    module MediaStoreData
+      VERSION: String
+    end
+  end

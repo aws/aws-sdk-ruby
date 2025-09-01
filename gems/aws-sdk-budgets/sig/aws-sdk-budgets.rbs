@@ -1,0 +1,5 @@
+  module Aws
+    module Budgets
+      VERSION: String
+    end
+  end

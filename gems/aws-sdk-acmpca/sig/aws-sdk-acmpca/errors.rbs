@@ -1,0 +1,61 @@
+module Aws::ACMPCA
+  module Errors
+    class CertificateMismatchException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ConcurrentModificationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidArgsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidArnException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidNextTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPolicyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidRequestException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidTagException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LockoutPreventedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MalformedCSRException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class MalformedCertificateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class PermissionAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RequestAlreadyProcessedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RequestFailedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RequestInProgressException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceNotFoundException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

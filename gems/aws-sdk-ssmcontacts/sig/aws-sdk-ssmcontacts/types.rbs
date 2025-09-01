@@ -1,0 +1,1671 @@
+module Aws::SSMContacts
+  module Types
+
+    module AcceptCodeValidation
+      IGNORE: String
+      ENFORCE: String
+    end
+
+    class AcceptPageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?page_id: String,
+        ?contact_channel_id: String,
+        ?accept_type: String,
+        ?note: String,
+        ?accept_code: String,
+        ?accept_code_validation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor page_id: String?
+      attr_accessor contact_channel_id: String?
+      attr_accessor accept_type: String?
+      attr_accessor note: String?
+      attr_accessor accept_code: String?
+      attr_accessor accept_code_validation: String?
+    end
+
+    class AcceptPageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module AcceptType
+      DELIVERED: String
+      READ: String
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ActivateContactChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_channel_id: String,
+        ?activation_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_channel_id: String?
+      attr_accessor activation_code: String?
+    end
+
+    class ActivateContactChannelResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module ActivationStatus
+      ACTIVATED: String
+      NOT_ACTIVATED: String
+    end
+
+    class ChannelTargetInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_channel_id: String,
+        ?retry_interval_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_channel_id: String?
+      attr_accessor retry_interval_in_minutes: Integer?
+    end
+
+    module ChannelType
+      SMS: String
+      VOICE: String
+      EMAIL: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?dependent_entities: Array[Types::DependentEntity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor dependent_entities: Array[Types::DependentEntity]?
+    end
+
+    class Contact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_arn: String,
+        ?alias: String,
+        ?display_name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_arn: String?
+      attr_accessor alias: String?
+      attr_accessor display_name: String?
+      attr_accessor type: String?
+    end
+
+    class ContactChannel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_channel_arn: String,
+        ?contact_arn: String,
+        ?name: String,
+        ?type: String,
+        ?delivery_address: Types::ContactChannelAddress,
+        ?activation_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_channel_arn: String?
+      attr_accessor contact_arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor delivery_address: Types::ContactChannelAddress?
+      attr_accessor activation_status: String?
+    end
+
+    class ContactChannelAddress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?simple_address: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor simple_address: String?
+    end
+
+    class ContactTargetInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_id: String,
+        ?is_essential: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_id: String?
+      attr_accessor is_essential: bool?
+    end
+
+    module ContactType
+      PERSONAL: String
+      ESCALATION: String
+      ONCALL_SCHEDULE: String
+    end
+
+    class CoverageTime
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start: Types::HandOffTime,
+        ?end: Types::HandOffTime,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start: Types::HandOffTime?
+      attr_accessor end: Types::HandOffTime?
+    end
+
+    class CreateContactChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_id: String,
+        ?name: String,
+        ?type: String,
+        ?delivery_address: Types::ContactChannelAddress,
+        ?defer_activation: bool,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_id: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor delivery_address: Types::ContactChannelAddress?
+      attr_accessor defer_activation: bool?
+      attr_accessor idempotency_token: String?
+    end
+
+    class CreateContactChannelResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_channel_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_channel_arn: String?
+    end
+
+    class CreateContactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alias: String,
+        ?display_name: String,
+        ?type: String,
+        ?plan: Types::Plan,
+        ?tags: Array[Types::Tag],
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alias: String?
+      attr_accessor display_name: String?
+      attr_accessor type: String?
+      attr_accessor plan: Types::Plan?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor idempotency_token: String?
+    end
+
+    class CreateContactResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_arn: String?
+    end
+
+    class CreateRotationOverrideRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_id: String,
+        ?new_contact_ids: Array[String],
+        ?start_time: Time,
+        ?end_time: Time,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_id: String?
+      attr_accessor new_contact_ids: Array[String]?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor idempotency_token: String?
+    end
+
+    class CreateRotationOverrideResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_override_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_override_id: String?
+    end
+
+    class CreateRotationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?contact_ids: Array[String],
+        ?start_time: Time,
+        ?time_zone_id: String,
+        ?recurrence: Types::RecurrenceSettings,
+        ?tags: Array[Types::Tag],
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor contact_ids: Array[String]?
+      attr_accessor start_time: Time?
+      attr_accessor time_zone_id: String?
+      attr_accessor recurrence: Types::RecurrenceSettings?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor idempotency_token: String?
+    end
+
+    class CreateRotationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_arn: String?
+    end
+
+    class DataEncryptionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module DayOfWeek
+      MON: String
+      TUE: String
+      WED: String
+      THU: String
+      FRI: String
+      SAT: String
+      SUN: String
+    end
+
+    class DeactivateContactChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_channel_id: String?
+    end
+
+    class DeactivateContactChannelResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteContactChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_channel_id: String?
+    end
+
+    class DeleteContactChannelResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteContactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_id: String?
+    end
+
+    class DeleteContactResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRotationOverrideRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_id: String,
+        ?rotation_override_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_id: String?
+      attr_accessor rotation_override_id: String?
+    end
+
+    class DeleteRotationOverrideResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRotationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_id: String?
+    end
+
+    class DeleteRotationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DependentEntity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?relation_type: String,
+        ?dependent_resource_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor relation_type: String?
+      attr_accessor dependent_resource_ids: Array[String]?
+    end
+
+    class DescribeEngagementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engagement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engagement_id: String?
+    end
+
+    class DescribeEngagementResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_arn: String,
+        ?engagement_arn: String,
+        ?sender: String,
+        ?subject: String,
+        ?content: String,
+        ?public_subject: String,
+        ?public_content: String,
+        ?incident_id: String,
+        ?start_time: Time,
+        ?stop_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_arn: String?
+      attr_accessor engagement_arn: String?
+      attr_accessor sender: String?
+      attr_accessor subject: String?
+      attr_accessor content: String?
+      attr_accessor public_subject: String?
+      attr_accessor public_content: String?
+      attr_accessor incident_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor stop_time: Time?
+    end
+
+    class DescribePageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?page_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor page_id: String?
+    end
+
+    class DescribePageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?page_arn: String,
+        ?engagement_arn: String,
+        ?contact_arn: String,
+        ?sender: String,
+        ?subject: String,
+        ?content: String,
+        ?public_subject: String,
+        ?public_content: String,
+        ?incident_id: String,
+        ?sent_time: Time,
+        ?read_time: Time,
+        ?delivery_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor page_arn: String?
+      attr_accessor engagement_arn: String?
+      attr_accessor contact_arn: String?
+      attr_accessor sender: String?
+      attr_accessor subject: String?
+      attr_accessor content: String?
+      attr_accessor public_subject: String?
+      attr_accessor public_content: String?
+      attr_accessor incident_id: String?
+      attr_accessor sent_time: Time?
+      attr_accessor read_time: Time?
+      attr_accessor delivery_time: Time?
+    end
+
+    class Engagement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engagement_arn: String,
+        ?contact_arn: String,
+        ?sender: String,
+        ?incident_id: String,
+        ?start_time: Time,
+        ?stop_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engagement_arn: String?
+      attr_accessor contact_arn: String?
+      attr_accessor sender: String?
+      attr_accessor incident_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor stop_time: Time?
+    end
+
+    class GetContactChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_channel_id: String?
+    end
+
+    class GetContactChannelResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_arn: String,
+        ?contact_channel_arn: String,
+        ?name: String,
+        ?type: String,
+        ?delivery_address: Types::ContactChannelAddress,
+        ?activation_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_arn: String?
+      attr_accessor contact_channel_arn: String?
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor delivery_address: Types::ContactChannelAddress?
+      attr_accessor activation_status: String?
+    end
+
+    class GetContactPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_arn: String?
+    end
+
+    class GetContactPolicyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class GetContactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_id: String?
+    end
+
+    class GetContactResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_arn: String,
+        ?alias: String,
+        ?display_name: String,
+        ?type: String,
+        ?plan: Types::Plan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_arn: String?
+      attr_accessor alias: String?
+      attr_accessor display_name: String?
+      attr_accessor type: String?
+      attr_accessor plan: Types::Plan?
+    end
+
+    class GetRotationOverrideRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_id: String,
+        ?rotation_override_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_id: String?
+      attr_accessor rotation_override_id: String?
+    end
+
+    class GetRotationOverrideResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_override_id: String,
+        ?rotation_arn: String,
+        ?new_contact_ids: Array[String],
+        ?start_time: Time,
+        ?end_time: Time,
+        ?create_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_override_id: String?
+      attr_accessor rotation_arn: String?
+      attr_accessor new_contact_ids: Array[String]?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor create_time: Time?
+    end
+
+    class GetRotationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_id: String?
+    end
+
+    class GetRotationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_arn: String,
+        ?name: String,
+        ?contact_ids: Array[String],
+        ?start_time: Time,
+        ?time_zone_id: String,
+        ?recurrence: Types::RecurrenceSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_arn: String?
+      attr_accessor name: String?
+      attr_accessor contact_ids: Array[String]?
+      attr_accessor start_time: Time?
+      attr_accessor time_zone_id: String?
+      attr_accessor recurrence: Types::RecurrenceSettings?
+    end
+
+    class HandOffTime
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hour_of_day: Integer,
+        ?minute_of_hour: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hour_of_day: Integer?
+      attr_accessor minute_of_hour: Integer?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class ListContactChannelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListContactChannelsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?contact_channels: Array[Types::ContactChannel],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor contact_channels: Array[Types::ContactChannel]?
+    end
+
+    class ListContactsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?alias_prefix: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor alias_prefix: String?
+      attr_accessor type: String?
+    end
+
+    class ListContactsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?contacts: Array[Types::Contact],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor contacts: Array[Types::Contact]?
+    end
+
+    class ListEngagementsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?incident_id: String,
+        ?time_range_value: Types::TimeRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor incident_id: String?
+      attr_accessor time_range_value: Types::TimeRange?
+    end
+
+    class ListEngagementsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?engagements: Array[Types::Engagement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor engagements: Array[Types::Engagement]?
+    end
+
+    class ListPageReceiptsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?page_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor page_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPageReceiptsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?receipts: Array[Types::Receipt],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor receipts: Array[Types::Receipt]?
+    end
+
+    class ListPageResolutionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_id: String?
+    end
+
+    class ListPageResolutionsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?page_resolutions: Array[Types::ResolutionContact],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor page_resolutions: Array[Types::ResolutionContact]?
+    end
+
+    class ListPagesByContactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPagesByContactResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?pages: Array[Types::Page],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor pages: Array[Types::Page]?
+    end
+
+    class ListPagesByEngagementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engagement_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engagement_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPagesByEngagementResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?pages: Array[Types::Page],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor pages: Array[Types::Page]?
+    end
+
+    class ListPreviewRotationShiftsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_start_time: Time,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?members: Array[String],
+        ?time_zone_id: String,
+        ?recurrence: Types::RecurrenceSettings,
+        ?overrides: Array[Types::PreviewOverride],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_start_time: Time?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor members: Array[String]?
+      attr_accessor time_zone_id: String?
+      attr_accessor recurrence: Types::RecurrenceSettings?
+      attr_accessor overrides: Array[Types::PreviewOverride]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPreviewRotationShiftsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_shifts: Array[Types::RotationShift],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_shifts: Array[Types::RotationShift]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRotationOverridesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_id: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRotationOverridesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_overrides: Array[Types::RotationOverride],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_overrides: Array[Types::RotationOverride]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRotationShiftsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_id: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_id: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRotationShiftsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_shifts: Array[Types::RotationShift],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_shifts: Array[Types::RotationShift]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRotationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_name_prefix: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_name_prefix: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRotationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?rotations: Array[Types::Rotation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor rotations: Array[Types::Rotation]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class MonthlySetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?day_of_month: Integer,
+        ?hand_off_time: Types::HandOffTime,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor day_of_month: Integer?
+      attr_accessor hand_off_time: Types::HandOffTime?
+    end
+
+    class Page
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?page_arn: String,
+        ?engagement_arn: String,
+        ?contact_arn: String,
+        ?sender: String,
+        ?incident_id: String,
+        ?sent_time: Time,
+        ?delivery_time: Time,
+        ?read_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor page_arn: String?
+      attr_accessor engagement_arn: String?
+      attr_accessor contact_arn: String?
+      attr_accessor sender: String?
+      attr_accessor incident_id: String?
+      attr_accessor sent_time: Time?
+      attr_accessor delivery_time: Time?
+      attr_accessor read_time: Time?
+    end
+
+    class Plan
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stages: Array[Types::Stage],
+        ?rotation_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stages: Array[Types::Stage]?
+      attr_accessor rotation_ids: Array[String]?
+    end
+
+    class PreviewOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?new_members: Array[String],
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor new_members: Array[String]?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class PutContactPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_arn: String,
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_arn: String?
+      attr_accessor policy: String?
+    end
+
+    class PutContactPolicyResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Receipt
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_channel_arn: String,
+        ?receipt_type: String,
+        ?receipt_info: String,
+        ?receipt_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_channel_arn: String?
+      attr_accessor receipt_type: String?
+      attr_accessor receipt_info: String?
+      attr_accessor receipt_time: Time?
+    end
+
+    module ReceiptType
+      DELIVERED: String
+      ERROR: String
+      READ: String
+      SENT: String
+      STOP: String
+    end
+
+    class RecurrenceSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monthly_settings: Array[Types::MonthlySetting],
+        ?weekly_settings: Array[Types::WeeklySetting],
+        ?daily_settings: Array[Types::HandOffTime],
+        ?number_of_on_calls: Integer,
+        ?shift_coverages: Hash[String, Array[Types::CoverageTime]],
+        ?recurrence_multiplier: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monthly_settings: Array[Types::MonthlySetting]?
+      attr_accessor weekly_settings: Array[Types::WeeklySetting]?
+      attr_accessor daily_settings: Array[Types::HandOffTime]?
+      attr_accessor number_of_on_calls: Integer?
+      attr_accessor shift_coverages: Hash[String, Array[Types::CoverageTime]]?
+      attr_accessor recurrence_multiplier: Integer?
+    end
+
+    class ResolutionContact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_arn: String,
+        ?type: String,
+        ?stage_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_arn: String?
+      attr_accessor type: String?
+      attr_accessor stage_index: Integer?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class Rotation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_arn: String,
+        ?name: String,
+        ?contact_ids: Array[String],
+        ?start_time: Time,
+        ?time_zone_id: String,
+        ?recurrence: Types::RecurrenceSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_arn: String?
+      attr_accessor name: String?
+      attr_accessor contact_ids: Array[String]?
+      attr_accessor start_time: Time?
+      attr_accessor time_zone_id: String?
+      attr_accessor recurrence: Types::RecurrenceSettings?
+    end
+
+    class RotationOverride
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_override_id: String,
+        ?new_contact_ids: Array[String],
+        ?start_time: Time,
+        ?end_time: Time,
+        ?create_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_override_id: String?
+      attr_accessor new_contact_ids: Array[String]?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor create_time: Time?
+    end
+
+    class RotationShift
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_ids: Array[String],
+        ?start_time: Time,
+        ?end_time: Time,
+        ?type: String,
+        ?shift_details: Types::ShiftDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_ids: Array[String]?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor type: String?
+      attr_accessor shift_details: Types::ShiftDetails?
+    end
+
+    class SendActivationCodeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_channel_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_channel_id: String?
+    end
+
+    class SendActivationCodeResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?quota_code: String,
+        ?service_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor quota_code: String?
+      attr_accessor service_code: String?
+    end
+
+    class ShiftDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?overridden_contact_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor overridden_contact_ids: Array[String]?
+    end
+
+    module ShiftType
+      REGULAR: String
+      OVERRIDDEN: String
+    end
+
+    class Stage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration_in_minutes: Integer,
+        ?targets: Array[Types::Target],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration_in_minutes: Integer?
+      attr_accessor targets: Array[Types::Target]?
+    end
+
+    class StartEngagementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_id: String,
+        ?sender: String,
+        ?subject: String,
+        ?content: String,
+        ?public_subject: String,
+        ?public_content: String,
+        ?incident_id: String,
+        ?idempotency_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_id: String?
+      attr_accessor sender: String?
+      attr_accessor subject: String?
+      attr_accessor content: String?
+      attr_accessor public_subject: String?
+      attr_accessor public_content: String?
+      attr_accessor incident_id: String?
+      attr_accessor idempotency_token: String?
+    end
+
+    class StartEngagementResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engagement_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engagement_arn: String?
+    end
+
+    class StopEngagementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?engagement_id: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor engagement_id: String?
+      attr_accessor reason: String?
+    end
+
+    class StopEngagementResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Target
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_target_info: Types::ChannelTargetInfo,
+        ?contact_target_info: Types::ContactTargetInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_target_info: Types::ChannelTargetInfo?
+      attr_accessor contact_target_info: Types::ContactTargetInfo?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?quota_code: String,
+        ?service_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor quota_code: String?
+      attr_accessor service_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class TimeRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: Time,
+        ?end_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateContactChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_channel_id: String,
+        ?name: String,
+        ?delivery_address: Types::ContactChannelAddress,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_channel_id: String?
+      attr_accessor name: String?
+      attr_accessor delivery_address: Types::ContactChannelAddress?
+    end
+
+    class UpdateContactChannelResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateContactRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contact_id: String,
+        ?display_name: String,
+        ?plan: Types::Plan,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contact_id: String?
+      attr_accessor display_name: String?
+      attr_accessor plan: Types::Plan?
+    end
+
+    class UpdateContactResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateRotationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rotation_id: String,
+        ?contact_ids: Array[String],
+        ?start_time: Time,
+        ?time_zone_id: String,
+        ?recurrence: Types::RecurrenceSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rotation_id: String?
+      attr_accessor contact_ids: Array[String]?
+      attr_accessor start_time: Time?
+      attr_accessor time_zone_id: String?
+      attr_accessor recurrence: Types::RecurrenceSettings?
+    end
+
+    class UpdateRotationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?fields: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor fields: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+
+    class WeeklySetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?day_of_week: String,
+        ?hand_off_time: Types::HandOffTime,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor day_of_week: String?
+      attr_accessor hand_off_time: Types::HandOffTime?
+    end
+  end
+end

@@ -1,0 +1,5 @@
+  module Aws
+    module Braket
+      VERSION: String
+    end
+  end

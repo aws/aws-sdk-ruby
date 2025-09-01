@@ -1,0 +1,5 @@
+  module Aws
+    module SSMContacts
+      VERSION: String
+    end
+  end

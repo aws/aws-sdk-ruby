@@ -1,0 +1,5 @@
+module Aws::OpenSearch
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

@@ -1,0 +1,37 @@
+module Aws::SWF
+  module Errors
+    class DefaultUndefinedFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DomainAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DomainDeprecatedFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class LimitExceededFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OperationNotPermittedFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TypeAlreadyExistsFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TypeDeprecatedFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TypeNotDeprecatedFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class UnknownResourceFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class WorkflowExecutionAlreadyStartedFault < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

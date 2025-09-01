@@ -1,0 +1,66 @@
+module Aws::NetworkMonitor
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    AddressFamily: EnumShape
+    AggregationPeriod: IntegerShape
+    Arn: StringShape
+    ConflictException: StructureShape
+    CreateMonitorInput: StructureShape
+    CreateMonitorOutput: StructureShape
+    CreateMonitorProbeInput: StructureShape
+    CreateMonitorProbeInputList: ListShape
+    CreateProbeInput: StructureShape
+    CreateProbeOutput: StructureShape
+    DeleteMonitorInput: StructureShape
+    DeleteMonitorOutput: StructureShape
+    DeleteProbeInput: StructureShape
+    DeleteProbeOutput: StructureShape
+    Destination: StringShape
+    GetMonitorInput: StructureShape
+    GetMonitorOutput: StructureShape
+    GetProbeInput: StructureShape
+    GetProbeOutput: StructureShape
+    InternalServerException: StructureShape
+    Iso8601Timestamp: TimestampShape
+    ListMonitorsInput: StructureShape
+    ListMonitorsOutput: StructureShape
+    ListTagsForResourceInput: StructureShape
+    ListTagsForResourceOutput: StructureShape
+    MaxResults: IntegerShape
+    MonitorArn: StringShape
+    MonitorList: ListShape
+    MonitorState: EnumShape
+    MonitorSummary: StructureShape
+    PacketSize: IntegerShape
+    PaginationToken: StringShape
+    Port: IntegerShape
+    Probe: StructureShape
+    ProbeId: StringShape
+    ProbeInput: StructureShape
+    ProbeList: ListShape
+    ProbeState: EnumShape
+    Protocol: EnumShape
+    ResourceName: StringShape
+    ResourceNotFoundException: StructureShape
+    ServiceQuotaExceededException: StructureShape
+    TagKey: StringShape
+    TagKeyList: ListShape
+    TagMap: MapShape
+    TagResourceInput: StructureShape
+    TagResourceOutput: StructureShape
+    TagValue: StringShape
+    ThrottlingException: StructureShape
+    UntagResourceInput: StructureShape
+    UntagResourceOutput: StructureShape
+    UpdateMonitorInput: StructureShape
+    UpdateMonitorOutput: StructureShape
+    UpdateProbeInput: StructureShape
+    UpdateProbeOutput: StructureShape
+    ValidationException: StructureShape
+    VpcId: StringShape
+
+    NetworkMonitor: ServiceShape
+  end
+end

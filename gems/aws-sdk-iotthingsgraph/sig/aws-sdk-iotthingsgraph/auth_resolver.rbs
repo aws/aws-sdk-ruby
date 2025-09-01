@@ -1,0 +1,5 @@
+module Aws::IoTThingsGraph
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

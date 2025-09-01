@@ -1,0 +1,3747 @@
+module Aws::CostExplorer
+  module Types
+
+    module AccountScope
+      PAYER: String
+      LINKED: String
+    end
+
+    class AnalysisDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plans_purchase_analysis_details: Types::SavingsPlansPurchaseAnalysisDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plans_purchase_analysis_details: Types::SavingsPlansPurchaseAnalysisDetails?
+    end
+
+    class AnalysisNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AnalysisStatus
+      SUCCEEDED: String
+      PROCESSING: String
+      FAILED: String
+    end
+
+    class AnalysisSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?estimated_completion_time: String,
+        ?analysis_completion_time: String,
+        ?analysis_started_time: String,
+        ?analysis_status: String,
+        ?error_code: String,
+        ?analysis_id: String,
+        ?commitment_purchase_analysis_configuration: Types::CommitmentPurchaseAnalysisConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor estimated_completion_time: String?
+      attr_accessor analysis_completion_time: String?
+      attr_accessor analysis_started_time: String?
+      attr_accessor analysis_status: String?
+      attr_accessor error_code: String?
+      attr_accessor analysis_id: String?
+      attr_accessor commitment_purchase_analysis_configuration: Types::CommitmentPurchaseAnalysisConfiguration?
+    end
+
+    module AnalysisType
+      MAX_SAVINGS: String
+      CUSTOM_COMMITMENT: String
+    end
+
+    class Anomaly
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_id: String,
+        ?anomaly_start_date: String,
+        ?anomaly_end_date: String,
+        ?dimension_value: String,
+        ?root_causes: Array[Types::RootCause],
+        ?anomaly_score: Types::AnomalyScore,
+        ?impact: Types::Impact,
+        ?monitor_arn: String,
+        ?feedback: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_id: String?
+      attr_accessor anomaly_start_date: String?
+      attr_accessor anomaly_end_date: String?
+      attr_accessor dimension_value: String?
+      attr_accessor root_causes: Array[Types::RootCause]?
+      attr_accessor anomaly_score: Types::AnomalyScore?
+      attr_accessor impact: Types::Impact?
+      attr_accessor monitor_arn: String?
+      attr_accessor feedback: String?
+    end
+
+    class AnomalyDateInterval
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_date: String,
+        ?end_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_date: String?
+      attr_accessor end_date: String?
+    end
+
+    module AnomalyFeedbackType
+      YES: String
+      NO: String
+      PLANNED_ACTIVITY: String
+    end
+
+    class AnomalyMonitor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn: String,
+        ?monitor_name: String,
+        ?creation_date: String,
+        ?last_updated_date: String,
+        ?last_evaluated_date: String,
+        ?monitor_type: String,
+        ?monitor_dimension: String,
+        ?monitor_specification: Types::Expression,
+        ?dimensional_value_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn: String?
+      attr_accessor monitor_name: String?
+      attr_accessor creation_date: String?
+      attr_accessor last_updated_date: String?
+      attr_accessor last_evaluated_date: String?
+      attr_accessor monitor_type: String?
+      attr_accessor monitor_dimension: String?
+      attr_accessor monitor_specification: Types::Expression?
+      attr_accessor dimensional_value_count: Integer?
+    end
+
+    class AnomalyScore
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_score: Float,
+        ?current_score: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_score: Float?
+      attr_accessor current_score: Float?
+    end
+
+    class AnomalySubscription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_arn: String,
+        ?account_id: String,
+        ?monitor_arn_list: Array[String],
+        ?subscribers: Array[Types::Subscriber],
+        ?threshold: Float,
+        ?frequency: String,
+        ?subscription_name: String,
+        ?threshold_expression: Types::Expression,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_arn: String?
+      attr_accessor account_id: String?
+      attr_accessor monitor_arn_list: Array[String]?
+      attr_accessor subscribers: Array[Types::Subscriber]?
+      attr_accessor threshold: Float?
+      attr_accessor frequency: String?
+      attr_accessor subscription_name: String?
+      attr_accessor threshold_expression: Types::Expression?
+    end
+
+    module AnomalySubscriptionFrequency
+      DAILY: String
+      IMMEDIATE: String
+      WEEKLY: String
+    end
+
+    module ApproximationDimension
+      SERVICE: String
+      RESOURCE: String
+    end
+
+    class BackfillLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BillExpirationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CommitmentPurchaseAnalysisConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plans_purchase_analysis_configuration: Types::SavingsPlansPurchaseAnalysisConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plans_purchase_analysis_configuration: Types::SavingsPlansPurchaseAnalysisConfiguration?
+    end
+
+    class ComparisonMetricValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?baseline_time_period_amount: String,
+        ?comparison_time_period_amount: String,
+        ?difference: String,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor baseline_time_period_amount: String?
+      attr_accessor comparison_time_period_amount: String?
+      attr_accessor difference: String?
+      attr_accessor unit: String?
+    end
+
+    module Context
+      COST_AND_USAGE: String
+      RESERVATIONS: String
+      SAVINGS_PLANS: String
+    end
+
+    class CostAllocationTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_key: String,
+        ?type: String,
+        ?status: String,
+        ?last_updated_date: String,
+        ?last_used_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_key: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor last_updated_date: String?
+      attr_accessor last_used_date: String?
+    end
+
+    class CostAllocationTagBackfillRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backfill_from: String,
+        ?requested_at: String,
+        ?completed_at: String,
+        ?backfill_status: String,
+        ?last_updated_at: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backfill_from: String?
+      attr_accessor requested_at: String?
+      attr_accessor completed_at: String?
+      attr_accessor backfill_status: String?
+      attr_accessor last_updated_at: String?
+    end
+
+    module CostAllocationTagBackfillStatus
+      SUCCEEDED: String
+      PROCESSING: String
+      FAILED: String
+    end
+
+    module CostAllocationTagStatus
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class CostAllocationTagStatusEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_key: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_key: String?
+      attr_accessor status: String?
+    end
+
+    module CostAllocationTagType
+      AWS_GENERATED: String
+      USER_DEFINED: String
+    end
+
+    class CostAndUsageComparison
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_and_usage_selector: Types::Expression,
+        ?metrics: Hash[String, Types::ComparisonMetricValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_and_usage_selector: Types::Expression?
+      attr_accessor metrics: Hash[String, Types::ComparisonMetricValue]?
+    end
+
+    class CostCategory
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_category_arn: String,
+        ?effective_start: String,
+        ?effective_end: String,
+        ?name: String,
+        ?rule_version: String,
+        ?rules: Array[Types::CostCategoryRule],
+        ?split_charge_rules: Array[Types::CostCategorySplitChargeRule],
+        ?processing_status: Array[Types::CostCategoryProcessingStatus],
+        ?default_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_category_arn: String?
+      attr_accessor effective_start: String?
+      attr_accessor effective_end: String?
+      attr_accessor name: String?
+      attr_accessor rule_version: String?
+      attr_accessor rules: Array[Types::CostCategoryRule]?
+      attr_accessor split_charge_rules: Array[Types::CostCategorySplitChargeRule]?
+      attr_accessor processing_status: Array[Types::CostCategoryProcessingStatus]?
+      attr_accessor default_value: String?
+    end
+
+    class CostCategoryInheritedValueDimension
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimension_name: String,
+        ?dimension_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimension_name: String?
+      attr_accessor dimension_key: String?
+    end
+
+    module CostCategoryInheritedValueDimensionName
+      LINKED_ACCOUNT_NAME: String
+      TAG: String
+    end
+
+    class CostCategoryProcessingStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component: String?
+      attr_accessor status: String?
+    end
+
+    class CostCategoryReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_category_arn: String,
+        ?name: String,
+        ?effective_start: String,
+        ?effective_end: String,
+        ?number_of_rules: Integer,
+        ?processing_status: Array[Types::CostCategoryProcessingStatus],
+        ?values: Array[String],
+        ?default_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_category_arn: String?
+      attr_accessor name: String?
+      attr_accessor effective_start: String?
+      attr_accessor effective_end: String?
+      attr_accessor number_of_rules: Integer?
+      attr_accessor processing_status: Array[Types::CostCategoryProcessingStatus]?
+      attr_accessor values: Array[String]?
+      attr_accessor default_value: String?
+    end
+
+    class CostCategoryRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?rule: Types::Expression,
+        ?inherited_value: Types::CostCategoryInheritedValueDimension,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor rule: Types::Expression?
+      attr_accessor inherited_value: Types::CostCategoryInheritedValueDimension?
+      attr_accessor type: String?
+    end
+
+    module CostCategoryRuleType
+      REGULAR: String
+      INHERITED_VALUE: String
+    end
+
+    module CostCategoryRuleVersion
+      CostCategoryExpressionV1: String
+    end
+
+    module CostCategorySplitChargeMethod
+      FIXED: String
+      PROPORTIONAL: String
+      EVEN: String
+    end
+
+    class CostCategorySplitChargeRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?targets: Array[String],
+        ?method: String,
+        ?parameters: Array[Types::CostCategorySplitChargeRuleParameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor targets: Array[String]?
+      attr_accessor method: String?
+      attr_accessor parameters: Array[Types::CostCategorySplitChargeRuleParameter]?
+    end
+
+    class CostCategorySplitChargeRuleParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor values: Array[String]?
+    end
+
+    module CostCategorySplitChargeRuleParameterType
+      ALLOCATION_PERCENTAGES: String
+    end
+
+    module CostCategoryStatus
+      PROCESSING: String
+      APPLIED: String
+    end
+
+    module CostCategoryStatusComponent
+      COST_EXPLORER: String
+    end
+
+    class CostCategoryValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+        ?match_options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+      attr_accessor match_options: Array[String]?
+    end
+
+    class CostComparisonDriver
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_selector: Types::Expression,
+        ?metrics: Hash[String, Types::ComparisonMetricValue],
+        ?cost_drivers: Array[Types::CostDriver],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_selector: Types::Expression?
+      attr_accessor metrics: Hash[String, Types::ComparisonMetricValue]?
+      attr_accessor cost_drivers: Array[Types::CostDriver]?
+    end
+
+    class CostDriver
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?name: String,
+        ?metrics: Hash[String, Types::ComparisonMetricValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor metrics: Hash[String, Types::ComparisonMetricValue]?
+    end
+
+    class Coverage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?coverage_hours: Types::CoverageHours,
+        ?coverage_normalized_units: Types::CoverageNormalizedUnits,
+        ?coverage_cost: Types::CoverageCost,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor coverage_hours: Types::CoverageHours?
+      attr_accessor coverage_normalized_units: Types::CoverageNormalizedUnits?
+      attr_accessor coverage_cost: Types::CoverageCost?
+    end
+
+    class CoverageByTime
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::DateInterval,
+        ?groups: Array[Types::ReservationCoverageGroup],
+        ?total: Types::Coverage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::DateInterval?
+      attr_accessor groups: Array[Types::ReservationCoverageGroup]?
+      attr_accessor total: Types::Coverage?
+    end
+
+    class CoverageCost
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?on_demand_cost: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor on_demand_cost: String?
+    end
+
+    class CoverageHours
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?on_demand_hours: String,
+        ?reserved_hours: String,
+        ?total_running_hours: String,
+        ?coverage_hours_percentage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor on_demand_hours: String?
+      attr_accessor reserved_hours: String?
+      attr_accessor total_running_hours: String?
+      attr_accessor coverage_hours_percentage: String?
+    end
+
+    class CoverageNormalizedUnits
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?on_demand_normalized_units: String,
+        ?reserved_normalized_units: String,
+        ?total_running_normalized_units: String,
+        ?coverage_normalized_units_percentage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor on_demand_normalized_units: String?
+      attr_accessor reserved_normalized_units: String?
+      attr_accessor total_running_normalized_units: String?
+      attr_accessor coverage_normalized_units_percentage: String?
+    end
+
+    class CreateAnomalyMonitorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_monitor: Types::AnomalyMonitor,
+        ?resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_monitor: Types::AnomalyMonitor?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class CreateAnomalyMonitorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn: String?
+    end
+
+    class CreateAnomalySubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_subscription: Types::AnomalySubscription,
+        ?resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_subscription: Types::AnomalySubscription?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class CreateAnomalySubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_arn: String?
+    end
+
+    class CreateCostCategoryDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?effective_start: String,
+        ?rule_version: String,
+        ?rules: Array[Types::CostCategoryRule],
+        ?default_value: String,
+        ?split_charge_rules: Array[Types::CostCategorySplitChargeRule],
+        ?resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor effective_start: String?
+      attr_accessor rule_version: String?
+      attr_accessor rules: Array[Types::CostCategoryRule]?
+      attr_accessor default_value: String?
+      attr_accessor split_charge_rules: Array[Types::CostCategorySplitChargeRule]?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class CreateCostCategoryDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_category_arn: String,
+        ?effective_start: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_category_arn: String?
+      attr_accessor effective_start: String?
+    end
+
+    class CurrentInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_id: String,
+        ?instance_name: String,
+        ?tags: Array[Types::TagValues],
+        ?resource_details: Types::ResourceDetails,
+        ?resource_utilization: Types::ResourceUtilization,
+        ?reservation_covered_hours_in_lookback_period: String,
+        ?savings_plans_covered_hours_in_lookback_period: String,
+        ?on_demand_hours_in_lookback_period: String,
+        ?total_running_hours_in_lookback_period: String,
+        ?monthly_cost: String,
+        ?currency_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_id: String?
+      attr_accessor instance_name: String?
+      attr_accessor tags: Array[Types::TagValues]?
+      attr_accessor resource_details: Types::ResourceDetails?
+      attr_accessor resource_utilization: Types::ResourceUtilization?
+      attr_accessor reservation_covered_hours_in_lookback_period: String?
+      attr_accessor savings_plans_covered_hours_in_lookback_period: String?
+      attr_accessor on_demand_hours_in_lookback_period: String?
+      attr_accessor total_running_hours_in_lookback_period: String?
+      attr_accessor monthly_cost: String?
+      attr_accessor currency_code: String?
+    end
+
+    class DataUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class DateInterval
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start: String,
+        ?end: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start: String?
+      attr_accessor end: String?
+    end
+
+    class DeleteAnomalyMonitorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn: String?
+    end
+
+    class DeleteAnomalyMonitorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteAnomalySubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_arn: String?
+    end
+
+    class DeleteAnomalySubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteCostCategoryDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_category_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_category_arn: String?
+    end
+
+    class DeleteCostCategoryDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_category_arn: String,
+        ?effective_end: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_category_arn: String?
+      attr_accessor effective_end: String?
+    end
+
+    class DescribeCostCategoryDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_category_arn: String,
+        ?effective_on: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_category_arn: String?
+      attr_accessor effective_on: String?
+    end
+
+    class DescribeCostCategoryDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_category: Types::CostCategory,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_category: Types::CostCategory?
+    end
+
+    module Dimension
+      AZ: String
+      INSTANCE_TYPE: String
+      LINKED_ACCOUNT: String
+      LINKED_ACCOUNT_NAME: String
+      OPERATION: String
+      PURCHASE_TYPE: String
+      REGION: String
+      SERVICE: String
+      SERVICE_CODE: String
+      USAGE_TYPE: String
+      USAGE_TYPE_GROUP: String
+      RECORD_TYPE: String
+      OPERATING_SYSTEM: String
+      TENANCY: String
+      SCOPE: String
+      PLATFORM: String
+      SUBSCRIPTION_ID: String
+      LEGAL_ENTITY_NAME: String
+      DEPLOYMENT_OPTION: String
+      DATABASE_ENGINE: String
+      CACHE_ENGINE: String
+      INSTANCE_TYPE_FAMILY: String
+      BILLING_ENTITY: String
+      RESERVATION_ID: String
+      RESOURCE_ID: String
+      RIGHTSIZING_TYPE: String
+      SAVINGS_PLANS_TYPE: String
+      SAVINGS_PLAN_ARN: String
+      PAYMENT_OPTION: String
+      AGREEMENT_END_DATE_TIME_AFTER: String
+      AGREEMENT_END_DATE_TIME_BEFORE: String
+      INVOICING_ENTITY: String
+      ANOMALY_TOTAL_IMPACT_ABSOLUTE: String
+      ANOMALY_TOTAL_IMPACT_PERCENTAGE: String
+    end
+
+    class DimensionValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+        ?match_options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+      attr_accessor match_options: Array[String]?
+    end
+
+    class DimensionValuesWithAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?attributes: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor attributes: Hash[String, String]?
+    end
+
+    class DiskResourceUtilization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?disk_read_ops_per_second: String,
+        ?disk_write_ops_per_second: String,
+        ?disk_read_bytes_per_second: String,
+        ?disk_write_bytes_per_second: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor disk_read_ops_per_second: String?
+      attr_accessor disk_write_ops_per_second: String?
+      attr_accessor disk_read_bytes_per_second: String?
+      attr_accessor disk_write_bytes_per_second: String?
+    end
+
+    class DynamoDBCapacityDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capacity_units: String,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capacity_units: String?
+      attr_accessor region: String?
+    end
+
+    class EBSResourceUtilization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ebs_read_ops_per_second: String,
+        ?ebs_write_ops_per_second: String,
+        ?ebs_read_bytes_per_second: String,
+        ?ebs_write_bytes_per_second: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ebs_read_ops_per_second: String?
+      attr_accessor ebs_write_ops_per_second: String?
+      attr_accessor ebs_read_bytes_per_second: String?
+      attr_accessor ebs_write_bytes_per_second: String?
+    end
+
+    class EC2InstanceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?family: String,
+        ?instance_type: String,
+        ?region: String,
+        ?availability_zone: String,
+        ?platform: String,
+        ?tenancy: String,
+        ?current_generation: bool,
+        ?size_flex_eligible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor family: String?
+      attr_accessor instance_type: String?
+      attr_accessor region: String?
+      attr_accessor availability_zone: String?
+      attr_accessor platform: String?
+      attr_accessor tenancy: String?
+      attr_accessor current_generation: bool?
+      attr_accessor size_flex_eligible: bool?
+    end
+
+    class EC2ResourceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hourly_on_demand_rate: String,
+        ?instance_type: String,
+        ?platform: String,
+        ?region: String,
+        ?sku: String,
+        ?memory: String,
+        ?network_performance: String,
+        ?storage: String,
+        ?vcpu: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hourly_on_demand_rate: String?
+      attr_accessor instance_type: String?
+      attr_accessor platform: String?
+      attr_accessor region: String?
+      attr_accessor sku: String?
+      attr_accessor memory: String?
+      attr_accessor network_performance: String?
+      attr_accessor storage: String?
+      attr_accessor vcpu: String?
+    end
+
+    class EC2ResourceUtilization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_cpu_utilization_percentage: String,
+        ?max_memory_utilization_percentage: String,
+        ?max_storage_utilization_percentage: String,
+        ?ebs_resource_utilization: Types::EBSResourceUtilization,
+        ?disk_resource_utilization: Types::DiskResourceUtilization,
+        ?network_resource_utilization: Types::NetworkResourceUtilization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_cpu_utilization_percentage: String?
+      attr_accessor max_memory_utilization_percentage: String?
+      attr_accessor max_storage_utilization_percentage: String?
+      attr_accessor ebs_resource_utilization: Types::EBSResourceUtilization?
+      attr_accessor disk_resource_utilization: Types::DiskResourceUtilization?
+      attr_accessor network_resource_utilization: Types::NetworkResourceUtilization?
+    end
+
+    class EC2Specification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?offering_class: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor offering_class: String?
+    end
+
+    class ESInstanceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_class: String,
+        ?instance_size: String,
+        ?region: String,
+        ?current_generation: bool,
+        ?size_flex_eligible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_class: String?
+      attr_accessor instance_size: String?
+      attr_accessor region: String?
+      attr_accessor current_generation: bool?
+      attr_accessor size_flex_eligible: bool?
+    end
+
+    class ElastiCacheInstanceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?family: String,
+        ?node_type: String,
+        ?region: String,
+        ?product_description: String,
+        ?current_generation: bool,
+        ?size_flex_eligible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor family: String?
+      attr_accessor node_type: String?
+      attr_accessor region: String?
+      attr_accessor product_description: String?
+      attr_accessor current_generation: bool?
+      attr_accessor size_flex_eligible: bool?
+    end
+
+    module ErrorCode
+      NO_USAGE_FOUND: String
+      INTERNAL_FAILURE: String
+      INVALID_SAVINGS_PLANS_TO_ADD: String
+      INVALID_SAVINGS_PLANS_TO_EXCLUDE: String
+      INVALID_ACCOUNT_ID: String
+    end
+
+    class Expression
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?or: Array[Types::Expression],
+        ?and: Array[Types::Expression],
+        ?not: Types::Expression,
+        ?dimensions: Types::DimensionValues,
+        ?tags: Types::TagValues,
+        ?cost_categories: Types::CostCategoryValues,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor or: Array[Types::Expression]?
+      attr_accessor and: Array[Types::Expression]?
+      attr_accessor not: Types::Expression?
+      attr_accessor dimensions: Types::DimensionValues?
+      attr_accessor tags: Types::TagValues?
+      attr_accessor cost_categories: Types::CostCategoryValues?
+    end
+
+    module FindingReasonCode
+      CPU_OVER_PROVISIONED: String
+      CPU_UNDER_PROVISIONED: String
+      MEMORY_OVER_PROVISIONED: String
+      MEMORY_UNDER_PROVISIONED: String
+      EBS_THROUGHPUT_OVER_PROVISIONED: String
+      EBS_THROUGHPUT_UNDER_PROVISIONED: String
+      EBS_IOPS_OVER_PROVISIONED: String
+      EBS_IOPS_UNDER_PROVISIONED: String
+      NETWORK_BANDWIDTH_OVER_PROVISIONED: String
+      NETWORK_BANDWIDTH_UNDER_PROVISIONED: String
+      NETWORK_PPS_OVER_PROVISIONED: String
+      NETWORK_PPS_UNDER_PROVISIONED: String
+      DISK_IOPS_OVER_PROVISIONED: String
+      DISK_IOPS_UNDER_PROVISIONED: String
+      DISK_THROUGHPUT_OVER_PROVISIONED: String
+      DISK_THROUGHPUT_UNDER_PROVISIONED: String
+    end
+
+    class ForecastResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::DateInterval,
+        ?mean_value: String,
+        ?prediction_interval_lower_bound: String,
+        ?prediction_interval_upper_bound: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::DateInterval?
+      attr_accessor mean_value: String?
+      attr_accessor prediction_interval_lower_bound: String?
+      attr_accessor prediction_interval_upper_bound: String?
+    end
+
+    class GenerationExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module GenerationStatus
+      SUCCEEDED: String
+      PROCESSING: String
+      FAILED: String
+    end
+
+    class GenerationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_id: String,
+        ?generation_status: String,
+        ?generation_started_time: String,
+        ?generation_completion_time: String,
+        ?estimated_completion_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_id: String?
+      attr_accessor generation_status: String?
+      attr_accessor generation_started_time: String?
+      attr_accessor generation_completion_time: String?
+      attr_accessor estimated_completion_time: String?
+    end
+
+    class GetAnomaliesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn: String,
+        ?date_interval: Types::AnomalyDateInterval,
+        ?feedback: String,
+        ?total_impact: Types::TotalImpactFilter,
+        ?next_page_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn: String?
+      attr_accessor date_interval: Types::AnomalyDateInterval?
+      attr_accessor feedback: String?
+      attr_accessor total_impact: Types::TotalImpactFilter?
+      attr_accessor next_page_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetAnomaliesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomalies: Array[Types::Anomaly],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomalies: Array[Types::Anomaly]?
+      attr_accessor next_page_token: String?
+    end
+
+    class GetAnomalyMonitorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn_list: Array[String],
+        ?next_page_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn_list: Array[String]?
+      attr_accessor next_page_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetAnomalyMonitorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_monitors: Array[Types::AnomalyMonitor],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_monitors: Array[Types::AnomalyMonitor]?
+      attr_accessor next_page_token: String?
+    end
+
+    class GetAnomalySubscriptionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_arn_list: Array[String],
+        ?monitor_arn: String,
+        ?next_page_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_arn_list: Array[String]?
+      attr_accessor monitor_arn: String?
+      attr_accessor next_page_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetAnomalySubscriptionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_subscriptions: Array[Types::AnomalySubscription],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_subscriptions: Array[Types::AnomalySubscription]?
+      attr_accessor next_page_token: String?
+    end
+
+    class GetApproximateUsageRecordsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?granularity: String,
+        ?services: Array[String],
+        ?approximation_dimension: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor granularity: String?
+      attr_accessor services: Array[String]?
+      attr_accessor approximation_dimension: String?
+    end
+
+    class GetApproximateUsageRecordsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?services: Hash[String, Integer],
+        ?total_records: Integer,
+        ?lookback_period: Types::DateInterval,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor services: Hash[String, Integer]?
+      attr_accessor total_records: Integer?
+      attr_accessor lookback_period: Types::DateInterval?
+    end
+
+    class GetCommitmentPurchaseAnalysisRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_id: String?
+    end
+
+    class GetCommitmentPurchaseAnalysisResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?estimated_completion_time: String,
+        ?analysis_completion_time: String,
+        ?analysis_started_time: String,
+        ?analysis_id: String,
+        ?analysis_status: String,
+        ?error_code: String,
+        ?analysis_details: Types::AnalysisDetails,
+        ?commitment_purchase_analysis_configuration: Types::CommitmentPurchaseAnalysisConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor estimated_completion_time: String?
+      attr_accessor analysis_completion_time: String?
+      attr_accessor analysis_started_time: String?
+      attr_accessor analysis_id: String?
+      attr_accessor analysis_status: String?
+      attr_accessor error_code: String?
+      attr_accessor analysis_details: Types::AnalysisDetails?
+      attr_accessor commitment_purchase_analysis_configuration: Types::CommitmentPurchaseAnalysisConfiguration?
+    end
+
+    class GetCostAndUsageComparisonsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_view_arn: String,
+        ?baseline_time_period: Types::DateInterval,
+        ?comparison_time_period: Types::DateInterval,
+        ?metric_for_comparison: String,
+        ?filter: Types::Expression,
+        ?group_by: Array[Types::GroupDefinition],
+        ?max_results: Integer,
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_view_arn: String?
+      attr_accessor baseline_time_period: Types::DateInterval?
+      attr_accessor comparison_time_period: Types::DateInterval?
+      attr_accessor metric_for_comparison: String?
+      attr_accessor filter: Types::Expression?
+      attr_accessor group_by: Array[Types::GroupDefinition]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_page_token: String?
+    end
+
+    class GetCostAndUsageComparisonsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_and_usage_comparisons: Array[Types::CostAndUsageComparison],
+        ?total_cost_and_usage: Hash[String, Types::ComparisonMetricValue],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_and_usage_comparisons: Array[Types::CostAndUsageComparison]?
+      attr_accessor total_cost_and_usage: Hash[String, Types::ComparisonMetricValue]?
+      attr_accessor next_page_token: String?
+    end
+
+    class GetCostAndUsageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::DateInterval,
+        ?granularity: String,
+        ?filter: Types::Expression,
+        ?metrics: Array[String],
+        ?group_by: Array[Types::GroupDefinition],
+        ?billing_view_arn: String,
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::DateInterval?
+      attr_accessor granularity: String?
+      attr_accessor filter: Types::Expression?
+      attr_accessor metrics: Array[String]?
+      attr_accessor group_by: Array[Types::GroupDefinition]?
+      attr_accessor billing_view_arn: String?
+      attr_accessor next_page_token: String?
+    end
+
+    class GetCostAndUsageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_page_token: String,
+        ?group_definitions: Array[Types::GroupDefinition],
+        ?results_by_time: Array[Types::ResultByTime],
+        ?dimension_value_attributes: Array[Types::DimensionValuesWithAttributes],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_page_token: String?
+      attr_accessor group_definitions: Array[Types::GroupDefinition]?
+      attr_accessor results_by_time: Array[Types::ResultByTime]?
+      attr_accessor dimension_value_attributes: Array[Types::DimensionValuesWithAttributes]?
+    end
+
+    class GetCostAndUsageWithResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::DateInterval,
+        ?granularity: String,
+        ?filter: Types::Expression,
+        ?metrics: Array[String],
+        ?group_by: Array[Types::GroupDefinition],
+        ?billing_view_arn: String,
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::DateInterval?
+      attr_accessor granularity: String?
+      attr_accessor filter: Types::Expression?
+      attr_accessor metrics: Array[String]?
+      attr_accessor group_by: Array[Types::GroupDefinition]?
+      attr_accessor billing_view_arn: String?
+      attr_accessor next_page_token: String?
+    end
+
+    class GetCostAndUsageWithResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_page_token: String,
+        ?group_definitions: Array[Types::GroupDefinition],
+        ?results_by_time: Array[Types::ResultByTime],
+        ?dimension_value_attributes: Array[Types::DimensionValuesWithAttributes],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_page_token: String?
+      attr_accessor group_definitions: Array[Types::GroupDefinition]?
+      attr_accessor results_by_time: Array[Types::ResultByTime]?
+      attr_accessor dimension_value_attributes: Array[Types::DimensionValuesWithAttributes]?
+    end
+
+    class GetCostCategoriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_string: String,
+        ?time_period: Types::DateInterval,
+        ?cost_category_name: String,
+        ?filter: Types::Expression,
+        ?sort_by: Array[Types::SortDefinition],
+        ?billing_view_arn: String,
+        ?max_results: Integer,
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_string: String?
+      attr_accessor time_period: Types::DateInterval?
+      attr_accessor cost_category_name: String?
+      attr_accessor filter: Types::Expression?
+      attr_accessor sort_by: Array[Types::SortDefinition]?
+      attr_accessor billing_view_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_page_token: String?
+    end
+
+    class GetCostCategoriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_page_token: String,
+        ?cost_category_names: Array[String],
+        ?cost_category_values: Array[String],
+        ?return_size: Integer,
+        ?total_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_page_token: String?
+      attr_accessor cost_category_names: Array[String]?
+      attr_accessor cost_category_values: Array[String]?
+      attr_accessor return_size: Integer?
+      attr_accessor total_size: Integer?
+    end
+
+    class GetCostComparisonDriversRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?billing_view_arn: String,
+        ?baseline_time_period: Types::DateInterval,
+        ?comparison_time_period: Types::DateInterval,
+        ?metric_for_comparison: String,
+        ?filter: Types::Expression,
+        ?group_by: Array[Types::GroupDefinition],
+        ?max_results: Integer,
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor billing_view_arn: String?
+      attr_accessor baseline_time_period: Types::DateInterval?
+      attr_accessor comparison_time_period: Types::DateInterval?
+      attr_accessor metric_for_comparison: String?
+      attr_accessor filter: Types::Expression?
+      attr_accessor group_by: Array[Types::GroupDefinition]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_page_token: String?
+    end
+
+    class GetCostComparisonDriversResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_comparison_drivers: Array[Types::CostComparisonDriver],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_comparison_drivers: Array[Types::CostComparisonDriver]?
+      attr_accessor next_page_token: String?
+    end
+
+    class GetCostForecastRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::DateInterval,
+        ?metric: String,
+        ?granularity: String,
+        ?filter: Types::Expression,
+        ?billing_view_arn: String,
+        ?prediction_interval_level: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::DateInterval?
+      attr_accessor metric: String?
+      attr_accessor granularity: String?
+      attr_accessor filter: Types::Expression?
+      attr_accessor billing_view_arn: String?
+      attr_accessor prediction_interval_level: Integer?
+    end
+
+    class GetCostForecastResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total: Types::MetricValue,
+        ?forecast_results_by_time: Array[Types::ForecastResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total: Types::MetricValue?
+      attr_accessor forecast_results_by_time: Array[Types::ForecastResult]?
+    end
+
+    class GetDimensionValuesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_string: String,
+        ?time_period: Types::DateInterval,
+        ?dimension: String,
+        ?context: String,
+        ?filter: Types::Expression,
+        ?sort_by: Array[Types::SortDefinition],
+        ?billing_view_arn: String,
+        ?max_results: Integer,
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_string: String?
+      attr_accessor time_period: Types::DateInterval?
+      attr_accessor dimension: String?
+      attr_accessor context: String?
+      attr_accessor filter: Types::Expression?
+      attr_accessor sort_by: Array[Types::SortDefinition]?
+      attr_accessor billing_view_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_page_token: String?
+    end
+
+    class GetDimensionValuesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dimension_values: Array[Types::DimensionValuesWithAttributes],
+        ?return_size: Integer,
+        ?total_size: Integer,
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dimension_values: Array[Types::DimensionValuesWithAttributes]?
+      attr_accessor return_size: Integer?
+      attr_accessor total_size: Integer?
+      attr_accessor next_page_token: String?
+    end
+
+    class GetReservationCoverageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::DateInterval,
+        ?group_by: Array[Types::GroupDefinition],
+        ?granularity: String,
+        ?filter: Types::Expression,
+        ?metrics: Array[String],
+        ?next_page_token: String,
+        ?sort_by: Types::SortDefinition,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::DateInterval?
+      attr_accessor group_by: Array[Types::GroupDefinition]?
+      attr_accessor granularity: String?
+      attr_accessor filter: Types::Expression?
+      attr_accessor metrics: Array[String]?
+      attr_accessor next_page_token: String?
+      attr_accessor sort_by: Types::SortDefinition?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetReservationCoverageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?coverages_by_time: Array[Types::CoverageByTime],
+        ?total: Types::Coverage,
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor coverages_by_time: Array[Types::CoverageByTime]?
+      attr_accessor total: Types::Coverage?
+      attr_accessor next_page_token: String?
+    end
+
+    class GetReservationPurchaseRecommendationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?service: String,
+        ?filter: Types::Expression,
+        ?account_scope: String,
+        ?lookback_period_in_days: String,
+        ?term_in_years: String,
+        ?payment_option: String,
+        ?service_specification: Types::ServiceSpecification,
+        ?page_size: Integer,
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor service: String?
+      attr_accessor filter: Types::Expression?
+      attr_accessor account_scope: String?
+      attr_accessor lookback_period_in_days: String?
+      attr_accessor term_in_years: String?
+      attr_accessor payment_option: String?
+      attr_accessor service_specification: Types::ServiceSpecification?
+      attr_accessor page_size: Integer?
+      attr_accessor next_page_token: String?
+    end
+
+    class GetReservationPurchaseRecommendationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata: Types::ReservationPurchaseRecommendationMetadata,
+        ?recommendations: Array[Types::ReservationPurchaseRecommendation],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata: Types::ReservationPurchaseRecommendationMetadata?
+      attr_accessor recommendations: Array[Types::ReservationPurchaseRecommendation]?
+      attr_accessor next_page_token: String?
+    end
+
+    class GetReservationUtilizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::DateInterval,
+        ?group_by: Array[Types::GroupDefinition],
+        ?granularity: String,
+        ?filter: Types::Expression,
+        ?sort_by: Types::SortDefinition,
+        ?next_page_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::DateInterval?
+      attr_accessor group_by: Array[Types::GroupDefinition]?
+      attr_accessor granularity: String?
+      attr_accessor filter: Types::Expression?
+      attr_accessor sort_by: Types::SortDefinition?
+      attr_accessor next_page_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class GetReservationUtilizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?utilizations_by_time: Array[Types::UtilizationByTime],
+        ?total: Types::ReservationAggregates,
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor utilizations_by_time: Array[Types::UtilizationByTime]?
+      attr_accessor total: Types::ReservationAggregates?
+      attr_accessor next_page_token: String?
+    end
+
+    class GetRightsizingRecommendationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter: Types::Expression,
+        ?configuration: Types::RightsizingRecommendationConfiguration,
+        ?service: String,
+        ?page_size: Integer,
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter: Types::Expression?
+      attr_accessor configuration: Types::RightsizingRecommendationConfiguration?
+      attr_accessor service: String?
+      attr_accessor page_size: Integer?
+      attr_accessor next_page_token: String?
+    end
+
+    class GetRightsizingRecommendationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata: Types::RightsizingRecommendationMetadata,
+        ?summary: Types::RightsizingRecommendationSummary,
+        ?rightsizing_recommendations: Array[Types::RightsizingRecommendation],
+        ?next_page_token: String,
+        ?configuration: Types::RightsizingRecommendationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata: Types::RightsizingRecommendationMetadata?
+      attr_accessor summary: Types::RightsizingRecommendationSummary?
+      attr_accessor rightsizing_recommendations: Array[Types::RightsizingRecommendation]?
+      attr_accessor next_page_token: String?
+      attr_accessor configuration: Types::RightsizingRecommendationConfiguration?
+    end
+
+    class GetSavingsPlanPurchaseRecommendationDetailsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_detail_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_detail_id: String?
+    end
+
+    class GetSavingsPlanPurchaseRecommendationDetailsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_detail_id: String,
+        ?recommendation_detail_data: Types::RecommendationDetailData,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_detail_id: String?
+      attr_accessor recommendation_detail_data: Types::RecommendationDetailData?
+    end
+
+    class GetSavingsPlansCoverageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::DateInterval,
+        ?group_by: Array[Types::GroupDefinition],
+        ?granularity: String,
+        ?filter: Types::Expression,
+        ?metrics: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?sort_by: Types::SortDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::DateInterval?
+      attr_accessor group_by: Array[Types::GroupDefinition]?
+      attr_accessor granularity: String?
+      attr_accessor filter: Types::Expression?
+      attr_accessor metrics: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor sort_by: Types::SortDefinition?
+    end
+
+    class GetSavingsPlansCoverageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plans_coverages: Array[Types::SavingsPlansCoverage],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plans_coverages: Array[Types::SavingsPlansCoverage]?
+      attr_accessor next_token: String?
+    end
+
+    class GetSavingsPlansPurchaseRecommendationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plans_type: String,
+        ?term_in_years: String,
+        ?payment_option: String,
+        ?account_scope: String,
+        ?next_page_token: String,
+        ?page_size: Integer,
+        ?lookback_period_in_days: String,
+        ?filter: Types::Expression,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plans_type: String?
+      attr_accessor term_in_years: String?
+      attr_accessor payment_option: String?
+      attr_accessor account_scope: String?
+      attr_accessor next_page_token: String?
+      attr_accessor page_size: Integer?
+      attr_accessor lookback_period_in_days: String?
+      attr_accessor filter: Types::Expression?
+    end
+
+    class GetSavingsPlansPurchaseRecommendationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata: Types::SavingsPlansPurchaseRecommendationMetadata,
+        ?savings_plans_purchase_recommendation: Types::SavingsPlansPurchaseRecommendation,
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata: Types::SavingsPlansPurchaseRecommendationMetadata?
+      attr_accessor savings_plans_purchase_recommendation: Types::SavingsPlansPurchaseRecommendation?
+      attr_accessor next_page_token: String?
+    end
+
+    class GetSavingsPlansUtilizationDetailsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::DateInterval,
+        ?filter: Types::Expression,
+        ?data_type: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+        ?sort_by: Types::SortDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::DateInterval?
+      attr_accessor filter: Types::Expression?
+      attr_accessor data_type: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor sort_by: Types::SortDefinition?
+    end
+
+    class GetSavingsPlansUtilizationDetailsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plans_utilization_details: Array[Types::SavingsPlansUtilizationDetail],
+        ?total: Types::SavingsPlansUtilizationAggregates,
+        ?time_period: Types::DateInterval,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plans_utilization_details: Array[Types::SavingsPlansUtilizationDetail]?
+      attr_accessor total: Types::SavingsPlansUtilizationAggregates?
+      attr_accessor time_period: Types::DateInterval?
+      attr_accessor next_token: String?
+    end
+
+    class GetSavingsPlansUtilizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::DateInterval,
+        ?granularity: String,
+        ?filter: Types::Expression,
+        ?sort_by: Types::SortDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::DateInterval?
+      attr_accessor granularity: String?
+      attr_accessor filter: Types::Expression?
+      attr_accessor sort_by: Types::SortDefinition?
+    end
+
+    class GetSavingsPlansUtilizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plans_utilizations_by_time: Array[Types::SavingsPlansUtilizationByTime],
+        ?total: Types::SavingsPlansUtilizationAggregates,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plans_utilizations_by_time: Array[Types::SavingsPlansUtilizationByTime]?
+      attr_accessor total: Types::SavingsPlansUtilizationAggregates?
+    end
+
+    class GetTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_string: String,
+        ?time_period: Types::DateInterval,
+        ?tag_key: String,
+        ?filter: Types::Expression,
+        ?sort_by: Array[Types::SortDefinition],
+        ?billing_view_arn: String,
+        ?max_results: Integer,
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_string: String?
+      attr_accessor time_period: Types::DateInterval?
+      attr_accessor tag_key: String?
+      attr_accessor filter: Types::Expression?
+      attr_accessor sort_by: Array[Types::SortDefinition]?
+      attr_accessor billing_view_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_page_token: String?
+    end
+
+    class GetTagsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_page_token: String,
+        ?tags: Array[String],
+        ?return_size: Integer,
+        ?total_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_page_token: String?
+      attr_accessor tags: Array[String]?
+      attr_accessor return_size: Integer?
+      attr_accessor total_size: Integer?
+    end
+
+    class GetUsageForecastRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::DateInterval,
+        ?metric: String,
+        ?granularity: String,
+        ?filter: Types::Expression,
+        ?billing_view_arn: String,
+        ?prediction_interval_level: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::DateInterval?
+      attr_accessor metric: String?
+      attr_accessor granularity: String?
+      attr_accessor filter: Types::Expression?
+      attr_accessor billing_view_arn: String?
+      attr_accessor prediction_interval_level: Integer?
+    end
+
+    class GetUsageForecastResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total: Types::MetricValue,
+        ?forecast_results_by_time: Array[Types::ForecastResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total: Types::MetricValue?
+      attr_accessor forecast_results_by_time: Array[Types::ForecastResult]?
+    end
+
+    module Granularity
+      DAILY: String
+      MONTHLY: String
+      HOURLY: String
+    end
+
+    class Group
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?keys: Array[String],
+        ?metrics: Hash[String, Types::MetricValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor keys: Array[String]?
+      attr_accessor metrics: Hash[String, Types::MetricValue]?
+    end
+
+    class GroupDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor key: String?
+    end
+
+    module GroupDefinitionType
+      DIMENSION: String
+      TAG: String
+      COST_CATEGORY: String
+    end
+
+    class Impact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_impact: Float,
+        ?total_impact: Float,
+        ?total_actual_spend: Float,
+        ?total_expected_spend: Float,
+        ?total_impact_percentage: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_impact: Float?
+      attr_accessor total_impact: Float?
+      attr_accessor total_actual_spend: Float?
+      attr_accessor total_expected_spend: Float?
+      attr_accessor total_impact_percentage: Float?
+    end
+
+    class InstanceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_instance_details: Types::EC2InstanceDetails,
+        ?rds_instance_details: Types::RDSInstanceDetails,
+        ?redshift_instance_details: Types::RedshiftInstanceDetails,
+        ?elasti_cache_instance_details: Types::ElastiCacheInstanceDetails,
+        ?es_instance_details: Types::ESInstanceDetails,
+        ?memory_db_instance_details: Types::MemoryDBInstanceDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_instance_details: Types::EC2InstanceDetails?
+      attr_accessor rds_instance_details: Types::RDSInstanceDetails?
+      attr_accessor redshift_instance_details: Types::RedshiftInstanceDetails?
+      attr_accessor elasti_cache_instance_details: Types::ElastiCacheInstanceDetails?
+      attr_accessor es_instance_details: Types::ESInstanceDetails?
+      attr_accessor memory_db_instance_details: Types::MemoryDBInstanceDetails?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListCommitmentPurchaseAnalysesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_status: String,
+        ?next_page_token: String,
+        ?page_size: Integer,
+        ?analysis_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_status: String?
+      attr_accessor next_page_token: String?
+      attr_accessor page_size: Integer?
+      attr_accessor analysis_ids: Array[String]?
+    end
+
+    class ListCommitmentPurchaseAnalysesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_summary_list: Array[Types::AnalysisSummary],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_summary_list: Array[Types::AnalysisSummary]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListCostAllocationTagBackfillHistoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCostAllocationTagBackfillHistoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backfill_requests: Array[Types::CostAllocationTagBackfillRequest],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backfill_requests: Array[Types::CostAllocationTagBackfillRequest]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCostAllocationTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?tag_keys: Array[String],
+        ?type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor tag_keys: Array[String]?
+      attr_accessor type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCostAllocationTagsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_allocation_tags: Array[Types::CostAllocationTag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_allocation_tags: Array[Types::CostAllocationTag]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCostCategoryDefinitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?effective_on: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor effective_on: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCostCategoryDefinitionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_category_references: Array[Types::CostCategoryReference],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_category_references: Array[Types::CostCategoryReference]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSavingsPlansPurchaseRecommendationGenerationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?generation_status: String,
+        ?recommendation_ids: Array[String],
+        ?page_size: Integer,
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor generation_status: String?
+      attr_accessor recommendation_ids: Array[String]?
+      attr_accessor page_size: Integer?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListSavingsPlansPurchaseRecommendationGenerationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?generation_summary_list: Array[Types::GenerationSummary],
+        ?next_page_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor generation_summary_list: Array[Types::GenerationSummary]?
+      attr_accessor next_page_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+    end
+
+    module LookbackPeriodInDays
+      SEVEN_DAYS: String
+      THIRTY_DAYS: String
+      SIXTY_DAYS: String
+    end
+
+    module MatchOption
+      EQUALS: String
+      ABSENT: String
+      STARTS_WITH: String
+      ENDS_WITH: String
+      CONTAINS: String
+      CASE_SENSITIVE: String
+      CASE_INSENSITIVE: String
+      GREATER_THAN_OR_EQUAL: String
+    end
+
+    class MemoryDBInstanceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?family: String,
+        ?node_type: String,
+        ?region: String,
+        ?current_generation: bool,
+        ?size_flex_eligible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor family: String?
+      attr_accessor node_type: String?
+      attr_accessor region: String?
+      attr_accessor current_generation: bool?
+      attr_accessor size_flex_eligible: bool?
+    end
+
+    module Metric
+      BLENDED_COST: String
+      UNBLENDED_COST: String
+      AMORTIZED_COST: String
+      NET_UNBLENDED_COST: String
+      NET_AMORTIZED_COST: String
+      USAGE_QUANTITY: String
+      NORMALIZED_USAGE_AMOUNT: String
+    end
+
+    class MetricValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amount: String,
+        ?unit: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amount: String?
+      attr_accessor unit: String?
+    end
+
+    class ModifyRecommendationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_instances: Array[Types::TargetInstance],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_instances: Array[Types::TargetInstance]?
+    end
+
+    module MonitorDimension
+      SERVICE: String
+    end
+
+    module MonitorType
+      DIMENSIONAL: String
+      CUSTOM: String
+    end
+
+    class NetworkResourceUtilization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_in_bytes_per_second: String,
+        ?network_out_bytes_per_second: String,
+        ?network_packets_in_per_second: String,
+        ?network_packets_out_per_second: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_in_bytes_per_second: String?
+      attr_accessor network_out_bytes_per_second: String?
+      attr_accessor network_packets_in_per_second: String?
+      attr_accessor network_packets_out_per_second: String?
+    end
+
+    module NumericOperator
+      EQUAL: String
+      GREATER_THAN_OR_EQUAL: String
+      LESS_THAN_OR_EQUAL: String
+      GREATER_THAN: String
+      LESS_THAN: String
+      BETWEEN: String
+    end
+
+    module OfferingClass
+      STANDARD: String
+      CONVERTIBLE: String
+    end
+
+    module PaymentOption
+      NO_UPFRONT: String
+      PARTIAL_UPFRONT: String
+      ALL_UPFRONT: String
+      LIGHT_UTILIZATION: String
+      MEDIUM_UTILIZATION: String
+      HEAVY_UTILIZATION: String
+    end
+
+    module PlatformDifference
+      HYPERVISOR: String
+      NETWORK_INTERFACE: String
+      STORAGE_INTERFACE: String
+      INSTANCE_STORE_AVAILABILITY: String
+      VIRTUALIZATION_TYPE: String
+    end
+
+    class ProvideAnomalyFeedbackRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_id: String,
+        ?feedback: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_id: String?
+      attr_accessor feedback: String?
+    end
+
+    class ProvideAnomalyFeedbackResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?anomaly_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor anomaly_id: String?
+    end
+
+    class RDSInstanceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?family: String,
+        ?instance_type: String,
+        ?region: String,
+        ?database_engine: String,
+        ?database_edition: String,
+        ?deployment_option: String,
+        ?license_model: String,
+        ?current_generation: bool,
+        ?size_flex_eligible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor family: String?
+      attr_accessor instance_type: String?
+      attr_accessor region: String?
+      attr_accessor database_engine: String?
+      attr_accessor database_edition: String?
+      attr_accessor deployment_option: String?
+      attr_accessor license_model: String?
+      attr_accessor current_generation: bool?
+      attr_accessor size_flex_eligible: bool?
+    end
+
+    class RecommendationDetailData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_scope: String,
+        ?lookback_period_in_days: String,
+        ?savings_plans_type: String,
+        ?term_in_years: String,
+        ?payment_option: String,
+        ?account_id: String,
+        ?currency_code: String,
+        ?instance_family: String,
+        ?region: String,
+        ?offering_id: String,
+        ?generation_timestamp: String,
+        ?latest_usage_timestamp: String,
+        ?current_average_hourly_on_demand_spend: String,
+        ?current_maximum_hourly_on_demand_spend: String,
+        ?current_minimum_hourly_on_demand_spend: String,
+        ?estimated_average_utilization: String,
+        ?estimated_monthly_savings_amount: String,
+        ?estimated_on_demand_cost: String,
+        ?estimated_on_demand_cost_with_current_commitment: String,
+        ?estimated_roi: String,
+        ?estimated_sp_cost: String,
+        ?estimated_savings_amount: String,
+        ?estimated_savings_percentage: String,
+        ?existing_hourly_commitment: String,
+        ?hourly_commitment_to_purchase: String,
+        ?upfront_cost: String,
+        ?current_average_coverage: String,
+        ?estimated_average_coverage: String,
+        ?metrics_over_lookback_period: Array[Types::RecommendationDetailHourlyMetrics],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_scope: String?
+      attr_accessor lookback_period_in_days: String?
+      attr_accessor savings_plans_type: String?
+      attr_accessor term_in_years: String?
+      attr_accessor payment_option: String?
+      attr_accessor account_id: String?
+      attr_accessor currency_code: String?
+      attr_accessor instance_family: String?
+      attr_accessor region: String?
+      attr_accessor offering_id: String?
+      attr_accessor generation_timestamp: String?
+      attr_accessor latest_usage_timestamp: String?
+      attr_accessor current_average_hourly_on_demand_spend: String?
+      attr_accessor current_maximum_hourly_on_demand_spend: String?
+      attr_accessor current_minimum_hourly_on_demand_spend: String?
+      attr_accessor estimated_average_utilization: String?
+      attr_accessor estimated_monthly_savings_amount: String?
+      attr_accessor estimated_on_demand_cost: String?
+      attr_accessor estimated_on_demand_cost_with_current_commitment: String?
+      attr_accessor estimated_roi: String?
+      attr_accessor estimated_sp_cost: String?
+      attr_accessor estimated_savings_amount: String?
+      attr_accessor estimated_savings_percentage: String?
+      attr_accessor existing_hourly_commitment: String?
+      attr_accessor hourly_commitment_to_purchase: String?
+      attr_accessor upfront_cost: String?
+      attr_accessor current_average_coverage: String?
+      attr_accessor estimated_average_coverage: String?
+      attr_accessor metrics_over_lookback_period: Array[Types::RecommendationDetailHourlyMetrics]?
+    end
+
+    class RecommendationDetailHourlyMetrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_time: String,
+        ?estimated_on_demand_cost: String,
+        ?current_coverage: String,
+        ?estimated_coverage: String,
+        ?estimated_new_commitment_utilization: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_time: String?
+      attr_accessor estimated_on_demand_cost: String?
+      attr_accessor current_coverage: String?
+      attr_accessor estimated_coverage: String?
+      attr_accessor estimated_new_commitment_utilization: String?
+    end
+
+    module RecommendationTarget
+      SAME_INSTANCE_FAMILY: String
+      CROSS_INSTANCE_FAMILY: String
+    end
+
+    class RedshiftInstanceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?family: String,
+        ?node_type: String,
+        ?region: String,
+        ?current_generation: bool,
+        ?size_flex_eligible: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor family: String?
+      attr_accessor node_type: String?
+      attr_accessor region: String?
+      attr_accessor current_generation: bool?
+      attr_accessor size_flex_eligible: bool?
+    end
+
+    class RequestChangedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ReservationAggregates
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?utilization_percentage: String,
+        ?utilization_percentage_in_units: String,
+        ?purchased_hours: String,
+        ?purchased_units: String,
+        ?total_actual_hours: String,
+        ?total_actual_units: String,
+        ?unused_hours: String,
+        ?unused_units: String,
+        ?on_demand_cost_of_ri_hours_used: String,
+        ?net_ri_savings: String,
+        ?total_potential_ri_savings: String,
+        ?amortized_upfront_fee: String,
+        ?amortized_recurring_fee: String,
+        ?total_amortized_fee: String,
+        ?ri_cost_for_unused_hours: String,
+        ?realized_savings: String,
+        ?unrealized_savings: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor utilization_percentage: String?
+      attr_accessor utilization_percentage_in_units: String?
+      attr_accessor purchased_hours: String?
+      attr_accessor purchased_units: String?
+      attr_accessor total_actual_hours: String?
+      attr_accessor total_actual_units: String?
+      attr_accessor unused_hours: String?
+      attr_accessor unused_units: String?
+      attr_accessor on_demand_cost_of_ri_hours_used: String?
+      attr_accessor net_ri_savings: String?
+      attr_accessor total_potential_ri_savings: String?
+      attr_accessor amortized_upfront_fee: String?
+      attr_accessor amortized_recurring_fee: String?
+      attr_accessor total_amortized_fee: String?
+      attr_accessor ri_cost_for_unused_hours: String?
+      attr_accessor realized_savings: String?
+      attr_accessor unrealized_savings: String?
+    end
+
+    class ReservationCoverageGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Hash[String, String],
+        ?coverage: Types::Coverage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor coverage: Types::Coverage?
+    end
+
+    class ReservationPurchaseRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_scope: String,
+        ?lookback_period_in_days: String,
+        ?term_in_years: String,
+        ?payment_option: String,
+        ?service_specification: Types::ServiceSpecification,
+        ?recommendation_details: Array[Types::ReservationPurchaseRecommendationDetail],
+        ?recommendation_summary: Types::ReservationPurchaseRecommendationSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_scope: String?
+      attr_accessor lookback_period_in_days: String?
+      attr_accessor term_in_years: String?
+      attr_accessor payment_option: String?
+      attr_accessor service_specification: Types::ServiceSpecification?
+      attr_accessor recommendation_details: Array[Types::ReservationPurchaseRecommendationDetail]?
+      attr_accessor recommendation_summary: Types::ReservationPurchaseRecommendationSummary?
+    end
+
+    class ReservationPurchaseRecommendationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?instance_details: Types::InstanceDetails,
+        ?recommended_number_of_instances_to_purchase: String,
+        ?recommended_normalized_units_to_purchase: String,
+        ?minimum_number_of_instances_used_per_hour: String,
+        ?minimum_normalized_units_used_per_hour: String,
+        ?maximum_number_of_instances_used_per_hour: String,
+        ?maximum_normalized_units_used_per_hour: String,
+        ?average_number_of_instances_used_per_hour: String,
+        ?average_normalized_units_used_per_hour: String,
+        ?average_utilization: String,
+        ?estimated_break_even_in_months: String,
+        ?currency_code: String,
+        ?estimated_monthly_savings_amount: String,
+        ?estimated_monthly_savings_percentage: String,
+        ?estimated_monthly_on_demand_cost: String,
+        ?estimated_reservation_cost_for_lookback_period: String,
+        ?upfront_cost: String,
+        ?recurring_standard_monthly_cost: String,
+        ?reserved_capacity_details: Types::ReservedCapacityDetails,
+        ?recommended_number_of_capacity_units_to_purchase: String,
+        ?minimum_number_of_capacity_units_used_per_hour: String,
+        ?maximum_number_of_capacity_units_used_per_hour: String,
+        ?average_number_of_capacity_units_used_per_hour: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor instance_details: Types::InstanceDetails?
+      attr_accessor recommended_number_of_instances_to_purchase: String?
+      attr_accessor recommended_normalized_units_to_purchase: String?
+      attr_accessor minimum_number_of_instances_used_per_hour: String?
+      attr_accessor minimum_normalized_units_used_per_hour: String?
+      attr_accessor maximum_number_of_instances_used_per_hour: String?
+      attr_accessor maximum_normalized_units_used_per_hour: String?
+      attr_accessor average_number_of_instances_used_per_hour: String?
+      attr_accessor average_normalized_units_used_per_hour: String?
+      attr_accessor average_utilization: String?
+      attr_accessor estimated_break_even_in_months: String?
+      attr_accessor currency_code: String?
+      attr_accessor estimated_monthly_savings_amount: String?
+      attr_accessor estimated_monthly_savings_percentage: String?
+      attr_accessor estimated_monthly_on_demand_cost: String?
+      attr_accessor estimated_reservation_cost_for_lookback_period: String?
+      attr_accessor upfront_cost: String?
+      attr_accessor recurring_standard_monthly_cost: String?
+      attr_accessor reserved_capacity_details: Types::ReservedCapacityDetails?
+      attr_accessor recommended_number_of_capacity_units_to_purchase: String?
+      attr_accessor minimum_number_of_capacity_units_used_per_hour: String?
+      attr_accessor maximum_number_of_capacity_units_used_per_hour: String?
+      attr_accessor average_number_of_capacity_units_used_per_hour: String?
+    end
+
+    class ReservationPurchaseRecommendationMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_id: String,
+        ?generation_timestamp: String,
+        ?additional_metadata: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_id: String?
+      attr_accessor generation_timestamp: String?
+      attr_accessor additional_metadata: String?
+    end
+
+    class ReservationPurchaseRecommendationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_estimated_monthly_savings_amount: String,
+        ?total_estimated_monthly_savings_percentage: String,
+        ?currency_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_estimated_monthly_savings_amount: String?
+      attr_accessor total_estimated_monthly_savings_percentage: String?
+      attr_accessor currency_code: String?
+    end
+
+    class ReservationUtilizationGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+        ?attributes: Hash[String, String],
+        ?utilization: Types::ReservationAggregates,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor utilization: Types::ReservationAggregates?
+    end
+
+    class ReservedCapacityDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dynamo_db_capacity_details: Types::DynamoDBCapacityDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dynamo_db_capacity_details: Types::DynamoDBCapacityDetails?
+    end
+
+    class ResourceDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_resource_details: Types::EC2ResourceDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_resource_details: Types::EC2ResourceDetails?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class ResourceTag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class ResourceUtilization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_resource_utilization: Types::EC2ResourceUtilization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_resource_utilization: Types::EC2ResourceUtilization?
+    end
+
+    class ResultByTime
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::DateInterval,
+        ?total: Hash[String, Types::MetricValue],
+        ?groups: Array[Types::Group],
+        ?estimated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::DateInterval?
+      attr_accessor total: Hash[String, Types::MetricValue]?
+      attr_accessor groups: Array[Types::Group]?
+      attr_accessor estimated: bool?
+    end
+
+    class RightsizingRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?current_instance: Types::CurrentInstance,
+        ?rightsizing_type: String,
+        ?modify_recommendation_detail: Types::ModifyRecommendationDetail,
+        ?terminate_recommendation_detail: Types::TerminateRecommendationDetail,
+        ?finding_reason_codes: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor current_instance: Types::CurrentInstance?
+      attr_accessor rightsizing_type: String?
+      attr_accessor modify_recommendation_detail: Types::ModifyRecommendationDetail?
+      attr_accessor terminate_recommendation_detail: Types::TerminateRecommendationDetail?
+      attr_accessor finding_reason_codes: Array[String]?
+    end
+
+    class RightsizingRecommendationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_target: String,
+        ?benefits_considered: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_target: String?
+      attr_accessor benefits_considered: bool?
+    end
+
+    class RightsizingRecommendationMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_id: String,
+        ?generation_timestamp: String,
+        ?lookback_period_in_days: String,
+        ?additional_metadata: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_id: String?
+      attr_accessor generation_timestamp: String?
+      attr_accessor lookback_period_in_days: String?
+      attr_accessor additional_metadata: String?
+    end
+
+    class RightsizingRecommendationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_recommendation_count: String,
+        ?estimated_total_monthly_savings_amount: String,
+        ?savings_currency_code: String,
+        ?savings_percentage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_recommendation_count: String?
+      attr_accessor estimated_total_monthly_savings_amount: String?
+      attr_accessor savings_currency_code: String?
+      attr_accessor savings_percentage: String?
+    end
+
+    module RightsizingType
+      TERMINATE: String
+      MODIFY: String
+    end
+
+    class RootCause
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: String,
+        ?region: String,
+        ?linked_account: String,
+        ?linked_account_name: String,
+        ?usage_type: String,
+        ?impact: Types::RootCauseImpact,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: String?
+      attr_accessor region: String?
+      attr_accessor linked_account: String?
+      attr_accessor linked_account_name: String?
+      attr_accessor usage_type: String?
+      attr_accessor impact: Types::RootCauseImpact?
+    end
+
+    class RootCauseImpact
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?contribution: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor contribution: Float?
+    end
+
+    class SavingsPlans
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payment_option: String,
+        ?savings_plans_type: String,
+        ?region: String,
+        ?instance_family: String,
+        ?term_in_years: String,
+        ?savings_plans_commitment: Float,
+        ?offering_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payment_option: String?
+      attr_accessor savings_plans_type: String?
+      attr_accessor region: String?
+      attr_accessor instance_family: String?
+      attr_accessor term_in_years: String?
+      attr_accessor savings_plans_commitment: Float?
+      attr_accessor offering_id: String?
+    end
+
+    class SavingsPlansAmortizedCommitment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?amortized_recurring_commitment: String,
+        ?amortized_upfront_commitment: String,
+        ?total_amortized_commitment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor amortized_recurring_commitment: String?
+      attr_accessor amortized_upfront_commitment: String?
+      attr_accessor total_amortized_commitment: String?
+    end
+
+    class SavingsPlansCoverage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attributes: Hash[String, String],
+        ?coverage: Types::SavingsPlansCoverageData,
+        ?time_period: Types::DateInterval,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor coverage: Types::SavingsPlansCoverageData?
+      attr_accessor time_period: Types::DateInterval?
+    end
+
+    class SavingsPlansCoverageData
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?spend_covered_by_savings_plans: String,
+        ?on_demand_cost: String,
+        ?total_cost: String,
+        ?coverage_percentage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spend_covered_by_savings_plans: String?
+      attr_accessor on_demand_cost: String?
+      attr_accessor total_cost: String?
+      attr_accessor coverage_percentage: String?
+    end
+
+    module SavingsPlansDataType
+      ATTRIBUTES: String
+      UTILIZATION: String
+      AMORTIZED_COMMITMENT: String
+      SAVINGS: String
+    end
+
+    class SavingsPlansDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?instance_family: String,
+        ?offering_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor instance_family: String?
+      attr_accessor offering_id: String?
+    end
+
+    class SavingsPlansPurchaseAnalysisConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_scope: String,
+        ?account_id: String,
+        ?analysis_type: String,
+        ?savings_plans_to_add: Array[Types::SavingsPlans],
+        ?savings_plans_to_exclude: Array[String],
+        ?look_back_time_period: Types::DateInterval,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_scope: String?
+      attr_accessor account_id: String?
+      attr_accessor analysis_type: String?
+      attr_accessor savings_plans_to_add: Array[Types::SavingsPlans]?
+      attr_accessor savings_plans_to_exclude: Array[String]?
+      attr_accessor look_back_time_period: Types::DateInterval?
+    end
+
+    class SavingsPlansPurchaseAnalysisDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?currency_code: String,
+        ?lookback_period_in_hours: String,
+        ?current_average_coverage: String,
+        ?current_average_hourly_on_demand_spend: String,
+        ?current_maximum_hourly_on_demand_spend: String,
+        ?current_minimum_hourly_on_demand_spend: String,
+        ?current_on_demand_spend: String,
+        ?existing_hourly_commitment: String,
+        ?hourly_commitment_to_purchase: String,
+        ?estimated_average_coverage: String,
+        ?estimated_average_utilization: String,
+        ?estimated_monthly_savings_amount: String,
+        ?estimated_on_demand_cost: String,
+        ?estimated_on_demand_cost_with_current_commitment: String,
+        ?estimated_roi: String,
+        ?estimated_savings_amount: String,
+        ?estimated_savings_percentage: String,
+        ?estimated_commitment_cost: String,
+        ?latest_usage_timestamp: String,
+        ?upfront_cost: String,
+        ?additional_metadata: String,
+        ?metrics_over_lookback_period: Array[Types::RecommendationDetailHourlyMetrics],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor currency_code: String?
+      attr_accessor lookback_period_in_hours: String?
+      attr_accessor current_average_coverage: String?
+      attr_accessor current_average_hourly_on_demand_spend: String?
+      attr_accessor current_maximum_hourly_on_demand_spend: String?
+      attr_accessor current_minimum_hourly_on_demand_spend: String?
+      attr_accessor current_on_demand_spend: String?
+      attr_accessor existing_hourly_commitment: String?
+      attr_accessor hourly_commitment_to_purchase: String?
+      attr_accessor estimated_average_coverage: String?
+      attr_accessor estimated_average_utilization: String?
+      attr_accessor estimated_monthly_savings_amount: String?
+      attr_accessor estimated_on_demand_cost: String?
+      attr_accessor estimated_on_demand_cost_with_current_commitment: String?
+      attr_accessor estimated_roi: String?
+      attr_accessor estimated_savings_amount: String?
+      attr_accessor estimated_savings_percentage: String?
+      attr_accessor estimated_commitment_cost: String?
+      attr_accessor latest_usage_timestamp: String?
+      attr_accessor upfront_cost: String?
+      attr_accessor additional_metadata: String?
+      attr_accessor metrics_over_lookback_period: Array[Types::RecommendationDetailHourlyMetrics]?
+    end
+
+    class SavingsPlansPurchaseRecommendation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_scope: String,
+        ?savings_plans_type: String,
+        ?term_in_years: String,
+        ?payment_option: String,
+        ?lookback_period_in_days: String,
+        ?savings_plans_purchase_recommendation_details: Array[Types::SavingsPlansPurchaseRecommendationDetail],
+        ?savings_plans_purchase_recommendation_summary: Types::SavingsPlansPurchaseRecommendationSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_scope: String?
+      attr_accessor savings_plans_type: String?
+      attr_accessor term_in_years: String?
+      attr_accessor payment_option: String?
+      attr_accessor lookback_period_in_days: String?
+      attr_accessor savings_plans_purchase_recommendation_details: Array[Types::SavingsPlansPurchaseRecommendationDetail]?
+      attr_accessor savings_plans_purchase_recommendation_summary: Types::SavingsPlansPurchaseRecommendationSummary?
+    end
+
+    class SavingsPlansPurchaseRecommendationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plans_details: Types::SavingsPlansDetails,
+        ?account_id: String,
+        ?upfront_cost: String,
+        ?estimated_roi: String,
+        ?currency_code: String,
+        ?estimated_sp_cost: String,
+        ?estimated_on_demand_cost: String,
+        ?estimated_on_demand_cost_with_current_commitment: String,
+        ?estimated_savings_amount: String,
+        ?estimated_savings_percentage: String,
+        ?hourly_commitment_to_purchase: String,
+        ?estimated_average_utilization: String,
+        ?estimated_monthly_savings_amount: String,
+        ?current_minimum_hourly_on_demand_spend: String,
+        ?current_maximum_hourly_on_demand_spend: String,
+        ?current_average_hourly_on_demand_spend: String,
+        ?recommendation_detail_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plans_details: Types::SavingsPlansDetails?
+      attr_accessor account_id: String?
+      attr_accessor upfront_cost: String?
+      attr_accessor estimated_roi: String?
+      attr_accessor currency_code: String?
+      attr_accessor estimated_sp_cost: String?
+      attr_accessor estimated_on_demand_cost: String?
+      attr_accessor estimated_on_demand_cost_with_current_commitment: String?
+      attr_accessor estimated_savings_amount: String?
+      attr_accessor estimated_savings_percentage: String?
+      attr_accessor hourly_commitment_to_purchase: String?
+      attr_accessor estimated_average_utilization: String?
+      attr_accessor estimated_monthly_savings_amount: String?
+      attr_accessor current_minimum_hourly_on_demand_spend: String?
+      attr_accessor current_maximum_hourly_on_demand_spend: String?
+      attr_accessor current_average_hourly_on_demand_spend: String?
+      attr_accessor recommendation_detail_id: String?
+    end
+
+    class SavingsPlansPurchaseRecommendationMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_id: String,
+        ?generation_timestamp: String,
+        ?additional_metadata: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_id: String?
+      attr_accessor generation_timestamp: String?
+      attr_accessor additional_metadata: String?
+    end
+
+    class SavingsPlansPurchaseRecommendationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?estimated_roi: String,
+        ?currency_code: String,
+        ?estimated_total_cost: String,
+        ?current_on_demand_spend: String,
+        ?estimated_savings_amount: String,
+        ?total_recommendation_count: String,
+        ?daily_commitment_to_purchase: String,
+        ?hourly_commitment_to_purchase: String,
+        ?estimated_savings_percentage: String,
+        ?estimated_monthly_savings_amount: String,
+        ?estimated_on_demand_cost_with_current_commitment: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor estimated_roi: String?
+      attr_accessor currency_code: String?
+      attr_accessor estimated_total_cost: String?
+      attr_accessor current_on_demand_spend: String?
+      attr_accessor estimated_savings_amount: String?
+      attr_accessor total_recommendation_count: String?
+      attr_accessor daily_commitment_to_purchase: String?
+      attr_accessor hourly_commitment_to_purchase: String?
+      attr_accessor estimated_savings_percentage: String?
+      attr_accessor estimated_monthly_savings_amount: String?
+      attr_accessor estimated_on_demand_cost_with_current_commitment: String?
+    end
+
+    class SavingsPlansSavings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?net_savings: String,
+        ?on_demand_cost_equivalent: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor net_savings: String?
+      attr_accessor on_demand_cost_equivalent: String?
+    end
+
+    class SavingsPlansUtilization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_commitment: String,
+        ?used_commitment: String,
+        ?unused_commitment: String,
+        ?utilization_percentage: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_commitment: String?
+      attr_accessor used_commitment: String?
+      attr_accessor unused_commitment: String?
+      attr_accessor utilization_percentage: String?
+    end
+
+    class SavingsPlansUtilizationAggregates
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?utilization: Types::SavingsPlansUtilization,
+        ?savings: Types::SavingsPlansSavings,
+        ?amortized_commitment: Types::SavingsPlansAmortizedCommitment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor utilization: Types::SavingsPlansUtilization?
+      attr_accessor savings: Types::SavingsPlansSavings?
+      attr_accessor amortized_commitment: Types::SavingsPlansAmortizedCommitment?
+    end
+
+    class SavingsPlansUtilizationByTime
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::DateInterval,
+        ?utilization: Types::SavingsPlansUtilization,
+        ?savings: Types::SavingsPlansSavings,
+        ?amortized_commitment: Types::SavingsPlansAmortizedCommitment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::DateInterval?
+      attr_accessor utilization: Types::SavingsPlansUtilization?
+      attr_accessor savings: Types::SavingsPlansSavings?
+      attr_accessor amortized_commitment: Types::SavingsPlansAmortizedCommitment?
+    end
+
+    class SavingsPlansUtilizationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?savings_plan_arn: String,
+        ?attributes: Hash[String, String],
+        ?utilization: Types::SavingsPlansUtilization,
+        ?savings: Types::SavingsPlansSavings,
+        ?amortized_commitment: Types::SavingsPlansAmortizedCommitment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor savings_plan_arn: String?
+      attr_accessor attributes: Hash[String, String]?
+      attr_accessor utilization: Types::SavingsPlansUtilization?
+      attr_accessor savings: Types::SavingsPlansSavings?
+      attr_accessor amortized_commitment: Types::SavingsPlansAmortizedCommitment?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceSpecification
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ec2_specification: Types::EC2Specification,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ec2_specification: Types::EC2Specification?
+    end
+
+    class SortDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor sort_order: String?
+    end
+
+    module SortOrder
+      ASCENDING: String
+      DESCENDING: String
+    end
+
+    class StartCommitmentPurchaseAnalysisRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?commitment_purchase_analysis_configuration: Types::CommitmentPurchaseAnalysisConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor commitment_purchase_analysis_configuration: Types::CommitmentPurchaseAnalysisConfiguration?
+    end
+
+    class StartCommitmentPurchaseAnalysisResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?analysis_id: String,
+        ?analysis_started_time: String,
+        ?estimated_completion_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor analysis_id: String?
+      attr_accessor analysis_started_time: String?
+      attr_accessor estimated_completion_time: String?
+    end
+
+    class StartCostAllocationTagBackfillRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backfill_from: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backfill_from: String?
+    end
+
+    class StartCostAllocationTagBackfillResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backfill_request: Types::CostAllocationTagBackfillRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backfill_request: Types::CostAllocationTagBackfillRequest?
+    end
+
+    class StartSavingsPlansPurchaseRecommendationGenerationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StartSavingsPlansPurchaseRecommendationGenerationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recommendation_id: String,
+        ?generation_started_time: String,
+        ?estimated_completion_time: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recommendation_id: String?
+      attr_accessor generation_started_time: String?
+      attr_accessor estimated_completion_time: String?
+    end
+
+    class Subscriber
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address: String,
+        ?type: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+    end
+
+    module SubscriberStatus
+      CONFIRMED: String
+      DECLINED: String
+    end
+
+    module SubscriberType
+      EMAIL: String
+      SNS: String
+    end
+
+    module SupportedSavingsPlansType
+      COMPUTE_SP: String
+      EC2_INSTANCE_SP: String
+      SAGEMAKER_SP: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_tags: Array[Types::ResourceTag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_tags: Array[Types::ResourceTag]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TagValues
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+        ?match_options: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
+      attr_accessor match_options: Array[String]?
+    end
+
+    class TargetInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?estimated_monthly_cost: String,
+        ?estimated_monthly_savings: String,
+        ?currency_code: String,
+        ?default_target_instance: bool,
+        ?resource_details: Types::ResourceDetails,
+        ?expected_resource_utilization: Types::ResourceUtilization,
+        ?platform_differences: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor estimated_monthly_cost: String?
+      attr_accessor estimated_monthly_savings: String?
+      attr_accessor currency_code: String?
+      attr_accessor default_target_instance: bool?
+      attr_accessor resource_details: Types::ResourceDetails?
+      attr_accessor expected_resource_utilization: Types::ResourceUtilization?
+      attr_accessor platform_differences: Array[String]?
+    end
+
+    module TermInYears
+      ONE_YEAR: String
+      THREE_YEARS: String
+    end
+
+    class TerminateRecommendationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?estimated_monthly_savings: String,
+        ?currency_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor estimated_monthly_savings: String?
+      attr_accessor currency_code: String?
+    end
+
+    class TooManyTagsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class TotalImpactFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?numeric_operator: String,
+        ?start_value: Float,
+        ?end_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor numeric_operator: String?
+      attr_accessor start_value: Float?
+      attr_accessor end_value: Float?
+    end
+
+    class UnknownMonitorException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnknownSubscriptionException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UnresolvableUsageUnitException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?resource_tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor resource_tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAnomalyMonitorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn: String,
+        ?monitor_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn: String?
+      attr_accessor monitor_name: String?
+    end
+
+    class UpdateAnomalyMonitorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monitor_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monitor_arn: String?
+    end
+
+    class UpdateAnomalySubscriptionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_arn: String,
+        ?threshold: Float,
+        ?frequency: String,
+        ?monitor_arn_list: Array[String],
+        ?subscribers: Array[Types::Subscriber],
+        ?subscription_name: String,
+        ?threshold_expression: Types::Expression,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_arn: String?
+      attr_accessor threshold: Float?
+      attr_accessor frequency: String?
+      attr_accessor monitor_arn_list: Array[String]?
+      attr_accessor subscribers: Array[Types::Subscriber]?
+      attr_accessor subscription_name: String?
+      attr_accessor threshold_expression: Types::Expression?
+    end
+
+    class UpdateAnomalySubscriptionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscription_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscription_arn: String?
+    end
+
+    class UpdateCostAllocationTagsStatusError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tag_key: String,
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tag_key: String?
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    class UpdateCostAllocationTagsStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_allocation_tags_status: Array[Types::CostAllocationTagStatusEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_allocation_tags_status: Array[Types::CostAllocationTagStatusEntry]?
+    end
+
+    class UpdateCostAllocationTagsStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?errors: Array[Types::UpdateCostAllocationTagsStatusError],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor errors: Array[Types::UpdateCostAllocationTagsStatusError]?
+    end
+
+    class UpdateCostCategoryDefinitionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_category_arn: String,
+        ?effective_start: String,
+        ?rule_version: String,
+        ?rules: Array[Types::CostCategoryRule],
+        ?default_value: String,
+        ?split_charge_rules: Array[Types::CostCategorySplitChargeRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_category_arn: String?
+      attr_accessor effective_start: String?
+      attr_accessor rule_version: String?
+      attr_accessor rules: Array[Types::CostCategoryRule]?
+      attr_accessor default_value: String?
+      attr_accessor split_charge_rules: Array[Types::CostCategorySplitChargeRule]?
+    end
+
+    class UpdateCostCategoryDefinitionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cost_category_arn: String,
+        ?effective_start: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cost_category_arn: String?
+      attr_accessor effective_start: String?
+    end
+
+    class UtilizationByTime
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?time_period: Types::DateInterval,
+        ?groups: Array[Types::ReservationUtilizationGroup],
+        ?total: Types::ReservationAggregates,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor time_period: Types::DateInterval?
+      attr_accessor groups: Array[Types::ReservationUtilizationGroup]?
+      attr_accessor total: Types::ReservationAggregates?
+    end
+  end
+end

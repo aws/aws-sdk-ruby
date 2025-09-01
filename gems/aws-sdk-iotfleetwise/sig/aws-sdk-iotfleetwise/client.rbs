@@ -1,0 +1,1400 @@
+module Aws::IoTFleetWise
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::IoTFleetWise::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _AssociateVehicleFleetResponse
+      include Smithy::Client::_Response[Types::AssociateVehicleFleetOutput]
+    end
+    def associate_vehicle_fleet: (
+      ?vehicle_name: String,
+      ?fleet_id: String
+    ) -> _AssociateVehicleFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateVehicleFleetResponse
+
+    interface _BatchCreateVehicleResponse
+      include Smithy::Client::_Response[Types::BatchCreateVehicleOutput]
+      def vehicles: () -> Array[Types::CreateVehicleResponseItem]?
+      def errors: () -> Array[Types::CreateVehicleError]?
+    end
+    def batch_create_vehicle: (
+      ?vehicles: Array[
+        {
+          vehicle_name: String,
+          model_manifest_arn: String,
+          decoder_manifest_arn: untyped,
+          attributes: Hash[String, String],
+          association_behavior: String,
+          tags: Array[
+            {
+              key: String,
+              value: String
+            }
+          ],
+          state_templates: Array[
+            {
+              identifier: String,
+              state_template_update_strategy: {
+                periodic: {
+                  state_template_update_rate: {
+                    unit: String,
+                    value: Integer
+                  }
+                },
+                on_change: {
+                }
+              }
+            }
+          ]
+        }
+      ]
+    ) -> _BatchCreateVehicleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchCreateVehicleResponse
+
+    interface _BatchUpdateVehicleResponse
+      include Smithy::Client::_Response[Types::BatchUpdateVehicleOutput]
+      def vehicles: () -> Array[Types::UpdateVehicleResponseItem]?
+      def errors: () -> Array[Types::UpdateVehicleError]?
+    end
+    def batch_update_vehicle: (
+      ?vehicles: Array[
+        {
+          vehicle_name: String,
+          model_manifest_arn: String,
+          decoder_manifest_arn: untyped,
+          attributes: Hash[String, String],
+          attribute_update_mode: String,
+          state_templates_to_add: Array[
+            {
+              identifier: String,
+              state_template_update_strategy: {
+                periodic: {
+                  state_template_update_rate: {
+                    unit: String,
+                    value: Integer
+                  }
+                },
+                on_change: {
+                }
+              }
+            }
+          ],
+          state_templates_to_remove: Array[String],
+          state_templates_to_update: untyped
+        }
+      ]
+    ) -> _BatchUpdateVehicleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchUpdateVehicleResponse
+
+    interface _CreateCampaignResponse
+      include Smithy::Client::_Response[Types::CreateCampaignOutput]
+      def name: () -> String?
+      def arn: () -> String?
+    end
+    def create_campaign: (
+      ?name: String,
+      ?description: String,
+      ?signal_catalog_arn: String,
+      ?target_arn: String,
+      ?start_time: Time,
+      ?expiry_time: Time,
+      ?post_trigger_collection_duration: Integer,
+      ?diagnostics_mode: String,
+      ?spooling_mode: String,
+      ?compression: String,
+      ?priority: Integer,
+      ?signals_to_collect: Array[
+        {
+          name: String,
+          max_sample_count: Integer,
+          minimum_sampling_interval_ms: Integer,
+          data_partition_id: String
+        }
+      ],
+      ?collection_scheme: {
+        time_based_collection_scheme: {
+          period_ms: Integer
+        },
+        condition_based_collection_scheme: {
+          expression: String,
+          minimum_trigger_interval_ms: Integer,
+          trigger_mode: String,
+          condition_language_version: Integer
+        }
+      },
+      ?data_extra_dimensions: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?data_destination_configs: Array[
+        {
+          s3_config: {
+            bucket_arn: String,
+            data_format: String,
+            storage_compression_format: String,
+            prefix: String
+          },
+          timestream_config: {
+            timestream_table_arn: String,
+            execution_role_arn: String
+          },
+          mqtt_topic_config: {
+            mqtt_topic_arn: String,
+            execution_role_arn: untyped
+          }
+        }
+      ],
+      ?data_partitions: Array[
+        {
+          id: String,
+          storage_options: {
+            maximum_size: {
+              unit: String,
+              value: Integer
+            },
+            storage_location: String,
+            minimum_time_to_live: {
+              unit: String,
+              value: Integer
+            }
+          },
+          upload_options: {
+            expression: String,
+            condition_language_version: Integer
+          }
+        }
+      ],
+      ?signals_to_fetch: Array[
+        {
+          fully_qualified_name: String,
+          signal_fetch_config: {
+            time_based: {
+              execution_frequency_ms: Integer
+            },
+            condition_based: {
+              condition_expression: String,
+              trigger_mode: String
+            }
+          },
+          condition_language_version: Integer,
+          actions: Array[String]
+        }
+      ]
+    ) -> _CreateCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCampaignResponse
+
+    interface _CreateDecoderManifestResponse
+      include Smithy::Client::_Response[Types::CreateDecoderManifestOutput]
+      def name: () -> String?
+      def arn: () -> String?
+    end
+    def create_decoder_manifest: (
+      ?name: String,
+      ?description: String,
+      ?model_manifest_arn: String,
+      ?signal_decoders: Array[
+        {
+          fully_qualified_name: String,
+          type: String,
+          interface_id: String,
+          can_signal: {
+            message_id: Integer,
+            is_big_endian: bool,
+            is_signed: untyped,
+            start_bit: untyped,
+            offset: Float,
+            factor: untyped,
+            length: untyped,
+            name: String,
+            signal_value_type: String
+          },
+          obd_signal: {
+            pid_response_length: Integer,
+            service_mode: untyped,
+            pid: untyped,
+            scaling: untyped,
+            offset: untyped,
+            start_byte: untyped,
+            byte_length: Integer,
+            bit_right_shift: untyped,
+            bit_mask_length: Integer,
+            is_signed: untyped,
+            signal_value_type: untyped
+          },
+          message_signal: {
+            topic_name: String,
+            structured_message: {
+              primitive_message_definition: {
+                ros2_primitive_message_definition: {
+                  primitive_type: String,
+                  offset: untyped,
+                  scaling: untyped,
+                  upper_bound: Integer
+                }
+              },
+              structured_message_list_definition: {
+                name: String,
+                member_type: untyped,
+                list_type: String,
+                capacity: untyped
+              },
+              structured_message_definition: Array[
+                {
+                  field_name: untyped,
+                  data_type: untyped
+                }
+              ]
+            }
+          },
+          custom_decoding_signal: {
+            id: String
+          }
+        }
+      ],
+      ?network_interfaces: Array[
+        {
+          interface_id: String,
+          type: String,
+          can_interface: {
+            name: String,
+            protocol_name: String,
+            protocol_version: String
+          },
+          obd_interface: {
+            name: String,
+            request_message_id: Integer,
+            obd_standard: String,
+            pid_request_interval_seconds: untyped,
+            dtc_request_interval_seconds: untyped,
+            use_extended_ids: bool,
+            has_transmission_ecu: untyped
+          },
+          vehicle_middleware: {
+            name: String,
+            protocol_name: String
+          },
+          custom_decoding_interface: {
+            name: String
+          }
+        }
+      ],
+      ?default_for_unmapped_signals: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDecoderManifestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDecoderManifestResponse
+
+    interface _CreateFleetResponse
+      include Smithy::Client::_Response[Types::CreateFleetOutput]
+      def id: () -> String?
+      def arn: () -> String?
+    end
+    def create_fleet: (
+      ?fleet_id: String,
+      ?description: String,
+      ?signal_catalog_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFleetResponse
+
+    interface _CreateModelManifestResponse
+      include Smithy::Client::_Response[Types::CreateModelManifestOutput]
+      def name: () -> String?
+      def arn: () -> String?
+    end
+    def create_model_manifest: (
+      ?name: String,
+      ?description: String,
+      ?nodes: Array[String],
+      ?signal_catalog_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateModelManifestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateModelManifestResponse
+
+    interface _CreateSignalCatalogResponse
+      include Smithy::Client::_Response[Types::CreateSignalCatalogOutput]
+      def name: () -> String?
+      def arn: () -> String?
+    end
+    def create_signal_catalog: (
+      ?name: String,
+      ?description: String,
+      ?nodes: Array[
+        {
+          branch: {
+            fully_qualified_name: String,
+            description: String,
+            deprecation_message: String,
+            comment: untyped
+          },
+          sensor: {
+            fully_qualified_name: untyped,
+            data_type: String,
+            description: untyped,
+            unit: untyped,
+            allowed_values: Array[String],
+            min: Float,
+            max: untyped,
+            deprecation_message: untyped,
+            comment: untyped,
+            struct_fully_qualified_name: String
+          },
+          actuator: {
+            fully_qualified_name: untyped,
+            data_type: untyped,
+            description: untyped,
+            unit: untyped,
+            allowed_values: untyped,
+            min: untyped,
+            max: untyped,
+            assigned_value: untyped,
+            deprecation_message: untyped,
+            comment: untyped,
+            struct_fully_qualified_name: untyped
+          },
+          attribute: {
+            fully_qualified_name: untyped,
+            data_type: untyped,
+            description: untyped,
+            unit: untyped,
+            allowed_values: untyped,
+            min: untyped,
+            max: untyped,
+            assigned_value: untyped,
+            default_value: untyped,
+            deprecation_message: untyped,
+            comment: untyped
+          },
+          struct: {
+            fully_qualified_name: untyped,
+            description: untyped,
+            deprecation_message: untyped,
+            comment: untyped
+          },
+          property: {
+            fully_qualified_name: untyped,
+            data_type: untyped,
+            data_encoding: String,
+            description: untyped,
+            deprecation_message: untyped,
+            comment: untyped,
+            struct_fully_qualified_name: untyped
+          }
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateSignalCatalogResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSignalCatalogResponse
+
+    interface _CreateStateTemplateResponse
+      include Smithy::Client::_Response[Types::CreateStateTemplateResponse]
+      def name: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+    end
+    def create_state_template: (
+      ?name: String,
+      ?description: String,
+      ?signal_catalog_arn: String,
+      ?state_template_properties: Array[String],
+      ?data_extra_dimensions: Array[String],
+      ?metadata_extra_dimensions: Array[String],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateStateTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateStateTemplateResponse
+
+    interface _CreateVehicleResponse
+      include Smithy::Client::_Response[Types::CreateVehicleOutput]
+      def vehicle_name: () -> String?
+      def arn: () -> String?
+      def thing_arn: () -> String?
+    end
+    def create_vehicle: (
+      ?vehicle_name: String,
+      ?model_manifest_arn: String,
+      ?decoder_manifest_arn: String,
+      ?attributes: Hash[String, String],
+      ?association_behavior: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?state_templates: Array[
+        {
+          identifier: String,
+          state_template_update_strategy: {
+            periodic: {
+              state_template_update_rate: {
+                unit: String,
+                value: Integer
+              }
+            },
+            on_change: {
+            }
+          }
+        }
+      ]
+    ) -> _CreateVehicleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVehicleResponse
+
+    interface _DeleteCampaignResponse
+      include Smithy::Client::_Response[Types::DeleteCampaignOutput]
+      def name: () -> String?
+      def arn: () -> String?
+    end
+    def delete_campaign: (
+      ?name: String
+    ) -> _DeleteCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCampaignResponse
+
+    interface _DeleteDecoderManifestResponse
+      include Smithy::Client::_Response[Types::DeleteDecoderManifestOutput]
+      def name: () -> String?
+      def arn: () -> String?
+    end
+    def delete_decoder_manifest: (
+      ?name: String
+    ) -> _DeleteDecoderManifestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDecoderManifestResponse
+
+    interface _DeleteFleetResponse
+      include Smithy::Client::_Response[Types::DeleteFleetOutput]
+      def id: () -> String?
+      def arn: () -> String?
+    end
+    def delete_fleet: (
+      ?fleet_id: String
+    ) -> _DeleteFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFleetResponse
+
+    interface _DeleteModelManifestResponse
+      include Smithy::Client::_Response[Types::DeleteModelManifestOutput]
+      def name: () -> String?
+      def arn: () -> String?
+    end
+    def delete_model_manifest: (
+      ?name: String
+    ) -> _DeleteModelManifestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteModelManifestResponse
+
+    interface _DeleteSignalCatalogResponse
+      include Smithy::Client::_Response[Types::DeleteSignalCatalogOutput]
+      def name: () -> String?
+      def arn: () -> String?
+    end
+    def delete_signal_catalog: (
+      ?name: String
+    ) -> _DeleteSignalCatalogResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteSignalCatalogResponse
+
+    interface _DeleteStateTemplateResponse
+      include Smithy::Client::_Response[Types::DeleteStateTemplateResponse]
+      def name: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+    end
+    def delete_state_template: (
+      ?identifier: String
+    ) -> _DeleteStateTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteStateTemplateResponse
+
+    interface _DeleteVehicleResponse
+      include Smithy::Client::_Response[Types::DeleteVehicleOutput]
+      def vehicle_name: () -> String?
+      def arn: () -> String?
+    end
+    def delete_vehicle: (
+      ?vehicle_name: String
+    ) -> _DeleteVehicleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVehicleResponse
+
+    interface _DisassociateVehicleFleetResponse
+      include Smithy::Client::_Response[Types::DisassociateVehicleFleetOutput]
+    end
+    def disassociate_vehicle_fleet: (
+      ?vehicle_name: String,
+      ?fleet_id: String
+    ) -> _DisassociateVehicleFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateVehicleFleetResponse
+
+    interface _GetCampaignResponse
+      include Smithy::Client::_Response[Types::GetCampaignOutput]
+      def name: () -> String?
+      def arn: () -> String?
+      def description: () -> String?
+      def signal_catalog_arn: () -> String?
+      def target_arn: () -> String?
+      def status: () -> String?
+      def start_time: () -> Time?
+      def expiry_time: () -> Time?
+      def post_trigger_collection_duration: () -> Integer?
+      def diagnostics_mode: () -> String?
+      def spooling_mode: () -> String?
+      def compression: () -> String?
+      def priority: () -> Integer?
+      def signals_to_collect: () -> Array[Types::SignalInformation]?
+      def collection_scheme: () -> Types::CollectionScheme?
+      def data_extra_dimensions: () -> Array[String]?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+      def data_destination_configs: () -> Array[Types::DataDestinationConfig]?
+      def data_partitions: () -> Array[Types::DataPartition]?
+      def signals_to_fetch: () -> Array[Types::SignalFetchInformation]?
+    end
+    def get_campaign: (
+      ?name: String
+    ) -> _GetCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCampaignResponse
+
+    interface _GetDecoderManifestResponse
+      include Smithy::Client::_Response[Types::GetDecoderManifestOutput]
+      def name: () -> String?
+      def arn: () -> String?
+      def description: () -> String?
+      def model_manifest_arn: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+      def message: () -> String?
+    end
+    def get_decoder_manifest: (
+      ?name: String
+    ) -> _GetDecoderManifestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDecoderManifestResponse
+
+    interface _GetEncryptionConfigurationResponse
+      include Smithy::Client::_Response[Types::GetEncryptionConfigurationResponse]
+      def kms_key_id: () -> String?
+      def encryption_status: () -> String?
+      def encryption_type: () -> String?
+      def error_message: () -> String?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+    end
+    def get_encryption_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEncryptionConfigurationResponse
+
+    interface _GetFleetResponse
+      include Smithy::Client::_Response[Types::GetFleetOutput]
+      def id: () -> String?
+      def arn: () -> String?
+      def description: () -> String?
+      def signal_catalog_arn: () -> String?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+    end
+    def get_fleet: (
+      ?fleet_id: String
+    ) -> _GetFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFleetResponse
+
+    interface _GetLoggingOptionsResponse
+      include Smithy::Client::_Response[Types::GetLoggingOptionsOutput]
+      def cloud_watch_log_delivery: () -> Types::CloudWatchLogDeliveryOptions?
+    end
+    def get_logging_options: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetLoggingOptionsResponse
+
+    interface _GetModelManifestResponse
+      include Smithy::Client::_Response[Types::GetModelManifestOutput]
+      def name: () -> String?
+      def arn: () -> String?
+      def description: () -> String?
+      def signal_catalog_arn: () -> String?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+    end
+    def get_model_manifest: (
+      ?name: String
+    ) -> _GetModelManifestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetModelManifestResponse
+
+    interface _GetRegisterAccountStatusResponse
+      include Smithy::Client::_Response[Types::GetRegisterAccountStatusOutput]
+      def customer_account_id: () -> String?
+      def account_status: () -> String?
+      def timestream_registration_response: () -> Types::TimestreamRegistrationResponse?
+      def iam_registration_response: () -> Types::IamRegistrationResponse?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+    end
+    def get_register_account_status: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRegisterAccountStatusResponse
+
+    interface _GetSignalCatalogResponse
+      include Smithy::Client::_Response[Types::GetSignalCatalogOutput]
+      def name: () -> String?
+      def arn: () -> String?
+      def description: () -> String?
+      def node_counts: () -> Types::NodeCounts?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+    end
+    def get_signal_catalog: (
+      ?name: String
+    ) -> _GetSignalCatalogResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSignalCatalogResponse
+
+    interface _GetStateTemplateResponse
+      include Smithy::Client::_Response[Types::GetStateTemplateResponse]
+      def name: () -> String?
+      def arn: () -> String?
+      def description: () -> String?
+      def signal_catalog_arn: () -> String?
+      def state_template_properties: () -> Array[String]?
+      def data_extra_dimensions: () -> Array[String]?
+      def metadata_extra_dimensions: () -> Array[String]?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+      def id: () -> String?
+    end
+    def get_state_template: (
+      ?identifier: String
+    ) -> _GetStateTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetStateTemplateResponse
+
+    interface _GetVehicleResponse
+      include Smithy::Client::_Response[Types::GetVehicleOutput]
+      def vehicle_name: () -> String?
+      def arn: () -> String?
+      def model_manifest_arn: () -> String?
+      def decoder_manifest_arn: () -> String?
+      def attributes: () -> Hash[String, String]?
+      def state_templates: () -> Array[Types::StateTemplateAssociation]?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+    end
+    def get_vehicle: (
+      ?vehicle_name: String
+    ) -> _GetVehicleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVehicleResponse
+
+    interface _GetVehicleStatusResponse
+      include Smithy::Client::_Response[Types::GetVehicleStatusOutput]
+      def campaigns: () -> Array[Types::VehicleStatus]?
+      def next_token: () -> String?
+    end
+    def get_vehicle_status: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?vehicle_name: String
+    ) -> _GetVehicleStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVehicleStatusResponse
+
+    interface _ImportDecoderManifestResponse
+      include Smithy::Client::_Response[Types::ImportDecoderManifestOutput]
+      def name: () -> String?
+      def arn: () -> String?
+    end
+    def import_decoder_manifest: (
+      ?name: String,
+      ?network_file_definitions: Array[
+        {
+          can_dbc: {
+            network_interface: String,
+            can_dbc_files: Array[String],
+            signals_map: Hash[String, String]
+          }
+        }
+      ]
+    ) -> _ImportDecoderManifestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportDecoderManifestResponse
+
+    interface _ImportSignalCatalogResponse
+      include Smithy::Client::_Response[Types::ImportSignalCatalogOutput]
+      def name: () -> String?
+      def arn: () -> String?
+    end
+    def import_signal_catalog: (
+      ?name: String,
+      ?description: String,
+      ?vss: {
+        vss_json: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _ImportSignalCatalogResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ImportSignalCatalogResponse
+
+    interface _ListCampaignsResponse
+      include Smithy::Client::_Response[Types::ListCampaignsOutput]
+      def campaign_summaries: () -> Array[Types::CampaignSummary]?
+      def next_token: () -> String?
+    end
+    def list_campaigns: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?status: String,
+      ?list_response_scope: String
+    ) -> _ListCampaignsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCampaignsResponse
+
+    interface _ListDecoderManifestNetworkInterfacesResponse
+      include Smithy::Client::_Response[Types::ListDecoderManifestNetworkInterfacesOutput]
+      def network_interfaces: () -> Array[Types::NetworkInterface]?
+      def next_token: () -> String?
+    end
+    def list_decoder_manifest_network_interfaces: (
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDecoderManifestNetworkInterfacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDecoderManifestNetworkInterfacesResponse
+
+    interface _ListDecoderManifestSignalsResponse
+      include Smithy::Client::_Response[Types::ListDecoderManifestSignalsOutput]
+      def signal_decoders: () -> Array[Types::SignalDecoder]?
+      def next_token: () -> String?
+    end
+    def list_decoder_manifest_signals: (
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListDecoderManifestSignalsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDecoderManifestSignalsResponse
+
+    interface _ListDecoderManifestsResponse
+      include Smithy::Client::_Response[Types::ListDecoderManifestsOutput]
+      def summaries: () -> Array[Types::DecoderManifestSummary]?
+      def next_token: () -> String?
+    end
+    def list_decoder_manifests: (
+      ?model_manifest_arn: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?list_response_scope: String
+    ) -> _ListDecoderManifestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDecoderManifestsResponse
+
+    interface _ListFleetsResponse
+      include Smithy::Client::_Response[Types::ListFleetsOutput]
+      def fleet_summaries: () -> Array[Types::FleetSummary]?
+      def next_token: () -> String?
+    end
+    def list_fleets: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?list_response_scope: String
+    ) -> _ListFleetsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFleetsResponse
+
+    interface _ListFleetsForVehicleResponse
+      include Smithy::Client::_Response[Types::ListFleetsForVehicleOutput]
+      def fleets: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_fleets_for_vehicle: (
+      ?vehicle_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFleetsForVehicleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFleetsForVehicleResponse
+
+    interface _ListModelManifestNodesResponse
+      include Smithy::Client::_Response[Types::ListModelManifestNodesOutput]
+      def nodes: () -> Array[Types::Node]?
+      def next_token: () -> String?
+    end
+    def list_model_manifest_nodes: (
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListModelManifestNodesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListModelManifestNodesResponse
+
+    interface _ListModelManifestsResponse
+      include Smithy::Client::_Response[Types::ListModelManifestsOutput]
+      def summaries: () -> Array[Types::ModelManifestSummary]?
+      def next_token: () -> String?
+    end
+    def list_model_manifests: (
+      ?signal_catalog_arn: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?list_response_scope: String
+    ) -> _ListModelManifestsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListModelManifestsResponse
+
+    interface _ListSignalCatalogNodesResponse
+      include Smithy::Client::_Response[Types::ListSignalCatalogNodesOutput]
+      def nodes: () -> Array[Types::Node]?
+      def next_token: () -> String?
+    end
+    def list_signal_catalog_nodes: (
+      ?name: String,
+      ?next_token: String,
+      ?max_results: Integer,
+      ?signal_node_type: String
+    ) -> _ListSignalCatalogNodesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSignalCatalogNodesResponse
+
+    interface _ListSignalCatalogsResponse
+      include Smithy::Client::_Response[Types::ListSignalCatalogsOutput]
+      def summaries: () -> Array[Types::SignalCatalogSummary]?
+      def next_token: () -> String?
+    end
+    def list_signal_catalogs: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSignalCatalogsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSignalCatalogsResponse
+
+    interface _ListStateTemplatesResponse
+      include Smithy::Client::_Response[Types::ListStateTemplatesResponse]
+      def summaries: () -> Array[Types::StateTemplateSummary]?
+      def next_token: () -> String?
+    end
+    def list_state_templates: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?list_response_scope: String
+    ) -> _ListStateTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListStateTemplatesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListVehiclesResponse
+      include Smithy::Client::_Response[Types::ListVehiclesOutput]
+      def vehicle_summaries: () -> Array[Types::VehicleSummary]?
+      def next_token: () -> String?
+    end
+    def list_vehicles: (
+      ?model_manifest_arn: String,
+      ?attribute_names: Array[String],
+      ?attribute_values: Array[String],
+      ?next_token: String,
+      ?max_results: Integer,
+      ?list_response_scope: String
+    ) -> _ListVehiclesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVehiclesResponse
+
+    interface _ListVehiclesInFleetResponse
+      include Smithy::Client::_Response[Types::ListVehiclesInFleetOutput]
+      def vehicles: () -> Array[String]?
+      def next_token: () -> String?
+    end
+    def list_vehicles_in_fleet: (
+      ?fleet_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListVehiclesInFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVehiclesInFleetResponse
+
+    interface _PutEncryptionConfigurationResponse
+      include Smithy::Client::_Response[Types::PutEncryptionConfigurationResponse]
+      def kms_key_id: () -> String?
+      def encryption_status: () -> String?
+      def encryption_type: () -> String?
+    end
+    def put_encryption_configuration: (
+      ?kms_key_id: String,
+      ?encryption_type: String
+    ) -> _PutEncryptionConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutEncryptionConfigurationResponse
+
+    interface _PutLoggingOptionsResponse
+      include Smithy::Client::_Response[Types::PutLoggingOptionsOutput]
+    end
+    def put_logging_options: (
+      ?cloud_watch_log_delivery: {
+        log_type: String,
+        log_group_name: String
+      }
+    ) -> _PutLoggingOptionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutLoggingOptionsResponse
+
+    interface _RegisterAccountResponse
+      include Smithy::Client::_Response[Types::RegisterAccountOutput]
+      def register_account_status: () -> String?
+      def timestream_resources: () -> Types::TimestreamResources?
+      def iam_resources: () -> Types::IamResources?
+      def creation_time: () -> Time?
+      def last_modification_time: () -> Time?
+    end
+    def register_account: (
+      ?timestream_resources: {
+        timestream_database_name: String,
+        timestream_table_name: String
+      },
+      ?iam_resources: {
+        role_arn: String
+      }
+    ) -> _RegisterAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RegisterAccountResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateCampaignResponse
+      include Smithy::Client::_Response[Types::UpdateCampaignOutput]
+      def arn: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+    end
+    def update_campaign: (
+      ?name: String,
+      ?description: String,
+      ?data_extra_dimensions: Array[String],
+      ?action: String
+    ) -> _UpdateCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCampaignResponse
+
+    interface _UpdateDecoderManifestResponse
+      include Smithy::Client::_Response[Types::UpdateDecoderManifestOutput]
+      def name: () -> String?
+      def arn: () -> String?
+    end
+    def update_decoder_manifest: (
+      ?name: String,
+      ?description: String,
+      ?signal_decoders_to_add: Array[
+        {
+          fully_qualified_name: String,
+          type: String,
+          interface_id: String,
+          can_signal: {
+            message_id: Integer,
+            is_big_endian: bool,
+            is_signed: untyped,
+            start_bit: untyped,
+            offset: Float,
+            factor: untyped,
+            length: untyped,
+            name: String,
+            signal_value_type: String
+          },
+          obd_signal: {
+            pid_response_length: Integer,
+            service_mode: untyped,
+            pid: untyped,
+            scaling: untyped,
+            offset: untyped,
+            start_byte: untyped,
+            byte_length: Integer,
+            bit_right_shift: untyped,
+            bit_mask_length: Integer,
+            is_signed: untyped,
+            signal_value_type: untyped
+          },
+          message_signal: {
+            topic_name: String,
+            structured_message: {
+              primitive_message_definition: {
+                ros2_primitive_message_definition: {
+                  primitive_type: String,
+                  offset: untyped,
+                  scaling: untyped,
+                  upper_bound: Integer
+                }
+              },
+              structured_message_list_definition: {
+                name: String,
+                member_type: untyped,
+                list_type: String,
+                capacity: untyped
+              },
+              structured_message_definition: Array[
+                {
+                  field_name: untyped,
+                  data_type: untyped
+                }
+              ]
+            }
+          },
+          custom_decoding_signal: {
+            id: String
+          }
+        }
+      ],
+      ?signal_decoders_to_update: Array[
+        {
+          fully_qualified_name: String,
+          type: String,
+          interface_id: String,
+          can_signal: {
+            message_id: Integer,
+            is_big_endian: bool,
+            is_signed: untyped,
+            start_bit: untyped,
+            offset: Float,
+            factor: untyped,
+            length: untyped,
+            name: String,
+            signal_value_type: String
+          },
+          obd_signal: {
+            pid_response_length: Integer,
+            service_mode: untyped,
+            pid: untyped,
+            scaling: untyped,
+            offset: untyped,
+            start_byte: untyped,
+            byte_length: Integer,
+            bit_right_shift: untyped,
+            bit_mask_length: Integer,
+            is_signed: untyped,
+            signal_value_type: untyped
+          },
+          message_signal: {
+            topic_name: String,
+            structured_message: {
+              primitive_message_definition: {
+                ros2_primitive_message_definition: {
+                  primitive_type: String,
+                  offset: untyped,
+                  scaling: untyped,
+                  upper_bound: Integer
+                }
+              },
+              structured_message_list_definition: {
+                name: String,
+                member_type: untyped,
+                list_type: String,
+                capacity: untyped
+              },
+              structured_message_definition: Array[
+                {
+                  field_name: untyped,
+                  data_type: untyped
+                }
+              ]
+            }
+          },
+          custom_decoding_signal: {
+            id: String
+          }
+        }
+      ],
+      ?signal_decoders_to_remove: Array[String],
+      ?network_interfaces_to_add: Array[
+        {
+          interface_id: String,
+          type: String,
+          can_interface: {
+            name: String,
+            protocol_name: String,
+            protocol_version: String
+          },
+          obd_interface: {
+            name: String,
+            request_message_id: Integer,
+            obd_standard: String,
+            pid_request_interval_seconds: untyped,
+            dtc_request_interval_seconds: untyped,
+            use_extended_ids: bool,
+            has_transmission_ecu: untyped
+          },
+          vehicle_middleware: {
+            name: String,
+            protocol_name: String
+          },
+          custom_decoding_interface: {
+            name: String
+          }
+        }
+      ],
+      ?network_interfaces_to_update: Array[
+        {
+          interface_id: String,
+          type: String,
+          can_interface: {
+            name: String,
+            protocol_name: String,
+            protocol_version: String
+          },
+          obd_interface: {
+            name: String,
+            request_message_id: Integer,
+            obd_standard: String,
+            pid_request_interval_seconds: untyped,
+            dtc_request_interval_seconds: untyped,
+            use_extended_ids: bool,
+            has_transmission_ecu: untyped
+          },
+          vehicle_middleware: {
+            name: String,
+            protocol_name: String
+          },
+          custom_decoding_interface: {
+            name: String
+          }
+        }
+      ],
+      ?network_interfaces_to_remove: Array[String],
+      ?status: String,
+      ?default_for_unmapped_signals: String
+    ) -> _UpdateDecoderManifestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDecoderManifestResponse
+
+    interface _UpdateFleetResponse
+      include Smithy::Client::_Response[Types::UpdateFleetOutput]
+      def id: () -> String?
+      def arn: () -> String?
+    end
+    def update_fleet: (
+      ?fleet_id: String,
+      ?description: String
+    ) -> _UpdateFleetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFleetResponse
+
+    interface _UpdateModelManifestResponse
+      include Smithy::Client::_Response[Types::UpdateModelManifestOutput]
+      def name: () -> String?
+      def arn: () -> String?
+    end
+    def update_model_manifest: (
+      ?name: String,
+      ?description: String,
+      ?nodes_to_add: Array[String],
+      ?nodes_to_remove: Array[String],
+      ?status: String
+    ) -> _UpdateModelManifestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateModelManifestResponse
+
+    interface _UpdateSignalCatalogResponse
+      include Smithy::Client::_Response[Types::UpdateSignalCatalogOutput]
+      def name: () -> String?
+      def arn: () -> String?
+    end
+    def update_signal_catalog: (
+      ?name: String,
+      ?description: String,
+      ?nodes_to_add: Array[
+        {
+          branch: {
+            fully_qualified_name: String,
+            description: String,
+            deprecation_message: String,
+            comment: untyped
+          },
+          sensor: {
+            fully_qualified_name: untyped,
+            data_type: String,
+            description: untyped,
+            unit: untyped,
+            allowed_values: Array[String],
+            min: Float,
+            max: untyped,
+            deprecation_message: untyped,
+            comment: untyped,
+            struct_fully_qualified_name: String
+          },
+          actuator: {
+            fully_qualified_name: untyped,
+            data_type: untyped,
+            description: untyped,
+            unit: untyped,
+            allowed_values: untyped,
+            min: untyped,
+            max: untyped,
+            assigned_value: untyped,
+            deprecation_message: untyped,
+            comment: untyped,
+            struct_fully_qualified_name: untyped
+          },
+          attribute: {
+            fully_qualified_name: untyped,
+            data_type: untyped,
+            description: untyped,
+            unit: untyped,
+            allowed_values: untyped,
+            min: untyped,
+            max: untyped,
+            assigned_value: untyped,
+            default_value: untyped,
+            deprecation_message: untyped,
+            comment: untyped
+          },
+          struct: {
+            fully_qualified_name: untyped,
+            description: untyped,
+            deprecation_message: untyped,
+            comment: untyped
+          },
+          property: {
+            fully_qualified_name: untyped,
+            data_type: untyped,
+            data_encoding: String,
+            description: untyped,
+            deprecation_message: untyped,
+            comment: untyped,
+            struct_fully_qualified_name: untyped
+          }
+        }
+      ],
+      ?nodes_to_update: Array[
+        {
+          branch: {
+            fully_qualified_name: String,
+            description: String,
+            deprecation_message: String,
+            comment: untyped
+          },
+          sensor: {
+            fully_qualified_name: untyped,
+            data_type: String,
+            description: untyped,
+            unit: untyped,
+            allowed_values: Array[String],
+            min: Float,
+            max: untyped,
+            deprecation_message: untyped,
+            comment: untyped,
+            struct_fully_qualified_name: String
+          },
+          actuator: {
+            fully_qualified_name: untyped,
+            data_type: untyped,
+            description: untyped,
+            unit: untyped,
+            allowed_values: untyped,
+            min: untyped,
+            max: untyped,
+            assigned_value: untyped,
+            deprecation_message: untyped,
+            comment: untyped,
+            struct_fully_qualified_name: untyped
+          },
+          attribute: {
+            fully_qualified_name: untyped,
+            data_type: untyped,
+            description: untyped,
+            unit: untyped,
+            allowed_values: untyped,
+            min: untyped,
+            max: untyped,
+            assigned_value: untyped,
+            default_value: untyped,
+            deprecation_message: untyped,
+            comment: untyped
+          },
+          struct: {
+            fully_qualified_name: untyped,
+            description: untyped,
+            deprecation_message: untyped,
+            comment: untyped
+          },
+          property: {
+            fully_qualified_name: untyped,
+            data_type: untyped,
+            data_encoding: String,
+            description: untyped,
+            deprecation_message: untyped,
+            comment: untyped,
+            struct_fully_qualified_name: untyped
+          }
+        }
+      ],
+      ?nodes_to_remove: Array[String]
+    ) -> _UpdateSignalCatalogResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSignalCatalogResponse
+
+    interface _UpdateStateTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateStateTemplateResponse]
+      def name: () -> String?
+      def arn: () -> String?
+      def id: () -> String?
+    end
+    def update_state_template: (
+      ?identifier: String,
+      ?description: String,
+      ?state_template_properties_to_add: Array[String],
+      ?state_template_properties_to_remove: Array[String],
+      ?data_extra_dimensions: Array[String],
+      ?metadata_extra_dimensions: Array[String]
+    ) -> _UpdateStateTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateStateTemplateResponse
+
+    interface _UpdateVehicleResponse
+      include Smithy::Client::_Response[Types::UpdateVehicleOutput]
+      def vehicle_name: () -> String?
+      def arn: () -> String?
+    end
+    def update_vehicle: (
+      ?vehicle_name: String,
+      ?model_manifest_arn: String,
+      ?decoder_manifest_arn: String,
+      ?attributes: Hash[String, String],
+      ?attribute_update_mode: String,
+      ?state_templates_to_add: Array[
+        {
+          identifier: String,
+          state_template_update_strategy: {
+            periodic: {
+              state_template_update_rate: {
+                unit: String,
+                value: Integer
+              }
+            },
+            on_change: {
+            }
+          }
+        }
+      ],
+      ?state_templates_to_remove: Array[String],
+      ?state_templates_to_update: Array[
+        {
+          identifier: String,
+          state_template_update_strategy: {
+            periodic: {
+              state_template_update_rate: {
+                unit: String,
+                value: Integer
+              }
+            },
+            on_change: {
+            }
+          }
+        }
+      ]
+    ) -> _UpdateVehicleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVehicleResponse
+  end
+end

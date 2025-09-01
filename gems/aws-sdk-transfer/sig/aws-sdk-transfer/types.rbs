@@ -1,0 +1,3336 @@
+module Aws::Transfer
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AgreementStatusType
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class As2ConnectorConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?local_profile_id: String,
+        ?partner_profile_id: String,
+        ?message_subject: String,
+        ?compression: String,
+        ?encryption_algorithm: String,
+        ?signing_algorithm: String,
+        ?mdn_signing_algorithm: String,
+        ?mdn_response: String,
+        ?basic_auth_secret_id: String,
+        ?preserve_content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor local_profile_id: String?
+      attr_accessor partner_profile_id: String?
+      attr_accessor message_subject: String?
+      attr_accessor compression: String?
+      attr_accessor encryption_algorithm: String?
+      attr_accessor signing_algorithm: String?
+      attr_accessor mdn_signing_algorithm: String?
+      attr_accessor mdn_response: String?
+      attr_accessor basic_auth_secret_id: String?
+      attr_accessor preserve_content_type: String?
+    end
+
+    module As2Transport
+      HTTP: String
+    end
+
+    module CertificateStatusType
+      ACTIVE: String
+      PENDING_ROTATION: String
+      INACTIVE: String
+    end
+
+    module CertificateType
+      CERTIFICATE: String
+      CERTIFICATE_WITH_PRIVATE_KEY: String
+    end
+
+    module CertificateUsageType
+      SIGNING: String
+      ENCRYPTION: String
+      TLS: String
+    end
+
+    module CompressionEnum
+      ZLIB: String
+      DISABLED: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConnectorFileTransferResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_path: String,
+        ?status_code: String,
+        ?failure_code: String,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_path: String?
+      attr_accessor status_code: String?
+      attr_accessor failure_code: String?
+      attr_accessor failure_message: String?
+    end
+
+    class CopyStepDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?destination_file_location: Types::InputFileLocation,
+        ?overwrite_existing: String,
+        ?source_file_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor destination_file_location: Types::InputFileLocation?
+      attr_accessor overwrite_existing: String?
+      attr_accessor source_file_location: String?
+    end
+
+    class CreateAccessRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?home_directory: String,
+        ?home_directory_type: String,
+        ?home_directory_mappings: Array[Types::HomeDirectoryMapEntry],
+        ?policy: String,
+        ?posix_profile: Types::PosixProfile,
+        ?role: String,
+        ?server_id: String,
+        ?external_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor home_directory: String?
+      attr_accessor home_directory_type: String?
+      attr_accessor home_directory_mappings: Array[Types::HomeDirectoryMapEntry]?
+      attr_accessor policy: String?
+      attr_accessor posix_profile: Types::PosixProfile?
+      attr_accessor role: String?
+      attr_accessor server_id: String?
+      attr_accessor external_id: String?
+    end
+
+    class CreateAccessResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?external_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor external_id: String?
+    end
+
+    class CreateAgreementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?server_id: String,
+        ?local_profile_id: String,
+        ?partner_profile_id: String,
+        ?base_directory: String,
+        ?access_role: String,
+        ?status: String,
+        ?tags: Array[Types::Tag],
+        ?preserve_filename: String,
+        ?enforce_message_signing: String,
+        ?custom_directories: Types::CustomDirectoriesType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor server_id: String?
+      attr_accessor local_profile_id: String?
+      attr_accessor partner_profile_id: String?
+      attr_accessor base_directory: String?
+      attr_accessor access_role: String?
+      attr_accessor status: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor preserve_filename: String?
+      attr_accessor enforce_message_signing: String?
+      attr_accessor custom_directories: Types::CustomDirectoriesType?
+    end
+
+    class CreateAgreementResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+    end
+
+    class CreateConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?as2_config: Types::As2ConnectorConfig,
+        ?access_role: String,
+        ?logging_role: String,
+        ?tags: Array[Types::Tag],
+        ?sftp_config: Types::SftpConnectorConfig,
+        ?security_policy_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor as2_config: Types::As2ConnectorConfig?
+      attr_accessor access_role: String?
+      attr_accessor logging_role: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor sftp_config: Types::SftpConnectorConfig?
+      attr_accessor security_policy_name: String?
+    end
+
+    class CreateConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+    end
+
+    class CreateProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?as2_id: String,
+        ?profile_type: String,
+        ?certificate_ids: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor as2_id: String?
+      attr_accessor profile_type: String?
+      attr_accessor certificate_ids: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+    end
+
+    class CreateServerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate: String,
+        ?domain: String,
+        ?endpoint_details: Types::EndpointDetails,
+        ?endpoint_type: String,
+        ?host_key: String,
+        ?identity_provider_details: Types::IdentityProviderDetails,
+        ?identity_provider_type: String,
+        ?logging_role: String,
+        ?post_authentication_login_banner: String,
+        ?pre_authentication_login_banner: String,
+        ?protocols: Array[String],
+        ?protocol_details: Types::ProtocolDetails,
+        ?security_policy_name: String,
+        ?tags: Array[Types::Tag],
+        ?workflow_details: Types::WorkflowDetails,
+        ?structured_log_destinations: Array[String],
+        ?s3_storage_options: Types::S3StorageOptions,
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate: String?
+      attr_accessor domain: String?
+      attr_accessor endpoint_details: Types::EndpointDetails?
+      attr_accessor endpoint_type: String?
+      attr_accessor host_key: String?
+      attr_accessor identity_provider_details: Types::IdentityProviderDetails?
+      attr_accessor identity_provider_type: String?
+      attr_accessor logging_role: String?
+      attr_accessor post_authentication_login_banner: String?
+      attr_accessor pre_authentication_login_banner: String?
+      attr_accessor protocols: Array[String]?
+      attr_accessor protocol_details: Types::ProtocolDetails?
+      attr_accessor security_policy_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor workflow_details: Types::WorkflowDetails?
+      attr_accessor structured_log_destinations: Array[String]?
+      attr_accessor s3_storage_options: Types::S3StorageOptions?
+      attr_accessor ip_address_type: String?
+    end
+
+    class CreateServerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+    end
+
+    class CreateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?home_directory: String,
+        ?home_directory_type: String,
+        ?home_directory_mappings: Array[Types::HomeDirectoryMapEntry],
+        ?policy: String,
+        ?posix_profile: Types::PosixProfile,
+        ?role: String,
+        ?server_id: String,
+        ?ssh_public_key_body: String,
+        ?tags: Array[Types::Tag],
+        ?user_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor home_directory: String?
+      attr_accessor home_directory_type: String?
+      attr_accessor home_directory_mappings: Array[Types::HomeDirectoryMapEntry]?
+      attr_accessor policy: String?
+      attr_accessor posix_profile: Types::PosixProfile?
+      attr_accessor role: String?
+      attr_accessor server_id: String?
+      attr_accessor ssh_public_key_body: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor user_name: String?
+    end
+
+    class CreateUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?user_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor user_name: String?
+    end
+
+    class CreateWebAppRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identity_provider_details: Types::WebAppIdentityProviderDetails,
+        ?access_endpoint: String,
+        ?web_app_units: Types::WebAppUnits,
+        ?tags: Array[Types::Tag],
+        ?web_app_endpoint_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_provider_details: Types::WebAppIdentityProviderDetails?
+      attr_accessor access_endpoint: String?
+      attr_accessor web_app_units: Types::WebAppUnits?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor web_app_endpoint_policy: String?
+    end
+
+    class CreateWebAppResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_app_id: String?
+    end
+
+    class CreateWorkflowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?steps: Array[Types::WorkflowStep],
+        ?on_exception_steps: Array[Types::WorkflowStep],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor steps: Array[Types::WorkflowStep]?
+      attr_accessor on_exception_steps: Array[Types::WorkflowStep]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateWorkflowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+    end
+
+    class CustomDirectoriesType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_files_directory: String,
+        ?mdn_files_directory: String,
+        ?payload_files_directory: String,
+        ?status_files_directory: String,
+        ?temporary_files_directory: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_files_directory: String?
+      attr_accessor mdn_files_directory: String?
+      attr_accessor payload_files_directory: String?
+      attr_accessor status_files_directory: String?
+      attr_accessor temporary_files_directory: String?
+    end
+
+    class CustomStepDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?target: String,
+        ?timeout_seconds: Integer,
+        ?source_file_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor target: String?
+      attr_accessor timeout_seconds: Integer?
+      attr_accessor source_file_location: String?
+    end
+
+    module CustomStepStatus
+      SUCCESS: String
+      FAILURE: String
+    end
+
+    class DecryptStepDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?source_file_location: String,
+        ?overwrite_existing: String,
+        ?destination_file_location: Types::InputFileLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor source_file_location: String?
+      attr_accessor overwrite_existing: String?
+      attr_accessor destination_file_location: Types::InputFileLocation?
+    end
+
+    class DeleteAccessRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?external_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor external_id: String?
+    end
+
+    class DeleteAgreementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+        ?server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+      attr_accessor server_id: String?
+    end
+
+    class DeleteCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_id: String?
+    end
+
+    class DeleteConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+    end
+
+    class DeleteHostKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?host_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor host_key_id: String?
+    end
+
+    class DeleteProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+    end
+
+    class DeleteServerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+    end
+
+    class DeleteSshPublicKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?ssh_public_key_id: String,
+        ?user_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor ssh_public_key_id: String?
+      attr_accessor user_name: String?
+    end
+
+    class DeleteStepDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?source_file_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor source_file_location: String?
+    end
+
+    class DeleteUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?user_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor user_name: String?
+    end
+
+    class DeleteWebAppCustomizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_app_id: String?
+    end
+
+    class DeleteWebAppRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_app_id: String?
+    end
+
+    class DeleteWorkflowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+    end
+
+    class DescribeAccessRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?external_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor external_id: String?
+    end
+
+    class DescribeAccessResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?access: Types::DescribedAccess,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor access: Types::DescribedAccess?
+    end
+
+    class DescribeAgreementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+        ?server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+      attr_accessor server_id: String?
+    end
+
+    class DescribeAgreementResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement: Types::DescribedAgreement,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement: Types::DescribedAgreement?
+    end
+
+    class DescribeCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_id: String?
+    end
+
+    class DescribeCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate: Types::DescribedCertificate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate: Types::DescribedCertificate?
+    end
+
+    class DescribeConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+    end
+
+    class DescribeConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector: Types::DescribedConnector,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector: Types::DescribedConnector?
+    end
+
+    class DescribeExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_id: String,
+        ?workflow_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_id: String?
+      attr_accessor workflow_id: String?
+    end
+
+    class DescribeExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?execution: Types::DescribedExecution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor execution: Types::DescribedExecution?
+    end
+
+    class DescribeHostKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?host_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor host_key_id: String?
+    end
+
+    class DescribeHostKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_key: Types::DescribedHostKey,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_key: Types::DescribedHostKey?
+    end
+
+    class DescribeProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+    end
+
+    class DescribeProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile: Types::DescribedProfile,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile: Types::DescribedProfile?
+    end
+
+    class DescribeSecurityPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_policy_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_policy_name: String?
+    end
+
+    class DescribeSecurityPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_policy: Types::DescribedSecurityPolicy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_policy: Types::DescribedSecurityPolicy?
+    end
+
+    class DescribeServerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+    end
+
+    class DescribeServerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server: Types::DescribedServer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server: Types::DescribedServer?
+    end
+
+    class DescribeUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?user_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor user_name: String?
+    end
+
+    class DescribeUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?user: Types::DescribedUser,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor user: Types::DescribedUser?
+    end
+
+    class DescribeWebAppCustomizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_app_id: String?
+    end
+
+    class DescribeWebAppCustomizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_app_customization: Types::DescribedWebAppCustomization,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_app_customization: Types::DescribedWebAppCustomization?
+    end
+
+    class DescribeWebAppRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_app_id: String?
+    end
+
+    class DescribeWebAppResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_app: Types::DescribedWebApp,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_app: Types::DescribedWebApp?
+    end
+
+    class DescribeWorkflowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+    end
+
+    class DescribeWorkflowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow: Types::DescribedWorkflow,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow: Types::DescribedWorkflow?
+    end
+
+    class DescribedAccess
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?home_directory: String,
+        ?home_directory_mappings: Array[Types::HomeDirectoryMapEntry],
+        ?home_directory_type: String,
+        ?policy: String,
+        ?posix_profile: Types::PosixProfile,
+        ?role: String,
+        ?external_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor home_directory: String?
+      attr_accessor home_directory_mappings: Array[Types::HomeDirectoryMapEntry]?
+      attr_accessor home_directory_type: String?
+      attr_accessor policy: String?
+      attr_accessor posix_profile: Types::PosixProfile?
+      attr_accessor role: String?
+      attr_accessor external_id: String?
+    end
+
+    class DescribedAgreement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?agreement_id: String,
+        ?description: String,
+        ?status: String,
+        ?server_id: String,
+        ?local_profile_id: String,
+        ?partner_profile_id: String,
+        ?base_directory: String,
+        ?access_role: String,
+        ?tags: Array[Types::Tag],
+        ?preserve_filename: String,
+        ?enforce_message_signing: String,
+        ?custom_directories: Types::CustomDirectoriesType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor agreement_id: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor server_id: String?
+      attr_accessor local_profile_id: String?
+      attr_accessor partner_profile_id: String?
+      attr_accessor base_directory: String?
+      attr_accessor access_role: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor preserve_filename: String?
+      attr_accessor enforce_message_signing: String?
+      attr_accessor custom_directories: Types::CustomDirectoriesType?
+    end
+
+    class DescribedCertificate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?certificate_id: String,
+        ?usage: String,
+        ?status: String,
+        ?certificate: String,
+        ?certificate_chain: String,
+        ?active_date: Time,
+        ?inactive_date: Time,
+        ?serial: String,
+        ?not_before_date: Time,
+        ?not_after_date: Time,
+        ?type: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor certificate_id: String?
+      attr_accessor usage: String?
+      attr_accessor status: String?
+      attr_accessor certificate: String?
+      attr_accessor certificate_chain: String?
+      attr_accessor active_date: Time?
+      attr_accessor inactive_date: Time?
+      attr_accessor serial: String?
+      attr_accessor not_before_date: Time?
+      attr_accessor not_after_date: Time?
+      attr_accessor type: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class DescribedConnector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?connector_id: String,
+        ?url: String,
+        ?as2_config: Types::As2ConnectorConfig,
+        ?access_role: String,
+        ?logging_role: String,
+        ?tags: Array[Types::Tag],
+        ?sftp_config: Types::SftpConnectorConfig,
+        ?service_managed_egress_ip_addresses: Array[String],
+        ?security_policy_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor connector_id: String?
+      attr_accessor url: String?
+      attr_accessor as2_config: Types::As2ConnectorConfig?
+      attr_accessor access_role: String?
+      attr_accessor logging_role: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor sftp_config: Types::SftpConnectorConfig?
+      attr_accessor service_managed_egress_ip_addresses: Array[String]?
+      attr_accessor security_policy_name: String?
+    end
+
+    class DescribedExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_id: String,
+        ?initial_file_location: Types::FileLocation,
+        ?service_metadata: Types::ServiceMetadata,
+        ?execution_role: String,
+        ?logging_configuration: Types::LoggingConfiguration,
+        ?posix_profile: Types::PosixProfile,
+        ?status: String,
+        ?results: Types::ExecutionResults,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_id: String?
+      attr_accessor initial_file_location: Types::FileLocation?
+      attr_accessor service_metadata: Types::ServiceMetadata?
+      attr_accessor execution_role: String?
+      attr_accessor logging_configuration: Types::LoggingConfiguration?
+      attr_accessor posix_profile: Types::PosixProfile?
+      attr_accessor status: String?
+      attr_accessor results: Types::ExecutionResults?
+    end
+
+    class DescribedHostKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?host_key_id: String,
+        ?host_key_fingerprint: String,
+        ?description: String,
+        ?type: String,
+        ?date_imported: Time,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor host_key_id: String?
+      attr_accessor host_key_fingerprint: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor date_imported: Time?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class DescribedIdentityCenterConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_arn: String,
+        ?instance_arn: String,
+        ?role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_arn: String?
+      attr_accessor instance_arn: String?
+      attr_accessor role: String?
+    end
+
+    class DescribedProfile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?profile_id: String,
+        ?profile_type: String,
+        ?as2_id: String,
+        ?certificate_ids: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor profile_id: String?
+      attr_accessor profile_type: String?
+      attr_accessor as2_id: String?
+      attr_accessor certificate_ids: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class DescribedSecurityPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fips: bool,
+        ?security_policy_name: String,
+        ?ssh_ciphers: Array[String],
+        ?ssh_kexs: Array[String],
+        ?ssh_macs: Array[String],
+        ?tls_ciphers: Array[String],
+        ?ssh_host_key_algorithms: Array[String],
+        ?type: String,
+        ?protocols: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fips: bool?
+      attr_accessor security_policy_name: String?
+      attr_accessor ssh_ciphers: Array[String]?
+      attr_accessor ssh_kexs: Array[String]?
+      attr_accessor ssh_macs: Array[String]?
+      attr_accessor tls_ciphers: Array[String]?
+      attr_accessor ssh_host_key_algorithms: Array[String]?
+      attr_accessor type: String?
+      attr_accessor protocols: Array[String]?
+    end
+
+    class DescribedServer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?certificate: String,
+        ?protocol_details: Types::ProtocolDetails,
+        ?domain: String,
+        ?endpoint_details: Types::EndpointDetails,
+        ?endpoint_type: String,
+        ?host_key_fingerprint: String,
+        ?identity_provider_details: Types::IdentityProviderDetails,
+        ?identity_provider_type: String,
+        ?logging_role: String,
+        ?post_authentication_login_banner: String,
+        ?pre_authentication_login_banner: String,
+        ?protocols: Array[String],
+        ?security_policy_name: String,
+        ?server_id: String,
+        ?state: String,
+        ?tags: Array[Types::Tag],
+        ?user_count: Integer,
+        ?workflow_details: Types::WorkflowDetails,
+        ?structured_log_destinations: Array[String],
+        ?s3_storage_options: Types::S3StorageOptions,
+        ?as2_service_managed_egress_ip_addresses: Array[String],
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor certificate: String?
+      attr_accessor protocol_details: Types::ProtocolDetails?
+      attr_accessor domain: String?
+      attr_accessor endpoint_details: Types::EndpointDetails?
+      attr_accessor endpoint_type: String?
+      attr_accessor host_key_fingerprint: String?
+      attr_accessor identity_provider_details: Types::IdentityProviderDetails?
+      attr_accessor identity_provider_type: String?
+      attr_accessor logging_role: String?
+      attr_accessor post_authentication_login_banner: String?
+      attr_accessor pre_authentication_login_banner: String?
+      attr_accessor protocols: Array[String]?
+      attr_accessor security_policy_name: String?
+      attr_accessor server_id: String?
+      attr_accessor state: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor user_count: Integer?
+      attr_accessor workflow_details: Types::WorkflowDetails?
+      attr_accessor structured_log_destinations: Array[String]?
+      attr_accessor s3_storage_options: Types::S3StorageOptions?
+      attr_accessor as2_service_managed_egress_ip_addresses: Array[String]?
+      attr_accessor ip_address_type: String?
+    end
+
+    class DescribedUser
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?home_directory: String,
+        ?home_directory_mappings: Array[Types::HomeDirectoryMapEntry],
+        ?home_directory_type: String,
+        ?policy: String,
+        ?posix_profile: Types::PosixProfile,
+        ?role: String,
+        ?ssh_public_keys: Array[Types::SshPublicKey],
+        ?tags: Array[Types::Tag],
+        ?user_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor home_directory: String?
+      attr_accessor home_directory_mappings: Array[Types::HomeDirectoryMapEntry]?
+      attr_accessor home_directory_type: String?
+      attr_accessor policy: String?
+      attr_accessor posix_profile: Types::PosixProfile?
+      attr_accessor role: String?
+      attr_accessor ssh_public_keys: Array[Types::SshPublicKey]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor user_name: String?
+    end
+
+    class DescribedWebApp
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?web_app_id: String,
+        ?described_identity_provider_details: Types::DescribedWebAppIdentityProviderDetails,
+        ?access_endpoint: String,
+        ?web_app_endpoint: String,
+        ?web_app_units: Types::WebAppUnits,
+        ?tags: Array[Types::Tag],
+        ?web_app_endpoint_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor web_app_id: String?
+      attr_accessor described_identity_provider_details: Types::DescribedWebAppIdentityProviderDetails?
+      attr_accessor access_endpoint: String?
+      attr_accessor web_app_endpoint: String?
+      attr_accessor web_app_units: Types::WebAppUnits?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor web_app_endpoint_policy: String?
+    end
+
+    class DescribedWebAppCustomization
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?web_app_id: String,
+        ?title: String,
+        ?logo_file: String,
+        ?favicon_file: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor web_app_id: String?
+      attr_accessor title: String?
+      attr_accessor logo_file: String?
+      attr_accessor favicon_file: String?
+    end
+
+    class DescribedWebAppIdentityProviderDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?identity_center_config: Types::DescribedIdentityCenterConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_center_config: Types::DescribedIdentityCenterConfig?
+
+      class IdentityCenterConfig < DescribedWebAppIdentityProviderDetails
+      end
+      class Unknown < DescribedWebAppIdentityProviderDetails
+      end
+    end
+
+    class DescribedWorkflow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?description: String,
+        ?steps: Array[Types::WorkflowStep],
+        ?on_exception_steps: Array[Types::WorkflowStep],
+        ?workflow_id: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor steps: Array[Types::WorkflowStep]?
+      attr_accessor on_exception_steps: Array[Types::WorkflowStep]?
+      attr_accessor workflow_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    module DirectoryListingOptimization
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module Domain
+      S3: String
+      EFS: String
+    end
+
+    class EfsFileLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_system_id: String,
+        ?path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_system_id: String?
+      attr_accessor path: String?
+    end
+
+    module EncryptionAlg
+      AES128_CBC: String
+      AES192_CBC: String
+      AES256_CBC: String
+      DES_EDE3_CBC: String
+      NONE: String
+    end
+
+    module EncryptionType
+      PGP: String
+    end
+
+    class EndpointDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?address_allocation_ids: Array[String],
+        ?subnet_ids: Array[String],
+        ?vpc_endpoint_id: String,
+        ?vpc_id: String,
+        ?security_group_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor address_allocation_ids: Array[String]?
+      attr_accessor subnet_ids: Array[String]?
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor vpc_id: String?
+      attr_accessor security_group_ids: Array[String]?
+    end
+
+    module EndpointType
+      PUBLIC: String
+      VPC: String
+      VPC_ENDPOINT: String
+    end
+
+    module EnforceMessageSigningType
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class ExecutionError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    module ExecutionErrorType
+      PERMISSION_DENIED: String
+      CUSTOM_STEP_FAILED: String
+      THROTTLED: String
+      ALREADY_EXISTS: String
+      NOT_FOUND: String
+      BAD_REQUEST: String
+      TIMEOUT: String
+      INTERNAL_SERVER_ERROR: String
+    end
+
+    class ExecutionResults
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?steps: Array[Types::ExecutionStepResult],
+        ?on_exception_steps: Array[Types::ExecutionStepResult],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor steps: Array[Types::ExecutionStepResult]?
+      attr_accessor on_exception_steps: Array[Types::ExecutionStepResult]?
+    end
+
+    module ExecutionStatus
+      IN_PROGRESS: String
+      COMPLETED: String
+      EXCEPTION: String
+      HANDLING_EXCEPTION: String
+    end
+
+    class ExecutionStepResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?step_type: String,
+        ?outputs: String,
+        ?error: Types::ExecutionError,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor step_type: String?
+      attr_accessor outputs: String?
+      attr_accessor error: Types::ExecutionError?
+    end
+
+    class FileLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_file_location: Types::S3FileLocation,
+        ?efs_file_location: Types::EfsFileLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_file_location: Types::S3FileLocation?
+      attr_accessor efs_file_location: Types::EfsFileLocation?
+    end
+
+    class HomeDirectoryMapEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entry: String,
+        ?target: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entry: String?
+      attr_accessor target: String?
+      attr_accessor type: String?
+    end
+
+    module HomeDirectoryType
+      PATH: String
+      LOGICAL: String
+    end
+
+    class IdentityCenterConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor role: String?
+    end
+
+    class IdentityProviderDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?invocation_role: String,
+        ?directory_id: String,
+        ?function: String,
+        ?sftp_authentication_methods: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor invocation_role: String?
+      attr_accessor directory_id: String?
+      attr_accessor function: String?
+      attr_accessor sftp_authentication_methods: String?
+    end
+
+    module IdentityProviderType
+      SERVICE_MANAGED: String
+      API_GATEWAY: String
+      AWS_DIRECTORY_SERVICE: String
+      AWS_LAMBDA: String
+    end
+
+    class ImportCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?usage: String,
+        ?certificate: String,
+        ?certificate_chain: String,
+        ?private_key: String,
+        ?active_date: Time,
+        ?inactive_date: Time,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor usage: String?
+      attr_accessor certificate: String?
+      attr_accessor certificate_chain: String?
+      attr_accessor private_key: String?
+      attr_accessor active_date: Time?
+      attr_accessor inactive_date: Time?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ImportCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_id: String?
+    end
+
+    class ImportHostKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?host_key_body: String,
+        ?description: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor host_key_body: String?
+      attr_accessor description: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ImportHostKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?host_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor host_key_id: String?
+    end
+
+    class ImportSshPublicKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?ssh_public_key_body: String,
+        ?user_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor ssh_public_key_body: String?
+      attr_accessor user_name: String?
+    end
+
+    class ImportSshPublicKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?ssh_public_key_id: String,
+        ?user_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor ssh_public_key_id: String?
+      attr_accessor user_name: String?
+    end
+
+    class InputFileLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_file_location: Types::S3InputFileLocation,
+        ?efs_file_location: Types::EfsFileLocation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_file_location: Types::S3InputFileLocation?
+      attr_accessor efs_file_location: Types::EfsFileLocation?
+    end
+
+    class InternalServiceError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidNextTokenException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module IpAddressType
+      IPV4: String
+      DUALSTACK: String
+    end
+
+    class ListAccessesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor server_id: String?
+    end
+
+    class ListAccessesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?server_id: String,
+        ?accesses: Array[Types::ListedAccess],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor server_id: String?
+      attr_accessor accesses: Array[Types::ListedAccess]?
+    end
+
+    class ListAgreementsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor server_id: String?
+    end
+
+    class ListAgreementsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?agreements: Array[Types::ListedAgreement],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor agreements: Array[Types::ListedAgreement]?
+    end
+
+    class ListCertificatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCertificatesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?certificates: Array[Types::ListedCertificate],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor certificates: Array[Types::ListedCertificate]?
+    end
+
+    class ListConnectorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListConnectorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?connectors: Array[Types::ListedConnector],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor connectors: Array[Types::ListedConnector]?
+    end
+
+    class ListExecutionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?workflow_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor workflow_id: String?
+    end
+
+    class ListExecutionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?workflow_id: String,
+        ?executions: Array[Types::ListedExecution],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor workflow_id: String?
+      attr_accessor executions: Array[Types::ListedExecution]?
+    end
+
+    class ListFileTransferResultsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+        ?transfer_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+      attr_accessor transfer_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListFileTransferResultsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_transfer_results: Array[Types::ConnectorFileTransferResult],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_transfer_results: Array[Types::ConnectorFileTransferResult]?
+      attr_accessor next_token: String?
+    end
+
+    class ListHostKeysRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor server_id: String?
+    end
+
+    class ListHostKeysResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?server_id: String,
+        ?host_keys: Array[Types::ListedHostKey],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor server_id: String?
+      attr_accessor host_keys: Array[Types::ListedHostKey]?
+    end
+
+    class ListProfilesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?profile_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor profile_type: String?
+    end
+
+    class ListProfilesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?profiles: Array[Types::ListedProfile],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor profiles: Array[Types::ListedProfile]?
+    end
+
+    class ListSecurityPoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSecurityPoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?security_policy_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor security_policy_names: Array[String]?
+    end
+
+    class ListServersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListServersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?servers: Array[Types::ListedServer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor servers: Array[Types::ListedServer]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?next_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor next_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class ListUsersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor server_id: String?
+    end
+
+    class ListUsersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?server_id: String,
+        ?users: Array[Types::ListedUser],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor server_id: String?
+      attr_accessor users: Array[Types::ListedUser]?
+    end
+
+    class ListWebAppsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListWebAppsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?web_apps: Array[Types::ListedWebApp],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor web_apps: Array[Types::ListedWebApp]?
+    end
+
+    class ListWorkflowsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkflowsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?workflows: Array[Types::ListedWorkflow],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor workflows: Array[Types::ListedWorkflow]?
+    end
+
+    class ListedAccess
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?home_directory: String,
+        ?home_directory_type: String,
+        ?role: String,
+        ?external_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor home_directory: String?
+      attr_accessor home_directory_type: String?
+      attr_accessor role: String?
+      attr_accessor external_id: String?
+    end
+
+    class ListedAgreement
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?agreement_id: String,
+        ?description: String,
+        ?status: String,
+        ?server_id: String,
+        ?local_profile_id: String,
+        ?partner_profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor agreement_id: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor server_id: String?
+      attr_accessor local_profile_id: String?
+      attr_accessor partner_profile_id: String?
+    end
+
+    class ListedCertificate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?certificate_id: String,
+        ?usage: String,
+        ?status: String,
+        ?active_date: Time,
+        ?inactive_date: Time,
+        ?type: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor certificate_id: String?
+      attr_accessor usage: String?
+      attr_accessor status: String?
+      attr_accessor active_date: Time?
+      attr_accessor inactive_date: Time?
+      attr_accessor type: String?
+      attr_accessor description: String?
+    end
+
+    class ListedConnector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?connector_id: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor connector_id: String?
+      attr_accessor url: String?
+    end
+
+    class ListedExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_id: String,
+        ?initial_file_location: Types::FileLocation,
+        ?service_metadata: Types::ServiceMetadata,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_id: String?
+      attr_accessor initial_file_location: Types::FileLocation?
+      attr_accessor service_metadata: Types::ServiceMetadata?
+      attr_accessor status: String?
+    end
+
+    class ListedHostKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?host_key_id: String,
+        ?fingerprint: String,
+        ?description: String,
+        ?type: String,
+        ?date_imported: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor host_key_id: String?
+      attr_accessor fingerprint: String?
+      attr_accessor description: String?
+      attr_accessor type: String?
+      attr_accessor date_imported: Time?
+    end
+
+    class ListedProfile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?profile_id: String,
+        ?as2_id: String,
+        ?profile_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor profile_id: String?
+      attr_accessor as2_id: String?
+      attr_accessor profile_type: String?
+    end
+
+    class ListedServer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?domain: String,
+        ?identity_provider_type: String,
+        ?endpoint_type: String,
+        ?logging_role: String,
+        ?server_id: String,
+        ?state: String,
+        ?user_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor domain: String?
+      attr_accessor identity_provider_type: String?
+      attr_accessor endpoint_type: String?
+      attr_accessor logging_role: String?
+      attr_accessor server_id: String?
+      attr_accessor state: String?
+      attr_accessor user_count: Integer?
+    end
+
+    class ListedUser
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?home_directory: String,
+        ?home_directory_type: String,
+        ?role: String,
+        ?ssh_public_key_count: Integer,
+        ?user_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor home_directory: String?
+      attr_accessor home_directory_type: String?
+      attr_accessor role: String?
+      attr_accessor ssh_public_key_count: Integer?
+      attr_accessor user_name: String?
+    end
+
+    class ListedWebApp
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?web_app_id: String,
+        ?access_endpoint: String,
+        ?web_app_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor web_app_id: String?
+      attr_accessor access_endpoint: String?
+      attr_accessor web_app_endpoint: String?
+    end
+
+    class ListedWorkflow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?description: String,
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor description: String?
+      attr_accessor arn: String?
+    end
+
+    class LoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?logging_role: String,
+        ?log_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor logging_role: String?
+      attr_accessor log_group_name: String?
+    end
+
+    module MapType
+      FILE: String
+      DIRECTORY: String
+    end
+
+    module MdnResponse
+      SYNC: String
+      NONE: String
+    end
+
+    module MdnSigningAlg
+      SHA256: String
+      SHA384: String
+      SHA512: String
+      SHA1: String
+      NONE: String
+      DEFAULT: String
+    end
+
+    module OverwriteExisting
+      TRUE: String
+      FALSE: String
+    end
+
+    class PosixProfile
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uid: Integer,
+        ?gid: Integer,
+        ?secondary_gids: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uid: Integer?
+      attr_accessor gid: Integer?
+      attr_accessor secondary_gids: Array[Integer]?
+    end
+
+    module PreserveContentType
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module PreserveFilenameType
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module ProfileType
+      LOCAL: String
+      PARTNER: String
+    end
+
+    module Protocol
+      SFTP: String
+      FTP: String
+      FTPS: String
+      AS2: String
+    end
+
+    class ProtocolDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?passive_ip: String,
+        ?tls_session_resumption_mode: String,
+        ?set_stat_option: String,
+        ?as2_transports: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor passive_ip: String?
+      attr_accessor tls_session_resumption_mode: String?
+      attr_accessor set_stat_option: String?
+      attr_accessor as2_transports: Array[String]?
+    end
+
+    class ResourceExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource: String?
+      attr_accessor resource_type: String?
+    end
+
+    class S3FileLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+        ?version_id: String,
+        ?etag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+      attr_accessor version_id: String?
+      attr_accessor etag: String?
+    end
+
+    class S3InputFileLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+    end
+
+    class S3StorageOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?directory_listing_optimization: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor directory_listing_optimization: String?
+    end
+
+    class S3Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    module SecurityPolicyProtocol
+      SFTP: String
+      FTPS: String
+    end
+
+    module SecurityPolicyResourceType
+      SERVER: String
+      CONNECTOR: String
+    end
+
+    class SendWorkflowStepStateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?execution_id: String,
+        ?token: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor execution_id: String?
+      attr_accessor token: String?
+      attr_accessor status: String?
+    end
+
+    class SendWorkflowStepStateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ServiceMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_details: Types::UserDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_details: Types::UserDetails?
+    end
+
+    class ServiceUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module SetStatOption
+      DEFAULT: String
+      ENABLE_NO_OP: String
+    end
+
+    module SftpAuthenticationMethods
+      PASSWORD: String
+      PUBLIC_KEY: String
+      PUBLIC_KEY_OR_PASSWORD: String
+      PUBLIC_KEY_AND_PASSWORD: String
+    end
+
+    class SftpConnectorConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_secret_id: String,
+        ?trusted_host_keys: Array[String],
+        ?max_concurrent_connections: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_secret_id: String?
+      attr_accessor trusted_host_keys: Array[String]?
+      attr_accessor max_concurrent_connections: Integer?
+    end
+
+    class SftpConnectorConnectionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?host_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor host_key: String?
+    end
+
+    module SigningAlg
+      SHA256: String
+      SHA384: String
+      SHA512: String
+      SHA1: String
+      NONE: String
+    end
+
+    class SshPublicKey
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?date_imported: Time,
+        ?ssh_public_key_body: String,
+        ?ssh_public_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor date_imported: Time?
+      attr_accessor ssh_public_key_body: String?
+      attr_accessor ssh_public_key_id: String?
+    end
+
+    class StartDirectoryListingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+        ?remote_directory_path: String,
+        ?max_items: Integer,
+        ?output_directory_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+      attr_accessor remote_directory_path: String?
+      attr_accessor max_items: Integer?
+      attr_accessor output_directory_path: String?
+    end
+
+    class StartDirectoryListingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?listing_id: String,
+        ?output_file_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor listing_id: String?
+      attr_accessor output_file_name: String?
+    end
+
+    class StartFileTransferRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+        ?send_file_paths: Array[String],
+        ?retrieve_file_paths: Array[String],
+        ?local_directory_path: String,
+        ?remote_directory_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+      attr_accessor send_file_paths: Array[String]?
+      attr_accessor retrieve_file_paths: Array[String]?
+      attr_accessor local_directory_path: String?
+      attr_accessor remote_directory_path: String?
+    end
+
+    class StartFileTransferResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transfer_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transfer_id: String?
+    end
+
+    class StartRemoteDeleteRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+        ?delete_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+      attr_accessor delete_path: String?
+    end
+
+    class StartRemoteDeleteResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?delete_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor delete_id: String?
+    end
+
+    class StartRemoteMoveRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+        ?source_path: String,
+        ?target_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+      attr_accessor source_path: String?
+      attr_accessor target_path: String?
+    end
+
+    class StartRemoteMoveResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?move_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor move_id: String?
+    end
+
+    class StartServerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+    end
+
+    module State
+      OFFLINE: String
+      ONLINE: String
+      STARTING: String
+      STOPPING: String
+      START_FAILED: String
+      STOP_FAILED: String
+    end
+
+    class StopServerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagStepDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?tags: Array[Types::S3Tag],
+        ?source_file_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor tags: Array[Types::S3Tag]?
+      attr_accessor source_file_location: String?
+    end
+
+    class TestConnectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+    end
+
+    class TestConnectionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+        ?status: String,
+        ?status_message: String,
+        ?sftp_connection_details: Types::SftpConnectorConnectionDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor sftp_connection_details: Types::SftpConnectorConnectionDetails?
+    end
+
+    class TestIdentityProviderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?server_protocol: String,
+        ?source_ip: String,
+        ?user_name: String,
+        ?user_password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor server_protocol: String?
+      attr_accessor source_ip: String?
+      attr_accessor user_name: String?
+      attr_accessor user_password: String?
+    end
+
+    class TestIdentityProviderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?response: String,
+        ?status_code: Integer,
+        ?message: String,
+        ?url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor response: String?
+      attr_accessor status_code: Integer?
+      attr_accessor message: String?
+      attr_accessor url: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retry_after_seconds: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retry_after_seconds: String?
+    end
+
+    module TlsSessionResumptionMode
+      DISABLED: String
+      ENABLED: String
+      ENFORCED: String
+    end
+
+    module TransferTableStatus
+      QUEUED: String
+      IN_PROGRESS: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateAccessRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?home_directory: String,
+        ?home_directory_type: String,
+        ?home_directory_mappings: Array[Types::HomeDirectoryMapEntry],
+        ?policy: String,
+        ?posix_profile: Types::PosixProfile,
+        ?role: String,
+        ?server_id: String,
+        ?external_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor home_directory: String?
+      attr_accessor home_directory_type: String?
+      attr_accessor home_directory_mappings: Array[Types::HomeDirectoryMapEntry]?
+      attr_accessor policy: String?
+      attr_accessor posix_profile: Types::PosixProfile?
+      attr_accessor role: String?
+      attr_accessor server_id: String?
+      attr_accessor external_id: String?
+    end
+
+    class UpdateAccessResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?external_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor external_id: String?
+    end
+
+    class UpdateAgreementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+        ?server_id: String,
+        ?description: String,
+        ?status: String,
+        ?local_profile_id: String,
+        ?partner_profile_id: String,
+        ?base_directory: String,
+        ?access_role: String,
+        ?preserve_filename: String,
+        ?enforce_message_signing: String,
+        ?custom_directories: Types::CustomDirectoriesType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+      attr_accessor server_id: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor local_profile_id: String?
+      attr_accessor partner_profile_id: String?
+      attr_accessor base_directory: String?
+      attr_accessor access_role: String?
+      attr_accessor preserve_filename: String?
+      attr_accessor enforce_message_signing: String?
+      attr_accessor custom_directories: Types::CustomDirectoriesType?
+    end
+
+    class UpdateAgreementResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?agreement_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor agreement_id: String?
+    end
+
+    class UpdateCertificateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_id: String,
+        ?active_date: Time,
+        ?inactive_date: Time,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_id: String?
+      attr_accessor active_date: Time?
+      attr_accessor inactive_date: Time?
+      attr_accessor description: String?
+    end
+
+    class UpdateCertificateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_id: String?
+    end
+
+    class UpdateConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+        ?url: String,
+        ?as2_config: Types::As2ConnectorConfig,
+        ?access_role: String,
+        ?logging_role: String,
+        ?sftp_config: Types::SftpConnectorConfig,
+        ?security_policy_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+      attr_accessor url: String?
+      attr_accessor as2_config: Types::As2ConnectorConfig?
+      attr_accessor access_role: String?
+      attr_accessor logging_role: String?
+      attr_accessor sftp_config: Types::SftpConnectorConfig?
+      attr_accessor security_policy_name: String?
+    end
+
+    class UpdateConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_id: String?
+    end
+
+    class UpdateHostKeyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?host_key_id: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor host_key_id: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateHostKeyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?host_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor host_key_id: String?
+    end
+
+    class UpdateProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+        ?certificate_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+      attr_accessor certificate_ids: Array[String]?
+    end
+
+    class UpdateProfileResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor profile_id: String?
+    end
+
+    class UpdateServerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate: String,
+        ?protocol_details: Types::ProtocolDetails,
+        ?endpoint_details: Types::EndpointDetails,
+        ?endpoint_type: String,
+        ?host_key: String,
+        ?identity_provider_details: Types::IdentityProviderDetails,
+        ?logging_role: String,
+        ?post_authentication_login_banner: String,
+        ?pre_authentication_login_banner: String,
+        ?protocols: Array[String],
+        ?security_policy_name: String,
+        ?server_id: String,
+        ?workflow_details: Types::WorkflowDetails,
+        ?structured_log_destinations: Array[String],
+        ?s3_storage_options: Types::S3StorageOptions,
+        ?ip_address_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate: String?
+      attr_accessor protocol_details: Types::ProtocolDetails?
+      attr_accessor endpoint_details: Types::EndpointDetails?
+      attr_accessor endpoint_type: String?
+      attr_accessor host_key: String?
+      attr_accessor identity_provider_details: Types::IdentityProviderDetails?
+      attr_accessor logging_role: String?
+      attr_accessor post_authentication_login_banner: String?
+      attr_accessor pre_authentication_login_banner: String?
+      attr_accessor protocols: Array[String]?
+      attr_accessor security_policy_name: String?
+      attr_accessor server_id: String?
+      attr_accessor workflow_details: Types::WorkflowDetails?
+      attr_accessor structured_log_destinations: Array[String]?
+      attr_accessor s3_storage_options: Types::S3StorageOptions?
+      attr_accessor ip_address_type: String?
+    end
+
+    class UpdateServerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+    end
+
+    class UpdateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?home_directory: String,
+        ?home_directory_type: String,
+        ?home_directory_mappings: Array[Types::HomeDirectoryMapEntry],
+        ?policy: String,
+        ?posix_profile: Types::PosixProfile,
+        ?role: String,
+        ?server_id: String,
+        ?user_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor home_directory: String?
+      attr_accessor home_directory_type: String?
+      attr_accessor home_directory_mappings: Array[Types::HomeDirectoryMapEntry]?
+      attr_accessor policy: String?
+      attr_accessor posix_profile: Types::PosixProfile?
+      attr_accessor role: String?
+      attr_accessor server_id: String?
+      attr_accessor user_name: String?
+    end
+
+    class UpdateUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?server_id: String,
+        ?user_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor server_id: String?
+      attr_accessor user_name: String?
+    end
+
+    class UpdateWebAppCustomizationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_app_id: String,
+        ?title: String,
+        ?logo_file: String,
+        ?favicon_file: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_app_id: String?
+      attr_accessor title: String?
+      attr_accessor logo_file: String?
+      attr_accessor favicon_file: String?
+    end
+
+    class UpdateWebAppCustomizationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_app_id: String?
+    end
+
+    class UpdateWebAppIdentityCenterConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role: String?
+    end
+
+    class UpdateWebAppIdentityProviderDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?identity_center_config: Types::UpdateWebAppIdentityCenterConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_center_config: Types::UpdateWebAppIdentityCenterConfig?
+
+      class IdentityCenterConfig < UpdateWebAppIdentityProviderDetails
+      end
+      class Unknown < UpdateWebAppIdentityProviderDetails
+      end
+    end
+
+    class UpdateWebAppRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_app_id: String,
+        ?identity_provider_details: Types::UpdateWebAppIdentityProviderDetails,
+        ?access_endpoint: String,
+        ?web_app_units: Types::WebAppUnits,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_app_id: String?
+      attr_accessor identity_provider_details: Types::UpdateWebAppIdentityProviderDetails?
+      attr_accessor access_endpoint: String?
+      attr_accessor web_app_units: Types::WebAppUnits?
+    end
+
+    class UpdateWebAppResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?web_app_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor web_app_id: String?
+    end
+
+    class UserDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_name: String,
+        ?server_id: String,
+        ?session_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_name: String?
+      attr_accessor server_id: String?
+      attr_accessor session_id: String?
+    end
+
+    module WebAppEndpointPolicy
+      FIPS: String
+      STANDARD: String
+    end
+
+    class WebAppIdentityProviderDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?identity_center_config: Types::IdentityCenterConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identity_center_config: Types::IdentityCenterConfig?
+
+      class IdentityCenterConfig < WebAppIdentityProviderDetails
+      end
+      class Unknown < WebAppIdentityProviderDetails
+      end
+    end
+
+    class WebAppUnits
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?provisioned: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provisioned: Integer?
+
+      class Provisioned < WebAppUnits
+      end
+      class Unknown < WebAppUnits
+      end
+    end
+
+    class WorkflowDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_id: String,
+        ?execution_role: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_id: String?
+      attr_accessor execution_role: String?
+    end
+
+    class WorkflowDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?on_upload: Array[Types::WorkflowDetail],
+        ?on_partial_upload: Array[Types::WorkflowDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor on_upload: Array[Types::WorkflowDetail]?
+      attr_accessor on_partial_upload: Array[Types::WorkflowDetail]?
+    end
+
+    class WorkflowStep
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?copy_step_details: Types::CopyStepDetails,
+        ?custom_step_details: Types::CustomStepDetails,
+        ?delete_step_details: Types::DeleteStepDetails,
+        ?tag_step_details: Types::TagStepDetails,
+        ?decrypt_step_details: Types::DecryptStepDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor copy_step_details: Types::CopyStepDetails?
+      attr_accessor custom_step_details: Types::CustomStepDetails?
+      attr_accessor delete_step_details: Types::DeleteStepDetails?
+      attr_accessor tag_step_details: Types::TagStepDetails?
+      attr_accessor decrypt_step_details: Types::DecryptStepDetails?
+    end
+
+    module WorkflowStepType
+      COPY: String
+      CUSTOM: String
+      TAG: String
+      DELETE: String
+      DECRYPT: String
+    end
+  end
+end

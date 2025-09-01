@@ -1,0 +1,3732 @@
+module Aws::Proton
+  module Types
+
+    class AcceptEnvironmentAccountConnectionOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class AcceptEnvironmentAccountConnectionOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_account_connection: Types::EnvironmentAccountConnection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_account_connection: Types::EnvironmentAccountConnection?
+    end
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AccountSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_service_role_arn: String,
+        ?pipeline_provisioning_repository: Types::RepositoryBranch,
+        ?pipeline_codebuild_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_service_role_arn: String?
+      attr_accessor pipeline_provisioning_repository: Types::RepositoryBranch?
+      attr_accessor pipeline_codebuild_role_arn: String?
+    end
+
+    class CancelComponentDeploymentOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_name: String?
+    end
+
+    class CancelComponentDeploymentOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component: Types::Component,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component: Types::Component?
+    end
+
+    class CancelEnvironmentDeploymentOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_name: String?
+    end
+
+    class CancelEnvironmentDeploymentOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment: Types::Environment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment: Types::Environment?
+    end
+
+    class CancelServiceInstanceDeploymentOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_instance_name: String,
+        ?service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_instance_name: String?
+      attr_accessor service_name: String?
+    end
+
+    class CancelServiceInstanceDeploymentOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_instance: Types::ServiceInstance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_instance: Types::ServiceInstance?
+    end
+
+    class CancelServicePipelineDeploymentOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+    end
+
+    class CancelServicePipelineDeploymentOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline: Types::ServicePipeline,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline: Types::ServicePipeline?
+    end
+
+    class CompatibleEnvironmentTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?major_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor major_version: String?
+    end
+
+    class CompatibleEnvironmentTemplateInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?major_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor major_version: String?
+    end
+
+    class Component
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?arn: String,
+        ?environment_name: String,
+        ?service_name: String,
+        ?service_instance_name: String,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+        ?last_deployment_attempted_at: Time,
+        ?last_deployment_succeeded_at: Time,
+        ?deployment_status: String,
+        ?deployment_status_message: String,
+        ?service_spec: String,
+        ?last_client_request_token: String,
+        ?last_attempted_deployment_id: String,
+        ?last_succeeded_deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor arn: String?
+      attr_accessor environment_name: String?
+      attr_accessor service_name: String?
+      attr_accessor service_instance_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor last_deployment_attempted_at: Time?
+      attr_accessor last_deployment_succeeded_at: Time?
+      attr_accessor deployment_status: String?
+      attr_accessor deployment_status_message: String?
+      attr_accessor service_spec: String?
+      attr_accessor last_client_request_token: String?
+      attr_accessor last_attempted_deployment_id: String?
+      attr_accessor last_succeeded_deployment_id: String?
+    end
+
+    class ComponentState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?service_instance_name: String,
+        ?service_spec: String,
+        ?template_file: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor service_instance_name: String?
+      attr_accessor service_spec: String?
+      attr_accessor template_file: String?
+    end
+
+    class ComponentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?environment_name: String,
+        ?service_name: String,
+        ?service_instance_name: String,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+        ?last_deployment_attempted_at: Time,
+        ?last_deployment_succeeded_at: Time,
+        ?deployment_status: String,
+        ?deployment_status_message: String,
+        ?last_attempted_deployment_id: String,
+        ?last_succeeded_deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor environment_name: String?
+      attr_accessor service_name: String?
+      attr_accessor service_instance_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor last_deployment_attempted_at: Time?
+      attr_accessor last_deployment_succeeded_at: Time?
+      attr_accessor deployment_status: String?
+      attr_accessor deployment_status_message: String?
+      attr_accessor last_attempted_deployment_id: String?
+      attr_accessor last_succeeded_deployment_id: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CountsSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?components: Types::ResourceCountsSummary,
+        ?environments: Types::ResourceCountsSummary,
+        ?environment_templates: Types::ResourceCountsSummary,
+        ?service_instances: Types::ResourceCountsSummary,
+        ?services: Types::ResourceCountsSummary,
+        ?service_templates: Types::ResourceCountsSummary,
+        ?pipelines: Types::ResourceCountsSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor components: Types::ResourceCountsSummary?
+      attr_accessor environments: Types::ResourceCountsSummary?
+      attr_accessor environment_templates: Types::ResourceCountsSummary?
+      attr_accessor service_instances: Types::ResourceCountsSummary?
+      attr_accessor services: Types::ResourceCountsSummary?
+      attr_accessor service_templates: Types::ResourceCountsSummary?
+      attr_accessor pipelines: Types::ResourceCountsSummary?
+    end
+
+    class CreateComponentOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?service_name: String,
+        ?service_instance_name: String,
+        ?environment_name: String,
+        ?template_file: String,
+        ?manifest: String,
+        ?service_spec: String,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor service_name: String?
+      attr_accessor service_instance_name: String?
+      attr_accessor environment_name: String?
+      attr_accessor template_file: String?
+      attr_accessor manifest: String?
+      attr_accessor service_spec: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateComponentOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component: Types::Component,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component: Types::Component?
+    end
+
+    class CreateEnvironmentAccountConnectionOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?management_account_id: String,
+        ?role_arn: String,
+        ?environment_name: String,
+        ?tags: Array[Types::Tag],
+        ?component_role_arn: String,
+        ?codebuild_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor management_account_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor environment_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor component_role_arn: String?
+      attr_accessor codebuild_role_arn: String?
+    end
+
+    class CreateEnvironmentAccountConnectionOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_account_connection: Types::EnvironmentAccountConnection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_account_connection: Types::EnvironmentAccountConnection?
+    end
+
+    class CreateEnvironmentOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?template_name: String,
+        ?template_major_version: String,
+        ?template_minor_version: String,
+        ?description: String,
+        ?spec: String,
+        ?proton_service_role_arn: String,
+        ?environment_account_connection_id: String,
+        ?tags: Array[Types::Tag],
+        ?provisioning_repository: Types::RepositoryBranchInput,
+        ?component_role_arn: String,
+        ?codebuild_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor template_name: String?
+      attr_accessor template_major_version: String?
+      attr_accessor template_minor_version: String?
+      attr_accessor description: String?
+      attr_accessor spec: String?
+      attr_accessor proton_service_role_arn: String?
+      attr_accessor environment_account_connection_id: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor provisioning_repository: Types::RepositoryBranchInput?
+      attr_accessor component_role_arn: String?
+      attr_accessor codebuild_role_arn: String?
+    end
+
+    class CreateEnvironmentOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment: Types::Environment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment: Types::Environment?
+    end
+
+    class CreateEnvironmentTemplateOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?display_name: String,
+        ?description: String,
+        ?encryption_key: String,
+        ?provisioning: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor encryption_key: String?
+      attr_accessor provisioning: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateEnvironmentTemplateOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_template: Types::EnvironmentTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_template: Types::EnvironmentTemplate?
+    end
+
+    class CreateEnvironmentTemplateVersionOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?template_name: String,
+        ?description: String,
+        ?major_version: String,
+        ?source: Types::TemplateVersionSourceInput,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor template_name: String?
+      attr_accessor description: String?
+      attr_accessor major_version: String?
+      attr_accessor source: Types::TemplateVersionSourceInput?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateEnvironmentTemplateVersionOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_template_version: Types::EnvironmentTemplateVersion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_template_version: Types::EnvironmentTemplateVersion?
+    end
+
+    class CreateRepositoryOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider: String,
+        ?name: String,
+        ?connection_arn: String,
+        ?encryption_key: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider: String?
+      attr_accessor name: String?
+      attr_accessor connection_arn: String?
+      attr_accessor encryption_key: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateRepositoryOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository: Types::Repository,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository: Types::Repository?
+    end
+
+    class CreateServiceInstanceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?service_name: String,
+        ?spec: String,
+        ?template_major_version: String,
+        ?template_minor_version: String,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor service_name: String?
+      attr_accessor spec: String?
+      attr_accessor template_major_version: String?
+      attr_accessor template_minor_version: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateServiceInstanceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_instance: Types::ServiceInstance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_instance: Types::ServiceInstance?
+    end
+
+    class CreateServiceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?template_name: String,
+        ?template_major_version: String,
+        ?template_minor_version: String,
+        ?spec: String,
+        ?repository_connection_arn: String,
+        ?repository_id: String,
+        ?branch_name: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor template_name: String?
+      attr_accessor template_major_version: String?
+      attr_accessor template_minor_version: String?
+      attr_accessor spec: String?
+      attr_accessor repository_connection_arn: String?
+      attr_accessor repository_id: String?
+      attr_accessor branch_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateServiceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: Types::Service,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::Service?
+    end
+
+    class CreateServiceSyncConfigOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?repository_provider: String,
+        ?repository_name: String,
+        ?branch: String,
+        ?file_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor repository_provider: String?
+      attr_accessor repository_name: String?
+      attr_accessor branch: String?
+      attr_accessor file_path: String?
+    end
+
+    class CreateServiceSyncConfigOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_sync_config: Types::ServiceSyncConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_sync_config: Types::ServiceSyncConfig?
+    end
+
+    class CreateServiceTemplateOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?display_name: String,
+        ?description: String,
+        ?encryption_key: String,
+        ?pipeline_provisioning: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor encryption_key: String?
+      attr_accessor pipeline_provisioning: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateServiceTemplateOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_template: Types::ServiceTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_template: Types::ServiceTemplate?
+    end
+
+    class CreateServiceTemplateVersionOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?template_name: String,
+        ?description: String,
+        ?major_version: String,
+        ?source: Types::TemplateVersionSourceInput,
+        ?compatible_environment_templates: Array[Types::CompatibleEnvironmentTemplateInput],
+        ?tags: Array[Types::Tag],
+        ?supported_component_sources: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor template_name: String?
+      attr_accessor description: String?
+      attr_accessor major_version: String?
+      attr_accessor source: Types::TemplateVersionSourceInput?
+      attr_accessor compatible_environment_templates: Array[Types::CompatibleEnvironmentTemplateInput]?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor supported_component_sources: Array[String]?
+    end
+
+    class CreateServiceTemplateVersionOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_template_version: Types::ServiceTemplateVersion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_template_version: Types::ServiceTemplateVersion?
+    end
+
+    class CreateTemplateSyncConfigOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?template_type: String,
+        ?repository_provider: String,
+        ?repository_name: String,
+        ?branch: String,
+        ?subdirectory: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor template_type: String?
+      attr_accessor repository_provider: String?
+      attr_accessor repository_name: String?
+      attr_accessor branch: String?
+      attr_accessor subdirectory: String?
+    end
+
+    class CreateTemplateSyncConfigOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_sync_config: Types::TemplateSyncConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_sync_config: Types::TemplateSyncConfig?
+    end
+
+    class DeleteComponentOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteComponentOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component: Types::Component,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component: Types::Component?
+    end
+
+    class DeleteDeploymentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteDeploymentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment: Types::Deployment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment: Types::Deployment?
+    end
+
+    class DeleteEnvironmentAccountConnectionOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class DeleteEnvironmentAccountConnectionOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_account_connection: Types::EnvironmentAccountConnection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_account_connection: Types::EnvironmentAccountConnection?
+    end
+
+    class DeleteEnvironmentOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteEnvironmentOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment: Types::Environment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment: Types::Environment?
+    end
+
+    class DeleteEnvironmentTemplateOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteEnvironmentTemplateOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_template: Types::EnvironmentTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_template: Types::EnvironmentTemplate?
+    end
+
+    class DeleteEnvironmentTemplateVersionOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?major_version: String,
+        ?minor_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor major_version: String?
+      attr_accessor minor_version: String?
+    end
+
+    class DeleteEnvironmentTemplateVersionOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_template_version: Types::EnvironmentTemplateVersion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_template_version: Types::EnvironmentTemplateVersion?
+    end
+
+    class DeleteRepositoryOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteRepositoryOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository: Types::Repository,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository: Types::Repository?
+    end
+
+    class DeleteServiceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteServiceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: Types::Service,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::Service?
+    end
+
+    class DeleteServiceSyncConfigOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+    end
+
+    class DeleteServiceSyncConfigOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_sync_config: Types::ServiceSyncConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_sync_config: Types::ServiceSyncConfig?
+    end
+
+    class DeleteServiceTemplateOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DeleteServiceTemplateOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_template: Types::ServiceTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_template: Types::ServiceTemplate?
+    end
+
+    class DeleteServiceTemplateVersionOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?major_version: String,
+        ?minor_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor major_version: String?
+      attr_accessor minor_version: String?
+    end
+
+    class DeleteServiceTemplateVersionOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_template_version: Types::ServiceTemplateVersion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_template_version: Types::ServiceTemplateVersion?
+    end
+
+    class DeleteTemplateSyncConfigOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?template_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor template_type: String?
+    end
+
+    class DeleteTemplateSyncConfigOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_sync_config: Types::TemplateSyncConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_sync_config: Types::TemplateSyncConfig?
+    end
+
+    class Deployment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?target_arn: String,
+        ?target_resource_created_at: Time,
+        ?target_resource_type: String,
+        ?environment_name: String,
+        ?service_name: String,
+        ?service_instance_name: String,
+        ?component_name: String,
+        ?deployment_status: String,
+        ?deployment_status_message: String,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+        ?completed_at: Time,
+        ?last_attempted_deployment_id: String,
+        ?last_succeeded_deployment_id: String,
+        ?initial_state: Types::DeploymentState,
+        ?target_state: Types::DeploymentState,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor target_arn: String?
+      attr_accessor target_resource_created_at: Time?
+      attr_accessor target_resource_type: String?
+      attr_accessor environment_name: String?
+      attr_accessor service_name: String?
+      attr_accessor service_instance_name: String?
+      attr_accessor component_name: String?
+      attr_accessor deployment_status: String?
+      attr_accessor deployment_status_message: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor completed_at: Time?
+      attr_accessor last_attempted_deployment_id: String?
+      attr_accessor last_succeeded_deployment_id: String?
+      attr_accessor initial_state: Types::DeploymentState?
+      attr_accessor target_state: Types::DeploymentState?
+    end
+
+    class DeploymentState
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?service_instance: Types::ServiceInstanceState,
+        ?environment: Types::EnvironmentState,
+        ?service_pipeline: Types::ServicePipelineState,
+        ?component: Types::ComponentState,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_instance: Types::ServiceInstanceState?
+      attr_accessor environment: Types::EnvironmentState?
+      attr_accessor service_pipeline: Types::ServicePipelineState?
+      attr_accessor component: Types::ComponentState?
+
+      class ServiceInstance < DeploymentState
+      end
+      class Environment < DeploymentState
+      end
+      class ServicePipeline < DeploymentState
+      end
+      class Component < DeploymentState
+      end
+      class Unknown < DeploymentState
+      end
+    end
+
+    class DeploymentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?target_arn: String,
+        ?target_resource_created_at: Time,
+        ?target_resource_type: String,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+        ?completed_at: Time,
+        ?environment_name: String,
+        ?service_name: String,
+        ?service_instance_name: String,
+        ?component_name: String,
+        ?last_attempted_deployment_id: String,
+        ?last_succeeded_deployment_id: String,
+        ?deployment_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor target_arn: String?
+      attr_accessor target_resource_created_at: Time?
+      attr_accessor target_resource_type: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor completed_at: Time?
+      attr_accessor environment_name: String?
+      attr_accessor service_name: String?
+      attr_accessor service_instance_name: String?
+      attr_accessor component_name: String?
+      attr_accessor last_attempted_deployment_id: String?
+      attr_accessor last_succeeded_deployment_id: String?
+      attr_accessor deployment_status: String?
+    end
+
+    class Environment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?created_at: Time,
+        ?last_deployment_attempted_at: Time,
+        ?last_deployment_succeeded_at: Time,
+        ?arn: String,
+        ?template_name: String,
+        ?template_major_version: String,
+        ?template_minor_version: String,
+        ?deployment_status: String,
+        ?deployment_status_message: String,
+        ?proton_service_role_arn: String,
+        ?environment_account_connection_id: String,
+        ?environment_account_id: String,
+        ?spec: String,
+        ?provisioning: String,
+        ?provisioning_repository: Types::RepositoryBranch,
+        ?component_role_arn: String,
+        ?codebuild_role_arn: String,
+        ?last_attempted_deployment_id: String,
+        ?last_succeeded_deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_deployment_attempted_at: Time?
+      attr_accessor last_deployment_succeeded_at: Time?
+      attr_accessor arn: String?
+      attr_accessor template_name: String?
+      attr_accessor template_major_version: String?
+      attr_accessor template_minor_version: String?
+      attr_accessor deployment_status: String?
+      attr_accessor deployment_status_message: String?
+      attr_accessor proton_service_role_arn: String?
+      attr_accessor environment_account_connection_id: String?
+      attr_accessor environment_account_id: String?
+      attr_accessor spec: String?
+      attr_accessor provisioning: String?
+      attr_accessor provisioning_repository: Types::RepositoryBranch?
+      attr_accessor component_role_arn: String?
+      attr_accessor codebuild_role_arn: String?
+      attr_accessor last_attempted_deployment_id: String?
+      attr_accessor last_succeeded_deployment_id: String?
+    end
+
+    class EnvironmentAccountConnection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?management_account_id: String,
+        ?environment_account_id: String,
+        ?role_arn: String,
+        ?environment_name: String,
+        ?requested_at: Time,
+        ?last_modified_at: Time,
+        ?status: String,
+        ?component_role_arn: String,
+        ?codebuild_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor management_account_id: String?
+      attr_accessor environment_account_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor environment_name: String?
+      attr_accessor requested_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor status: String?
+      attr_accessor component_role_arn: String?
+      attr_accessor codebuild_role_arn: String?
+    end
+
+    class EnvironmentAccountConnectionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?arn: String,
+        ?management_account_id: String,
+        ?environment_account_id: String,
+        ?role_arn: String,
+        ?environment_name: String,
+        ?requested_at: Time,
+        ?last_modified_at: Time,
+        ?status: String,
+        ?component_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor arn: String?
+      attr_accessor management_account_id: String?
+      attr_accessor environment_account_id: String?
+      attr_accessor role_arn: String?
+      attr_accessor environment_name: String?
+      attr_accessor requested_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor status: String?
+      attr_accessor component_role_arn: String?
+    end
+
+    class EnvironmentState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?spec: String,
+        ?template_name: String,
+        ?template_major_version: String,
+        ?template_minor_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spec: String?
+      attr_accessor template_name: String?
+      attr_accessor template_major_version: String?
+      attr_accessor template_minor_version: String?
+    end
+
+    class EnvironmentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?created_at: Time,
+        ?last_deployment_attempted_at: Time,
+        ?last_deployment_succeeded_at: Time,
+        ?arn: String,
+        ?template_name: String,
+        ?template_major_version: String,
+        ?template_minor_version: String,
+        ?deployment_status: String,
+        ?deployment_status_message: String,
+        ?proton_service_role_arn: String,
+        ?environment_account_connection_id: String,
+        ?environment_account_id: String,
+        ?provisioning: String,
+        ?component_role_arn: String,
+        ?last_attempted_deployment_id: String,
+        ?last_succeeded_deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_deployment_attempted_at: Time?
+      attr_accessor last_deployment_succeeded_at: Time?
+      attr_accessor arn: String?
+      attr_accessor template_name: String?
+      attr_accessor template_major_version: String?
+      attr_accessor template_minor_version: String?
+      attr_accessor deployment_status: String?
+      attr_accessor deployment_status_message: String?
+      attr_accessor proton_service_role_arn: String?
+      attr_accessor environment_account_connection_id: String?
+      attr_accessor environment_account_id: String?
+      attr_accessor provisioning: String?
+      attr_accessor component_role_arn: String?
+      attr_accessor last_attempted_deployment_id: String?
+      attr_accessor last_succeeded_deployment_id: String?
+    end
+
+    class EnvironmentTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+        ?display_name: String,
+        ?description: String,
+        ?recommended_version: String,
+        ?encryption_key: String,
+        ?provisioning: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor recommended_version: String?
+      attr_accessor encryption_key: String?
+      attr_accessor provisioning: String?
+    end
+
+    class EnvironmentTemplateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?major_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor major_version: String?
+    end
+
+    class EnvironmentTemplateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+        ?display_name: String,
+        ?description: String,
+        ?recommended_version: String,
+        ?provisioning: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor recommended_version: String?
+      attr_accessor provisioning: String?
+    end
+
+    class EnvironmentTemplateVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?major_version: String,
+        ?minor_version: String,
+        ?recommended_minor_version: String,
+        ?status: String,
+        ?status_message: String,
+        ?description: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+        ?schema: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor major_version: String?
+      attr_accessor minor_version: String?
+      attr_accessor recommended_minor_version: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor description: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor schema: String?
+    end
+
+    class EnvironmentTemplateVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?major_version: String,
+        ?minor_version: String,
+        ?recommended_minor_version: String,
+        ?status: String,
+        ?status_message: String,
+        ?description: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor major_version: String?
+      attr_accessor minor_version: String?
+      attr_accessor recommended_minor_version: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor description: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+    end
+
+    class GetAccountSettingsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetAccountSettingsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_settings: Types::AccountSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_settings: Types::AccountSettings?
+    end
+
+    class GetComponentOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetComponentOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component: Types::Component,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component: Types::Component?
+    end
+
+    class GetDeploymentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?environment_name: String,
+        ?service_name: String,
+        ?service_instance_name: String,
+        ?component_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor environment_name: String?
+      attr_accessor service_name: String?
+      attr_accessor service_instance_name: String?
+      attr_accessor component_name: String?
+    end
+
+    class GetDeploymentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment: Types::Deployment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment: Types::Deployment?
+    end
+
+    class GetEnvironmentAccountConnectionOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class GetEnvironmentAccountConnectionOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_account_connection: Types::EnvironmentAccountConnection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_account_connection: Types::EnvironmentAccountConnection?
+    end
+
+    class GetEnvironmentOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetEnvironmentOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment: Types::Environment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment: Types::Environment?
+    end
+
+    class GetEnvironmentTemplateOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetEnvironmentTemplateOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_template: Types::EnvironmentTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_template: Types::EnvironmentTemplate?
+    end
+
+    class GetEnvironmentTemplateVersionOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?major_version: String,
+        ?minor_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor major_version: String?
+      attr_accessor minor_version: String?
+    end
+
+    class GetEnvironmentTemplateVersionOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_template_version: Types::EnvironmentTemplateVersion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_template_version: Types::EnvironmentTemplateVersion?
+    end
+
+    class GetRepositoryOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider: String?
+      attr_accessor name: String?
+    end
+
+    class GetRepositoryOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository: Types::Repository,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository: Types::Repository?
+    end
+
+    class GetRepositorySyncStatusOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?repository_provider: String,
+        ?branch: String,
+        ?sync_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor repository_provider: String?
+      attr_accessor branch: String?
+      attr_accessor sync_type: String?
+    end
+
+    class GetRepositorySyncStatusOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?latest_sync: Types::RepositorySyncAttempt,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor latest_sync: Types::RepositorySyncAttempt?
+    end
+
+    class GetResourcesSummaryOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetResourcesSummaryOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?counts: Types::CountsSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor counts: Types::CountsSummary?
+    end
+
+    class GetServiceInstanceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor service_name: String?
+    end
+
+    class GetServiceInstanceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_instance: Types::ServiceInstance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_instance: Types::ServiceInstance?
+    end
+
+    class GetServiceInstanceSyncStatusOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?service_instance_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor service_instance_name: String?
+    end
+
+    class GetServiceInstanceSyncStatusOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?latest_sync: Types::ResourceSyncAttempt,
+        ?latest_successful_sync: Types::ResourceSyncAttempt,
+        ?desired_state: Types::Revision,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor latest_sync: Types::ResourceSyncAttempt?
+      attr_accessor latest_successful_sync: Types::ResourceSyncAttempt?
+      attr_accessor desired_state: Types::Revision?
+    end
+
+    class GetServiceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetServiceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: Types::Service,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::Service?
+    end
+
+    class GetServiceSyncBlockerSummaryOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?service_instance_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor service_instance_name: String?
+    end
+
+    class GetServiceSyncBlockerSummaryOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_sync_blocker_summary: Types::ServiceSyncBlockerSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_sync_blocker_summary: Types::ServiceSyncBlockerSummary?
+    end
+
+    class GetServiceSyncConfigOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+    end
+
+    class GetServiceSyncConfigOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_sync_config: Types::ServiceSyncConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_sync_config: Types::ServiceSyncConfig?
+    end
+
+    class GetServiceTemplateOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetServiceTemplateOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_template: Types::ServiceTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_template: Types::ServiceTemplate?
+    end
+
+    class GetServiceTemplateVersionOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?major_version: String,
+        ?minor_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor major_version: String?
+      attr_accessor minor_version: String?
+    end
+
+    class GetServiceTemplateVersionOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_template_version: Types::ServiceTemplateVersion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_template_version: Types::ServiceTemplateVersion?
+    end
+
+    class GetTemplateSyncConfigOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?template_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor template_type: String?
+    end
+
+    class GetTemplateSyncConfigOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_sync_config: Types::TemplateSyncConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_sync_config: Types::TemplateSyncConfig?
+    end
+
+    class GetTemplateSyncStatusOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?template_type: String,
+        ?template_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor template_type: String?
+      attr_accessor template_version: String?
+    end
+
+    class GetTemplateSyncStatusOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?latest_sync: Types::ResourceSyncAttempt,
+        ?latest_successful_sync: Types::ResourceSyncAttempt,
+        ?desired_state: Types::Revision,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor latest_sync: Types::ResourceSyncAttempt?
+      attr_accessor latest_successful_sync: Types::ResourceSyncAttempt?
+      attr_accessor desired_state: Types::Revision?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListComponentOutputsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_name: String,
+        ?next_token: String,
+        ?deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_name: String?
+      attr_accessor next_token: String?
+      attr_accessor deployment_id: String?
+    end
+
+    class ListComponentOutputsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?outputs: Array[Types::Output],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor outputs: Array[Types::Output]?
+    end
+
+    class ListComponentProvisionedResourcesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListComponentProvisionedResourcesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?provisioned_resources: Array[Types::ProvisionedResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor provisioned_resources: Array[Types::ProvisionedResource]?
+    end
+
+    class ListComponentsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?environment_name: String,
+        ?service_name: String,
+        ?service_instance_name: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor environment_name: String?
+      attr_accessor service_name: String?
+      attr_accessor service_instance_name: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListComponentsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?components: Array[Types::ComponentSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor components: Array[Types::ComponentSummary]?
+    end
+
+    class ListDeploymentsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?environment_name: String,
+        ?service_name: String,
+        ?service_instance_name: String,
+        ?component_name: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor environment_name: String?
+      attr_accessor service_name: String?
+      attr_accessor service_instance_name: String?
+      attr_accessor component_name: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDeploymentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?deployments: Array[Types::DeploymentSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor deployments: Array[Types::DeploymentSummary]?
+    end
+
+    class ListEnvironmentAccountConnectionsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?requested_by: String,
+        ?environment_name: String,
+        ?statuses: Array[String],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor requested_by: String?
+      attr_accessor environment_name: String?
+      attr_accessor statuses: Array[String]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEnvironmentAccountConnectionsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_account_connections: Array[Types::EnvironmentAccountConnectionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_account_connections: Array[Types::EnvironmentAccountConnectionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEnvironmentOutputsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_name: String,
+        ?next_token: String,
+        ?deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_name: String?
+      attr_accessor next_token: String?
+      attr_accessor deployment_id: String?
+    end
+
+    class ListEnvironmentOutputsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?outputs: Array[Types::Output],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor outputs: Array[Types::Output]?
+    end
+
+    class ListEnvironmentProvisionedResourcesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListEnvironmentProvisionedResourcesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?provisioned_resources: Array[Types::ProvisionedResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor provisioned_resources: Array[Types::ProvisionedResource]?
+    end
+
+    class ListEnvironmentTemplateVersionsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?template_name: String,
+        ?major_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor template_name: String?
+      attr_accessor major_version: String?
+    end
+
+    class ListEnvironmentTemplateVersionsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?template_versions: Array[Types::EnvironmentTemplateVersionSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor template_versions: Array[Types::EnvironmentTemplateVersionSummary]?
+    end
+
+    class ListEnvironmentTemplatesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEnvironmentTemplatesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?templates: Array[Types::EnvironmentTemplateSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor templates: Array[Types::EnvironmentTemplateSummary]?
+    end
+
+    class ListEnvironmentsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?environment_templates: Array[Types::EnvironmentTemplateFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor environment_templates: Array[Types::EnvironmentTemplateFilter]?
+    end
+
+    class ListEnvironmentsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?environments: Array[Types::EnvironmentSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor environments: Array[Types::EnvironmentSummary]?
+    end
+
+    class ListRepositoriesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListRepositoriesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?repositories: Array[Types::RepositorySummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor repositories: Array[Types::RepositorySummary]?
+    end
+
+    class ListRepositorySyncDefinitionsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?repository_provider: String,
+        ?sync_type: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor repository_provider: String?
+      attr_accessor sync_type: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListRepositorySyncDefinitionsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?sync_definitions: Array[Types::RepositorySyncDefinition],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor sync_definitions: Array[Types::RepositorySyncDefinition]?
+    end
+
+    class ListServiceInstanceOutputsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_instance_name: String,
+        ?service_name: String,
+        ?next_token: String,
+        ?deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_instance_name: String?
+      attr_accessor service_name: String?
+      attr_accessor next_token: String?
+      attr_accessor deployment_id: String?
+    end
+
+    class ListServiceInstanceOutputsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?outputs: Array[Types::Output],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor outputs: Array[Types::Output]?
+    end
+
+    class ListServiceInstanceProvisionedResourcesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?service_instance_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor service_instance_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceInstanceProvisionedResourcesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?provisioned_resources: Array[Types::ProvisionedResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor provisioned_resources: Array[Types::ProvisionedResource]?
+    end
+
+    class ListServiceInstancesFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class ListServiceInstancesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+        ?filters: Array[Types::ListServiceInstancesFilter],
+        ?sort_by: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor filters: Array[Types::ListServiceInstancesFilter]?
+      attr_accessor sort_by: String?
+      attr_accessor sort_order: String?
+    end
+
+    class ListServiceInstancesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?service_instances: Array[Types::ServiceInstanceSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor service_instances: Array[Types::ServiceInstanceSummary]?
+    end
+
+    class ListServicePipelineOutputsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?next_token: String,
+        ?deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor next_token: String?
+      attr_accessor deployment_id: String?
+    end
+
+    class ListServicePipelineOutputsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?outputs: Array[Types::Output],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor outputs: Array[Types::Output]?
+    end
+
+    class ListServicePipelineProvisionedResourcesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListServicePipelineProvisionedResourcesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?provisioned_resources: Array[Types::ProvisionedResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor provisioned_resources: Array[Types::ProvisionedResource]?
+    end
+
+    class ListServiceTemplateVersionsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?template_name: String,
+        ?major_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor template_name: String?
+      attr_accessor major_version: String?
+    end
+
+    class ListServiceTemplateVersionsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?template_versions: Array[Types::ServiceTemplateVersionSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor template_versions: Array[Types::ServiceTemplateVersionSummary]?
+    end
+
+    class ListServiceTemplatesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListServiceTemplatesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?templates: Array[Types::ServiceTemplateSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor templates: Array[Types::ServiceTemplateSummary]?
+    end
+
+    class ListServicesOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListServicesOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?services: Array[Types::ServiceSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor services: Array[Types::ServiceSummary]?
+    end
+
+    class ListTagsForResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListTagsForResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Array[Types::Tag],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor next_token: String?
+    end
+
+    class NotifyResourceDeploymentStatusChangeOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?status: String,
+        ?outputs: Array[Types::Output],
+        ?deployment_id: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor status: String?
+      attr_accessor outputs: Array[Types::Output]?
+      attr_accessor deployment_id: String?
+      attr_accessor status_message: String?
+    end
+
+    class NotifyResourceDeploymentStatusChangeOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class Output
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value_string: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value_string: String?
+    end
+
+    class ProvisionedResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?identifier: String,
+        ?provisioning_engine: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor identifier: String?
+      attr_accessor provisioning_engine: String?
+    end
+
+    class RejectEnvironmentAccountConnectionOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+    end
+
+    class RejectEnvironmentAccountConnectionOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_account_connection: Types::EnvironmentAccountConnection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_account_connection: Types::EnvironmentAccountConnection?
+    end
+
+    class Repository
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?provider: String,
+        ?name: String,
+        ?connection_arn: String,
+        ?encryption_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor provider: String?
+      attr_accessor name: String?
+      attr_accessor connection_arn: String?
+      attr_accessor encryption_key: String?
+    end
+
+    class RepositoryBranch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?provider: String,
+        ?name: String,
+        ?branch: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor provider: String?
+      attr_accessor name: String?
+      attr_accessor branch: String?
+    end
+
+    class RepositoryBranchInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?provider: String,
+        ?name: String,
+        ?branch: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor provider: String?
+      attr_accessor name: String?
+      attr_accessor branch: String?
+    end
+
+    class RepositorySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?provider: String,
+        ?name: String,
+        ?connection_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor provider: String?
+      attr_accessor name: String?
+      attr_accessor connection_arn: String?
+    end
+
+    class RepositorySyncAttempt
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?started_at: Time,
+        ?status: String,
+        ?events: Array[Types::RepositorySyncEvent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor started_at: Time?
+      attr_accessor status: String?
+      attr_accessor events: Array[Types::RepositorySyncEvent]?
+    end
+
+    class RepositorySyncDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target: String,
+        ?parent: String,
+        ?branch: String,
+        ?directory: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target: String?
+      attr_accessor parent: String?
+      attr_accessor branch: String?
+      attr_accessor directory: String?
+    end
+
+    class RepositorySyncEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?external_id: String,
+        ?time: Time,
+        ?event: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor external_id: String?
+      attr_accessor time: Time?
+      attr_accessor event: String?
+    end
+
+    class ResourceCountsSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total: Integer,
+        ?failed: Integer,
+        ?up_to_date: Integer,
+        ?behind_major: Integer,
+        ?behind_minor: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total: Integer?
+      attr_accessor failed: Integer?
+      attr_accessor up_to_date: Integer?
+      attr_accessor behind_major: Integer?
+      attr_accessor behind_minor: Integer?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceSyncAttempt
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?initial_revision: Types::Revision,
+        ?target_revision: Types::Revision,
+        ?target: String,
+        ?started_at: Time,
+        ?status: String,
+        ?events: Array[Types::ResourceSyncEvent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor initial_revision: Types::Revision?
+      attr_accessor target_revision: Types::Revision?
+      attr_accessor target: String?
+      attr_accessor started_at: Time?
+      attr_accessor status: String?
+      attr_accessor events: Array[Types::ResourceSyncEvent]?
+    end
+
+    class ResourceSyncEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?external_id: String,
+        ?time: Time,
+        ?event: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor external_id: String?
+      attr_accessor time: Time?
+      attr_accessor event: String?
+    end
+
+    class Revision
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?repository_name: String,
+        ?repository_provider: String,
+        ?sha: String,
+        ?directory: String,
+        ?branch: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor repository_name: String?
+      attr_accessor repository_provider: String?
+      attr_accessor sha: String?
+      attr_accessor directory: String?
+      attr_accessor branch: String?
+    end
+
+    class S3ObjectSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+    end
+
+    class Service
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?arn: String,
+        ?template_name: String,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+        ?status: String,
+        ?status_message: String,
+        ?spec: String,
+        ?pipeline: Types::ServicePipeline,
+        ?repository_connection_arn: String,
+        ?repository_id: String,
+        ?branch_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor arn: String?
+      attr_accessor template_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor spec: String?
+      attr_accessor pipeline: Types::ServicePipeline?
+      attr_accessor repository_connection_arn: String?
+      attr_accessor repository_id: String?
+      attr_accessor branch_name: String?
+    end
+
+    class ServiceInstance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?last_deployment_attempted_at: Time,
+        ?last_deployment_succeeded_at: Time,
+        ?service_name: String,
+        ?environment_name: String,
+        ?template_name: String,
+        ?template_major_version: String,
+        ?template_minor_version: String,
+        ?deployment_status: String,
+        ?deployment_status_message: String,
+        ?spec: String,
+        ?last_client_request_token: String,
+        ?last_attempted_deployment_id: String,
+        ?last_succeeded_deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_deployment_attempted_at: Time?
+      attr_accessor last_deployment_succeeded_at: Time?
+      attr_accessor service_name: String?
+      attr_accessor environment_name: String?
+      attr_accessor template_name: String?
+      attr_accessor template_major_version: String?
+      attr_accessor template_minor_version: String?
+      attr_accessor deployment_status: String?
+      attr_accessor deployment_status_message: String?
+      attr_accessor spec: String?
+      attr_accessor last_client_request_token: String?
+      attr_accessor last_attempted_deployment_id: String?
+      attr_accessor last_succeeded_deployment_id: String?
+    end
+
+    class ServiceInstanceState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?spec: String,
+        ?template_name: String,
+        ?template_major_version: String,
+        ?template_minor_version: String,
+        ?last_successful_component_deployment_ids: Array[String],
+        ?last_successful_environment_deployment_id: String,
+        ?last_successful_service_pipeline_deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spec: String?
+      attr_accessor template_name: String?
+      attr_accessor template_major_version: String?
+      attr_accessor template_minor_version: String?
+      attr_accessor last_successful_component_deployment_ids: Array[String]?
+      attr_accessor last_successful_environment_deployment_id: String?
+      attr_accessor last_successful_service_pipeline_deployment_id: String?
+    end
+
+    class ServiceInstanceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?last_deployment_attempted_at: Time,
+        ?last_deployment_succeeded_at: Time,
+        ?service_name: String,
+        ?environment_name: String,
+        ?template_name: String,
+        ?template_major_version: String,
+        ?template_minor_version: String,
+        ?deployment_status: String,
+        ?deployment_status_message: String,
+        ?last_attempted_deployment_id: String,
+        ?last_succeeded_deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_deployment_attempted_at: Time?
+      attr_accessor last_deployment_succeeded_at: Time?
+      attr_accessor service_name: String?
+      attr_accessor environment_name: String?
+      attr_accessor template_name: String?
+      attr_accessor template_major_version: String?
+      attr_accessor template_minor_version: String?
+      attr_accessor deployment_status: String?
+      attr_accessor deployment_status_message: String?
+      attr_accessor last_attempted_deployment_id: String?
+      attr_accessor last_succeeded_deployment_id: String?
+    end
+
+    class ServicePipeline
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?created_at: Time,
+        ?last_deployment_attempted_at: Time,
+        ?last_deployment_succeeded_at: Time,
+        ?template_name: String,
+        ?template_major_version: String,
+        ?template_minor_version: String,
+        ?deployment_status: String,
+        ?deployment_status_message: String,
+        ?spec: String,
+        ?last_attempted_deployment_id: String,
+        ?last_succeeded_deployment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_deployment_attempted_at: Time?
+      attr_accessor last_deployment_succeeded_at: Time?
+      attr_accessor template_name: String?
+      attr_accessor template_major_version: String?
+      attr_accessor template_minor_version: String?
+      attr_accessor deployment_status: String?
+      attr_accessor deployment_status_message: String?
+      attr_accessor spec: String?
+      attr_accessor last_attempted_deployment_id: String?
+      attr_accessor last_succeeded_deployment_id: String?
+    end
+
+    class ServicePipelineState
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?spec: String,
+        ?template_name: String,
+        ?template_major_version: String,
+        ?template_minor_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spec: String?
+      attr_accessor template_name: String?
+      attr_accessor template_major_version: String?
+      attr_accessor template_minor_version: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ServiceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?arn: String,
+        ?template_name: String,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor arn: String?
+      attr_accessor template_name: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    class ServiceSyncBlockerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?service_instance_name: String,
+        ?latest_blockers: Array[Types::SyncBlocker],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor service_instance_name: String?
+      attr_accessor latest_blockers: Array[Types::SyncBlocker]?
+    end
+
+    class ServiceSyncConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?repository_provider: String,
+        ?repository_name: String,
+        ?branch: String,
+        ?file_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor repository_provider: String?
+      attr_accessor repository_name: String?
+      attr_accessor branch: String?
+      attr_accessor file_path: String?
+    end
+
+    class ServiceTemplate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+        ?display_name: String,
+        ?description: String,
+        ?recommended_version: String,
+        ?encryption_key: String,
+        ?pipeline_provisioning: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor recommended_version: String?
+      attr_accessor encryption_key: String?
+      attr_accessor pipeline_provisioning: String?
+    end
+
+    class ServiceTemplateSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+        ?display_name: String,
+        ?description: String,
+        ?recommended_version: String,
+        ?pipeline_provisioning: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+      attr_accessor recommended_version: String?
+      attr_accessor pipeline_provisioning: String?
+    end
+
+    class ServiceTemplateVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?major_version: String,
+        ?minor_version: String,
+        ?recommended_minor_version: String,
+        ?status: String,
+        ?status_message: String,
+        ?description: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+        ?compatible_environment_templates: Array[Types::CompatibleEnvironmentTemplate],
+        ?schema: String,
+        ?supported_component_sources: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor major_version: String?
+      attr_accessor minor_version: String?
+      attr_accessor recommended_minor_version: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor description: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+      attr_accessor compatible_environment_templates: Array[Types::CompatibleEnvironmentTemplate]?
+      attr_accessor schema: String?
+      attr_accessor supported_component_sources: Array[String]?
+    end
+
+    class ServiceTemplateVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?major_version: String,
+        ?minor_version: String,
+        ?recommended_minor_version: String,
+        ?status: String,
+        ?status_message: String,
+        ?description: String,
+        ?arn: String,
+        ?created_at: Time,
+        ?last_modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor major_version: String?
+      attr_accessor minor_version: String?
+      attr_accessor recommended_minor_version: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+      attr_accessor description: String?
+      attr_accessor arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor last_modified_at: Time?
+    end
+
+    class SyncBlocker
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+        ?status: String,
+        ?created_reason: String,
+        ?created_at: Time,
+        ?contexts: Array[Types::SyncBlockerContext],
+        ?resolved_reason: String,
+        ?resolved_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor created_reason: String?
+      attr_accessor created_at: Time?
+      attr_accessor contexts: Array[Types::SyncBlockerContext]?
+      attr_accessor resolved_reason: String?
+      attr_accessor resolved_at: Time?
+    end
+
+    class SyncBlockerContext
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class Tag
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class TagResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class TagResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TemplateSyncConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?template_type: String,
+        ?repository_provider: String,
+        ?repository_name: String,
+        ?branch: String,
+        ?subdirectory: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor template_type: String?
+      attr_accessor repository_provider: String?
+      attr_accessor repository_name: String?
+      attr_accessor branch: String?
+      attr_accessor subdirectory: String?
+    end
+
+    class TemplateVersionSourceInput
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3: Types::S3ObjectSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3: Types::S3ObjectSource?
+
+      class S3 < TemplateVersionSourceInput
+      end
+      class Unknown < TemplateVersionSourceInput
+      end
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateAccountSettingsOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline_service_role_arn: String,
+        ?pipeline_provisioning_repository: Types::RepositoryBranchInput,
+        ?delete_pipeline_provisioning_repository: bool,
+        ?pipeline_codebuild_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline_service_role_arn: String?
+      attr_accessor pipeline_provisioning_repository: Types::RepositoryBranchInput?
+      attr_accessor delete_pipeline_provisioning_repository: bool?
+      attr_accessor pipeline_codebuild_role_arn: String?
+    end
+
+    class UpdateAccountSettingsOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_settings: Types::AccountSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_settings: Types::AccountSettings?
+    end
+
+    class UpdateComponentOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?deployment_type: String,
+        ?description: String,
+        ?service_name: String,
+        ?service_instance_name: String,
+        ?service_spec: String,
+        ?template_file: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor deployment_type: String?
+      attr_accessor description: String?
+      attr_accessor service_name: String?
+      attr_accessor service_instance_name: String?
+      attr_accessor service_spec: String?
+      attr_accessor template_file: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateComponentOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?component: Types::Component,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor component: Types::Component?
+    end
+
+    class UpdateEnvironmentAccountConnectionOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?role_arn: String,
+        ?component_role_arn: String,
+        ?codebuild_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor role_arn: String?
+      attr_accessor component_role_arn: String?
+      attr_accessor codebuild_role_arn: String?
+    end
+
+    class UpdateEnvironmentAccountConnectionOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_account_connection: Types::EnvironmentAccountConnection,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_account_connection: Types::EnvironmentAccountConnection?
+    end
+
+    class UpdateEnvironmentOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?spec: String,
+        ?template_major_version: String,
+        ?template_minor_version: String,
+        ?proton_service_role_arn: String,
+        ?deployment_type: String,
+        ?environment_account_connection_id: String,
+        ?provisioning_repository: Types::RepositoryBranchInput,
+        ?component_role_arn: String,
+        ?codebuild_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor spec: String?
+      attr_accessor template_major_version: String?
+      attr_accessor template_minor_version: String?
+      attr_accessor proton_service_role_arn: String?
+      attr_accessor deployment_type: String?
+      attr_accessor environment_account_connection_id: String?
+      attr_accessor provisioning_repository: Types::RepositoryBranchInput?
+      attr_accessor component_role_arn: String?
+      attr_accessor codebuild_role_arn: String?
+    end
+
+    class UpdateEnvironmentOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment: Types::Environment,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment: Types::Environment?
+    end
+
+    class UpdateEnvironmentTemplateOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?display_name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateEnvironmentTemplateOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_template: Types::EnvironmentTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_template: Types::EnvironmentTemplate?
+    end
+
+    class UpdateEnvironmentTemplateVersionOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?major_version: String,
+        ?minor_version: String,
+        ?description: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor major_version: String?
+      attr_accessor minor_version: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateEnvironmentTemplateVersionOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_template_version: Types::EnvironmentTemplateVersion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_template_version: Types::EnvironmentTemplateVersion?
+    end
+
+    class UpdateServiceInstanceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?service_name: String,
+        ?deployment_type: String,
+        ?spec: String,
+        ?template_major_version: String,
+        ?template_minor_version: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor service_name: String?
+      attr_accessor deployment_type: String?
+      attr_accessor spec: String?
+      attr_accessor template_major_version: String?
+      attr_accessor template_minor_version: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateServiceInstanceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_instance: Types::ServiceInstance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_instance: Types::ServiceInstance?
+    end
+
+    class UpdateServiceOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?spec: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor spec: String?
+    end
+
+    class UpdateServiceOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service: Types::Service,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service: Types::Service?
+    end
+
+    class UpdateServicePipelineOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?spec: String,
+        ?deployment_type: String,
+        ?template_major_version: String,
+        ?template_minor_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor spec: String?
+      attr_accessor deployment_type: String?
+      attr_accessor template_major_version: String?
+      attr_accessor template_minor_version: String?
+    end
+
+    class UpdateServicePipelineOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pipeline: Types::ServicePipeline,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pipeline: Types::ServicePipeline?
+    end
+
+    class UpdateServiceSyncBlockerOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?resolved_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor resolved_reason: String?
+    end
+
+    class UpdateServiceSyncBlockerOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?service_instance_name: String,
+        ?service_sync_blocker: Types::SyncBlocker,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor service_instance_name: String?
+      attr_accessor service_sync_blocker: Types::SyncBlocker?
+    end
+
+    class UpdateServiceSyncConfigOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_name: String,
+        ?repository_provider: String,
+        ?repository_name: String,
+        ?branch: String,
+        ?file_path: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_name: String?
+      attr_accessor repository_provider: String?
+      attr_accessor repository_name: String?
+      attr_accessor branch: String?
+      attr_accessor file_path: String?
+    end
+
+    class UpdateServiceSyncConfigOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_sync_config: Types::ServiceSyncConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_sync_config: Types::ServiceSyncConfig?
+    end
+
+    class UpdateServiceTemplateOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?display_name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor display_name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateServiceTemplateOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_template: Types::ServiceTemplate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_template: Types::ServiceTemplate?
+    end
+
+    class UpdateServiceTemplateVersionOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?major_version: String,
+        ?minor_version: String,
+        ?description: String,
+        ?status: String,
+        ?compatible_environment_templates: Array[Types::CompatibleEnvironmentTemplateInput],
+        ?supported_component_sources: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor major_version: String?
+      attr_accessor minor_version: String?
+      attr_accessor description: String?
+      attr_accessor status: String?
+      attr_accessor compatible_environment_templates: Array[Types::CompatibleEnvironmentTemplateInput]?
+      attr_accessor supported_component_sources: Array[String]?
+    end
+
+    class UpdateServiceTemplateVersionOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_template_version: Types::ServiceTemplateVersion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_template_version: Types::ServiceTemplateVersion?
+    end
+
+    class UpdateTemplateSyncConfigOperationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_name: String,
+        ?template_type: String,
+        ?repository_provider: String,
+        ?repository_name: String,
+        ?branch: String,
+        ?subdirectory: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_name: String?
+      attr_accessor template_type: String?
+      attr_accessor repository_provider: String?
+      attr_accessor repository_name: String?
+      attr_accessor branch: String?
+      attr_accessor subdirectory: String?
+    end
+
+    class UpdateTemplateSyncConfigOperationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_sync_config: Types::TemplateSyncConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_sync_config: Types::TemplateSyncConfig?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

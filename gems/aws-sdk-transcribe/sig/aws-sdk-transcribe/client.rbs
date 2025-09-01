@@ -1,0 +1,769 @@
+module Aws::Transcribe
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Transcribe::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateCallAnalyticsCategoryResponse
+      include Smithy::Client::_Response[Types::CreateCallAnalyticsCategoryResponse]
+      def category_properties: () -> Types::CategoryProperties?
+    end
+    def create_call_analytics_category: (
+      ?category_name: String,
+      ?rules: Array[
+        {
+          non_talk_time_filter: {
+            threshold: Integer,
+            absolute_time_range: {
+              start_time: untyped,
+              end_time: untyped,
+              first: untyped,
+              last: untyped
+            },
+            relative_time_range: {
+              start_percentage: Integer,
+              end_percentage: untyped,
+              first: untyped,
+              last: untyped
+            },
+            negate: bool
+          },
+          interruption_filter: {
+            threshold: untyped,
+            participant_role: String,
+            absolute_time_range: untyped,
+            relative_time_range: untyped,
+            negate: untyped
+          },
+          transcript_filter: {
+            transcript_filter_type: String,
+            absolute_time_range: untyped,
+            relative_time_range: untyped,
+            participant_role: untyped,
+            negate: untyped,
+            targets: Array[String]
+          },
+          sentiment_filter: {
+            sentiments: Array[String],
+            absolute_time_range: untyped,
+            relative_time_range: untyped,
+            participant_role: untyped,
+            negate: untyped
+          }
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?input_type: String
+    ) -> _CreateCallAnalyticsCategoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCallAnalyticsCategoryResponse
+
+    interface _CreateLanguageModelResponse
+      include Smithy::Client::_Response[Types::CreateLanguageModelResponse]
+      def language_code: () -> String?
+      def base_model_name: () -> String?
+      def model_name: () -> String?
+      def input_data_config: () -> Types::InputDataConfig?
+      def model_status: () -> String?
+    end
+    def create_language_model: (
+      ?language_code: String,
+      ?base_model_name: String,
+      ?model_name: String,
+      ?input_data_config: {
+        s3_uri: String,
+        tuning_data_s3_uri: untyped,
+        data_access_role_arn: String
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateLanguageModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLanguageModelResponse
+
+    interface _CreateMedicalVocabularyResponse
+      include Smithy::Client::_Response[Types::CreateMedicalVocabularyResponse]
+      def vocabulary_name: () -> String?
+      def language_code: () -> String?
+      def vocabulary_state: () -> String?
+      def last_modified_time: () -> Time?
+      def failure_reason: () -> String?
+    end
+    def create_medical_vocabulary: (
+      ?vocabulary_name: String,
+      ?language_code: String,
+      ?vocabulary_file_uri: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateMedicalVocabularyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateMedicalVocabularyResponse
+
+    interface _CreateVocabularyResponse
+      include Smithy::Client::_Response[Types::CreateVocabularyResponse]
+      def vocabulary_name: () -> String?
+      def language_code: () -> String?
+      def vocabulary_state: () -> String?
+      def last_modified_time: () -> Time?
+      def failure_reason: () -> String?
+    end
+    def create_vocabulary: (
+      ?vocabulary_name: String,
+      ?language_code: String,
+      ?phrases: Array[String],
+      ?vocabulary_file_uri: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?data_access_role_arn: String
+    ) -> _CreateVocabularyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVocabularyResponse
+
+    interface _CreateVocabularyFilterResponse
+      include Smithy::Client::_Response[Types::CreateVocabularyFilterResponse]
+      def vocabulary_filter_name: () -> String?
+      def language_code: () -> String?
+      def last_modified_time: () -> Time?
+    end
+    def create_vocabulary_filter: (
+      ?vocabulary_filter_name: String,
+      ?language_code: String,
+      ?words: Array[String],
+      ?vocabulary_filter_file_uri: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?data_access_role_arn: String
+    ) -> _CreateVocabularyFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVocabularyFilterResponse
+
+    interface _DeleteCallAnalyticsCategoryResponse
+      include Smithy::Client::_Response[Types::DeleteCallAnalyticsCategoryResponse]
+    end
+    def delete_call_analytics_category: (
+      ?category_name: String
+    ) -> _DeleteCallAnalyticsCategoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCallAnalyticsCategoryResponse
+
+    interface _DeleteCallAnalyticsJobResponse
+      include Smithy::Client::_Response[Types::DeleteCallAnalyticsJobResponse]
+    end
+    def delete_call_analytics_job: (
+      ?call_analytics_job_name: String
+    ) -> _DeleteCallAnalyticsJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCallAnalyticsJobResponse
+
+    interface _DeleteLanguageModelResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_language_model: (
+      ?model_name: String
+    ) -> _DeleteLanguageModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLanguageModelResponse
+
+    interface _DeleteMedicalScribeJobResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_medical_scribe_job: (
+      ?medical_scribe_job_name: String
+    ) -> _DeleteMedicalScribeJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMedicalScribeJobResponse
+
+    interface _DeleteMedicalTranscriptionJobResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_medical_transcription_job: (
+      ?medical_transcription_job_name: String
+    ) -> _DeleteMedicalTranscriptionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMedicalTranscriptionJobResponse
+
+    interface _DeleteMedicalVocabularyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_medical_vocabulary: (
+      ?vocabulary_name: String
+    ) -> _DeleteMedicalVocabularyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteMedicalVocabularyResponse
+
+    interface _DeleteTranscriptionJobResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_transcription_job: (
+      ?transcription_job_name: String
+    ) -> _DeleteTranscriptionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTranscriptionJobResponse
+
+    interface _DeleteVocabularyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_vocabulary: (
+      ?vocabulary_name: String
+    ) -> _DeleteVocabularyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVocabularyResponse
+
+    interface _DeleteVocabularyFilterResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_vocabulary_filter: (
+      ?vocabulary_filter_name: String
+    ) -> _DeleteVocabularyFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteVocabularyFilterResponse
+
+    interface _DescribeLanguageModelResponse
+      include Smithy::Client::_Response[Types::DescribeLanguageModelResponse]
+      def language_model: () -> Types::LanguageModel?
+    end
+    def describe_language_model: (
+      ?model_name: String
+    ) -> _DescribeLanguageModelResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeLanguageModelResponse
+
+    interface _GetCallAnalyticsCategoryResponse
+      include Smithy::Client::_Response[Types::GetCallAnalyticsCategoryResponse]
+      def category_properties: () -> Types::CategoryProperties?
+    end
+    def get_call_analytics_category: (
+      ?category_name: String
+    ) -> _GetCallAnalyticsCategoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCallAnalyticsCategoryResponse
+
+    interface _GetCallAnalyticsJobResponse
+      include Smithy::Client::_Response[Types::GetCallAnalyticsJobResponse]
+      def call_analytics_job: () -> Types::CallAnalyticsJob?
+    end
+    def get_call_analytics_job: (
+      ?call_analytics_job_name: String
+    ) -> _GetCallAnalyticsJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCallAnalyticsJobResponse
+
+    interface _GetMedicalScribeJobResponse
+      include Smithy::Client::_Response[Types::GetMedicalScribeJobResponse]
+      def medical_scribe_job: () -> Types::MedicalScribeJob?
+    end
+    def get_medical_scribe_job: (
+      ?medical_scribe_job_name: String
+    ) -> _GetMedicalScribeJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMedicalScribeJobResponse
+
+    interface _GetMedicalTranscriptionJobResponse
+      include Smithy::Client::_Response[Types::GetMedicalTranscriptionJobResponse]
+      def medical_transcription_job: () -> Types::MedicalTranscriptionJob?
+    end
+    def get_medical_transcription_job: (
+      ?medical_transcription_job_name: String
+    ) -> _GetMedicalTranscriptionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMedicalTranscriptionJobResponse
+
+    interface _GetMedicalVocabularyResponse
+      include Smithy::Client::_Response[Types::GetMedicalVocabularyResponse]
+      def vocabulary_name: () -> String?
+      def language_code: () -> String?
+      def vocabulary_state: () -> String?
+      def last_modified_time: () -> Time?
+      def failure_reason: () -> String?
+      def download_uri: () -> String?
+    end
+    def get_medical_vocabulary: (
+      ?vocabulary_name: String
+    ) -> _GetMedicalVocabularyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMedicalVocabularyResponse
+
+    interface _GetTranscriptionJobResponse
+      include Smithy::Client::_Response[Types::GetTranscriptionJobResponse]
+      def transcription_job: () -> Types::TranscriptionJob?
+    end
+    def get_transcription_job: (
+      ?transcription_job_name: String
+    ) -> _GetTranscriptionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTranscriptionJobResponse
+
+    interface _GetVocabularyResponse
+      include Smithy::Client::_Response[Types::GetVocabularyResponse]
+      def vocabulary_name: () -> String?
+      def language_code: () -> String?
+      def vocabulary_state: () -> String?
+      def last_modified_time: () -> Time?
+      def failure_reason: () -> String?
+      def download_uri: () -> String?
+    end
+    def get_vocabulary: (
+      ?vocabulary_name: String
+    ) -> _GetVocabularyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVocabularyResponse
+
+    interface _GetVocabularyFilterResponse
+      include Smithy::Client::_Response[Types::GetVocabularyFilterResponse]
+      def vocabulary_filter_name: () -> String?
+      def language_code: () -> String?
+      def last_modified_time: () -> Time?
+      def download_uri: () -> String?
+    end
+    def get_vocabulary_filter: (
+      ?vocabulary_filter_name: String
+    ) -> _GetVocabularyFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVocabularyFilterResponse
+
+    interface _ListCallAnalyticsCategoriesResponse
+      include Smithy::Client::_Response[Types::ListCallAnalyticsCategoriesResponse]
+      def next_token: () -> String?
+      def categories: () -> Array[Types::CategoryProperties]?
+    end
+    def list_call_analytics_categories: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCallAnalyticsCategoriesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCallAnalyticsCategoriesResponse
+
+    interface _ListCallAnalyticsJobsResponse
+      include Smithy::Client::_Response[Types::ListCallAnalyticsJobsResponse]
+      def status: () -> String?
+      def next_token: () -> String?
+      def call_analytics_job_summaries: () -> Array[Types::CallAnalyticsJobSummary]?
+    end
+    def list_call_analytics_jobs: (
+      ?status: String,
+      ?job_name_contains: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCallAnalyticsJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCallAnalyticsJobsResponse
+
+    interface _ListLanguageModelsResponse
+      include Smithy::Client::_Response[Types::ListLanguageModelsResponse]
+      def next_token: () -> String?
+      def models: () -> Array[Types::LanguageModel]?
+    end
+    def list_language_models: (
+      ?status_equals: String,
+      ?name_contains: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListLanguageModelsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListLanguageModelsResponse
+
+    interface _ListMedicalScribeJobsResponse
+      include Smithy::Client::_Response[Types::ListMedicalScribeJobsResponse]
+      def status: () -> String?
+      def next_token: () -> String?
+      def medical_scribe_job_summaries: () -> Array[Types::MedicalScribeJobSummary]?
+    end
+    def list_medical_scribe_jobs: (
+      ?status: String,
+      ?job_name_contains: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMedicalScribeJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMedicalScribeJobsResponse
+
+    interface _ListMedicalTranscriptionJobsResponse
+      include Smithy::Client::_Response[Types::ListMedicalTranscriptionJobsResponse]
+      def status: () -> String?
+      def next_token: () -> String?
+      def medical_transcription_job_summaries: () -> Array[Types::MedicalTranscriptionJobSummary]?
+    end
+    def list_medical_transcription_jobs: (
+      ?status: String,
+      ?job_name_contains: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListMedicalTranscriptionJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMedicalTranscriptionJobsResponse
+
+    interface _ListMedicalVocabulariesResponse
+      include Smithy::Client::_Response[Types::ListMedicalVocabulariesResponse]
+      def status: () -> String?
+      def next_token: () -> String?
+      def vocabularies: () -> Array[Types::VocabularyInfo]?
+    end
+    def list_medical_vocabularies: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?state_equals: String,
+      ?name_contains: String
+    ) -> _ListMedicalVocabulariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMedicalVocabulariesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def resource_arn: () -> String?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTranscriptionJobsResponse
+      include Smithy::Client::_Response[Types::ListTranscriptionJobsResponse]
+      def status: () -> String?
+      def next_token: () -> String?
+      def transcription_job_summaries: () -> Array[Types::TranscriptionJobSummary]?
+    end
+    def list_transcription_jobs: (
+      ?status: String,
+      ?job_name_contains: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTranscriptionJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTranscriptionJobsResponse
+
+    interface _ListVocabulariesResponse
+      include Smithy::Client::_Response[Types::ListVocabulariesResponse]
+      def status: () -> String?
+      def next_token: () -> String?
+      def vocabularies: () -> Array[Types::VocabularyInfo]?
+    end
+    def list_vocabularies: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?state_equals: String,
+      ?name_contains: String
+    ) -> _ListVocabulariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVocabulariesResponse
+
+    interface _ListVocabularyFiltersResponse
+      include Smithy::Client::_Response[Types::ListVocabularyFiltersResponse]
+      def next_token: () -> String?
+      def vocabulary_filters: () -> Array[Types::VocabularyFilterInfo]?
+    end
+    def list_vocabulary_filters: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?name_contains: String
+    ) -> _ListVocabularyFiltersResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVocabularyFiltersResponse
+
+    interface _StartCallAnalyticsJobResponse
+      include Smithy::Client::_Response[Types::StartCallAnalyticsJobResponse]
+      def call_analytics_job: () -> Types::CallAnalyticsJob?
+    end
+    def start_call_analytics_job: (
+      ?call_analytics_job_name: String,
+      ?media: {
+        media_file_uri: String,
+        redacted_media_file_uri: untyped
+      },
+      ?output_location: String,
+      ?output_encryption_kms_key_id: String,
+      ?data_access_role_arn: String,
+      ?settings: {
+        vocabulary_name: String,
+        vocabulary_filter_name: String,
+        vocabulary_filter_method: String,
+        language_model_name: String,
+        content_redaction: {
+          redaction_type: String,
+          redaction_output: String,
+          pii_entity_types: Array[String]
+        },
+        language_options: Array[String],
+        language_id_settings: Hash[String,
+          {
+            vocabulary_name: untyped,
+            vocabulary_filter_name: untyped,
+            language_model_name: untyped
+          }
+        ],
+        summarization: {
+          generate_abstractive_summary: bool
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?channel_definitions: Array[
+        {
+          channel_id: Integer,
+          participant_role: String
+        }
+      ]
+    ) -> _StartCallAnalyticsJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCallAnalyticsJobResponse
+
+    interface _StartMedicalScribeJobResponse
+      include Smithy::Client::_Response[Types::StartMedicalScribeJobResponse]
+      def medical_scribe_job: () -> Types::MedicalScribeJob?
+    end
+    def start_medical_scribe_job: (
+      ?medical_scribe_job_name: String,
+      ?media: {
+        media_file_uri: String,
+        redacted_media_file_uri: untyped
+      },
+      ?output_bucket_name: String,
+      ?output_encryption_kms_key_id: String,
+      ?kms_encryption_context: Hash[String, String],
+      ?data_access_role_arn: String,
+      ?settings: {
+        show_speaker_labels: bool,
+        max_speaker_labels: Integer,
+        channel_identification: untyped,
+        vocabulary_name: String,
+        vocabulary_filter_name: String,
+        vocabulary_filter_method: String,
+        clinical_note_generation_settings: {
+          note_template: String
+        }
+      },
+      ?channel_definitions: Array[
+        {
+          channel_id: Integer,
+          participant_role: String
+        }
+      ],
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?medical_scribe_context: {
+        patient_context: {
+          pronouns: String
+        }
+      }
+    ) -> _StartMedicalScribeJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMedicalScribeJobResponse
+
+    interface _StartMedicalTranscriptionJobResponse
+      include Smithy::Client::_Response[Types::StartMedicalTranscriptionJobResponse]
+      def medical_transcription_job: () -> Types::MedicalTranscriptionJob?
+    end
+    def start_medical_transcription_job: (
+      ?medical_transcription_job_name: String,
+      ?language_code: String,
+      ?media_sample_rate_hertz: Integer,
+      ?media_format: String,
+      ?media: {
+        media_file_uri: String,
+        redacted_media_file_uri: untyped
+      },
+      ?output_bucket_name: String,
+      ?output_key: String,
+      ?output_encryption_kms_key_id: String,
+      ?kms_encryption_context: Hash[String, String],
+      ?settings: {
+        show_speaker_labels: bool,
+        max_speaker_labels: Integer,
+        channel_identification: untyped,
+        show_alternatives: untyped,
+        max_alternatives: Integer,
+        vocabulary_name: String
+      },
+      ?content_identification_type: String,
+      ?specialty: String,
+      ?type: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _StartMedicalTranscriptionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMedicalTranscriptionJobResponse
+
+    interface _StartTranscriptionJobResponse
+      include Smithy::Client::_Response[Types::StartTranscriptionJobResponse]
+      def transcription_job: () -> Types::TranscriptionJob?
+    end
+    def start_transcription_job: (
+      ?transcription_job_name: String,
+      ?language_code: String,
+      ?media_sample_rate_hertz: Integer,
+      ?media_format: String,
+      ?media: {
+        media_file_uri: String,
+        redacted_media_file_uri: untyped
+      },
+      ?output_bucket_name: String,
+      ?output_key: String,
+      ?output_encryption_kms_key_id: String,
+      ?kms_encryption_context: Hash[String, String],
+      ?settings: {
+        vocabulary_name: String,
+        show_speaker_labels: bool,
+        max_speaker_labels: Integer,
+        channel_identification: untyped,
+        show_alternatives: untyped,
+        max_alternatives: Integer,
+        vocabulary_filter_name: String,
+        vocabulary_filter_method: String
+      },
+      ?model_settings: {
+        language_model_name: String
+      },
+      ?job_execution_settings: {
+        allow_deferred_execution: bool,
+        data_access_role_arn: String
+      },
+      ?content_redaction: {
+        redaction_type: String,
+        redaction_output: String,
+        pii_entity_types: Array[String]
+      },
+      ?identify_language: bool,
+      ?identify_multiple_languages: bool,
+      ?language_options: Array[String],
+      ?subtitles: {
+        formats: Array[String],
+        output_start_index: Integer
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?language_id_settings: Hash[String,
+        {
+          vocabulary_name: String,
+          vocabulary_filter_name: String,
+          language_model_name: String
+        }
+      ],
+      ?toxicity_detection: Array[
+        {
+          toxicity_categories: Array[String]
+        }
+      ]
+    ) -> _StartTranscriptionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartTranscriptionJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateCallAnalyticsCategoryResponse
+      include Smithy::Client::_Response[Types::UpdateCallAnalyticsCategoryResponse]
+      def category_properties: () -> Types::CategoryProperties?
+    end
+    def update_call_analytics_category: (
+      ?category_name: String,
+      ?rules: Array[
+        {
+          non_talk_time_filter: {
+            threshold: Integer,
+            absolute_time_range: {
+              start_time: untyped,
+              end_time: untyped,
+              first: untyped,
+              last: untyped
+            },
+            relative_time_range: {
+              start_percentage: Integer,
+              end_percentage: untyped,
+              first: untyped,
+              last: untyped
+            },
+            negate: bool
+          },
+          interruption_filter: {
+            threshold: untyped,
+            participant_role: String,
+            absolute_time_range: untyped,
+            relative_time_range: untyped,
+            negate: untyped
+          },
+          transcript_filter: {
+            transcript_filter_type: String,
+            absolute_time_range: untyped,
+            relative_time_range: untyped,
+            participant_role: untyped,
+            negate: untyped,
+            targets: Array[String]
+          },
+          sentiment_filter: {
+            sentiments: Array[String],
+            absolute_time_range: untyped,
+            relative_time_range: untyped,
+            participant_role: untyped,
+            negate: untyped
+          }
+        }
+      ],
+      ?input_type: String
+    ) -> _UpdateCallAnalyticsCategoryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCallAnalyticsCategoryResponse
+
+    interface _UpdateMedicalVocabularyResponse
+      include Smithy::Client::_Response[Types::UpdateMedicalVocabularyResponse]
+      def vocabulary_name: () -> String?
+      def language_code: () -> String?
+      def last_modified_time: () -> Time?
+      def vocabulary_state: () -> String?
+    end
+    def update_medical_vocabulary: (
+      ?vocabulary_name: String,
+      ?language_code: String,
+      ?vocabulary_file_uri: String
+    ) -> _UpdateMedicalVocabularyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateMedicalVocabularyResponse
+
+    interface _UpdateVocabularyResponse
+      include Smithy::Client::_Response[Types::UpdateVocabularyResponse]
+      def vocabulary_name: () -> String?
+      def language_code: () -> String?
+      def last_modified_time: () -> Time?
+      def vocabulary_state: () -> String?
+    end
+    def update_vocabulary: (
+      ?vocabulary_name: String,
+      ?language_code: String,
+      ?phrases: Array[String],
+      ?vocabulary_file_uri: String,
+      ?data_access_role_arn: String
+    ) -> _UpdateVocabularyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVocabularyResponse
+
+    interface _UpdateVocabularyFilterResponse
+      include Smithy::Client::_Response[Types::UpdateVocabularyFilterResponse]
+      def vocabulary_filter_name: () -> String?
+      def language_code: () -> String?
+      def last_modified_time: () -> Time?
+    end
+    def update_vocabulary_filter: (
+      ?vocabulary_filter_name: String,
+      ?words: Array[String],
+      ?vocabulary_filter_file_uri: String,
+      ?data_access_role_arn: String
+    ) -> _UpdateVocabularyFilterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVocabularyFilterResponse
+  end
+end

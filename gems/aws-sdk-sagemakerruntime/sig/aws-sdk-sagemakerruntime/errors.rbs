@@ -1,0 +1,32 @@
+module Aws::SageMakerRuntime
+  module Errors
+    class InternalDependencyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalFailure < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InternalStreamFailure < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ModelError < Smithy::Client::ServiceError
+      def message: () -> String?
+      def original_status_code: () -> Integer?
+      def original_message: () -> String?
+      def log_stream_arn: () -> String?
+    end
+    class ModelNotReadyException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ModelStreamError < Smithy::Client::ServiceError
+      def message: () -> String?
+      def error_code: () -> String?
+    end
+    class ServiceUnavailable < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ValidationError < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

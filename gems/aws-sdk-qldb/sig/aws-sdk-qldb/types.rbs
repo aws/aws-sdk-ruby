@@ -1,0 +1,824 @@
+module Aws::QLDB
+  module Types
+
+    class CancelJournalKinesisStreamRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ledger_name: String,
+        ?stream_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ledger_name: String?
+      attr_accessor stream_id: String?
+    end
+
+    class CancelJournalKinesisStreamResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_id: String?
+    end
+
+    class CreateLedgerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?tags: Hash[String, String?],
+        ?permissions_mode: String,
+        ?deletion_protection: bool,
+        ?kms_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String?]?
+      attr_accessor permissions_mode: String?
+      attr_accessor deletion_protection: bool?
+      attr_accessor kms_key: String?
+    end
+
+    class CreateLedgerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?state: String,
+        ?creation_date_time: Time,
+        ?permissions_mode: String,
+        ?deletion_protection: bool,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor state: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor permissions_mode: String?
+      attr_accessor deletion_protection: bool?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class DeleteLedgerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DescribeJournalKinesisStreamRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ledger_name: String,
+        ?stream_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ledger_name: String?
+      attr_accessor stream_id: String?
+    end
+
+    class DescribeJournalKinesisStreamResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream: Types::JournalKinesisStreamDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream: Types::JournalKinesisStreamDescription?
+    end
+
+    class DescribeJournalS3ExportRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?export_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor export_id: String?
+    end
+
+    class DescribeJournalS3ExportResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_description: Types::JournalS3ExportDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_description: Types::JournalS3ExportDescription?
+    end
+
+    class DescribeLedgerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DescribeLedgerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?state: String,
+        ?creation_date_time: Time,
+        ?permissions_mode: String,
+        ?deletion_protection: bool,
+        ?encryption_description: Types::LedgerEncryptionDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor state: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor permissions_mode: String?
+      attr_accessor deletion_protection: bool?
+      attr_accessor encryption_description: Types::LedgerEncryptionDescription?
+    end
+
+    module EncryptionStatus
+      ENABLED: String
+      UPDATING: String
+      KMS_KEY_INACCESSIBLE: String
+    end
+
+    module ErrorCause
+      KINESIS_STREAM_NOT_FOUND: String
+      IAM_PERMISSION_REVOKED: String
+    end
+
+    class ExportJournalToS3Request
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?inclusive_start_time: Time,
+        ?exclusive_end_time: Time,
+        ?s3_export_configuration: Types::S3ExportConfiguration,
+        ?role_arn: String,
+        ?output_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor inclusive_start_time: Time?
+      attr_accessor exclusive_end_time: Time?
+      attr_accessor s3_export_configuration: Types::S3ExportConfiguration?
+      attr_accessor role_arn: String?
+      attr_accessor output_format: String?
+    end
+
+    class ExportJournalToS3Response
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?export_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor export_id: String?
+    end
+
+    module ExportStatus
+      IN_PROGRESS: String
+      COMPLETED: String
+      CANCELLED: String
+    end
+
+    class GetBlockRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?block_address: Types::ValueHolder,
+        ?digest_tip_address: Types::ValueHolder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor block_address: Types::ValueHolder?
+      attr_accessor digest_tip_address: Types::ValueHolder?
+    end
+
+    class GetBlockResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?block: Types::ValueHolder,
+        ?proof: Types::ValueHolder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor block: Types::ValueHolder?
+      attr_accessor proof: Types::ValueHolder?
+    end
+
+    class GetDigestRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class GetDigestResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?digest: String,
+        ?digest_tip_address: Types::ValueHolder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor digest: String?
+      attr_accessor digest_tip_address: Types::ValueHolder?
+    end
+
+    class GetRevisionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?block_address: Types::ValueHolder,
+        ?document_id: String,
+        ?digest_tip_address: Types::ValueHolder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor block_address: Types::ValueHolder?
+      attr_accessor document_id: String?
+      attr_accessor digest_tip_address: Types::ValueHolder?
+    end
+
+    class GetRevisionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?proof: Types::ValueHolder,
+        ?revision: Types::ValueHolder,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor proof: Types::ValueHolder?
+      attr_accessor revision: Types::ValueHolder?
+    end
+
+    class InvalidParameterException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?parameter_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor parameter_name: String?
+    end
+
+    class JournalKinesisStreamDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ledger_name: String,
+        ?creation_time: Time,
+        ?inclusive_start_time: Time,
+        ?exclusive_end_time: Time,
+        ?role_arn: String,
+        ?stream_id: String,
+        ?arn: String,
+        ?status: String,
+        ?kinesis_configuration: Types::KinesisConfiguration,
+        ?error_cause: String,
+        ?stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ledger_name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor inclusive_start_time: Time?
+      attr_accessor exclusive_end_time: Time?
+      attr_accessor role_arn: String?
+      attr_accessor stream_id: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor kinesis_configuration: Types::KinesisConfiguration?
+      attr_accessor error_cause: String?
+      attr_accessor stream_name: String?
+    end
+
+    class JournalS3ExportDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ledger_name: String,
+        ?export_id: String,
+        ?export_creation_time: Time,
+        ?status: String,
+        ?inclusive_start_time: Time,
+        ?exclusive_end_time: Time,
+        ?s3_export_configuration: Types::S3ExportConfiguration,
+        ?role_arn: String,
+        ?output_format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ledger_name: String?
+      attr_accessor export_id: String?
+      attr_accessor export_creation_time: Time?
+      attr_accessor status: String?
+      attr_accessor inclusive_start_time: Time?
+      attr_accessor exclusive_end_time: Time?
+      attr_accessor s3_export_configuration: Types::S3ExportConfiguration?
+      attr_accessor role_arn: String?
+      attr_accessor output_format: String?
+    end
+
+    class KinesisConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_arn: String,
+        ?aggregation_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_arn: String?
+      attr_accessor aggregation_enabled: bool?
+    end
+
+    class LedgerEncryptionDescription
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_arn: String,
+        ?encryption_status: String,
+        ?inaccessible_kms_key_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_arn: String?
+      attr_accessor encryption_status: String?
+      attr_accessor inaccessible_kms_key_date_time: Time?
+    end
+
+    module LedgerState
+      CREATING: String
+      ACTIVE: String
+      DELETING: String
+      DELETED: String
+    end
+
+    class LedgerSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?state: String,
+        ?creation_date_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor state: String?
+      attr_accessor creation_date_time: Time?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_type: String?
+    end
+
+    class ListJournalKinesisStreamsForLedgerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ledger_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ledger_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListJournalKinesisStreamsForLedgerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?streams: Array[Types::JournalKinesisStreamDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor streams: Array[Types::JournalKinesisStreamDescription]?
+      attr_accessor next_token: String?
+    end
+
+    class ListJournalS3ExportsForLedgerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListJournalS3ExportsForLedgerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?journal_s3_exports: Array[Types::JournalS3ExportDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor journal_s3_exports: Array[Types::JournalS3ExportDescription]?
+      attr_accessor next_token: String?
+    end
+
+    class ListJournalS3ExportsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListJournalS3ExportsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?journal_s3_exports: Array[Types::JournalS3ExportDescription],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor journal_s3_exports: Array[Types::JournalS3ExportDescription]?
+      attr_accessor next_token: String?
+    end
+
+    class ListLedgersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListLedgersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ledgers: Array[Types::LedgerSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ledgers: Array[Types::LedgerSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String?]?
+    end
+
+    module OutputFormat
+      ION_BINARY: String
+      ION_TEXT: String
+      JSON: String
+    end
+
+    module PermissionsMode
+      ALLOW_ALL: String
+      STANDARD: String
+    end
+
+    class ResourceAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_type: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_name: String?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_type: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_name: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_type: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_name: String?
+    end
+
+    class ResourcePreconditionNotMetException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_type: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_name: String?
+    end
+
+    class S3EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?object_encryption_type: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor object_encryption_type: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class S3ExportConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?prefix: String,
+        ?encryption_configuration: Types::S3EncryptionConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor prefix: String?
+      attr_accessor encryption_configuration: Types::S3EncryptionConfiguration?
+    end
+
+    module S3ObjectEncryptionType
+      SSE_KMS: String
+      SSE_S3: String
+      NO_ENCRYPTION: String
+    end
+
+    class StreamJournalToKinesisRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ledger_name: String,
+        ?role_arn: String,
+        ?tags: Hash[String, String?],
+        ?inclusive_start_time: Time,
+        ?exclusive_end_time: Time,
+        ?kinesis_configuration: Types::KinesisConfiguration,
+        ?stream_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ledger_name: String?
+      attr_accessor role_arn: String?
+      attr_accessor tags: Hash[String, String?]?
+      attr_accessor inclusive_start_time: Time?
+      attr_accessor exclusive_end_time: Time?
+      attr_accessor kinesis_configuration: Types::KinesisConfiguration?
+      attr_accessor stream_name: String?
+    end
+
+    class StreamJournalToKinesisResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?stream_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor stream_id: String?
+    end
+
+    module StreamStatus
+      ACTIVE: String
+      COMPLETED: String
+      CANCELED: String
+      FAILED: String
+      IMPAIRED: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String?],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String?]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateLedgerPermissionsModeRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?permissions_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor permissions_mode: String?
+    end
+
+    class UpdateLedgerPermissionsModeResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?permissions_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor permissions_mode: String?
+    end
+
+    class UpdateLedgerRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?deletion_protection: bool,
+        ?kms_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor deletion_protection: bool?
+      attr_accessor kms_key: String?
+    end
+
+    class UpdateLedgerResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?state: String,
+        ?creation_date_time: Time,
+        ?deletion_protection: bool,
+        ?encryption_description: Types::LedgerEncryptionDescription,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor state: String?
+      attr_accessor creation_date_time: Time?
+      attr_accessor deletion_protection: bool?
+      attr_accessor encryption_description: Types::LedgerEncryptionDescription?
+    end
+
+    class ValueHolder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ion_text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ion_text: String?
+    end
+  end
+end

@@ -1,0 +1,932 @@
+module Aws::Route53RecoveryControlConfig
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AssertionRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asserted_controls: Array[String],
+        ?control_panel_arn: String,
+        ?name: String,
+        ?rule_config: Types::RuleConfig,
+        ?safety_rule_arn: String,
+        ?status: String,
+        ?wait_period_ms: Integer,
+        ?owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asserted_controls: Array[String]?
+      attr_accessor control_panel_arn: String?
+      attr_accessor name: String?
+      attr_accessor rule_config: Types::RuleConfig?
+      attr_accessor safety_rule_arn: String?
+      attr_accessor status: String?
+      attr_accessor wait_period_ms: Integer?
+      attr_accessor owner: String?
+    end
+
+    class AssertionRuleUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?safety_rule_arn: String,
+        ?wait_period_ms: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor safety_rule_arn: String?
+      attr_accessor wait_period_ms: Integer?
+    end
+
+    class Cluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+        ?cluster_endpoints: Array[Types::ClusterEndpoint],
+        ?name: String,
+        ?status: String,
+        ?owner: String,
+        ?network_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+      attr_accessor cluster_endpoints: Array[Types::ClusterEndpoint]?
+      attr_accessor name: String?
+      attr_accessor status: String?
+      attr_accessor owner: String?
+      attr_accessor network_type: String?
+    end
+
+    class ClusterEndpoint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?endpoint: String,
+        ?region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor endpoint: String?
+      attr_accessor region: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ControlPanel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+        ?control_panel_arn: String,
+        ?default_control_panel: bool,
+        ?name: String,
+        ?routing_control_count: Integer,
+        ?status: String,
+        ?owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+      attr_accessor control_panel_arn: String?
+      attr_accessor default_control_panel: bool?
+      attr_accessor name: String?
+      attr_accessor routing_control_count: Integer?
+      attr_accessor status: String?
+      attr_accessor owner: String?
+    end
+
+    class CreateClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?cluster_name: String,
+        ?tags: Hash[String, String],
+        ?network_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor cluster_name: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor network_type: String?
+    end
+
+    class CreateClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class CreateControlPanelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?cluster_arn: String,
+        ?control_panel_name: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor cluster_arn: String?
+      attr_accessor control_panel_name: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateControlPanelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_panel: Types::ControlPanel,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_panel: Types::ControlPanel?
+    end
+
+    class CreateRoutingControlRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?cluster_arn: String,
+        ?control_panel_arn: String,
+        ?routing_control_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor cluster_arn: String?
+      attr_accessor control_panel_arn: String?
+      attr_accessor routing_control_name: String?
+    end
+
+    class CreateRoutingControlResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?routing_control: Types::RoutingControl,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor routing_control: Types::RoutingControl?
+    end
+
+    class CreateSafetyRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assertion_rule: Types::NewAssertionRule,
+        ?client_token: String,
+        ?gating_rule: Types::NewGatingRule,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assertion_rule: Types::NewAssertionRule?
+      attr_accessor client_token: String?
+      attr_accessor gating_rule: Types::NewGatingRule?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateSafetyRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assertion_rule: Types::AssertionRule,
+        ?gating_rule: Types::GatingRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assertion_rule: Types::AssertionRule?
+      attr_accessor gating_rule: Types::GatingRule?
+    end
+
+    class DeleteClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+    end
+
+    class DeleteClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteControlPanelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_panel_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_panel_arn: String?
+    end
+
+    class DeleteControlPanelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRoutingControlRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?routing_control_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor routing_control_arn: String?
+    end
+
+    class DeleteRoutingControlResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteSafetyRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?safety_rule_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor safety_rule_arn: String?
+    end
+
+    class DeleteSafetyRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+    end
+
+    class DescribeClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class DescribeControlPanelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_panel_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_panel_arn: String?
+    end
+
+    class DescribeControlPanelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_panel: Types::ControlPanel,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_panel: Types::ControlPanel?
+    end
+
+    class DescribeRoutingControlRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?routing_control_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor routing_control_arn: String?
+    end
+
+    class DescribeRoutingControlResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?routing_control: Types::RoutingControl,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor routing_control: Types::RoutingControl?
+    end
+
+    class DescribeSafetyRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?safety_rule_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor safety_rule_arn: String?
+    end
+
+    class DescribeSafetyRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assertion_rule: Types::AssertionRule,
+        ?gating_rule: Types::GatingRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assertion_rule: Types::AssertionRule?
+      attr_accessor gating_rule: Types::GatingRule?
+    end
+
+    class GatingRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_panel_arn: String,
+        ?gating_controls: Array[String],
+        ?name: String,
+        ?rule_config: Types::RuleConfig,
+        ?safety_rule_arn: String,
+        ?status: String,
+        ?target_controls: Array[String],
+        ?wait_period_ms: Integer,
+        ?owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_panel_arn: String?
+      attr_accessor gating_controls: Array[String]?
+      attr_accessor name: String?
+      attr_accessor rule_config: Types::RuleConfig?
+      attr_accessor safety_rule_arn: String?
+      attr_accessor status: String?
+      attr_accessor target_controls: Array[String]?
+      attr_accessor wait_period_ms: Integer?
+      attr_accessor owner: String?
+    end
+
+    class GatingRuleUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?safety_rule_arn: String,
+        ?wait_period_ms: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor safety_rule_arn: String?
+      attr_accessor wait_period_ms: Integer?
+    end
+
+    class GetResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListAssociatedRoute53HealthChecksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?routing_control_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor routing_control_arn: String?
+    end
+
+    class ListAssociatedRoute53HealthChecksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?health_check_ids: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor health_check_ids: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListClustersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListClustersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?clusters: Array[Types::Cluster],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor clusters: Array[Types::Cluster]?
+      attr_accessor next_token: String?
+    end
+
+    class ListControlPanelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListControlPanelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_panels: Array[Types::ControlPanel],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_panels: Array[Types::ControlPanel]?
+      attr_accessor next_token: String?
+    end
+
+    class ListRoutingControlsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_panel_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_panel_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRoutingControlsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?routing_controls: Array[Types::RoutingControl],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor routing_controls: Array[Types::RoutingControl]?
+    end
+
+    class ListSafetyRulesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_panel_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_panel_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSafetyRulesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?safety_rules: Array[Types::Rule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor safety_rules: Array[Types::Rule]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module NetworkType
+      IPV4: String
+      DUALSTACK: String
+    end
+
+    class NewAssertionRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?asserted_controls: Array[String],
+        ?control_panel_arn: String,
+        ?name: String,
+        ?rule_config: Types::RuleConfig,
+        ?wait_period_ms: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor asserted_controls: Array[String]?
+      attr_accessor control_panel_arn: String?
+      attr_accessor name: String?
+      attr_accessor rule_config: Types::RuleConfig?
+      attr_accessor wait_period_ms: Integer?
+    end
+
+    class NewGatingRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_panel_arn: String,
+        ?gating_controls: Array[String],
+        ?name: String,
+        ?rule_config: Types::RuleConfig,
+        ?target_controls: Array[String],
+        ?wait_period_ms: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_panel_arn: String?
+      attr_accessor gating_controls: Array[String]?
+      attr_accessor name: String?
+      attr_accessor rule_config: Types::RuleConfig?
+      attr_accessor target_controls: Array[String]?
+      attr_accessor wait_period_ms: Integer?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class RoutingControl
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_panel_arn: String,
+        ?name: String,
+        ?routing_control_arn: String,
+        ?status: String,
+        ?owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_panel_arn: String?
+      attr_accessor name: String?
+      attr_accessor routing_control_arn: String?
+      attr_accessor status: String?
+      attr_accessor owner: String?
+    end
+
+    class Rule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assertion: Types::AssertionRule,
+        ?gating: Types::GatingRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assertion: Types::AssertionRule?
+      attr_accessor gating: Types::GatingRule?
+    end
+
+    class RuleConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?inverted: bool,
+        ?threshold: Integer,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor inverted: bool?
+      attr_accessor threshold: Integer?
+      attr_accessor type: String?
+    end
+
+    module RuleType
+      ATLEAST: String
+      AND: String
+      OR: String
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Status
+      PENDING: String
+      DEPLOYED: String
+      PENDING_DELETION: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateClusterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+        ?network_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+      attr_accessor network_type: String?
+    end
+
+    class UpdateClusterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster: Types::Cluster,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster: Types::Cluster?
+    end
+
+    class UpdateControlPanelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_panel_arn: String,
+        ?control_panel_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_panel_arn: String?
+      attr_accessor control_panel_name: String?
+    end
+
+    class UpdateControlPanelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_panel: Types::ControlPanel,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_panel: Types::ControlPanel?
+    end
+
+    class UpdateRoutingControlRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?routing_control_arn: String,
+        ?routing_control_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor routing_control_arn: String?
+      attr_accessor routing_control_name: String?
+    end
+
+    class UpdateRoutingControlResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?routing_control: Types::RoutingControl,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor routing_control: Types::RoutingControl?
+    end
+
+    class UpdateSafetyRuleRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assertion_rule_update: Types::AssertionRuleUpdate,
+        ?gating_rule_update: Types::GatingRuleUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assertion_rule_update: Types::AssertionRuleUpdate?
+      attr_accessor gating_rule_update: Types::GatingRuleUpdate?
+    end
+
+    class UpdateSafetyRuleResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?assertion_rule: Types::AssertionRule,
+        ?gating_rule: Types::GatingRule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor assertion_rule: Types::AssertionRule?
+      attr_accessor gating_rule: Types::GatingRule?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

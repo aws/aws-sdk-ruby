@@ -1,0 +1,5 @@
+module Aws::Codeartifact
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

@@ -1,0 +1,993 @@
+module Aws::AmplifyUIBuilder
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::AmplifyUIBuilder::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateComponentResponse
+      include Smithy::Client::_Response[Types::CreateComponentOutput]
+      def entity: () -> Types::Component?
+    end
+    def create_component: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?client_token: String,
+      ?component_to_create: {
+        name: String,
+        source_id: String,
+        component_type: String,
+        properties: Hash[String,
+          {
+            value: untyped,
+            binding_properties: {
+              property: untyped,
+              field: untyped
+            },
+            collection_binding_properties: untyped,
+            default_value: untyped,
+            model: untyped,
+            bindings: Hash[String,
+              {
+                element: untyped,
+                property: untyped
+              }
+            ],
+            event: untyped,
+            user_attribute: untyped,
+            concat: Array[
+              {
+                value: untyped,
+                binding_properties: untyped,
+                collection_binding_properties: untyped,
+                default_value: untyped,
+                model: untyped,
+                bindings: untyped,
+                event: untyped,
+                user_attribute: untyped,
+                concat: untyped,
+                condition: {
+                  property: untyped,
+                  field: untyped,
+                  operator: untyped,
+                  operand: untyped,
+                  then: {
+                    value: untyped,
+                    binding_properties: untyped,
+                    collection_binding_properties: untyped,
+                    default_value: untyped,
+                    model: untyped,
+                    bindings: untyped,
+                    event: untyped,
+                    user_attribute: untyped,
+                    concat: untyped,
+                    condition: untyped,
+                    configured: bool,
+                    type: untyped,
+                    imported_value: untyped,
+                    component_name: untyped,
+                    property: untyped
+                  },
+                  else: untyped,
+                  operand_type: untyped
+                },
+                configured: untyped,
+                type: untyped,
+                imported_value: untyped,
+                component_name: untyped,
+                property: untyped
+              }
+            ],
+            condition: untyped,
+            configured: untyped,
+            type: untyped,
+            imported_value: untyped,
+            component_name: untyped,
+            property: untyped
+          }
+        ],
+        children: Array[
+          {
+            component_type: untyped,
+            name: untyped,
+            properties: untyped,
+            children: untyped,
+            events: Hash[String,
+              {
+                action: untyped,
+                parameters: {
+                  type: untyped,
+                  url: untyped,
+                  anchor: untyped,
+                  target: untyped,
+                  global: untyped,
+                  model: untyped,
+                  id: untyped,
+                  fields: untyped,
+                  state: {
+                    component_name: untyped,
+                    property: untyped,
+                    set: untyped
+                  }
+                },
+                binding_event: untyped
+              }
+            ],
+            source_id: untyped
+          }
+        ],
+        variants: Array[
+          {
+            variant_values: Hash[String, String],
+            overrides: Hash[String,
+              Hash[String, String]
+            ]
+          }
+        ],
+        overrides: untyped,
+        binding_properties: Hash[String,
+          {
+            type: untyped,
+            binding_properties: {
+              model: untyped,
+              field: untyped,
+              predicates: Array[
+                {
+                  or: untyped,
+                  and: untyped,
+                  field: untyped,
+                  operator: untyped,
+                  operand: untyped,
+                  operand_type: String
+                }
+              ],
+              user_attribute: untyped,
+              bucket: untyped,
+              key: untyped,
+              default_value: untyped,
+              slot_name: untyped
+            },
+            default_value: untyped
+          }
+        ],
+        collection_properties: Hash[String,
+          {
+            model: untyped,
+            sort: Array[
+              {
+                field: untyped,
+                direction: String
+              }
+            ],
+            predicate: {
+              or: untyped,
+              and: untyped,
+              field: untyped,
+              operator: untyped,
+              operand: untyped,
+              operand_type: untyped
+            },
+            identifiers: Array[String]
+          }
+        ],
+        tags: Hash[String, String],
+        events: untyped,
+        schema_version: untyped
+      }
+    ) -> _CreateComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateComponentResponse
+
+    interface _CreateFormResponse
+      include Smithy::Client::_Response[Types::CreateFormOutput]
+      def entity: () -> Types::Form?
+    end
+    def create_form: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?client_token: String,
+      ?form_to_create: {
+        name: String,
+        data_type: {
+          data_source_type: String,
+          data_type_name: String
+        },
+        form_action_type: String,
+        fields: Hash[String,
+          {
+            label: untyped,
+            position: {
+              fixed: String,
+              right_of: untyped,
+              below: untyped
+            },
+            excluded: bool,
+            input_type: {
+              type: untyped,
+              required: untyped,
+              read_only: untyped,
+              placeholder: untyped,
+              default_value: untyped,
+              descriptive_text: untyped,
+              default_checked: untyped,
+              default_country_code: untyped,
+              value_mappings: {
+                values: Array[
+                  {
+                    display_value: {
+                      value: untyped,
+                      binding_properties: {
+                        property: untyped,
+                        field: untyped
+                      },
+                      concat: Array[
+                        {
+                          value: untyped,
+                          binding_properties: untyped,
+                          concat: untyped
+                        }
+                      ]
+                    },
+                    value: untyped
+                  }
+                ],
+                binding_properties: Hash[String,
+                  {
+                    type: untyped,
+                    binding_properties: {
+                      model: untyped
+                    }
+                  }
+                ]
+              },
+              name: untyped,
+              min_value: Float,
+              max_value: untyped,
+              step: untyped,
+              value: untyped,
+              is_array: untyped,
+              file_uploader_config: {
+                access_level: String,
+                accepted_file_types: Array[String],
+                show_thumbnails: untyped,
+                is_resumable: untyped,
+                max_file_count: Integer,
+                max_size: untyped
+              }
+            },
+            validations: Array[
+              {
+                type: untyped,
+                str_values: untyped,
+                num_values: Array[Integer],
+                validation_message: untyped
+              }
+            ]
+          }
+        ],
+        style: {
+          horizontal_gap: {
+            token_reference: untyped,
+            value: untyped
+          },
+          vertical_gap: untyped,
+          outer_padding: untyped
+        },
+        sectional_elements: Hash[String,
+          {
+            type: untyped,
+            position: untyped,
+            text: untyped,
+            level: untyped,
+            orientation: untyped,
+            excluded: untyped
+          }
+        ],
+        schema_version: untyped,
+        cta: {
+          position: String,
+          clear: {
+            excluded: untyped,
+            children: untyped,
+            position: untyped
+          },
+          cancel: untyped,
+          submit: untyped
+        },
+        tags: Hash[String, String],
+        label_decorator: String
+      }
+    ) -> _CreateFormResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFormResponse
+
+    interface _CreateThemeResponse
+      include Smithy::Client::_Response[Types::CreateThemeOutput]
+      def entity: () -> Types::Theme?
+    end
+    def create_theme: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?client_token: String,
+      ?theme_to_create: {
+        name: String,
+        values: Array[
+          {
+            key: String,
+            value: {
+              value: untyped,
+              children: untyped
+            }
+          }
+        ],
+        overrides: untyped,
+        tags: Hash[String, String]
+      }
+    ) -> _CreateThemeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateThemeResponse
+
+    interface _DeleteComponentResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_component: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?id: String
+    ) -> _DeleteComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteComponentResponse
+
+    interface _DeleteFormResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_form: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?id: String
+    ) -> _DeleteFormResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteFormResponse
+
+    interface _DeleteThemeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_theme: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?id: String
+    ) -> _DeleteThemeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteThemeResponse
+
+    interface _ExchangeCodeForTokenResponse
+      include Smithy::Client::_Response[Types::ExchangeCodeForTokenOutput]
+      def access_token: () -> String?
+      def expires_in: () -> Integer?
+      def refresh_token: () -> String?
+    end
+    def exchange_code_for_token: (
+      ?provider: String,
+      ?request: {
+        code: String,
+        redirect_uri: String,
+        client_id: untyped
+      }
+    ) -> _ExchangeCodeForTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExchangeCodeForTokenResponse
+
+    interface _ExportComponentsResponse
+      include Smithy::Client::_Response[Types::ExportComponentsOutput]
+      def entities: () -> Array[Types::Component]?
+      def next_token: () -> String?
+    end
+    def export_components: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?next_token: String
+    ) -> _ExportComponentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportComponentsResponse
+
+    interface _ExportFormsResponse
+      include Smithy::Client::_Response[Types::ExportFormsOutput]
+      def entities: () -> Array[Types::Form]?
+      def next_token: () -> String?
+    end
+    def export_forms: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?next_token: String
+    ) -> _ExportFormsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportFormsResponse
+
+    interface _ExportThemesResponse
+      include Smithy::Client::_Response[Types::ExportThemesOutput]
+      def entities: () -> Array[Types::Theme]?
+      def next_token: () -> String?
+    end
+    def export_themes: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?next_token: String
+    ) -> _ExportThemesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ExportThemesResponse
+
+    interface _GetCodegenJobResponse
+      include Smithy::Client::_Response[Types::GetCodegenJobResponse]
+      def job: () -> Types::CodegenJob?
+    end
+    def get_codegen_job: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?id: String
+    ) -> _GetCodegenJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetCodegenJobResponse
+
+    interface _GetComponentResponse
+      include Smithy::Client::_Response[Types::GetComponentOutput]
+      def component: () -> Types::Component?
+    end
+    def get_component: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?id: String
+    ) -> _GetComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetComponentResponse
+
+    interface _GetFormResponse
+      include Smithy::Client::_Response[Types::GetFormOutput]
+      def form: () -> Types::Form?
+    end
+    def get_form: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?id: String
+    ) -> _GetFormResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetFormResponse
+
+    interface _GetMetadataResponse
+      include Smithy::Client::_Response[Types::GetMetadataOutput]
+      def features: () -> Hash[String, String]?
+    end
+    def get_metadata: (
+      ?app_id: String,
+      ?environment_name: String
+    ) -> _GetMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMetadataResponse
+
+    interface _GetThemeResponse
+      include Smithy::Client::_Response[Types::GetThemeOutput]
+      def theme: () -> Types::Theme?
+    end
+    def get_theme: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?id: String
+    ) -> _GetThemeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetThemeResponse
+
+    interface _ListCodegenJobsResponse
+      include Smithy::Client::_Response[Types::ListCodegenJobsResponse]
+      def entities: () -> Array[Types::CodegenJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_codegen_jobs: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCodegenJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCodegenJobsResponse
+
+    interface _ListComponentsResponse
+      include Smithy::Client::_Response[Types::ListComponentsOutput]
+      def entities: () -> Array[Types::ComponentSummary]?
+      def next_token: () -> String?
+    end
+    def list_components: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListComponentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListComponentsResponse
+
+    interface _ListFormsResponse
+      include Smithy::Client::_Response[Types::ListFormsOutput]
+      def entities: () -> Array[Types::FormSummary]?
+      def next_token: () -> String?
+    end
+    def list_forms: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListFormsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFormsResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceResponse]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListThemesResponse
+      include Smithy::Client::_Response[Types::ListThemesOutput]
+      def entities: () -> Array[Types::ThemeSummary]?
+      def next_token: () -> String?
+    end
+    def list_themes: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListThemesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListThemesResponse
+
+    interface _PutMetadataFlagResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def put_metadata_flag: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?feature_name: String,
+      ?body: {
+        new_value: String
+      }
+    ) -> _PutMetadataFlagResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutMetadataFlagResponse
+
+    interface _RefreshTokenResponse
+      include Smithy::Client::_Response[Types::RefreshTokenOutput]
+      def access_token: () -> String?
+      def expires_in: () -> Integer?
+    end
+    def refresh_token: (
+      ?provider: String,
+      ?refresh_token_body: {
+        token: String,
+        client_id: untyped
+      }
+    ) -> _RefreshTokenResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RefreshTokenResponse
+
+    interface _StartCodegenJobResponse
+      include Smithy::Client::_Response[Types::StartCodegenJobResponse]
+      def entity: () -> Types::CodegenJob?
+    end
+    def start_codegen_job: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?client_token: String,
+      ?codegen_job_to_create: {
+        render_config: {
+          react: {
+            module: String,
+            target: String,
+            script: String,
+            render_type_declarations: bool,
+            inline_source_map: untyped,
+            api_configuration: {
+              graph_ql_config: {
+                types_file_path: String,
+                queries_file_path: untyped,
+                mutations_file_path: untyped,
+                subscriptions_file_path: untyped,
+                fragments_file_path: untyped
+              },
+              data_store_config: {
+              },
+              no_api_config: {
+              }
+            },
+            dependencies: Hash[String, String]
+          }
+        },
+        generic_data_schema: {
+          data_source_type: String,
+          models: Hash[String,
+            {
+              fields: Hash[String,
+                {
+                  data_type: String,
+                  data_type_value: untyped,
+                  required: untyped,
+                  read_only: untyped,
+                  is_array: untyped,
+                  relationship: {
+                    type: String,
+                    related_model_name: untyped,
+                    related_model_fields: Array[String],
+                    can_unlink_associated_model: untyped,
+                    related_join_field_name: untyped,
+                    related_join_table_name: untyped,
+                    belongs_to_field_on_related_model: untyped,
+                    associated_fields: Array[String],
+                    is_has_many_index: untyped
+                  }
+                }
+              ],
+              is_join_table: untyped,
+              primary_keys: Array[String]
+            }
+          ],
+          enums: Hash[String,
+            {
+              values: Array[String]
+            }
+          ],
+          non_models: Hash[String,
+            {
+              fields: Hash[String,
+                {
+                  data_type: untyped,
+                  data_type_value: untyped,
+                  required: untyped,
+                  read_only: untyped,
+                  is_array: untyped,
+                  relationship: untyped
+                }
+              ]
+            }
+          ]
+        },
+        auto_generate_forms: untyped,
+        features: {
+          is_relationship_supported: untyped,
+          is_non_model_supported: untyped
+        },
+        tags: Hash[String, String]
+      }
+    ) -> _StartCodegenJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCodegenJobResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceResponse]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceResponse]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateComponentResponse
+      include Smithy::Client::_Response[Types::UpdateComponentOutput]
+      def entity: () -> Types::Component?
+    end
+    def update_component: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?id: String,
+      ?client_token: String,
+      ?updated_component: {
+        id: String,
+        name: String,
+        source_id: String,
+        component_type: String,
+        properties: Hash[String,
+          {
+            value: untyped,
+            binding_properties: {
+              property: untyped,
+              field: untyped
+            },
+            collection_binding_properties: untyped,
+            default_value: untyped,
+            model: untyped,
+            bindings: Hash[String,
+              {
+                element: untyped,
+                property: untyped
+              }
+            ],
+            event: untyped,
+            user_attribute: untyped,
+            concat: Array[
+              {
+                value: untyped,
+                binding_properties: untyped,
+                collection_binding_properties: untyped,
+                default_value: untyped,
+                model: untyped,
+                bindings: untyped,
+                event: untyped,
+                user_attribute: untyped,
+                concat: untyped,
+                condition: {
+                  property: untyped,
+                  field: untyped,
+                  operator: untyped,
+                  operand: untyped,
+                  then: {
+                    value: untyped,
+                    binding_properties: untyped,
+                    collection_binding_properties: untyped,
+                    default_value: untyped,
+                    model: untyped,
+                    bindings: untyped,
+                    event: untyped,
+                    user_attribute: untyped,
+                    concat: untyped,
+                    condition: untyped,
+                    configured: bool,
+                    type: untyped,
+                    imported_value: untyped,
+                    component_name: untyped,
+                    property: untyped
+                  },
+                  else: untyped,
+                  operand_type: untyped
+                },
+                configured: untyped,
+                type: untyped,
+                imported_value: untyped,
+                component_name: untyped,
+                property: untyped
+              }
+            ],
+            condition: untyped,
+            configured: untyped,
+            type: untyped,
+            imported_value: untyped,
+            component_name: untyped,
+            property: untyped
+          }
+        ],
+        children: Array[
+          {
+            component_type: untyped,
+            name: untyped,
+            properties: untyped,
+            children: untyped,
+            events: Hash[String,
+              {
+                action: untyped,
+                parameters: {
+                  type: untyped,
+                  url: untyped,
+                  anchor: untyped,
+                  target: untyped,
+                  global: untyped,
+                  model: untyped,
+                  id: untyped,
+                  fields: untyped,
+                  state: {
+                    component_name: untyped,
+                    property: untyped,
+                    set: untyped
+                  }
+                },
+                binding_event: untyped
+              }
+            ],
+            source_id: untyped
+          }
+        ],
+        variants: Array[
+          {
+            variant_values: Hash[String, String],
+            overrides: Hash[String,
+              Hash[String, String]
+            ]
+          }
+        ],
+        overrides: untyped,
+        binding_properties: Hash[String,
+          {
+            type: untyped,
+            binding_properties: {
+              model: untyped,
+              field: untyped,
+              predicates: Array[
+                {
+                  or: untyped,
+                  and: untyped,
+                  field: untyped,
+                  operator: untyped,
+                  operand: untyped,
+                  operand_type: String
+                }
+              ],
+              user_attribute: untyped,
+              bucket: untyped,
+              key: untyped,
+              default_value: untyped,
+              slot_name: untyped
+            },
+            default_value: untyped
+          }
+        ],
+        collection_properties: Hash[String,
+          {
+            model: untyped,
+            sort: Array[
+              {
+                field: untyped,
+                direction: String
+              }
+            ],
+            predicate: {
+              or: untyped,
+              and: untyped,
+              field: untyped,
+              operator: untyped,
+              operand: untyped,
+              operand_type: untyped
+            },
+            identifiers: Array[String]
+          }
+        ],
+        events: untyped,
+        schema_version: untyped
+      }
+    ) -> _UpdateComponentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateComponentResponse
+
+    interface _UpdateFormResponse
+      include Smithy::Client::_Response[Types::UpdateFormOutput]
+      def entity: () -> Types::Form?
+    end
+    def update_form: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?id: String,
+      ?client_token: String,
+      ?updated_form: {
+        name: String,
+        data_type: {
+          data_source_type: String,
+          data_type_name: String
+        },
+        form_action_type: String,
+        fields: Hash[String,
+          {
+            label: untyped,
+            position: {
+              fixed: String,
+              right_of: untyped,
+              below: untyped
+            },
+            excluded: bool,
+            input_type: {
+              type: untyped,
+              required: untyped,
+              read_only: untyped,
+              placeholder: untyped,
+              default_value: untyped,
+              descriptive_text: untyped,
+              default_checked: untyped,
+              default_country_code: untyped,
+              value_mappings: {
+                values: Array[
+                  {
+                    display_value: {
+                      value: untyped,
+                      binding_properties: {
+                        property: untyped,
+                        field: untyped
+                      },
+                      concat: Array[
+                        {
+                          value: untyped,
+                          binding_properties: untyped,
+                          concat: untyped
+                        }
+                      ]
+                    },
+                    value: untyped
+                  }
+                ],
+                binding_properties: Hash[String,
+                  {
+                    type: untyped,
+                    binding_properties: {
+                      model: untyped
+                    }
+                  }
+                ]
+              },
+              name: untyped,
+              min_value: Float,
+              max_value: untyped,
+              step: untyped,
+              value: untyped,
+              is_array: untyped,
+              file_uploader_config: {
+                access_level: String,
+                accepted_file_types: Array[String],
+                show_thumbnails: untyped,
+                is_resumable: untyped,
+                max_file_count: Integer,
+                max_size: untyped
+              }
+            },
+            validations: Array[
+              {
+                type: untyped,
+                str_values: untyped,
+                num_values: Array[Integer],
+                validation_message: untyped
+              }
+            ]
+          }
+        ],
+        style: {
+          horizontal_gap: {
+            token_reference: untyped,
+            value: untyped
+          },
+          vertical_gap: untyped,
+          outer_padding: untyped
+        },
+        sectional_elements: Hash[String,
+          {
+            type: untyped,
+            position: untyped,
+            text: untyped,
+            level: untyped,
+            orientation: untyped,
+            excluded: untyped
+          }
+        ],
+        schema_version: untyped,
+        cta: {
+          position: String,
+          clear: {
+            excluded: untyped,
+            children: untyped,
+            position: untyped
+          },
+          cancel: untyped,
+          submit: untyped
+        },
+        label_decorator: String
+      }
+    ) -> _UpdateFormResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFormResponse
+
+    interface _UpdateThemeResponse
+      include Smithy::Client::_Response[Types::UpdateThemeOutput]
+      def entity: () -> Types::Theme?
+    end
+    def update_theme: (
+      ?app_id: String,
+      ?environment_name: String,
+      ?id: String,
+      ?client_token: String,
+      ?updated_theme: {
+        id: String,
+        name: String,
+        values: Array[
+          {
+            key: String,
+            value: {
+              value: untyped,
+              children: untyped
+            }
+          }
+        ],
+        overrides: untyped
+      }
+    ) -> _UpdateThemeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateThemeResponse
+  end
+end

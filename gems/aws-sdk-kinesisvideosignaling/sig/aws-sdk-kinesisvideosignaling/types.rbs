@@ -1,0 +1,145 @@
+module Aws::KinesisVideoSignaling
+  module Types
+
+    class ClientLimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetIceServerConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?client_id: String,
+        ?service: String,
+        ?username: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor client_id: String?
+      attr_accessor service: String?
+      attr_accessor username: String?
+    end
+
+    class GetIceServerConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ice_server_list: Array[Types::IceServer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ice_server_list: Array[Types::IceServer]?
+    end
+
+    class IceServer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?uris: Array[String],
+        ?username: String,
+        ?password: String,
+        ?ttl: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uris: Array[String]?
+      attr_accessor username: String?
+      attr_accessor password: String?
+      attr_accessor ttl: Integer?
+    end
+
+    class InvalidArgumentException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidClientException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class NotAuthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SendAlexaOfferToMasterRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?sender_client_id: String,
+        ?message_payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor sender_client_id: String?
+      attr_accessor message_payload: String?
+    end
+
+    class SendAlexaOfferToMasterResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?answer: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor answer: String?
+    end
+
+    module Service
+      TURN: String
+    end
+
+    class SessionExpiredException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

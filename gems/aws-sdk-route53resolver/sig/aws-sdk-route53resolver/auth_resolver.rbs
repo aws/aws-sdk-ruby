@@ -1,0 +1,5 @@
+module Aws::Route53Resolver
+  class AuthResolver
+    def resolve: (AuthParameters) -> Array[String]
+  end
+end

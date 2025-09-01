@@ -1,0 +1,55 @@
+module Aws::ServiceQuotas
+  module Errors
+    class AWSServiceAccessNotEnabledException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class AccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class DependencyAccessDeniedException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class IllegalArgumentException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidPaginationTokenException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class InvalidResourceStateException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoAvailableOrganizationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class NoSuchResourceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class OrganizationNotInAllFeaturesModeException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class QuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ResourceAlreadyExistsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class ServiceQuotaTemplateNotInUseException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TagPolicyViolationException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TemplatesNotAvailableInRegionException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyRequestsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class TooManyTagsException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+  end
+end

@@ -1,0 +1,510 @@
+module Aws::Keyspaces
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?convert_params: bool,
+      ?credentials: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::Keyspaces::EndpointProvider,
+      ?http_ca_file: String,
+      ?http_ca_path: String,
+      ?http_cert: OpenSSL::X509::Certificate,
+      ?http_cert_store: OpenSSL::X509::Store,
+      ?http_continue_timeout: Numeric,
+      ?http_debug_output: bool,
+      ?http_keep_alive_timeout: Numeric,
+      ?http_key: OpenSSL::PKey::RSA | OpenSSL::PKey::DSA,
+      ?http_open_timeout: Numeric,
+      ?http_proxy: URI::HTTP | String,
+      ?http_read_timeout: Numeric,
+      ?http_ssl_timeout: Numeric,
+      ?http_verify_mode: Integer,
+      ?http_write_timeout: Numeric,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?profile: String,
+      ?raise_response_errors: bool,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_backoff: lambda,
+      ?retry_max_attempts: Integer,
+      ?retry_strategy: String | Class,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?stub_responses: bool,
+      ?use_dual_stack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateKeyspaceResponse
+      include Smithy::Client::_Response[Types::CreateKeyspaceOutput]
+      def resource_arn: () -> String?
+    end
+    def create_keyspace: (
+      ?keyspace_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?replication_specification: {
+        replication_strategy: String,
+        region_list: Array[String]
+      }
+    ) -> _CreateKeyspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateKeyspaceResponse
+
+    interface _CreateTableResponse
+      include Smithy::Client::_Response[Types::CreateTableOutput]
+      def resource_arn: () -> String?
+    end
+    def create_table: (
+      ?keyspace_name: String,
+      ?table_name: String,
+      ?schema_definition: {
+        all_columns: Array[
+          {
+            name: String,
+            type: untyped
+          }
+        ],
+        partition_keys: Array[
+          {
+            name: untyped
+          }
+        ],
+        clustering_keys: Array[
+          {
+            name: untyped,
+            order_by: String
+          }
+        ],
+        static_columns: Array[
+          {
+            name: untyped
+          }
+        ]
+      },
+      ?comment: {
+        message: String
+      },
+      ?capacity_specification: {
+        throughput_mode: String,
+        read_capacity_units: Integer,
+        write_capacity_units: untyped
+      },
+      ?encryption_specification: {
+        type: String,
+        kms_key_identifier: String
+      },
+      ?point_in_time_recovery: {
+        status: String
+      },
+      ?ttl: {
+        status: String
+      },
+      ?default_time_to_live: Integer,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_side_timestamps: {
+        status: String
+      },
+      ?auto_scaling_specification: {
+        write_capacity_auto_scaling: {
+          auto_scaling_disabled: bool,
+          minimum_units: Integer,
+          maximum_units: untyped,
+          scaling_policy: {
+            target_tracking_scaling_policy_configuration: {
+              disable_scale_in: untyped,
+              scale_in_cooldown: Integer,
+              scale_out_cooldown: untyped,
+              target_value: Float
+            }
+          }
+        },
+        read_capacity_auto_scaling: untyped
+      },
+      ?replica_specifications: Array[
+        {
+          region: String,
+          read_capacity_units: Integer,
+          read_capacity_auto_scaling: {
+            auto_scaling_disabled: bool,
+            minimum_units: untyped,
+            maximum_units: untyped,
+            scaling_policy: {
+              target_tracking_scaling_policy_configuration: {
+                disable_scale_in: untyped,
+                scale_in_cooldown: Integer,
+                scale_out_cooldown: untyped,
+                target_value: Float
+              }
+            }
+          }
+        }
+      ],
+      ?cdc_specification: {
+        status: String,
+        view_type: String,
+        tags: Array[
+          {
+            key: String,
+            value: String
+          }
+        ],
+        propagate_tags: String
+      }
+    ) -> _CreateTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTableResponse
+
+    interface _CreateTypeResponse
+      include Smithy::Client::_Response[Types::CreateTypeResponse]
+      def keyspace_arn: () -> String?
+      def type_name: () -> String?
+    end
+    def create_type: (
+      ?keyspace_name: String,
+      ?type_name: String,
+      ?field_definitions: Array[
+        {
+          name: String,
+          type: untyped
+        }
+      ]
+    ) -> _CreateTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTypeResponse
+
+    interface _DeleteKeyspaceResponse
+      include Smithy::Client::_Response[Types::DeleteKeyspaceOutput]
+    end
+    def delete_keyspace: (
+      ?keyspace_name: String
+    ) -> _DeleteKeyspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteKeyspaceResponse
+
+    interface _DeleteTableResponse
+      include Smithy::Client::_Response[Types::DeleteTableOutput]
+    end
+    def delete_table: (
+      ?keyspace_name: String,
+      ?table_name: String
+    ) -> _DeleteTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTableResponse
+
+    interface _DeleteTypeResponse
+      include Smithy::Client::_Response[Types::DeleteTypeResponse]
+      def keyspace_arn: () -> String?
+      def type_name: () -> String?
+    end
+    def delete_type: (
+      ?keyspace_name: String,
+      ?type_name: String
+    ) -> _DeleteTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTypeResponse
+
+    interface _GetKeyspaceResponse
+      include Smithy::Client::_Response[Types::GetKeyspaceOutput]
+      def keyspace_name: () -> String?
+      def resource_arn: () -> String?
+      def replication_strategy: () -> String?
+      def replication_regions: () -> Array[String]?
+      def replication_group_statuses: () -> Array[Types::ReplicationGroupStatus]?
+    end
+    def get_keyspace: (
+      ?keyspace_name: String
+    ) -> _GetKeyspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetKeyspaceResponse
+
+    interface _GetTableResponse
+      include Smithy::Client::_Response[Types::GetTableOutput]
+      def keyspace_name: () -> String?
+      def table_name: () -> String?
+      def resource_arn: () -> String?
+      def creation_timestamp: () -> Time?
+      def status: () -> String?
+      def schema_definition: () -> Types::SchemaDefinition?
+      def capacity_specification: () -> Types::CapacitySpecificationSummary?
+      def encryption_specification: () -> Types::EncryptionSpecification?
+      def point_in_time_recovery: () -> Types::PointInTimeRecoverySummary?
+      def ttl: () -> Types::TimeToLive?
+      def default_time_to_live: () -> Integer?
+      def comment: () -> Types::Comment?
+      def client_side_timestamps: () -> Types::ClientSideTimestamps?
+      def replica_specifications: () -> Array[Types::ReplicaSpecificationSummary]?
+      def latest_stream_arn: () -> String?
+      def cdc_specification: () -> Types::CdcSpecificationSummary?
+    end
+    def get_table: (
+      ?keyspace_name: String,
+      ?table_name: String
+    ) -> _GetTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableResponse
+
+    interface _GetTableAutoScalingSettingsResponse
+      include Smithy::Client::_Response[Types::GetTableAutoScalingSettingsResponse]
+      def keyspace_name: () -> String?
+      def table_name: () -> String?
+      def resource_arn: () -> String?
+      def auto_scaling_specification: () -> Types::AutoScalingSpecification?
+      def replica_specifications: () -> Array[Types::ReplicaAutoScalingSpecification]?
+    end
+    def get_table_auto_scaling_settings: (
+      ?keyspace_name: String,
+      ?table_name: String
+    ) -> _GetTableAutoScalingSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTableAutoScalingSettingsResponse
+
+    interface _GetTypeResponse
+      include Smithy::Client::_Response[Types::GetTypeResponse]
+      def keyspace_name: () -> String?
+      def type_name: () -> String?
+      def field_definitions: () -> Array[Types::FieldDefinition]?
+      def last_modified_timestamp: () -> Time?
+      def status: () -> String?
+      def direct_referring_tables: () -> Array[String]?
+      def direct_parent_types: () -> Array[String]?
+      def max_nesting_depth: () -> Integer?
+      def keyspace_arn: () -> String?
+    end
+    def get_type: (
+      ?keyspace_name: String,
+      ?type_name: String
+    ) -> _GetTypeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTypeResponse
+
+    interface _ListKeyspacesResponse
+      include Smithy::Client::_Response[Types::ListKeyspacesOutput]
+      def next_token: () -> String?
+      def keyspaces: () -> Array[Types::KeyspaceSummary]?
+    end
+    def list_keyspaces: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListKeyspacesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListKeyspacesResponse
+
+    interface _ListTablesResponse
+      include Smithy::Client::_Response[Types::ListTablesOutput]
+      def next_token: () -> String?
+      def tables: () -> Array[Types::TableSummary]?
+    end
+    def list_tables: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?keyspace_name: String
+    ) -> _ListTablesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTablesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def next_token: () -> String?
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTypesResponse
+      include Smithy::Client::_Response[Types::ListTypesResponse]
+      def next_token: () -> String?
+      def types: () -> Array[String]?
+    end
+    def list_types: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?keyspace_name: String
+    ) -> _ListTypesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTypesResponse
+
+    interface _RestoreTableResponse
+      include Smithy::Client::_Response[Types::RestoreTableOutput]
+      def restored_table_arn: () -> String?
+    end
+    def restore_table: (
+      ?source_keyspace_name: String,
+      ?source_table_name: String,
+      ?target_keyspace_name: String,
+      ?target_table_name: String,
+      ?restore_timestamp: Time,
+      ?capacity_specification_override: {
+        throughput_mode: String,
+        read_capacity_units: Integer,
+        write_capacity_units: untyped
+      },
+      ?encryption_specification_override: {
+        type: String,
+        kms_key_identifier: String
+      },
+      ?point_in_time_recovery_override: {
+        status: String
+      },
+      ?tags_override: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?auto_scaling_specification: {
+        write_capacity_auto_scaling: {
+          auto_scaling_disabled: bool,
+          minimum_units: Integer,
+          maximum_units: untyped,
+          scaling_policy: {
+            target_tracking_scaling_policy_configuration: {
+              disable_scale_in: untyped,
+              scale_in_cooldown: Integer,
+              scale_out_cooldown: untyped,
+              target_value: Float
+            }
+          }
+        },
+        read_capacity_auto_scaling: untyped
+      },
+      ?replica_specifications: Array[
+        {
+          region: String,
+          read_capacity_units: Integer,
+          read_capacity_auto_scaling: {
+            auto_scaling_disabled: bool,
+            minimum_units: untyped,
+            maximum_units: untyped,
+            scaling_policy: {
+              target_tracking_scaling_policy_configuration: {
+                disable_scale_in: untyped,
+                scale_in_cooldown: Integer,
+                scale_out_cooldown: untyped,
+                target_value: Float
+              }
+            }
+          }
+        }
+      ]
+    ) -> _RestoreTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreTableResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateKeyspaceResponse
+      include Smithy::Client::_Response[Types::UpdateKeyspaceResponse]
+      def resource_arn: () -> String?
+    end
+    def update_keyspace: (
+      ?keyspace_name: String,
+      ?replication_specification: {
+        replication_strategy: String,
+        region_list: Array[String]
+      },
+      ?client_side_timestamps: {
+        status: String
+      }
+    ) -> _UpdateKeyspaceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateKeyspaceResponse
+
+    interface _UpdateTableResponse
+      include Smithy::Client::_Response[Types::UpdateTableOutput]
+      def resource_arn: () -> String?
+    end
+    def update_table: (
+      ?keyspace_name: String,
+      ?table_name: String,
+      ?add_columns: Array[
+        {
+          name: String,
+          type: untyped
+        }
+      ],
+      ?capacity_specification: {
+        throughput_mode: String,
+        read_capacity_units: Integer,
+        write_capacity_units: untyped
+      },
+      ?encryption_specification: {
+        type: String,
+        kms_key_identifier: String
+      },
+      ?point_in_time_recovery: {
+        status: String
+      },
+      ?ttl: {
+        status: String
+      },
+      ?default_time_to_live: Integer,
+      ?client_side_timestamps: {
+        status: String
+      },
+      ?auto_scaling_specification: {
+        write_capacity_auto_scaling: {
+          auto_scaling_disabled: bool,
+          minimum_units: Integer,
+          maximum_units: untyped,
+          scaling_policy: {
+            target_tracking_scaling_policy_configuration: {
+              disable_scale_in: untyped,
+              scale_in_cooldown: Integer,
+              scale_out_cooldown: untyped,
+              target_value: Float
+            }
+          }
+        },
+        read_capacity_auto_scaling: untyped
+      },
+      ?replica_specifications: Array[
+        {
+          region: String,
+          read_capacity_units: Integer,
+          read_capacity_auto_scaling: {
+            auto_scaling_disabled: bool,
+            minimum_units: untyped,
+            maximum_units: untyped,
+            scaling_policy: {
+              target_tracking_scaling_policy_configuration: {
+                disable_scale_in: untyped,
+                scale_in_cooldown: Integer,
+                scale_out_cooldown: untyped,
+                target_value: Float
+              }
+            }
+          }
+        }
+      ],
+      ?cdc_specification: {
+        status: String,
+        view_type: String,
+        tags: Array[
+          {
+            key: String,
+            value: String
+          }
+        ],
+        propagate_tags: String
+      }
+    ) -> _UpdateTableResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTableResponse
+  end
+end

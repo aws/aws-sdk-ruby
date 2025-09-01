@@ -1,0 +1,5 @@
+  module Aws
+    module Omics
+      VERSION: String
+    end
+  end

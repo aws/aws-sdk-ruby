@@ -1,0 +1,1491 @@
+module Aws::Finspacedata
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module ApiAccess
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module ApplicationPermission
+      CreateDataset: String
+      ManageClusters: String
+      ManageUsersAndGroups: String
+      ManageAttributeSets: String
+      ViewAuditData: String
+      AccessNotebooks: String
+      GetTemporaryCredentials: String
+    end
+
+    class AssociateUserToPermissionGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_group_id: String,
+        ?user_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_group_id: String?
+      attr_accessor user_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class AssociateUserToPermissionGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: Integer?
+    end
+
+    class AwsCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_key_id: String,
+        ?secret_access_key: String,
+        ?session_token: String,
+        ?expiration: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_key_id: String?
+      attr_accessor secret_access_key: String?
+      attr_accessor session_token: String?
+      attr_accessor expiration: Integer?
+    end
+
+    module ChangeType
+      REPLACE: String
+      APPEND: String
+      MODIFY: String
+    end
+
+    class ChangesetErrorInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_message: String,
+        ?error_category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_message: String?
+      attr_accessor error_category: String?
+    end
+
+    class ChangesetSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?changeset_id: String,
+        ?changeset_arn: String,
+        ?dataset_id: String,
+        ?change_type: String,
+        ?source_params: Hash[String, String],
+        ?format_params: Hash[String, String],
+        ?create_time: Integer,
+        ?status: String,
+        ?error_info: Types::ChangesetErrorInfo,
+        ?active_until_timestamp: Integer,
+        ?active_from_timestamp: Integer,
+        ?updates_changeset_id: String,
+        ?updated_by_changeset_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor changeset_id: String?
+      attr_accessor changeset_arn: String?
+      attr_accessor dataset_id: String?
+      attr_accessor change_type: String?
+      attr_accessor source_params: Hash[String, String]?
+      attr_accessor format_params: Hash[String, String]?
+      attr_accessor create_time: Integer?
+      attr_accessor status: String?
+      attr_accessor error_info: Types::ChangesetErrorInfo?
+      attr_accessor active_until_timestamp: Integer?
+      attr_accessor active_from_timestamp: Integer?
+      attr_accessor updates_changeset_id: String?
+      attr_accessor updated_by_changeset_id: String?
+    end
+
+    module ColumnDataType
+      STRING: String
+      CHAR: String
+      INTEGER: String
+      TINYINT: String
+      SMALLINT: String
+      BIGINT: String
+      FLOAT: String
+      DOUBLE: String
+      DATE: String
+      DATETIME: String
+      BOOLEAN: String
+      BINARY: String
+    end
+
+    class ColumnDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_type: String,
+        ?column_name: String,
+        ?column_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_type: String?
+      attr_accessor column_name: String?
+      attr_accessor column_description: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    class CreateChangesetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?dataset_id: String,
+        ?change_type: String,
+        ?source_params: Hash[String, String],
+        ?format_params: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor dataset_id: String?
+      attr_accessor change_type: String?
+      attr_accessor source_params: Hash[String, String]?
+      attr_accessor format_params: Hash[String, String]?
+    end
+
+    class CreateChangesetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?changeset_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor changeset_id: String?
+    end
+
+    class CreateDataViewRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?dataset_id: String,
+        ?auto_update: bool,
+        ?sort_columns: Array[String],
+        ?partition_columns: Array[String],
+        ?as_of_timestamp: Integer,
+        ?destination_type_params: Types::DataViewDestinationTypeParams,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor dataset_id: String?
+      attr_accessor auto_update: bool?
+      attr_accessor sort_columns: Array[String]?
+      attr_accessor partition_columns: Array[String]?
+      attr_accessor as_of_timestamp: Integer?
+      attr_accessor destination_type_params: Types::DataViewDestinationTypeParams?
+    end
+
+    class CreateDataViewResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?data_view_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor data_view_id: String?
+    end
+
+    class CreateDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?dataset_title: String,
+        ?kind: String,
+        ?dataset_description: String,
+        ?owner_info: Types::DatasetOwnerInfo,
+        ?permission_group_params: Types::PermissionGroupParams,
+        ?alias: String,
+        ?schema_definition: Types::SchemaUnion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor dataset_title: String?
+      attr_accessor kind: String?
+      attr_accessor dataset_description: String?
+      attr_accessor owner_info: Types::DatasetOwnerInfo?
+      attr_accessor permission_group_params: Types::PermissionGroupParams?
+      attr_accessor alias: String?
+      attr_accessor schema_definition: Types::SchemaUnion?
+    end
+
+    class CreateDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+    end
+
+    class CreatePermissionGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?application_permissions: Array[String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor application_permissions: Array[String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreatePermissionGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_group_id: String?
+    end
+
+    class CreateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?email_address: String,
+        ?type: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?api_access: String,
+        ?api_access_principal_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor email_address: String?
+      attr_accessor type: String?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor api_access: String?
+      attr_accessor api_access_principal_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+    end
+
+    class Credentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_key_id: String,
+        ?secret_access_key: String,
+        ?session_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_key_id: String?
+      attr_accessor secret_access_key: String?
+      attr_accessor session_token: String?
+    end
+
+    class DataViewDestinationTypeParams
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_type: String,
+        ?s3_destination_export_file_format: String,
+        ?s3_destination_export_file_format_options: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_type: String?
+      attr_accessor s3_destination_export_file_format: String?
+      attr_accessor s3_destination_export_file_format_options: Hash[String, String]?
+    end
+
+    class DataViewErrorInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_message: String,
+        ?error_category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_message: String?
+      attr_accessor error_category: String?
+    end
+
+    module DataViewStatus
+      RUNNING: String
+      STARTING: String
+      FAILED: String
+      CANCELLED: String
+      TIMEOUT: String
+      SUCCESS: String
+      PENDING: String
+      FAILED_CLEANUP_FAILED: String
+    end
+
+    class DataViewSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_view_id: String,
+        ?data_view_arn: String,
+        ?dataset_id: String,
+        ?as_of_timestamp: Integer,
+        ?partition_columns: Array[String],
+        ?sort_columns: Array[String],
+        ?status: String,
+        ?error_info: Types::DataViewErrorInfo,
+        ?destination_type_properties: Types::DataViewDestinationTypeParams,
+        ?auto_update: bool,
+        ?create_time: Integer,
+        ?last_modified_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_view_id: String?
+      attr_accessor data_view_arn: String?
+      attr_accessor dataset_id: String?
+      attr_accessor as_of_timestamp: Integer?
+      attr_accessor partition_columns: Array[String]?
+      attr_accessor sort_columns: Array[String]?
+      attr_accessor status: String?
+      attr_accessor error_info: Types::DataViewErrorInfo?
+      attr_accessor destination_type_properties: Types::DataViewDestinationTypeParams?
+      attr_accessor auto_update: bool?
+      attr_accessor create_time: Integer?
+      attr_accessor last_modified_time: Integer?
+    end
+
+    class Dataset
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?dataset_arn: String,
+        ?dataset_title: String,
+        ?kind: String,
+        ?dataset_description: String,
+        ?owner_info: Types::DatasetOwnerInfo,
+        ?create_time: Integer,
+        ?last_modified_time: Integer,
+        ?schema_definition: Types::SchemaUnion,
+        ?alias: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor dataset_title: String?
+      attr_accessor kind: String?
+      attr_accessor dataset_description: String?
+      attr_accessor owner_info: Types::DatasetOwnerInfo?
+      attr_accessor create_time: Integer?
+      attr_accessor last_modified_time: Integer?
+      attr_accessor schema_definition: Types::SchemaUnion?
+      attr_accessor alias: String?
+    end
+
+    module DatasetKind
+      TABULAR: String
+      NON_TABULAR: String
+    end
+
+    class DatasetOwnerInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?phone_number: String,
+        ?email: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor phone_number: String?
+      attr_accessor email: String?
+    end
+
+    module DatasetStatus
+      PENDING: String
+      FAILED: String
+      SUCCESS: String
+      RUNNING: String
+    end
+
+    class DeleteDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?dataset_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor dataset_id: String?
+    end
+
+    class DeleteDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+    end
+
+    class DeletePermissionGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_group_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_group_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DeletePermissionGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_group_id: String?
+    end
+
+    class DisableUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DisableUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+    end
+
+    class DisassociateUserFromPermissionGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_group_id: String,
+        ?user_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_group_id: String?
+      attr_accessor user_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class DisassociateUserFromPermissionGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status_code: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status_code: Integer?
+    end
+
+    class EnableUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class EnableUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+    end
+
+    module ErrorCategory
+      VALIDATION: String
+      SERVICE_QUOTA_EXCEEDED: String
+      ACCESS_DENIED: String
+      RESOURCE_NOT_FOUND: String
+      THROTTLING: String
+      INTERNAL_SERVICE_EXCEPTION: String
+      CANCELLED: String
+      USER_RECOVERABLE: String
+    end
+
+    module ExportFileFormat
+      PARQUET: String
+      DELIMITED_TEXT: String
+    end
+
+    class GetChangesetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?changeset_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor changeset_id: String?
+    end
+
+    class GetChangesetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?changeset_id: String,
+        ?changeset_arn: String,
+        ?dataset_id: String,
+        ?change_type: String,
+        ?source_params: Hash[String, String],
+        ?format_params: Hash[String, String],
+        ?create_time: Integer,
+        ?status: String,
+        ?error_info: Types::ChangesetErrorInfo,
+        ?active_until_timestamp: Integer,
+        ?active_from_timestamp: Integer,
+        ?updates_changeset_id: String,
+        ?updated_by_changeset_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor changeset_id: String?
+      attr_accessor changeset_arn: String?
+      attr_accessor dataset_id: String?
+      attr_accessor change_type: String?
+      attr_accessor source_params: Hash[String, String]?
+      attr_accessor format_params: Hash[String, String]?
+      attr_accessor create_time: Integer?
+      attr_accessor status: String?
+      attr_accessor error_info: Types::ChangesetErrorInfo?
+      attr_accessor active_until_timestamp: Integer?
+      attr_accessor active_from_timestamp: Integer?
+      attr_accessor updates_changeset_id: String?
+      attr_accessor updated_by_changeset_id: String?
+    end
+
+    class GetDataViewRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_view_id: String,
+        ?dataset_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_view_id: String?
+      attr_accessor dataset_id: String?
+    end
+
+    class GetDataViewResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auto_update: bool,
+        ?partition_columns: Array[String],
+        ?dataset_id: String,
+        ?as_of_timestamp: Integer,
+        ?error_info: Types::DataViewErrorInfo,
+        ?last_modified_time: Integer,
+        ?create_time: Integer,
+        ?sort_columns: Array[String],
+        ?data_view_id: String,
+        ?data_view_arn: String,
+        ?destination_type_params: Types::DataViewDestinationTypeParams,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auto_update: bool?
+      attr_accessor partition_columns: Array[String]?
+      attr_accessor dataset_id: String?
+      attr_accessor as_of_timestamp: Integer?
+      attr_accessor error_info: Types::DataViewErrorInfo?
+      attr_accessor last_modified_time: Integer?
+      attr_accessor create_time: Integer?
+      attr_accessor sort_columns: Array[String]?
+      attr_accessor data_view_id: String?
+      attr_accessor data_view_arn: String?
+      attr_accessor destination_type_params: Types::DataViewDestinationTypeParams?
+      attr_accessor status: String?
+    end
+
+    class GetDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+    end
+
+    class GetDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?dataset_arn: String,
+        ?dataset_title: String,
+        ?kind: String,
+        ?dataset_description: String,
+        ?create_time: Integer,
+        ?last_modified_time: Integer,
+        ?schema_definition: Types::SchemaUnion,
+        ?alias: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor dataset_arn: String?
+      attr_accessor dataset_title: String?
+      attr_accessor kind: String?
+      attr_accessor dataset_description: String?
+      attr_accessor create_time: Integer?
+      attr_accessor last_modified_time: Integer?
+      attr_accessor schema_definition: Types::SchemaUnion?
+      attr_accessor alias: String?
+      attr_accessor status: String?
+    end
+
+    class GetExternalDataViewAccessDetailsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_view_id: String,
+        ?dataset_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_view_id: String?
+      attr_accessor dataset_id: String?
+    end
+
+    class GetExternalDataViewAccessDetailsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::AwsCredentials,
+        ?s3_location: Types::S3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::AwsCredentials?
+      attr_accessor s3_location: Types::S3Location?
+    end
+
+    class GetPermissionGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_group_id: String?
+    end
+
+    class GetPermissionGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_group: Types::PermissionGroup,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_group: Types::PermissionGroup?
+    end
+
+    class GetProgrammaticAccessCredentialsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?duration_in_minutes: Integer,
+        ?environment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor duration_in_minutes: Integer?
+      attr_accessor environment_id: String?
+    end
+
+    class GetProgrammaticAccessCredentialsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?credentials: Types::Credentials,
+        ?duration_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor credentials: Types::Credentials?
+      attr_accessor duration_in_minutes: Integer?
+    end
+
+    class GetUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+    end
+
+    class GetUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?status: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?email_address: String,
+        ?type: String,
+        ?api_access: String,
+        ?api_access_principal_arn: String,
+        ?create_time: Integer,
+        ?last_enabled_time: Integer,
+        ?last_disabled_time: Integer,
+        ?last_modified_time: Integer,
+        ?last_login_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor status: String?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor email_address: String?
+      attr_accessor type: String?
+      attr_accessor api_access: String?
+      attr_accessor api_access_principal_arn: String?
+      attr_accessor create_time: Integer?
+      attr_accessor last_enabled_time: Integer?
+      attr_accessor last_disabled_time: Integer?
+      attr_accessor last_modified_time: Integer?
+      attr_accessor last_login_time: Integer?
+    end
+
+    class GetWorkingLocationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?location_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor location_type: String?
+    end
+
+    class GetWorkingLocationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_uri: String,
+        ?s3_path: String,
+        ?s3_bucket: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_uri: String?
+      attr_accessor s3_path: String?
+      attr_accessor s3_bucket: String?
+    end
+
+    module IngestionStatus
+      PENDING: String
+      FAILED: String
+      SUCCESS: String
+      RUNNING: String
+      STOP_REQUESTED: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListChangesetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListChangesetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?changesets: Array[Types::ChangesetSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor changesets: Array[Types::ChangesetSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataViewsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDataViewsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?data_views: Array[Types::DataViewSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor data_views: Array[Types::DataViewSummary]?
+    end
+
+    class ListDatasetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDatasetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datasets: Array[Types::Dataset],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datasets: Array[Types::Dataset]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPermissionGroupsByUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPermissionGroupsByUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_groups: Array[Types::PermissionGroupByUser],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_groups: Array[Types::PermissionGroupByUser]?
+      attr_accessor next_token: String?
+    end
+
+    class ListPermissionGroupsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListPermissionGroupsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_groups: Array[Types::PermissionGroup],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_groups: Array[Types::PermissionGroup]?
+      attr_accessor next_token: String?
+    end
+
+    class ListUsersByPermissionGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_group_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_group_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListUsersByPermissionGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?users: Array[Types::UserByPermissionGroup],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor users: Array[Types::UserByPermissionGroup]?
+      attr_accessor next_token: String?
+    end
+
+    class ListUsersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListUsersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?users: Array[Types::User],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor users: Array[Types::User]?
+      attr_accessor next_token: String?
+    end
+
+    class PermissionGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_group_id: String,
+        ?name: String,
+        ?description: String,
+        ?application_permissions: Array[String],
+        ?create_time: Integer,
+        ?last_modified_time: Integer,
+        ?membership_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_group_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor application_permissions: Array[String]?
+      attr_accessor create_time: Integer?
+      attr_accessor last_modified_time: Integer?
+      attr_accessor membership_status: String?
+    end
+
+    class PermissionGroupByUser
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_group_id: String,
+        ?name: String,
+        ?membership_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_group_id: String?
+      attr_accessor name: String?
+      attr_accessor membership_status: String?
+    end
+
+    module PermissionGroupMembershipStatus
+      ADDITION_IN_PROGRESS: String
+      ADDITION_SUCCESS: String
+      REMOVAL_IN_PROGRESS: String
+    end
+
+    class PermissionGroupParams
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_group_id: String,
+        ?dataset_permissions: Array[Types::ResourcePermission],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_group_id: String?
+      attr_accessor dataset_permissions: Array[Types::ResourcePermission]?
+    end
+
+    class ResetUserPasswordRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor client_token: String?
+    end
+
+    class ResetUserPasswordResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?temporary_password: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor temporary_password: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    class ResourcePermission
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission: String?
+    end
+
+    class S3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor key: String?
+    end
+
+    class SchemaDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?columns: Array[Types::ColumnDefinition],
+        ?primary_key_columns: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor columns: Array[Types::ColumnDefinition]?
+      attr_accessor primary_key_columns: Array[String]?
+    end
+
+    class SchemaUnion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tabular_schema_config: Types::SchemaDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tabular_schema_config: Types::SchemaDefinition?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateChangesetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?dataset_id: String,
+        ?changeset_id: String,
+        ?source_params: Hash[String, String],
+        ?format_params: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor dataset_id: String?
+      attr_accessor changeset_id: String?
+      attr_accessor source_params: Hash[String, String]?
+      attr_accessor format_params: Hash[String, String]?
+    end
+
+    class UpdateChangesetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?changeset_id: String,
+        ?dataset_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor changeset_id: String?
+      attr_accessor dataset_id: String?
+    end
+
+    class UpdateDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?client_token: String,
+        ?dataset_id: String,
+        ?dataset_title: String,
+        ?kind: String,
+        ?dataset_description: String,
+        ?alias: String,
+        ?schema_definition: Types::SchemaUnion,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor client_token: String?
+      attr_accessor dataset_id: String?
+      attr_accessor dataset_title: String?
+      attr_accessor kind: String?
+      attr_accessor dataset_description: String?
+      attr_accessor alias: String?
+      attr_accessor schema_definition: Types::SchemaUnion?
+    end
+
+    class UpdateDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+    end
+
+    class UpdatePermissionGroupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_group_id: String,
+        ?name: String,
+        ?description: String,
+        ?application_permissions: Array[String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_group_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor application_permissions: Array[String]?
+      attr_accessor client_token: String?
+    end
+
+    class UpdatePermissionGroupResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?permission_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor permission_group_id: String?
+    end
+
+    class UpdateUserRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?type: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?api_access: String,
+        ?api_access_principal_arn: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor type: String?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor api_access: String?
+      attr_accessor api_access_principal_arn: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateUserResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+    end
+
+    class User
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?status: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?email_address: String,
+        ?type: String,
+        ?api_access: String,
+        ?api_access_principal_arn: String,
+        ?create_time: Integer,
+        ?last_enabled_time: Integer,
+        ?last_disabled_time: Integer,
+        ?last_modified_time: Integer,
+        ?last_login_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor status: String?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor email_address: String?
+      attr_accessor type: String?
+      attr_accessor api_access: String?
+      attr_accessor api_access_principal_arn: String?
+      attr_accessor create_time: Integer?
+      attr_accessor last_enabled_time: Integer?
+      attr_accessor last_disabled_time: Integer?
+      attr_accessor last_modified_time: Integer?
+      attr_accessor last_login_time: Integer?
+    end
+
+    class UserByPermissionGroup
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?user_id: String,
+        ?status: String,
+        ?first_name: String,
+        ?last_name: String,
+        ?email_address: String,
+        ?type: String,
+        ?api_access: String,
+        ?api_access_principal_arn: String,
+        ?membership_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor user_id: String?
+      attr_accessor status: String?
+      attr_accessor first_name: String?
+      attr_accessor last_name: String?
+      attr_accessor email_address: String?
+      attr_accessor type: String?
+      attr_accessor api_access: String?
+      attr_accessor api_access_principal_arn: String?
+      attr_accessor membership_status: String?
+    end
+
+    module UserStatus
+      CREATING: String
+      ENABLED: String
+      DISABLED: String
+    end
+
+    module UserType
+      SUPER_USER: String
+      APP_USER: String
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+    end
+
+    module LocationType
+      INGESTION: String
+      SAGEMAKER: String
+    end
+  end
+end

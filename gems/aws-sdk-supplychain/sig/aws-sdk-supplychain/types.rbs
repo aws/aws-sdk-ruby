@@ -1,0 +1,1511 @@
+module Aws::SupplyChain
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class BillOfMaterialsImportJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?job_id: String,
+        ?status: String,
+        ?s3uri: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor job_id: String?
+      attr_accessor status: String?
+      attr_accessor s3uri: String?
+      attr_accessor message: String?
+    end
+
+    module ConfigurationJobStatus
+      NEW: String
+      FAILED: String
+      IN_PROGRESS: String
+      QUEUED: String
+      SUCCESS: String
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateBillOfMaterialsImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?s3uri: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor s3uri: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateBillOfMaterialsImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job_id: String?
+    end
+
+    class CreateDataIntegrationFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?name: String,
+        ?sources: Array[Types::DataIntegrationFlowSource],
+        ?transformation: Types::DataIntegrationFlowTransformation,
+        ?target: Types::DataIntegrationFlowTarget,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor name: String?
+      attr_accessor sources: Array[Types::DataIntegrationFlowSource]?
+      attr_accessor transformation: Types::DataIntegrationFlowTransformation?
+      attr_accessor target: Types::DataIntegrationFlowTarget?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDataIntegrationFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor name: String?
+    end
+
+    class CreateDataLakeDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?namespace: String,
+        ?name: String,
+        ?schema: Types::DataLakeDatasetSchema,
+        ?description: String,
+        ?partition_spec: Types::DataLakeDatasetPartitionSpec,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+      attr_accessor schema: Types::DataLakeDatasetSchema?
+      attr_accessor description: String?
+      attr_accessor partition_spec: Types::DataLakeDatasetPartitionSpec?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDataLakeDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset: Types::DataLakeDataset,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset: Types::DataLakeDataset?
+    end
+
+    class CreateDataLakeNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDataLakeNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: Types::DataLakeNamespace,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: Types::DataLakeNamespace?
+    end
+
+    class CreateInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_name: String,
+        ?instance_description: String,
+        ?kms_key_arn: String,
+        ?web_app_dns_domain: String,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_name: String?
+      attr_accessor instance_description: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor web_app_dns_domain: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance: Types::Instance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance: Types::Instance?
+    end
+
+    class DataIntegrationEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?event_id: String,
+        ?event_type: String,
+        ?event_group_id: String,
+        ?event_timestamp: Time,
+        ?dataset_target_details: Types::DataIntegrationEventDatasetTargetDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor event_id: String?
+      attr_accessor event_type: String?
+      attr_accessor event_group_id: String?
+      attr_accessor event_timestamp: Time?
+      attr_accessor dataset_target_details: Types::DataIntegrationEventDatasetTargetDetails?
+    end
+
+    class DataIntegrationEventDatasetLoadExecutionDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor message: String?
+    end
+
+    module DataIntegrationEventDatasetLoadStatus
+      SUCCEEDED: String
+      IN_PROGRESS: String
+      FAILED: String
+    end
+
+    module DataIntegrationEventDatasetOperationType
+      APPEND: String
+      UPSERT: String
+      DELETE: String
+    end
+
+    class DataIntegrationEventDatasetTargetConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_identifier: String,
+        ?operation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_identifier: String?
+      attr_accessor operation_type: String?
+    end
+
+    class DataIntegrationEventDatasetTargetDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_identifier: String,
+        ?operation_type: String,
+        ?dataset_load_execution: Types::DataIntegrationEventDatasetLoadExecutionDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_identifier: String?
+      attr_accessor operation_type: String?
+      attr_accessor dataset_load_execution: Types::DataIntegrationEventDatasetLoadExecutionDetails?
+    end
+
+    module DataIntegrationEventType
+      FORECAST: String
+      INVENTORY_LEVEL: String
+      INBOUND_ORDER: String
+      INBOUND_ORDER_LINE: String
+      INBOUND_ORDER_LINE_SCHEDULE: String
+      OUTBOUND_ORDER_LINE: String
+      OUTBOUND_SHIPMENT: String
+      PROCESS_HEADER: String
+      PROCESS_OPERATION: String
+      PROCESS_PRODUCT: String
+      RESERVATION: String
+      SHIPMENT: String
+      SHIPMENT_STOP: String
+      SHIPMENT_STOP_ORDER: String
+      SUPPLY_PLAN: String
+      DATASET: String
+    end
+
+    class DataIntegrationFlow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?name: String,
+        ?sources: Array[Types::DataIntegrationFlowSource],
+        ?transformation: Types::DataIntegrationFlowTransformation,
+        ?target: Types::DataIntegrationFlowTarget,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor name: String?
+      attr_accessor sources: Array[Types::DataIntegrationFlowSource]?
+      attr_accessor transformation: Types::DataIntegrationFlowTransformation?
+      attr_accessor target: Types::DataIntegrationFlowTarget?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class DataIntegrationFlowDatasetOptions
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?load_type: String,
+        ?dedupe_records: bool,
+        ?dedupe_strategy: Types::DataIntegrationFlowDedupeStrategy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor load_type: String?
+      attr_accessor dedupe_records: bool?
+      attr_accessor dedupe_strategy: Types::DataIntegrationFlowDedupeStrategy?
+    end
+
+    class DataIntegrationFlowDatasetSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_identifier: String?
+    end
+
+    class DataIntegrationFlowDatasetSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_identifier: String,
+        ?options: Types::DataIntegrationFlowDatasetOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_identifier: String?
+      attr_accessor options: Types::DataIntegrationFlowDatasetOptions?
+    end
+
+    class DataIntegrationFlowDatasetTargetConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_identifier: String,
+        ?options: Types::DataIntegrationFlowDatasetOptions,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_identifier: String?
+      attr_accessor options: Types::DataIntegrationFlowDatasetOptions?
+    end
+
+    class DataIntegrationFlowDedupeStrategy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?field_priority: Types::DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor field_priority: Types::DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration?
+    end
+
+    module DataIntegrationFlowDedupeStrategyType
+      FIELD_PRIORITY: String
+    end
+
+    class DataIntegrationFlowExecution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?flow_name: String,
+        ?execution_id: String,
+        ?status: String,
+        ?source_info: Types::DataIntegrationFlowExecutionSourceInfo,
+        ?message: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?output_metadata: Types::DataIntegrationFlowExecutionOutputMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor flow_name: String?
+      attr_accessor execution_id: String?
+      attr_accessor status: String?
+      attr_accessor source_info: Types::DataIntegrationFlowExecutionSourceInfo?
+      attr_accessor message: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor output_metadata: Types::DataIntegrationFlowExecutionOutputMetadata?
+    end
+
+    class DataIntegrationFlowExecutionOutputMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?diagnostic_reports_root_s3_uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor diagnostic_reports_root_s3_uri: String?
+    end
+
+    class DataIntegrationFlowExecutionSourceInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_type: String,
+        ?s3_source: Types::DataIntegrationFlowS3Source,
+        ?dataset_source: Types::DataIntegrationFlowDatasetSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_type: String?
+      attr_accessor s3_source: Types::DataIntegrationFlowS3Source?
+      attr_accessor dataset_source: Types::DataIntegrationFlowDatasetSource?
+    end
+
+    module DataIntegrationFlowExecutionStatus
+      SUCCEEDED: String
+      IN_PROGRESS: String
+      FAILED: String
+    end
+
+    class DataIntegrationFlowFieldPriorityDedupeField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?sort_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor sort_order: String?
+    end
+
+    module DataIntegrationFlowFieldPriorityDedupeSortOrder
+      ASC: String
+      DESC: String
+    end
+
+    class DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fields: Array[Types::DataIntegrationFlowFieldPriorityDedupeField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fields: Array[Types::DataIntegrationFlowFieldPriorityDedupeField]?
+    end
+
+    module DataIntegrationFlowFileType
+      CSV: String
+      PARQUET: String
+      JSON: String
+    end
+
+    module DataIntegrationFlowLoadType
+      INCREMENTAL: String
+      REPLACE: String
+    end
+
+    class DataIntegrationFlowS3Options
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_type: String?
+    end
+
+    class DataIntegrationFlowS3Source
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor key: String?
+    end
+
+    class DataIntegrationFlowS3SourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?prefix: String,
+        ?options: Types::DataIntegrationFlowS3Options,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor prefix: String?
+      attr_accessor options: Types::DataIntegrationFlowS3Options?
+    end
+
+    class DataIntegrationFlowS3TargetConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_name: String,
+        ?prefix: String,
+        ?options: Types::DataIntegrationFlowS3Options,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_name: String?
+      attr_accessor prefix: String?
+      attr_accessor options: Types::DataIntegrationFlowS3Options?
+    end
+
+    class DataIntegrationFlowSQLTransformationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query: String?
+    end
+
+    class DataIntegrationFlowSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_type: String,
+        ?source_name: String,
+        ?s3_source: Types::DataIntegrationFlowS3SourceConfiguration,
+        ?dataset_source: Types::DataIntegrationFlowDatasetSourceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_type: String?
+      attr_accessor source_name: String?
+      attr_accessor s3_source: Types::DataIntegrationFlowS3SourceConfiguration?
+      attr_accessor dataset_source: Types::DataIntegrationFlowDatasetSourceConfiguration?
+    end
+
+    module DataIntegrationFlowSourceType
+      S3: String
+      DATASET: String
+    end
+
+    class DataIntegrationFlowTarget
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?target_type: String,
+        ?s3_target: Types::DataIntegrationFlowS3TargetConfiguration,
+        ?dataset_target: Types::DataIntegrationFlowDatasetTargetConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor target_type: String?
+      attr_accessor s3_target: Types::DataIntegrationFlowS3TargetConfiguration?
+      attr_accessor dataset_target: Types::DataIntegrationFlowDatasetTargetConfiguration?
+    end
+
+    module DataIntegrationFlowTargetType
+      S3: String
+      DATASET: String
+    end
+
+    class DataIntegrationFlowTransformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?transformation_type: String,
+        ?sql_transformation: Types::DataIntegrationFlowSQLTransformationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor transformation_type: String?
+      attr_accessor sql_transformation: Types::DataIntegrationFlowSQLTransformationConfiguration?
+    end
+
+    module DataIntegrationFlowTransformationType
+      SQL: String
+      NONE: String
+    end
+
+    class DataLakeDataset
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?namespace: String,
+        ?name: String,
+        ?arn: String,
+        ?schema: Types::DataLakeDatasetSchema,
+        ?description: String,
+        ?partition_spec: Types::DataLakeDatasetPartitionSpec,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor schema: Types::DataLakeDatasetSchema?
+      attr_accessor description: String?
+      attr_accessor partition_spec: Types::DataLakeDatasetPartitionSpec?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class DataLakeDatasetPartitionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?transform: Types::DataLakeDatasetPartitionFieldTransform,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor transform: Types::DataLakeDatasetPartitionFieldTransform?
+    end
+
+    class DataLakeDatasetPartitionFieldTransform
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    class DataLakeDatasetPartitionSpec
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fields: Array[Types::DataLakeDatasetPartitionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fields: Array[Types::DataLakeDatasetPartitionField]?
+    end
+
+    module DataLakeDatasetPartitionTransformType
+      YEAR: String
+      MONTH: String
+      DAY: String
+      HOUR: String
+      IDENTITY: String
+    end
+
+    class DataLakeDatasetPrimaryKeyField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+    end
+
+    class DataLakeDatasetSchema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?fields: Array[Types::DataLakeDatasetSchemaField],
+        ?primary_keys: Array[Types::DataLakeDatasetPrimaryKeyField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor fields: Array[Types::DataLakeDatasetSchemaField]?
+      attr_accessor primary_keys: Array[Types::DataLakeDatasetPrimaryKeyField]?
+    end
+
+    class DataLakeDatasetSchemaField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+        ?is_required: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+      attr_accessor is_required: bool?
+    end
+
+    module DataLakeDatasetSchemaFieldType
+      INT: String
+      DOUBLE: String
+      STRING: String
+      TIMESTAMP: String
+      LONG: String
+    end
+
+    class DataLakeNamespace
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?name: String,
+        ?arn: String,
+        ?description: String,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class DeleteDataIntegrationFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteDataIntegrationFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteDataLakeDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?namespace: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteDataLakeDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?namespace: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteDataLakeNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteDataLakeNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor name: String?
+    end
+
+    class DeleteInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+    end
+
+    class DeleteInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance: Types::Instance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance: Types::Instance?
+    end
+
+    class GetBillOfMaterialsImportJobRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor job_id: String?
+    end
+
+    class GetBillOfMaterialsImportJobResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?job: Types::BillOfMaterialsImportJob,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor job: Types::BillOfMaterialsImportJob?
+    end
+
+    class GetDataIntegrationEventRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?event_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor event_id: String?
+    end
+
+    class GetDataIntegrationEventResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event: Types::DataIntegrationEvent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event: Types::DataIntegrationEvent?
+    end
+
+    class GetDataIntegrationFlowExecutionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?flow_name: String,
+        ?execution_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor flow_name: String?
+      attr_accessor execution_id: String?
+    end
+
+    class GetDataIntegrationFlowExecutionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_execution: Types::DataIntegrationFlowExecution,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_execution: Types::DataIntegrationFlowExecution?
+    end
+
+    class GetDataIntegrationFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor name: String?
+    end
+
+    class GetDataIntegrationFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow: Types::DataIntegrationFlow,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow: Types::DataIntegrationFlow?
+    end
+
+    class GetDataLakeDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?namespace: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+    end
+
+    class GetDataLakeDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset: Types::DataLakeDataset,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset: Types::DataLakeDataset?
+    end
+
+    class GetDataLakeNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor name: String?
+    end
+
+    class GetDataLakeNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: Types::DataLakeNamespace,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: Types::DataLakeNamespace?
+    end
+
+    class GetInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+    end
+
+    class GetInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance: Types::Instance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance: Types::Instance?
+    end
+
+    class Instance
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?aws_account_id: String,
+        ?state: String,
+        ?error_message: String,
+        ?web_app_dns_domain: String,
+        ?created_time: Time,
+        ?last_modified_time: Time,
+        ?instance_name: String,
+        ?instance_description: String,
+        ?kms_key_arn: String,
+        ?version_number: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor aws_account_id: String?
+      attr_accessor state: String?
+      attr_accessor error_message: String?
+      attr_accessor web_app_dns_domain: String?
+      attr_accessor created_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor instance_name: String?
+      attr_accessor instance_description: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor version_number: Float?
+    end
+
+    module InstanceState
+      INITIALIZING: String
+      ACTIVE: String
+      CREATE_FAILED: String
+      DELETE_FAILED: String
+      DELETING: String
+      DELETED: String
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListDataIntegrationEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?event_type: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor event_type: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDataIntegrationEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?events: Array[Types::DataIntegrationEvent],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor events: Array[Types::DataIntegrationEvent]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataIntegrationFlowExecutionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?flow_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor flow_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDataIntegrationFlowExecutionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow_executions: Array[Types::DataIntegrationFlowExecution],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow_executions: Array[Types::DataIntegrationFlowExecution]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataIntegrationFlowsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDataIntegrationFlowsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flows: Array[Types::DataIntegrationFlow],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flows: Array[Types::DataIntegrationFlow]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataLakeDatasetsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?namespace: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor namespace: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDataLakeDatasetsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datasets: Array[Types::DataLakeDataset],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datasets: Array[Types::DataLakeDataset]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDataLakeNamespacesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDataLakeNamespacesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespaces: Array[Types::DataLakeNamespace],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespaces: Array[Types::DataLakeNamespace]?
+      attr_accessor next_token: String?
+    end
+
+    class ListInstancesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+        ?instance_name_filter: Array[String],
+        ?instance_state_filter: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+      attr_accessor instance_name_filter: Array[String]?
+      attr_accessor instance_state_filter: Array[String]?
+    end
+
+    class ListInstancesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instances: Array[Types::Instance],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instances: Array[Types::Instance]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SendDataIntegrationEventRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?event_type: String,
+        ?data: String,
+        ?event_group_id: String,
+        ?event_timestamp: Time,
+        ?client_token: String,
+        ?dataset_target: Types::DataIntegrationEventDatasetTargetConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor event_type: String?
+      attr_accessor data: String?
+      attr_accessor event_group_id: String?
+      attr_accessor event_timestamp: Time?
+      attr_accessor client_token: String?
+      attr_accessor dataset_target: Types::DataIntegrationEventDatasetTargetConfiguration?
+    end
+
+    class SendDataIntegrationEventResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateDataIntegrationFlowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?name: String,
+        ?sources: Array[Types::DataIntegrationFlowSource],
+        ?transformation: Types::DataIntegrationFlowTransformation,
+        ?target: Types::DataIntegrationFlowTarget,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor name: String?
+      attr_accessor sources: Array[Types::DataIntegrationFlowSource]?
+      attr_accessor transformation: Types::DataIntegrationFlowTransformation?
+      attr_accessor target: Types::DataIntegrationFlowTarget?
+    end
+
+    class UpdateDataIntegrationFlowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?flow: Types::DataIntegrationFlow,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor flow: Types::DataIntegrationFlow?
+    end
+
+    class UpdateDataLakeDatasetRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?namespace: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateDataLakeDatasetResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset: Types::DataLakeDataset,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset: Types::DataLakeDataset?
+    end
+
+    class UpdateDataLakeNamespaceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateDataLakeNamespaceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: Types::DataLakeNamespace,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: Types::DataLakeNamespace?
+    end
+
+    class UpdateInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_id: String,
+        ?instance_name: String,
+        ?instance_description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_id: String?
+      attr_accessor instance_name: String?
+      attr_accessor instance_description: String?
+    end
+
+    class UpdateInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance: Types::Instance,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance: Types::Instance?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

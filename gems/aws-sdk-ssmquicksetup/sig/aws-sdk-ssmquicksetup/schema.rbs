@@ -1,0 +1,61 @@
+module Aws::SSMQuickSetup
+  module Schema
+    include Smithy::Schema::Shapes
+
+    AccessDeniedException: StructureShape
+    ConfigurationDefinition: StructureShape
+    ConfigurationDefinitionInput: StructureShape
+    ConfigurationDefinitionSummariesList: ListShape
+    ConfigurationDefinitionSummary: StructureShape
+    ConfigurationDefinitionsInputList: ListShape
+    ConfigurationDefinitionsList: ListShape
+    ConfigurationManagerList: ListShape
+    ConfigurationManagerSummary: StructureShape
+    ConfigurationParametersMap: MapShape
+    ConfigurationSummary: StructureShape
+    ConfigurationsList: ListShape
+    ConflictException: StructureShape
+    CreateConfigurationManagerInput: StructureShape
+    CreateConfigurationManagerOutput: StructureShape
+    DeleteConfigurationManagerInput: StructureShape
+    Filter: StructureShape
+    FilterValues: ListShape
+    FiltersList: ListShape
+    GetConfigurationInput: StructureShape
+    GetConfigurationManagerInput: StructureShape
+    GetConfigurationManagerOutput: StructureShape
+    GetConfigurationOutput: StructureShape
+    GetServiceSettingsOutput: StructureShape
+    IAMRoleArn: StringShape
+    InternalServerException: StructureShape
+    ListConfigurationManagersInput: StructureShape
+    ListConfigurationManagersOutput: StructureShape
+    ListConfigurationsInput: StructureShape
+    ListConfigurationsOutput: StructureShape
+    ListQuickSetupTypesOutput: StructureShape
+    ListTagsForResourceRequest: StructureShape
+    ListTagsForResourceResponse: StructureShape
+    QuickSetupTypeList: ListShape
+    QuickSetupTypeOutput: StructureShape
+    ResourceNotFoundException: StructureShape
+    ServiceSettings: StructureShape
+    Status: EnumShape
+    StatusDetails: MapShape
+    StatusSummariesList: ListShape
+    StatusSummary: StructureShape
+    StatusType: EnumShape
+    TagEntry: StructureShape
+    TagKeys: ListShape
+    TagResourceInput: StructureShape
+    Tags: ListShape
+    TagsMap: MapShape
+    ThrottlingException: StructureShape
+    UntagResourceInput: StructureShape
+    UpdateConfigurationDefinitionInput: StructureShape
+    UpdateConfigurationManagerInput: StructureShape
+    UpdateServiceSettingsInput: StructureShape
+    ValidationException: StructureShape
+
+    QuickSetup: ServiceShape
+  end
+end

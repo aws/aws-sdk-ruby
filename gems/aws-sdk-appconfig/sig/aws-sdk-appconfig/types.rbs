@@ -1,0 +1,1963 @@
+module Aws::AppConfig
+  module Types
+
+    class Action
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?uri: String,
+        ?role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor uri: String?
+      attr_accessor role_arn: String?
+    end
+
+    class ActionInvocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?extension_identifier: String,
+        ?action_name: String,
+        ?uri: String,
+        ?role_arn: String,
+        ?error_message: String,
+        ?error_code: String,
+        ?invocation_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor extension_identifier: String?
+      attr_accessor action_name: String?
+      attr_accessor uri: String?
+      attr_accessor role_arn: String?
+      attr_accessor error_message: String?
+      attr_accessor error_code: String?
+      attr_accessor invocation_id: String?
+    end
+
+    module ActionPoint
+      PRE_CREATE_HOSTED_CONFIGURATION_VERSION: String
+      PRE_START_DEPLOYMENT: String
+      AT_DEPLOYMENT_TICK: String
+      ON_DEPLOYMENT_START: String
+      ON_DEPLOYMENT_STEP: String
+      ON_DEPLOYMENT_BAKING: String
+      ON_DEPLOYMENT_COMPLETE: String
+      ON_DEPLOYMENT_ROLLED_BACK: String
+    end
+
+    class Application
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class AppliedExtension
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?extension_id: String,
+        ?extension_association_id: String,
+        ?version_number: Integer,
+        ?parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor extension_id: String?
+      attr_accessor extension_association_id: String?
+      attr_accessor version_number: Integer?
+      attr_accessor parameters: Hash[String, String]?
+    end
+
+    class BadRequestDetails
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?invalid_configuration: Array[Types::InvalidConfigurationDetail],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invalid_configuration: Array[Types::InvalidConfigurationDetail]?
+
+      class InvalidConfiguration < BadRequestDetails
+      end
+      class Unknown < BadRequestDetails
+      end
+    end
+
+    class BadRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?details: Types::BadRequestDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor details: Types::BadRequestDetails?
+    end
+
+    module BadRequestReason
+      INVALID_CONFIGURATION: String
+    end
+
+    module BytesMeasure
+      KILOBYTES: String
+    end
+
+    class ConfigurationProfileSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?id: String,
+        ?name: String,
+        ?location_uri: String,
+        ?validator_types: Array[String],
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor location_uri: String?
+      attr_accessor validator_types: Array[String]?
+      attr_accessor type: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class CreateApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class CreateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateConfigurationProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?location_uri: String,
+        ?retrieval_role_arn: String,
+        ?validators: Array[Types::Validator],
+        ?type: String,
+        ?kms_key_arn: String,
+        ?kms_key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor location_uri: String?
+      attr_accessor retrieval_role_arn: String?
+      attr_accessor validators: Array[Types::Validator]?
+      attr_accessor type: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor kms_key_identifier: String?
+    end
+
+    class CreateConfigurationProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?name: String,
+        ?description: String,
+        ?location_uri: String,
+        ?retrieval_role_arn: String,
+        ?validators: Array[Types::Validator],
+        ?tags: Hash[String, String],
+        ?type: String,
+        ?kms_key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor location_uri: String?
+      attr_accessor retrieval_role_arn: String?
+      attr_accessor validators: Array[Types::Validator]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor type: String?
+      attr_accessor kms_key_identifier: String?
+    end
+
+    class CreateDeploymentStrategyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?deployment_duration_in_minutes: Integer,
+        ?growth_type: String,
+        ?growth_factor: Float,
+        ?final_bake_time_in_minutes: Integer,
+        ?replicate_to: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor deployment_duration_in_minutes: Integer?
+      attr_accessor growth_type: String?
+      attr_accessor growth_factor: Float?
+      attr_accessor final_bake_time_in_minutes: Integer?
+      attr_accessor replicate_to: String?
+    end
+
+    class CreateDeploymentStrategyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?deployment_duration_in_minutes: Integer,
+        ?final_bake_time_in_minutes: Integer,
+        ?growth_factor: Float,
+        ?growth_type: String,
+        ?replicate_to: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor deployment_duration_in_minutes: Integer?
+      attr_accessor final_bake_time_in_minutes: Integer?
+      attr_accessor growth_factor: Float?
+      attr_accessor growth_type: String?
+      attr_accessor replicate_to: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateEnvironmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?state: String,
+        ?monitors: Array[Types::Monitor],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor state: String?
+      attr_accessor monitors: Array[Types::Monitor]?
+    end
+
+    class CreateEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?name: String,
+        ?description: String,
+        ?monitors: Array[Types::Monitor],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor monitors: Array[Types::Monitor]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateExtensionAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?extension_arn: String,
+        ?resource_arn: String,
+        ?arn: String,
+        ?parameters: Hash[String, String],
+        ?extension_version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor extension_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor arn: String?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor extension_version_number: Integer?
+    end
+
+    class CreateExtensionAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?extension_identifier: String,
+        ?extension_version_number: Integer,
+        ?resource_identifier: String,
+        ?parameters: Hash[String, String],
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor extension_identifier: String?
+      attr_accessor extension_version_number: Integer?
+      attr_accessor resource_identifier: String?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateExtensionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?version_number: Integer,
+        ?arn: String,
+        ?description: String,
+        ?actions: Hash[String, Array[Types::Action]],
+        ?parameters: Hash[String, Types::Parameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor version_number: Integer?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor actions: Hash[String, Array[Types::Action]]?
+      attr_accessor parameters: Hash[String, Types::Parameter]?
+    end
+
+    class CreateExtensionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?actions: Hash[String, Array[Types::Action]],
+        ?parameters: Hash[String, Types::Parameter],
+        ?tags: Hash[String, String],
+        ?latest_version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor actions: Hash[String, Array[Types::Action]]?
+      attr_accessor parameters: Hash[String, Types::Parameter]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor latest_version_number: Integer?
+    end
+
+    class CreateHostedConfigurationVersionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?configuration_profile_id: String,
+        ?version_number: Integer,
+        ?description: String,
+        ?content: String,
+        ?content_type: String,
+        ?version_label: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor configuration_profile_id: String?
+      attr_accessor version_number: Integer?
+      attr_accessor description: String?
+      attr_accessor content: String?
+      attr_accessor content_type: String?
+      attr_accessor version_label: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class CreateHostedConfigurationVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?configuration_profile_id: String,
+        ?description: String,
+        ?content: String,
+        ?content_type: String,
+        ?latest_version_number: Integer,
+        ?version_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor configuration_profile_id: String?
+      attr_accessor description: String?
+      attr_accessor content: String?
+      attr_accessor content_type: String?
+      attr_accessor latest_version_number: Integer?
+      attr_accessor version_label: String?
+    end
+
+    class DeleteApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+    end
+
+    class DeleteConfigurationProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?configuration_profile_id: String,
+        ?deletion_protection_check: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor configuration_profile_id: String?
+      attr_accessor deletion_protection_check: String?
+    end
+
+    class DeleteDeploymentStrategyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_strategy_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_strategy_id: String?
+    end
+
+    class DeleteEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?environment_id: String,
+        ?application_id: String,
+        ?deletion_protection_check: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor environment_id: String?
+      attr_accessor application_id: String?
+      attr_accessor deletion_protection_check: String?
+    end
+
+    class DeleteExtensionAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?extension_association_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor extension_association_id: String?
+    end
+
+    class DeleteExtensionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?extension_identifier: String,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor extension_identifier: String?
+      attr_accessor version_number: Integer?
+    end
+
+    class DeleteHostedConfigurationVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?configuration_profile_id: String,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor configuration_profile_id: String?
+      attr_accessor version_number: Integer?
+    end
+
+    module DeletionProtectionCheck
+      ACCOUNT_DEFAULT: String
+      APPLY: String
+      BYPASS: String
+    end
+
+    class DeletionProtectionSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?protection_period_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor protection_period_in_minutes: Integer?
+    end
+
+    class DeploymentEvent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_type: String,
+        ?triggered_by: String,
+        ?description: String,
+        ?action_invocations: Array[Types::ActionInvocation],
+        ?occurred_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_type: String?
+      attr_accessor triggered_by: String?
+      attr_accessor description: String?
+      attr_accessor action_invocations: Array[Types::ActionInvocation]?
+      attr_accessor occurred_at: Time?
+    end
+
+    module DeploymentEventType
+      PERCENTAGE_UPDATED: String
+      ROLLBACK_STARTED: String
+      ROLLBACK_COMPLETED: String
+      BAKE_TIME_STARTED: String
+      DEPLOYMENT_STARTED: String
+      DEPLOYMENT_COMPLETED: String
+      REVERT_COMPLETED: String
+    end
+
+    module DeploymentState
+      BAKING: String
+      VALIDATING: String
+      DEPLOYING: String
+      COMPLETE: String
+      ROLLING_BACK: String
+      ROLLED_BACK: String
+      REVERTED: String
+    end
+
+    class DeploymentStrategy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?deployment_duration_in_minutes: Integer,
+        ?growth_type: String,
+        ?growth_factor: Float,
+        ?final_bake_time_in_minutes: Integer,
+        ?replicate_to: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor deployment_duration_in_minutes: Integer?
+      attr_accessor growth_type: String?
+      attr_accessor growth_factor: Float?
+      attr_accessor final_bake_time_in_minutes: Integer?
+      attr_accessor replicate_to: String?
+    end
+
+    class DeploymentSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_number: Integer,
+        ?configuration_name: String,
+        ?configuration_version: String,
+        ?deployment_duration_in_minutes: Integer,
+        ?growth_type: String,
+        ?growth_factor: Float,
+        ?final_bake_time_in_minutes: Integer,
+        ?state: String,
+        ?percentage_complete: Float,
+        ?started_at: Time,
+        ?completed_at: Time,
+        ?version_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_number: Integer?
+      attr_accessor configuration_name: String?
+      attr_accessor configuration_version: String?
+      attr_accessor deployment_duration_in_minutes: Integer?
+      attr_accessor growth_type: String?
+      attr_accessor growth_factor: Float?
+      attr_accessor final_bake_time_in_minutes: Integer?
+      attr_accessor state: String?
+      attr_accessor percentage_complete: Float?
+      attr_accessor started_at: Time?
+      attr_accessor completed_at: Time?
+      attr_accessor version_label: String?
+    end
+
+    class Environment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?state: String,
+        ?monitors: Array[Types::Monitor],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor state: String?
+      attr_accessor monitors: Array[Types::Monitor]?
+    end
+
+    module EnvironmentState
+      READY_FOR_DEPLOYMENT: String
+      DEPLOYING: String
+      ROLLING_BACK: String
+      ROLLED_BACK: String
+      REVERTED: String
+    end
+
+    class ExtensionAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?extension_arn: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor extension_arn: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class ExtensionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?version_number: Integer,
+        ?arn: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor version_number: Integer?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+    end
+
+    class GetAccountSettingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deletion_protection: Types::DeletionProtectionSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deletion_protection: Types::DeletionProtectionSettings?
+    end
+
+    class GetApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class GetApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+    end
+
+    class GetConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: String,
+        ?configuration_version: String,
+        ?content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: String?
+      attr_accessor configuration_version: String?
+      attr_accessor content_type: String?
+    end
+
+    class GetConfigurationProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?location_uri: String,
+        ?retrieval_role_arn: String,
+        ?validators: Array[Types::Validator],
+        ?type: String,
+        ?kms_key_arn: String,
+        ?kms_key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor location_uri: String?
+      attr_accessor retrieval_role_arn: String?
+      attr_accessor validators: Array[Types::Validator]?
+      attr_accessor type: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor kms_key_identifier: String?
+    end
+
+    class GetConfigurationProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?configuration_profile_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor configuration_profile_id: String?
+    end
+
+    class GetConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application: String,
+        ?environment: String,
+        ?configuration: String,
+        ?client_id: String,
+        ?client_configuration_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application: String?
+      attr_accessor environment: String?
+      attr_accessor configuration: String?
+      attr_accessor client_id: String?
+      attr_accessor client_configuration_version: String?
+    end
+
+    class GetDeploymentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?environment_id: String,
+        ?deployment_strategy_id: String,
+        ?configuration_profile_id: String,
+        ?deployment_number: Integer,
+        ?configuration_name: String,
+        ?configuration_location_uri: String,
+        ?configuration_version: String,
+        ?description: String,
+        ?deployment_duration_in_minutes: Integer,
+        ?growth_type: String,
+        ?growth_factor: Float,
+        ?final_bake_time_in_minutes: Integer,
+        ?state: String,
+        ?event_log: Array[Types::DeploymentEvent],
+        ?percentage_complete: Float,
+        ?started_at: Time,
+        ?completed_at: Time,
+        ?applied_extensions: Array[Types::AppliedExtension],
+        ?kms_key_arn: String,
+        ?kms_key_identifier: String,
+        ?version_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor deployment_strategy_id: String?
+      attr_accessor configuration_profile_id: String?
+      attr_accessor deployment_number: Integer?
+      attr_accessor configuration_name: String?
+      attr_accessor configuration_location_uri: String?
+      attr_accessor configuration_version: String?
+      attr_accessor description: String?
+      attr_accessor deployment_duration_in_minutes: Integer?
+      attr_accessor growth_type: String?
+      attr_accessor growth_factor: Float?
+      attr_accessor final_bake_time_in_minutes: Integer?
+      attr_accessor state: String?
+      attr_accessor event_log: Array[Types::DeploymentEvent]?
+      attr_accessor percentage_complete: Float?
+      attr_accessor started_at: Time?
+      attr_accessor completed_at: Time?
+      attr_accessor applied_extensions: Array[Types::AppliedExtension]?
+      attr_accessor kms_key_arn: String?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor version_label: String?
+    end
+
+    class GetDeploymentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?environment_id: String,
+        ?deployment_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor deployment_number: Integer?
+    end
+
+    class GetDeploymentStrategyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?deployment_duration_in_minutes: Integer,
+        ?growth_type: String,
+        ?growth_factor: Float,
+        ?final_bake_time_in_minutes: Integer,
+        ?replicate_to: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor deployment_duration_in_minutes: Integer?
+      attr_accessor growth_type: String?
+      attr_accessor growth_factor: Float?
+      attr_accessor final_bake_time_in_minutes: Integer?
+      attr_accessor replicate_to: String?
+    end
+
+    class GetDeploymentStrategyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_strategy_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_strategy_id: String?
+    end
+
+    class GetEnvironmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?state: String,
+        ?monitors: Array[Types::Monitor],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor state: String?
+      attr_accessor monitors: Array[Types::Monitor]?
+    end
+
+    class GetEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?environment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor environment_id: String?
+    end
+
+    class GetExtensionAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?extension_arn: String,
+        ?resource_arn: String,
+        ?arn: String,
+        ?parameters: Hash[String, String],
+        ?extension_version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor extension_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor arn: String?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor extension_version_number: Integer?
+    end
+
+    class GetExtensionAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?extension_association_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor extension_association_id: String?
+    end
+
+    class GetExtensionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?version_number: Integer,
+        ?arn: String,
+        ?description: String,
+        ?actions: Hash[String, Array[Types::Action]],
+        ?parameters: Hash[String, Types::Parameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor version_number: Integer?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor actions: Hash[String, Array[Types::Action]]?
+      attr_accessor parameters: Hash[String, Types::Parameter]?
+    end
+
+    class GetExtensionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?extension_identifier: String,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor extension_identifier: String?
+      attr_accessor version_number: Integer?
+    end
+
+    class GetHostedConfigurationVersionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?configuration_profile_id: String,
+        ?version_number: Integer,
+        ?description: String,
+        ?content: String,
+        ?content_type: String,
+        ?version_label: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor configuration_profile_id: String?
+      attr_accessor version_number: Integer?
+      attr_accessor description: String?
+      attr_accessor content: String?
+      attr_accessor content_type: String?
+      attr_accessor version_label: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class GetHostedConfigurationVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?configuration_profile_id: String,
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor configuration_profile_id: String?
+      attr_accessor version_number: Integer?
+    end
+
+    module GrowthType
+      LINEAR: String
+      EXPONENTIAL: String
+    end
+
+    class HostedConfigurationVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?configuration_profile_id: String,
+        ?version_number: Integer,
+        ?description: String,
+        ?content_type: String,
+        ?version_label: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor configuration_profile_id: String?
+      attr_accessor version_number: Integer?
+      attr_accessor description: String?
+      attr_accessor content_type: String?
+      attr_accessor version_label: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidConfigurationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?constraint: String,
+        ?location: String,
+        ?reason: String,
+        ?type: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor constraint: String?
+      attr_accessor location: String?
+      attr_accessor reason: String?
+      attr_accessor type: String?
+      attr_accessor value: String?
+    end
+
+    class ListApplicationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::Application],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::Application]?
+      attr_accessor next_token: String?
+    end
+
+    class ListApplicationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListConfigurationProfilesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ConfigurationProfileSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ConfigurationProfileSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListConfigurationProfilesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor type: String?
+    end
+
+    class ListDeploymentStrategiesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::DeploymentStrategy],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::DeploymentStrategy]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentStrategiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::DeploymentSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::DeploymentSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListDeploymentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?environment_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListEnvironmentsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::Environment],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::Environment]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEnvironmentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListExtensionAssociationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ExtensionAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ExtensionAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExtensionAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_identifier: String,
+        ?extension_identifier: String,
+        ?extension_version_number: Integer,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_identifier: String?
+      attr_accessor extension_identifier: String?
+      attr_accessor extension_version_number: Integer?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListExtensionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::ExtensionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::ExtensionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListExtensionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor name: String?
+    end
+
+    class ListHostedConfigurationVersionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::HostedConfigurationVersionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::HostedConfigurationVersionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListHostedConfigurationVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?configuration_profile_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?version_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor configuration_profile_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor version_label: String?
+    end
+
+    class ListTagsForResourceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class Monitor
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_arn: String,
+        ?alarm_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_arn: String?
+      attr_accessor alarm_role_arn: String?
+    end
+
+    class Parameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?description: String,
+        ?required: bool,
+        ?dynamic: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor description: String?
+      attr_accessor required: bool?
+      attr_accessor dynamic: bool?
+    end
+
+    class PayloadTooLargeException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?measure: String,
+        ?limit: Float,
+        ?size: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor measure: String?
+      attr_accessor limit: Float?
+      attr_accessor size: Float?
+    end
+
+    module ReplicateTo
+      NONE: String
+      SSM_DOCUMENT: String
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_name: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class StartDeploymentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?environment_id: String,
+        ?deployment_strategy_id: String,
+        ?configuration_profile_id: String,
+        ?deployment_number: Integer,
+        ?configuration_name: String,
+        ?configuration_location_uri: String,
+        ?configuration_version: String,
+        ?description: String,
+        ?deployment_duration_in_minutes: Integer,
+        ?growth_type: String,
+        ?growth_factor: Float,
+        ?final_bake_time_in_minutes: Integer,
+        ?state: String,
+        ?event_log: Array[Types::DeploymentEvent],
+        ?percentage_complete: Float,
+        ?started_at: Time,
+        ?completed_at: Time,
+        ?applied_extensions: Array[Types::AppliedExtension],
+        ?kms_key_arn: String,
+        ?kms_key_identifier: String,
+        ?version_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor deployment_strategy_id: String?
+      attr_accessor configuration_profile_id: String?
+      attr_accessor deployment_number: Integer?
+      attr_accessor configuration_name: String?
+      attr_accessor configuration_location_uri: String?
+      attr_accessor configuration_version: String?
+      attr_accessor description: String?
+      attr_accessor deployment_duration_in_minutes: Integer?
+      attr_accessor growth_type: String?
+      attr_accessor growth_factor: Float?
+      attr_accessor final_bake_time_in_minutes: Integer?
+      attr_accessor state: String?
+      attr_accessor event_log: Array[Types::DeploymentEvent]?
+      attr_accessor percentage_complete: Float?
+      attr_accessor started_at: Time?
+      attr_accessor completed_at: Time?
+      attr_accessor applied_extensions: Array[Types::AppliedExtension]?
+      attr_accessor kms_key_arn: String?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor version_label: String?
+    end
+
+    class StartDeploymentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?environment_id: String,
+        ?deployment_strategy_id: String,
+        ?configuration_profile_id: String,
+        ?configuration_version: String,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?kms_key_identifier: String,
+        ?dynamic_extension_parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor deployment_strategy_id: String?
+      attr_accessor configuration_profile_id: String?
+      attr_accessor configuration_version: String?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor dynamic_extension_parameters: Hash[String, String]?
+    end
+
+    class StopDeploymentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?environment_id: String,
+        ?deployment_strategy_id: String,
+        ?configuration_profile_id: String,
+        ?deployment_number: Integer,
+        ?configuration_name: String,
+        ?configuration_location_uri: String,
+        ?configuration_version: String,
+        ?description: String,
+        ?deployment_duration_in_minutes: Integer,
+        ?growth_type: String,
+        ?growth_factor: Float,
+        ?final_bake_time_in_minutes: Integer,
+        ?state: String,
+        ?event_log: Array[Types::DeploymentEvent],
+        ?percentage_complete: Float,
+        ?started_at: Time,
+        ?completed_at: Time,
+        ?applied_extensions: Array[Types::AppliedExtension],
+        ?kms_key_arn: String,
+        ?kms_key_identifier: String,
+        ?version_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor deployment_strategy_id: String?
+      attr_accessor configuration_profile_id: String?
+      attr_accessor deployment_number: Integer?
+      attr_accessor configuration_name: String?
+      attr_accessor configuration_location_uri: String?
+      attr_accessor configuration_version: String?
+      attr_accessor description: String?
+      attr_accessor deployment_duration_in_minutes: Integer?
+      attr_accessor growth_type: String?
+      attr_accessor growth_factor: Float?
+      attr_accessor final_bake_time_in_minutes: Integer?
+      attr_accessor state: String?
+      attr_accessor event_log: Array[Types::DeploymentEvent]?
+      attr_accessor percentage_complete: Float?
+      attr_accessor started_at: Time?
+      attr_accessor completed_at: Time?
+      attr_accessor applied_extensions: Array[Types::AppliedExtension]?
+      attr_accessor kms_key_arn: String?
+      attr_accessor kms_key_identifier: String?
+      attr_accessor version_label: String?
+    end
+
+    class StopDeploymentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?environment_id: String,
+        ?deployment_number: Integer,
+        ?allow_revert: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor deployment_number: Integer?
+      attr_accessor allow_revert: bool?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    module TriggeredBy
+      USER: String
+      APPCONFIG: String
+      CLOUDWATCH_ALARM: String
+      INTERNAL_ERROR: String
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateAccountSettingsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deletion_protection: Types::DeletionProtectionSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deletion_protection: Types::DeletionProtectionSettings?
+    end
+
+    class UpdateAccountSettingsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deletion_protection: Types::DeletionProtectionSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deletion_protection: Types::DeletionProtectionSettings?
+    end
+
+    class UpdateApplicationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateApplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+    end
+
+    class UpdateConfigurationProfileOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?location_uri: String,
+        ?retrieval_role_arn: String,
+        ?validators: Array[Types::Validator],
+        ?type: String,
+        ?kms_key_arn: String,
+        ?kms_key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor location_uri: String?
+      attr_accessor retrieval_role_arn: String?
+      attr_accessor validators: Array[Types::Validator]?
+      attr_accessor type: String?
+      attr_accessor kms_key_arn: String?
+      attr_accessor kms_key_identifier: String?
+    end
+
+    class UpdateConfigurationProfileRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?configuration_profile_id: String,
+        ?name: String,
+        ?description: String,
+        ?retrieval_role_arn: String,
+        ?validators: Array[Types::Validator],
+        ?kms_key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor configuration_profile_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor retrieval_role_arn: String?
+      attr_accessor validators: Array[Types::Validator]?
+      attr_accessor kms_key_identifier: String?
+    end
+
+    class UpdateDeploymentStrategyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?deployment_duration_in_minutes: Integer,
+        ?growth_type: String,
+        ?growth_factor: Float,
+        ?final_bake_time_in_minutes: Integer,
+        ?replicate_to: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor deployment_duration_in_minutes: Integer?
+      attr_accessor growth_type: String?
+      attr_accessor growth_factor: Float?
+      attr_accessor final_bake_time_in_minutes: Integer?
+      attr_accessor replicate_to: String?
+    end
+
+    class UpdateDeploymentStrategyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deployment_strategy_id: String,
+        ?description: String,
+        ?deployment_duration_in_minutes: Integer,
+        ?final_bake_time_in_minutes: Integer,
+        ?growth_factor: Float,
+        ?growth_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deployment_strategy_id: String?
+      attr_accessor description: String?
+      attr_accessor deployment_duration_in_minutes: Integer?
+      attr_accessor final_bake_time_in_minutes: Integer?
+      attr_accessor growth_factor: Float?
+      attr_accessor growth_type: String?
+    end
+
+    class UpdateEnvironmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?id: String,
+        ?name: String,
+        ?description: String,
+        ?state: String,
+        ?monitors: Array[Types::Monitor],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor state: String?
+      attr_accessor monitors: Array[Types::Monitor]?
+    end
+
+    class UpdateEnvironmentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?environment_id: String,
+        ?name: String,
+        ?description: String,
+        ?monitors: Array[Types::Monitor],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor environment_id: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor monitors: Array[Types::Monitor]?
+    end
+
+    class UpdateExtensionAssociationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?extension_arn: String,
+        ?resource_arn: String,
+        ?arn: String,
+        ?parameters: Hash[String, String],
+        ?extension_version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor extension_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor arn: String?
+      attr_accessor parameters: Hash[String, String]?
+      attr_accessor extension_version_number: Integer?
+    end
+
+    class UpdateExtensionAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?extension_association_id: String,
+        ?parameters: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor extension_association_id: String?
+      attr_accessor parameters: Hash[String, String]?
+    end
+
+    class UpdateExtensionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?version_number: Integer,
+        ?arn: String,
+        ?description: String,
+        ?actions: Hash[String, Array[Types::Action]],
+        ?parameters: Hash[String, Types::Parameter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor version_number: Integer?
+      attr_accessor arn: String?
+      attr_accessor description: String?
+      attr_accessor actions: Hash[String, Array[Types::Action]]?
+      attr_accessor parameters: Hash[String, Types::Parameter]?
+    end
+
+    class UpdateExtensionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?extension_identifier: String,
+        ?description: String,
+        ?actions: Hash[String, Array[Types::Action]],
+        ?parameters: Hash[String, Types::Parameter],
+        ?version_number: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor extension_identifier: String?
+      attr_accessor description: String?
+      attr_accessor actions: Hash[String, Array[Types::Action]]?
+      attr_accessor parameters: Hash[String, Types::Parameter]?
+      attr_accessor version_number: Integer?
+    end
+
+    class ValidateConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?application_id: String,
+        ?configuration_profile_id: String,
+        ?configuration_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor application_id: String?
+      attr_accessor configuration_profile_id: String?
+      attr_accessor configuration_version: String?
+    end
+
+    class Validator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?content: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor content: String?
+    end
+
+    module ValidatorType
+      JSON_SCHEMA: String
+      LAMBDA: String
+    end
+  end
+end
