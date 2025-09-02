@@ -27,11 +27,14 @@ module Aws::Translate
 
     describe '#translate_document' do
       it 'preserves the encoding on text documents' do
-        client.stub_responses(:translate_document, {
-                                translated_document: { content: translated_text_document },
-                                source_language_code: 'en',
-                                target_language_code: 'es'
-                              })
+        client.stub_responses(
+          :translate_document,
+          {
+            translated_document: { content: translated_text_document },
+            source_language_code: 'en',
+            target_language_code: 'es'
+          }
+        )
         resp = client.translate_document(
           document: text_document,
           source_language_code: 'en',
@@ -41,11 +44,14 @@ module Aws::Translate
       end
 
       it 'does not change the encoding on non-text documents' do
-        client.stub_responses(:translate_document, {
-                                translated_document: { content: translated_word_document },
-                                source_language_code: 'en',
-                                target_language_code: 'es'
-                              })
+        client.stub_responses(
+          :translate_document,
+          {
+            translated_document: { content: translated_word_document },
+            source_language_code: 'en',
+            target_language_code: 'es'
+          }
+        )
         resp = client.translate_document(
           document: word_document,
           source_language_code: 'en',
