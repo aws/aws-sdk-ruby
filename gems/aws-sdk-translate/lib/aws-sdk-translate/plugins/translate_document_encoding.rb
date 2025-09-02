@@ -8,6 +8,7 @@ module Aws::Translate
     # when the input document is text (eg: text/plain or text/html) the encoding
     # should be preserved.
     class TranslateDocumentEncoding < Seahorse::Client::Plugin
+      # @api private
       class Handler < Seahorse::Client::Handler
         def call(context)
           # detect encoding
@@ -17,12 +18,11 @@ module Aws::Translate
               document[:content].encoding
             end
           resp = @handler.call(context)
-          if encoding
-            resp.translated_document.content = resp.translated_document.content.force_encoding(encoding)
-          end
+          resp.translated_document.content = resp.translated_document.content.force_encoding(encoding) if encoding
           resp
         end
       end
+
       def add_handlers(handlers, _config)
         handlers.add(Handler, step: :initialize, operations: [:translate_document])
       end

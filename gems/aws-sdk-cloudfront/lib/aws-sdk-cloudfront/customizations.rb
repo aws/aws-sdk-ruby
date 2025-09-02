@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# utility classes
 module Aws
   module CloudFront
     autoload :Signer, 'aws-sdk-cloudfront/signer'
