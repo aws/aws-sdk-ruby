@@ -2,6 +2,7 @@
 
 require 'smithy-client'
 
+require_relative 'aws-sdk-core/ec2_metadata'
 require_relative 'aws-sdk-core/endpoint_rules'
 
 # Shared Config
@@ -17,6 +18,7 @@ require_relative 'aws-sdk-core/identities/credentials'
 require_relative 'aws-sdk-core/credentials_provider'
 require_relative 'aws-sdk-core/default_credentials'
 require_relative 'aws-sdk-core/container_credentials'
+require_relative 'aws-sdk-core/instance_profile_credentials'
 require_relative 'aws-sdk-core/process_credentials'
 require_relative 'aws-sdk-core/static_credentials'
 

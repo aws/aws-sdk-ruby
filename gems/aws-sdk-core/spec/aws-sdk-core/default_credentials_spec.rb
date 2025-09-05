@@ -21,377 +21,388 @@ module Aws
       end
 
       let(:sample_client) { ClientHelper.sample_client(shapes: shapes) }
-
       let(:client_class) { sample_client.const_get(:Client) }
-
       let(:client) { client_class.new }
 
-      describe '#code_static_credentials' do
-        it 'resolves static credentials from code' do
-          client = client_class.new(
-            access_key_id: 'akid',
-            secret_access_key: 'secret',
-            session_token: 'session',
-            account_id: '123456789012'
-          )
-          creds = client.config.credentials.identity
-          expect(creds.access_key_id).to eq('akid')
-          expect(creds.secret_access_key).to eq('secret')
-          expect(creds.session_token).to eq('session')
-          expect(creds.account_id).to eq('123456789012')
+      before(:each) { allow(Kernel).to receive(:sleep) }
+
+      context 'providers' do
+        let(:mock_instance_creds) { double('InstanceProfileCredentials', identity: nil) }
+
+        describe '#code_static_credentials' do
+          it 'resolves static credentials from code' do
+            client = client_class.new(
+              access_key_id: 'akid',
+              secret_access_key: 'secret',
+              session_token: 'session',
+              account_id: '123456789012'
+            )
+            creds = client.config.credentials.identity
+            expect(creds.access_key_id).to eq('akid')
+            expect(creds.secret_access_key).to eq('secret')
+            expect(creds.session_token).to eq('session')
+            expect(creds.account_id).to eq('123456789012')
+          end
+
+          it 'resolves static credentials with minimum inputs required' do
+            client = client_class.new(
+              access_key_id: 'akid',
+              secret_access_key: 'secret',
+              session_token: nil,
+              account_id: nil
+            )
+            creds = client.config.credentials.identity
+            expect(creds.access_key_id).to eq('akid')
+            expect(creds.secret_access_key).to eq('secret')
+            expect(creds.session_token).to eq(nil)
+            expect(creds.account_id).to eq(nil)
+          end
+
+          it 'fails to resolve static credentials when required inputs are missing' do
+            expect(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
+            client = client_class.new(
+              access_key_id: nil,
+              secret_access_key: nil,
+              session_token: 'session',
+              account_id: '123456789012'
+            )
+            expect(client.config.credentials.identity).to be_nil
+          end
+
+          it 'tracks the correct feature id' do
+            client = client_class.new(
+              access_key_id: 'akid',
+              secret_access_key: 'secret',
+              session_token: 'session',
+              account_id: '123456789012',
+              stub_responses: true
+            )
+            expect(metrics_from_user_agent_header(client.operation)).to include('e')
+          end
         end
 
-        it 'resolves static credentials with minimum inputs required' do
-          client = client_class.new(
-            access_key_id: 'akid',
-            secret_access_key: 'secret',
-            session_token: nil,
-            account_id: nil
-          )
-          creds = client.config.credentials.identity
-          expect(creds.access_key_id).to eq('akid')
-          expect(creds.secret_access_key).to eq('secret')
-          expect(creds.session_token).to eq(nil)
-          expect(creds.account_id).to eq(nil)
+        describe '#env_static_credentials' do
+          it 'resolves static credentials from environment' do
+            ENV['AWS_ACCESS_KEY_ID'] = 'akid'
+            ENV['AWS_SECRET_ACCESS_KEY'] = 'secret'
+            ENV['AWS_SESSION_TOKEN'] = 'session'
+            ENV['AWS_ACCOUNT_ID'] = '123456789012'
+            creds = client.config.credentials.identity
+            expect(creds.access_key_id).to eq('akid')
+            expect(creds.secret_access_key).to eq('secret')
+            expect(creds.session_token).to eq('session')
+            expect(creds.account_id).to eq('123456789012')
+          end
+
+          it 'resolves static credentials with minimum inputs required' do
+            ENV['AWS_ACCESS_KEY_ID'] = 'akid'
+            ENV['AWS_SECRET_ACCESS_KEY'] = 'secret'
+            creds = client.config.credentials.identity
+            expect(creds.access_key_id).to eq('akid')
+            expect(creds.secret_access_key).to eq('secret')
+            expect(creds.session_token).to eq(nil)
+            expect(creds.account_id).to eq(nil)
+          end
+
+          it 'fails to resolve static credentials when required inputs are missing' do
+            expect(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
+            ENV['AWS_SESSION_TOKEN'] = 'session'
+            ENV['AWS_ACCOUNT_ID'] = '123456789012'
+            expect(client.config.credentials.identity).to be_nil
+          end
+
+          it 'tracks the correct feature id' do
+            ENV['AWS_ACCESS_KEY_ID'] = 'akid'
+            ENV['AWS_SECRET_ACCESS_KEY'] = 'secret'
+            ENV['AWS_SESSION_TOKEN'] = 'session'
+            ENV['AWS_ACCOUNT_ID'] = '123456789012'
+            client = client_class.new(
+              access_key_id: nil,
+              secret_access_key: nil,
+              stub_responses: true
+            )
+            expect(metrics_from_user_agent_header(client.operation)).to include('g')
+          end
         end
 
-        it 'fails to resolve static credentials when there are no inputs' do
-          client = client_class.new(
-            access_key_id: nil,
-            secret_access_key: nil,
-            session_token: nil,
-            account_id: nil
-          )
-          expect(client.config.credentials.identity).to be_nil
+        describe '#profile_static_credentials' do
+          it 'resolves static credentials from profile' do
+            shared_config = <<~CONFIG
+              [profile default]
+              aws_access_key_id = ACCESS_KEY_PROFILE
+              aws_secret_access_key = SECRET_KEY_PROFILE
+              aws_session_token = TOKEN_PROFILE
+              aws_account_id = 123456789012
+            CONFIG
+            mock_shared_config(shared_config)
+            creds = client.config.credentials.identity
+            expect(creds.access_key_id).to eq('ACCESS_KEY_PROFILE')
+            expect(creds.secret_access_key).to eq('SECRET_KEY_PROFILE')
+            expect(creds.session_token).to eq('TOKEN_PROFILE')
+          end
+
+          it 'resolves static credentials with minimum inputs required' do
+            shared_config = <<~CONFIG
+              [profile default]
+              aws_access_key_id = ACCESS_KEY_PROFILE
+              aws_secret_access_key = SECRET_KEY_PROFILE
+            CONFIG
+            mock_shared_config(shared_config)
+            creds = client.config.credentials.identity
+            expect(creds.access_key_id).to eq('ACCESS_KEY_PROFILE')
+            expect(creds.secret_access_key).to eq('SECRET_KEY_PROFILE')
+            expect(creds.session_token).to eq(nil)
+            expect(creds.account_id).to eq(nil)
+          end
+
+          it 'fails to resolve static credentials when required inputs are missing' do
+            expect(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
+            shared_config = <<~CONFIG
+              [profile default]
+              aws_session_token = TOKEN_PROFILE
+              aws_account_id = 123456789012
+            CONFIG
+            mock_shared_config(shared_config)
+            expect(client.config.credentials.identity).to be_nil
+          end
+
+          it 'fails to resolve static credentials when profile does not exist' do
+            expect(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
+            shared_config = <<~CONFIG
+              [profile default]
+              aws_access_key_id = ACCESS_KEY_PROFILE
+              aws_secret_access_key = SECRET_KEY_PROFILE
+              aws_session_token = TOKEN_PROFILE
+              aws_account_id = 123456789012
+            CONFIG
+            mock_shared_config(shared_config)
+            client = client_class.new(profile: 'nonexistent')
+            expect(client.config.credentials.identity).to be_nil
+          end
+
+          it 'tracks the correct feature id' do
+            shared_config = <<~CONFIG
+              [profile default]
+              aws_access_key_id = ACCESS_KEY_PROFILE
+              aws_secret_access_key = SECRET_KEY_PROFILE
+              aws_session_token = TOKEN_PROFILE
+              aws_account_id = 123456789012
+            CONFIG
+            mock_shared_config(shared_config)
+            client = client_class.new(
+              access_key_id: nil,
+              secret_access_key: nil,
+              stub_responses: true
+            )
+            expect(metrics_from_user_agent_header(client.operation)).to include('n')
+          end
         end
 
-        it 'fails to resolve static credentials when required inputs are missing' do
-          client = client_class.new(
-            access_key_id: nil,
-            secret_access_key: nil,
-            session_token: 'session',
-            account_id: '123456789012'
-          )
-          expect(client.config.credentials.identity).to be_nil
+        describe '#profile_process_credentials' do
+          it 'resolves process credentials from profile' do
+            shared_config = <<~CONFIG
+              [profile default]
+              credential_process = echo '{ "Version": 1, "AccessKeyId": "AK_PROC", "SecretAccessKey": "SECRET_AK_PROC", "SessionToken": "TOKEN_PROC" }'
+            CONFIG
+            mock_shared_config(shared_config)
+            creds = client.config.credentials.identity
+            expect(creds.access_key_id).to eq('AK_PROC')
+            expect(creds.secret_access_key).to eq('SECRET_AK_PROC')
+            expect(creds.session_token).to eq('TOKEN_PROC')
+          end
+
+          it 'fails to resolve process credentials when credential_process is missing' do
+            expect(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
+            shared_config = <<~CONFIG
+              [profile default]
+            CONFIG
+            mock_shared_config(shared_config)
+            expect(client.config.credentials.identity).to be_nil
+          end
+
+          it 'fails to resolve process credentials when profile does not exist' do
+            expect(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
+            shared_config = <<~CONFIG
+              [profile default]
+              credential_process = echo '{ "Version": 1, "AccessKeyId": "AK_PROC", "SecretAccessKey": "SECRET_AK_PROC", "SessionToken": "TOKEN_PROC" }'
+            CONFIG
+            mock_shared_config(shared_config)
+            client = client_class.new(profile: 'nonexistent')
+            expect(client.config.credentials.identity).to be_nil
+          end
+
+          it 'tracks the correct feature id' do
+            shared_config = <<~CONFIG
+              [profile default]
+              credential_process = echo '{ "Version": 1, "AccessKeyId": "AK_PROC", "SecretAccessKey": "SECRET_AK_PROC", "SessionToken": "TOKEN_PROC" }'
+            CONFIG
+            mock_shared_config(shared_config)
+            client = client_class.new(
+              access_key_id: nil,
+              secret_access_key: nil,
+              stub_responses: true
+            )
+            expect(metrics_from_user_agent_header(client.operation)).to include('v', 'w')
+          end
         end
 
-        it 'fails to resolve static credentials when access key id is missing' do
-          client = client_class.new(
-            access_key_id: nil,
-            secret_access_key: 'secret',
-            session_token: 'session',
-            account_id: '123456789012'
-          )
-          expect(client.config.credentials.identity).to be_nil
+        describe '#container_credentials' do
+          it 'resolves container credentials with relative uri' do
+            path = '/latest/credentials?id=foobarbaz'
+            resp = <<~JSON.strip
+              {
+                "RoleArn": "arn:aws:iam::123456789012:role/BarFooRole",
+                "AccessKeyId": "ACCESS_KEY_CONTAINER",
+                "SecretAccessKey": "SECRET_AK_CONTAINER",
+                "Token": "TOKEN_CONTAINER",
+                "Expiration": "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
+              }
+            JSON
+            ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = path
+            stub_request(:get, "http://169.254.170.2#{path}")
+              .to_return(status: 200, body: resp)
+            creds = client.config.credentials.identity
+            expect(creds.access_key_id).to eq('ACCESS_KEY_CONTAINER')
+            expect(creds.secret_access_key).to eq('SECRET_AK_CONTAINER')
+            expect(creds.session_token).to eq('TOKEN_CONTAINER')
+          end
+
+          it 'resolves container credentials with full uri' do
+            path = 'http://169.254.170.2/latest/credentials?id=foobarbaz'
+            resp = <<~JSON.strip
+              {
+                "RoleArn": "arn:aws:iam::123456789012:role/BarFooRole",
+                "AccessKeyId": "ACCESS_KEY_CONTAINER",
+                "SecretAccessKey": "SECRET_AK_CONTAINER",
+                "Token": "TOKEN_CONTAINER",
+                "Expiration": "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
+              }
+            JSON
+            ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = path
+            stub_request(:get, path)
+              .to_return(status: 200, body: resp)
+            creds = client.config.credentials.identity
+            expect(creds.access_key_id).to eq('ACCESS_KEY_CONTAINER')
+            expect(creds.secret_access_key).to eq('SECRET_AK_CONTAINER')
+            expect(creds.session_token).to eq('TOKEN_CONTAINER')
+          end
+
+          it 'fails to resolve container credentials when neither relative nor full uri is set' do
+            expect(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
+            stub_const('ENV', {})
+            expect(client.config.credentials.identity).to be_nil
+          end
+
+          it 'tracks the correct feature id' do
+            path = '/latest/credentials?id=foobarbaz'
+            resp = <<~JSON.strip
+              {
+                "RoleArn": "arn:aws:iam::123456789012:role/BarFooRole",
+                "AccessKeyId": "ACCESS_KEY_CONTAINER",
+                "SecretAccessKey": "SECRET_AK_CONTAINER",
+                "Token": "TOKEN_CONTAINER",
+                "Expiration": "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
+              }
+            JSON
+            ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = path
+            stub_request(:get, "http://169.254.170.2#{path}")
+              .to_return(status: 200, body: resp)
+            client = client_class.new(
+              access_key_id: nil,
+              secret_access_key: nil,
+              stub_responses: true
+            )
+            expect(metrics_from_user_agent_header(client.operation)).to include('z')
+          end
         end
 
-        it 'fails to resolve static credentials when secret access key is missing' do
-          client = client_class.new(
-            access_key_id: 'akid',
-            secret_access_key: nil,
-            session_token: 'session',
-            account_id: '123456789012'
-          )
-          expect(client.config.credentials.identity).to be_nil
-        end
+        describe '#instance_profile_credentials' do
+          let(:mock_instance_creds) do
+            double(
+              'InstanceProfileCredentials',
+              identity: Identities::Credentials.new(
+                access_key_id: 'ACCESS_KEY_INSTANCE',
+                secret_access_key: 'SECRET_AK_INSTANCE',
+                session_token: 'TOKEN_INSTANCE'
+              ),
+              features: ['CREDENTIALS_IMDS']
+            )
+          end
 
-        it 'tracks the correct feature id' do
-          client = client_class.new(
-            access_key_id: 'akid',
-            secret_access_key: 'secret',
-            session_token: 'session',
-            account_id: '123456789012',
-            stub_responses: true
-          )
-          expect(metrics_from_user_agent_header(client.operation)).to include('e')
-        end
-      end
+          before(:each) do
+            allow(InstanceProfileCredentials).to receive(:new).and_return(mock_instance_creds)
+          end
 
-      describe '#env_static_credentials' do
-        it 'resolves static credentials from environment' do
-          ENV['AWS_ACCESS_KEY_ID'] = 'akid'
-          ENV['AWS_SECRET_ACCESS_KEY'] = 'secret'
-          ENV['AWS_SESSION_TOKEN'] = 'session'
-          ENV['AWS_ACCOUNT_ID'] = '123456789012'
-          creds = client.config.credentials.identity
-          expect(creds.access_key_id).to eq('akid')
-          expect(creds.secret_access_key).to eq('secret')
-          expect(creds.session_token).to eq('session')
-          expect(creds.account_id).to eq('123456789012')
-        end
+          it 'resolves instance profile credentials' do
+            creds = client.config.credentials.identity
+            expect(creds.access_key_id).to eq('ACCESS_KEY_INSTANCE')
+            expect(creds.secret_access_key).to eq('SECRET_AK_INSTANCE')
+            expect(creds.session_token).to eq('TOKEN_INSTANCE')
+          end
 
-        it 'resolves static credentials with minimum inputs required' do
-          ENV['AWS_ACCESS_KEY_ID'] = 'akid'
-          ENV['AWS_SECRET_ACCESS_KEY'] = 'secret'
-          creds = client.config.credentials.identity
-          expect(creds.access_key_id).to eq('akid')
-          expect(creds.secret_access_key).to eq('secret')
-          expect(creds.session_token).to eq(nil)
-          expect(creds.account_id).to eq(nil)
-        end
+          it 'resolves instance profile credentials when AWS_EC2_METADATA_DISABLED is explicitly false' do
+            ENV['AWS_EC2_METADATA_DISABLED'] = 'false'
+            creds = client.config.credentials.identity
+            expect(creds.access_key_id).to eq('ACCESS_KEY_INSTANCE')
+            expect(creds.secret_access_key).to eq('SECRET_AK_INSTANCE')
+            expect(creds.session_token).to eq('TOKEN_INSTANCE')
+          end
 
-        it 'fails to resolve static credentials when there are no inputs' do
-          stub_const('ENV', {})
-          expect(client.config.credentials.identity).to be_nil
-        end
+          it 'fails to resolve instance profile credentials when AWS_EC2_METADATA_DISABLED is true' do
+            ENV['AWS_EC2_METADATA_DISABLED'] = 'true'
+            expect(client.config.credentials.identity).to be_nil
+          end
 
-        it 'fails to resolve static credentials when required inputs are missing' do
-          ENV['AWS_SESSION_TOKEN'] = 'session'
-          ENV['AWS_ACCOUNT_ID'] = '123456789012'
-          expect(client.config.credentials.identity).to be_nil
-        end
+          it 'tracks the correct feature id' do
+            client = client_class.new(
+              access_key_id: nil,
+              secret_access_key: nil,
+              stub_responses: true
+            )
+            expect(metrics_from_user_agent_header(client.operation)).to include('0')
+          end
 
-        it 'fails to resolve static credentials when access key id is missing' do
-          ENV['AWS_SECRET_ACCESS_KEY'] = 'secret'
-          ENV['AWS_SESSION_TOKEN'] = 'session'
-          ENV['AWS_ACCOUNT_ID'] = '123456789012'
-          expect(client.config.credentials.identity).to be_nil
-        end
+          describe 'endpoint resolution' do
+            it 'resolves endpoint from ENV' do
+              expect(InstanceProfileCredentials).to receive(:new).with(
+                retries: 0,
+                endpoint: 'http://[fd00:ec2::254]',
+                endpoint_mode: 'IPv6'
+              ).and_return(mock_instance_creds)
+              ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE'] = 'IPv6'
+              ENV['AWS_EC2_METADATA_SERVICE_ENDPOINT'] = 'http://[fd00:ec2::254]'
+              client.config.credentials.identity
+            end
 
-        it 'fails to resolve static credentials when secret access key is missing' do
-          ENV['AWS_ACCESS_KEY_ID'] = 'akid'
-          ENV['AWS_SESSION_TOKEN'] = 'session'
-          ENV['AWS_ACCOUNT_ID'] = '123456789012'
-          expect(client.config.credentials.identity).to be_nil
-        end
+            it 'resolves endpoint from shared config' do
+              expect(InstanceProfileCredentials).to receive(:new).with(
+                retries: 0,
+                endpoint: 'http://[fd00:ec2::254]',
+                endpoint_mode: 'IPv6'
+              ).and_return(mock_instance_creds)
+              shared_config = <<~CONFIG
+                [profile default]
+                ec2_metadata_service_endpoint_mode = IPv6
+                ec2_metadata_service_endpoint = http://[fd00:ec2::254]
+              CONFIG
+              mock_shared_config(shared_config)
+              client.config.credentials.identity
+            end
 
-        it 'tracks the correct feature id' do
-          ENV['AWS_ACCESS_KEY_ID'] = 'akid'
-          ENV['AWS_SECRET_ACCESS_KEY'] = 'secret'
-          ENV['AWS_SESSION_TOKEN'] = 'session'
-          ENV['AWS_ACCOUNT_ID'] = '123456789012'
-          client = client_class.new(
-            access_key_id: nil,
-            secret_access_key: nil,
-            stub_responses: true
-          )
-          expect(metrics_from_user_agent_header(client.operation)).to include('g')
-        end
-      end
-
-      describe '#profile_static_credentials' do
-        it 'resolves static credentials from profile' do
-          shared_config = <<~CONFIG
-            [profile default]
-            aws_access_key_id = ACCESS_KEY_PROFILE
-            aws_secret_access_key = SECRET_KEY_PROFILE
-            aws_session_token = TOKEN_PROFILE
-            aws_account_id = 123456789012
-          CONFIG
-          mock_shared_config(shared_config)
-          client = client_class.new
-          creds = client.config.credentials.identity
-          expect(creds.access_key_id).to eq('ACCESS_KEY_PROFILE')
-          expect(creds.secret_access_key).to eq('SECRET_KEY_PROFILE')
-          expect(creds.session_token).to eq('TOKEN_PROFILE')
-        end
-
-        it 'resolves static credentials with minimum inputs required' do
-          shared_config = <<~CONFIG
-            [profile default]
-            aws_access_key_id = ACCESS_KEY_PROFILE
-            aws_secret_access_key = SECRET_KEY_PROFILE
-          CONFIG
-          mock_shared_config(shared_config)
-          creds = client.config.credentials.identity
-          expect(creds.access_key_id).to eq('ACCESS_KEY_PROFILE')
-          expect(creds.secret_access_key).to eq('SECRET_KEY_PROFILE')
-          expect(creds.session_token).to eq(nil)
-          expect(creds.account_id).to eq(nil)
-        end
-
-        it 'fails to resolve static credentials when there are no inputs' do
-          shared_config = <<~CONFIG
-            [profile default]
-          CONFIG
-          mock_shared_config(shared_config)
-          expect(client.config.credentials.identity).to be_nil
-        end
-
-        it 'fails to resolve static credentials when required inputs are missing' do
-          shared_config = <<~CONFIG
-            [profile default]
-            aws_session_token = TOKEN_PROFILE
-            aws_account_id = 123456789012
-          CONFIG
-          mock_shared_config(shared_config)
-          expect(client.config.credentials.identity).to be_nil
-        end
-
-        it 'fails to resolve static credentials when access key id is missing' do
-          shared_config = <<~CONFIG
-            [profile default]
-            aws_secret_access_key = SECRET_KEY_PROFILE
-            aws_session_token = TOKEN_PROFILE
-            aws_account_id = 123456789012
-          CONFIG
-          mock_shared_config(shared_config)
-          expect(client.config.credentials.identity).to be_nil
-        end
-
-        it 'fails to resolve static credentials when secret access key is missing' do
-          shared_config = <<~CONFIG
-            [profile default]
-            aws_access_key_id = ACCESS_KEY_PROFILE
-            aws_session_token = TOKEN_PROFILE
-            aws_account_id = 123456789012
-          CONFIG
-          mock_shared_config(shared_config)
-          expect(client.config.credentials.identity).to be_nil
-        end
-
-        it 'fails to resolve static credentials when profile does not exist' do
-          shared_config = <<~CONFIG
-            [profile default]
-            aws_access_key_id = ACCESS_KEY_PROFILE
-            aws_secret_access_key = SECRET_KEY_PROFILE
-            aws_session_token = TOKEN_PROFILE
-            aws_account_id = 123456789012
-          CONFIG
-          mock_shared_config(shared_config)
-          client = client_class.new(profile: 'nonexistent')
-          expect(client.config.credentials.identity).to be_nil
-        end
-
-        it 'tracks the correct feature id' do
-          shared_config = <<~CONFIG
-            [profile default]
-            aws_access_key_id = ACCESS_KEY_PROFILE
-            aws_secret_access_key = SECRET_KEY_PROFILE
-            aws_session_token = TOKEN_PROFILE
-            aws_account_id = 123456789012
-          CONFIG
-          mock_shared_config(shared_config)
-          client = client_class.new(
-            access_key_id: nil,
-            secret_access_key: nil,
-            stub_responses: true
-          )
-          expect(metrics_from_user_agent_header(client.operation)).to include('n')
-        end
-      end
-
-      describe '#profile_process_credentials' do
-        it 'resolves process credentials from profile' do
-          shared_config = <<~CONFIG
-            [profile default]
-            credential_process = echo '{ "Version": 1, "AccessKeyId": "AK_PROC", "SecretAccessKey": "SECRET_AK_PROC", "SessionToken": "TOKEN_PROC" }'
-          CONFIG
-          mock_shared_config(shared_config)
-          client = client_class.new
-          creds = client.config.credentials.identity
-          expect(creds.access_key_id).to eq('AK_PROC')
-          expect(creds.secret_access_key).to eq('SECRET_AK_PROC')
-          expect(creds.session_token).to eq('TOKEN_PROC')
-        end
-
-        it 'fails to resolve process credentials when credential_process is missing' do
-          shared_config = <<~CONFIG
-            [profile default]
-          CONFIG
-          mock_shared_config(shared_config)
-          expect(client.config.credentials.identity).to be_nil
-        end
-
-        it 'fails to resolve process credentials when profile does not exist' do
-          shared_config = <<~CONFIG
-            [profile default]
-            credential_process = echo '{ "Version": 1, "AccessKeyId": "AK_PROC", "SecretAccessKey": "SECRET_AK_PROC", "SessionToken": "TOKEN_PROC" }'
-          CONFIG
-          mock_shared_config(shared_config)
-          client = client_class.new(profile: 'nonexistent')
-          expect(client.config.credentials.identity).to be_nil
-        end
-
-        it 'tracks the correct feature id' do
-          shared_config = <<~CONFIG
-            [profile default]
-            credential_process = echo '{ "Version": 1, "AccessKeyId": "AK_PROC", "SecretAccessKey": "SECRET_AK_PROC", "SessionToken": "TOKEN_PROC" }'
-          CONFIG
-          mock_shared_config(shared_config)
-          client = client_class.new(
-            access_key_id: nil,
-            secret_access_key: nil,
-            stub_responses: true
-          )
-          expect(metrics_from_user_agent_header(client.operation)).to include('v', 'w')
-        end
-      end
-
-      describe '#container_credentials' do
-        it 'resolves container credentials with relative uri' do
-          path = '/latest/credentials?id=foobarbaz'
-          resp = <<~JSON.strip
-            {
-              "RoleArn": "arn:aws:iam::123456789012:role/BarFooRole",
-              "AccessKeyId": "ACCESS_KEY_CONTAINER",
-              "SecretAccessKey": "SECRET_AK_CONTAINER",
-              "Token": "TOKEN_CONTAINER",
-              "Expiration": "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
-            }
-          JSON
-          ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = path
-          stub_request(:get, "http://169.254.170.2#{path}")
-            .to_return(status: 200, body: resp)
-          client = client_class.new
-          creds = client.config.credentials.identity
-          expect(creds.access_key_id).to eq('ACCESS_KEY_CONTAINER')
-          expect(creds.secret_access_key).to eq('SECRET_AK_CONTAINER')
-          expect(creds.session_token).to eq('TOKEN_CONTAINER')
-        end
-
-        it 'resolves container credentials with full uri' do
-          path = 'http://169.254.170.2/latest/credentials?id=foobarbaz'
-          resp = <<~JSON.strip
-            {
-              "RoleArn": "arn:aws:iam::123456789012:role/BarFooRole",
-              "AccessKeyId": "ACCESS_KEY_CONTAINER",
-              "SecretAccessKey": "SECRET_AK_CONTAINER",
-              "Token": "TOKEN_CONTAINER",
-              "Expiration": "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
-            }
-          JSON
-          ENV['AWS_CONTAINER_CREDENTIALS_FULL_URI'] = path
-          stub_request(:get, path)
-            .to_return(status: 200, body: resp)
-          client = client_class.new
-          creds = client.config.credentials.identity
-          expect(creds.access_key_id).to eq('ACCESS_KEY_CONTAINER')
-          expect(creds.secret_access_key).to eq('SECRET_AK_CONTAINER')
-          expect(creds.session_token).to eq('TOKEN_CONTAINER')
-        end
-
-        it 'fails to resolve container credentials when neither relative nor full uri is set' do
-          stub_const('ENV', {})
-          expect(client.config.credentials.identity).to be_nil
-        end
-
-        it 'tracks the correct feature id' do
-          path = '/latest/credentials?id=foobarbaz'
-          resp = <<~JSON.strip
-            {
-              "RoleArn": "arn:aws:iam::123456789012:role/BarFooRole",
-              "AccessKeyId": "ACCESS_KEY_CONTAINER",
-              "SecretAccessKey": "SECRET_AK_CONTAINER",
-              "Token": "TOKEN_CONTAINER",
-              "Expiration": "#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"
-            }
-          JSON
-          ENV['AWS_CONTAINER_CREDENTIALS_RELATIVE_URI'] = path
-          stub_request(:get, "http://169.254.170.2#{path}")
-            .to_return(status: 200, body: resp)
-          client = client_class.new(
-            access_key_id: nil,
-            secret_access_key: nil,
-            stub_responses: true
-          )
-          expect(metrics_from_user_agent_header(client.operation)).to include('z')
+            it 'defaults to nil' do
+              expect(InstanceProfileCredentials).to receive(:new).with(
+                retries: 0,
+                endpoint: nil,
+                endpoint_mode: nil
+              ).and_return(mock_instance_creds)
+              client.config.credentials.identity
+            end
+          end
         end
       end
 
       describe '#identity' do
-        file = File.join(File.dirname(__FILE__),
-                         'default_credentials_tests.json')
+        file = File.join(File.dirname(__FILE__), 'default_credentials_tests.json')
         test_cases = JSON.load_file(file)
 
         def credentials(values)
@@ -432,7 +443,16 @@ module Aws
               )
               allow(ContainerCredentials)
                 .to receive(:new).and_return(container_provider)
-            when 'stsResponse', 'ssoResponse', 'imdsResponse'
+            when 'imdsResponse'
+              # Error case is handled transparently since instance profile credentials
+              # will rescue from StandardError and return empty credentials.
+              instance_provider = double(
+                'InstanceProfileCredentials',
+                identity: credentials(values)
+              )
+              allow(InstanceProfileCredentials)
+                .to receive(:new).and_return(instance_provider)
+            when 'stsResponse', 'ssoResponse'
               # Not implemented yet
               next
             else
@@ -451,9 +471,7 @@ module Aws
             '6' => 'Source Profile: Not implemented',
             '7' => 'Credential Source: Not implemented',
             '8' => 'WebID: Not implemented',
-            '9' => 'SSO: Not implemented',
-            '15' => 'IMDS: Not implemented',
-            '16' => 'No credentials: Logic uses IMDS, not implemented'
+            '9' => 'SSO: Not implemented'
           }
 
           it "passes: #{test_case['documentation']}" do

@@ -44,7 +44,7 @@ module Aws
           profile_sso_credentials
           profile_process_credentials
           container_credentials
-          imds_credentials
+          instance_profile_credentials
         ]
       end
 
@@ -126,8 +126,17 @@ module Aws
         ContainerCredentials.new
       end
 
-      def imds_credentials
-        nil
+      def instance_profile_credentials
+        return if ENV.fetch('AWS_EC2_METADATA_DISABLED', 'false').downcase == 'true'
+
+        profile = @config.profile
+        profile_config = Aws::Core.shared_config.profiles[profile]
+        endpoint = ENV.fetch('AWS_EC2_METADATA_SERVICE_ENDPOINT', nil) ||
+                   (profile_config && profile_config['ec2_metadata_service_endpoint'])
+        endpoint_mode = ENV.fetch('AWS_EC2_METADATA_SERVICE_ENDPOINT_MODE', nil) ||
+                        (profile_config && profile_config['ec2_metadata_service_endpoint_mode'])
+
+        InstanceProfileCredentials.new(retries: 0, endpoint: endpoint, endpoint_mode: endpoint_mode)
       end
     end
   end
